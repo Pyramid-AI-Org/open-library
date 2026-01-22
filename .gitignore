@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+logs/
+
+# Data is stored on a separate branch via Actions worktree
+data/
+
+# Local runs
+local-data/

@@ -1,0 +1,19 @@
+# Public configuration (safe to commit)
+# Add crawler-specific config under `crawlers.<name>`.
+
+http:
+  user_agent: "OpenLibraryCrawler/0.1 (+https://github.com/<your-org>/<your-repo>)"
+  timeout_seconds: 30
+  max_retries: 3
+
+crawlers:
+  example:
+    seed_urls:
+      - "https://example.com/"
+
+  # Proof-of-concept crawler: fetch a single page and extract links.
+  # This default extracts the "More information..." link on example.com.
+  link_extract:
+    page_url: "https://example.com/"
+    text_contains: "Learn more"
+    limit: 10
