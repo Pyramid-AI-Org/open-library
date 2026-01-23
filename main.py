@@ -68,7 +68,7 @@ def main() -> int:
         crawler_names = [args.crawler.strip()]
     else:
         # Keep this explicit so adding crawlers is intentional/reviewable.
-        crawler_names = ["example", "link_extract"]
+        crawler_names = ["example", "link_extract", "hksar_press_releases"]
 
     all_records: list[dict[str, Any]] = []
     for name in crawler_names:

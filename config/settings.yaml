@@ -17,3 +17,17 @@ crawlers:
     page_url: "https://example.com/"
     text_contains: "Learn more"
     limit: 10
+
+  # HKSAR Government Press Releases daily listing crawler.
+  # Iterates day-by-day for the last 2 years and extracts press release detail links
+  # within div#contentBody.
+  hksar_press_releases:
+    base_url: "https://www.info.gov.hk"
+    days_back: 730
+    listing_path_template: "/gia/general/{yyyymm}/{dd}.htm"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    per_day_limit: 200
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
