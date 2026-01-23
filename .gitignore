@@ -4,8 +4,8 @@ __pycache__/
 .DS_Store
 logs/
 
-# Data is stored on a separate branch via Actions worktree
-data/
+# The Actions workflow creates a git worktree at this path
+data-worktree/
 
 # Local runs
 local-data/

@@ -61,7 +61,8 @@ jobs:
 
           # Create a worktree checked out at ./data-worktree
           # If the data branch doesn't exist yet, create it orphaned.
-          if git show-ref --verify --quiet refs/heads/data; then
+          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
+            git fetch origin data
             git worktree add -B data data-worktree origin/data
           else
             git worktree add -b data data-worktree
@@ -103,7 +104,7 @@ jobs:
           pushd data-worktree
 
           # Ensure we only commit data outputs
-          git add -A data/latest data/archive || true
+          git add -f -A data/latest data/archive || true
 
           if git diff --cached --quiet; then
             echo "No data changes to commit"
