@@ -31,3 +31,92 @@ crawlers:
     max_total_records: 50000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
+
+  # DevB Press Releases (English) index crawler.
+  # Iterates year-by-year for the last N years, discovers page count via pagination,
+  # and extracts (date, title, url) from table.articlelistpage.
+  devb_press_releases:
+    base_url: "https://www.devb.gov.hk"
+    years_back: 10
+    type: "all"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # DevB Speeches and Presentations (English) index crawler.
+  # Iterates year-by-year for the last N years, discovers page count via pagination
+  # (or embedded hidden links), and extracts (date, title, url) from table.articlelistpage.
+  devb_speeches_and_presentations:
+    base_url: "https://www.devb.gov.hk"
+    years_back: 10
+    type: "all"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # DevB General Circulars (English) crawler.
+  # Currently extracts PDF links from a single listing page.
+  devb_general_circulars:
+    base_url: "https://www.devb.gov.hk"
+    page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/general_circulars/index.html"
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # DevB Planning and Lands Technical Circulars (English) crawler.
+  # Extracts PDF links from a single page containing multiple tables.
+  devb_planning_and_lands_technical_circulars:
+    base_url: "https://www.devb.gov.hk"
+    page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/technical_circulars/planning_and_lands_technical_circular/index.html"
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # DevB Works Technical Circulars (in force) via JS dataset.
+  # The page renders results client-side; we parse the backing dataset and
+  # emulate the Issue Year search for the last N years.
+  devb_works_technical_circulars_um:
+    base_url: "https://www.devb.gov.hk"
+    data_js_url: "https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcirculars_53.js"
+    years_back: 10
+    include_revision_year_matches: true
+    request_delay_seconds: 0.0
+    request_jitter_seconds: 0.0
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # DevB Publications (English) recursive document crawler.
+  # Crawls only within the Publications section and emits only PDF/DOC/DOCX links.
+  devb_publications:
+    base_url: "https://www.devb.gov.hk"
+    seed_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/index.html"
+    scope_prefix: "/en/publications_and_press_releases/publications/"
+    content_element_id: "content"
+    exclude_path_prefixes:
+      - "/en/publications_and_press_releases/publications/glossary_of_terms"
+      - "/en/publications_and_press_releases/publications/standardised_components_and_practices"
+    max_depth: 6
+    max_pages: 2000
+    max_out_links_per_page: 500
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # HKSAR Government Telephone Directory (English) people crawler.
+  # Traverses department/subdepartment pages under tel.directory.gov.hk and emits
+  # one record per person, deduplicated by office telephone number.
+  tel_directory:
+    index_url: "https://tel.directory.gov.hk/index_ENG.html"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_pages: 2000
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
