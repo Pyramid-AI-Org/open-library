@@ -78,6 +78,8 @@ def main() -> int:
             "devb_planning_and_lands_technical_circulars",
             "devb_works_technical_circulars_um",
             "devb_publications",
+            "archsd_technical_documents",
+            "archsd_practices_and_guidelines",
             "tel_directory",
         ]
 

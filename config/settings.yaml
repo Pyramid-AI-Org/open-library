@@ -3,7 +3,7 @@
 
 http:
   user_agent: "OpenLibraryCrawler/0.1 (+https://github.com/<your-org>/<your-repo>)"
-  timeout_seconds: 30
+  timeout_seconds: 60
   max_retries: 3
 
 crawlers:
@@ -117,6 +117,79 @@ crawlers:
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
     max_pages: 2000
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # ARCHSD Technical Documents crawler.
+  # Starts from the Technical Documents hub page, discovers the 6 sections,
+  # and recursively follows subsection pages to emit PDF links.
+  #
+  # Year filtering policy:
+  # - If a page exposes a year selector that includes 2022, it only follows 2022+ year pages.
+  # - If a year selector exists but 2022 is missing, it filters PDFs by best-effort year
+  #   extraction from link text/URL.
+  # - If there is no year selector, it keeps all PDFs on that page.
+  archsd_technical_documents:
+    base_url: "https://www.archsd.gov.hk"
+    start_url: "https://www.archsd.gov.hk/en/reports/techinical-documents.html"
+    min_year: 2022
+
+    # Best-effort: if empty/unhelpful, it falls back to full-page link extraction.
+    content_element_id: "content"
+
+    allowed_page_path_prefixes:
+      - "/en/publications-publicity/"
+      - "/publications-publicity/"
+
+    # Restrict emitted PDFs to relevant site paths (avoids unrelated banner PDFs).
+    allowed_pdf_path_prefixes:
+      - "/media/publications-publicity/"
+
+    max_depth: 6
+    max_pages: 2000
+    max_out_links_per_page: 800
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # ARCHSD Practices and Guidelines crawler.
+  # Crawls the Practices and Guidelines page and emits all PDF links it finds.
+  # No year filtering.
+  archsd_practices_and_guidelines:
+    base_url: "https://www.archsd.gov.hk"
+    start_url: "https://www.archsd.gov.hk/en/reports/practices-and-guidelines.html"
+
+    # Best-effort: if empty/unhelpful, it falls back to full-page link extraction.
+    content_element_id: "content"
+
+    # Keep HTML traversal tight so we don't drift into other /en/reports pages via nav.
+    explicit_allowed_page_paths:
+      - "/en/reports/practices-and-guidelines.html"
+      - "/en/reports/disclaimer-for-BIM-guides.html"
+      - "/en/BIM-guides/index.html"
+      - "/en/consultants-contractors/product-conformity-certification-schemes.html"
+
+    allowed_page_path_prefixes:
+      - "/en/ua/"
+      - "/en/ua2/"
+      - "/en/thepossiblepackage/"
+      - "/en/BIM-guides/"
+
+    # PDFs on this page commonly live under /media/reports/practices-and-guidelines/.
+    allowed_pdf_path_prefixes:
+      - "/media/reports/"
+      - "/archsd/html/ua/"
+      - "/archsd/html/ua2/"
+      - "/media/consultants-contractors/"
+
+    max_depth: 4
+    max_pages: 500
+    max_out_links_per_page: 800
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
     max_total_records: 50000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
