@@ -7,7 +7,7 @@ import time
 from dataclasses import dataclass
 from datetime import date, datetime
 from typing import Any
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 
@@ -96,6 +96,14 @@ def _parse_ddmmyyyy_to_iso(value: str | None) -> str | None:
         return None
 
 
+def _path_ext(url: str) -> str:
+    p = urlparse(url)
+    path = (p.path or "").lower()
+    if "." not in path:
+        return ""
+    return "." + path.rsplit(".", 1)[-1]
+
+
 _LIST_RE = re.compile(r"var\s+list\s*=\s*(\[[\s\S]*?\])\s*(?:;|%|$)")
 
 
@@ -173,7 +181,9 @@ class Crawler:
         ).strip()
 
         years_back = int(cfg.get("years_back", 10))
-        include_revision_year_matches = bool(cfg.get("include_revision_year_matches", True))
+        include_revision_year_matches = bool(
+            cfg.get("include_revision_year_matches", True)
+        )
         request_delay_seconds = float(cfg.get("request_delay_seconds", 0.0))
         request_jitter_seconds = float(cfg.get("request_jitter_seconds", 0.0))
         max_total_records = int(cfg.get("max_total_records", 50000))
@@ -215,11 +225,13 @@ class Crawler:
             # The site builds results client-side, but we keep a small per-year delay
             # to be consistent/polite if this ever changes to server-side.
             if request_delay_seconds > 0:
-                _sleep_seconds(request_delay_seconds + random.uniform(0.0, request_jitter_seconds))
+                _sleep_seconds(
+                    request_delay_seconds + random.uniform(0.0, request_jitter_seconds)
+                )
 
             for item in items:
-                issue_year = (item.get("IssueYear") or "")
-                revision_year = (item.get("RevisionYear") or "")
+                issue_year = item.get("IssueYear") or ""
+                revision_year = item.get("RevisionYear") or ""
 
                 matches_year = False
                 if issue_year == year:
@@ -230,8 +242,8 @@ class Crawler:
                 if not matches_year:
                     continue
 
-                circular_number = (item.get("CircularNumber") or None)
-                title = (item.get("Title") or None)
+                circular_number = item.get("CircularNumber") or None
+                title = item.get("Title") or None
 
                 index_groups_raw = item.get("IndexGroup")
                 index_groups: list[str] = []
@@ -259,6 +271,10 @@ class Crawler:
 
                     abs_url = urljoin(base_url + "/", file_path_s.lstrip("/"))
                     if not abs_url.startswith(base_url + "/"):
+                        continue
+
+                    # Policy: ignore spreadsheets and Word docs.
+                    if _path_ext(abs_url) in (".xls", ".xlsx", ".doc", ".docx"):
                         continue
 
                     name_parts: list[str] = []

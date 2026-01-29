@@ -19,6 +19,28 @@ _DETAIL_PATH_RE = re.compile(
 )
 
 
+def _is_chinese_only_title(title: str | None) -> bool:
+    t = (title or "").strip().lower()
+    if not t:
+        return False
+    return "chinese only" in t or "chinese version" in t
+
+
+def _rewrite_lang_url(url: str, *, base_url: str, lang: str) -> str:
+    prefix = base_url.rstrip("/") + "/en/"
+    if url.startswith(prefix):
+        return base_url.rstrip("/") + f"/{lang}/" + url[len(prefix) :]
+    return url
+
+
+def _infer_locale_from_url(url: str, *, base_url: str) -> str | None:
+    base = base_url.rstrip("/")
+    for lang in ("en", "tc", "sc"):
+        if url.startswith(base + f"/{lang}/"):
+            return lang
+    return None
+
+
 def _infer_max_pages_from_html(html: str, *, year: int, type_value: str) -> int | None:
     # Some DevB pages embed page index links in `divHiddenLinks` instead of (or in
     # addition to) a visible pagination widget.
@@ -353,6 +375,9 @@ class Crawler:
         base_url = str(cfg.get("base_url", "https://www.devb.gov.hk")).rstrip("/")
         years_back = int(cfg.get("years_back", 10))
         type_value = str(cfg.get("type", "all")).strip() or "all"
+        chinese_only_lang = str(cfg.get("chinese_only_lang", "tc")).strip().lower()
+        if chinese_only_lang not in ("tc", "sc"):
+            chinese_only_lang = "tc"
 
         request_delay_seconds = float(cfg.get("request_delay_seconds", 0.5))
         request_jitter_seconds = float(cfg.get("request_jitter_seconds", 0.25))
@@ -422,13 +447,21 @@ class Crawler:
                     if not _DETAIL_PATH_RE.match(path):
                         continue
 
-                    if abs_url in seen_urls:
+                    final_url = abs_url
+                    if _is_chinese_only_title(row.title):
+                        final_url = _rewrite_lang_url(
+                            abs_url, base_url=base_url, lang=chinese_only_lang
+                        )
+
+                    if final_url in seen_urls:
                         continue
-                    seen_urls.add(abs_url)
+                    seen_urls.add(final_url)
+
+                    locale = _infer_locale_from_url(final_url, base_url=base_url)
 
                     out.append(
                         UrlRecord(
-                            url=abs_url,
+                            url=final_url,
                             name=row.title,
                             discovered_at_utc=discovered_at,
                             source=self.name,
@@ -437,6 +470,7 @@ class Crawler:
                                 "year": year,
                                 "type": type_value,
                                 "listing_url": listing_url,
+                                "locale": locale,
                             },
                         )
                     )

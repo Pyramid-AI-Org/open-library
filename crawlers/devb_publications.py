@@ -4,7 +4,7 @@ import random
 import time
 from dataclasses import dataclass
 from typing import Iterable
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import unquote, urlparse, urlunparse
 
 import requests
 
@@ -12,7 +12,41 @@ from crawlers.base import RunContext, UrlRecord
 from utils.html_links import HtmlLink, extract_links, extract_links_in_element
 
 
-_ALLOWED_DOC_EXTS = {".pdf", ".doc", ".docx"}
+_ALLOWED_DOC_EXTS = {".pdf"}
+
+
+_GENERIC_LINK_TEXTS = {
+    "more",
+    "download",
+    "click here",
+    "here",
+    "view",
+    "open",
+}
+
+
+def _infer_doc_name(link_text: str | None, url: str) -> str | None:
+    t = (link_text or "").strip()
+    if t and t.lower() not in _GENERIC_LINK_TEXTS:
+        return t
+
+    p = urlparse(url)
+    seg = (p.path or "").rstrip("/").rsplit("/", 1)[-1]
+    if not seg:
+        return t or None
+
+    seg = unquote(seg)
+    # Remove extension.
+    if "." in seg:
+        seg = seg.rsplit(".", 1)[0]
+
+    # Normalize separators and whitespace.
+    seg = seg.replace("_", " ").replace("-", " ")
+    seg = " ".join(seg.split())
+
+    if not seg:
+        return t or None
+    return seg
 
 
 def _normalize_path_prefix(value: str) -> str | None:
@@ -325,7 +359,7 @@ class Crawler:
                     out.append(
                         UrlRecord(
                             url=can,
-                            name=(link.text or None),
+                            name=_infer_doc_name(link.text, can),
                             discovered_at_utc=ctx.started_at_utc,
                             source=self.name,
                             meta={

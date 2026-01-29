@@ -4,7 +4,6 @@ import random
 import re
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
 from typing import Iterable
 from urllib.parse import urljoin, urlparse, urlunparse
 
@@ -128,29 +127,10 @@ def _iter_links(html: str, *, base_url: str, content_element_id: str) -> Iterabl
     return extract_links(html, base_url)
 
 
-_YEAR_RE = re.compile(r"\b(19\d{2}|20\d{2})\b")
 _PDF_URL_RE = re.compile(
     r"((?:https?://|/)[^\"\'<>\s]+?\.pdf(?:\?[^\"\'<>\s]*)?)",
     re.IGNORECASE,
 )
-
-
-def _extract_best_effort_year(*parts: str) -> int | None:
-    candidates: list[int] = []
-    for part in parts:
-        if not part:
-            continue
-        for m in _YEAR_RE.findall(part):
-            try:
-                candidates.append(int(m))
-            except ValueError:
-                pass
-
-    if not candidates:
-        return None
-
-    # Prefer the most recent year in the text/URL.
-    return max(candidates)
 
 
 def _is_probable_year_link(link: HtmlLink) -> int | None:
@@ -161,6 +141,65 @@ def _is_probable_year_link(link: HtmlLink) -> int | None:
     if year < 1900 or year > 2100:
         return None
     return year
+
+
+_ITEM_WITH_DOCUMENTS_RE = re.compile(
+    r"\{\s*title:\s*\"(?P<item_title>[^\"]*)\"\s*,\s*description:\s*\"(?P<desc>[^\"]*)\"\s*,\s*document:\s*\[(?P<docs>.*?)\]\s*\}",
+    re.DOTALL,
+)
+_DOCUMENT_ENTRY_RE = re.compile(
+    r"\{\s*title:\s*\"(?P<title>[^\"]*)\"\s*,\s*url:\s*\"(?P<url>[^\"]*)\"\s*,\s*icon:\s*\"(?P<icon>[^\"]*)\"\s*\}",
+    re.DOTALL,
+)
+
+
+def _extract_pdf_titles_from_items_array(html: str, *, base_url: str) -> dict[str, str]:
+    """Best-effort extraction of PDF (url -> title) from embedded JS datasets.
+
+    ARCHSD Technical Documents pages often render listings client-side via a JS
+    array (e.g. `var itemsArray = [...]`). In that case there may be few/no PDF
+    anchor tags in the HTML, so we scrape the embedded dataset for titles.
+    """
+
+    out: dict[str, str] = {}
+    if not html:
+        return out
+
+    for item_m in _ITEM_WITH_DOCUMENTS_RE.finditer(html):
+        item_title = (item_m.group("item_title") or "").strip()
+        docs = item_m.group("docs") or ""
+        for doc_m in _DOCUMENT_ENTRY_RE.finditer(docs):
+            icon = (doc_m.group("icon") or "").strip().lower()
+            if icon != "pdf":
+                continue
+
+            doc_title = (doc_m.group("title") or "").strip()
+            raw_url = (doc_m.group("url") or "").strip()
+            if not raw_url:
+                continue
+
+            # The dataset occasionally contains literal spaces.
+            raw_url = raw_url.replace(" ", "%20")
+            raw_url = raw_url.replace("&amp;", "&")
+
+            if raw_url.startswith("/"):
+                raw_url = urljoin(base_url, raw_url)
+
+            can = _canonicalize_url(raw_url)
+            if not can:
+                continue
+
+            title = doc_title or item_title
+            if not title:
+                continue
+
+            # Prefer the first non-empty title we see.
+            if can not in out:
+                out[can] = title
+            elif not out[can] and title:
+                out[can] = title
+
+    return out
 
 
 def _extract_pdf_urls_from_html(html: str, *, base_url: str) -> list[str]:
@@ -219,8 +258,6 @@ class _QueueItem:
     discovered_from: str | None
     section: str | None
     section_root_slug: str | None
-    year_context: int | None
-    year_mode: str  # "none" | "strict" | "best_effort"
 
 
 class Crawler:
@@ -229,12 +266,8 @@ class Crawler:
     Crawls the Technical Documents hub page, discovers the 6 section pages, then
     recursively follows subsection pages and emits PDF links.
 
-    Year handling:
-    - If a page exposes a year selector with an explicit 2022 link, only follows
-      year pages for 2022+ (strict).
-    - If a page exposes a year selector but 2022 is missing, follows year pages
-      and filters PDFs by best-effort year extraction from link text/URL.
-    - If a page has no year selector, does not filter by year.
+        Year handling:
+        - No year filtering. Keeps all PDFs regardless of year.
 
     Config: crawlers.archsd_technical_documents
       - base_url: https://www.archsd.gov.hk
@@ -266,7 +299,6 @@ class Crawler:
             cfg.get("start_url", f"{base_url}/en/reports/techinical-documents.html")
         ).strip()
 
-        min_year = int(cfg.get("min_year", 2022))
         content_element_id = (
             str(cfg.get("content_element_id", "content")).strip() or "content"
         )
@@ -323,6 +355,10 @@ class Crawler:
         if not start_can:
             return []
 
+        ignored_page_paths: set[str] = {
+            "/en/publications-publicity/standard-drawings.html",
+        }
+
         # Always allow the hub URL(s) as crawlable HTML pages even though they sit
         # outside the publications-publicity path prefix.
         start_path = urlparse(start_can).path or "/"
@@ -356,7 +392,6 @@ class Crawler:
             "bill-of-quantities,-method-of-measurement-and-schedule-of-rates.html": "Model Bill of Quantities for Building Works",
             "standard-method-of-measurement-for-building-elements.html": "Standard Method of Measurement for Building Elements",
             "schedule-of-rates.html": "Schedule of Rates",
-            "standard-drawings.html": "Standard Drawings",
         }
 
         # Heuristic: many pages include global navigation links under the same
@@ -377,6 +412,8 @@ class Crawler:
                 continue
             p = urlparse(can)
             if p.netloc.lower() != base_netloc:
+                continue
+            if (p.path or "") in ignored_page_paths:
                 continue
             slug = (p.path or "").rsplit("/", 1)[-1].strip().lower()
             if slug in section_slug_to_name:
@@ -400,8 +437,6 @@ class Crawler:
                         discovered_from=start_can,
                         section=sec_name,
                         section_root_slug=(sec_slug.lower() or None),
-                        year_context=None,
-                        year_mode="none",
                     )
                 )
         else:
@@ -412,8 +447,6 @@ class Crawler:
                     discovered_from=None,
                     section=None,
                     section_root_slug=None,
-                    year_context=None,
-                    year_mode="none",
                 )
             )
 
@@ -434,6 +467,10 @@ class Crawler:
             if p.netloc.lower() != base_netloc:
                 continue
 
+            if (p.path or "") in ignored_page_paths:
+                skipped_pages.add(item.url)
+                continue
+
             # Only recurse through in-scope HTML pages.
             if not (
                 _path_is_explicitly_allowed(p.path, allowed_paths=explicit_allowed_paths)
@@ -450,9 +487,7 @@ class Crawler:
                 )
 
             if ctx.debug:
-                print(
-                    f"[{self.name}] Fetch(depth={item.depth} year={item.year_context} mode={item.year_mode}) -> {item.url}"
-                )
+                print(f"[{self.name}] Fetch(depth={item.depth}) -> {item.url}")
 
             resp = _get_with_retries(
                 session,
@@ -473,28 +508,8 @@ class Crawler:
             # Extract them from raw HTML as a fallback.
             pdf_urls_in_html = _extract_pdf_urls_from_html(resp.text, base_url=item.url)
 
-            # Detect year selector links on this page.
-            year_links: list[tuple[int, str]] = []
-            for link in links:
-                y = _is_probable_year_link(link)
-                if y is None:
-                    continue
-                can = _canonicalize_url(link.href)
-                if not can:
-                    continue
-                lp = urlparse(can)
-                if lp.netloc.lower() != base_netloc:
-                    continue
-                if not (
-                    _path_is_explicitly_allowed(
-                        lp.path, allowed_paths=explicit_allowed_paths
-                    )
-                    or _path_starts_with_any(lp.path, allowed_page_path_prefixes)
-                ):
-                    continue
-                year_links.append((y, can))
-
-            years_available = {y for y, _ in year_links}
+            # JS-rendered listings (e.g. itemsArray) contain PDF titles.
+            pdf_title_map = _extract_pdf_titles_from_items_array(resp.text, base_url=item.url)
 
             # Emit PDF documents on the current page.
             doc_url_to_text: dict[str, str] = {}
@@ -516,6 +531,11 @@ class Crawler:
                 if can not in doc_url_to_text:
                     doc_url_to_text[can] = ""
 
+            # Fill missing names from embedded dataset.
+            for doc_url, title in pdf_title_map.items():
+                if doc_url in doc_url_to_text and not (doc_url_to_text[doc_url] or "").strip():
+                    doc_url_to_text[doc_url] = title
+
             for can in sorted(doc_url_to_text.keys()):
                 lp = urlparse(can)
                 if lp.netloc.lower() != base_netloc:
@@ -531,11 +551,6 @@ class Crawler:
 
                 link_text = doc_url_to_text.get(can, "")
 
-                if item.year_mode == "best_effort":
-                    y = _extract_best_effort_year(link_text, can)
-                    if y is not None and y < min_year:
-                        continue
-
                 seen_docs.add(can)
                 ext = _path_ext(can)
 
@@ -549,11 +564,6 @@ class Crawler:
                             "start_url": start_can,
                             "section": item.section,
                             "discovered_from": item.url,
-                            "depth": item.depth,
-                            "link_text": link_text,
-                            "year_context": item.year_context,
-                            "year_mode": item.year_mode,
-                            "best_effort_year": _extract_best_effort_year(link_text, can),
                             "file_ext": ext.lstrip("."),
                         },
                     )
@@ -568,39 +578,6 @@ class Crawler:
             # Recurse into linked pages.
             if item.depth >= max_depth:
                 continue
-
-            # If a year selector is present, choose which year pages to follow.
-            year_urls_to_follow: set[str] = set()
-            if year_links:
-                if min_year in years_available:
-                    for y, u in year_links:
-                        if y >= min_year:
-                            year_urls_to_follow.add(u)
-                else:
-                    # If 2022 isn't in the selection, still try to stay within 2022+.
-                    # If the selector doesn't provide any 2022+ years, fall back to all.
-                    any_2022_plus = any(y >= min_year for y, _ in year_links)
-                    for y, u in year_links:
-                        if any_2022_plus and y < min_year:
-                            continue
-                        year_urls_to_follow.add(u)
-
-                for y, u in year_links:
-                    if u not in year_urls_to_follow:
-                        continue
-                    mode = "strict" if (min_year in years_available) else "best_effort"
-                    if u not in visited_pages:
-                        queue.append(
-                            _QueueItem(
-                                url=u,
-                                depth=item.depth + 1,
-                                discovered_from=item.url,
-                                section=item.section,
-                                section_root_slug=item.section_root_slug,
-                                year_context=y,
-                                year_mode=mode,
-                            )
-                        )
 
             for link in links:
                 can = _canonicalize_url(link.href)
@@ -629,6 +606,10 @@ class Crawler:
                         item.section_root_slug
                     )
 
+                    # Numeric year selector links should still be crawlable.
+                    if _is_probable_year_link(link) is not None:
+                        allowed_prefixes = None
+
                     # If we don't know this section's subsection patterns, stay
                     # on the section root page only (avoid global nav drift).
                     if not allowed_prefixes:
@@ -639,11 +620,8 @@ class Crawler:
                             if child_slug != item.section_root_slug:
                                 continue
 
-                # Avoid adding year links twice; handled above.
-                y = _is_probable_year_link(link)
-                if y is not None and year_links:
-                    if can in year_urls_to_follow:
-                        continue
+                if (lp.path or "") in ignored_page_paths:
+                    continue
 
                 # Propagate section name best-effort.
                 section = item.section
@@ -660,8 +638,6 @@ class Crawler:
                             discovered_from=item.url,
                             section=section,
                             section_root_slug=item.section_root_slug,
-                            year_context=item.year_context,
-                            year_mode=item.year_mode,
                         )
                     )
 
