@@ -40,3 +40,21 @@ Workflow: [.github/workflows/crawl.yml](.github/workflows/crawl.yml)
 
 The `link_extract` crawler fetches a single page and extracts anchor URLs from it.
 Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settings.yaml).
+
+## TODO
+- Singapore Code and standard.
+- Readible UI module (rendering the JSONL?)
+- Original set:
+| Website | Status |
+|---|---|
+| https://www.info.gov.hk/gia/ | partial |
+| https://www.directory.gov.hk/ | partial |
+| https://www.devb.gov.hk/ | partial |
+| https://www.archsd.gov.hk/ | partial |
+| https://www.cedd.gov.hk/ | todo |
+| https://www.dsd.gov.hk/ | todo |
+| https://www.emsd.gov.hk/ | todo |
+| https://www.epd.gov.hk/ | todo |
+| https://www.hyd.gov.hk/ | todo |
+| https://www.wsd.gov.hk/ | todo |
+| https://www.legco.gov.hk/ | todo |
