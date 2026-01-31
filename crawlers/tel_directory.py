@@ -701,8 +701,9 @@ class Crawler:
                             post_title_abbrev_map,
                         )
                     )
-                    if post_title_short and post_title_long == post_title_short:
-                        post_title_long = None
+                    # Ensure post_title_long is always populated when we have a post_title.
+                    if post_title_short and (post_title_long is None or post_title_long == post_title_short):
+                        post_title_long = post_title_short
 
                     meta: dict[str, Any] = {
                         "post_title": post_title_short,
@@ -739,10 +740,9 @@ class Crawler:
                                         post_title_abbrev_map,
                                     )
                                 )
-                                if post_title_long == post_title_short:
-                                    post_title_long = None
-                                if post_title_long:
-                                    existing.meta["post_title_long"] = post_title_long
+                                if post_title_long is None or post_title_long == post_title_short:
+                                    post_title_long = post_title_short
+                                existing.meta["post_title_long"] = post_title_long
 
                         _merge_department_path(existing.meta, dept_path)
                         if isinstance(existing.meta.get("discovered_from"), str):
