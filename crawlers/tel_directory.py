@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import json
 import random
 import re
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from html.parser import HTMLParser
+from pathlib import Path
 from typing import Any
 from urllib.parse import urljoin, urlparse, urlunparse
 
@@ -16,6 +18,139 @@ from utils.html_links import extract_links
 
 
 _TEL_HOST = "tel.directory.gov.hk"
+
+
+_ABBREVIATIONS_JSON_PATH = Path(__file__).with_name("tel_directory_abbreviations.json")
+
+
+_SKIP_DEPT_SEGMENTS = {
+    "back",
+    "help",
+    "disclaimer",
+    "copyright notice",
+    "skip to content",
+    "govhk",
+}
+
+
+_ALPHA_INDEX_SEGMENT_RE = re.compile(r"^(?:[A-Z]|[0-9])(?:\s*[-–]\s*(?:[A-Z]|[0-9]))*$")
+
+
+def _load_tel_abbreviations() -> dict[str, str]:
+    try:
+        raw = json.loads(_ABBREVIATIONS_JSON_PATH.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        return {}
+    except json.JSONDecodeError:
+        return {}
+
+    if not isinstance(raw, dict):
+        return {}
+
+    out: dict[str, str] = {}
+    for k, v in raw.items():
+        if not isinstance(k, str) or not isinstance(v, str):
+            continue
+        kk = " ".join(k.split()).strip()
+        vv = " ".join(v.split()).strip()
+        if kk and vv:
+            out[kk] = vv
+    return out
+
+
+def _build_post_title_abbrev_expander(
+    abbreviations: dict[str, str],
+    *,
+    require_capital_start: bool = True,
+) -> tuple[re.Pattern[str] | None, dict[str, str]]:
+    if not abbreviations:
+        return None, {}
+
+    selected: dict[str, str] = {}
+    for short, long in abbreviations.items():
+        if not short or not long:
+            continue
+        if require_capital_start and not short[0].isupper():
+            continue
+        selected[short] = long
+
+    if not selected:
+        return None, {}
+
+    # Match abbreviations as standalone tokens (surrounded by non-alnum).
+    # Sort by length desc so e.g. "Acct(s)" matches before "Acc".
+    parts = sorted((re.escape(k) for k in selected.keys()), key=len, reverse=True)
+    pat = re.compile(r"(?<![A-Za-z0-9])(" + "|".join(parts) + r")(?![A-Za-z0-9])")
+    return pat, selected
+
+
+def _expand_post_title_abbreviations(
+    post_title: str | None,
+    pattern: re.Pattern[str] | None,
+    mapping: dict[str, str],
+) -> tuple[str | None, list[dict[str, str]]]:
+    t = (post_title or "").strip()
+    if not t:
+        return None, []
+    if pattern is None or not mapping:
+        return t, []
+
+    used: list[dict[str, str]] = []
+    seen: set[str] = set()
+
+    def _repl(m: re.Match[str]) -> str:
+        short = m.group(1)
+        long = mapping.get(short)
+        if long and short not in seen:
+            seen.add(short)
+            used.append({"short": short, "long": long})
+        return long or short
+
+    expanded = pattern.sub(_repl, t)
+    return expanded, used
+
+
+def _clean_department_segment(text: str) -> str | None:
+    t = " ".join((text or "").split())
+    if not t:
+        return None
+
+    # Many pages include A-Z / 0-9 index navigation. Those are not meaningful
+    # department breadcrumb segments.
+    if _ALPHA_INDEX_SEGMENT_RE.fullmatch(t):
+        return None
+
+    tl = t.lower()
+    if tl in _SKIP_DEPT_SEGMENTS:
+        return None
+    if tl.startswith("skip to"):
+        return None
+    return t
+
+
+def _path_to_key(path: list[str]) -> tuple[str, ...]:
+    return tuple(path)
+
+
+def _merge_department_path(meta: dict[str, Any], path: list[str]) -> None:
+    if not path:
+        return
+
+    paths = meta.get("department_paths")
+    if not isinstance(paths, list):
+        meta["department_paths"] = [path]
+        return
+
+    # Ensure uniqueness while preserving insertion order.
+    existing: set[tuple[str, ...]] = set()
+    for p in paths:
+        if isinstance(p, list) and all(isinstance(x, str) for x in p):
+            existing.add(tuple(p))
+
+    k = _path_to_key(path)
+    if k not in existing:
+        paths.append(path)
+        existing.add(k)
 
 
 def _sleep_seconds(seconds: float) -> None:
@@ -471,20 +606,54 @@ class Crawler:
         if user_agent:
             session.headers.update({"User-Agent": user_agent})
 
+        abbreviations = _load_tel_abbreviations()
+        post_title_abbrev_pattern, post_title_abbrev_map = (
+            _build_post_title_abbrev_expander(abbreviations, require_capital_start=True)
+        )
+
         start = _canonicalize_tel_url(index_url)
         if not start:
             return []
 
         discovered_at = datetime.now(timezone.utc).isoformat()
 
-        queue: list[str] = [start]
+        @dataclass(frozen=True)
+        class _QueueItem:
+            url: str
+            department_path: list[str]
+
+        queue: list[_QueueItem] = [_QueueItem(url=start, department_path=[])]
         visited_pages: set[str] = set()
 
-        seen_phones: set[str] = set()
+        # Track all known department paths for a page and the phones discovered on that page.
+        page_paths: dict[str, set[tuple[str, ...]]] = {}
+        page_phone_keys: dict[str, set[str]] = {}
+
+        phone_to_record: dict[str, UrlRecord] = {}
         out: list[UrlRecord] = []
 
+        def _ensure_page_path(url: str, dept_path: list[str]) -> None:
+            if not dept_path:
+                return
+            paths = page_paths.setdefault(url, set())
+            paths.add(_path_to_key(dept_path))
+
+        def _merge_path_into_phone(phone_key: str, dept_path: list[str]) -> None:
+            if not dept_path:
+                return
+            r = phone_to_record.get(phone_key)
+            if not r:
+                return
+            if not isinstance(r.meta, dict):
+                return
+            _merge_department_path(r.meta, dept_path)
+
         while queue:
-            page_url = queue.pop(0)
+            item = queue.pop(0)
+            page_url = item.url
+            dept_path = item.department_path
+
+            _ensure_page_path(page_url, dept_path)
 
             if page_url in visited_pages:
                 continue
@@ -509,40 +678,97 @@ class Crawler:
 
             # 1) Extract people from tables
             people = _extract_people_from_html(html, page_url=page_url)
+            phones_on_page: set[str] = set()
             for p in people:
                 phone_key = str(p.get("office_tel_norm") or "").strip()
                 if not phone_key:
                     continue
-                if phone_key in seen_phones:
-                    continue
-                seen_phones.add(phone_key)
+
+                phones_on_page.add(phone_key)
 
                 url = str(p.get("person_url") or "").strip()
                 if not url:
                     # Fall back to the page we discovered them on.
                     url = page_url
 
-                out.append(
-                    UrlRecord(
+                existing = phone_to_record.get(phone_key)
+                if existing is None:
+                    post_title_short = p.get("post_title")
+                    post_title_long, _post_title_abbrevs = (
+                        _expand_post_title_abbreviations(
+                            post_title_short,
+                            post_title_abbrev_pattern,
+                            post_title_abbrev_map,
+                        )
+                    )
+                    if post_title_short and post_title_long == post_title_short:
+                        post_title_long = None
+
+                    meta: dict[str, Any] = {
+                        "post_title": post_title_short,
+                        "post_title_long": post_title_long,
+                        "office_tel": p.get("office_tel"),
+                        "email": p.get("email"),
+                        "discovered_from": page_url,
+                        "dedup_key": phone_key,
+                        "department_paths": [],
+                    }
+                    _merge_department_path(meta, dept_path)
+
+                    rec = UrlRecord(
                         url=url,
                         name=p.get("name") or None,
                         discovered_at_utc=discovered_at,
                         source=self.name,
-                        meta={
-                            "post_title": p.get("post_title"),
-                            "office_tel": p.get("office_tel"),
-                            "email": p.get("email"),
-                            "discovered_from": page_url,
-                            "dedup_key": phone_key,
-                        },
+                        meta=meta,
                     )
-                )
+                    phone_to_record[phone_key] = rec
+                    out.append(rec)
+                else:
+                    # Same phone encountered again: merge department paths and track other origins.
+                    if isinstance(existing.meta, dict):
+                        # Best-effort: fill in missing post_title/post_title_long from subsequent sightings.
+                        post_title_short = p.get("post_title")
+                        if post_title_short:
+                            existing.meta.setdefault("post_title", post_title_short)
+                            if existing.meta.get("post_title_long") is None:
+                                post_title_long, _post_title_abbrevs = (
+                                    _expand_post_title_abbreviations(
+                                        post_title_short,
+                                        post_title_abbrev_pattern,
+                                        post_title_abbrev_map,
+                                    )
+                                )
+                                if post_title_long == post_title_short:
+                                    post_title_long = None
+                                if post_title_long:
+                                    existing.meta["post_title_long"] = post_title_long
+
+                        _merge_department_path(existing.meta, dept_path)
+                        if isinstance(existing.meta.get("discovered_from"), str):
+                            dfs = existing.meta.get("discovered_from_urls")
+                            if not isinstance(dfs, list):
+                                dfs = [existing.meta["discovered_from"]]
+                                existing.meta["discovered_from_urls"] = dfs
+                            if page_url not in dfs:
+                                dfs.append(page_url)
+
+                        # Optional: detect collisions where the URL differs.
+                        if url and existing.url != url:
+                            other_urls = existing.meta.get("other_person_urls")
+                            if not isinstance(other_urls, list):
+                                other_urls = []
+                                existing.meta["other_person_urls"] = other_urls
+                            if url not in other_urls and url != existing.url:
+                                other_urls.append(url)
 
                 if len(out) >= max_total_records:
                     break
 
             if len(out) >= max_total_records:
                 break
+
+            page_phone_keys[page_url] = phones_on_page
 
             # 2) Discover more office/department pages to crawl
             links = extract_links(html, base_url=page_url)
@@ -556,9 +782,27 @@ class Crawler:
                 can = _canonicalize_tel_url(href)
                 if not can:
                     continue
+
+                seg = _clean_department_segment(link.text or "")
+                next_path = dept_path
+                if seg:
+                    if (
+                        dept_path
+                        and dept_path[-1].strip().lower() == seg.strip().lower()
+                    ):
+                        next_path = dept_path
+                    else:
+                        next_path = [*dept_path, seg]
+
+                _ensure_page_path(can, next_path)
+
                 if can in visited_pages:
+                    # No refetch, but if we've already extracted phones from that page, merge in the new path.
+                    for phone_key in page_phone_keys.get(can, set()):
+                        _merge_path_into_phone(phone_key, next_path)
                     continue
-                queue.append(can)
+
+                queue.append(_QueueItem(url=can, department_path=next_path))
 
             # Polite pacing
             delay = request_delay_seconds
@@ -567,4 +811,16 @@ class Crawler:
             _sleep_seconds(delay)
 
         out.sort(key=lambda r: (r.meta.get("dedup_key") or "", r.url))
+
+        if ctx.debug:
+            multi_path = 0
+            for r in out:
+                paths = (
+                    r.meta.get("department_paths") if isinstance(r.meta, dict) else None
+                )
+                if isinstance(paths, list) and len(paths) > 1:
+                    multi_path += 1
+            print(f"[{self.name}] Unique phones: {len(out)}")
+            print(f"[{self.name}] Phones with >1 department path: {multi_path}")
+
         return out
