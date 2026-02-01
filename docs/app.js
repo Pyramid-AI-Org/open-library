@@ -1,0 +1,578 @@
+const els = {
+  repoInput: document.getElementById("repoInput"),
+  saveRepoBtn: document.getElementById("saveRepoBtn"),
+
+  datasetSelect: document.getElementById("datasetSelect"),
+  archiveField: document.getElementById("archiveField"),
+  archiveSelect: document.getElementById("archiveSelect"),
+
+  sourceFilter: document.getElementById("sourceFilter"),
+  domainFilter: document.getElementById("domainFilter"),
+  searchInput: document.getElementById("searchInput"),
+
+  pageSizeSelect: document.getElementById("pageSizeSelect"),
+  status: document.getElementById("status"),
+  downloadLink: document.getElementById("downloadLink"),
+  runInfo: document.getElementById("runInfo"),
+
+  reloadBtn: document.getElementById("reloadBtn"),
+  resetBtn: document.getElementById("resetBtn"),
+
+  resultInfo: document.getElementById("resultInfo"),
+  prevBtn: document.getElementById("prevBtn"),
+  nextBtn: document.getElementById("nextBtn"),
+  pageText: document.getElementById("pageText"),
+  tbody: document.getElementById("tbody"),
+
+  detailDialog: document.getElementById("detailDialog"),
+  detailTitle: document.getElementById("detailTitle"),
+  detailSubtitle: document.getElementById("detailSubtitle"),
+  detailJson: document.getElementById("detailJson"),
+  detailOpenUrl: document.getElementById("detailOpenUrl"),
+  copyJsonBtn: document.getElementById("copyJsonBtn"),
+};
+
+/**
+ * State
+ */
+const state = {
+  owner: "",
+  repo: "",
+  branch: "data",
+  dataRoot: "data",
+
+  records: /** @type {Array<any>} */ ([]),
+  filteredIdx: /** @type {Array<number>} */ ([]),
+
+  sortKey: "discovered_at_utc",
+  sortDir: "desc", // asc | desc
+
+  page: 1,
+  pageSize: 50,
+
+  archiveIndex: /** @type {Array<any>} */ ([]),
+  selectedArchivePath: "",
+
+  loading: false,
+};
+
+function setStatus(text) {
+  els.status.textContent = text;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function inferGitHubRepoFromPages() {
+  // For https://OWNER.github.io/REPO/
+  const host = window.location.hostname || "";
+  const isPages = host.endsWith(".github.io");
+  if (!isPages) return null;
+
+  const owner = host.split(".")[0] || "";
+  const parts = (window.location.pathname || "/").split("/").filter(Boolean);
+  const repo = parts[0] || "";
+  if (!owner || !repo) return null;
+
+  return { owner, repo };
+}
+
+function loadRepoFromQueryOrStorage() {
+  const url = new URL(window.location.href);
+  const qp = url.searchParams.get("repo") || "";
+  const stored = localStorage.getItem("ol_viewer_repo") || "";
+
+  const inferred = inferGitHubRepoFromPages();
+
+  const chosen = (qp || stored || (inferred ? `${inferred.owner}/${inferred.repo}` : "")).trim();
+  const [owner, repo] = chosen.split("/");
+  if (owner && repo) {
+    state.owner = owner;
+    state.repo = repo;
+  }
+
+  els.repoInput.value = state.owner && state.repo ? `${state.owner}/${state.repo}` : "";
+}
+
+function saveRepo(value) {
+  const v = (value || "").trim();
+  const [owner, repo] = v.split("/");
+  if (!owner || !repo) {
+    alert("Repo must be like: owner/repo");
+    return;
+  }
+  state.owner = owner;
+  state.repo = repo;
+  localStorage.setItem("ol_viewer_repo", `${owner}/${repo}`);
+}
+
+function rawUrl(path) {
+  if (!state.owner || !state.repo) return "";
+  const clean = String(path || "").replace(/^\/+/, "");
+  return `https://raw.githubusercontent.com/${state.owner}/${state.repo}/${state.branch}/${state.dataRoot}/${clean}`;
+}
+
+function safeHost(url) {
+  const s = (url || "").trim();
+  if (!s) return "";
+  try {
+    return new URL(s).hostname.toLowerCase();
+  } catch {
+    return "";
+  }
+}
+
+function normalizeRecord(r) {
+  const url = typeof r?.url === "string" ? r.url : "";
+  return {
+    url,
+    name: typeof r?.name === "string" ? r.name : "",
+    discovered_at_utc: typeof r?.discovered_at_utc === "string" ? r.discovered_at_utc : "",
+    source: typeof r?.source === "string" ? r.source : "",
+    meta: r?.meta ?? null,
+    domain: safeHost(url),
+  };
+}
+
+function compareValues(a, b) {
+  if (a === b) return 0;
+  if (a == null) return -1;
+  if (b == null) return 1;
+  return a < b ? -1 : 1;
+}
+
+function recordSortValue(rec, key) {
+  switch (key) {
+    case "discovered_at_utc": {
+      const t = Date.parse(rec.discovered_at_utc || "");
+      return Number.isFinite(t) ? t : (rec.discovered_at_utc || "");
+    }
+    case "name":
+      return (rec.name || "").toLowerCase();
+    case "url":
+      return (rec.url || "").toLowerCase();
+    case "domain":
+      return (rec.domain || "").toLowerCase();
+    case "source":
+      return (rec.source || "").toLowerCase();
+    default:
+      return (rec[key] ?? "");
+  }
+}
+
+function rebuildFilters() {
+  const sources = new Map();
+  const domains = new Map();
+
+  for (const r of state.records) {
+    if (r.source) sources.set(r.source, (sources.get(r.source) || 0) + 1);
+    if (r.domain) domains.set(r.domain, (domains.get(r.domain) || 0) + 1);
+  }
+
+  const sourceSelected = els.sourceFilter.value;
+  const domainSelected = els.domainFilter.value;
+
+  const sourceOptions = Array.from(sources.entries()).sort((a, b) => b[1] - a[1]);
+  const domainOptions = Array.from(domains.entries()).sort((a, b) => b[1] - a[1]);
+
+  els.sourceFilter.replaceChildren(new Option("All", ""));
+  for (const [src, count] of sourceOptions) {
+    els.sourceFilter.add(new Option(`${src} (${count})`, src));
+  }
+
+  els.domainFilter.replaceChildren(new Option("All", ""));
+  for (const [d, count] of domainOptions) {
+    els.domainFilter.add(new Option(`${d} (${count})`, d));
+  }
+
+  els.sourceFilter.value = sourceSelected;
+  els.domainFilter.value = domainSelected;
+}
+
+function applyFiltersAndSort() {
+  const source = (els.sourceFilter.value || "").trim();
+  const domain = (els.domainFilter.value || "").trim();
+  const q = (els.searchInput.value || "").trim().toLowerCase();
+
+  const idx = [];
+  for (let i = 0; i < state.records.length; i++) {
+    const r = state.records[i];
+    if (source && r.source !== source) continue;
+    if (domain && r.domain !== domain) continue;
+
+    if (q) {
+      const hay = `${r.name || ""}\n${r.url || ""}`.toLowerCase();
+      if (!hay.includes(q)) continue;
+    }
+
+    idx.push(i);
+  }
+
+  const dirMul = state.sortDir === "asc" ? 1 : -1;
+  idx.sort((ia, ib) => {
+    const a = state.records[ia];
+    const b = state.records[ib];
+    const va = recordSortValue(a, state.sortKey);
+    const vb = recordSortValue(b, state.sortKey);
+    const c = compareValues(va, vb);
+    if (c !== 0) return c * dirMul;
+    // stable-ish fallback
+    return (a.url || "").localeCompare(b.url || "") * dirMul;
+  });
+
+  state.filteredIdx = idx;
+  state.page = 1;
+}
+
+function totalPages() {
+  return Math.max(1, Math.ceil(state.filteredIdx.length / state.pageSize));
+}
+
+function clampPage() {
+  const tp = totalPages();
+  if (state.page < 1) state.page = 1;
+  if (state.page > tp) state.page = tp;
+}
+
+function renderTable() {
+  clampPage();
+
+  const total = state.filteredIdx.length;
+  const tp = totalPages();
+  const start = (state.page - 1) * state.pageSize;
+  const end = Math.min(total, start + state.pageSize);
+
+  els.pageText.textContent = `Page ${tp === 0 ? 0 : state.page} / ${tp}`;
+  els.prevBtn.disabled = state.page <= 1;
+  els.nextBtn.disabled = state.page >= tp;
+
+  els.resultInfo.textContent = total
+    ? `Showing ${start + 1}-${end} of ${total} records (loaded: ${state.records.length})`
+    : `No matching records (loaded: ${state.records.length})`;
+
+  const frag = document.createDocumentFragment();
+  for (let i = start; i < end; i++) {
+    const r = state.records[state.filteredIdx[i]];
+
+    const tr = document.createElement("tr");
+    tr.tabIndex = 0;
+    tr.addEventListener("click", () => openDetail(r));
+    tr.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") openDetail(r);
+    });
+
+    const title = r.name || "(no title)";
+    tr.innerHTML = `
+      <td class="cellTitle">${escapeHtml(title)}</td>
+      <td><span class="badge">${escapeHtml(r.domain || "(unknown)")}</span></td>
+      <td><span class="badge">${escapeHtml(r.source || "(unknown)")}</span></td>
+      <td>${escapeHtml(r.discovered_at_utc || "")}</td>
+      <td class="cellUrl"><a class="link" href="${escapeHtml(r.url || "#")}" target="_blank" rel="noreferrer">${escapeHtml(r.url || "")}</a></td>
+    `;
+    frag.appendChild(tr);
+  }
+  els.tbody.replaceChildren(frag);
+}
+
+function openDetail(r) {
+  const title = r.name || "(no title)";
+  els.detailTitle.textContent = title;
+  els.detailSubtitle.textContent = `${r.domain || ""} • ${r.source || ""} • ${r.discovered_at_utc || ""}`;
+  els.detailOpenUrl.href = r.url || "#";
+
+  const payload = {
+    url: r.url,
+    name: r.name,
+    discovered_at_utc: r.discovered_at_utc,
+    source: r.source,
+    meta: r.meta,
+  };
+
+  els.detailJson.textContent = JSON.stringify(payload, null, 2);
+  els.copyJsonBtn.onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(payload));
+      setStatus("Copied JSON to clipboard");
+    } catch {
+      setStatus("Could not copy (browser blocked clipboard)");
+    }
+  };
+
+  els.detailDialog.showModal();
+}
+
+async function fetchJson(url) {
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
+  return await res.json();
+}
+
+async function loadArchiveIndex() {
+  const url = rawUrl("archive/index.json");
+  if (!url) return;
+
+  try {
+    const obj = await fetchJson(url);
+    const entries = Array.isArray(obj?.archives) ? obj.archives : Array.isArray(obj) ? obj : [];
+    state.archiveIndex = entries;
+
+    els.archiveSelect.replaceChildren();
+    for (const e of entries) {
+      const date = e.date || e.run_date_utc || "";
+      const path = e.path || "";
+      if (!date || !path) continue;
+      els.archiveSelect.add(new Option(date, path));
+    }
+
+    if (els.archiveSelect.options.length > 0) {
+      els.archiveSelect.selectedIndex = 0;
+      state.selectedArchivePath = els.archiveSelect.value;
+    }
+  } catch (err) {
+    state.archiveIndex = [];
+    els.archiveSelect.replaceChildren(new Option("(no archive index found)", ""));
+  }
+}
+
+async function loadRunInfo() {
+  els.runInfo.textContent = "";
+  const url = rawUrl("latest/summary.json");
+  if (!url) return;
+  try {
+    const s = await fetchJson(url);
+    const runDate = s?.run_date_utc || "";
+    const rows = s?.rows != null ? String(s.rows) : "";
+    const crawler = s?.crawler || "";
+    els.runInfo.textContent = runDate ? `run: ${runDate}${rows ? ` • rows: ${rows}` : ""}${crawler ? ` • scope: ${crawler}` : ""}` : "";
+  } catch {
+    // ignore
+  }
+}
+
+async function loadDataset() {
+  if (!state.owner || !state.repo) {
+    setStatus("Set repo (owner/repo) to load data");
+    return;
+  }
+
+  const kind = els.datasetSelect.value;
+  const relPath =
+    kind === "archive" && state.selectedArchivePath
+      ? state.selectedArchivePath
+      : "latest/urls.jsonl";
+
+  const url = rawUrl(relPath);
+  if (!url) {
+    setStatus("Invalid repo configuration");
+    return;
+  }
+
+  els.downloadLink.href = url;
+  els.downloadLink.textContent = `Download JSONL (${kind === "archive" ? "archive" : "latest"})`;
+
+  state.loading = true;
+  state.records = [];
+  state.filteredIdx = [];
+  setStatus("Loading…");
+
+  const startT = performance.now();
+
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
+
+    const totalBytes = Number(res.headers.get("Content-Length") || "0") || 0;
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+    let bytesRead = 0;
+    let buf = "";
+    let lines = 0;
+    let parseErrors = 0;
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      bytesRead += value?.byteLength || 0;
+
+      buf += decoder.decode(value, { stream: true });
+
+      let idx;
+      while ((idx = buf.indexOf("\n")) >= 0) {
+        const line = buf.slice(0, idx).trim();
+        buf = buf.slice(idx + 1);
+        if (!line) continue;
+        try {
+          const obj = JSON.parse(line);
+          state.records.push(normalizeRecord(obj));
+        } catch {
+          parseErrors++;
+        }
+        lines++;
+
+        if (lines % 1000 === 0) {
+          const pct = totalBytes ? Math.round((100 * bytesRead) / totalBytes) : 0;
+          setStatus(
+            totalBytes
+              ? `Loading… ${pct}% (${state.records.length.toLocaleString()} records)`
+              : `Loading… (${state.records.length.toLocaleString()} records)`
+          );
+          await new Promise((r) => setTimeout(r, 0));
+        }
+      }
+    }
+
+    buf += decoder.decode();
+    const tail = buf.trim();
+    if (tail) {
+      try {
+        const obj = JSON.parse(tail);
+        state.records.push(normalizeRecord(obj));
+      } catch {
+        parseErrors++;
+      }
+    }
+
+    rebuildFilters();
+    applyFiltersAndSort();
+    renderTable();
+
+    const ms = Math.round(performance.now() - startT);
+    setStatus(
+      `Loaded ${state.records.length.toLocaleString()} records in ${ms}ms${parseErrors ? ` • parse errors: ${parseErrors}` : ""}`
+    );
+
+    if (kind !== "archive") {
+      await loadRunInfo();
+    } else {
+      els.runInfo.textContent = "";
+    }
+  } catch (err) {
+    console.error(err);
+    setStatus("Failed to load JSONL (check repo/branch/path)");
+    els.tbody.replaceChildren();
+    els.resultInfo.textContent = "No data loaded";
+  } finally {
+    state.loading = false;
+  }
+}
+
+function resetFilters() {
+  els.sourceFilter.value = "";
+  els.domainFilter.value = "";
+  els.searchInput.value = "";
+  state.sortKey = "discovered_at_utc";
+  state.sortDir = "desc";
+  state.page = 1;
+  applyFiltersAndSort();
+  renderTable();
+}
+
+function wireEvents() {
+  els.saveRepoBtn.addEventListener("click", async () => {
+    saveRepo(els.repoInput.value);
+    await loadArchiveIndex();
+    await loadDataset();
+  });
+
+  els.repoInput.addEventListener("keydown", async (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      saveRepo(els.repoInput.value);
+      await loadArchiveIndex();
+      await loadDataset();
+    }
+  });
+
+  els.datasetSelect.addEventListener("change", async () => {
+    const kind = els.datasetSelect.value;
+    els.archiveField.hidden = kind !== "archive";
+    if (kind === "archive" && state.archiveIndex.length === 0) {
+      await loadArchiveIndex();
+    }
+    state.selectedArchivePath = els.archiveSelect.value || "";
+    await loadDataset();
+  });
+
+  els.archiveSelect.addEventListener("change", async () => {
+    state.selectedArchivePath = els.archiveSelect.value || "";
+    await loadDataset();
+  });
+
+  els.sourceFilter.addEventListener("change", () => {
+    applyFiltersAndSort();
+    renderTable();
+  });
+
+  els.domainFilter.addEventListener("change", () => {
+    applyFiltersAndSort();
+    renderTable();
+  });
+
+  let searchTimer = null;
+  els.searchInput.addEventListener("input", () => {
+    if (searchTimer) window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(() => {
+      applyFiltersAndSort();
+      renderTable();
+    }, 150);
+  });
+
+  els.pageSizeSelect.addEventListener("change", () => {
+    state.pageSize = Number(els.pageSizeSelect.value) || 50;
+    state.page = 1;
+    renderTable();
+  });
+
+  els.prevBtn.addEventListener("click", () => {
+    state.page -= 1;
+    renderTable();
+  });
+
+  els.nextBtn.addEventListener("click", () => {
+    state.page += 1;
+    renderTable();
+  });
+
+  els.reloadBtn.addEventListener("click", async () => {
+    await loadDataset();
+  });
+
+  els.resetBtn.addEventListener("click", () => resetFilters());
+
+  document.querySelectorAll("th[data-sort]").forEach((th) => {
+    th.addEventListener("click", () => {
+      const key = th.getAttribute("data-sort");
+      if (!key) return;
+      if (state.sortKey === key) {
+        state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+      } else {
+        state.sortKey = key;
+        state.sortDir = key === "discovered_at_utc" ? "desc" : "asc";
+      }
+      applyFiltersAndSort();
+      renderTable();
+    });
+  });
+}
+
+async function main() {
+  loadRepoFromQueryOrStorage();
+  state.pageSize = Number(els.pageSizeSelect.value) || 50;
+  wireEvents();
+
+  if (state.owner && state.repo) {
+    await loadArchiveIndex();
+    await loadDataset();
+  } else {
+    setStatus("Set repo (owner/repo) to load data");
+  }
+}
+
+main();

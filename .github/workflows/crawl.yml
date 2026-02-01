@@ -99,6 +99,19 @@ jobs:
 
           python main.py $args --out data-worktree/data
 
+      - name: Generate latest stats (for viewer)
+        run: |
+          # Produce machine-readable stats + a human-readable summary.
+          # Keep this non-blocking so a crawl can still publish even if stats fail.
+          python scripts/data_stats.py \
+            --in data-worktree/data/latest/urls.jsonl \
+            --out-json data-worktree/data/latest/stats.json \
+            > data-worktree/data/latest/info.txt || true
+
+      - name: Build archive index (for viewer)
+        run: |
+          python scripts/build_archive_index.py --data-root data-worktree/data
+
       - name: Commit and push data branch
         run: |
           pushd data-worktree
