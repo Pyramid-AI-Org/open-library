@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "defaults": {
+    "fields": [
+      { "type": "meta", "key": "date_utc", "label": "Date", "format": "date" },
+      { "type": "meta", "key": "date", "label": "Date", "format": "date" },
+      { "type": "meta", "key": "type", "label": "Type" },
+      { "type": "meta", "key": "section", "label": "Section" },
+      { "type": "meta", "key": "title", "label": "Title" },
+      { "type": "meta", "key": "listing_url", "label": "Listing URL", "format": "url" },
+      { "type": "meta", "key": "discovered_from", "label": "Discovered from", "format": "url" }
+    ]
+  },
+  "sources": {
+    "tel_directory": {
+      "fields": [
+        {
+          "type": "meta",
+          "key": "department_paths",
+          "label": "Department",
+          "format": "departments",
+          "limit": 5
+        },
+        { "type": "meta", "key": "office_tel", "label": "Office" },
+        { "type": "meta", "key": "email", "label": "Email", "format": "email" },
+        {
+          "type": "meta",
+          "key": "post_title_long",
+          "label": "Title",
+          "fallbackKeys": ["post_title"]
+        }
+      ]
+    }
+  }
+}

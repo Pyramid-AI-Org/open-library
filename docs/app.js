@@ -20,6 +20,8 @@ const els = {
 
   resultInfo: document.getElementById("resultInfo"),
   prevBtn: document.getElementById("prevBtn"),
+  pageInput: document.getElementById("pageInput"),
+  goPageBtn: document.getElementById("goPageBtn"),
   nextBtn: document.getElementById("nextBtn"),
   pageText: document.getElementById("pageText"),
   tbody: document.getElementById("tbody"),
@@ -53,6 +55,8 @@ const state = {
 
   archiveIndex: /** @type {Array<any>} */ ([]),
   selectedArchivePath: "",
+
+  viewerConfig: null,
 
   loading: false,
 };
@@ -108,6 +112,12 @@ function humanBytes(n) {
   return `${v.toFixed(digits)} ${units[i]}`;
 }
 
+function normalizeDataRootPath(p) {
+  const s = String(p || "").trim().replace(/^\/+/, "");
+  // GitHub tree API returns paths like `data/archive/...`; rawUrl expects relative to data root.
+  return s.startsWith("data/") ? s.slice("data/".length) : s;
+}
+
 function inferGitHubRepoFromPages() {
   // For https://OWNER.github.io/REPO/
   const host = window.location.hostname || "";
@@ -157,6 +167,11 @@ function rawUrl(path) {
   return `https://raw.githubusercontent.com/${state.owner}/${state.repo}/${state.branch}/${state.dataRoot}/${clean}`;
 }
 
+function githubApiUrl(path) {
+  const clean = String(path || "").replace(/^\/+/, "");
+  return `https://api.github.com/${clean}`;
+}
+
 function safeHost(url) {
   const s = (url || "").trim();
   if (!s) return "";
@@ -186,16 +201,22 @@ function metaGet(meta, key) {
   return meta[key];
 }
 
-function joinDepartmentPaths(value) {
+function departmentLines(value) {
   // department_paths: [["Dept", "Division"], ...]
-  if (!Array.isArray(value)) return "";
-  const parts = [];
+  if (!Array.isArray(value)) return [];
+  const lines = [];
   for (const p of value) {
     if (!Array.isArray(p)) continue;
     const segs = p.map((x) => String(x || "").trim()).filter(Boolean);
-    if (segs.length) parts.push(segs.join(" -> "));
+    if (segs.length) lines.push(segs.join(" -> "));
   }
-  return parts.join(" and ");
+  return lines;
+}
+
+function emailDisplay(v) {
+  if (v === null || v === undefined) return "N/A";
+  const s = String(v).trim();
+  return s ? s : "N/A";
 }
 
 function renderKvRows(rows) {
@@ -210,7 +231,33 @@ function renderKvRows(rows) {
 
     const v = document.createElement("div");
     v.className = "kv__v";
-    if (row.href) {
+
+    if (row.kind === "departments") {
+      const lines = Array.isArray(row.lines) ? row.lines : [];
+      const limit = Number(row.limit) || lines.length;
+      const shown = lines.slice(0, limit);
+      const hidden = lines.slice(limit);
+
+      const pre = document.createElement("div");
+      pre.style.whiteSpace = "pre-line";
+      pre.textContent = shown.join("\n");
+      v.appendChild(pre);
+
+      if (hidden.length) {
+        const more = document.createElement("details");
+        more.className = "raw";
+        const summary = document.createElement("summary");
+        summary.className = "raw__summary";
+        summary.textContent = `Show ${hidden.length} more`;
+        const rest = document.createElement("div");
+        rest.style.whiteSpace = "pre-line";
+        rest.style.marginTop = "8px";
+        rest.textContent = hidden.join("\n");
+        more.appendChild(summary);
+        more.appendChild(rest);
+        v.appendChild(more);
+      }
+    } else if (row.href) {
       v.innerHTML = `<a class="link" href="${escapeHtml(row.href)}" target="_blank" rel="noreferrer">${escapeHtml(row.value || row.href)}</a>`;
     } else {
       v.textContent = row.value;
@@ -332,6 +379,10 @@ function renderTable() {
   const end = Math.min(total, start + state.pageSize);
 
   els.pageText.textContent = `Page ${tp === 0 ? 0 : state.page} / ${tp}`;
+  if (els.pageInput) {
+    els.pageInput.max = String(tp);
+    els.pageInput.value = String(state.page);
+  }
   els.prevBtn.disabled = state.page <= 1;
   els.nextBtn.disabled = state.page >= tp;
 
@@ -380,17 +431,8 @@ function openDetail(r) {
   els.detailJson.textContent = JSON.stringify(payload, null, 2);
 
   const meta = r.meta && typeof r.meta === "object" ? r.meta : null;
-  const dept = joinDepartmentPaths(metaGet(meta, "department_paths"));
-  const email = metaGet(meta, "email");
-  const officeTel = metaGet(meta, "office_tel");
-  const postTitleLong = metaGet(meta, "post_title_long");
-  const postTitle = metaGet(meta, "post_title");
-  const date = metaGet(meta, "date_utc") || metaGet(meta, "date");
-  const type = metaGet(meta, "type");
-  const section = metaGet(meta, "section");
-  const discoveredFrom = metaGet(meta, "discovered_from");
 
-  /** @type {Array<{label:string,value:string,href?:string}>} */
+  /** @type {Array<any>} */
   const rows = [];
 
   rows.push({ label: "URL", value: r.url || "", href: r.url || "" });
@@ -399,26 +441,76 @@ function openDetail(r) {
   rows.push({ label: "Source", value: r.source || "" });
   rows.push({ label: "Website", value: r.domain || "" });
 
-  if (date) rows.push({ label: "Date", value: formatDateUtc(String(date)) });
-  if (type) rows.push({ label: "Type", value: String(type) });
-  if (section) rows.push({ label: "Section", value: String(section) });
+  const cfg = state.viewerConfig || {};
+  const srcCfg = (cfg.sources && r.source && cfg.sources[r.source]) || null;
+  const fieldDefs =
+    (srcCfg && Array.isArray(srcCfg.fields) ? srcCfg.fields : null) ||
+    (cfg.defaults && Array.isArray(cfg.defaults.fields) ? cfg.defaults.fields : []);
 
-  if (dept) rows.push({ label: "Department", value: dept });
-  if (officeTel) rows.push({ label: "Office", value: String(officeTel) });
-  if (email === null || email === undefined || email === "") {
-    // Only show Email field when metadata includes it OR for tel_directory where it's commonly present.
-    if ((r.source || "").toLowerCase() === "tel_directory") {
-      rows.push({ label: "Email", value: "N/A" });
+  const already = new Set(rows.map((x) => x.label));
+
+  for (const def of fieldDefs) {
+    if (!def || def.type !== "meta") continue;
+    const label = String(def.label || "").trim();
+    if (!label || already.has(label)) continue;
+
+    const keys = [String(def.key || "").trim()].filter(Boolean);
+    const fallbacks = Array.isArray(def.fallbackKeys) ? def.fallbackKeys.map(String) : [];
+    for (const k of fallbacks) {
+      const kk = String(k || "").trim();
+      if (kk) keys.push(kk);
     }
-  } else {
-    rows.push({ label: "Email", value: String(email) });
-  }
 
-  const bestTitle = postTitleLong || postTitle || metaGet(meta, "title");
-  if (bestTitle) rows.push({ label: "Title", value: String(bestTitle) });
+    let val = null;
+    for (const k of keys) {
+      const got = metaGet(meta, k);
+      if (got !== null && got !== undefined && !(typeof got === "string" && !got.trim())) {
+        val = got;
+        break;
+      }
+    }
 
-  if (typeof discoveredFrom === "string" && discoveredFrom.trim()) {
-    rows.push({ label: "Discovered from", value: discoveredFrom.trim(), href: discoveredFrom.trim() });
+    // Special formatting
+    const fmt = String(def.format || "").trim();
+    if (fmt === "departments") {
+      const lines = departmentLines(val);
+      if (!lines.length) continue;
+      rows.push({ label, kind: "departments", lines, limit: def.limit || 5 });
+      already.add(label);
+      continue;
+    }
+
+    if (fmt === "email") {
+      // For tel_directory specifically, show Email even if null.
+      if ((r.source || "").toLowerCase() === "tel_directory") {
+        rows.push({ label, value: emailDisplay(val) });
+        already.add(label);
+      } else if (val !== null && val !== undefined) {
+        rows.push({ label, value: emailDisplay(val) });
+        already.add(label);
+      }
+      continue;
+    }
+
+    if (fmt === "date") {
+      if (val === null || val === undefined) continue;
+      rows.push({ label, value: formatDateUtc(String(val)) });
+      already.add(label);
+      continue;
+    }
+
+    if (fmt === "url") {
+      if (typeof val !== "string" || !val.trim()) continue;
+      rows.push({ label, value: val.trim(), href: val.trim() });
+      already.add(label);
+      continue;
+    }
+
+    if (val === null || val === undefined) continue;
+    if (typeof val === "string" && !val.trim()) continue;
+
+    rows.push({ label, value: String(val) });
+    already.add(label);
   }
 
   renderKvRows(rows);
@@ -441,6 +533,55 @@ async function fetchJson(url) {
   return await res.json();
 }
 
+async function loadViewerConfig() {
+  try {
+    const res = await fetch("./viewer-config.json", { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    state.viewerConfig = await res.json();
+  } catch {
+    state.viewerConfig = { version: 1, defaults: { fields: [] }, sources: {} };
+  }
+}
+
+async function tryBuildArchiveIndexFromGitTree() {
+  if (!state.owner || !state.repo) return [];
+  // 1) Get ref for data branch
+  const refUrl = githubApiUrl(`repos/${state.owner}/${state.repo}/git/ref/heads/${state.branch}`);
+  const ref = await fetchJson(refUrl);
+  const commitSha = ref?.object?.sha;
+  if (!commitSha) return [];
+
+  // 2) Get commit -> tree sha
+  const commitUrl = githubApiUrl(`repos/${state.owner}/${state.repo}/git/commits/${commitSha}`);
+  const commit = await fetchJson(commitUrl);
+  const treeSha = commit?.tree?.sha;
+  if (!treeSha) return [];
+
+  // 3) Get full tree
+  const treeUrl = githubApiUrl(
+    `repos/${state.owner}/${state.repo}/git/trees/${treeSha}?recursive=1`
+  );
+  const tree = await fetchJson(treeUrl);
+  const items = Array.isArray(tree?.tree) ? tree.tree : [];
+
+  const out = [];
+  const re = /^data\/archive\/(\d{4})\/(\d{2})\/(\d{2})\/urls\.jsonl$/;
+  for (const it of items) {
+    if (!it || it.type !== "blob" || typeof it.path !== "string") continue;
+    const m = it.path.match(re);
+    if (!m) continue;
+    const date = `${m[1]}-${m[2]}-${m[3]}`;
+    out.push({
+      date,
+      path: normalizeDataRootPath(it.path),
+      bytes: typeof it.size === "number" ? it.size : undefined,
+    });
+  }
+
+  out.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  return out;
+}
+
 async function loadArchiveIndex() {
   const url = rawUrl("archive/index.json");
   if (!url) return;
@@ -454,7 +595,7 @@ async function loadArchiveIndex() {
     els.archiveSelect.add(new Option("Select an archive…", ""));
 
     for (const e of entries) {
-      const path = (e.path || "").trim();
+      const path = normalizeDataRootPath((e.path || "").trim());
       let date = (e.date || e.run_date_utc || "").trim();
       if (!date && path) {
         // Try infer from archive/YYYY/MM/DD/...
@@ -472,8 +613,29 @@ async function loadArchiveIndex() {
       state.selectedArchivePath = String(els.archiveSelect.value || "");
     }
   } catch (err) {
-    state.archiveIndex = [];
-    els.archiveSelect.replaceChildren(new Option("(no archive index found)", ""));
+    // Fallback: build archive list from the data branch git tree.
+    try {
+      setStatus("Loading archives…");
+      const built = await tryBuildArchiveIndexFromGitTree();
+      state.archiveIndex = built;
+
+      els.archiveSelect.replaceChildren();
+      els.archiveSelect.add(new Option("Select an archive…", ""));
+      for (const e of built) {
+        const size = e.bytes != null ? ` (${humanBytes(e.bytes)})` : "";
+        els.archiveSelect.add(new Option(`${e.date}${size}`, e.path));
+      }
+
+      if (els.archiveSelect.options.length > 1) {
+        els.archiveSelect.selectedIndex = 1;
+        state.selectedArchivePath = String(els.archiveSelect.value || "");
+      }
+
+      setStatus(built.length ? `Loaded ${built.length} archives` : "No archives found");
+    } catch {
+      state.archiveIndex = [];
+      els.archiveSelect.replaceChildren(new Option("(no archives found)", ""));
+    }
   }
 }
 
@@ -673,6 +835,20 @@ function wireEvents() {
     renderTable();
   });
 
+  const goToPage = () => {
+    const v = Number(els.pageInput?.value || "0") || 0;
+    if (v > 0) state.page = v;
+    renderTable();
+  };
+
+  els.goPageBtn?.addEventListener("click", () => goToPage());
+  els.pageInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      goToPage();
+    }
+  });
+
   els.nextBtn.addEventListener("click", () => {
     state.page += 1;
     renderTable();
@@ -708,6 +884,7 @@ function wireEvents() {
 }
 
 async function main() {
+  await loadViewerConfig();
   loadRepoFromQueryOrStorage();
   state.pageSize = Number(els.pageSizeSelect.value) || 50;
   wireEvents();
