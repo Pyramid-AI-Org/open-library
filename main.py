@@ -69,8 +69,6 @@ def main() -> int:
     else:
         # Keep this explicit so adding crawlers is intentional/reviewable.
         crawler_names = [
-            "example",
-            "link_extract",
             "hksar_press_releases",
             "devb_press_releases",
             "devb_speeches_and_presentations",

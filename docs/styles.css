@@ -283,6 +283,44 @@ body {
   margin-bottom: 10px;
 }
 
+.kv {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.kv__row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.kv__k {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.kv__v {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.raw {
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  padding-top: 10px;
+}
+
+.raw__summary {
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.80);
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
 .code {
   font-family: var(--mono);
   font-size: 12px;
@@ -311,5 +349,9 @@ body {
 
   .cellUrl {
     max-width: 260px;
+  }
+
+  .kv__row {
+    grid-template-columns: 1fr;
   }
 }

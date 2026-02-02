@@ -27,6 +27,7 @@ const els = {
   detailDialog: document.getElementById("detailDialog"),
   detailTitle: document.getElementById("detailTitle"),
   detailSubtitle: document.getElementById("detailSubtitle"),
+  detailFields: document.getElementById("detailFields"),
   detailJson: document.getElementById("detailJson"),
   detailOpenUrl: document.getElementById("detailOpenUrl"),
   copyJsonBtn: document.getElementById("copyJsonBtn"),
@@ -67,6 +68,44 @@ function escapeHtml(s) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function formatDateUtc(value, opts = {}) {
+  const s = (value || "").trim();
+  if (!s) return "";
+
+  let d;
+  // Support YYYY-MM-DD and ISO timestamps.
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
+    d = new Date(`${s}T00:00:00Z`);
+  } else {
+    const t = Date.parse(s);
+    d = Number.isFinite(t) ? new Date(t) : null;
+  }
+  if (!d || Number.isNaN(d.getTime())) return s;
+
+  const fmt = new Intl.DateTimeFormat(undefined, {
+    timeZone: "UTC",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    ...opts,
+  });
+  return fmt.format(d);
+}
+
+function humanBytes(n) {
+  const x = Number(n) || 0;
+  if (!x) return "0 B";
+  const units = ["B", "KB", "MB", "GB"];
+  let v = x;
+  let i = 0;
+  while (v >= 1024 && i < units.length - 1) {
+    v /= 1024;
+    i++;
+  }
+  const digits = i === 0 ? 0 : i === 1 ? 1 : 1;
+  return `${v.toFixed(digits)} ${units[i]}`;
 }
 
 function inferGitHubRepoFromPages() {
@@ -138,6 +177,50 @@ function normalizeRecord(r) {
     meta: r?.meta ?? null,
     domain: safeHost(url),
   };
+}
+
+function metaGet(meta, key) {
+  if (!meta || typeof meta !== "object") return null;
+  // eslint-disable-next-line no-prototype-builtins
+  if (!Object.prototype.hasOwnProperty.call(meta, key)) return null;
+  return meta[key];
+}
+
+function joinDepartmentPaths(value) {
+  // department_paths: [["Dept", "Division"], ...]
+  if (!Array.isArray(value)) return "";
+  const parts = [];
+  for (const p of value) {
+    if (!Array.isArray(p)) continue;
+    const segs = p.map((x) => String(x || "").trim()).filter(Boolean);
+    if (segs.length) parts.push(segs.join(" -> "));
+  }
+  return parts.join(" and ");
+}
+
+function renderKvRows(rows) {
+  const frag = document.createDocumentFragment();
+  for (const row of rows) {
+    const div = document.createElement("div");
+    div.className = "kv__row";
+
+    const k = document.createElement("div");
+    k.className = "kv__k";
+    k.textContent = row.label;
+
+    const v = document.createElement("div");
+    v.className = "kv__v";
+    if (row.href) {
+      v.innerHTML = `<a class="link" href="${escapeHtml(row.href)}" target="_blank" rel="noreferrer">${escapeHtml(row.value || row.href)}</a>`;
+    } else {
+      v.textContent = row.value;
+    }
+
+    div.appendChild(k);
+    div.appendChild(v);
+    frag.appendChild(div);
+  }
+  els.detailFields.replaceChildren(frag);
 }
 
 function compareValues(a, b) {
@@ -272,7 +355,7 @@ function renderTable() {
       <td class="cellTitle">${escapeHtml(title)}</td>
       <td><span class="badge">${escapeHtml(r.domain || "(unknown)")}</span></td>
       <td><span class="badge">${escapeHtml(r.source || "(unknown)")}</span></td>
-      <td>${escapeHtml(r.discovered_at_utc || "")}</td>
+      <td title="${escapeHtml(r.discovered_at_utc || "")}">${escapeHtml(formatDateUtc(r.discovered_at_utc))}</td>
       <td class="cellUrl"><a class="link" href="${escapeHtml(r.url || "#")}" target="_blank" rel="noreferrer">${escapeHtml(r.url || "")}</a></td>
     `;
     frag.appendChild(tr);
@@ -283,7 +366,7 @@ function renderTable() {
 function openDetail(r) {
   const title = r.name || "(no title)";
   els.detailTitle.textContent = title;
-  els.detailSubtitle.textContent = `${r.domain || ""} • ${r.source || ""} • ${r.discovered_at_utc || ""}`;
+  els.detailSubtitle.textContent = `${r.domain || ""} • ${r.source || ""} • ${formatDateUtc(r.discovered_at_utc)}`;
   els.detailOpenUrl.href = r.url || "#";
 
   const payload = {
@@ -295,6 +378,51 @@ function openDetail(r) {
   };
 
   els.detailJson.textContent = JSON.stringify(payload, null, 2);
+
+  const meta = r.meta && typeof r.meta === "object" ? r.meta : null;
+  const dept = joinDepartmentPaths(metaGet(meta, "department_paths"));
+  const email = metaGet(meta, "email");
+  const officeTel = metaGet(meta, "office_tel");
+  const postTitleLong = metaGet(meta, "post_title_long");
+  const postTitle = metaGet(meta, "post_title");
+  const date = metaGet(meta, "date_utc") || metaGet(meta, "date");
+  const type = metaGet(meta, "type");
+  const section = metaGet(meta, "section");
+  const discoveredFrom = metaGet(meta, "discovered_from");
+
+  /** @type {Array<{label:string,value:string,href?:string}>} */
+  const rows = [];
+
+  rows.push({ label: "URL", value: r.url || "", href: r.url || "" });
+  rows.push({ label: "Name", value: r.name || "(no title)" });
+  rows.push({ label: "Discovered at", value: formatDateUtc(r.discovered_at_utc) || "" });
+  rows.push({ label: "Source", value: r.source || "" });
+  rows.push({ label: "Website", value: r.domain || "" });
+
+  if (date) rows.push({ label: "Date", value: formatDateUtc(String(date)) });
+  if (type) rows.push({ label: "Type", value: String(type) });
+  if (section) rows.push({ label: "Section", value: String(section) });
+
+  if (dept) rows.push({ label: "Department", value: dept });
+  if (officeTel) rows.push({ label: "Office", value: String(officeTel) });
+  if (email === null || email === undefined || email === "") {
+    // Only show Email field when metadata includes it OR for tel_directory where it's commonly present.
+    if ((r.source || "").toLowerCase() === "tel_directory") {
+      rows.push({ label: "Email", value: "N/A" });
+    }
+  } else {
+    rows.push({ label: "Email", value: String(email) });
+  }
+
+  const bestTitle = postTitleLong || postTitle || metaGet(meta, "title");
+  if (bestTitle) rows.push({ label: "Title", value: String(bestTitle) });
+
+  if (typeof discoveredFrom === "string" && discoveredFrom.trim()) {
+    rows.push({ label: "Discovered from", value: discoveredFrom.trim(), href: discoveredFrom.trim() });
+  }
+
+  renderKvRows(rows);
+
   els.copyJsonBtn.onclick = async () => {
     try {
       await navigator.clipboard.writeText(JSON.stringify(payload));
@@ -323,16 +451,25 @@ async function loadArchiveIndex() {
     state.archiveIndex = entries;
 
     els.archiveSelect.replaceChildren();
+    els.archiveSelect.add(new Option("Select an archive…", ""));
+
     for (const e of entries) {
-      const date = e.date || e.run_date_utc || "";
-      const path = e.path || "";
-      if (!date || !path) continue;
-      els.archiveSelect.add(new Option(date, path));
+      const path = (e.path || "").trim();
+      let date = (e.date || e.run_date_utc || "").trim();
+      if (!date && path) {
+        // Try infer from archive/YYYY/MM/DD/...
+        const m = path.match(/archive\/(\d{4})\/(\d{2})\/(\d{2})\//);
+        if (m) date = `${m[1]}-${m[2]}-${m[3]}`;
+      }
+      if (!path) continue;
+      const size = e.bytes != null ? ` (${humanBytes(e.bytes)})` : "";
+      els.archiveSelect.add(new Option(`${date || path}${size}`, path));
     }
 
-    if (els.archiveSelect.options.length > 0) {
-      els.archiveSelect.selectedIndex = 0;
-      state.selectedArchivePath = els.archiveSelect.value;
+    if (els.archiveSelect.options.length > 1) {
+      // Default to most recent archive entry when user switches to Archive.
+      els.archiveSelect.selectedIndex = 1;
+      state.selectedArchivePath = String(els.archiveSelect.value || "");
     }
   } catch (err) {
     state.archiveIndex = [];
@@ -349,7 +486,8 @@ async function loadRunInfo() {
     const runDate = s?.run_date_utc || "";
     const rows = s?.rows != null ? String(s.rows) : "";
     const crawler = s?.crawler || "";
-    els.runInfo.textContent = runDate ? `run: ${runDate}${rows ? ` • rows: ${rows}` : ""}${crawler ? ` • scope: ${crawler}` : ""}` : "";
+    const prettyRun = runDate ? formatDateUtc(String(runDate)) : "";
+    els.runInfo.textContent = prettyRun ? `run: ${prettyRun}${rows ? ` • rows: ${rows}` : ""}${crawler ? ` • scope: ${crawler}` : ""}` : "";
   } catch {
     // ignore
   }
@@ -496,12 +634,12 @@ function wireEvents() {
     if (kind === "archive" && state.archiveIndex.length === 0) {
       await loadArchiveIndex();
     }
-    state.selectedArchivePath = els.archiveSelect.value || "";
+    state.selectedArchivePath = String(els.archiveSelect.value || "");
     await loadDataset();
   });
 
   els.archiveSelect.addEventListener("change", async () => {
-    state.selectedArchivePath = els.archiveSelect.value || "";
+    state.selectedArchivePath = String(els.archiveSelect.value || "");
     await loadDataset();
   });
 
@@ -559,6 +697,13 @@ function wireEvents() {
       applyFiltersAndSort();
       renderTable();
     });
+  });
+
+  // Close the record dialog when clicking the backdrop.
+  els.detailDialog.addEventListener("click", (e) => {
+    if (e.target === els.detailDialog) {
+      els.detailDialog.close();
+    }
   });
 }
 

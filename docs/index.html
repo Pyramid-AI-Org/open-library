@@ -1,151 +1,159 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Open Library – Crawl Data Viewer</title>
     <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <header class="topbar">
-      <div class="topbar__title">
-        <h1>Open Library</h1>
-        <div class="sub">Crawl data viewer (JSONL)</div>
-      </div>
+</head>
 
-      <div class="topbar__repo">
-        <label class="label" for="repoInput">Repo</label>
-        <input id="repoInput" class="input" type="text" placeholder="owner/repo" />
-        <button id="saveRepoBtn" class="btn" type="button">Use</button>
-      </div>
+<body>
+    <header class="topbar">
+        <div class="topbar__title">
+            <h1>Open Library</h1>
+            <div class="sub">Crawl data viewer (JSONL)</div>
+        </div>
+
+        <div class="topbar__repo">
+            <label class="label" for="repoInput">Repo</label>
+            <input id="repoInput" class="input" type="text" placeholder="owner/repo" />
+            <button id="saveRepoBtn" class="btn" type="button">Use</button>
+        </div>
     </header>
 
     <main class="container">
-      <section class="panel">
-        <div class="row row--wrap">
-          <div class="field">
-            <label class="label" for="datasetSelect">Dataset</label>
-            <select id="datasetSelect" class="select">
-              <option value="latest" selected>Latest</option>
-              <option value="archive">Archive…</option>
-            </select>
-          </div>
+        <section class="panel">
+            <div class="row row--wrap">
+                <div class="field">
+                    <label class="label" for="datasetSelect">Dataset</label>
+                    <select id="datasetSelect" class="select">
+                        <option value="latest" selected>Latest</option>
+                        <option value="archive">Archive…</option>
+                    </select>
+                </div>
 
-          <div class="field" id="archiveField" hidden>
-            <label class="label" for="archiveSelect">Archive date (UTC)</label>
-            <select id="archiveSelect" class="select"></select>
-          </div>
+                <div class="field" id="archiveField" hidden>
+                    <label class="label" for="archiveSelect">Archive date (UTC)</label>
+                    <select id="archiveSelect" class="select"></select>
+                </div>
 
-          <div class="field">
-            <label class="label" for="sourceFilter">Source (crawler)</label>
-            <select id="sourceFilter" class="select">
-              <option value="">All</option>
-            </select>
-          </div>
+                <div class="field">
+                    <label class="label" for="sourceFilter">Source (crawler)</label>
+                    <select id="sourceFilter" class="select">
+                        <option value="">All</option>
+                    </select>
+                </div>
 
-          <div class="field">
-            <label class="label" for="domainFilter">Website (domain)</label>
-            <select id="domainFilter" class="select">
-              <option value="">All</option>
-            </select>
-          </div>
+                <div class="field">
+                    <label class="label" for="domainFilter">Website (domain)</label>
+                    <select id="domainFilter" class="select">
+                        <option value="">All</option>
+                    </select>
+                </div>
 
-          <div class="field field--grow">
-            <label class="label" for="searchInput">Search</label>
-            <input id="searchInput" class="input" type="search" placeholder="Title or URL…" />
-          </div>
-        </div>
-
-        <div class="row row--wrap row--tight">
-          <div class="field">
-            <label class="label" for="pageSizeSelect">Page size</label>
-            <select id="pageSizeSelect" class="select">
-              <option>25</option>
-              <option selected>50</option>
-              <option>100</option>
-              <option>250</option>
-              <option>500</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label class="label">Status</label>
-            <div id="status" class="status">Idle</div>
-          </div>
-
-          <div class="field field--grow">
-            <label class="label">Data</label>
-            <div class="row row--tight">
-              <a id="downloadLink" class="link" href="#" target="_blank" rel="noreferrer">Download JSONL</a>
-              <span class="muted" id="runInfo"></span>
-            </div>
-          </div>
-
-          <div class="field">
-            <label class="label">Actions</label>
-            <div class="row row--tight">
-              <button id="reloadBtn" class="btn" type="button">Reload</button>
-              <button id="resetBtn" class="btn btn--ghost" type="button">Reset filters</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <div class="tableHeader">
-          <div class="muted" id="resultInfo">No data loaded</div>
-
-          <div class="pager">
-            <button id="prevBtn" class="btn btn--ghost" type="button">Prev</button>
-            <span class="pager__text" id="pageText">Page 0 / 0</span>
-            <button id="nextBtn" class="btn btn--ghost" type="button">Next</button>
-          </div>
-        </div>
-
-        <div class="tableWrap">
-          <table class="table">
-            <thead>
-              <tr>
-                <th data-sort="name">Title</th>
-                <th data-sort="domain">Website</th>
-                <th data-sort="source">Source</th>
-                <th data-sort="discovered_at_utc">Discovered</th>
-                <th data-sort="url">URL</th>
-              </tr>
-            </thead>
-            <tbody id="tbody"></tbody>
-          </table>
-        </div>
-      </section>
-
-      <dialog id="detailDialog" class="dialog">
-        <form method="dialog" class="dialog__form">
-          <div class="dialog__header">
-            <div>
-              <div class="dialog__title" id="detailTitle">Record</div>
-              <div class="muted" id="detailSubtitle"></div>
-            </div>
-            <button class="btn btn--ghost" value="cancel" type="submit">Close</button>
-          </div>
-
-          <div class="dialog__body">
-            <div class="dialog__actions">
-              <a id="detailOpenUrl" class="btn" href="#" target="_blank" rel="noreferrer">Open URL</a>
-              <button id="copyJsonBtn" class="btn btn--ghost" type="button">Copy JSON</button>
+                <div class="field field--grow">
+                    <label class="label" for="searchInput">Search</label>
+                    <input id="searchInput" class="input" type="search" placeholder="Title or URL…" />
+                </div>
             </div>
 
-            <pre class="code" id="detailJson"></pre>
-          </div>
-        </form>
-      </dialog>
+            <div class="row row--wrap row--tight">
+                <div class="field">
+                    <label class="label" for="pageSizeSelect">Page size</label>
+                    <select id="pageSizeSelect" class="select">
+                        <option>25</option>
+                        <option selected>50</option>
+                        <option>100</option>
+                        <option>250</option>
+                        <option>500</option>
+                    </select>
+                </div>
 
-      <footer class="footer">
-        <div class="muted">
-          Tip: sorting is by clicking column headers. Large datasets (~20MB) may take a few seconds to load.
-        </div>
-      </footer>
+                <div class="field">
+                    <label class="label">Status</label>
+                    <div id="status" class="status">Idle</div>
+                </div>
+
+                <div class="field field--grow">
+                    <label class="label">Data</label>
+                    <div class="row row--tight">
+                        <a id="downloadLink" class="link" href="#" target="_blank" rel="noreferrer">Download JSONL</a>
+                        <span class="muted" id="runInfo"></span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Actions</label>
+                    <div class="row row--tight">
+                        <button id="reloadBtn" class="btn" type="button">Reload</button>
+                        <button id="resetBtn" class="btn btn--ghost" type="button">Reset filters</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <div class="tableHeader">
+                <div class="muted" id="resultInfo">No data loaded</div>
+
+                <div class="pager">
+                    <button id="prevBtn" class="btn btn--ghost" type="button">Prev</button>
+                    <span class="pager__text" id="pageText">Page 0 / 0</span>
+                    <button id="nextBtn" class="btn btn--ghost" type="button">Next</button>
+                </div>
+            </div>
+
+            <div class="tableWrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th data-sort="name">Title</th>
+                            <th data-sort="domain">Website</th>
+                            <th data-sort="source">Source</th>
+                            <th data-sort="discovered_at_utc">Discovered</th>
+                            <th data-sort="url">URL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <dialog id="detailDialog" class="dialog">
+            <form method="dialog" class="dialog__form">
+                <div class="dialog__header">
+                    <div>
+                        <div class="dialog__title" id="detailTitle">Record</div>
+                        <div class="muted" id="detailSubtitle"></div>
+                    </div>
+                    <button class="btn btn--ghost" value="cancel" type="submit">Close</button>
+                </div>
+
+                <div class="dialog__body">
+                    <div class="dialog__actions">
+                        <a id="detailOpenUrl" class="btn" href="#" target="_blank" rel="noreferrer">Open URL</a>
+                        <button id="copyJsonBtn" class="btn btn--ghost" type="button">Copy JSON</button>
+                    </div>
+
+                    <div id="detailFields" class="kv"></div>
+
+                    <details class="raw">
+                        <summary class="raw__summary">Raw JSON</summary>
+                        <pre class="code" id="detailJson"></pre>
+                    </details>
+                </div>
+            </form>
+        </dialog>
+
+        <footer class="footer">
+            <div class="muted">
+                Tip: sorting is by clicking column headers. Large datasets (~20MB) may take a few seconds to load.
+            </div>
+        </footer>
     </main>
 
     <script src="./app.js" type="module"></script>
-  </body>
+</body>
+
 </html>
