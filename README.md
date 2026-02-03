@@ -70,3 +70,5 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 | https://www.hyd.gov.hk/       | todo    |
 | https://www.wsd.gov.hk/       | todo    |
 | https://www.legco.gov.hk/     | todo    |
+
+- Landscape engineer will use it to find tree information. User type in a tree species or used the advance filter to find the tree information. this is regularly updated. ( https://www.herbarium.gov.hk/en/hk-plant-database/index.html)
