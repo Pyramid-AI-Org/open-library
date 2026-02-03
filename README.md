@@ -53,8 +53,8 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 
 ## TODO
 
-- Landscape engineer will use it to find tree information. User type in a tree species or used the advance filter to find the tree information. this is regularly updated. ( https://www.herbarium.gov.hk/en/hk-plant-database/index.html)
-- Singapore Code and standard.
+- Landscape engineer will use it to find tree information. User type in a tree species or used the advance filter to find the tree information. this is regularly updated. (https://www.herbarium.gov.hk/en/hk-plant-database/index.html)
+- Singapore Code and standard https://info.corenet.gov.sg/resources/codes-and-regulations)
 - Original set:
 
 | Website                       | Status  |
