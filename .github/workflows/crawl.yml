@@ -2,21 +2,21 @@ name: Daily Web Crawl
 
 on:
   schedule:
-    - cron: '0 2 * * *' # Daily at 2 AM UTC
+    - cron: "0 2 * * *" # Daily at 2 AM UTC
   workflow_dispatch:
     inputs:
       crawler:
-        description: 'Specific crawler module to run (e.g. example). Empty runs all.'
+        description: "Specific crawler module to run (e.g. example). Empty runs all."
         required: false
-        default: ''
+        default: ""
       debug:
-        description: 'Enable debug mode'
+        description: "Enable debug mode"
         required: false
-        default: 'false'
+        default: "false"
       run_date:
-        description: 'UTC date YYYY-MM-DD (defaults to today)'
+        description: "UTC date YYYY-MM-DD (defaults to today)"
         required: false
-        default: ''
+        default: ""
 
 concurrency:
   group: crawler-data
@@ -39,7 +39,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Cache dependencies
         uses: actions/cache@v4
@@ -103,14 +103,14 @@ jobs:
         run: |
           # Produce machine-readable stats + a human-readable summary.
           # Keep this non-blocking so a crawl can still publish even if stats fail.
-          python scripts/data_stats.py \
+          python -m scripts.data_stats \
             --in data-worktree/data/latest/urls.jsonl \
             --out-json data-worktree/data/latest/stats.json \
             > data-worktree/data/latest/info.txt || true
 
       - name: Build archive index (for viewer)
         run: |
-          python scripts/build_archive_index.py --data-root data-worktree/data
+          python -m scripts.build_archive_index --data-root data-worktree/data
 
       - name: Commit and push data branch
         run: |
