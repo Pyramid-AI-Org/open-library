@@ -1,0 +1,119 @@
+Input: data-worktree/data/latest/urls.jsonl
+Total records: 42380 (parse_errors=0)
+
+Records by website group:
+- archsd.gov.hk: 186 (0.4%)
+- devb.gov.hk: 5036 (11.9%)
+- info.gov.hk: 21692 (51.2%)
+- tel.directory.gov.hk: 15466 (36.5%)
+
+Crawler sources (top 15):
+- hksar_press_releases: 21692
+- tel_directory: 15466
+- devb_press_releases: 3486
+- devb_publications: 1019
+- devb_speeches_and_presentations: 457
+- archsd_technical_documents: 133
+- devb_works_technical_circulars_um: 68
+- archsd_practices_and_guidelines: 53
+- devb_planning_and_lands_technical_circulars: 4
+- devb_general_circulars: 2
+
+Per-group format + schema summary:
+
+[archsd.gov.hk]
+- records: 186 | unique_urls: 186 | dup_url_hits: 0
+- completeness: missing_name=49 (26.3%) missing_meta=0 (0.0%)
+- discovered_at_utc: 2026-02-05T04:14:26.956455+00:00 .. 2026-02-05T04:14:26.956455+00:00
+- top url hosts:
+  - www.archsd.gov.hk: 186
+- top url extensions:
+  - .pdf: 186
+- top-level key signatures (urls.jsonl record format):
+  - count=186 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
+- meta key signatures:
+  - count=133 meta_keys=['discovered_from', 'file_ext', 'section', 'start_url']
+  - count=53 meta_keys=['depth', 'discovered_from', 'file_ext', 'start_url']
+- meta schema variants: 2
+- most common meta keys:
+  - discovered_from: 186
+  - file_ext: 186
+  - start_url: 186
+  - section: 133
+  - depth: 53
+
+[devb.gov.hk]
+- records: 5036 | unique_urls: 5036 | dup_url_hits: 0
+- completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
+- discovered_at_utc: 2026-02-05T04:14:26.956455+00:00 .. 2026-02-05T04:14:26.956455+00:00
+- top url hosts:
+  - www.devb.gov.hk: 5036
+- top url extensions:
+  - .html: 3943
+  - .pdf: 1093
+- top-level key signatures (urls.jsonl record format):
+  - count=5036 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
+- meta key signatures:
+  - count=3943 meta_keys=['date', 'listing_url', 'locale', 'type', 'year']
+  - count=1019 meta_keys=['depth', 'discovered_from', 'file_ext', 'link_text', 'scope_page', 'seed_url']
+  - count=68 meta_keys=['circular_no', 'data_js_url', 'index_groups', 'issue_date', 'issue_year', 'matched_years', 'revision_date', 'revision_year', 'title']
+- meta schema variants: 5
+- most common meta keys:
+  - date: 3949
+  - listing_url: 3949
+  - locale: 3943
+  - type: 3943
+  - year: 3943
+  - depth: 1019
+  - discovered_from: 1019
+  - file_ext: 1019
+
+[tel.directory.gov.hk]
+- records: 15466 | unique_urls: 15466 | dup_url_hits: 0
+- completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
+- discovered_at_utc: 2026-02-05T05:07:07.298432+00:00 .. 2026-02-05T05:07:07.298432+00:00
+- top url hosts:
+  - www.directory.gov.hk: 15466
+- top url extensions:
+  - .jsp: 15466
+- top-level key signatures (urls.jsonl record format):
+  - count=15466 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
+- meta key signatures:
+  - count=14842 meta_keys=['dedup_key', 'department_paths', 'discovered_from', 'email', 'office_tel', 'post_title', 'post_title_long']
+  - count=502 meta_keys=['dedup_key', 'department_paths', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'other_person_urls', 'post_title', 'post_title_long']
+  - count=122 meta_keys=['dedup_key', 'department_paths', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'post_title', 'post_title_long']
+- meta schema variants: 3
+- most common meta keys:
+  - dedup_key: 15466
+  - department_paths: 15466
+  - discovered_from: 15466
+  - email: 15466
+  - office_tel: 15466
+  - post_title: 15466
+  - post_title_long: 15466
+  - discovered_from_urls: 624
+
+[info.gov.hk]
+- records: 21692 | unique_urls: 21692 | dup_url_hits: 0
+- completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
+- discovered_at_utc: 2026-02-05T04:14:27.079553+00:00 .. 2026-02-05T04:14:27.079553+00:00
+- top url hosts:
+  - www.info.gov.hk: 21692
+- top url extensions:
+  - .htm: 21692
+- top-level key signatures (urls.jsonl record format):
+  - count=21692 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
+- meta key signatures:
+  - count=21692 meta_keys=['date_utc', 'listing_url']
+- meta schema variants: 1
+- most common meta keys:
+  - date_utc: 21692
+  - listing_url: 21692
+
+General stats:
+- record JSON size (bytes): min=296 p50=429.0 mean=491.1 p95=712.0 max=18632
+
+Unusual records / anomalies:
+- none detected by current heuristics
+
+Wrote JSON report to: data-worktree/data/latest/stats.json
