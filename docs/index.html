@@ -67,25 +67,26 @@
                     </select>
                 </div>
 
-                <div class="field">
+                <div class="field field--grow">
                     <label class="label">Status</label>
                     <div id="status" class="status">Idle</div>
-                </div>
-
-                <div class="field field--grow">
-                    <label class="label">Data</label>
-                    <div class="row row--tight">
-                        <a id="downloadLink" class="link" href="#" target="_blank" rel="noreferrer">Download JSONL</a>
-                        <span class="muted" id="runInfo"></span>
-                    </div>
                 </div>
 
                 <div class="field">
                     <label class="label">Actions</label>
                     <div class="row row--tight">
                         <button id="reloadBtn" class="btn" type="button">Reload</button>
-                        <button id="downloadExcelBtn" class="btn btn--ghost" type="button">Download Excel</button>
                         <button id="resetBtn" class="btn btn--ghost" type="button">Reset filters</button>
+                        <details class="menu menu--right" id="downloadMenu">
+                            <summary class="btn btn--ghost" id="downloadMenuBtn" type="button">Download</summary>
+                            <div class="menu__list" role="menu" aria-label="Download options">
+                                <a id="downloadJsonLink" class="menu__item" href="#" target="_blank" rel="noreferrer"
+                                    role="menuitem">JSONL</a>
+                                <button id="downloadExcelBtn" class="menu__item" type="button" role="menuitem">
+                                    Excel (.xlsx)
+                                </button>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>

@@ -180,6 +180,63 @@ body {
   text-decoration: underline;
 }
 
+.menu {
+  position: relative;
+}
+
+.menu > summary {
+  list-style: none;
+}
+
+.menu > summary::-webkit-details-marker {
+  display: none;
+}
+
+.menu__list {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 180px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(8, 12, 22, 0.98);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+  display: grid;
+  gap: 6px;
+}
+
+.menu--right .menu__list {
+  left: auto;
+  right: 0;
+}
+
+.menu__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.menu__item:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.menu__item--disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
 .muted {
   color: var(--muted);
   font-size: 12px;

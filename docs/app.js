@@ -12,7 +12,8 @@ const els = {
 
   pageSizeSelect: document.getElementById("pageSizeSelect"),
   status: document.getElementById("status"),
-  downloadLink: document.getElementById("downloadLink"),
+  downloadMenu: document.getElementById("downloadMenu"),
+  downloadJsonLink: document.getElementById("downloadJsonLink"),
   runInfo: document.getElementById("runInfo"),
 
   downloadExcelBtn: document.getElementById("downloadExcelBtn"),
@@ -137,6 +138,12 @@ function downloadExcel() {
   const d = new Date();
   const stamp = Number.isFinite(d.getTime()) ? d.toISOString().slice(0, 10) : "export";
   XLSX.writeFile(wb, `open-library-${stamp}.xlsx`);
+}
+
+function closeDownloadMenu() {
+  if (els.downloadMenu && els.downloadMenu.open) {
+    els.downloadMenu.open = false;
+  }
 }
 
 function setStatus(text) {
@@ -725,6 +732,7 @@ async function loadArchiveIndex() {
 }
 
 async function loadRunInfo() {
+  if (!els.runInfo) return;
   els.runInfo.textContent = "";
   const url = rawUrl("latest/summary.json");
   if (!url) return;
@@ -734,7 +742,9 @@ async function loadRunInfo() {
     const rows = s?.rows != null ? String(s.rows) : "";
     const crawler = s?.crawler || "";
     const prettyRun = runDate ? formatDateUtc(String(runDate)) : "";
-    els.runInfo.textContent = prettyRun ? `run: ${prettyRun}${rows ? ` • rows: ${rows}` : ""}${crawler ? ` • scope: ${crawler}` : ""}` : "";
+    els.runInfo.textContent = prettyRun
+      ? `run: ${prettyRun}${rows ? ` • rows: ${rows}` : ""}${crawler ? ` • scope: ${crawler}` : ""}`
+      : "";
   } catch {
     // ignore
   }
@@ -758,8 +768,12 @@ async function loadDataset() {
     return;
   }
 
-  els.downloadLink.href = url;
-  els.downloadLink.textContent = `Download JSONL (${kind === "archive" ? "archive" : "latest"})`;
+  if (els.downloadJsonLink) {
+    els.downloadJsonLink.href = url;
+    els.downloadJsonLink.textContent = `JSONL (${kind === "archive" ? "archive" : "latest"})`;
+    els.downloadJsonLink.removeAttribute("aria-disabled");
+    els.downloadJsonLink.classList.remove("menu__item--disabled");
+  }
   if (els.downloadExcelBtn) els.downloadExcelBtn.disabled = true;
 
   state.loading = true;
@@ -831,15 +845,13 @@ async function loadDataset() {
 
     if (els.downloadExcelBtn) els.downloadExcelBtn.disabled = state.filteredIdx.length === 0;
 
-    const ms = Math.round(performance.now() - startT);
-    setStatus(
-      `Loaded ${state.records.length.toLocaleString()} records in ${ms}ms${parseErrors ? ` • parse errors: ${parseErrors}` : ""}`
-    );
+    // Keep status quiet after load; table/resultInfo already shows counts.
+    setStatus(parseErrors ? `Idle (parse errors: ${parseErrors})` : "Idle");
 
     if (kind !== "archive") {
       await loadRunInfo();
     } else {
-      els.runInfo.textContent = "";
+      if (els.runInfo) els.runInfo.textContent = "";
     }
   } catch (err) {
     console.error(err);
@@ -948,7 +960,14 @@ function wireEvents() {
     await loadDataset();
   });
 
-  els.downloadExcelBtn?.addEventListener("click", () => downloadExcel());
+  els.downloadJsonLink?.addEventListener("click", () => {
+    closeDownloadMenu();
+  });
+
+  els.downloadExcelBtn?.addEventListener("click", () => {
+    downloadExcel();
+    closeDownloadMenu();
+  });
 
   els.resetBtn.addEventListener("click", () => resetFilters());
 
@@ -972,6 +991,14 @@ function wireEvents() {
     if (e.target === els.detailDialog) {
       els.detailDialog.close();
     }
+  });
+
+  // Close the download menu when clicking outside of it.
+  document.addEventListener("click", (e) => {
+    if (!els.downloadMenu || !els.downloadMenu.open) return;
+    const t = /** @type {any} */ (e.target);
+    if (t && typeof els.downloadMenu.contains === "function" && els.downloadMenu.contains(t)) return;
+    closeDownloadMenu();
   });
 }
 
