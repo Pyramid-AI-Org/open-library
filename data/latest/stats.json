@@ -1,17 +1,393 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 3348,
-    "records_total": 3348,
+    "lines_total": 46214,
+    "records_total": 46214,
     "records_by_group": {
-      "other": 3348
+      "archsd.gov.hk": 186,
+      "devb.gov.hk": 5498,
+      "tel.directory.gov.hk": 15464,
+      "other": 3348,
+      "info.gov.hk": 21718
     },
     "records_by_source": {
-      "herbarium": 3348
+      "archsd_practices_and_guidelines": 53,
+      "archsd_technical_documents": 133,
+      "devb_press_releases": 3494,
+      "devb_speeches_and_presentations": 459,
+      "devb_publications": 1471,
+      "devb_general_circulars": 2,
+      "devb_planning_and_lands_technical_circulars": 4,
+      "devb_works_technical_circulars_um": 68,
+      "tel_directory": 15464,
+      "herbarium": 3348,
+      "hksar_press_releases": 21718
     },
     "parse_errors": 0
   },
   "groups": {
+    "archsd.gov.hk": {
+      "records": 186,
+      "unique_urls": 186,
+      "duplicate_url_hits": 0,
+      "missing_name": 49,
+      "missing_meta": 0,
+      "url_host_mismatch": 0,
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "source",
+            "url"
+          ],
+          "count": 186
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "file_ext",
+            "section",
+            "start_url"
+          ],
+          "count": 133
+        },
+        {
+          "meta_keys": [
+            "depth",
+            "discovered_from",
+            "file_ext",
+            "start_url"
+          ],
+          "count": 53
+        }
+      ],
+      "meta_schema_variants": 2,
+      "top_meta_keys": [
+        [
+          "discovered_from",
+          186
+        ],
+        [
+          "file_ext",
+          186
+        ],
+        [
+          "start_url",
+          186
+        ],
+        [
+          "section",
+          133
+        ],
+        [
+          "depth",
+          53
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.archsd.gov.hk",
+          186
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          186
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-02-05T16:54:52.891249+00:00",
+        "max": "2026-02-05T16:54:52.891249+00:00",
+        "count": 186
+      }
+    },
+    "devb.gov.hk": {
+      "records": 5498,
+      "unique_urls": 5498,
+      "duplicate_url_hits": 0,
+      "missing_name": 0,
+      "missing_meta": 0,
+      "url_host_mismatch": 0,
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "source",
+            "url"
+          ],
+          "count": 5498
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "date",
+            "listing_url",
+            "locale",
+            "type",
+            "year"
+          ],
+          "count": 3953
+        },
+        {
+          "meta_keys": [
+            "depth",
+            "discovered_from",
+            "file_ext",
+            "link_text",
+            "scope_page",
+            "seed_url"
+          ],
+          "count": 826
+        },
+        {
+          "meta_keys": [
+            "depth",
+            "discovered_from",
+            "file_ext",
+            "issue_date_raw",
+            "kind",
+            "scope_page",
+            "seed_url",
+            "standard_contract_documents",
+            "variant"
+          ],
+          "count": 544
+        },
+        {
+          "meta_keys": [
+            "depth",
+            "discovered_from",
+            "file_ext",
+            "issue_date_raw",
+            "kind",
+            "scope_page",
+            "seed_url",
+            "standard_consultancy_document",
+            "variant"
+          ],
+          "count": 72
+        },
+        {
+          "meta_keys": [
+            "circular_no",
+            "data_js_url",
+            "index_groups",
+            "issue_date",
+            "issue_year",
+            "matched_years",
+            "revision_date",
+            "revision_year",
+            "title"
+          ],
+          "count": 68
+        }
+      ],
+      "meta_schema_variants": 10,
+      "top_meta_keys": [
+        [
+          "date",
+          3959
+        ],
+        [
+          "listing_url",
+          3959
+        ],
+        [
+          "locale",
+          3953
+        ],
+        [
+          "type",
+          3953
+        ],
+        [
+          "year",
+          3953
+        ],
+        [
+          "depth",
+          1471
+        ],
+        [
+          "discovered_from",
+          1471
+        ],
+        [
+          "file_ext",
+          1471
+        ],
+        [
+          "scope_page",
+          1471
+        ],
+        [
+          "seed_url",
+          1471
+        ],
+        [
+          "link_text",
+          826
+        ],
+        [
+          "kind",
+          645
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.devb.gov.hk",
+          5498
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".html",
+          3953
+        ],
+        [
+          ".pdf",
+          1028
+        ],
+        [
+          ".docx",
+          382
+        ],
+        [
+          ".doc",
+          135
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-02-05T16:54:52.891249+00:00",
+        "max": "2026-02-05T16:54:52.891249+00:00",
+        "count": 5498
+      }
+    },
+    "tel.directory.gov.hk": {
+      "records": 15464,
+      "unique_urls": 15464,
+      "duplicate_url_hits": 0,
+      "missing_name": 0,
+      "missing_meta": 0,
+      "url_host_mismatch": 0,
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "source",
+            "url"
+          ],
+          "count": 15464
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "dedup_key",
+            "department_paths",
+            "discovered_from",
+            "email",
+            "office_tel",
+            "post_title",
+            "post_title_long"
+          ],
+          "count": 14840
+        },
+        {
+          "meta_keys": [
+            "dedup_key",
+            "department_paths",
+            "discovered_from",
+            "discovered_from_urls",
+            "email",
+            "office_tel",
+            "other_person_urls",
+            "post_title",
+            "post_title_long"
+          ],
+          "count": 502
+        },
+        {
+          "meta_keys": [
+            "dedup_key",
+            "department_paths",
+            "discovered_from",
+            "discovered_from_urls",
+            "email",
+            "office_tel",
+            "post_title",
+            "post_title_long"
+          ],
+          "count": 122
+        }
+      ],
+      "meta_schema_variants": 3,
+      "top_meta_keys": [
+        [
+          "dedup_key",
+          15464
+        ],
+        [
+          "department_paths",
+          15464
+        ],
+        [
+          "discovered_from",
+          15464
+        ],
+        [
+          "email",
+          15464
+        ],
+        [
+          "office_tel",
+          15464
+        ],
+        [
+          "post_title",
+          15464
+        ],
+        [
+          "post_title_long",
+          15464
+        ],
+        [
+          "discovered_from_urls",
+          624
+        ],
+        [
+          "other_person_urls",
+          502
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.directory.gov.hk",
+          15464
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".jsp",
+          15464
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-02-05T17:21:05.197519+00:00",
+        "max": "2026-02-05T17:21:05.197519+00:00",
+        "count": 15464
+      }
+    },
     "other": {
       "records": 3348,
       "unique_urls": 3348,
@@ -125,19 +501,76 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-05T15:58:59.580504+00:00",
-        "max": "2026-02-05T15:58:59.580504+00:00",
+        "min": "2026-02-05T16:54:52.891249+00:00",
+        "max": "2026-02-05T16:54:52.891249+00:00",
         "count": 3348
+      }
+    },
+    "info.gov.hk": {
+      "records": 21718,
+      "unique_urls": 21718,
+      "duplicate_url_hits": 0,
+      "missing_name": 0,
+      "missing_meta": 0,
+      "url_host_mismatch": 0,
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "source",
+            "url"
+          ],
+          "count": 21718
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "date_utc",
+            "listing_url"
+          ],
+          "count": 21718
+        }
+      ],
+      "meta_schema_variants": 1,
+      "top_meta_keys": [
+        [
+          "date_utc",
+          21718
+        ],
+        [
+          "listing_url",
+          21718
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.info.gov.hk",
+          21718
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".htm",
+          21718
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-02-05T16:54:52.980971+00:00",
+        "max": "2026-02-05T16:54:52.980971+00:00",
+        "count": 21718
       }
     }
   },
   "general": {
     "record_size_bytes": {
-      "min": 808,
-      "max": 1350,
-      "mean": 923.0274790919952,
-      "p50": 913.0,
-      "p95": 1029.0
+      "min": 296,
+      "max": 18632,
+      "mean": 526.3313930843467,
+      "p50": 455.0,
+      "p95": 909.0
     },
     "anomaly_counts": {},
     "anomaly_examples": []
