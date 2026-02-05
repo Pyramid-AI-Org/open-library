@@ -11,14 +11,11 @@
 <body>
     <header class="topbar">
         <div class="topbar__title">
-            <h1>Open Library</h1>
-            <div class="sub">Crawl data viewer (JSONL)</div>
-        </div>
-
-        <div class="topbar__repo">
-            <label class="label" for="repoInput">Repo</label>
-            <input id="repoInput" class="input" type="text" placeholder="owner/repo" />
-            <button id="saveRepoBtn" class="btn" type="button">Use</button>
+            <img class="topbar__logo" src="./assets/logo.svg" alt="Pyramid AI" />
+            <div>
+                <h1>Open Library</h1>
+                <div class="sub">Crawl data viewer (JSONL)</div>
+            </div>
         </div>
     </header>
 
@@ -87,6 +84,7 @@
                     <label class="label">Actions</label>
                     <div class="row row--tight">
                         <button id="reloadBtn" class="btn" type="button">Reload</button>
+                        <button id="downloadExcelBtn" class="btn btn--ghost" type="button">Download Excel</button>
                         <button id="resetBtn" class="btn btn--ghost" type="button">Reset filters</button>
                     </div>
                 </div>
@@ -157,6 +155,8 @@
         </footer>
     </main>
 
+    <!-- Excel export (SheetJS). Loaded as UMD to provide global `XLSX`. -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="./app.js" type="module"></script>
 </body>
 

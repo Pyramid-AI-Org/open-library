@@ -35,13 +35,30 @@ body {
 
 .topbar {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
   gap: 16px;
   padding: 18px 20px;
   border-bottom: 1px solid var(--border);
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(10px);
+}
+
+.topbar__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar__logo {
+  width: auto;
+  height: 15px;
+  max-width: min(320px, 50vw);
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
 }
 
 .topbar__title h1 {
@@ -95,11 +112,12 @@ body {
 .field {
   display: grid;
   gap: 6px;
+  min-width: 180px;
 }
 
 .field--grow {
-  flex: 1 1 260px;
-  min-width: 220px;
+  flex: 1 1 420px;
+  min-width: 280px;
 }
 
 .label {
@@ -115,6 +133,7 @@ body {
   background: rgba(0, 0, 0, 0.25);
   color: var(--text);
   outline: none;
+  width: 100%;
 }
 
 .input:focus,

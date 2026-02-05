@@ -15,6 +15,8 @@ const els = {
   downloadLink: document.getElementById("downloadLink"),
   runInfo: document.getElementById("runInfo"),
 
+  downloadExcelBtn: document.getElementById("downloadExcelBtn"),
+
   reloadBtn: document.getElementById("reloadBtn"),
   resetBtn: document.getElementById("resetBtn"),
 
@@ -34,6 +36,9 @@ const els = {
   detailOpenUrl: document.getElementById("detailOpenUrl"),
   copyJsonBtn: document.getElementById("copyJsonBtn"),
 };
+
+// Fallback repo for custom domains (where GitHub Pages inference won't work).
+const DEFAULT_REPO = { owner: "pyramid-ai-org", repo: "open-library" };
 
 /**
  * State
@@ -60,6 +65,79 @@ const state = {
 
   loading: false,
 };
+
+function metaValueForExcel(v) {
+  if (v === null || v === undefined) return "";
+  if (Array.isArray(v)) {
+    return v
+      .map((x) => String(x ?? "").trim())
+      .filter(Boolean)
+      .join("; ");
+  }
+  if (typeof v === "object") {
+    try {
+      return JSON.stringify(v);
+    } catch {
+      return String(v);
+    }
+  }
+  return String(v);
+}
+
+function downloadExcel() {
+  const XLSX = window.XLSX;
+  if (!XLSX || !XLSX.utils || !XLSX.writeFile) {
+    alert("Excel export library not loaded. Please refresh the page.");
+    return;
+  }
+
+  if (!state.records.length) {
+    alert("No records loaded yet.");
+    return;
+  }
+
+  const idx = state.filteredIdx.length ? state.filteredIdx : state.records.map((_, i) => i);
+  if (!idx.length) {
+    alert("No matching records to export.");
+    return;
+  }
+
+  const rows = idx.map((i) => {
+    const r = state.records[i];
+    const meta = r && r.meta && typeof r.meta === "object" ? r.meta : null;
+
+    // A few useful meta columns (works great for herbarium; harmless for others).
+    const speciesId = meta ? meta.species_id : null;
+    const familyName = meta ? meta.family_name : null;
+    const genusName = meta ? meta.genus_name : null;
+    const commonName = meta ? meta.common_name : null;
+    const chineseName = meta ? meta.chinese_name : null;
+
+    return {
+      name: r?.name ?? "",
+      url: r?.url ?? "",
+      domain: r?.domain ?? "",
+      source: r?.source ?? "",
+      discovered_at_utc: r?.discovered_at_utc ?? "",
+
+      species_id: metaValueForExcel(speciesId),
+      family_name: metaValueForExcel(familyName),
+      genus_name: metaValueForExcel(genusName),
+      common_name: metaValueForExcel(commonName),
+      chinese_name: metaValueForExcel(chineseName),
+
+      meta_json: meta ? metaValueForExcel(meta) : "",
+    };
+  });
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "links");
+
+  const d = new Date();
+  const stamp = Number.isFinite(d.getTime()) ? d.toISOString().slice(0, 10) : "export";
+  XLSX.writeFile(wb, `open-library-${stamp}.xlsx`);
+}
 
 function setStatus(text) {
   els.status.textContent = text;
@@ -139,14 +217,21 @@ function loadRepoFromQueryOrStorage() {
 
   const inferred = inferGitHubRepoFromPages();
 
-  const chosen = (qp || stored || (inferred ? `${inferred.owner}/${inferred.repo}` : "")).trim();
+  const chosen = (
+    qp ||
+    stored ||
+    (inferred ? `${inferred.owner}/${inferred.repo}` : "") ||
+    `${DEFAULT_REPO.owner}/${DEFAULT_REPO.repo}`
+  ).trim();
   const [owner, repo] = chosen.split("/");
   if (owner && repo) {
     state.owner = owner;
     state.repo = repo;
   }
 
-  els.repoInput.value = state.owner && state.repo ? `${state.owner}/${state.repo}` : "";
+  if (els.repoInput) {
+    els.repoInput.value = state.owner && state.repo ? `${state.owner}/${state.repo}` : "";
+  }
 }
 
 function saveRepo(value) {
@@ -675,6 +760,7 @@ async function loadDataset() {
 
   els.downloadLink.href = url;
   els.downloadLink.textContent = `Download JSONL (${kind === "archive" ? "archive" : "latest"})`;
+  if (els.downloadExcelBtn) els.downloadExcelBtn.disabled = true;
 
   state.loading = true;
   state.records = [];
@@ -743,6 +829,8 @@ async function loadDataset() {
     applyFiltersAndSort();
     renderTable();
 
+    if (els.downloadExcelBtn) els.downloadExcelBtn.disabled = state.filteredIdx.length === 0;
+
     const ms = Math.round(performance.now() - startT);
     setStatus(
       `Loaded ${state.records.length.toLocaleString()} records in ${ms}ms${parseErrors ? ` • parse errors: ${parseErrors}` : ""}`
@@ -775,20 +863,22 @@ function resetFilters() {
 }
 
 function wireEvents() {
-  els.saveRepoBtn.addEventListener("click", async () => {
-    saveRepo(els.repoInput.value);
-    await loadArchiveIndex();
-    await loadDataset();
-  });
-
-  els.repoInput.addEventListener("keydown", async (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
+  if (els.saveRepoBtn && els.repoInput) {
+    els.saveRepoBtn.addEventListener("click", async () => {
       saveRepo(els.repoInput.value);
       await loadArchiveIndex();
       await loadDataset();
-    }
-  });
+    });
+
+    els.repoInput.addEventListener("keydown", async (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        saveRepo(els.repoInput.value);
+        await loadArchiveIndex();
+        await loadDataset();
+      }
+    });
+  }
 
   els.datasetSelect.addEventListener("change", async () => {
     const kind = els.datasetSelect.value;
@@ -857,6 +947,8 @@ function wireEvents() {
   els.reloadBtn.addEventListener("click", async () => {
     await loadDataset();
   });
+
+  els.downloadExcelBtn?.addEventListener("click", () => downloadExcel());
 
   els.resetBtn.addEventListener("click", () => resetFilters());
 

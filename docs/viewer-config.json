@@ -30,6 +30,32 @@
           "fallbackKeys": ["post_title"]
         }
       ]
+    },
+    "herbarium": {
+      "fields": [
+        { "type": "meta", "key": "species_id", "label": "Species ID" },
+        { "type": "meta", "key": "type", "label": "Taxon rank" },
+
+        { "type": "meta", "key": "family_name", "label": "Family (EN)" },
+        { "type": "meta", "key": "family_name_chi", "label": "Family (ZH)" },
+        { "type": "meta", "key": "family_no", "label": "Family No." },
+
+        { "type": "meta", "key": "genus_name", "label": "Genus (EN)" },
+        { "type": "meta", "key": "genus_name_chi", "label": "Genus (ZH)" },
+
+        { "type": "meta", "key": "scientific_name_with_authority", "label": "Scientific name" },
+        { "type": "meta", "key": "scientific_name", "label": "Scientific name (plain)" },
+
+        { "type": "meta", "key": "common_name", "label": "Common name" },
+        { "type": "meta", "key": "chinese_name", "label": "Chinese name" },
+        { "type": "meta", "key": "sc_name", "label": "Chinese name (SC)" },
+
+        { "type": "meta", "key": "flower_period", "label": "Flower period" },
+        { "type": "meta", "key": "fruit_period", "label": "Fruit period" },
+        { "type": "meta", "key": "rare_plant_hk", "label": "Rare plant (HK)" },
+
+        { "type": "meta", "key": "photo_multimedia_id", "label": "Photo ID" }
+      ]
     }
   }
 }
