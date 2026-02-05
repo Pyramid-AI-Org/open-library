@@ -79,6 +79,7 @@ def main() -> int:
             "archsd_technical_documents",
             "archsd_practices_and_guidelines",
             "tel_directory",
+            "herbarium",
         ]
 
     all_records: list[dict[str, Any]] = []

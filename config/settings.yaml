@@ -193,3 +193,29 @@ crawlers:
     max_total_records: 50000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
+
+  # Hong Kong Herbarium Plant Database crawler.
+  # Calls the public JSON endpoint and emits one record per species_id.
+  herbarium:
+    api_url: "https://www.herbarium.gov.hk/plantdb/GetSpeciesList.php"
+
+    # Mirrors the website's query options (cache-buster param intentionally omitted).
+    plant_type:
+      - "Angiosperms (dicotyledons)"
+      - "Angiosperms (monocotyledons)"
+      - "Gymnosperms"
+      - "Pteridophytes"
+
+    taxon_rank:
+      - "family"
+      - "genus"
+      - "species"
+
+    order_by: "family"
+    page_size: 4000
+
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 200000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
