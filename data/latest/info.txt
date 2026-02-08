@@ -1,15 +1,15 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 46190 (parse_errors=0)
+Total records: 46175 (parse_errors=0)
 
 Records by website group:
 - archsd.gov.hk: 186 (0.4%)
 - devb.gov.hk: 5498 (11.9%)
-- info.gov.hk: 21695 (47.0%)
-- other: 3348 (7.2%)
+- info.gov.hk: 21680 (47.0%)
+- other: 3348 (7.3%)
 - tel.directory.gov.hk: 15463 (33.5%)
 
 Crawler sources (top 15):
-- hksar_press_releases: 21695
+- hksar_press_releases: 21680
 - tel_directory: 15463
 - devb_press_releases: 3494
 - herbarium: 3348
@@ -26,7 +26,7 @@ Per-group format + schema summary:
 [archsd.gov.hk]
 - records: 186 | unique_urls: 186 | dup_url_hits: 0
 - completeness: missing_name=49 (26.3%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-07T04:08:17.929748+00:00 .. 2026-02-07T04:08:17.929748+00:00
+- discovered_at_utc: 2026-02-08T04:32:18.067805+00:00 .. 2026-02-08T04:32:18.067805+00:00
 - top url hosts:
   - www.archsd.gov.hk: 186
 - top url extensions:
@@ -47,7 +47,7 @@ Per-group format + schema summary:
 [devb.gov.hk]
 - records: 5498 | unique_urls: 5498 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-07T04:08:17.929748+00:00 .. 2026-02-07T04:08:17.929748+00:00
+- discovered_at_utc: 2026-02-08T04:32:18.067805+00:00 .. 2026-02-08T04:32:18.067805+00:00
 - top url hosts:
   - www.devb.gov.hk: 5498
 - top url extensions:
@@ -75,7 +75,7 @@ Per-group format + schema summary:
 [tel.directory.gov.hk]
 - records: 15463 | unique_urls: 15463 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-07T04:39:00.287306+00:00 .. 2026-02-07T04:39:00.287306+00:00
+- discovered_at_utc: 2026-02-08T05:02:42.584454+00:00 .. 2026-02-08T05:02:42.584454+00:00
 - top url hosts:
   - www.directory.gov.hk: 15463
 - top url extensions:
@@ -100,7 +100,7 @@ Per-group format + schema summary:
 [other]
 - records: 3348 | unique_urls: 3348 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-07T04:08:17.929748+00:00 .. 2026-02-07T04:08:17.929748+00:00
+- discovered_at_utc: 2026-02-08T04:32:18.067805+00:00 .. 2026-02-08T04:32:18.067805+00:00
 - top url hosts:
   - www.herbarium.gov.hk: 3348
 - top url extensions:
@@ -121,24 +121,24 @@ Per-group format + schema summary:
   - flower_period: 3348
 
 [info.gov.hk]
-- records: 21695 | unique_urls: 21695 | dup_url_hits: 0
+- records: 21680 | unique_urls: 21680 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-07T04:08:18.015761+00:00 .. 2026-02-07T04:08:18.015761+00:00
+- discovered_at_utc: 2026-02-08T04:32:18.148931+00:00 .. 2026-02-08T04:32:18.148931+00:00
 - top url hosts:
-  - www.info.gov.hk: 21695
+  - www.info.gov.hk: 21680
 - top url extensions:
-  - .htm: 21695
+  - .htm: 21680
 - top-level key signatures (urls.jsonl record format):
-  - count=21695 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
+  - count=21680 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
 - meta key signatures:
-  - count=21695 meta_keys=['date_utc', 'listing_url']
+  - count=21680 meta_keys=['date_utc', 'listing_url']
 - meta schema variants: 1
 - most common meta keys:
-  - date_utc: 21695
-  - listing_url: 21695
+  - date_utc: 21680
+  - listing_url: 21680
 
 General stats:
-- record JSON size (bytes): min=296 p50=455.0 mean=526.4 p95=909.0 max=18632
+- record JSON size (bytes): min=296 p50=455 mean=526.4 p95=909.0 max=18632
 
 Unusual records / anomalies:
 - none detected by current heuristics
