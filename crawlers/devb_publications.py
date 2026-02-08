@@ -9,6 +9,10 @@ from urllib.parse import unquote, urlparse, urlunparse
 import requests
 
 from crawlers.base import RunContext, UrlRecord
+from crawlers.devb_construction_site_safety_manual import (
+    CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX,
+    parse_construction_site_safety_manual_page,
+)
 from crawlers.devb_standard_contract_documents import (
     STANDARD_CONTRACT_DOCS_PREFIX,
     parse_standard_contract_documents_page,
@@ -342,6 +346,87 @@ class Crawler:
                 backoff_base_seconds=backoff_base_seconds,
                 backoff_jitter_seconds=backoff_jitter_seconds,
             )
+
+            # Construction Site Safety Manual pages use complex tables where titles
+            # must come from the left column (not from "Download" link text), and
+            # highlighted/track-change columns should be ignored.
+            if p.path.startswith(CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX):
+                doc_hits, page_links = parse_construction_site_safety_manual_page(
+                    resp.text,
+                    base_url=item.url,
+                    content_element_id=content_element_id,
+                )
+
+                for hit in doc_hits:
+                    can = _canonicalize_url(hit.url)
+                    if not can:
+                        continue
+
+                    ext = _path_ext(can)
+                    if ext not in _ALLOWED_DOC_EXTS:
+                        continue
+
+                    lp = urlparse(can)
+                    if lp.netloc.lower() != base_netloc:
+                        continue
+
+                    if can in seen_docs:
+                        continue
+                    seen_docs.add(can)
+
+                    meta: dict[str, object] = {
+                        "seed_url": seed_can,
+                        "discovered_from": item.url,
+                        "depth": item.depth,
+                        "file_ext": ext.lstrip("."),
+                        "scope_page": item.url,
+                        "construction_site_safety_manual": True,
+                    }
+                    if hit.issue_date_raw:
+                        meta["issue_date_raw"] = hit.issue_date_raw
+                    if hit.meta:
+                        meta.update(hit.meta)
+
+                    out.append(
+                        UrlRecord(
+                            url=can,
+                            name=hit.title,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                        )
+                    )
+
+                    if len(out) >= max_total_records:
+                        break
+
+                if len(out) >= max_total_records:
+                    break
+
+                if item.depth < max_depth:
+                    for next_url in page_links:
+                        next_can = _canonicalize_url(next_url)
+                        if not next_can:
+                            continue
+
+                        np = urlparse(next_can)
+                        if np.netloc.lower() != base_netloc:
+                            continue
+                        if not np.path.startswith(CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX):
+                            continue
+                        if _path_is_excluded(np.path, excluded_prefixes=excluded_prefixes):
+                            continue
+
+                        if next_can not in visited_pages and next_can not in skipped_pages:
+                            queue.append(
+                                _QueueItem(
+                                    url=next_can,
+                                    depth=item.depth + 1,
+                                    discovered_from=item.url,
+                                )
+                            )
+
+                continue
 
             # Standard Consultancy Document pages also use complex tables where titles
             # must come from the "Document"/"Item" column, not from filename link text.

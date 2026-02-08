@@ -12,6 +12,13 @@
     ]
   },
   "sources": {
+    "devb_works_technical_circulars_um": {
+      "fields": [
+        { "type": "meta", "key": "date", "label": "Date", "format": "date" },
+        { "type": "meta", "key": "index_groups", "label": "Index group(s)" },
+        { "type": "meta", "key": "circular_no", "label": "Circular No." }
+      ]
+    },
     "tel_directory": {
       "fields": [
         {

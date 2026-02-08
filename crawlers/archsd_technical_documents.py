@@ -4,6 +4,7 @@ import random
 import re
 import time
 from dataclasses import dataclass
+from html.parser import HTMLParser
 from typing import Iterable
 from urllib.parse import urljoin, urlparse, urlunparse
 
@@ -14,6 +15,144 @@ from utils.html_links import HtmlLink, extract_links, extract_links_in_element
 
 
 _ALLOWED_DOC_EXTS = {".pdf"}
+
+
+def _is_addendum_document(*, text: str | None, url: str) -> bool:
+    """Heuristic: exclude addendum-only PDFs.
+
+    Keep documents that merely *incorporate* an addendum (often appears in the
+    item title). Exclude PDFs whose link title or URL path indicates they are an
+    addendum document.
+    """
+
+    t = (text or "").strip().lower()
+    if "addendum" in t:
+        return True
+
+    path = (urlparse(url).path or "").lower()
+    if "addendum" in path:
+        return True
+
+    return False
+
+
+_EDITION_RE = re.compile(r"\bedition\s*:\s*(?P<edition>\d{4}(?:[-/]\d{1,2}[-/]\d{1,2})?)\b", re.IGNORECASE)
+
+
+class _ArchsdItemContentParser(HTMLParser):
+    """Parse ARCHSD 'item-content' blocks to associate Edition -> PDFs."""
+
+    def __init__(self, *, base_url: str) -> None:
+        super().__init__()
+        self._base_url = base_url
+
+        self._item_depth = 0
+        self._in_item_detail = False
+        self._detail_text_parts: list[str] = []
+
+        self._in_a = False
+        self._current_href: str | None = None
+        self._current_a_text_parts: list[str] = []
+        self._current_item_links: list[tuple[str, str]] = []
+
+        self.pdf_edition_by_url: dict[str, str] = {}
+
+    def _attrs_to_dict(self, attrs: list[tuple[str, str | None]]) -> dict[str, str]:
+        out: dict[str, str] = {}
+        for k, v in attrs:
+            if v is None:
+                continue
+            out[k.lower()] = v
+        return out
+
+    def _class_has(self, attrs_map: dict[str, str], token: str) -> bool:
+        cls = (attrs_map.get("class") or "").strip()
+        if not cls:
+            return False
+        parts = {p for p in cls.split() if p}
+        return token in parts
+
+    def _finalize_item(self) -> None:
+        detail_text = " ".join("".join(self._detail_text_parts).split()).strip()
+        edition: str | None = None
+        m = _EDITION_RE.search(detail_text)
+        if m:
+            edition = (m.group("edition") or "").strip() or None
+
+        if edition:
+            for href, a_text in self._current_item_links:
+                full = urljoin(self._base_url, href)
+                can = _canonicalize_url(full)
+                if not can:
+                    continue
+                if _path_ext(can) not in _ALLOWED_DOC_EXTS:
+                    continue
+                if _is_addendum_document(text=a_text, url=can):
+                    continue
+                if can not in self.pdf_edition_by_url:
+                    self.pdf_edition_by_url[can] = edition
+
+        self._detail_text_parts = []
+        self._current_item_links = []
+        self._in_item_detail = False
+        self._in_a = False
+        self._current_href = None
+        self._current_a_text_parts = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attrs_map = self._attrs_to_dict(attrs)
+
+        if tag.lower() == "div" and self._class_has(attrs_map, "item-content"):
+            if self._item_depth == 0:
+                self._item_depth = 1
+                self._detail_text_parts = []
+                self._current_item_links = []
+            else:
+                self._item_depth += 1
+            return
+
+        if self._item_depth > 0:
+            # Track depth for nested tags.
+            self._item_depth += 1
+
+            if tag.lower() == "div" and self._class_has(attrs_map, "item-detail"):
+                self._in_item_detail = True
+                return
+
+            if tag.lower() == "a":
+                self._in_a = True
+                self._current_href = attrs_map.get("href")
+                self._current_a_text_parts = []
+                return
+
+    def handle_endtag(self, tag: str) -> None:
+        if self._item_depth <= 0:
+            return
+
+        if tag.lower() == "a":
+            if self._in_a and self._current_href:
+                text = "".join(self._current_a_text_parts).strip()
+                self._current_item_links.append((self._current_href, text))
+            self._in_a = False
+            self._current_href = None
+            self._current_a_text_parts = []
+
+        if tag.lower() == "div" and self._in_item_detail:
+            self._in_item_detail = False
+
+        self._item_depth -= 1
+        if self._item_depth == 0:
+            self._finalize_item()
+
+    def handle_data(self, data: str) -> None:
+        if self._item_depth <= 0:
+            return
+
+        if self._in_item_detail:
+            self._detail_text_parts.append(data)
+
+        if self._in_a:
+            self._current_a_text_parts.append(data)
 
 
 def _sleep_seconds(seconds: float) -> None:
@@ -202,6 +341,52 @@ def _extract_pdf_titles_from_items_array(html: str, *, base_url: str) -> dict[st
     return out
 
 
+def _extract_pdf_editions_from_items_array(html: str, *, base_url: str) -> dict[str, str]:
+    """Best-effort extraction of PDF (url -> edition_date) from embedded JS datasets."""
+
+    out: dict[str, str] = {}
+    if not html:
+        return out
+
+    for item_m in _ITEM_WITH_DOCUMENTS_RE.finditer(html):
+        desc = (item_m.group("desc") or "").strip()
+        edition: str | None = None
+        m = _EDITION_RE.search(desc)
+        if m:
+            edition = (m.group("edition") or "").strip() or None
+
+        if not edition:
+            continue
+
+        docs = item_m.group("docs") or ""
+        for doc_m in _DOCUMENT_ENTRY_RE.finditer(docs):
+            icon = (doc_m.group("icon") or "").strip().lower()
+            if icon != "pdf":
+                continue
+
+            doc_title = (doc_m.group("title") or "").strip()
+            raw_url = (doc_m.group("url") or "").strip()
+            if not raw_url:
+                continue
+
+            raw_url = raw_url.replace(" ", "%20")
+            raw_url = raw_url.replace("&amp;", "&")
+            if raw_url.startswith("/"):
+                raw_url = urljoin(base_url, raw_url)
+
+            can = _canonicalize_url(raw_url)
+            if not can:
+                continue
+
+            if _is_addendum_document(text=doc_title, url=can):
+                continue
+
+            if can not in out:
+                out[can] = edition
+
+    return out
+
+
 def _extract_pdf_urls_from_html(html: str, *, base_url: str) -> list[str]:
     out: list[str] = []
     for m in _PDF_URL_RE.findall(html or ""):
@@ -227,6 +412,16 @@ def _extract_pdf_urls_from_html(html: str, *, base_url: str) -> list[str]:
         seen.add(u)
         uniq.append(u)
     return uniq
+
+
+def _extract_pdf_editions_from_html_items(html: str, *, base_url: str) -> dict[str, str]:
+    parser = _ArchsdItemContentParser(base_url=base_url)
+    try:
+        parser.feed(html or "")
+    except Exception:
+        # Best-effort: malformed HTML should not break the crawl.
+        return {}
+    return parser.pdf_edition_by_url
 
 
 def _path_starts_with_any(path: str, prefixes: list[str]) -> bool:
@@ -508,11 +703,22 @@ class Crawler:
             # Extract them from raw HTML as a fallback.
             pdf_urls_in_html = _extract_pdf_urls_from_html(resp.text, base_url=item.url)
 
+            # Many list pages render items with an "Edition: ..." field.
+            pdf_edition_map_from_html = _extract_pdf_editions_from_html_items(
+                resp.text, base_url=item.url
+            )
+
             # JS-rendered listings (e.g. itemsArray) contain PDF titles.
             pdf_title_map = _extract_pdf_titles_from_items_array(resp.text, base_url=item.url)
 
+            # JS-rendered listings also include edition in the description.
+            pdf_edition_map_from_items_array = _extract_pdf_editions_from_items_array(
+                resp.text, base_url=item.url
+            )
+
             # Emit PDF documents on the current page.
             doc_url_to_text: dict[str, str] = {}
+            doc_url_to_edition: dict[str, str] = {}
 
             for link in links:
                 can = _canonicalize_url(link.href)
@@ -520,7 +726,15 @@ class Crawler:
                     continue
                 if _path_ext(can) not in _ALLOWED_DOC_EXTS:
                     continue
+                if _is_addendum_document(text=link.text, url=can):
+                    continue
                 doc_url_to_text[can] = link.text or ""
+                ed = (
+                    pdf_edition_map_from_html.get(can)
+                    or pdf_edition_map_from_items_array.get(can)
+                )
+                if ed:
+                    doc_url_to_edition[can] = ed
 
             for u in pdf_urls_in_html:
                 can = _canonicalize_url(u)
@@ -528,13 +742,26 @@ class Crawler:
                     continue
                 if _path_ext(can) not in _ALLOWED_DOC_EXTS:
                     continue
+                if _is_addendum_document(text=None, url=can):
+                    continue
                 if can not in doc_url_to_text:
                     doc_url_to_text[can] = ""
+                ed = (
+                    pdf_edition_map_from_html.get(can)
+                    or pdf_edition_map_from_items_array.get(can)
+                )
+                if ed and can not in doc_url_to_edition:
+                    doc_url_to_edition[can] = ed
 
             # Fill missing names from embedded dataset.
             for doc_url, title in pdf_title_map.items():
                 if doc_url in doc_url_to_text and not (doc_url_to_text[doc_url] or "").strip():
                     doc_url_to_text[doc_url] = title
+
+            # Fill missing editions from embedded dataset.
+            for doc_url, ed in pdf_edition_map_from_items_array.items():
+                if doc_url in doc_url_to_text and doc_url not in doc_url_to_edition:
+                    doc_url_to_edition[doc_url] = ed
 
             for can in sorted(doc_url_to_text.keys()):
                 lp = urlparse(can)
@@ -550,6 +777,7 @@ class Crawler:
                     continue
 
                 link_text = doc_url_to_text.get(can, "")
+                edition_date = doc_url_to_edition.get(can)
 
                 seen_docs.add(can)
                 ext = _path_ext(can)
@@ -565,6 +793,7 @@ class Crawler:
                             "section": item.section,
                             "discovered_from": item.url,
                             "file_ext": ext.lstrip("."),
+                            "edition_date": edition_date,
                         },
                     )
                 )

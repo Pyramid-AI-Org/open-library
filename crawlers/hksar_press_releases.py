@@ -12,7 +12,9 @@ from crawlers.base import RunContext, UrlRecord
 from utils.html_links import extract_links_in_element
 
 
-_DETAIL_HREF_RE = re.compile(r"^/gia/general/\d{6}/\d{2}/P\d+\.htm$", re.IGNORECASE)
+_DETAIL_HREF_RE = re.compile(
+    r"^/gia/general/\d{6}/\d{2}/P\d+(?:c)?\.htm$", re.IGNORECASE
+)
 
 
 def _parse_run_date(run_date_utc: str) -> date:
@@ -93,14 +95,16 @@ class Crawler:
     Strategy: iterate daily listing pages for the last N days and extract press
     release detail anchors contained within div#contentBody.
 
-    Config: crawlers.hksar_press_releases
-      - base_url: https://www.info.gov.hk
-      - days_back: 730
-      - listing_path_template: /gia/general/{yyyymm}/{dd}.htm
-      - request_delay_seconds: 0.5
-      - request_jitter_seconds: 0.25
-      - per_day_limit: 200
-      - max_total_records: 50000
+        Config: crawlers.hksar_press_releases
+            - base_url: https://www.info.gov.hk
+            - days_back: 730
+            - locales: ["en", "tc"]
+            - listing_path_template: /gia/general/{yyyymm}/{dd}.htm
+            - listing_path_template_tc: /gia/general/{yyyymm}/{dd}c.htm
+            - request_delay_seconds: 0.5
+            - request_jitter_seconds: 0.25
+            - per_day_limit: 200
+            - max_total_records: 50000
 
     Uses http.timeout_seconds/user_agent/max_retries as shared settings.
     """
@@ -111,8 +115,18 @@ class Crawler:
         cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
         base_url = str(cfg.get("base_url", "https://www.info.gov.hk")).rstrip("/")
         days_back = int(cfg.get("days_back", 730))
-        listing_path_template = str(
+
+        locales_cfg = cfg.get("locales")
+        if isinstance(locales_cfg, list) and locales_cfg:
+            locales = [str(v).strip() for v in locales_cfg if str(v).strip()]
+        else:
+            locales = ["en"]
+
+        listing_path_template_en = str(
             cfg.get("listing_path_template", "/gia/general/{yyyymm}/{dd}.htm")
+        )
+        listing_path_template_tc = str(
+            cfg.get("listing_path_template_tc", "/gia/general/{yyyymm}/{dd}c.htm")
         )
 
         request_delay_seconds = float(cfg.get("request_delay_seconds", 0.5))
@@ -144,82 +158,90 @@ class Crawler:
         while current >= start_date:
             yyyymm = current.strftime("%Y%m")
             dd = current.strftime("%d")
-            listing_path = listing_path_template.format(yyyymm=yyyymm, dd=dd)
-            listing_url = urljoin(f"{base_url}/", listing_path.lstrip("/"))
 
-            if ctx.debug:
-                print(f"[{self.name}] Fetch {current.isoformat()} -> {listing_url}")
-
-            resp = _get_with_retries(
-                session,
-                listing_url,
-                timeout_seconds=timeout_seconds,
-                max_retries=max_retries,
-                backoff_base_seconds=backoff_base_seconds,
-                backoff_jitter_seconds=backoff_jitter_seconds,
-            )
-
-            links = extract_links_in_element(
-                resp.text,
-                base_url=listing_url,
-                element_id="contentBody",
-            )
-
-            day_count = 0
-            for link in links:
-                # Keep only press release detail anchors
-                # - Most are absolute after normalization, but regex expects path
-                href = link.href
-                if not href:
-                    continue
-
-                # Accept normalized absolute URLs as long as their path matches
-                # the canonical detail pattern.
-                if href.startswith(base_url):
-                    path = href[len(base_url) :]
-                    if not path.startswith("/"):
-                        path = "/" + path
+            for locale in locales:
+                if locale == "en":
+                    listing_path_template = listing_path_template_en
+                elif locale == "tc":
+                    listing_path_template = listing_path_template_tc
                 else:
-                    # If extract_links_in_element normalized to a different host, ignore
                     continue
 
-                if not _DETAIL_HREF_RE.match(path):
-                    continue
+                listing_path = listing_path_template.format(yyyymm=yyyymm, dd=dd)
+                listing_url = urljoin(f"{base_url}/", listing_path.lstrip("/"))
 
-                if href in seen_urls:
-                    continue
-                seen_urls.add(href)
-
-                out.append(
-                    UrlRecord(
-                        url=href,
-                        name=(link.text or None),
-                        discovered_at_utc=discovered_at,
-                        source=self.name,
-                        meta={
-                            "date_utc": current.isoformat(),
-                            "listing_url": listing_url,
-                        },
+                if ctx.debug:
+                    print(
+                        f"[{self.name}] Fetch {current.isoformat()} ({locale}) -> {listing_url}"
                     )
-                )
-                day_count += 1
 
-                if day_count >= per_day_limit:
-                    break
+                resp = _get_with_retries(
+                    session,
+                    listing_url,
+                    timeout_seconds=timeout_seconds,
+                    max_retries=max_retries,
+                    backoff_base_seconds=backoff_base_seconds,
+                    backoff_jitter_seconds=backoff_jitter_seconds,
+                )
+
+                links = extract_links_in_element(
+                    resp.text,
+                    base_url=listing_url,
+                    element_id="contentBody",
+                )
+
+                day_count = 0
+                for link in links:
+                    href = link.href
+                    if not href:
+                        continue
+
+                    if href.startswith(base_url):
+                        path = href[len(base_url) :]
+                        if not path.startswith("/"):
+                            path = "/" + path
+                    else:
+                        continue
+
+                    if not _DETAIL_HREF_RE.match(path):
+                        continue
+
+                    if href in seen_urls:
+                        continue
+                    seen_urls.add(href)
+
+                    out.append(
+                        UrlRecord(
+                            url=href,
+                            name=(link.text or None),
+                            discovered_at_utc=discovered_at,
+                            source=self.name,
+                            meta={
+                                "date_utc": current.isoformat(),
+                                "listing_url": listing_url,
+                                "locale": locale,
+                            },
+                        )
+                    )
+                    day_count += 1
+
+                    if day_count >= per_day_limit:
+                        break
+                    if len(out) >= max_total_records:
+                        break
+
                 if len(out) >= max_total_records:
                     break
+
+                delay = request_delay_seconds
+                if request_jitter_seconds > 0:
+                    delay += random.uniform(0.0, request_jitter_seconds)
+                _sleep_seconds(delay)
 
             if len(out) >= max_total_records:
                 break
 
-            # Polite pacing between day pages
-            delay = request_delay_seconds
-            if request_jitter_seconds > 0:
-                delay += random.uniform(0.0, request_jitter_seconds)
-            _sleep_seconds(delay)
-
             current -= timedelta(days=1)
 
-        # Deterministic ordering for stable diffs
         out.sort(key=lambda r: (r.url, r.meta.get("date_utc") or ""))
         return out

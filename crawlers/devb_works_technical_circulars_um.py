@@ -261,6 +261,7 @@ class Crawler:
 
                 issue_date_iso = _parse_ddmmyyyy_to_iso(item.get("IssueDate"))
                 revision_date_iso = _parse_ddmmyyyy_to_iso(item.get("RevisionDate"))
+                chosen_date_iso = issue_date_iso or revision_date_iso
 
                 for file_path in files_raw:
                     if file_path is None:
@@ -277,12 +278,9 @@ class Crawler:
                     if _path_ext(abs_url) in (".xls", ".xlsx", ".doc", ".docx"):
                         continue
 
-                    name_parts: list[str] = []
-                    if circular_number:
-                        name_parts.append(circular_number)
-                    if title:
-                        name_parts.append(title)
-                    name = " - ".join(name_parts) or None
+                    # Keep human title in `name` (viewer uses `name` as the main label).
+                    # Fall back to circular number if title is missing.
+                    name = title or circular_number or None
 
                     record = UrlRecord(
                         url=abs_url,
@@ -291,8 +289,8 @@ class Crawler:
                         source=self.name,
                         meta={
                             "circular_no": circular_number,
-                            "title": title,
                             "index_groups": index_groups,
+                            "date": chosen_date_iso,
                             "issue_year": issue_year or None,
                             "issue_date": issue_date_iso,
                             "revision_year": revision_year or None,
