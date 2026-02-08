@@ -9,15 +9,15 @@ from urllib.parse import unquote, urlparse, urlunparse
 import requests
 
 from crawlers.base import RunContext, UrlRecord
-from crawlers.devb_construction_site_safety_manual import (
+from crawlers.devb.devb_construction_site_safety_manual import (
     CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX,
     parse_construction_site_safety_manual_page,
 )
-from crawlers.devb_standard_contract_documents import (
+from crawlers.devb.devb_standard_contract_documents import (
     STANDARD_CONTRACT_DOCS_PREFIX,
     parse_standard_contract_documents_page,
 )
-from crawlers.devb_standard_consultancy_documents import (
+from crawlers.devb.devb_standard_consultancy_documents import (
     STANDARD_CONSULTANCY_DOCS_PREFIX,
     parse_standard_consultancy_documents_page,
 )
@@ -412,12 +412,19 @@ class Crawler:
                         np = urlparse(next_can)
                         if np.netloc.lower() != base_netloc:
                             continue
-                        if not np.path.startswith(CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX):
+                        if not np.path.startswith(
+                            CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX
+                        ):
                             continue
-                        if _path_is_excluded(np.path, excluded_prefixes=excluded_prefixes):
+                        if _path_is_excluded(
+                            np.path, excluded_prefixes=excluded_prefixes
+                        ):
                             continue
 
-                        if next_can not in visited_pages and next_can not in skipped_pages:
+                        if (
+                            next_can not in visited_pages
+                            and next_can not in skipped_pages
+                        ):
                             queue.append(
                                 _QueueItem(
                                     url=next_can,
@@ -495,10 +502,15 @@ class Crawler:
                             continue
                         if not np.path.startswith(STANDARD_CONSULTANCY_DOCS_PREFIX):
                             continue
-                        if _path_is_excluded(np.path, excluded_prefixes=excluded_prefixes):
+                        if _path_is_excluded(
+                            np.path, excluded_prefixes=excluded_prefixes
+                        ):
                             continue
 
-                        if next_can not in visited_pages and next_can not in skipped_pages:
+                        if (
+                            next_can not in visited_pages
+                            and next_can not in skipped_pages
+                        ):
                             queue.append(
                                 _QueueItem(
                                     url=next_can,
@@ -575,10 +587,15 @@ class Crawler:
                             continue
                         if not np.path.startswith(STANDARD_CONTRACT_DOCS_PREFIX):
                             continue
-                        if _path_is_excluded(np.path, excluded_prefixes=excluded_prefixes):
+                        if _path_is_excluded(
+                            np.path, excluded_prefixes=excluded_prefixes
+                        ):
                             continue
 
-                        if next_can not in visited_pages and next_can not in skipped_pages:
+                        if (
+                            next_can not in visited_pages
+                            and next_can not in skipped_pages
+                        ):
                             queue.append(
                                 _QueueItem(
                                     url=next_can,

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       crawler:
-        description: "Specific crawler module to run (e.g. example). Empty runs all."
+        description: "Specific crawler module to run (e.g. example or devb.devb_press_releases). Empty runs all."
         required: false
         default: ""
       debug:

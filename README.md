@@ -19,6 +19,9 @@ pip install -r crawlers/requirements.txt
 
 python main.py --crawler example --settings config/settings.yaml --out ./local-data
 
+# Crawler modules can also be referenced via dotted paths (subfolders under crawlers/)
+python main.py --crawler devb.devb_press_releases --settings config/settings.yaml --out ./local-data
+
 # Run all allowlisted crawlers
 python main.py --settings config/settings.yaml --out ./local-data
 ```

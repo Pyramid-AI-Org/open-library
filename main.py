@@ -12,8 +12,36 @@ from utils.settings import load_settings
 from utils.time import utc_date_yyyymmdd, utc_now
 
 
+_CRAWLER_MODULE_ALIASES: dict[str, str] = {
+    # Backward-compatible aliases for old flat module names.
+    "hksar_press_releases": "hksar.hksar_press_releases",
+    "devb_press_releases": "devb.devb_press_releases",
+    "devb_speeches_and_presentations": "devb.devb_speeches_and_presentations",
+    "devb_general_circulars": "devb.devb_general_circulars",
+    "devb_planning_and_lands_technical_circulars": "devb.devb_planning_and_lands_technical_circulars",
+    "devb_works_technical_circulars_um": "devb.devb_works_technical_circulars_um",
+    "devb_publications": "devb.devb_publications",
+    "devb_construction_site_safety_manual": "devb.devb_construction_site_safety_manual",
+    "devb_standard_consultancy_documents": "devb.devb_standard_consultancy_documents",
+    "devb_standard_contract_documents": "devb.devb_standard_contract_documents",
+    "archsd_technical_documents": "archsd.archsd_technical_documents",
+    "archsd_practices_and_guidelines": "archsd.archsd_practices_and_guidelines",
+    "tel_directory": "directory.tel_directory",
+    "herbarium": "herbarium.herbarium",
+}
+
+
 def _load_crawler_module(name: str):
-    return importlib.import_module(f"crawlers.{name}")
+    raw = name.strip()
+    if not raw:
+        raise ValueError("crawler name is empty")
+
+    normalized = raw.replace("/", ".")
+    if normalized.startswith("crawlers."):
+        return importlib.import_module(normalized)
+
+    normalized = _CRAWLER_MODULE_ALIASES.get(normalized, normalized)
+    return importlib.import_module(f"crawlers.{normalized}")
 
 
 def _run_one(crawler_name: str, ctx: RunContext) -> list[dict[str, Any]]:
@@ -39,7 +67,14 @@ def _run_one(crawler_name: str, ctx: RunContext) -> list[dict[str, Any]]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="Run web crawlers and write results")
-    ap.add_argument("--crawler", default="", help="Run a specific crawler module name")
+    ap.add_argument(
+        "--crawler",
+        default="",
+        help=(
+            "Run a specific crawler module path relative to crawlers "
+            "(e.g. devb.devb_press_releases)."
+        ),
+    )
     ap.add_argument("--settings", default="config/settings.yaml")
     ap.add_argument(
         "--out", default="data", help="Output root (usually points to data worktree)"
@@ -69,17 +104,17 @@ def main() -> int:
     else:
         # Keep this explicit so adding crawlers is intentional/reviewable.
         crawler_names = [
-            "hksar_press_releases",
-            "devb_press_releases",
-            "devb_speeches_and_presentations",
-            "devb_general_circulars",
-            "devb_planning_and_lands_technical_circulars",
-            "devb_works_technical_circulars_um",
-            "devb_publications",
-            "archsd_technical_documents",
-            "archsd_practices_and_guidelines",
-            "tel_directory",
-            "herbarium",
+            "hksar.hksar_press_releases",
+            "devb.devb_press_releases",
+            "devb.devb_speeches_and_presentations",
+            "devb.devb_general_circulars",
+            "devb.devb_planning_and_lands_technical_circulars",
+            "devb.devb_works_technical_circulars_um",
+            "devb.devb_publications",
+            "archsd.archsd_technical_documents",
+            "archsd.archsd_practices_and_guidelines",
+            "directory.tel_directory",
+            "herbarium.herbarium",
         ]
 
     all_records: list[dict[str, Any]] = []
