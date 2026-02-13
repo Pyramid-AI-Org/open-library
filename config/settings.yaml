@@ -102,6 +102,114 @@ crawlers:
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
 
+  # Building Department codes, design manuals, and guidelines crawler.
+  # Extracts PDF links from the single index page.
+  codes_design_manuals_and_guidelines:
+    base_url: "https://www.bd.gov.hk"
+    page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # BD Practice Notes and Circular Letters.
+  # Crawls 5 specific sub-pages (PNAP, PNRC, JPN, PNBI, Circular Letters).
+  # Circular Letters includes a 10-year lookback via filtering.
+  practice_notes_and_circular_letters:
+    url_pnap: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnap.html"
+    url_pnrc: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnrc.html"
+    url_joint: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
+    url_pnbi: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnbi.html"
+    url_circulars: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_circulars.html"
+    years_back: 10
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # BD Central Data Bank crawler.
+  # Crawls the CDB main page + 4 sub-pages and emits PDF links.
+  # On the main page, only ADM-20 is emitted.
+  central_data_bank:
+    main_page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDB.html"
+    subpage_urls:
+      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildMaterial.html"
+      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildComp.html"
+      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBConstructSys.html"
+      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBFSImprovementWorks.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # BD Modular Integrated Construction (MiC) crawler.
+  # Emits the index page (HTML) + all PDF links found on it.
+  # (Moved to bd_basic_pages)
+
+  # BD Basic Pages crawler.
+  # Handles miscellaneous single pages where we want to emit the page itself (HTML)
+  # and all PDF links found on the page.
+  bd_basic_pages:
+    targets:
+      - name: "modular_integrated_construction"
+        title: "Modular Integrated Construction (MiC) Index"
+        url: "https://www.bd.gov.hk/en/resources/codes-and-references/modular-integrated-construction/index.html"
+        content_element_id: "content"
+      - name: "pre_accepted_computer_programs"
+        title: "Pre-accepted Computer Programs Index"
+        url: "https://www.bd.gov.hk/en/resources/codes-and-references/pre-accepted-computer-programs/index.html"
+        content_element_id: "content"
+      - name: "precautionary_measures_typhoon_season"
+        title: "Precautionary Measures for Typhoon Season Index"
+        url: "https://www.bd.gov.hk/en/resources/codes-and-references/precautionary-measures-typhoon-season/index.html"
+        content_element_id: "content"
+      - name: "pv_panel"
+        title: "Correct Installation of Photovoltaic (PV) System"
+        url: "https://www.bd.gov.hk/en/resources/codes-and-references/pv-panel/index.html"
+        content_element_id: "content"
+      - name: "ibmt_pre_acceptance_mechanism"
+        title: "Pre-acceptance Mechanism for Innovative Building Materials and Technologies"
+        url: "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/index-pre-acceptance-mechanism.html"
+        content_element_id: "content"
+      - name: "ibmt_accepted_list"
+        title: "Pre-accepted Innovative Building Materials and Technologies"
+        url: "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/ibmt_acceptedList.html"
+        content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # BD Scheduled Areas crawler.
+  # Emits all PDF links found on the page.
+  scheduled_areas:
+    page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/scheduled-areas/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # BD Notices and Reports crawler.
+  # Crawls Notices, Investigation Reports, and CEPAS subpages for PDF links.
+  notices_and_reports:
+    page_urls:
+      - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_notice.html"
+      - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_reports.html"
+      - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_CEPAS.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
   # HKSAR Government Telephone Directory (English) people crawler.
   # Traverses department/subdepartment pages under tel.directory.gov.hk and emits
   # one record per person, deduplicated by office telephone number.
