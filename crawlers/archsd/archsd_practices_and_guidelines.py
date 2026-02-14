@@ -2,17 +2,23 @@ from __future__ import annotations
 
 import random
 import re
-import time
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from typing import Iterable
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urljoin, urlparse
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord
+from crawlers.base import (
+    RunContext,
+    UrlRecord,
+    canonicalize_url,
+    clean_text,
+    get_with_retries,
+    path_ext,
+    sleep_seconds,
+)
 from utils.html_links import HtmlLink, extract_links, extract_links_in_element
-
 
 _ALLOWED_DOC_EXTS = {".pdf"}
 
@@ -22,8 +28,7 @@ _PDF_URL_RE = re.compile(
 )
 
 
-def _clean_text(s: str) -> str:
-    return " ".join((s or "").strip().split())
+_clean_text = clean_text
 
 
 def _is_generic_link_text(s: str) -> bool:
@@ -154,7 +159,9 @@ class _PdfTitleParser(HTMLParser):
 
         # Count nested tags inside title/name blocks so we can close correctly.
         if self._capture_card_title_depth > 0 and not (
-            tag.lower() == "div" and "title" in classes and self._capture_card_title_depth == 1
+            tag.lower() == "div"
+            and "title" in classes
+            and self._capture_card_title_depth == 1
         ):
             self._capture_card_title_depth += 1
 
@@ -216,109 +223,15 @@ def _extract_pdf_url_to_title(html: str, *, base_url: str) -> dict[str, str]:
     return out
 
 
-def _sleep_seconds(seconds: float) -> None:
-    if seconds <= 0:
-        return
-    time.sleep(seconds)
+_sleep_seconds = sleep_seconds
+_get_with_retries = get_with_retries
+_canonicalize_url = canonicalize_url
+_path_ext = path_ext
 
 
-def _compute_backoff_seconds(attempt: int, *, base: float, jitter: float) -> float:
-    exp = base * (2**attempt)
-    exp = min(exp, 30.0)
-    if jitter > 0:
-        exp += random.uniform(0.0, jitter)
-    return exp
-
-
-def _get_with_retries(
-    session: requests.Session,
-    url: str,
-    *,
-    timeout_seconds: int,
-    max_retries: int,
-    backoff_base_seconds: float,
-    backoff_jitter_seconds: float,
-) -> requests.Response:
-    last_err: Exception | None = None
-
-    for attempt in range(max_retries + 1):
-        try:
-            resp = session.get(url, timeout=timeout_seconds)
-            if resp.status_code in (429, 500, 502, 503, 504):
-                if attempt >= max_retries:
-                    resp.raise_for_status()
-
-                retry_after = resp.headers.get("Retry-After")
-                if retry_after:
-                    try:
-                        _sleep_seconds(float(retry_after))
-                    except ValueError:
-                        pass
-
-                _sleep_seconds(
-                    _compute_backoff_seconds(
-                        attempt,
-                        base=backoff_base_seconds,
-                        jitter=backoff_jitter_seconds,
-                    )
-                )
-                continue
-
-            resp.raise_for_status()
-            return resp
-        except requests.RequestException as e:
-            last_err = e
-            if attempt >= max_retries:
-                raise
-
-            _sleep_seconds(
-                _compute_backoff_seconds(
-                    attempt,
-                    base=backoff_base_seconds,
-                    jitter=backoff_jitter_seconds,
-                )
-            )
-
-    assert last_err is not None
-    raise last_err
-
-
-def _canonicalize_url(url: str) -> str | None:
-    s = (url or "").strip()
-    if not s:
-        return None
-
-    lower = s.lower()
-    if lower.startswith("javascript:"):
-        return None
-    if lower.startswith("mailto:"):
-        return None
-    if lower.startswith("tel:"):
-        return None
-
-    p = urlparse(s)
-    if not p.scheme or not p.netloc:
-        return None
-
-    p = p._replace(scheme=p.scheme.lower(), netloc=p.netloc.lower(), fragment="")
-
-    path = p.path or "/"
-    if path != "/" and path.endswith("/"):
-        path = path.rstrip("/")
-    p = p._replace(path=path)
-
-    return urlunparse(p)
-
-
-def _path_ext(url: str) -> str:
-    p = urlparse(url)
-    path = (p.path or "").lower()
-    if "." not in path:
-        return ""
-    return "." + path.rsplit(".", 1)[-1]
-
-
-def _iter_links(html: str, *, base_url: str, content_element_id: str) -> Iterable[HtmlLink]:
+def _iter_links(
+    html: str, *, base_url: str, content_element_id: str
+) -> Iterable[HtmlLink]:
     scoped = extract_links_in_element(
         html, base_url=base_url, element_id=content_element_id
     )
@@ -379,8 +292,7 @@ class _QueueItem:
 
 
 class Crawler:
-    """ARCHSD Practices and Guidelines crawler.
-    """
+    """ARCHSD Practices and Guidelines crawler."""
 
     name = "archsd_practices_and_guidelines"
 
@@ -427,7 +339,9 @@ class Crawler:
         allowed_pdf_path_prefixes_raw = cfg.get("allowed_pdf_path_prefixes", None)
         if isinstance(allowed_pdf_path_prefixes_raw, list):
             allowed_pdf_path_prefixes = [
-                str(v).strip() for v in allowed_pdf_path_prefixes_raw if isinstance(v, str)
+                str(v).strip()
+                for v in allowed_pdf_path_prefixes_raw
+                if isinstance(v, str)
             ]
         else:
             allowed_pdf_path_prefixes = [
@@ -481,7 +395,9 @@ class Crawler:
         seen_docs: set[str] = set()
         out: list[UrlRecord] = []
 
-        queue: list[_QueueItem] = [_QueueItem(url=start_can, depth=0, discovered_from=None)]
+        queue: list[_QueueItem] = [
+            _QueueItem(url=start_can, depth=0, discovered_from=None)
+        ]
 
         while queue:
             item = queue.pop(0)
@@ -496,7 +412,9 @@ class Crawler:
                 continue
 
             if not (
-                _path_is_explicitly_allowed(p.path, allowed_paths=explicit_allowed_paths)
+                _path_is_explicitly_allowed(
+                    p.path, allowed_paths=explicit_allowed_paths
+                )
                 or _path_starts_with_any(p.path, allowed_page_path_prefixes)
             ):
                 skipped_pages.add(item.url)
@@ -524,7 +442,9 @@ class Crawler:
             pdf_url_to_title = _extract_pdf_url_to_title(resp.text, base_url=item.url)
 
             links = list(
-                _iter_links(resp.text, base_url=item.url, content_element_id=content_element_id)
+                _iter_links(
+                    resp.text, base_url=item.url, content_element_id=content_element_id
+                )
             )
             if max_out_links_per_page > 0:
                 links = links[:max_out_links_per_page]

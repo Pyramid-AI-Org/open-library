@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import random
 import re
-import time
 from dataclasses import dataclass
 from datetime import date, datetime
 from html.parser import HTMLParser
@@ -10,7 +9,7 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord
+from crawlers.base import RunContext, UrlRecord, get_with_retries, sleep_seconds
 
 
 _DETAIL_PATH_RE = re.compile(
@@ -89,18 +88,20 @@ def _parse_run_year(run_date_utc: str) -> int:
     return date.fromisoformat(run_date_utc).year
 
 
-def _sleep_seconds(seconds: float) -> None:
-    if seconds <= 0:
-        return
-    time.sleep(seconds)
-
-
-def _compute_backoff_seconds(attempt: int, *, base: float, jitter: float) -> float:
-    exp = base * (2**attempt)
-    exp = min(exp, 30.0)
-    if jitter > 0:
-        exp += random.uniform(0.0, jitter)
-    return exp
+def _apply_charset_fix(resp: requests.Response) -> None:
+    # DevB pages sometimes omit charset and `requests` falls back to
+    # ISO-8859-1 for `.text`, which breaks Chinese titles (mojibake).
+    content_type = (resp.headers.get("Content-Type") or "").lower()
+    is_html = (
+        ("text/html" in content_type)
+        or ("application/xhtml" in content_type)
+        or not content_type
+    )
+    if is_html:
+        enc = (resp.encoding or "").strip().lower()
+        if not enc or enc in ("iso-8859-1", "latin-1"):
+            guessed = (getattr(resp, "apparent_encoding", None) or "").strip()
+            resp.encoding = guessed or "utf-8"
 
 
 def _get_with_retries(
@@ -112,63 +113,18 @@ def _get_with_retries(
     backoff_base_seconds: float,
     backoff_jitter_seconds: float,
 ) -> requests.Response:
-    last_err: Exception | None = None
+    return get_with_retries(
+        session,
+        url,
+        timeout_seconds=timeout_seconds,
+        max_retries=max_retries,
+        backoff_base_seconds=backoff_base_seconds,
+        backoff_jitter_seconds=backoff_jitter_seconds,
+        response_hook=_apply_charset_fix,
+    )
 
-    for attempt in range(max_retries + 1):
-        try:
-            resp = session.get(url, timeout=timeout_seconds)
-            if resp.status_code in (429, 500, 502, 503, 504):
-                if attempt >= max_retries:
-                    resp.raise_for_status()
 
-                retry_after = resp.headers.get("Retry-After")
-                if retry_after:
-                    try:
-                        _sleep_seconds(float(retry_after))
-                    except ValueError:
-                        pass
-
-                _sleep_seconds(
-                    _compute_backoff_seconds(
-                        attempt,
-                        base=backoff_base_seconds,
-                        jitter=backoff_jitter_seconds,
-                    )
-                )
-                continue
-
-            resp.raise_for_status()
-
-            # DevB pages sometimes omit charset and `requests` falls back to
-            # ISO-8859-1 for `.text`, which breaks Chinese titles (mojibake).
-            content_type = (resp.headers.get("Content-Type") or "").lower()
-            is_html = (
-                ("text/html" in content_type)
-                or ("application/xhtml" in content_type)
-                or not content_type
-            )
-            if is_html:
-                enc = (resp.encoding or "").strip().lower()
-                if not enc or enc in ("iso-8859-1", "latin-1"):
-                    guessed = (getattr(resp, "apparent_encoding", None) or "").strip()
-                    resp.encoding = guessed or "utf-8"
-
-            return resp
-        except requests.RequestException as e:
-            last_err = e
-            if attempt >= max_retries:
-                raise
-
-            _sleep_seconds(
-                _compute_backoff_seconds(
-                    attempt,
-                    base=backoff_base_seconds,
-                    jitter=backoff_jitter_seconds,
-                )
-            )
-
-    assert last_err is not None
-    raise last_err
+_sleep_seconds = sleep_seconds
 
 
 def _parse_ddmmyyyy_to_iso(value: str) -> str | None:

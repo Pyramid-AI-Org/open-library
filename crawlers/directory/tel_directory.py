@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import random
 import re
-import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from html.parser import HTMLParser
@@ -13,7 +12,7 @@ from urllib.parse import urljoin, urlparse, urlunparse
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord
+from crawlers.base import RunContext, UrlRecord, get_with_retries, sleep_seconds
 from utils.html_links import extract_links
 
 
@@ -174,20 +173,6 @@ def _set_department_path(meta: dict[str, Any], path: list[str]) -> None:
         meta["department_paths"] = []
 
 
-def _sleep_seconds(seconds: float) -> None:
-    if seconds <= 0:
-        return
-    time.sleep(seconds)
-
-
-def _compute_backoff_seconds(attempt: int, *, base: float, jitter: float) -> float:
-    exp = base * (2**attempt)
-    exp = min(exp, 30.0)
-    if jitter > 0:
-        exp += random.uniform(0.0, jitter)
-    return exp
-
-
 def _get_with_retries(
     session: requests.Session,
     url: str,
@@ -197,48 +182,17 @@ def _get_with_retries(
     backoff_base_seconds: float,
     backoff_jitter_seconds: float,
 ) -> requests.Response:
-    last_err: Exception | None = None
+    return get_with_retries(
+        session,
+        url,
+        timeout_seconds=timeout_seconds,
+        max_retries=max_retries,
+        backoff_base_seconds=backoff_base_seconds,
+        backoff_jitter_seconds=backoff_jitter_seconds,
+    )
 
-    for attempt in range(max_retries + 1):
-        try:
-            resp = session.get(url, timeout=timeout_seconds)
-            if resp.status_code in (429, 500, 502, 503, 504):
-                if attempt >= max_retries:
-                    resp.raise_for_status()
 
-                retry_after = resp.headers.get("Retry-After")
-                if retry_after:
-                    try:
-                        _sleep_seconds(float(retry_after))
-                    except ValueError:
-                        pass
-
-                _sleep_seconds(
-                    _compute_backoff_seconds(
-                        attempt,
-                        base=backoff_base_seconds,
-                        jitter=backoff_jitter_seconds,
-                    )
-                )
-                continue
-
-            resp.raise_for_status()
-            return resp
-        except requests.RequestException as e:
-            last_err = e
-            if attempt >= max_retries:
-                raise
-
-            _sleep_seconds(
-                _compute_backoff_seconds(
-                    attempt,
-                    base=backoff_base_seconds,
-                    jitter=backoff_jitter_seconds,
-                )
-            )
-
-    assert last_err is not None
-    raise last_err
+_sleep_seconds = sleep_seconds
 
 
 def _canonicalize_tel_url(url: str) -> str | None:

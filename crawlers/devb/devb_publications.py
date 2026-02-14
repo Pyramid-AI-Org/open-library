@@ -1,14 +1,20 @@
 from __future__ import annotations
 
 import random
-import time
 from dataclasses import dataclass
 from typing import Iterable
-from urllib.parse import unquote, urlparse, urlunparse
+from urllib.parse import unquote, urlparse
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord
+from crawlers.base import (
+    RunContext,
+    UrlRecord,
+    canonicalize_url,
+    get_with_retries,
+    path_ext,
+    sleep_seconds,
+)
 from crawlers.devb.devb_construction_site_safety_manual import (
     CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX,
     parse_construction_site_safety_manual_page,
@@ -89,113 +95,13 @@ def _path_is_excluded(path: str, *, excluded_prefixes: list[str]) -> bool:
     return False
 
 
-def _sleep_seconds(seconds: float) -> None:
-    if seconds <= 0:
-        return
-    time.sleep(seconds)
-
-
-def _compute_backoff_seconds(attempt: int, *, base: float, jitter: float) -> float:
-    exp = base * (2**attempt)
-    exp = min(exp, 30.0)
-    if jitter > 0:
-        exp += random.uniform(0.0, jitter)
-    return exp
-
-
-def _get_with_retries(
-    session: requests.Session,
-    url: str,
-    *,
-    timeout_seconds: int,
-    max_retries: int,
-    backoff_base_seconds: float,
-    backoff_jitter_seconds: float,
-) -> requests.Response:
-    last_err: Exception | None = None
-
-    for attempt in range(max_retries + 1):
-        try:
-            resp = session.get(url, timeout=timeout_seconds)
-            if resp.status_code in (429, 500, 502, 503, 504):
-                if attempt >= max_retries:
-                    resp.raise_for_status()
-
-                retry_after = resp.headers.get("Retry-After")
-                if retry_after:
-                    try:
-                        _sleep_seconds(float(retry_after))
-                    except ValueError:
-                        pass
-
-                _sleep_seconds(
-                    _compute_backoff_seconds(
-                        attempt,
-                        base=backoff_base_seconds,
-                        jitter=backoff_jitter_seconds,
-                    )
-                )
-                continue
-
-            resp.raise_for_status()
-            return resp
-        except requests.RequestException as e:
-            last_err = e
-            if attempt >= max_retries:
-                raise
-
-            _sleep_seconds(
-                _compute_backoff_seconds(
-                    attempt,
-                    base=backoff_base_seconds,
-                    jitter=backoff_jitter_seconds,
-                )
-            )
-
-    assert last_err is not None
-    raise last_err
-
-
 def _canonicalize_url(url: str) -> str | None:
-    s = (url or "").strip()
-    if not s:
-        return None
-
-    # Some DEVb links contain literal spaces in hrefs.
-    # Encode them to keep output URLs usable.
-    s = s.replace(" ", "%20")
-
-    lower = s.lower()
-    if lower.startswith("javascript:"):
-        return None
-    if lower.startswith("mailto:"):
-        return None
-    if lower.startswith("tel:"):
-        return None
-
-    p = urlparse(s)
-    if not p.scheme or not p.netloc:
-        return None
-
-    # Drop fragments; keep query (some pages use query flags).
-    p = p._replace(scheme=p.scheme.lower(), netloc=p.netloc.lower(), fragment="")
-
-    # Normalize path slightly.
-    path = p.path or "/"
-    if path != "/" and path.endswith("/"):
-        path = path.rstrip("/")
-    p = p._replace(path=path)
-
-    return urlunparse(p)
+    return canonicalize_url(url, encode_spaces=True)
 
 
-def _path_ext(url: str) -> str:
-    p = urlparse(url)
-    path = (p.path or "").lower()
-    # Get last extension (handles .tar.gz poorly but we don't want zip/images anyway).
-    if "." not in path:
-        return ""
-    return "." + path.rsplit(".", 1)[-1]
+_sleep_seconds = sleep_seconds
+_get_with_retries = get_with_retries
+_path_ext = path_ext
 
 
 @dataclass(frozen=True)

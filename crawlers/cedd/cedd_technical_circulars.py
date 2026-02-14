@@ -1,48 +1,36 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
 from html.parser import HTMLParser
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord, get_with_retries, sleep_seconds
+from crawlers.base import RunContext, UrlRecord, clean_text, get_with_retries, sleep_seconds
 
 
+_clean_text = clean_text
 _sleep_seconds = sleep_seconds
 _get_with_retries = get_with_retries
 
 
-def _parse_dd_mon_yyyy_to_iso(value: str) -> str | None:
-    # Example: "26 Jul 2024" or "15 Jan 2026"
-    s = (value or "").strip()
-    if not s:
-        return None
-    try:
-        return datetime.strptime(s, "%d %b %Y").date().isoformat()
-    except ValueError:
-        return None
+def _is_pdf_url(url: str) -> bool:
+    path = (urlparse(url).path or "").lower()
+    return path.endswith(".pdf")
 
 
-@dataclass
+@dataclass(frozen=True)
 class _Row:
     circular_no: str | None
     title: str | None
-    date_iso: str | None
     href: str | None
 
 
-class _GeneralCircularsParser(HTMLParser):
-    """Parse DevB General Circulars listing table.
+class _CeddTechnicalCircularsParser(HTMLParser):
+    """Parse CEDD technical circulars table.
 
-    Table shape (from test.html):
-    - table.articlelistpage.altrowcolor
-    - header row: Circular No. | Title | Date
-    - each data row:
-      td[0] anchor -> PDF href + circular number text
-      td[1] title text
-      td[2] date text (e.g., 15 Jan 2026)
+    Expected table shape:
+      Circular No. | Title
     """
 
     def __init__(self) -> None:
@@ -54,17 +42,17 @@ class _GeneralCircularsParser(HTMLParser):
 
         self._in_tr = False
         self._in_th = False
-
         self._td_index = -1
-        self._capture_text = False
-        self._current_text_parts: list[str] = []
 
-        self._current_href: str | None = None
-        self._current_circular_no_parts: list[str] = []
+        self._current_circular_parts: list[str] = []
         self._current_title_parts: list[str] = []
-        self._current_date_parts: list[str] = []
+        self._current_href: str | None = None
 
-    def _attrs_to_dict(self, attrs: list[tuple[str, str | None]]) -> dict[str, str]:
+        self._in_a = False
+        self._accessibility_depth = 0
+
+    @staticmethod
+    def _attrs_to_dict(attrs: list[tuple[str, str | None]]) -> dict[str, str]:
         out: dict[str, str] = {}
         for k, v in attrs:
             if v is None:
@@ -72,14 +60,19 @@ class _GeneralCircularsParser(HTMLParser):
             out[k.lower()] = v
         return out
 
+    @staticmethod
+    def _class_set(attrs_map: dict[str, str]) -> set[str]:
+        return {c.strip() for c in attrs_map.get("class", "").split() if c.strip()}
+
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         t = tag.lower()
         attrs_map = self._attrs_to_dict(attrs)
 
         if not self._in_table and t == "table":
-            cls = attrs_map.get("class", "")
-            classes = set(cls.split())
-            if "articlelistpage" in classes:
+            classes = self._class_set(attrs_map)
+            if "colortable" in {c.lower() for c in classes} and "tendertbl" in {
+                c.lower() for c in classes
+            }:
                 self._in_table = True
                 self._table_depth = 1
                 return
@@ -91,11 +84,13 @@ class _GeneralCircularsParser(HTMLParser):
 
         if t == "tr":
             self._in_tr = True
+            self._in_th = False
             self._td_index = -1
-            self._current_href = None
-            self._current_circular_no_parts = []
+            self._current_circular_parts = []
             self._current_title_parts = []
-            self._current_date_parts = []
+            self._current_href = None
+            self._in_a = False
+            self._accessibility_depth = 0
             return
 
         if not self._in_tr:
@@ -107,14 +102,20 @@ class _GeneralCircularsParser(HTMLParser):
 
         if t == "td":
             self._td_index += 1
-            self._capture_text = True
-            self._current_text_parts = []
             return
 
-        if t == "a" and self._td_index == 0 and self._current_href is None:
-            href = attrs_map.get("href")
-            if href:
-                self._current_href = href
+        if t == "a" and not self._in_th and self._td_index == 1:
+            self._in_a = True
+            if self._current_href is None:
+                href = attrs_map.get("href")
+                if href:
+                    self._current_href = href
+            return
+
+        if t == "span" and self._in_a:
+            classes = self._class_set(attrs_map)
+            if "accessibility" in {c.lower() for c in classes}:
+                self._accessibility_depth += 1
 
     def handle_endtag(self, tag: str) -> None:
         t = tag.lower()
@@ -122,95 +123,73 @@ class _GeneralCircularsParser(HTMLParser):
         if not self._in_table:
             return
 
-        # Track exiting the table (balanced against start tags).
         self._table_depth -= 1
         if self._table_depth == 0:
             self._in_table = False
             self._in_tr = False
             self._in_th = False
-            self._capture_text = False
+            self._in_a = False
+            self._accessibility_depth = 0
+            return
+
+        if not self._in_tr:
+            return
+
+        if t == "span" and self._in_a and self._accessibility_depth > 0:
+            self._accessibility_depth -= 1
+            return
+
+        if t == "a" and self._in_a:
+            self._in_a = False
+            self._accessibility_depth = 0
             return
 
         if t == "th":
             self._in_th = False
             return
 
-        if not self._in_tr:
-            return
-
-        if t == "td" and not self._in_th:
-            text = "".join(self._current_text_parts).strip()
-            if self._td_index == 0:
-                if text:
-                    self._current_circular_no_parts.append(text)
-            elif self._td_index == 1:
-                if text:
-                    self._current_title_parts.append(text)
-            elif self._td_index == 2:
-                if text:
-                    self._current_date_parts.append(text)
-
-            self._capture_text = False
-            self._current_text_parts = []
-            return
-
         if t == "tr":
             self._in_tr = False
-
-            # Skip header rows (no href).
             if self._current_href:
-                circular_no = " ".join(self._current_circular_no_parts).strip() or None
-                title = " ".join(self._current_title_parts).strip() or None
-                date_raw = " ".join(self._current_date_parts).strip()
-                date_iso = _parse_dd_mon_yyyy_to_iso(date_raw)
-
+                circular_no = _clean_text("".join(self._current_circular_parts)) or None
+                title = _clean_text("".join(self._current_title_parts)) or None
                 self.rows.append(
                     _Row(
                         circular_no=circular_no,
                         title=title,
-                        date_iso=date_iso,
                         href=self._current_href,
                     )
                 )
 
             self._td_index = -1
-            self._capture_text = False
-            self._current_text_parts = []
+            self._in_a = False
+            self._accessibility_depth = 0
 
     def handle_data(self, data: str) -> None:
         if not self._in_table or not self._in_tr or self._in_th:
             return
-        if not self._capture_text:
+
+        if self._td_index == 0:
+            self._current_circular_parts.append(data)
             return
-        self._current_text_parts.append(data)
+
+        if self._td_index == 1 and self._in_a and self._accessibility_depth == 0:
+            self._current_title_parts.append(data)
 
 
 class Crawler:
-    """Crawl DevB General Circulars (English).
+    """Crawl CEDD Technical Circulars listing page and emit PDF records."""
 
-    Listing page:
-      https://www.devb.gov.hk/en/publications_and_press_releases/general_circulars/index.html
-
-    Extracts PDF URLs plus title and date.
-
-    Config: crawlers.devb_general_circulars
-      - base_url: https://www.devb.gov.hk
-      - page_url: (optional override)
-      - max_total_records: 50000
-      - backoff_base_seconds: 0.5
-      - backoff_jitter_seconds: 0.25
-    """
-
-    name = "devb_general_circulars"
+    name = "cedd_technical_circulars"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
 
-        base_url = str(cfg.get("base_url", "https://www.devb.gov.hk")).rstrip("/")
+        base_url = str(cfg.get("base_url", "https://www.cedd.gov.hk")).rstrip("/")
         page_url = str(
             cfg.get(
                 "page_url",
-                f"{base_url}/en/publications_and_press_releases/general_circulars/index.html",
+                f"{base_url}/eng/publications/technical-circulars/index.html",
             )
         ).strip()
 
@@ -239,11 +218,11 @@ class Crawler:
             backoff_jitter_seconds=backoff_jitter_seconds,
         )
 
-        parser = _GeneralCircularsParser()
+        parser = _CeddTechnicalCircularsParser()
         parser.feed(resp.text)
 
-        seen: set[str] = set()
         out: list[UrlRecord] = []
+        seen: set[str] = set()
 
         for row in parser.rows:
             if not row.href:
@@ -252,7 +231,8 @@ class Crawler:
             abs_url = urljoin(page_url, row.href)
             if not abs_url.startswith(base_url + "/"):
                 continue
-
+            if not _is_pdf_url(abs_url):
+                continue
             if abs_url in seen:
                 continue
             seen.add(abs_url)
@@ -262,19 +242,17 @@ class Crawler:
                 name_parts.append(row.circular_no)
             if row.title:
                 name_parts.append(row.title)
-            name = " - ".join(name_parts) or None
 
             out.append(
                 UrlRecord(
                     url=abs_url,
-                    name=name,
+                    name=" - ".join(name_parts) or None,
                     discovered_at_utc=ctx.started_at_utc,
                     source=self.name,
                     meta={
                         "circular_no": row.circular_no,
                         "title": row.title,
-                        "date": row.date_iso,
-                        "listing_url": page_url,
+                        "discovered_from": page_url,
                     },
                 )
             )
@@ -282,5 +260,5 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-        out.sort(key=lambda r: (r.url, (r.meta.get("date") or "")))
+        out.sort(key=lambda r: (r.url, (r.meta.get("circular_no") or "")))
         return out

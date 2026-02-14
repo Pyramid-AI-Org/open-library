@@ -1,146 +1,34 @@
 from __future__ import annotations
 
 import random
-import time
-from urllib.parse import unquote, urlparse, urlunparse
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord
+from crawlers.base import (
+    RunContext,
+    UrlRecord,
+    canonicalize_url,
+    clean_text,
+    get_with_retries,
+    infer_name_from_link,
+    path_ext,
+    sleep_seconds,
+)
 from utils.html_links import extract_links, extract_links_in_element
 
 
 _ALLOWED_DOC_EXTS = {".pdf"}
 
 
-def _clean_text(value: str) -> str:
-    return " ".join((value or "").strip().split())
-
-
-def _sleep_seconds(seconds: float) -> None:
-    if seconds <= 0:
-        return
-    time.sleep(seconds)
-
-
-def _compute_backoff_seconds(attempt: int, *, base: float, jitter: float) -> float:
-    exp = base * (2**attempt)
-    exp = min(exp, 30.0)
-    if jitter > 0:
-        exp += random.uniform(0.0, jitter)
-    return exp
-
-
-def _get_with_retries(
-    session: requests.Session,
-    url: str,
-    *,
-    timeout_seconds: int,
-    max_retries: int,
-    backoff_base_seconds: float,
-    backoff_jitter_seconds: float,
-) -> requests.Response:
-    last_err: Exception | None = None
-
-    for attempt in range(max_retries + 1):
-        try:
-            resp = session.get(url, timeout=timeout_seconds)
-            if resp.status_code in (429, 500, 502, 503, 504):
-                if attempt >= max_retries:
-                    resp.raise_for_status()
-
-                retry_after = resp.headers.get("Retry-After")
-                if retry_after:
-                    try:
-                        _sleep_seconds(float(retry_after))
-                    except ValueError:
-                        pass
-
-                _sleep_seconds(
-                    _compute_backoff_seconds(
-                        attempt,
-                        base=backoff_base_seconds,
-                        jitter=backoff_jitter_seconds,
-                    )
-                )
-                continue
-
-            resp.raise_for_status()
-            return resp
-        except requests.RequestException as exc:
-            last_err = exc
-            if attempt >= max_retries:
-                raise
-
-            _sleep_seconds(
-                _compute_backoff_seconds(
-                    attempt,
-                    base=backoff_base_seconds,
-                    jitter=backoff_jitter_seconds,
-                )
-            )
-
-    assert last_err is not None
-    raise last_err
-
-
 def _canonicalize_url(url: str) -> str | None:
-    s = (url or "").strip()
-    if not s:
-        return None
-
-    # Keep produced URLs usable if source href has spaces.
-    s = s.replace(" ", "%20")
-
-    lower = s.lower()
-    if lower.startswith("javascript:"):
-        return None
-    if lower.startswith("mailto:"):
-        return None
-    if lower.startswith("tel:"):
-        return None
-
-    parsed = urlparse(s)
-    if not parsed.scheme or not parsed.netloc:
-        return None
-
-    parsed = parsed._replace(
-        scheme=parsed.scheme.lower(),
-        netloc=parsed.netloc.lower(),
-        fragment="",
-    )
-
-    path = parsed.path or "/"
-    if path != "/" and path.endswith("/"):
-        path = path.rstrip("/")
-    parsed = parsed._replace(path=path)
-
-    return urlunparse(parsed)
+    return canonicalize_url(url, encode_spaces=True)
 
 
-def _path_ext(url: str) -> str:
-    parsed = urlparse(url)
-    path = (parsed.path or "").lower()
-    if "." not in path:
-        return ""
-    return "." + path.rsplit(".", 1)[-1]
-
-
-def _infer_name(link_text: str, url: str) -> str | None:
-    text = _clean_text(link_text)
-    if text:
-        return text
-
-    parsed = urlparse(url)
-    tail = (parsed.path or "").rstrip("/").rsplit("/", 1)[-1]
-    if not tail:
-        return None
-    tail = unquote(tail)
-    if "." in tail:
-        tail = tail.rsplit(".", 1)[0]
-    tail = tail.replace("_", " ").replace("-", " ")
-    tail = _clean_text(tail)
-    return tail or None
+_clean_text = clean_text
+_sleep_seconds = sleep_seconds
+_get_with_retries = get_with_retries
+_path_ext = path_ext
+_infer_name = infer_name_from_link
 
 
 def _extract_links_in_content(html: str, *, page_url: str, content_element_id: str):

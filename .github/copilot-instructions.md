@@ -13,10 +13,16 @@
 
 - CLI entrypoint: `main.py`
   - `python main.py --settings config/settings.yaml --out ./local-data`
-  - `python main.py --crawler devb_press_releases --settings config/settings.yaml --out ./local-data`
+  - `python main.py --crawler devb.devb_press_releases --settings config/settings.yaml --out ./local-data`
+  - `python main.py --crawler cedd.cedd_technical_circulars --settings config/settings.yaml --out ./local-data`
+  - note: `--debug` is a flag (do not pass `true/false` values)
 - Crawler contract: `crawlers/base.py`
   - Each module exports `class Crawler` with `name` and `crawl(ctx: RunContext) -> list[UrlRecord]`.
   - `RunContext.settings` is the parsed YAML from `config/settings.yaml` (via `utils/settings.py`).
+  - Shared crawler helpers live in `crawlers/base.py` and should be reused where possible:
+    - `clean_text()`, `sleep_seconds()`, `compute_backoff_seconds()`
+    - `get_with_retries()`
+    - `canonicalize_url()`, `path_ext()`, `infer_name_from_link()`
 - Output schema written by `main.py`:
   - `url` (string), `name` (string|null), `discovered_at_utc` (ISO-8601 string), `source` (crawler name), `meta` (object)
 - Determinism matters (data branch diffs): records are sorted before writing and JSON is emitted with sorted keys (`utils/jsonio.py`).
@@ -24,14 +30,23 @@
 ## Project-specific conventions
 
 - Adding a crawler is intentionally allowlisted: update the explicit `crawler_names = [...]` list in `main.py`.
+- If adding support for a short crawler name, also update `_CRAWLER_MODULE_ALIASES` in `main.py`.
 - Crawler config goes under `crawlers.<name>` in `config/settings.yaml` and typically includes:
   - request pacing (`request_delay_seconds`, `request_jitter_seconds`)
   - retry/backoff knobs (`max_total_records`, `backoff_*`, etc.)
-- HTTP is done with `requests` (see `crawlers/devb_press_releases.py`, `crawlers/tel_directory.py`):
+- HTTP is done with `requests` (see `crawlers/devb/devb_press_releases.py`, `crawlers/directory/tel_directory.py`):
   - reuse a `requests.Session` when crawling many pages
   - honor `http.timeout_seconds` and `http.user_agent` from settings
-  - handle 429/5xx with retries + exponential backoff
+  - prefer shared `get_with_retries()` for 429/5xx + backoff behavior
 - HTML parsing is mostly stdlib (`html.parser.HTMLParser`) and the helper in `utils/html_links.py` (see `crawlers/link_extract.py`).
+
+### URL canonicalization and crawler-specific wrappers
+
+- Use shared `canonicalize_url()` defaults unless a crawler requires special behavior.
+- Common wrappers in crawlers are acceptable for preserving existing behavior, e.g.:
+  - `encode_spaces=True` where sources contain literal spaces in hrefs.
+  - response charset post-processing hooks (DevB press releases).
+  - host-restricted canonicalization in domain-specific crawlers (e.g., telephone directory).
 
 ## Data publishing workflow (CI)
 

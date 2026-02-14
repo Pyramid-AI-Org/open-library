@@ -1,127 +1,31 @@
 from __future__ import annotations
 
 import random
-import time
 from dataclasses import dataclass
 from html.parser import HTMLParser
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urljoin
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord
+from crawlers.base import (
+    RunContext,
+    UrlRecord,
+    canonicalize_url,
+    clean_text,
+    get_with_retries,
+    path_ext,
+    sleep_seconds,
+)
 
 
 _ALLOWED_DOC_EXTS = {".pdf"}
 
 
-def _clean_text(value: str) -> str:
-    return " ".join((value or "").strip().split())
-
-
-def _sleep_seconds(seconds: float) -> None:
-    if seconds <= 0:
-        return
-    time.sleep(seconds)
-
-
-def _compute_backoff_seconds(attempt: int, *, base: float, jitter: float) -> float:
-    exp = base * (2**attempt)
-    exp = min(exp, 30.0)
-    if jitter > 0:
-        exp += random.uniform(0.0, jitter)
-    return exp
-
-
-def _get_with_retries(
-    session: requests.Session,
-    url: str,
-    *,
-    timeout_seconds: int,
-    max_retries: int,
-    backoff_base_seconds: float,
-    backoff_jitter_seconds: float,
-) -> requests.Response:
-    last_err: Exception | None = None
-
-    for attempt in range(max_retries + 1):
-        try:
-            resp = session.get(url, timeout=timeout_seconds)
-            if resp.status_code in (429, 500, 502, 503, 504):
-                if attempt >= max_retries:
-                    resp.raise_for_status()
-
-                retry_after = resp.headers.get("Retry-After")
-                if retry_after:
-                    try:
-                        _sleep_seconds(float(retry_after))
-                    except ValueError:
-                        pass
-
-                _sleep_seconds(
-                    _compute_backoff_seconds(
-                        attempt,
-                        base=backoff_base_seconds,
-                        jitter=backoff_jitter_seconds,
-                    )
-                )
-                continue
-
-            resp.raise_for_status()
-            return resp
-        except requests.RequestException as exc:
-            last_err = exc
-            if attempt >= max_retries:
-                raise
-
-            _sleep_seconds(
-                _compute_backoff_seconds(
-                    attempt,
-                    base=backoff_base_seconds,
-                    jitter=backoff_jitter_seconds,
-                )
-            )
-
-    assert last_err is not None
-    raise last_err
-
-
-def _canonicalize_url(url: str) -> str | None:
-    s = (url or "").strip()
-    if not s:
-        return None
-
-    lower = s.lower()
-    if lower.startswith("javascript:"):
-        return None
-    if lower.startswith("mailto:"):
-        return None
-    if lower.startswith("tel:"):
-        return None
-
-    parsed = urlparse(s)
-    if not parsed.scheme or not parsed.netloc:
-        return None
-
-    parsed = parsed._replace(
-        scheme=parsed.scheme.lower(),
-        netloc=parsed.netloc.lower(),
-        fragment="",
-    )
-
-    path = parsed.path or "/"
-    if path != "/" and path.endswith("/"):
-        path = path.rstrip("/")
-    parsed = parsed._replace(path=path)
-
-    return urlunparse(parsed)
-
-
-def _path_ext(url: str) -> str:
-    parsed = urlparse(url)
-    path = (parsed.path or "").lower()
-    if "." not in path:
-        return ""
-    return "." + path.rsplit(".", 1)[-1]
+_clean_text = clean_text
+_sleep_seconds = sleep_seconds
+_get_with_retries = get_with_retries
+_canonicalize_url = canonicalize_url
+_path_ext = path_ext
 
 
 @dataclass(frozen=True)

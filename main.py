@@ -32,6 +32,11 @@ _CRAWLER_MODULE_ALIASES: dict[str, str] = {
     "notices_and_reports": "bd.notices_and_reports",
     "archsd_technical_documents": "archsd.archsd_technical_documents",
     "archsd_practices_and_guidelines": "archsd.archsd_practices_and_guidelines",
+    "cedd_technical_circulars": "cedd.cedd_technical_circulars",
+    "cedd_geo_publications": "cedd.cedd_geo_publications",
+    "cedd_eacsb_handbook": "cedd.cedd_eacsb_handbook",
+    "cedd_standards_spec_handbooks_cost": "cedd.cedd_standards_spec_handbooks_cost",
+    "cedd_ceo_publications": "cedd.cedd_ceo_publications",
     "tel_directory": "directory.tel_directory",
     "herbarium": "herbarium.herbarium",
 }
@@ -125,6 +130,11 @@ def main() -> int:
             "bd.notices_and_reports",
             "archsd.archsd_technical_documents",
             "archsd.archsd_practices_and_guidelines",
+            "cedd.cedd_technical_circulars",
+            "cedd.cedd_geo_publications",
+            "cedd.cedd_eacsb_handbook",
+            "cedd.cedd_standards_spec_handbooks_cost",
+            "cedd.cedd_ceo_publications",
             "directory.tel_directory",
             "herbarium.herbarium",
         ]

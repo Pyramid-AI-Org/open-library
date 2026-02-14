@@ -295,6 +295,69 @@ crawlers:
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
 
+  # CEDD Technical Circulars crawler.
+  # Extracts PDF URL, circular number, and title from the listing table.
+  cedd_technical_circulars:
+    base_url: "https://www.cedd.gov.hk"
+    page_url: "https://www.cedd.gov.hk/eng/publications/technical-circulars/index.html"
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # CEDD GEO publications crawler.
+  # Extracts title and PDF URL from the GEO publications listing table.
+  cedd_geo_publications:
+    base_url: "https://www.cedd.gov.hk"
+    page_url: "https://www.cedd.gov.hk/eng/publications/geo/index.html"
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # CEDD EACSB Handbook crawler.
+  # Discovers the handbook PDF link from the landing page paragraph.
+  cedd_eacsb_handbook:
+    base_url: "https://www.cedd.gov.hk"
+    page_url: "https://www.cedd.gov.hk/eng/publications/eacsb-handbook/index.html"
+    max_total_records: 1
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # CEDD Standards/Specifications/Handbooks crawler.
+  # Crawls the main page and in-scope subpages for PDF links.
+  # `issue_date` is extracted only from table columns headed "Latest Update" or
+  # "Last Update" when present.
+  cedd_standards_spec_handbooks_cost:
+    base_url: "https://www.cedd.gov.hk"
+    page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/index.html"
+    scope_prefix: "/eng/publications/standards-spec-handbooks-cost/"
+    stan_pah_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
+    content_element_id: "content"
+    max_pages: 600
+    max_total_records: 50000
+    exclude_urls:
+      - "https://www.cedd.gov.hk/filemanager/eng/content_22/List%20of%20BIM%20Objects.pdf"
+      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-general/index.html"
+      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-geotechnical/index.html"
+      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-port-works/index.html"
+      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
+      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/CEWTPI-disclaimer/index.html"
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # CEDD CEO publications crawler.
+  # Crawls CEO subpages and emits PDFs. For PWDM, only the first table's
+  # "Current" column links are emitted. If a subpage has no PDFs,
+  # the subpage URL itself is emitted as fallback.
+  cedd_ceo_publications:
+    base_url: "https://www.cedd.gov.hk"
+    page_url: "https://www.cedd.gov.hk/eng/publications/ceo/index.html"
+    scope_prefix: "/eng/publications/ceo/"
+    pwdm_path: "/eng/publications/ceo/pwdm/index.html"
+    content_element_id: "content"
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
   # Hong Kong Herbarium Plant Database crawler.
   # Calls the public JSON endpoint and emits one record per species_id.
   herbarium:

@@ -2,15 +2,21 @@ from __future__ import annotations
 
 import random
 import re
-import time
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from typing import Iterable
-from urllib.parse import urljoin, urlparse, urlunparse
+from urllib.parse import urljoin, urlparse
 
 import requests
 
-from crawlers.base import RunContext, UrlRecord
+from crawlers.base import (
+    RunContext,
+    UrlRecord,
+    canonicalize_url,
+    get_with_retries,
+    path_ext,
+    sleep_seconds,
+)
 from utils.html_links import HtmlLink, extract_links, extract_links_in_element
 
 
@@ -36,7 +42,9 @@ def _is_addendum_document(*, text: str | None, url: str) -> bool:
     return False
 
 
-_EDITION_RE = re.compile(r"\bedition\s*:\s*(?P<edition>\d{4}(?:[-/]\d{1,2}[-/]\d{1,2})?)\b", re.IGNORECASE)
+_EDITION_RE = re.compile(
+    r"\bedition\s*:\s*(?P<edition>\d{4}(?:[-/]\d{1,2}[-/]\d{1,2})?)\b", re.IGNORECASE
+)
 
 
 class _ArchsdItemContentParser(HTMLParser):
@@ -155,109 +163,15 @@ class _ArchsdItemContentParser(HTMLParser):
             self._current_a_text_parts.append(data)
 
 
-def _sleep_seconds(seconds: float) -> None:
-    if seconds <= 0:
-        return
-    time.sleep(seconds)
+_sleep_seconds = sleep_seconds
+_get_with_retries = get_with_retries
+_canonicalize_url = canonicalize_url
+_path_ext = path_ext
 
 
-def _compute_backoff_seconds(attempt: int, *, base: float, jitter: float) -> float:
-    exp = base * (2**attempt)
-    exp = min(exp, 30.0)
-    if jitter > 0:
-        exp += random.uniform(0.0, jitter)
-    return exp
-
-
-def _get_with_retries(
-    session: requests.Session,
-    url: str,
-    *,
-    timeout_seconds: int,
-    max_retries: int,
-    backoff_base_seconds: float,
-    backoff_jitter_seconds: float,
-) -> requests.Response:
-    last_err: Exception | None = None
-
-    for attempt in range(max_retries + 1):
-        try:
-            resp = session.get(url, timeout=timeout_seconds)
-            if resp.status_code in (429, 500, 502, 503, 504):
-                if attempt >= max_retries:
-                    resp.raise_for_status()
-
-                retry_after = resp.headers.get("Retry-After")
-                if retry_after:
-                    try:
-                        _sleep_seconds(float(retry_after))
-                    except ValueError:
-                        pass
-
-                _sleep_seconds(
-                    _compute_backoff_seconds(
-                        attempt,
-                        base=backoff_base_seconds,
-                        jitter=backoff_jitter_seconds,
-                    )
-                )
-                continue
-
-            resp.raise_for_status()
-            return resp
-        except requests.RequestException as e:
-            last_err = e
-            if attempt >= max_retries:
-                raise
-
-            _sleep_seconds(
-                _compute_backoff_seconds(
-                    attempt,
-                    base=backoff_base_seconds,
-                    jitter=backoff_jitter_seconds,
-                )
-            )
-
-    assert last_err is not None
-    raise last_err
-
-
-def _canonicalize_url(url: str) -> str | None:
-    s = (url or "").strip()
-    if not s:
-        return None
-
-    lower = s.lower()
-    if lower.startswith("javascript:"):
-        return None
-    if lower.startswith("mailto:"):
-        return None
-    if lower.startswith("tel:"):
-        return None
-
-    p = urlparse(s)
-    if not p.scheme or not p.netloc:
-        return None
-
-    p = p._replace(scheme=p.scheme.lower(), netloc=p.netloc.lower(), fragment="")
-
-    path = p.path or "/"
-    if path != "/" and path.endswith("/"):
-        path = path.rstrip("/")
-    p = p._replace(path=path)
-
-    return urlunparse(p)
-
-
-def _path_ext(url: str) -> str:
-    p = urlparse(url)
-    path = (p.path or "").lower()
-    if "." not in path:
-        return ""
-    return "." + path.rsplit(".", 1)[-1]
-
-
-def _iter_links(html: str, *, base_url: str, content_element_id: str) -> Iterable[HtmlLink]:
+def _iter_links(
+    html: str, *, base_url: str, content_element_id: str
+) -> Iterable[HtmlLink]:
     scoped = extract_links_in_element(
         html, base_url=base_url, element_id=content_element_id
     )
@@ -341,7 +255,9 @@ def _extract_pdf_titles_from_items_array(html: str, *, base_url: str) -> dict[st
     return out
 
 
-def _extract_pdf_editions_from_items_array(html: str, *, base_url: str) -> dict[str, str]:
+def _extract_pdf_editions_from_items_array(
+    html: str, *, base_url: str
+) -> dict[str, str]:
     """Best-effort extraction of PDF (url -> edition_date) from embedded JS datasets."""
 
     out: dict[str, str] = {}
@@ -414,7 +330,9 @@ def _extract_pdf_urls_from_html(html: str, *, base_url: str) -> list[str]:
     return uniq
 
 
-def _extract_pdf_editions_from_html_items(html: str, *, base_url: str) -> dict[str, str]:
+def _extract_pdf_editions_from_html_items(
+    html: str, *, base_url: str
+) -> dict[str, str]:
     parser = _ArchsdItemContentParser(base_url=base_url)
     try:
         parser.feed(html or "")
@@ -578,7 +496,9 @@ class Crawler:
             backoff_jitter_seconds=backoff_jitter_seconds,
         )
         hub_links = list(
-            _iter_links(resp.text, base_url=start_can, content_element_id=content_element_id)
+            _iter_links(
+                resp.text, base_url=start_can, content_element_id=content_element_id
+            )
         )
 
         section_slug_to_name = {
@@ -668,7 +588,9 @@ class Crawler:
 
             # Only recurse through in-scope HTML pages.
             if not (
-                _path_is_explicitly_allowed(p.path, allowed_paths=explicit_allowed_paths)
+                _path_is_explicitly_allowed(
+                    p.path, allowed_paths=explicit_allowed_paths
+                )
                 or _path_starts_with_any(p.path, allowed_page_path_prefixes)
             ):
                 skipped_pages.add(item.url)
@@ -694,7 +616,9 @@ class Crawler:
             )
 
             links = list(
-                _iter_links(resp.text, base_url=item.url, content_element_id=content_element_id)
+                _iter_links(
+                    resp.text, base_url=item.url, content_element_id=content_element_id
+                )
             )
             if max_out_links_per_page > 0:
                 links = links[:max_out_links_per_page]
@@ -709,7 +633,9 @@ class Crawler:
             )
 
             # JS-rendered listings (e.g. itemsArray) contain PDF titles.
-            pdf_title_map = _extract_pdf_titles_from_items_array(resp.text, base_url=item.url)
+            pdf_title_map = _extract_pdf_titles_from_items_array(
+                resp.text, base_url=item.url
+            )
 
             # JS-rendered listings also include edition in the description.
             pdf_edition_map_from_items_array = _extract_pdf_editions_from_items_array(
@@ -729,10 +655,9 @@ class Crawler:
                 if _is_addendum_document(text=link.text, url=can):
                     continue
                 doc_url_to_text[can] = link.text or ""
-                ed = (
-                    pdf_edition_map_from_html.get(can)
-                    or pdf_edition_map_from_items_array.get(can)
-                )
+                ed = pdf_edition_map_from_html.get(
+                    can
+                ) or pdf_edition_map_from_items_array.get(can)
                 if ed:
                     doc_url_to_edition[can] = ed
 
@@ -746,16 +671,18 @@ class Crawler:
                     continue
                 if can not in doc_url_to_text:
                     doc_url_to_text[can] = ""
-                ed = (
-                    pdf_edition_map_from_html.get(can)
-                    or pdf_edition_map_from_items_array.get(can)
-                )
+                ed = pdf_edition_map_from_html.get(
+                    can
+                ) or pdf_edition_map_from_items_array.get(can)
                 if ed and can not in doc_url_to_edition:
                     doc_url_to_edition[can] = ed
 
             # Fill missing names from embedded dataset.
             for doc_url, title in pdf_title_map.items():
-                if doc_url in doc_url_to_text and not (doc_url_to_text[doc_url] or "").strip():
+                if (
+                    doc_url in doc_url_to_text
+                    and not (doc_url_to_text[doc_url] or "").strip()
+                ):
                     doc_url_to_text[doc_url] = title
 
             # Fill missing editions from embedded dataset.
@@ -845,7 +772,9 @@ class Crawler:
                         if child_slug != item.section_root_slug:
                             continue
                     else:
-                        if not any(child_slug.startswith(pref) for pref in allowed_prefixes):
+                        if not any(
+                            child_slug.startswith(pref) for pref in allowed_prefixes
+                        ):
                             if child_slug != item.section_root_slug:
                                 continue
 
