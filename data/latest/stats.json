@@ -1,31 +1,208 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 75137,
-    "records_total": 75137,
+    "lines_total": 76114,
+    "records_total": 76114,
     "records_by_group": {
+      "other": 4270,
       "archsd.gov.hk": 184,
-      "devb.gov.hk": 5496,
-      "tel.directory.gov.hk": 20600,
-      "other": 3348,
-      "info.gov.hk": 45509
+      "devb.gov.hk": 5498,
+      "tel.directory.gov.hk": 20604,
+      "info.gov.hk": 45558
     },
     "records_by_source": {
+      "notices_and_reports": 20,
       "archsd_practices_and_guidelines": 53,
       "archsd_technical_documents": 131,
-      "devb_press_releases": 3494,
+      "scheduled_areas": 346,
+      "codes_design_manuals_and_guidelines": 50,
+      "bd_basic_pages": 31,
+      "practice_notes_and_circular_letters": 457,
+      "central_data_bank": 18,
+      "devb_press_releases": 3496,
       "devb_speeches_and_presentations": 459,
       "devb_publications": 1468,
       "devb_general_circulars": 2,
       "devb_planning_and_lands_technical_circulars": 4,
       "devb_works_technical_circulars_um": 69,
-      "tel_directory": 20600,
+      "tel_directory": 20604,
       "herbarium": 3348,
-      "hksar_press_releases": 45509
+      "hksar_press_releases": 45558
     },
     "parse_errors": 0
   },
   "groups": {
+    "other": {
+      "records": 4270,
+      "unique_urls": 4262,
+      "duplicate_url_hits": 8,
+      "missing_name": 0,
+      "missing_meta": 0,
+      "url_host_mismatch": 0,
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "source",
+            "url"
+          ],
+          "count": 4270
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "chinese_name",
+            "common_name",
+            "family_id",
+            "family_name",
+            "family_name_chi",
+            "family_name_sc",
+            "family_no",
+            "flower_period",
+            "fruit_period",
+            "genus_id",
+            "genus_name",
+            "genus_name_chi",
+            "genus_name_sc",
+            "infraspecific_authority",
+            "photo_multimedia_id",
+            "rare_plant_hk",
+            "sc_name",
+            "scientific_name",
+            "scientific_name_with_authority",
+            "species_authority",
+            "species_id",
+            "species_name",
+            "type"
+          ],
+          "count": 3348
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "from_page_url"
+          ],
+          "count": 371
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "issue_date",
+            "page_url",
+            "ref_no",
+            "source_page",
+            "tab"
+          ],
+          "count": 221
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "page_url",
+            "source_page",
+            "year"
+          ],
+          "count": 153
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "issue_date",
+            "page_url",
+            "ref_no",
+            "source_page"
+          ],
+          "count": 83
+        }
+      ],
+      "meta_schema_variants": 9,
+      "top_meta_keys": [
+        [
+          "chinese_name",
+          3348
+        ],
+        [
+          "common_name",
+          3348
+        ],
+        [
+          "family_id",
+          3348
+        ],
+        [
+          "family_name",
+          3348
+        ],
+        [
+          "family_name_chi",
+          3348
+        ],
+        [
+          "family_name_sc",
+          3348
+        ],
+        [
+          "family_no",
+          3348
+        ],
+        [
+          "flower_period",
+          3348
+        ],
+        [
+          "fruit_period",
+          3348
+        ],
+        [
+          "genus_id",
+          3348
+        ],
+        [
+          "genus_name",
+          3348
+        ],
+        [
+          "genus_name_chi",
+          3348
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.herbarium.gov.hk",
+          3348
+        ],
+        [
+          "www.bd.gov.hk",
+          918
+        ],
+        [
+          "www.labour.gov.hk",
+          3
+        ],
+        [
+          "www.gld.gov.hk",
+          1
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".html",
+          3354
+        ],
+        [
+          ".pdf",
+          916
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-02-14T04:10:21.352520+00:00",
+        "max": "2026-02-14T04:10:21.352520+00:00",
+        "count": 4270
+      }
+    },
     "archsd.gov.hk": {
       "records": 184,
       "unique_urls": 184,
@@ -106,14 +283,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-13T04:21:24.831206+00:00",
-        "max": "2026-02-13T04:21:24.831206+00:00",
+        "min": "2026-02-14T04:10:21.352520+00:00",
+        "max": "2026-02-14T04:10:21.352520+00:00",
         "count": 184
       }
     },
     "devb.gov.hk": {
-      "records": 5496,
-      "unique_urls": 5496,
+      "records": 5498,
+      "unique_urls": 5498,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -127,7 +304,7 @@
             "source",
             "url"
           ],
-          "count": 5496
+          "count": 5498
         }
       ],
       "meta_schema_signatures": [
@@ -138,7 +315,7 @@
             "locale",
             "year"
           ],
-          "count": 3494
+          "count": 3496
         },
         {
           "meta_keys": [
@@ -194,19 +371,19 @@
       "top_meta_keys": [
         [
           "date",
-          4028
+          4030
         ],
         [
           "listing_url",
-          3959
+          3961
         ],
         [
           "locale",
-          3953
+          3955
         ],
         [
           "year",
-          3953
+          3955
         ],
         [
           "depth",
@@ -244,13 +421,13 @@
       "top_hosts": [
         [
           "www.devb.gov.hk",
-          5496
+          5498
         ]
       ],
       "top_extensions": [
         [
           ".html",
-          3953
+          3955
         ],
         [
           ".pdf",
@@ -266,15 +443,15 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-13T04:21:24.831206+00:00",
-        "max": "2026-02-13T04:21:24.831206+00:00",
-        "count": 5496
+        "min": "2026-02-14T04:10:21.352520+00:00",
+        "max": "2026-02-14T04:10:21.352520+00:00",
+        "count": 5498
       }
     },
     "tel.directory.gov.hk": {
-      "records": 20600,
-      "unique_urls": 15667,
-      "duplicate_url_hits": 4933,
+      "records": 20604,
+      "unique_urls": 15669,
+      "duplicate_url_hits": 4935,
       "missing_name": 0,
       "missing_meta": 0,
       "url_host_mismatch": 0,
@@ -287,7 +464,7 @@
             "source",
             "url"
           ],
-          "count": 20600
+          "count": 20604
         }
       ],
       "meta_schema_signatures": [
@@ -302,7 +479,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 20272
+          "count": 20277
         },
         {
           "meta_keys": [
@@ -317,7 +494,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 325
+          "count": 324
         },
         {
           "meta_keys": [
@@ -338,184 +515,66 @@
       "top_meta_keys": [
         [
           "dedup_key",
-          20600
+          20604
         ],
         [
           "department_paths",
-          20600
+          20604
         ],
         [
           "department_root",
-          20600
+          20604
         ],
         [
           "discovered_from",
-          20600
+          20604
         ],
         [
           "email",
-          20600
+          20604
         ],
         [
           "office_tel",
-          20600
+          20604
         ],
         [
           "post_title",
-          20600
+          20604
         ],
         [
           "post_title_long",
-          20600
+          20604
         ],
         [
           "discovered_from_urls",
-          328
+          327
         ],
         [
           "other_person_urls",
-          325
+          324
         ]
       ],
       "top_hosts": [
         [
           "www.directory.gov.hk",
-          20600
+          20604
         ]
       ],
       "top_extensions": [
         [
           ".jsp",
-          20600
+          20604
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-13T05:10:49.436828+00:00",
-        "max": "2026-02-13T05:10:49.436828+00:00",
-        "count": 20600
-      }
-    },
-    "other": {
-      "records": 3348,
-      "unique_urls": 3348,
-      "duplicate_url_hits": 0,
-      "missing_name": 0,
-      "missing_meta": 0,
-      "url_host_mismatch": 0,
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "source",
-            "url"
-          ],
-          "count": 3348
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "chinese_name",
-            "common_name",
-            "family_id",
-            "family_name",
-            "family_name_chi",
-            "family_name_sc",
-            "family_no",
-            "flower_period",
-            "fruit_period",
-            "genus_id",
-            "genus_name",
-            "genus_name_chi",
-            "genus_name_sc",
-            "infraspecific_authority",
-            "photo_multimedia_id",
-            "rare_plant_hk",
-            "sc_name",
-            "scientific_name",
-            "scientific_name_with_authority",
-            "species_authority",
-            "species_id",
-            "species_name",
-            "type"
-          ],
-          "count": 3348
-        }
-      ],
-      "meta_schema_variants": 1,
-      "top_meta_keys": [
-        [
-          "chinese_name",
-          3348
-        ],
-        [
-          "common_name",
-          3348
-        ],
-        [
-          "family_id",
-          3348
-        ],
-        [
-          "family_name",
-          3348
-        ],
-        [
-          "family_name_chi",
-          3348
-        ],
-        [
-          "family_name_sc",
-          3348
-        ],
-        [
-          "family_no",
-          3348
-        ],
-        [
-          "flower_period",
-          3348
-        ],
-        [
-          "fruit_period",
-          3348
-        ],
-        [
-          "genus_id",
-          3348
-        ],
-        [
-          "genus_name",
-          3348
-        ],
-        [
-          "genus_name_chi",
-          3348
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.herbarium.gov.hk",
-          3348
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".html",
-          3348
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-02-13T04:21:24.831206+00:00",
-        "max": "2026-02-13T04:21:24.831206+00:00",
-        "count": 3348
+        "min": "2026-02-14T05:00:27.047184+00:00",
+        "max": "2026-02-14T05:00:27.047184+00:00",
+        "count": 20604
       }
     },
     "info.gov.hk": {
-      "records": 45509,
-      "unique_urls": 45509,
+      "records": 45558,
+      "unique_urls": 45558,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -529,7 +588,7 @@
             "source",
             "url"
           ],
-          "count": 45509
+          "count": 45558
         }
       ],
       "meta_schema_signatures": [
@@ -539,49 +598,49 @@
             "listing_url",
             "locale"
           ],
-          "count": 45509
+          "count": 45558
         }
       ],
       "meta_schema_variants": 1,
       "top_meta_keys": [
         [
           "date_utc",
-          45509
+          45558
         ],
         [
           "listing_url",
-          45509
+          45558
         ],
         [
           "locale",
-          45509
+          45558
         ]
       ],
       "top_hosts": [
         [
           "www.info.gov.hk",
-          45509
+          45558
         ]
       ],
       "top_extensions": [
         [
           ".htm",
-          45509
+          45558
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-13T04:21:24.933938+00:00",
-        "max": "2026-02-13T04:21:24.933938+00:00",
-        "count": 45509
+        "min": "2026-02-14T04:10:21.602845+00:00",
+        "max": "2026-02-14T04:10:21.602845+00:00",
+        "count": 45558
       }
     }
   },
   "general": {
     "record_size_bytes": {
-      "min": 311,
+      "min": 284,
       "max": 2171,
-      "mean": 532.382887259273,
-      "p50": 397,
+      "mean": 531.7474577607273,
+      "p50": 398.0,
       "p95": 944.0
     },
     "anomaly_counts": {},
