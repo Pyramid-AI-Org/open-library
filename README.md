@@ -66,7 +66,7 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 | https://www.devb.gov.hk/      | partial |
 | https://www.archsd.gov.hk/    | partial |
 | https://www.bd.gov.hk         | partial |
-| https://www.cedd.gov.hk/      | todo    |
+| https://www.cedd.gov.hk/      | partial |
 | https://www.dsd.gov.hk/       | todo    |
 | https://www.emsd.gov.hk/      | todo    |
 | https://www.epd.gov.hk/       | todo    |
