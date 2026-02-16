@@ -1,15 +1,15 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 76440 (parse_errors=0)
+Total records: 76410 (parse_errors=0)
 
 Records by website group:
 - archsd.gov.hk: 184 (0.2%)
 - devb.gov.hk: 5498 (7.2%)
-- info.gov.hk: 45539 (59.6%)
+- info.gov.hk: 45509 (59.6%)
 - other: 4615 (6.0%)
 - tel.directory.gov.hk: 20604 (27.0%)
 
 Crawler sources (top 15):
-- hksar_press_releases: 45539
+- hksar_press_releases: 45509
 - tel_directory: 20604
 - devb_press_releases: 3496
 - herbarium: 3348
@@ -30,7 +30,7 @@ Per-group format + schema summary:
 [other]
 - records: 4615 | unique_urls: 4607 | dup_url_hits: 8
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-15T04:22:05.846951+00:00 .. 2026-02-15T04:22:05.846951+00:00
+- discovered_at_utc: 2026-02-16T04:25:26.572213+00:00 .. 2026-02-16T04:25:26.572213+00:00
 - top url hosts:
   - www.herbarium.gov.hk: 3348
   - www.bd.gov.hk: 918
@@ -60,7 +60,7 @@ Per-group format + schema summary:
 [archsd.gov.hk]
 - records: 184 | unique_urls: 184 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-15T04:22:05.846951+00:00 .. 2026-02-15T04:22:05.846951+00:00
+- discovered_at_utc: 2026-02-16T04:25:26.572213+00:00 .. 2026-02-16T04:25:26.572213+00:00
 - top url hosts:
   - www.archsd.gov.hk: 184
 - top url extensions:
@@ -82,7 +82,7 @@ Per-group format + schema summary:
 [devb.gov.hk]
 - records: 5498 | unique_urls: 5498 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-15T04:22:05.846951+00:00 .. 2026-02-15T04:22:05.846951+00:00
+- discovered_at_utc: 2026-02-16T04:25:26.572213+00:00 .. 2026-02-16T04:25:26.572213+00:00
 - top url hosts:
   - www.devb.gov.hk: 5498
 - top url extensions:
@@ -110,7 +110,7 @@ Per-group format + schema summary:
 [tel.directory.gov.hk]
 - records: 20604 | unique_urls: 15669 | dup_url_hits: 4935
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-15T05:15:04.425091+00:00 .. 2026-02-15T05:15:04.425091+00:00
+- discovered_at_utc: 2026-02-16T05:13:31.739528+00:00 .. 2026-02-16T05:13:31.739528+00:00
 - top url hosts:
   - www.directory.gov.hk: 20604
 - top url extensions:
@@ -118,8 +118,8 @@ Per-group format + schema summary:
 - top-level key signatures (urls.jsonl record format):
   - count=20604 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
 - meta key signatures:
-  - count=20277 meta_keys=['dedup_key', 'department_paths', 'department_root', 'discovered_from', 'email', 'office_tel', 'post_title', 'post_title_long']
-  - count=324 meta_keys=['dedup_key', 'department_paths', 'department_root', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'other_person_urls', 'post_title', 'post_title_long']
+  - count=20278 meta_keys=['dedup_key', 'department_paths', 'department_root', 'discovered_from', 'email', 'office_tel', 'post_title', 'post_title_long']
+  - count=323 meta_keys=['dedup_key', 'department_paths', 'department_root', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'other_person_urls', 'post_title', 'post_title_long']
   - count=3 meta_keys=['dedup_key', 'department_paths', 'department_root', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'post_title', 'post_title_long']
 - meta schema variants: 3
 - most common meta keys:
@@ -133,25 +133,25 @@ Per-group format + schema summary:
   - post_title_long: 20604
 
 [info.gov.hk]
-- records: 45539 | unique_urls: 45539 | dup_url_hits: 0
+- records: 45509 | unique_urls: 45509 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-15T04:22:05.854505+00:00 .. 2026-02-15T04:22:05.854505+00:00
+- discovered_at_utc: 2026-02-16T04:25:26.580054+00:00 .. 2026-02-16T04:25:26.580054+00:00
 - top url hosts:
-  - www.info.gov.hk: 45539
+  - www.info.gov.hk: 45509
 - top url extensions:
-  - .htm: 45539
+  - .htm: 45509
 - top-level key signatures (urls.jsonl record format):
-  - count=45539 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
+  - count=45509 keys=['discovered_at_utc', 'meta', 'name', 'source', 'url']
 - meta key signatures:
-  - count=45539 meta_keys=['date_utc', 'listing_url', 'locale']
+  - count=45509 meta_keys=['date_utc', 'listing_url', 'locale']
 - meta schema variants: 1
 - most common meta keys:
-  - date_utc: 45539
-  - listing_url: 45539
-  - locale: 45539
+  - date_utc: 45509
+  - listing_url: 45509
+  - locale: 45509
 
 General stats:
-- record JSON size (bytes): min=284 p50=397.0 mean=531.1 p95=944.0 max=2171
+- record JSON size (bytes): min=284 p50=397.0 mean=531.2 p95=944.0 max=2171
 
 Unusual records / anomalies:
 - none detected by current heuristics
