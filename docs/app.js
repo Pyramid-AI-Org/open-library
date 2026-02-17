@@ -41,6 +41,44 @@ const els = {
 // Fallback repo for custom domains (where GitHub Pages inference won't work).
 const DEFAULT_REPO = { owner: "pyramid-ai-org", repo: "open-library" };
 
+const SOURCE_GROUPS = [
+  { id: "archsd", label: "Architectural Services Department" },
+  { id: "bd", label: "Building Department" },
+  { id: "cedd", label: "Civil Engineering and Development Department" },
+  { id: "devb", label: "The Development Bureau" },
+  { id: "directory", label: "Telephone Directory" },
+  { id: "herbarium", label: "Hong Kong Herbarium" },
+  { id: "hksar", label: "HKSAR Press Releases" },
+];
+
+const SOURCE_GROUP_LABELS = Object.fromEntries(SOURCE_GROUPS.map((x) => [x.id, x.label]));
+
+const BD_SOURCE_NAMES = new Set([
+  "bd_basic_pages",
+  "codes_design_manuals_and_guidelines",
+  "practice_notes_and_circular_letters",
+  "central_data_bank",
+  "scheduled_areas",
+  "notices_and_reports",
+]);
+
+function sourceGroupFromCrawler(source) {
+  const s = String(source || "").trim().toLowerCase();
+  if (!s) return "";
+
+  if (s.startsWith("archsd_")) return "archsd";
+  if (s.startsWith("cedd_")) return "cedd";
+  if (s.startsWith("devb_")) return "devb";
+  if (s.startsWith("hksar_")) return "hksar";
+
+  if (s === "tel_directory" || s.startsWith("directory_")) return "directory";
+  if (s === "herbarium" || s.startsWith("herbarium_")) return "herbarium";
+
+  if (s.startsWith("bd_") || BD_SOURCE_NAMES.has(s)) return "bd";
+
+  return "";
+}
+
 /**
  * State
  */
@@ -276,11 +314,15 @@ function safeHost(url) {
 
 function normalizeRecord(r) {
   const url = typeof r?.url === "string" ? r.url : "";
+  const source = typeof r?.source === "string" ? r.source : "";
+  const sourceGroup = sourceGroupFromCrawler(source);
   return {
     url,
     name: typeof r?.name === "string" ? r.name : "",
     discovered_at_utc: typeof r?.discovered_at_utc === "string" ? r.discovered_at_utc : "",
-    source: typeof r?.source === "string" ? r.source : "",
+    source,
+    source_group: sourceGroup,
+    source_group_label: SOURCE_GROUP_LABELS[sourceGroup] || sourceGroup || "",
     meta: r?.meta ?? null,
     domain: safeHost(url),
   };
@@ -393,19 +435,20 @@ function rebuildFilters() {
   const domains = new Map();
 
   for (const r of state.records) {
-    if (r.source) sources.set(r.source, (sources.get(r.source) || 0) + 1);
+    if (r.source_group) sources.set(r.source_group, (sources.get(r.source_group) || 0) + 1);
     if (r.domain) domains.set(r.domain, (domains.get(r.domain) || 0) + 1);
   }
 
   const sourceSelected = els.sourceFilter.value;
   const domainSelected = els.domainFilter.value;
 
-  const sourceOptions = Array.from(sources.entries()).sort((a, b) => b[1] - a[1]);
   const domainOptions = Array.from(domains.entries()).sort((a, b) => b[1] - a[1]);
 
   els.sourceFilter.replaceChildren(new Option("All", ""));
-  for (const [src, count] of sourceOptions) {
-    els.sourceFilter.add(new Option(`${src} (${count})`, src));
+  for (const { id, label } of SOURCE_GROUPS) {
+    const count = sources.get(id) || 0;
+    if (!count) continue;
+    els.sourceFilter.add(new Option(`${label} (${count})`, id));
   }
 
   els.domainFilter.replaceChildren(new Option("All", ""));
@@ -425,7 +468,7 @@ function applyFiltersAndSort() {
   const idx = [];
   for (let i = 0; i < state.records.length; i++) {
     const r = state.records[i];
-    if (source && r.source !== source) continue;
+    if (source && r.source_group !== source) continue;
     if (domain && r.domain !== domain) continue;
 
     if (q) {
