@@ -1,14 +1,14 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 76410,
-    "records_total": 76410,
+    "lines_total": 76442,
+    "records_total": 76442,
     "records_by_group": {
       "other": 4615,
       "archsd.gov.hk": 184,
       "devb.gov.hk": 5498,
-      "tel.directory.gov.hk": 20604,
-      "info.gov.hk": 45509
+      "tel.directory.gov.hk": 20603,
+      "info.gov.hk": 45542
     },
     "records_by_source": {
       "notices_and_reports": 20,
@@ -30,9 +30,9 @@
       "devb_general_circulars": 2,
       "devb_planning_and_lands_technical_circulars": 4,
       "devb_works_technical_circulars_um": 69,
-      "tel_directory": 20604,
+      "tel_directory": 20603,
       "herbarium": 3348,
-      "hksar_press_releases": 45509
+      "hksar_press_releases": 45542
     },
     "parse_errors": 0
   },
@@ -203,8 +203,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-16T04:25:26.572213+00:00",
-        "max": "2026-02-16T04:25:26.572213+00:00",
+        "min": "2026-02-17T04:20:12.971263+00:00",
+        "max": "2026-02-17T04:20:12.971263+00:00",
         "count": 4615
       }
     },
@@ -288,8 +288,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-16T04:25:26.572213+00:00",
-        "max": "2026-02-16T04:25:26.572213+00:00",
+        "min": "2026-02-17T04:20:12.971263+00:00",
+        "max": "2026-02-17T04:20:12.971263+00:00",
         "count": 184
       }
     },
@@ -448,14 +448,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-16T04:25:26.572213+00:00",
-        "max": "2026-02-16T04:25:26.572213+00:00",
+        "min": "2026-02-17T04:20:12.971263+00:00",
+        "max": "2026-02-17T04:20:12.971263+00:00",
         "count": 5498
       }
     },
     "tel.directory.gov.hk": {
-      "records": 20604,
-      "unique_urls": 15669,
+      "records": 20603,
+      "unique_urls": 15668,
       "duplicate_url_hits": 4935,
       "missing_name": 0,
       "missing_meta": 0,
@@ -469,7 +469,7 @@
             "source",
             "url"
           ],
-          "count": 20604
+          "count": 20603
         }
       ],
       "meta_schema_signatures": [
@@ -484,7 +484,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 20278
+          "count": 20277
         },
         {
           "meta_keys": [
@@ -520,35 +520,35 @@
       "top_meta_keys": [
         [
           "dedup_key",
-          20604
+          20603
         ],
         [
           "department_paths",
-          20604
+          20603
         ],
         [
           "department_root",
-          20604
+          20603
         ],
         [
           "discovered_from",
-          20604
+          20603
         ],
         [
           "email",
-          20604
+          20603
         ],
         [
           "office_tel",
-          20604
+          20603
         ],
         [
           "post_title",
-          20604
+          20603
         ],
         [
           "post_title_long",
-          20604
+          20603
         ],
         [
           "discovered_from_urls",
@@ -562,24 +562,24 @@
       "top_hosts": [
         [
           "www.directory.gov.hk",
-          20604
+          20603
         ]
       ],
       "top_extensions": [
         [
           ".jsp",
-          20604
+          20603
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-16T05:13:31.739528+00:00",
-        "max": "2026-02-16T05:13:31.739528+00:00",
-        "count": 20604
+        "min": "2026-02-17T05:11:02.708290+00:00",
+        "max": "2026-02-17T05:11:02.708290+00:00",
+        "count": 20603
       }
     },
     "info.gov.hk": {
-      "records": 45509,
-      "unique_urls": 45509,
+      "records": 45542,
+      "unique_urls": 45542,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -593,7 +593,7 @@
             "source",
             "url"
           ],
-          "count": 45509
+          "count": 45542
         }
       ],
       "meta_schema_signatures": [
@@ -603,40 +603,40 @@
             "listing_url",
             "locale"
           ],
-          "count": 45509
+          "count": 45542
         }
       ],
       "meta_schema_variants": 1,
       "top_meta_keys": [
         [
           "date_utc",
-          45509
+          45542
         ],
         [
           "listing_url",
-          45509
+          45542
         ],
         [
           "locale",
-          45509
+          45542
         ]
       ],
       "top_hosts": [
         [
           "www.info.gov.hk",
-          45509
+          45542
         ]
       ],
       "top_extensions": [
         [
           ".htm",
-          45509
+          45542
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-16T04:25:26.580054+00:00",
-        "max": "2026-02-16T04:25:26.580054+00:00",
-        "count": 45509
+        "min": "2026-02-17T04:20:12.977964+00:00",
+        "max": "2026-02-17T04:20:12.977964+00:00",
+        "count": 45542
       }
     }
   },
@@ -644,7 +644,7 @@
     "record_size_bytes": {
       "min": 284,
       "max": 2171,
-      "mean": 531.2077084151289,
+      "mean": 531.1550979827844,
       "p50": 397.0,
       "p95": 944.0
     },
