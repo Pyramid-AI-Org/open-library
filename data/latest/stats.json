@@ -1,14 +1,14 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 76377,
-    "records_total": 76377,
+    "lines_total": 76300,
+    "records_total": 76300,
     "records_by_group": {
       "other": 4615,
       "archsd.gov.hk": 184,
       "devb.gov.hk": 5498,
       "tel.directory.gov.hk": 20604,
-      "info.gov.hk": 45476
+      "info.gov.hk": 45399
     },
     "records_by_source": {
       "notices_and_reports": 20,
@@ -32,7 +32,7 @@
       "devb_works_technical_circulars_um": 69,
       "tel_directory": 20604,
       "herbarium": 3348,
-      "hksar_press_releases": 45476
+      "hksar_press_releases": 45399
     },
     "parse_errors": 0
   },
@@ -203,8 +203,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-20T04:15:03.697266+00:00",
-        "max": "2026-02-20T04:15:03.697266+00:00",
+        "min": "2026-02-21T04:06:51.746602+00:00",
+        "max": "2026-02-21T04:06:51.746602+00:00",
         "count": 4615
       }
     },
@@ -288,8 +288,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-20T04:15:03.697266+00:00",
-        "max": "2026-02-20T04:15:03.697266+00:00",
+        "min": "2026-02-21T04:06:51.746602+00:00",
+        "max": "2026-02-21T04:06:51.746602+00:00",
         "count": 184
       }
     },
@@ -448,8 +448,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-20T04:15:03.697266+00:00",
-        "max": "2026-02-20T04:15:03.697266+00:00",
+        "min": "2026-02-21T04:06:51.746602+00:00",
+        "max": "2026-02-21T04:06:51.746602+00:00",
         "count": 5498
       }
     },
@@ -484,7 +484,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 20277
+          "count": 20276
         },
         {
           "meta_keys": [
@@ -499,7 +499,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 324
+          "count": 325
         },
         {
           "meta_keys": [
@@ -552,11 +552,11 @@
         ],
         [
           "discovered_from_urls",
-          327
+          328
         ],
         [
           "other_person_urls",
-          324
+          325
         ]
       ],
       "top_hosts": [
@@ -572,14 +572,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-20T05:05:41.472783+00:00",
-        "max": "2026-02-20T05:05:41.472783+00:00",
+        "min": "2026-02-21T04:59:38.909786+00:00",
+        "max": "2026-02-21T04:59:38.909786+00:00",
         "count": 20604
       }
     },
     "info.gov.hk": {
-      "records": 45476,
-      "unique_urls": 45476,
+      "records": 45399,
+      "unique_urls": 45399,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -593,7 +593,7 @@
             "source",
             "url"
           ],
-          "count": 45476
+          "count": 45399
         }
       ],
       "meta_schema_signatures": [
@@ -603,40 +603,40 @@
             "listing_url",
             "locale"
           ],
-          "count": 45476
+          "count": 45399
         }
       ],
       "meta_schema_variants": 1,
       "top_meta_keys": [
         [
           "date_utc",
-          45476
+          45399
         ],
         [
           "listing_url",
-          45476
+          45399
         ],
         [
           "locale",
-          45476
+          45399
         ]
       ],
       "top_hosts": [
         [
           "www.info.gov.hk",
-          45476
+          45399
         ]
       ],
       "top_extensions": [
         [
           ".htm",
-          45476
+          45399
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-02-20T04:15:03.704453+00:00",
-        "max": "2026-02-20T04:15:03.704453+00:00",
-        "count": 45476
+        "min": "2026-02-21T04:06:51.753754+00:00",
+        "max": "2026-02-21T04:06:51.753754+00:00",
+        "count": 45399
       }
     }
   },
@@ -644,9 +644,9 @@
     "record_size_bytes": {
       "min": 284,
       "max": 2171,
-      "mean": 531.3064535134923,
-      "p50": 397,
-      "p95": 944.0
+      "mean": 531.2649803407602,
+      "p50": 398.0,
+      "p95": 942.0
     },
     "anomaly_counts": {},
     "anomaly_examples": []
