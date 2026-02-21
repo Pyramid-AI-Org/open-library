@@ -22,7 +22,42 @@ def _parse_run_date(run_date_utc: str) -> date:
 
 
 _sleep_seconds = sleep_seconds
-_get_with_retries = get_with_retries
+
+
+def _apply_charset_fix(resp: requests.Response) -> None:
+    # Some pages may omit charset and `requests` can decode as ISO-8859-1,
+    # which causes Chinese anchor text mojibake.
+    content_type = (resp.headers.get("Content-Type") or "").lower()
+    is_html = (
+        ("text/html" in content_type)
+        or ("application/xhtml" in content_type)
+        or not content_type
+    )
+    if is_html:
+        enc = (resp.encoding or "").strip().lower()
+        if not enc or enc in ("iso-8859-1", "latin-1"):
+            guessed = (getattr(resp, "apparent_encoding", None) or "").strip()
+            resp.encoding = guessed or "utf-8"
+
+
+def _get_with_retries(
+    session: requests.Session,
+    url: str,
+    *,
+    timeout_seconds: int,
+    max_retries: int,
+    backoff_base_seconds: float,
+    backoff_jitter_seconds: float,
+) -> requests.Response:
+    return get_with_retries(
+        session,
+        url,
+        timeout_seconds=timeout_seconds,
+        max_retries=max_retries,
+        backoff_base_seconds=backoff_base_seconds,
+        backoff_jitter_seconds=backoff_jitter_seconds,
+        response_hook=_apply_charset_fix,
+    )
 
 
 class Crawler:

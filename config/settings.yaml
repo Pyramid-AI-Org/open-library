@@ -383,3 +383,233 @@ crawlers:
     max_total_records: 200000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
+
+  # EMSD Electricity Safety - New Edition of Code of Practice.
+  # Discovers the two sub-pages from the landing page and emits PDF links.
+  electric_safety_cop:
+    landing_url: "https://www.emsd.gov.hk/en/electricity_safety/new_edition_cop/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Electricity Safety publications (general) crawler.
+  # Emits only English PDF links from the General publications page.
+  electric_safety_publications_general:
+    page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/general/index.html#eps"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Electricity Safety publications (guidelines) crawler.
+  # Emits PDF links from the Guidance Notes / Guidelines page.
+  electric_safety_publications_guidelines:
+    page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/guidance_notes_guidelines/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Electricity Safety publications (CoP) crawler.
+  # Emits PDF links from the Codes of Practice page.
+  electric_safety_publications_cop:
+    page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/codes_of_practice/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Regulating Railway Safety crawler.
+  # Crawls the main page and sub-pages under /regulating_railway_safety/ for PDFs.
+  emsd.regulating_railway_safety:
+    start_url: "https://www.emsd.gov.hk/en/railway_safety/regulating_railway_safety/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Railway Safety Publications crawler.
+  # Parses the table for PDF publications.
+  emsd.railway_safety_publication:
+    page_url: "https://www.emsd.gov.hk/en/railway_safety/publication/index.html"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Gas Safety Portal crawler.
+  # Crawls https://www.emsd.gov.hk/gsp/en/ to list sub-pages.
+  # Special handling for "Information for the Gas Trade" (b07.html) to list PDFs.
+  emsd.gas_safety_portal:
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Gas Safety Tips crawler.
+  # Recursively crawls English gas safety tips pages and PDF links.
+  emsd.gas_safety_tips:
+    start_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/index.html"
+    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/"
+    content_element_id: "content"
+    faq_en_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/frequently_asked_questions/index.html"
+    faq_tc_url: "https://www.emsd.gov.hk/tc/gas_safety/gas_safety_tips_to_users/frequently_asked_questions/index.html"
+    suspension_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/suspension_of_approval_of_gas_appliance_and_recall/index.html"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Gas Safety publications crawler.
+  # Crawls publication sub-pages and emits PDF links with discovered_from.
+  # Circular letters include date_of_issue from table column text.
+  emsd.gas_publications:
+    root_url: "https://www.emsd.gov.hk/en/gas_safety/publications/index.html"
+    subpages:
+      - "https://www.emsd.gov.hk/en/gas_safety/publications/general/index.html"
+      - "https://www.emsd.gov.hk/en/gas_safety/publications/codes_of_practice/index.html"
+      - "https://www.emsd.gov.hk/en/gas_safety/publications/guidance_notes/index.html"
+      - "https://www.emsd.gov.hk/en/gas_safety/publications/circular_letters/index.html"
+    general_tc_url: "https://www.emsd.gov.hk/tc/gas_safety/publications/general/index.html"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Gas Safety statutory advisory bodies crawler.
+  # Collects sub-page URLs from statutory advisory bodies landing page.
+  emsd.gas_statutory_advisory_bodies:
+    page_url: "https://www.emsd.gov.hk/en/gas_safety/statutory_advisory_bodies/index.html"
+    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/statutory_advisory_bodies/"
+    content_element_id: "content"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Gas Safety related information for competent person crawler.
+  # Collects PDF URLs from the main page and one-level sub-pages.
+  emsd.gas_related_information_for_competent_person:
+    page_url: "https://www.emsd.gov.hk/en/gas_safety/related_information_for_competent_person/index.html"
+    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/related_information_for_competent_person/"
+    content_element_id: "content"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Gas Safety approval schemes crawler.
+  # From the main page, discovers sub-pages and extracts PDF URLs from them.
+  emsd.gas_approval_schemes:
+    page_url: "https://www.emsd.gov.hk/en/gas_safety/approval_schemes/index.html"
+    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/approval_schemes/"
+    content_element_id: "content"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Lifts and Escalators Safety publications crawler.
+  # Crawls 3 section pages and emits PDF URLs with discovered_from.
+  # Nested sub-page crawling is configurable per section.
+  emsd.lifts_and_escalators_publications:
+    root_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/index.html"
+    section_urls:
+      general_report: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/general_report/index.html"
+      guidance_notes_guidelines: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/guidance_notes_guidelines/index.html"
+      code_of_practice: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/code_of_practice/index.html"
+    crawl_nested_subpages:
+      general_report: false
+      guidance_notes_guidelines: true
+      code_of_practice: true
+    max_nested_depth: 1
+    content_element_id: "content"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Lifts and Escalators Safety circulars crawler.
+  # Parses the circulars table and emits one record per PDF link.
+  emsd.lifts_and_escalators_circulars:
+    page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/index.html"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Lifts and Escalators Safety registered workers info crawler.
+  # Extracts table PDFs with date and free-form PDFs without date.
+  emsd.lifts_and_escalators_registered_workers:
+    page_url: "https://www.emsd.gov.hk/tc/lifts_and_escalators_safety/information_for_the_registered_workers/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Lifts and Escalators Safety statutory advisory bodies crawler.
+  # Extracts sub-page URLs and names from the landing page only.
+  emsd.lifts_and_escalators_statutory_advisory_bodies:
+    page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/index.html"
+    scope_prefix: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/"
+    content_element_id: "content"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Lifts and Escalators Safety responsible persons corner crawler.
+  # Extracts all PDF URLs from the page.
+  emsd.lifts_and_escalators_responsible_persons_corner:
+    page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/index.html"
+    content_element_id: "content"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD Publications technical specifications crawler.
+  # Extracts PDF URLs from the table with issue number/date metadata.
+  emsd.publications_technical_specifications:
+    page_url: "https://www.emsd.gov.hk/en/publications/technical_specifications/index.html"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+
+  # EMSD O&M Best Practices handbooks crawler.
+  # Discovers booklet pages from landing page, then extracts PDF links from each.
+  emsd.publications_handbooks:
+    page_url: "https://bestpractice.emsd.gov.hk/en/booklet"
+    booklet_root: "https://bestpractice.emsd.gov.hk"
+    content_element_id: "bookletlistpage"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
