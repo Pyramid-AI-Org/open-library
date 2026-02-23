@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import deque
 from dataclasses import dataclass
 from html.parser import HTMLParser
+import re
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -27,6 +28,20 @@ class _DiscoveredLink:
     href: str
     text: str
     issue_date: str | None
+
+
+def _normalize_text(value: str) -> str:
+    compact = clean_text(value).lower()
+    compact = re.sub(r"[^a-z0-9]+", " ", compact)
+    return clean_text(compact)
+
+
+def _heading_matches(actual: str, expected: str) -> bool:
+    a = _normalize_text(actual)
+    e = _normalize_text(expected)
+    if not a or not e:
+        return False
+    return e in a or a in e
 
 
 class _PageParser(HTMLParser):
@@ -196,6 +211,218 @@ class _PageParser(HTMLParser):
             self._current_link_text_parts.append(data)
 
 
+class _HeadingScopedTableParser(HTMLParser):
+    """Extract links only from the first table after a matching heading in #content."""
+
+    def __init__(self, *, content_element_id: str, heading_text: str) -> None:
+        super().__init__()
+        self.links: list[_DiscoveredLink] = []
+        self.target_table_found = False
+
+        self._content_element_id = content_element_id
+        self._expected_heading = heading_text
+
+        self._content_depth = 0
+
+        self._in_heading = False
+        self._heading_text_parts: list[str] = []
+        self._waiting_for_table = False
+
+        self._capture_table = False
+        self._captured_table_depth = 0
+
+        self._table_headers: list[str] = []
+        self._in_tr = False
+        self._row_has_th = False
+        self._row_has_td = False
+        self._current_row_cells: list[str] = []
+        self._current_row_links: list[tuple[str, str]] = []
+
+        self._in_cell = False
+        self._cell_tag = ""
+        self._cell_text_parts: list[str] = []
+
+        self._in_a = False
+        self._current_href: str | None = None
+        self._current_link_text_parts: list[str] = []
+        self._in_accessibility_span = False
+
+    @staticmethod
+    def _attrs_to_dict(attrs: list[tuple[str, str | None]]) -> dict[str, str]:
+        out: dict[str, str] = {}
+        for k, v in attrs:
+            if v is None:
+                continue
+            out[k.lower()] = v
+        return out
+
+    @staticmethod
+    def _class_set(value: str | None) -> set[str]:
+        return {c.strip().lower() for c in (value or "").split() if c.strip()}
+
+    def _in_content(self) -> bool:
+        return self._content_depth > 0
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        t = tag.lower()
+        attrs_map = self._attrs_to_dict(attrs)
+
+        if self._content_depth == 0 and attrs_map.get("id") == self._content_element_id:
+            self._content_depth = 1
+        elif self._content_depth > 0:
+            self._content_depth += 1
+
+        if not self._in_content():
+            return
+
+        if t in {"h1", "h2", "h3", "h4", "h5", "h6"} and not self._capture_table:
+            self._in_heading = True
+            self._heading_text_parts = []
+            if self._waiting_for_table:
+                self._waiting_for_table = False
+            return
+
+        if t == "table":
+            if self._capture_table:
+                self._captured_table_depth += 1
+            elif self._waiting_for_table and not self.target_table_found:
+                self.target_table_found = True
+                self._capture_table = True
+                self._captured_table_depth = 1
+                self._waiting_for_table = False
+                self._table_headers = []
+
+        if not self._capture_table:
+            if t == "span" and self._in_a:
+                classes = self._class_set(attrs_map.get("class"))
+                if "accessibility" in classes:
+                    self._in_accessibility_span = True
+            return
+
+        if t == "tr":
+            self._in_tr = True
+            self._row_has_th = False
+            self._row_has_td = False
+            self._current_row_cells = []
+            self._current_row_links = []
+            return
+
+        if t in ("th", "td") and self._in_tr:
+            self._in_cell = True
+            self._cell_tag = t
+            self._cell_text_parts = []
+            if t == "th":
+                self._row_has_th = True
+            else:
+                self._row_has_td = True
+            return
+
+        if t == "a":
+            self._in_a = True
+            self._current_href = attrs_map.get("href")
+            self._current_link_text_parts = []
+            return
+
+        if t == "span" and self._in_a:
+            classes = self._class_set(attrs_map.get("class"))
+            if "accessibility" in classes:
+                self._in_accessibility_span = True
+
+    def handle_endtag(self, tag: str) -> None:
+        t = tag.lower()
+
+        if not self._in_content():
+            return
+
+        if t == "span" and self._in_accessibility_span:
+            self._in_accessibility_span = False
+            return
+
+        if t in {"h1", "h2", "h3", "h4", "h5", "h6"} and self._in_heading:
+            heading_text = clean_text("".join(self._heading_text_parts))
+            if _heading_matches(heading_text, self._expected_heading):
+                self._waiting_for_table = True
+            self._in_heading = False
+            self._heading_text_parts = []
+            if self._content_depth > 0:
+                self._content_depth -= 1
+            return
+
+        if not self._capture_table:
+            if self._content_depth > 0:
+                self._content_depth -= 1
+            return
+
+        if t == "a" and self._in_a:
+            href = clean_text(self._current_href or "")
+            text = clean_text("".join(self._current_link_text_parts))
+            if href and self._in_tr:
+                self._current_row_links.append((href, text))
+
+            self._in_a = False
+            self._current_href = None
+            self._current_link_text_parts = []
+            self._in_accessibility_span = False
+            return
+
+        if t in ("th", "td") and self._in_cell and self._cell_tag == t:
+            cell_text = clean_text("".join(self._cell_text_parts))
+            self._current_row_cells.append(cell_text)
+            self._in_cell = False
+            self._cell_tag = ""
+            self._cell_text_parts = []
+            return
+
+        if t == "tr" and self._in_tr:
+            issue_date: str | None = None
+
+            if self._row_has_th and not self._row_has_td:
+                self._table_headers = [h.lower() for h in self._current_row_cells]
+            elif self._row_has_td:
+                for idx, hdr in enumerate(self._table_headers):
+                    if hdr in _ISSUE_DATE_HEADERS and idx < len(self._current_row_cells):
+                        candidate = clean_text(self._current_row_cells[idx])
+                        issue_date = candidate or None
+                        break
+
+                for href, text in self._current_row_links:
+                    self.links.append(
+                        _DiscoveredLink(href=href, text=text, issue_date=issue_date)
+                    )
+
+            self._in_tr = False
+            self._row_has_th = False
+            self._row_has_td = False
+            self._current_row_cells = []
+            self._current_row_links = []
+            return
+
+        if t == "table":
+            self._captured_table_depth -= 1
+            if self._captured_table_depth <= 0:
+                self._capture_table = False
+                self._captured_table_depth = 0
+
+        if self._content_depth > 0:
+            self._content_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if not self._in_content():
+            return
+
+        if self._in_heading:
+            self._heading_text_parts.append(data)
+
+        if not self._capture_table:
+            return
+
+        if self._in_cell:
+            self._cell_text_parts.append(data)
+
+        if self._in_a and not self._in_accessibility_span:
+            self._current_link_text_parts.append(data)
+
+
 class Crawler:
     """Crawl CEDD Standards/Specifications/Handbooks pages for PDF links."""
 
@@ -223,6 +450,20 @@ class Crawler:
                 exclude_urls.add(cu)
 
         content_element_id = str(cfg.get("content_element_id", "content")).strip()
+        table_heading_pdf_filters_raw = cfg.get("table_heading_pdf_filters", [])
+        table_heading_pdf_filters: dict[str, str] = {}
+        for item in table_heading_pdf_filters_raw:
+            if not isinstance(item, dict):
+                continue
+            page_url_raw = clean_text(str(item.get("page_url", "")))
+            heading_raw = clean_text(str(item.get("heading", "")))
+            if not page_url_raw or not heading_raw:
+                continue
+            page_url_canon = canonicalize_url(page_url_raw, encode_spaces=True)
+            if not page_url_canon:
+                continue
+            table_heading_pdf_filters[page_url_canon] = heading_raw
+
         stan_pah_url = str(
             cfg.get(
                 "stan_pah_url",
@@ -281,6 +522,39 @@ class Crawler:
             parser = _PageParser(content_element_id=content_element_id)
             parser.feed(resp.text)
 
+            target_heading = table_heading_pdf_filters.get(current_url)
+            filtered_pdf_links: dict[str, _DiscoveredLink] | None = None
+            if target_heading:
+                scoped_parser = _HeadingScopedTableParser(
+                    content_element_id=content_element_id,
+                    heading_text=target_heading,
+                )
+                scoped_parser.feed(resp.text)
+
+                if scoped_parser.target_table_found:
+                    scoped_map: dict[str, _DiscoveredLink] = {}
+                    for link in scoped_parser.links:
+                        abs_url = canonicalize_url(
+                            urljoin(current_url, link.href),
+                            encode_spaces=True,
+                        )
+                        if not abs_url or path_ext(abs_url) != ".pdf":
+                            continue
+                        if abs_url not in scoped_map:
+                            scoped_map[abs_url] = link
+                    filtered_pdf_links = scoped_map
+
+                    if ctx.debug:
+                        print(
+                            f"[{self.name}] Scoped PDF filter -> {current_url} "
+                            f"(heading={target_heading!r}, matched={len(scoped_map)})"
+                        )
+                elif ctx.debug:
+                    print(
+                        f"[{self.name}] Scoped PDF filter fallback -> {current_url} "
+                        f"(heading={target_heading!r} not found)"
+                    )
+
             for link in parser.links:
                 abs_url = canonicalize_url(
                     urljoin(current_url, link.href),
@@ -329,17 +603,28 @@ class Crawler:
 
                 ext = path_ext(abs_url)
                 if ext == ".pdf":
+                    scoped_link = None
+                    if filtered_pdf_links is not None:
+                        scoped_link = filtered_pdf_links.get(abs_url)
+                        if scoped_link is None:
+                            continue
+
                     if abs_url in seen_pdfs:
                         continue
                     seen_pdfs.add(abs_url)
 
-                    name = clean_text(link.text) or infer_name_from_link(link.text, abs_url)
+                    source_link = scoped_link or link
+                    name = clean_text(source_link.text) or infer_name_from_link(
+                        source_link.text,
+                        abs_url,
+                    )
 
                     meta: dict[str, str | None] = {
                         "discovered_from": current_url,
                     }
-                    if link.issue_date:
-                        meta["issue_date"] = link.issue_date
+                    issue_date = (source_link.issue_date or link.issue_date) if source_link else link.issue_date
+                    if issue_date:
+                        meta["issue_date"] = issue_date
 
                     out.append(
                         UrlRecord(

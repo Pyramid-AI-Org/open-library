@@ -305,10 +305,17 @@ crawlers:
     backoff_jitter_seconds: 0.25
 
   # CEDD GEO publications crawler.
-  # Extracts title and PDF URL from the GEO publications listing table.
+  # Recursively crawls GEO pages under scope_prefix, emits PDFs, emits page URLs
+  # for pages with Abstract section, and emits leaflets child subpages that have
+  # no direct PDF links.
   cedd_geo_publications:
     base_url: "https://www.cedd.gov.hk"
     page_url: "https://www.cedd.gov.hk/eng/publications/geo/index.html"
+    scope_prefix: "/eng/publications/geo/"
+    content_element_id: "content"
+    leaflets_url: "https://www.cedd.gov.hk/eng/publications/geo/leaflets-and-brochures/index.html"
+    max_pages: 1200
+    max_out_links_per_page: 1200
     max_total_records: 50000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
@@ -326,6 +333,11 @@ crawlers:
   # Crawls the main page and in-scope subpages for PDF links.
   # `issue_date` is extracted only from table columns headed "Latest Update" or
   # "Last Update" when present.
+  # Optional `table_heading_pdf_filters` rules apply tolerant heading matching
+  # (case/spacing/punctuation-insensitive, contains-based): for each listed
+  # page, only PDFs from the first table after the matching heading are emitted.
+  # If the heading/table is not found, crawler falls back to default all-PDF
+  # extraction for that page.
   cedd_standards_spec_handbooks_cost:
     base_url: "https://www.cedd.gov.hk"
     page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/index.html"
@@ -341,6 +353,28 @@ crawlers:
       - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-port-works/index.html"
       - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
       - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/CEWTPI-disclaimer/index.html"
+    table_heading_pdf_filters:
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-smm/index.html"
+        heading: "Continuously Updated Version Incorporating Corrigenda"
+
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1/index.html"
+        heading: "Continuously Updated Version with Amendments"
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1-2010/index.html"
+        heading: "Continuously Updated Version with Amendments"
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
+        heading: "Continuously Updated Version with Amendments"
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs3-2013/index.html"
+        heading: "Continuously Updated Version with Amendments"
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2/index.html"
+        heading: "Continuously Updated Version with Amendments"
+
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
+        heading: "Continuously Updated Version incorporating Amendments from Corrigendum No. 1/2003 onward"
+
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2006/index.html"
+        heading: "Continuously Updated Version incorporating Amendments"
+      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2020/index.html"
+        heading: "Continuously Updated Version incorporating Amendments"
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
 
