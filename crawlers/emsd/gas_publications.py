@@ -208,7 +208,7 @@ class Crawler:
     name = "emsd.gas_publications"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         root_url = str(cfg.get("root_url", _DEFAULT_ROOT_URL)).strip()
         general_tc_url = str(cfg.get("general_tc_url", _DEFAULT_GENERAL_TC_URL)).strip()
@@ -216,7 +216,7 @@ class Crawler:
         configured_subpages = cfg.get("subpages", _DEFAULT_SUBPAGES)
         subpages = [str(u).strip() for u in configured_subpages if str(u).strip()]
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -248,7 +248,7 @@ class Crawler:
                 meta.update(extra_meta)
 
             out.append(
-                UrlRecord(
+                ctx.make_record(
                     url=can,
                     name=clean_text(name) or infer_name_from_link(name or "", can),
                     discovered_at_utc=ctx.run_date_utc,

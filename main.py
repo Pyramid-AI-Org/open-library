@@ -12,68 +12,82 @@ from utils.settings import load_settings
 from utils.time import utc_date_yyyymmdd, utc_now
 
 
-_CRAWLER_MODULE_ALIASES: dict[str, str] = {
-    # Backward-compatible aliases for old flat module names.
-    "hksar_press_releases": "hksar.hksar_press_releases",
-    "devb_press_releases": "devb.devb_press_releases",
-    "devb_speeches_and_presentations": "devb.devb_speeches_and_presentations",
-    "devb_general_circulars": "devb.devb_general_circulars",
-    "devb_planning_and_lands_technical_circulars": "devb.devb_planning_and_lands_technical_circulars",
-    "devb_works_technical_circulars_um": "devb.devb_works_technical_circulars_um",
-    "devb_publications": "devb.devb_publications",
-    "devb_construction_site_safety_manual": "devb.devb_construction_site_safety_manual",
-    "devb_standard_consultancy_documents": "devb.devb_standard_consultancy_documents",
-    "devb_standard_contract_documents": "devb.devb_standard_contract_documents",
-    "codes_design_manuals_and_guidelines": "bd.codes_design_manuals_and_guidelines",
-    "practice_notes_and_circular_letters": "bd.practice_notes_and_circular_letters",
-    "central_data_bank": "bd.central_data_bank",
-    "bd_basic_pages": "bd.basic_pages",
-    "scheduled_areas": "bd.scheduled_areas",
-    "notices_and_reports": "bd.notices_and_reports",
-    "archsd_technical_documents": "archsd.archsd_technical_documents",
-    "archsd_practices_and_guidelines": "archsd.archsd_practices_and_guidelines",
-    "cedd_technical_circulars": "cedd.cedd_technical_circulars",
-    "cedd_geo_publications": "cedd.cedd_geo_publications",
-    "cedd_eacsb_handbook": "cedd.cedd_eacsb_handbook",
-    "cedd_standards_spec_handbooks_cost": "cedd.cedd_standards_spec_handbooks_cost",
-    "cedd_ceo_publications": "cedd.cedd_ceo_publications",
-    "tel_directory": "directory.tel_directory",
-    "herbarium": "herbarium.herbarium",
-    "electric_safety_cop": "emsd.electric_safety_cop",
-    "electric_safety_publications_general": "emsd.electric_safety_publications_general",
-    "gas_safety_tips": "emsd.gas_safety_tips",
-    "gas_publications": "emsd.gas_publications",
-    "gas_statutory_advisory_bodies": "emsd.gas_statutory_advisory_bodies",
-    "gas_related_information_for_competent_person": "emsd.gas_related_information_for_competent_person",
-    "gas_approval_schemes": "emsd.gas_approval_schemes",
-    "lifts_and_escalators_publications": "emsd.lifts_and_escalators_publications",
-    "lifts_and_escalators_circulars": "emsd.lifts_and_escalators_circulars",
-    "lifts_and_escalators_registered_workers": "emsd.lifts_and_escalators_registered_workers",
-    "lifts_and_escalators_statutory_advisory_bodies": "emsd.lifts_and_escalators_statutory_advisory_bodies",
-    "lifts_and_escalators_responsible_persons_corner": "emsd.lifts_and_escalators_responsible_persons_corner",
-    "publications_technical_specifications": "emsd.publications_technical_specifications",
-    "publications_handbooks": "emsd.publications_handbooks",
-}
+def _get_source_label(settings: dict[str, Any], source_id: str) -> str:
+    """Get the label for a source from settings."""
+    crawlers_cfg = settings.get("crawlers", {})
+    source_cfg = crawlers_cfg.get(source_id, {})
+    return source_cfg.get("label", source_id)
 
 
-def _load_crawler_module(name: str):
-    raw = name.strip()
+def _get_all_crawlers_from_settings(settings: dict[str, Any]) -> list[tuple[str, str, str]]:
+    """
+    Extract all crawler definitions from settings.
+    
+    Returns list of (source_id, crawler_name, module_path) tuples.
+    
+    Settings structure:
+      crawlers:
+        devb:
+          label: "The Development Bureau"
+          pages:
+            devb_press_releases:
+              ...
+            devb_speeches_and_presentations:
+              ...
+    """
+    crawlers_cfg = settings.get("crawlers", {})
+    result = []
+    
+    for source_id, source_cfg in crawlers_cfg.items():
+        if not isinstance(source_cfg, dict):
+            continue
+        pages_cfg = source_cfg.get("pages", {})
+        if not isinstance(pages_cfg, dict):
+            continue
+        
+        for crawler_name in pages_cfg.keys():
+            # Module path: crawlers.<source_id>.<crawler_name>
+            module_path = f"{source_id}.{crawler_name}"
+            result.append((source_id, crawler_name, module_path))
+    
+    return result
+
+
+def _load_crawler_module(module_path: str):
+    """Load a crawler module by its path (e.g., 'devb.devb_press_releases')."""
+    raw = module_path.strip()
     if not raw:
-        raise ValueError("crawler name is empty")
-
-    normalized = raw.replace("/", ".")
-    if normalized.startswith("crawlers."):
-        return importlib.import_module(normalized)
-
-    normalized = _CRAWLER_MODULE_ALIASES.get(normalized, normalized)
-    return importlib.import_module(f"crawlers.{normalized}")
+        raise ValueError("crawler module path is empty")
+    
+    full_path = f"crawlers.{raw}"
+    return importlib.import_module(full_path)
 
 
-def _run_one(crawler_name: str, ctx: RunContext) -> list[dict[str, Any]]:
-    mod = _load_crawler_module(crawler_name)
+def _run_one(
+    source_id: str,
+    crawler_name: str,
+    module_path: str,
+    settings: dict[str, Any],
+    run_date: str,
+    started_at: str,
+    debug: bool,
+) -> list[dict[str, Any]]:
+    """Run a single crawler and return its records."""
+    source_label = _get_source_label(settings, source_id)
+    
+    ctx = RunContext(
+        run_date_utc=run_date,
+        started_at_utc=started_at,
+        settings=settings,
+        source_id=source_id,
+        source_label=source_label,
+        debug=debug,
+    )
+    
+    mod = _load_crawler_module(module_path)
     crawler = mod.Crawler()
     records = crawler.crawl(ctx)
-
+    
     out: list[dict[str, Any]] = []
     for r in records:
         out.append(
@@ -82,10 +96,12 @@ def _run_one(crawler_name: str, ctx: RunContext) -> list[dict[str, Any]]:
                 "name": r.name,
                 "discovered_at_utc": r.discovered_at_utc,
                 "source": r.source,
+                "source_id": r.source_id,
+                "source_label": r.source_label,
                 "meta": r.meta,
             }
         )
-
+    
     out.sort(key=lambda rec: (rec.get("url") or ""))
     return out
 
@@ -96,8 +112,8 @@ def main() -> int:
         "--crawler",
         default="",
         help=(
-            "Run a specific crawler module path relative to crawlers "
-            "(e.g. devb.devb_press_releases)."
+            "Run a specific crawler by module path (e.g., devb.devb_press_releases) "
+            "or by short name (e.g., devb_press_releases)."
         ),
     )
     ap.add_argument("--settings", default="config/settings.yaml")
@@ -115,66 +131,54 @@ def main() -> int:
 
     now = utc_now()
     run_date = args.run_date.strip() or utc_date_yyyymmdd(now)
+    started_at = now.astimezone(timezone.utc).isoformat()
 
-    ctx = RunContext(
-        run_date_utc=run_date,
-        started_at_utc=now.astimezone(timezone.utc).isoformat(),
-        settings=settings,
-        debug=bool(args.debug),
-    )
-
-    crawler_names: list[str]
-    if args.crawler.strip():
-        crawler_names = [args.crawler.strip()]
+    # Determine which crawlers to run
+    all_crawlers = _get_all_crawlers_from_settings(settings)
+    
+    crawlers_to_run: list[tuple[str, str, str]]  # (source_id, crawler_name, module_path)
+    
+    crawler_arg = args.crawler.strip()
+    if crawler_arg:
+        # Run specific crawler
+        # Support both full path (devb.devb_press_releases) and short name (devb_press_releases)
+        found = None
+        for source_id, crawler_name, module_path in all_crawlers:
+            if module_path == crawler_arg or crawler_name == crawler_arg:
+                found = (source_id, crawler_name, module_path)
+                break
+        
+        if not found:
+            # Try to parse as source.crawler format
+            if "." in crawler_arg:
+                source_id, crawler_name = crawler_arg.split(".", 1)
+                found = (source_id, crawler_name, crawler_arg)
+            else:
+                raise ValueError(f"Crawler not found: {crawler_arg}")
+        
+        crawlers_to_run = [found]
     else:
-        # Keep this explicit so adding crawlers is intentional/reviewable.
-        crawler_names = [
-            "hksar.hksar_press_releases",
-            "devb.devb_press_releases",
-            "devb.devb_speeches_and_presentations",
-            "devb.devb_general_circulars",
-            "devb.devb_planning_and_lands_technical_circulars",
-            "devb.devb_works_technical_circulars_um",
-            "devb.devb_publications",
-            "bd.codes_design_manuals_and_guidelines",
-            "bd.practice_notes_and_circular_letters",
-            "bd.central_data_bank",
-            "bd.basic_pages",
-            "bd.scheduled_areas",
-            "bd.notices_and_reports",
-            "archsd.archsd_technical_documents",
-            "archsd.archsd_practices_and_guidelines",
-            "cedd.cedd_technical_circulars",
-            "cedd.cedd_geo_publications",
-            "cedd.cedd_eacsb_handbook",
-            "cedd.cedd_standards_spec_handbooks_cost",
-            "cedd.cedd_ceo_publications",
-            "directory.tel_directory",
-            "herbarium.herbarium",
-            "emsd.electric_safety_cop",
-            "emsd.electric_safety_publications_general",
-            "emsd.electric_safety_publications_guidelines",
-            "emsd.electric_safety_publications_cop",
-            "emsd.regulating_railway_safety",
-            "emsd.railway_safety_publication",
-            "emsd.gas_safety_portal",
-            "emsd.gas_safety_tips",
-            "emsd.gas_publications",
-            "emsd.gas_statutory_advisory_bodies",
-            "emsd.gas_related_information_for_competent_person",
-            "emsd.gas_approval_schemes",
-            "emsd.lifts_and_escalators_publications",
-            "emsd.lifts_and_escalators_circulars",
-            "emsd.lifts_and_escalators_registered_workers",
-            "emsd.lifts_and_escalators_statutory_advisory_bodies",
-            "emsd.lifts_and_escalators_responsible_persons_corner",
-            "emsd.publications_technical_specifications",
-            "emsd.publications_handbooks",
-        ]
+        # Run all crawlers
+        crawlers_to_run = all_crawlers
 
     all_records: list[dict[str, Any]] = []
-    for name in crawler_names:
-        all_records.extend(_run_one(name, ctx))
+    for source_id, crawler_name, module_path in crawlers_to_run:
+        try:
+            records = _run_one(
+                source_id,
+                crawler_name,
+                module_path,
+                settings,
+                run_date,
+                started_at,
+                bool(args.debug),
+            )
+            all_records.extend(records)
+            print(f"  {module_path}: {len(records)} records")
+        except Exception as e:
+            print(f"  {module_path}: ERROR - {e}")
+            if args.debug:
+                raise
 
     # Deterministic ordering & basic de-dup by url+source
     all_records.sort(key=lambda r: (r.get("url") or "", r.get("source") or ""))
@@ -187,8 +191,8 @@ def main() -> int:
 
     summary = {
         "run_date_utc": run_date,
-        "started_at_utc": ctx.started_at_utc,
-        "crawler": args.crawler.strip() or "all",
+        "started_at_utc": started_at,
+        "crawler": crawler_arg or "all",
         "rows": rows,
     }
     write_json(latest_dir / "summary.json", summary)

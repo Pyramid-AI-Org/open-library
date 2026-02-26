@@ -488,13 +488,13 @@ class Crawler:
                         meta["year"] = hit.year
 
                     out.append(
-                        UrlRecord(
-                            url=hit.url,
-                            name=hit.name or "Untitled",
-                            discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
-                            meta=meta,
-                        )
+                        ctx.make_record(
+                    url=hit.url,
+                    name=hit.name or "Untitled",
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta=meta,
+                )
                     )
 
             except Exception as e:

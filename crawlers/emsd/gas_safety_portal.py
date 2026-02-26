@@ -66,9 +66,9 @@ class Crawler:
     name = "emsd.gas_safety_portal"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        crawler_cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        crawler_cfg = ctx.get_crawler_config(self.name)
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -153,13 +153,13 @@ class Crawler:
                         link_href_lower = link.href.lower() if link.href else ""
                         if link_href_lower.endswith(".pdf"):
                             records.append(
-                                UrlRecord(
-                                    url=link.href,
-                                    name=clean_text(link.text) or "PDF Document",
-                                    discovered_at_utc=ctx.run_date_utc,
-                                    source=self.name,
-                                    meta={"category": name},
-                                )
+                                ctx.make_record(
+                    url=link.href,
+                    name=clean_text(link.text) or "PDF Document",
+                    discovered_at_utc=ctx.run_date_utc,
+                    source=self.name,
+                    meta={"category": name},
+                )
                             )
                             found_pdfs += 1
                     
@@ -172,13 +172,13 @@ class Crawler:
             else:
                 # Normal page, just record it
                 records.append(
-                    UrlRecord(
-                        url=full_url,
-                        name=name,
-                        discovered_at_utc=ctx.run_date_utc,
-                        source=self.name,
-                        meta={},
-                    )
+                    ctx.make_record(
+                    url=full_url,
+                    name=name,
+                    discovered_at_utc=ctx.run_date_utc,
+                    source=self.name,
+                    meta={},
+                )
                 )
 
         return records

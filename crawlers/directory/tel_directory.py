@@ -732,7 +732,7 @@ class Crawler:
     name = "tel_directory"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         index_url = str(
             cfg.get("index_url", f"https://{_TEL_HOST}/index_ENG.html")
@@ -746,7 +746,7 @@ class Crawler:
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -867,7 +867,7 @@ class Crawler:
                     email=e.get("email"),
                 )
 
-                rec = UrlRecord(
+                rec = ctx.make_record(
                     url=str(e.get("url") or page_url),
                     name=e.get("name") or None,
                     discovered_at_utc=discovered_at,
@@ -978,13 +978,13 @@ class Crawler:
                         email=p.get("email"),
                     )
 
-                    rec = UrlRecord(
-                        url=url,
-                        name=p.get("name") or None,
-                        discovered_at_utc=discovered_at,
-                        source=self.name,
-                        meta=meta,
-                    )
+                    rec = ctx.make_record(
+                    url=url,
+                    name=p.get("name") or None,
+                    discovered_at_utc=discovered_at,
+                    source=self.name,
+                    meta=meta,
+                )
                     record_by_key[k] = rec
                     out.append(rec)
                 else:

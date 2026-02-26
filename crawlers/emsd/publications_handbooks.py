@@ -31,7 +31,7 @@ class Crawler:
     name = "emsd.publications_handbooks"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         page_url = str(cfg.get("page_url", _DEFAULT_PAGE_URL)).strip()
         booklet_root = str(cfg.get("booklet_root", _DEFAULT_BOOKLET_ROOT)).rstrip("/")
@@ -43,7 +43,7 @@ class Crawler:
         backoff_jitter = float(cfg.get("backoff_jitter_seconds", 0.25))
         max_total_records = int(cfg.get("max_total_records", 50000))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -131,13 +131,13 @@ class Crawler:
                     continue
 
                 out.append(
-                    UrlRecord(
-                        url=can,
-                        name=booklet_name,
-                        discovered_at_utc=ctx.run_date_utc,
-                        source=self.name,
-                        meta={"discovered_from": booklet_url},
-                    )
+                    ctx.make_record(
+                    url=can,
+                    name=booklet_name,
+                    discovered_at_utc=ctx.run_date_utc,
+                    source=self.name,
+                    meta={"discovered_from": booklet_url},
+                )
                 )
                 seen_pdf_urls.add(can)
 

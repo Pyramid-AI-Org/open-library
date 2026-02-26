@@ -149,7 +149,7 @@ class Crawler:
     name = "devb_publications"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         base_url = str(cfg.get("base_url", "https://www.devb.gov.hk")).rstrip("/")
         seed_url = str(
@@ -190,7 +190,7 @@ class Crawler:
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -294,13 +294,13 @@ class Crawler:
                         meta.update(hit.meta)
 
                     out.append(
-                        UrlRecord(
-                            url=can,
-                            name=hit.title,
-                            discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
-                            meta=meta,
-                        )
+                        ctx.make_record(
+                    url=can,
+                    name=hit.title,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta=meta,
+                )
                     )
 
                     if len(out) >= max_total_records:
@@ -382,13 +382,13 @@ class Crawler:
                         meta.update(hit.meta)
 
                     out.append(
-                        UrlRecord(
-                            url=can,
-                            name=hit.title,
-                            discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
-                            meta=meta,
-                        )
+                        ctx.make_record(
+                    url=can,
+                    name=hit.title,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta=meta,
+                )
                     )
 
                     if len(out) >= max_total_records:
@@ -467,13 +467,13 @@ class Crawler:
                         meta.update(hit.meta)
 
                     out.append(
-                        UrlRecord(
-                            url=can,
-                            name=hit.title,
-                            discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
-                            meta=meta,
-                        )
+                        ctx.make_record(
+                    url=can,
+                    name=hit.title,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta=meta,
+                )
                     )
 
                     if len(out) >= max_total_records:
@@ -538,7 +538,7 @@ class Crawler:
                     seen_docs.add(can)
 
                     out.append(
-                        UrlRecord(
+                        ctx.make_record(
                             url=can,
                             name=_infer_doc_name(link.text, can),
                             discovered_at_utc=ctx.started_at_utc,

@@ -12,7 +12,7 @@ class Crawler:
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         seed_urls: list[str] = (
-            ctx.settings.get("crawlers", {}).get(self.name, {}).get("seed_urls", [])
+            ctx.get_crawler_config(self.name).get("seed_urls", [])
         )
         out: list[UrlRecord] = []
 
@@ -20,11 +20,11 @@ class Crawler:
             # Example-only: fetch and emit a single record about the seed
             requests.get(
                 seed,
-                timeout=int(ctx.settings.get("http", {}).get("timeout_seconds", 30)),
-                headers={"User-Agent": ctx.settings.get("http", {}).get("user_agent", "")},
+                timeout=int(ctx.get_http_config().get("timeout_seconds", 30)),
+                headers={"User-Agent": ctx.get_http_config().get("user_agent", "")},
             )
             out.append(
-                UrlRecord(
+                ctx.make_record(
                     url=seed,
                     name=None,
                     discovered_at_utc=datetime.now(timezone.utc).isoformat(),

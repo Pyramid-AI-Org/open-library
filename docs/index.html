@@ -23,28 +23,15 @@
         <section class="panel">
             <div class="row row--wrap">
                 <div class="field">
-                    <label class="label" for="datasetSelect">Dataset</label>
-                    <select id="datasetSelect" class="select">
-                        <option value="latest" selected>Latest</option>
-                        <option value="archive">Archive…</option>
+                    <label class="label" for="dateSelect">Date (UTC)</label>
+                    <select id="dateSelect" class="select">
+                        <option value="latest/urls.jsonl" selected>Latest</option>
                     </select>
-                </div>
-
-                <div class="field" id="archiveField" hidden>
-                    <label class="label" for="archiveSelect">Archive date (UTC)</label>
-                    <select id="archiveSelect" class="select"></select>
                 </div>
 
                 <div class="field">
                     <label class="label" for="sourceFilter">Source (crawler)</label>
                     <select id="sourceFilter" class="select">
-                        <option value="">All</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label class="label" for="domainFilter">Website (domain)</label>
-                    <select id="domainFilter" class="select">
                         <option value="">All</option>
                     </select>
                 </div>
@@ -158,6 +145,7 @@
 
     <!-- Excel export (SheetJS). Loaded as UMD to provide global `XLSX`. -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script src="./app.js" type="module"></script>
 </body>
 

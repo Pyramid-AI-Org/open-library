@@ -7,6 +7,7 @@ from urllib.parse import urljoin
 import requests
 
 from crawlers.base import (
+    RunContext,
     UrlRecord,
     canonicalize_url,
     clean_text,
@@ -256,7 +257,7 @@ def crawl_stan_pah_subpage(
     session: requests.Session,
     page_url: str,
     base_url: str,
-    discovered_at_utc: str,
+    ctx: "RunContext",
     source: str,
     timeout_seconds: int,
     max_retries: int,
@@ -302,10 +303,10 @@ def crawl_stan_pah_subpage(
         }
 
         out.append(
-            UrlRecord(
+            ctx.make_record(
                 url=abs_url,
                 name=name,
-                discovered_at_utc=discovered_at_utc,
+                discovered_at_utc=ctx.started_at_utc,
                 source=source,
                 meta=meta,
             )

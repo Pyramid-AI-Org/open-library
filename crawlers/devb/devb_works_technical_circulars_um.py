@@ -107,7 +107,7 @@ class Crawler:
     name = "devb_works_technical_circulars_um"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         base_url = str(cfg.get("base_url", "https://www.devb.gov.hk")).rstrip("/")
         data_js_url = str(
@@ -127,7 +127,7 @@ class Crawler:
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -219,12 +219,12 @@ class Crawler:
                     # Fall back to circular number if title is missing.
                     name = title or circular_number or None
 
-                    record = UrlRecord(
-                        url=abs_url,
-                        name=name,
-                        discovered_at_utc=ctx.started_at_utc,
-                        source=self.name,
-                        meta={
+                    record = ctx.make_record(
+                    url=abs_url,
+                    name=name,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta={
                             "circular_no": circular_number,
                             "index_groups": index_groups,
                             "date": chosen_date_iso,
@@ -235,7 +235,7 @@ class Crawler:
                             "matched_years": [year],
                             "data_js_url": data_js_url,
                         },
-                    )
+                )
 
                     prev = by_url.get(abs_url)
                     if prev is None:
@@ -259,7 +259,7 @@ class Crawler:
             meta = dict(rec.meta)
             meta["matched_years"] = sorted(years_set, reverse=True)
             out.append(
-                UrlRecord(
+                ctx.make_record(
                     url=rec.url,
                     name=rec.name,
                     discovered_at_utc=rec.discovered_at_utc,

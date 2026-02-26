@@ -163,7 +163,7 @@ class Crawler:
     name = "cedd_geo_publications"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         base_url = str(cfg.get("base_url", "https://www.cedd.gov.hk")).rstrip("/")
         page_url = str(
@@ -189,7 +189,7 @@ class Crawler:
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -239,7 +239,7 @@ class Crawler:
                 meta["reason"] = reason
 
             out.append(
-                UrlRecord(
+                ctx.make_record(
                     url=record_url,
                     name=title or None,
                     discovered_at_utc=ctx.started_at_utc,

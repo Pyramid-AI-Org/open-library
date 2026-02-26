@@ -1,22 +1,123 @@
 {
   "version": 1,
+  "viewer": {
+    "defaultRepo": {
+      "owner": "pyramid-ai-org",
+      "repo": "open-library"
+    },
+    "sourceGroupByCrawler": {
+      "tel_directory": "directory",
+      "electric_safety_cop": "emsd",
+      "electric_safety_publications_general": "emsd",
+      "electric_safety_publications_guidelines": "emsd",
+      "electric_safety_publications_cop": "emsd",
+      "regulating_railway_safety": "emsd",
+      "railway_safety_publication": "emsd",
+      "gas_safety_portal": "emsd",
+      "gas_safety_tips": "emsd",
+      "gas_publications": "emsd",
+      "gas_statutory_advisory_bodies": "emsd",
+      "gas_related_information_for_competent_person": "emsd",
+      "gas_approval_schemes": "emsd",
+      "lifts_and_escalators_publications": "emsd",
+      "lifts_and_escalators_circulars": "emsd",
+      "lifts_and_escalators_registered_workers": "emsd",
+      "lifts_and_escalators_statutory_advisory_bodies": "emsd",
+      "lifts_and_escalators_responsible_persons_corner": "emsd",
+      "publications_technical_specifications": "emsd",
+      "publications_handbooks": "emsd"
+    },
+    "sourceGroups": [
+      {
+        "id": "archsd",
+        "label": "Architectural Services Department"
+      },
+      {
+        "id": "bd",
+        "label": "Building Department"
+      },
+      {
+        "id": "cedd",
+        "label": "Civil Engineering and Development Department"
+      },
+      {
+        "id": "devb",
+        "label": "The Development Bureau"
+      },
+      {
+        "id": "directory",
+        "label": "Telephone Directory"
+      },
+      {
+        "id": "herbarium",
+        "label": "Hong Kong Herbarium"
+      },
+      {
+        "id": "hksar",
+        "label": "HKSAR Press Releases"
+      },
+      {
+        "id": "emsd",
+        "label": "Electrical and Mechanical Services Department"
+      }
+    ]
+  },
   "defaults": {
     "fields": [
-      { "type": "meta", "key": "date_utc", "label": "Date", "format": "date" },
-      { "type": "meta", "key": "date", "label": "Date", "format": "date" },
-      { "type": "meta", "key": "type", "label": "Type" },
-      { "type": "meta", "key": "section", "label": "Section" },
-      { "type": "meta", "key": "title", "label": "Title" },
-      { "type": "meta", "key": "listing_url", "label": "Listing URL", "format": "url" },
-      { "type": "meta", "key": "discovered_from", "label": "Discovered from", "format": "url" }
+      {
+        "type": "meta",
+        "key": "date_utc",
+        "label": "Date",
+        "format": "date"
+      },
+      {
+        "type": "meta",
+        "key": "date",
+        "label": "Date",
+        "format": "date"
+      },
+      {
+        "type": "meta",
+        "key": "type",
+        "label": "Type"
+      },
+      {
+        "type": "meta",
+        "key": "section",
+        "label": "Section"
+      },
+      {
+        "type": "meta",
+        "key": "title",
+        "label": "Title"
+      },
+      {
+        "type": "meta",
+        "key": "discovered_from",
+        "label": "Discovered from",
+        "format": "url"
+      }
     ]
   },
   "sources": {
     "devb_works_technical_circulars_um": {
       "fields": [
-        { "type": "meta", "key": "date", "label": "Date", "format": "date" },
-        { "type": "meta", "key": "index_groups", "label": "Index group(s)" },
-        { "type": "meta", "key": "circular_no", "label": "Circular No." }
+        {
+          "type": "meta",
+          "key": "date",
+          "label": "Date",
+          "format": "date"
+        },
+        {
+          "type": "meta",
+          "key": "index_groups",
+          "label": "Index group(s)"
+        },
+        {
+          "type": "meta",
+          "key": "circular_no",
+          "label": "Circular No."
+        }
       ]
     },
     "tel_directory": {
@@ -28,40 +129,109 @@
           "format": "departments",
           "limit": 5
         },
-        { "type": "meta", "key": "office_tel", "label": "Office" },
-        { "type": "meta", "key": "email", "label": "Email", "format": "email" },
+        {
+          "type": "meta",
+          "key": "office_tel",
+          "label": "Office"
+        },
+        {
+          "type": "meta",
+          "key": "email",
+          "label": "Email",
+          "format": "email"
+        },
         {
           "type": "meta",
           "key": "post_title_long",
           "label": "Title",
-          "fallbackKeys": ["post_title"]
+          "fallbackKeys": [
+            "post_title"
+          ]
         }
       ]
     },
     "herbarium": {
       "fields": [
-        { "type": "meta", "key": "species_id", "label": "Species ID" },
-        { "type": "meta", "key": "type", "label": "Taxon rank" },
-
-        { "type": "meta", "key": "family_name", "label": "Family (EN)" },
-        { "type": "meta", "key": "family_name_chi", "label": "Family (ZH)" },
-        { "type": "meta", "key": "family_no", "label": "Family No." },
-
-        { "type": "meta", "key": "genus_name", "label": "Genus (EN)" },
-        { "type": "meta", "key": "genus_name_chi", "label": "Genus (ZH)" },
-
-        { "type": "meta", "key": "scientific_name_with_authority", "label": "Scientific name" },
-        { "type": "meta", "key": "scientific_name", "label": "Scientific name (plain)" },
-
-        { "type": "meta", "key": "common_name", "label": "Common name" },
-        { "type": "meta", "key": "chinese_name", "label": "Chinese name" },
-        { "type": "meta", "key": "sc_name", "label": "Chinese name (SC)" },
-
-        { "type": "meta", "key": "flower_period", "label": "Flower period" },
-        { "type": "meta", "key": "fruit_period", "label": "Fruit period" },
-        { "type": "meta", "key": "rare_plant_hk", "label": "Rare plant (HK)" },
-
-        { "type": "meta", "key": "photo_multimedia_id", "label": "Photo ID" }
+        {
+          "type": "meta",
+          "key": "species_id",
+          "label": "Species ID"
+        },
+        {
+          "type": "meta",
+          "key": "type",
+          "label": "Taxon rank"
+        },
+        {
+          "type": "meta",
+          "key": "family_name",
+          "label": "Family (EN)"
+        },
+        {
+          "type": "meta",
+          "key": "family_name_chi",
+          "label": "Family (ZH)"
+        },
+        {
+          "type": "meta",
+          "key": "family_no",
+          "label": "Family No."
+        },
+        {
+          "type": "meta",
+          "key": "genus_name",
+          "label": "Genus (EN)"
+        },
+        {
+          "type": "meta",
+          "key": "genus_name_chi",
+          "label": "Genus (ZH)"
+        },
+        {
+          "type": "meta",
+          "key": "scientific_name_with_authority",
+          "label": "Scientific name"
+        },
+        {
+          "type": "meta",
+          "key": "scientific_name",
+          "label": "Scientific name (plain)"
+        },
+        {
+          "type": "meta",
+          "key": "common_name",
+          "label": "Common name"
+        },
+        {
+          "type": "meta",
+          "key": "chinese_name",
+          "label": "Chinese name"
+        },
+        {
+          "type": "meta",
+          "key": "sc_name",
+          "label": "Chinese name (SC)"
+        },
+        {
+          "type": "meta",
+          "key": "flower_period",
+          "label": "Flower period"
+        },
+        {
+          "type": "meta",
+          "key": "fruit_period",
+          "label": "Fruit period"
+        },
+        {
+          "type": "meta",
+          "key": "rare_plant_hk",
+          "label": "Rare plant (HK)"
+        },
+        {
+          "type": "meta",
+          "key": "photo_multimedia_id",
+          "label": "Photo ID"
+        }
       ]
     }
   }

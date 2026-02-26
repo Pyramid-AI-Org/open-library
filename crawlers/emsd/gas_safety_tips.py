@@ -84,7 +84,7 @@ class Crawler:
     name = "emsd.gas_safety_tips"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        crawler_cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        crawler_cfg = ctx.get_crawler_config(self.name)
 
         start_url = _normalize_url(
             str(crawler_cfg.get("start_url", _DEFAULT_START_URL)).strip()
@@ -105,7 +105,7 @@ class Crawler:
             str(crawler_cfg.get("suspension_url", _DEFAULT_SUSPENSION_URL)).strip()
         )
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -160,13 +160,13 @@ class Crawler:
             if keep_page_record and current_url not in seen_record_urls:
                 page_name = _infer_page_name(current_url, page_name_hint)
                 records.append(
-                    UrlRecord(
-                        url=current_url,
-                        name=page_name,
-                        discovered_at_utc=ctx.run_date_utc,
-                        source=self.name,
-                        meta={"discovered_from": discovered_from or start_url},
-                    )
+                    ctx.make_record(
+                    url=current_url,
+                    name=page_name,
+                    discovered_at_utc=ctx.run_date_utc,
+                    source=self.name,
+                    meta={"discovered_from": discovered_from or start_url},
+                )
                 )
                 seen_record_urls.add(current_url)
 
@@ -201,13 +201,13 @@ class Crawler:
                         link.text, candidate
                     )
                     records.append(
-                        UrlRecord(
-                            url=candidate,
-                            name=pdf_name,
-                            discovered_at_utc=ctx.run_date_utc,
-                            source=self.name,
-                            meta={"discovered_from": current_url},
-                        )
+                        ctx.make_record(
+                    url=candidate,
+                    name=pdf_name,
+                    discovered_at_utc=ctx.run_date_utc,
+                    source=self.name,
+                    meta={"discovered_from": current_url},
+                )
                     )
                     seen_record_urls.add(candidate)
 

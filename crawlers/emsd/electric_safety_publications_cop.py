@@ -31,14 +31,14 @@ class Crawler:
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         # 1. Load config
-        crawler_cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        crawler_cfg = ctx.get_crawler_config(self.name)
         page_url = crawler_cfg.get(
             "page_url",
             "https://www.emsd.gov.hk/en/electricity_safety/publications/codes_of_practice/index.html"
         )
         content_element_id = crawler_cfg.get("content_element_id", "content")
         
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = http_cfg.get("user_agent")
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -89,15 +89,15 @@ class Crawler:
             if not text:
                 text = parsed.path.split("/")[-1]
 
-            records.append(UrlRecord(
-                url=link.href,
-                name=text,
-                discovered_at_utc=ctx.started_at_utc,
-                source=self.name,
-                meta={
+            records.append(ctx.make_record(
+                    url=link.href,
+                    name=text,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta={
                     "discovered_from": page_url
                 }
-            ))
+                ))
             
         logger.info(f"Found {len(records)} PDF records from {page_url}")
         return records

@@ -129,7 +129,7 @@ class Crawler:
     name = "emsd.railway_safety_publication"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        crawler_cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        crawler_cfg = ctx.get_crawler_config(self.name)
         page_url = str(
             crawler_cfg.get(
                 "page_url",
@@ -137,7 +137,7 @@ class Crawler:
             )
         ).strip()
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -185,7 +185,7 @@ class Crawler:
                 title = parsed.path.split("/")[-1]
 
             records.append(
-                UrlRecord(
+                ctx.make_record(
                     url=row.pdf_url,
                     name=title,
                     discovered_at_utc=ctx.started_at_utc,

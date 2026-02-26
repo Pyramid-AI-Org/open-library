@@ -1,5 +1,6 @@
 # Public configuration (safe to commit)
-# Add crawler-specific config under `crawlers.<name>`.
+# Organized by source (folder) with nested pages.
+# Each source has a label and shared settings that pages inherit.
 
 http:
   user_agent: "OpenLibraryCrawler/0.1 (+https://github.com/<your-org>/<your-repo>)"
@@ -7,643 +8,430 @@ http:
   max_retries: 3
 
 crawlers:
-  # HKSAR Government Press Releases daily listing crawler.
-  # Iterates day-by-day for the last 2 years and extracts press release detail links
-  # within div#contentBody.
-  hksar_press_releases:
+  # ============================================================================
+  # HKSAR - HKSAR Press Releases
+  # ============================================================================
+  hksar:
+    label: "HKSAR Press Releases"
     base_url: "https://www.info.gov.hk"
-    days_back: 730
-    locales:
-      - "en"
-      - "tc"
-    listing_path_template: "/gia/general/{yyyymm}/{dd}.htm"
-    listing_path_template_tc: "/gia/general/{yyyymm}/{dd}c.htm"
+    pages:
+      hksar_press_releases:
+        # HKSAR Government Press Releases daily listing crawler.
+        # Iterates day-by-day for the last 2 years and extracts press release detail links
+        # within div#contentBody.
+        days_back: 730
+        locales:
+          - "en"
+          - "tc"
+        listing_path_template: "/gia/general/{yyyymm}/{dd}.htm"
+        listing_path_template_tc: "/gia/general/{yyyymm}/{dd}c.htm"
+        request_delay_seconds: 0.5
+        request_jitter_seconds: 0.25
+        per_day_limit: 200
+        max_total_records: 50000
+        backoff_base_seconds: 0.5
+        backoff_jitter_seconds: 0.25
+
+  # ============================================================================
+  # DEVB - The Development Bureau
+  # ============================================================================
+  devb:
+    label: "The Development Bureau"
+    base_url: "https://www.devb.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
-    per_day_limit: 200
-    max_total_records: 50000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
-
-  # DevB Press Releases (English) index crawler.
-  # Iterates year-by-year for the last N years, discovers page count via pagination,
-  # and extracts (date, title, url) from table.articlelistpage.
-  devb_press_releases:
-    base_url: "https://www.devb.gov.hk"
-    years_back: 10
-    type: "all"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
     max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+    pages:
+      devb_press_releases:
+        # DevB Press Releases (English) index crawler.
+        years_back: 10
+        type: "all"
 
-  # DevB Speeches and Presentations (English) index crawler.
-  # Iterates year-by-year for the last N years, discovers page count via pagination
-  # (or embedded hidden links), and extracts (date, title, url) from table.articlelistpage.
-  devb_speeches_and_presentations:
-    base_url: "https://www.devb.gov.hk"
-    years_back: 10
-    type: "all"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      devb_speeches_and_presentations:
+        # DevB Speeches and Presentations (English) index crawler.
+        years_back: 10
+        type: "all"
 
-  # DevB General Circulars (English) crawler.
-  # Currently extracts PDF links from a single listing page.
-  devb_general_circulars:
-    base_url: "https://www.devb.gov.hk"
-    page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/general_circulars/index.html"
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      devb_general_circulars:
+        # DevB General Circulars (English) crawler.
+        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/general_circulars/index.html"
 
-  # DevB Planning and Lands Technical Circulars (English) crawler.
-  # Extracts PDF links from a single page containing multiple tables.
-  devb_planning_and_lands_technical_circulars:
-    base_url: "https://www.devb.gov.hk"
-    page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/technical_circulars/planning_and_lands_technical_circular/index.html"
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      devb_planning_and_lands_technical_circulars:
+        # DevB Planning and Lands Technical Circulars (English) crawler.
+        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/technical_circulars/planning_and_lands_technical_circular/index.html"
 
-  # DevB Works Technical Circulars (in force) via JS dataset.
-  # The page renders results client-side; we parse the backing dataset and
-  # emulate the Issue Year search for the last N years.
-  devb_works_technical_circulars_um:
-    base_url: "https://www.devb.gov.hk"
-    data_js_url: "https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcirculars_53.js"
-    years_back: 10
-    include_revision_year_matches: true
-    request_delay_seconds: 0.0
-    request_jitter_seconds: 0.0
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      devb_works_technical_circulars_um:
+        # DevB Works Technical Circulars (in force) via JS dataset.
+        data_js_url: "https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcirculars_53.js"
+        years_back: 10
+        include_revision_year_matches: true
+        request_delay_seconds: 0.0
+        request_jitter_seconds: 0.0
 
-  # DevB Publications (English) recursive document crawler.
-  # Crawls only within the Publications section and emits only PDF/DOC/DOCX links.
-  devb_publications:
-    base_url: "https://www.devb.gov.hk"
-    seed_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/index.html"
-    scope_prefix: "/en/publications_and_press_releases/publications/"
-    content_element_id: "content"
-    exclude_path_prefixes:
-      - "/en/publications_and_press_releases/publications/glossary_of_terms"
-      - "/en/publications_and_press_releases/publications/standardised_components_and_practices"
-    max_depth: 6
-    max_pages: 2000
-    max_out_links_per_page: 500
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      devb_publications:
+        # DevB Publications (English) recursive document crawler.
+        seed_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/index.html"
+        scope_prefix: "/en/publications_and_press_releases/publications/"
+        content_element_id: "content"
+        exclude_path_prefixes:
+          - "/en/publications_and_press_releases/publications/glossary_of_terms"
+          - "/en/publications_and_press_releases/publications/standardised_components_and_practices"
+        max_depth: 6
+        max_pages: 2000
+        max_out_links_per_page: 500
 
-  # Building Department codes, design manuals, and guidelines crawler.
-  # Extracts PDF links from the single index page.
-  codes_design_manuals_and_guidelines:
+      devb_construction_site_safety_manual:
+        # DevB Construction Site Safety Manual crawler.
+        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/construction_site_safety_manual/index.html"
+        content_element_id: "content"
+
+      devb_standard_consultancy_documents:
+        # DevB Standard Consultancy Documents crawler.
+        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/standard_consultancy_documents/index.html"
+        content_element_id: "content"
+
+      devb_standard_contract_documents:
+        # DevB Standard Contract Documents crawler.
+        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/standard_contract_documents/index.html"
+        content_element_id: "content"
+
+  # ============================================================================
+  # BD - Building Department
+  # ============================================================================
+  bd:
+    label: "Building Department"
     base_url: "https://www.bd.gov.hk"
-    page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/index.html"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
     content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+    pages:
+      codes_design_manuals_and_guidelines:
+        # Building Department codes, design manuals, and guidelines crawler.
+        page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/index.html"
 
-  # BD Practice Notes and Circular Letters.
-  # Crawls 5 specific sub-pages (PNAP, PNRC, JPN, PNBI, Circular Letters).
-  # Circular Letters includes a 10-year lookback via filtering.
-  practice_notes_and_circular_letters:
-    url_pnap: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnap.html"
-    url_pnrc: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnrc.html"
-    url_joint: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
-    url_pnbi: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnbi.html"
-    url_circulars: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_circulars.html"
-    years_back: 10
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      practice_notes_and_circular_letters:
+        # BD Practice Notes and Circular Letters.
+        url_pnap: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnap.html"
+        url_pnrc: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnrc.html"
+        url_joint: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
+        url_pnbi: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnbi.html"
+        url_circulars: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_circulars.html"
+        years_back: 10
 
-  # BD Central Data Bank crawler.
-  # Crawls the CDB main page + 4 sub-pages and emits PDF links.
-  # On the main page, only ADM-20 is emitted.
-  central_data_bank:
-    main_page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDB.html"
-    subpage_urls:
-      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildMaterial.html"
-      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildComp.html"
-      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBConstructSys.html"
-      - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBFSImprovementWorks.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      central_data_bank:
+        # BD Central Data Bank crawler.
+        main_page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDB.html"
+        subpage_urls:
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildMaterial.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildComp.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBConstructSys.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBFSImprovementWorks.html"
 
-  # BD Modular Integrated Construction (MiC) crawler.
-  # Emits the index page (HTML) + all PDF links found on it.
-  # (Moved to bd_basic_pages)
+      bd_basic_pages:
+        # BD Basic Pages crawler.
+        targets:
+          - name: "modular_integrated_construction"
+            title: "Modular Integrated Construction (MiC) Index"
+            url: "https://www.bd.gov.hk/en/resources/codes-and-references/modular-integrated-construction/index.html"
+          - name: "pre_accepted_computer_programs"
+            title: "Pre-accepted Computer Programs Index"
+            url: "https://www.bd.gov.hk/en/resources/codes-and-references/pre-accepted-computer-programs/index.html"
+          - name: "precautionary_measures_typhoon_season"
+            title: "Precautionary Measures for Typhoon Season Index"
+            url: "https://www.bd.gov.hk/en/resources/codes-and-references/precautionary-measures-typhoon-season/index.html"
+          - name: "pv_panel"
+            title: "Correct Installation of Photovoltaic (PV) System"
+            url: "https://www.bd.gov.hk/en/resources/codes-and-references/pv-panel/index.html"
+          - name: "ibmt_pre_acceptance_mechanism"
+            title: "Pre-acceptance Mechanism for Innovative Building Materials and Technologies"
+            url: "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/index-pre-acceptance-mechanism.html"
+          - name: "ibmt_accepted_list"
+            title: "Pre-accepted Innovative Building Materials and Technologies"
+            url: "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/ibmt_acceptedList.html"
 
-  # BD Basic Pages crawler.
-  # Handles miscellaneous single pages where we want to emit the page itself (HTML)
-  # and all PDF links found on the page.
-  bd_basic_pages:
-    targets:
-      - name: "modular_integrated_construction"
-        title: "Modular Integrated Construction (MiC) Index"
-        url: "https://www.bd.gov.hk/en/resources/codes-and-references/modular-integrated-construction/index.html"
-        content_element_id: "content"
-      - name: "pre_accepted_computer_programs"
-        title: "Pre-accepted Computer Programs Index"
-        url: "https://www.bd.gov.hk/en/resources/codes-and-references/pre-accepted-computer-programs/index.html"
-        content_element_id: "content"
-      - name: "precautionary_measures_typhoon_season"
-        title: "Precautionary Measures for Typhoon Season Index"
-        url: "https://www.bd.gov.hk/en/resources/codes-and-references/precautionary-measures-typhoon-season/index.html"
-        content_element_id: "content"
-      - name: "pv_panel"
-        title: "Correct Installation of Photovoltaic (PV) System"
-        url: "https://www.bd.gov.hk/en/resources/codes-and-references/pv-panel/index.html"
-        content_element_id: "content"
-      - name: "ibmt_pre_acceptance_mechanism"
-        title: "Pre-acceptance Mechanism for Innovative Building Materials and Technologies"
-        url: "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/index-pre-acceptance-mechanism.html"
-        content_element_id: "content"
-      - name: "ibmt_accepted_list"
-        title: "Pre-accepted Innovative Building Materials and Technologies"
-        url: "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/ibmt_acceptedList.html"
-        content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      scheduled_areas:
+        # BD Scheduled Areas crawler.
+        page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/scheduled-areas/index.html"
 
-  # BD Scheduled Areas crawler.
-  # Emits all PDF links found on the page.
-  scheduled_areas:
-    page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/scheduled-areas/index.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      notices_and_reports:
+        # BD Notices and Reports crawler.
+        page_urls:
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_notice.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_reports.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_CEPAS.html"
 
-  # BD Notices and Reports crawler.
-  # Crawls Notices, Investigation Reports, and CEPAS subpages for PDF links.
-  notices_and_reports:
-    page_urls:
-      - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_notice.html"
-      - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_reports.html"
-      - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_CEPAS.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # HKSAR Government Telephone Directory (English) people crawler.
-  # Traverses department/subdepartment pages under tel.directory.gov.hk and emits
-  # one record per person, deduplicated by office telephone number.
-  tel_directory:
-    index_url: "https://tel.directory.gov.hk/index_ENG.html"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_pages: 2000
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # ARCHSD Technical Documents crawler.
-  # Starts from the Technical Documents hub page, discovers the 6 sections,
-  # and recursively follows subsection pages to emit PDF links.
-  #
-  # Year filtering policy:
-  # - If a page exposes a year selector that includes 2022, it only follows 2022+ year pages.
-  # - If a year selector exists but 2022 is missing, it filters PDFs by best-effort year
-  #   extraction from link text/URL.
-  # - If there is no year selector, it keeps all PDFs on that page.
-  archsd_technical_documents:
+  # ============================================================================
+  # ARCHSD - Architectural Services Department
+  # ============================================================================
+  archsd:
+    label: "Architectural Services Department"
     base_url: "https://www.archsd.gov.hk"
-    start_url: "https://www.archsd.gov.hk/en/reports/techinical-documents.html"
-    min_year: 2022
-
-    # Best-effort: if empty/unhelpful, it falls back to full-page link extraction.
-    content_element_id: "content"
-
-    allowed_page_path_prefixes:
-      - "/en/publications-publicity/"
-      - "/publications-publicity/"
-
-    # Restrict emitted PDFs to relevant site paths (avoids unrelated banner PDFs).
-    allowed_pdf_path_prefixes:
-      - "/media/publications-publicity/"
-
-    max_depth: 6
-    max_pages: 2000
-    max_out_links_per_page: 800
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
-    max_total_records: 50000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
-
-  # ARCHSD Practices and Guidelines crawler.
-  # Crawls the Practices and Guidelines page and emits all PDF links it finds.
-  # No year filtering.
-  archsd_practices_and_guidelines:
-    base_url: "https://www.archsd.gov.hk"
-    start_url: "https://www.archsd.gov.hk/en/reports/practices-and-guidelines.html"
-
-    # Best-effort: if empty/unhelpful, it falls back to full-page link extraction.
+    max_total_records: 50000
     content_element_id: "content"
+    pages:
+      archsd_technical_documents:
+        # ARCHSD Technical Documents crawler.
+        start_url: "https://www.archsd.gov.hk/en/reports/techinical-documents.html"
+        min_year: 2022
+        allowed_page_path_prefixes:
+          - "/en/publications-publicity/"
+          - "/publications-publicity/"
+        allowed_pdf_path_prefixes:
+          - "/media/publications-publicity/"
+        max_depth: 6
+        max_pages: 2000
+        max_out_links_per_page: 800
 
-    # Keep HTML traversal tight so we don't drift into other /en/reports pages via nav.
-    explicit_allowed_page_paths:
-      - "/en/reports/practices-and-guidelines.html"
-      - "/en/reports/disclaimer-for-BIM-guides.html"
-      - "/en/BIM-guides/index.html"
-      - "/en/consultants-contractors/product-conformity-certification-schemes.html"
+      archsd_practices_and_guidelines:
+        # ARCHSD Practices and Guidelines crawler.
+        start_url: "https://www.archsd.gov.hk/en/reports/practices-and-guidelines.html"
+        explicit_allowed_page_paths:
+          - "/en/reports/practices-and-guidelines.html"
+          - "/en/reports/disclaimer-for-BIM-guides.html"
+          - "/en/BIM-guides/index.html"
+          - "/en/consultants-contractors/product-conformity-certification-schemes.html"
+        allowed_page_path_prefixes:
+          - "/en/ua/"
+          - "/en/ua2/"
+          - "/en/thepossiblepackage/"
+          - "/en/BIM-guides/"
+        allowed_pdf_path_prefixes:
+          - "/media/reports/"
+          - "/archsd/html/ua/"
+          - "/archsd/html/ua2/"
+          - "/media/consultants-contractors/"
+        max_depth: 4
+        max_pages: 500
+        max_out_links_per_page: 800
 
-    allowed_page_path_prefixes:
-      - "/en/ua/"
-      - "/en/ua2/"
-      - "/en/thepossiblepackage/"
-      - "/en/BIM-guides/"
+  # ============================================================================
+  # CEDD - Civil Engineering and Development Department
+  # ============================================================================
+  cedd:
+    label: "Civil Engineering and Development Department"
+    base_url: "https://www.cedd.gov.hk"
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      cedd_technical_circulars:
+        # CEDD Technical Circulars crawler.
+        page_url: "https://www.cedd.gov.hk/eng/publications/technical-circulars/index.html"
 
-    # PDFs on this page commonly live under /media/reports/practices-and-guidelines/.
-    allowed_pdf_path_prefixes:
-      - "/media/reports/"
-      - "/archsd/html/ua/"
-      - "/archsd/html/ua2/"
-      - "/media/consultants-contractors/"
+      cedd_geo_publications:
+        # CEDD GEO publications crawler.
+        page_url: "https://www.cedd.gov.hk/eng/publications/geo/index.html"
+        scope_prefix: "/eng/publications/geo/"
+        content_element_id: "content"
+        leaflets_url: "https://www.cedd.gov.hk/eng/publications/geo/leaflets-and-brochures/index.html"
+        max_pages: 1200
+        max_out_links_per_page: 1200
 
-    max_depth: 4
-    max_pages: 500
-    max_out_links_per_page: 800
+      cedd_eacsb_handbook:
+        # CEDD EACSB Handbook crawler.
+        page_url: "https://www.cedd.gov.hk/eng/publications/eacsb-handbook/index.html"
+        max_total_records: 1
+
+      cedd_standards_spec_handbooks_cost:
+        # CEDD Standards/Specifications/Handbooks crawler.
+        page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/index.html"
+        scope_prefix: "/eng/publications/standards-spec-handbooks-cost/"
+        stan_pah_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
+        content_element_id: "content"
+        max_pages: 600
+        exclude_urls:
+          - "https://www.cedd.gov.hk/filemanager/eng/content_22/List%20of%20BIM%20Objects.pdf"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-general/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-geotechnical/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-port-works/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/CEWTPI-disclaimer/index.html"
+        table_heading_pdf_filters:
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-smm/index.html"
+            heading: "Continuously Updated Version Incorporating Corrigenda"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1/index.html"
+            heading: "Continuously Updated Version with Amendments"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1-2010/index.html"
+            heading: "Continuously Updated Version with Amendments"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
+            heading: "Continuously Updated Version with Amendments"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs3-2013/index.html"
+            heading: "Continuously Updated Version with Amendments"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2/index.html"
+            heading: "Continuously Updated Version with Amendments"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
+            heading: "Continuously Updated Version incorporating Amendments from Corrigendum No. 1/2003 onward"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2006/index.html"
+            heading: "Continuously Updated Version incorporating Amendments"
+          - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2020/index.html"
+            heading: "Continuously Updated Version incorporating Amendments"
+
+      cedd_ceo_publications:
+        # CEDD CEO publications crawler.
+        page_url: "https://www.cedd.gov.hk/eng/publications/ceo/index.html"
+        scope_prefix: "/eng/publications/ceo/"
+        pwdm_path: "/eng/publications/ceo/pwdm/index.html"
+        content_element_id: "content"
+
+  # ============================================================================
+  # DIRECTORY - Telephone Directory
+  # ============================================================================
+  directory:
+    label: "Telephone Directory"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
     max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+    pages:
+      tel_directory:
+        # HKSAR Government Telephone Directory (English) people crawler.
+        index_url: "https://tel.directory.gov.hk/index_ENG.html"
+        max_pages: 2000
 
-  # CEDD Technical Circulars crawler.
-  # Extracts PDF URL, circular number, and title from the listing table.
-  cedd_technical_circulars:
-    base_url: "https://www.cedd.gov.hk"
-    page_url: "https://www.cedd.gov.hk/eng/publications/technical-circulars/index.html"
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # CEDD GEO publications crawler.
-  # Recursively crawls GEO pages under scope_prefix, emits PDFs, emits page URLs
-  # for pages with Abstract section, and emits leaflets child subpages that have
-  # no direct PDF links.
-  cedd_geo_publications:
-    base_url: "https://www.cedd.gov.hk"
-    page_url: "https://www.cedd.gov.hk/eng/publications/geo/index.html"
-    scope_prefix: "/eng/publications/geo/"
-    content_element_id: "content"
-    leaflets_url: "https://www.cedd.gov.hk/eng/publications/geo/leaflets-and-brochures/index.html"
-    max_pages: 1200
-    max_out_links_per_page: 1200
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # CEDD EACSB Handbook crawler.
-  # Discovers the handbook PDF link from the landing page paragraph.
-  cedd_eacsb_handbook:
-    base_url: "https://www.cedd.gov.hk"
-    page_url: "https://www.cedd.gov.hk/eng/publications/eacsb-handbook/index.html"
-    max_total_records: 1
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # CEDD Standards/Specifications/Handbooks crawler.
-  # Crawls the main page and in-scope subpages for PDF links.
-  # `issue_date` is extracted only from table columns headed "Latest Update" or
-  # "Last Update" when present.
-  # Optional `table_heading_pdf_filters` rules apply tolerant heading matching
-  # (case/spacing/punctuation-insensitive, contains-based): for each listed
-  # page, only PDFs from the first table after the matching heading are emitted.
-  # If the heading/table is not found, crawler falls back to default all-PDF
-  # extraction for that page.
-  cedd_standards_spec_handbooks_cost:
-    base_url: "https://www.cedd.gov.hk"
-    page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/index.html"
-    scope_prefix: "/eng/publications/standards-spec-handbooks-cost/"
-    stan_pah_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
-    content_element_id: "content"
-    max_pages: 600
-    max_total_records: 50000
-    exclude_urls:
-      - "https://www.cedd.gov.hk/filemanager/eng/content_22/List%20of%20BIM%20Objects.pdf"
-      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-general/index.html"
-      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-geotechnical/index.html"
-      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-port-works/index.html"
-      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
-      - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/CEWTPI-disclaimer/index.html"
-    table_heading_pdf_filters:
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-smm/index.html"
-        heading: "Continuously Updated Version Incorporating Corrigenda"
-
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1/index.html"
-        heading: "Continuously Updated Version with Amendments"
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1-2010/index.html"
-        heading: "Continuously Updated Version with Amendments"
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
-        heading: "Continuously Updated Version with Amendments"
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs3-2013/index.html"
-        heading: "Continuously Updated Version with Amendments"
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2/index.html"
-        heading: "Continuously Updated Version with Amendments"
-
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
-        heading: "Continuously Updated Version incorporating Amendments from Corrigendum No. 1/2003 onward"
-
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2006/index.html"
-        heading: "Continuously Updated Version incorporating Amendments"
-      - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2020/index.html"
-        heading: "Continuously Updated Version incorporating Amendments"
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # CEDD CEO publications crawler.
-  # Crawls CEO subpages and emits PDFs. For PWDM, only the first table's
-  # "Current" column links are emitted. If a subpage has no PDFs,
-  # the subpage URL itself is emitted as fallback.
-  cedd_ceo_publications:
-    base_url: "https://www.cedd.gov.hk"
-    page_url: "https://www.cedd.gov.hk/eng/publications/ceo/index.html"
-    scope_prefix: "/eng/publications/ceo/"
-    pwdm_path: "/eng/publications/ceo/pwdm/index.html"
-    content_element_id: "content"
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # Hong Kong Herbarium Plant Database crawler.
-  # Calls the public JSON endpoint and emits one record per species_id.
+  # ============================================================================
+  # HERBARIUM - Hong Kong Herbarium
+  # ============================================================================
   herbarium:
-    api_url: "https://www.herbarium.gov.hk/plantdb/GetSpeciesList.php"
-
-    # Mirrors the website's query options (cache-buster param intentionally omitted).
-    plant_type:
-      - "Angiosperms (dicotyledons)"
-      - "Angiosperms (monocotyledons)"
-      - "Gymnosperms"
-      - "Pteridophytes"
-
-    taxon_rank:
-      - "family"
-      - "genus"
-      - "species"
-
-    order_by: "family"
-    page_size: 4000
-
+    label: "Hong Kong Herbarium"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
     max_total_records: 200000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+    pages:
+      herbarium:
+        # Hong Kong Herbarium Plant Database crawler.
+        api_url: "https://www.herbarium.gov.hk/plantdb/GetSpeciesList.php"
+        plant_type:
+          - "Angiosperms (dicotyledons)"
+          - "Angiosperms (monocotyledons)"
+          - "Gymnosperms"
+          - "Pteridophytes"
+        taxon_rank:
+          - "family"
+          - "genus"
+          - "species"
+        order_by: "family"
+        page_size: 4000
 
-  # EMSD Electricity Safety - New Edition of Code of Practice.
-  # Discovers the two sub-pages from the landing page and emits PDF links.
-  electric_safety_cop:
-    landing_url: "https://www.emsd.gov.hk/en/electricity_safety/new_edition_cop/index.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # EMSD Electricity Safety publications (general) crawler.
-  # Emits only English PDF links from the General publications page.
-  electric_safety_publications_general:
-    page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/general/index.html#eps"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # EMSD Electricity Safety publications (guidelines) crawler.
-  # Emits PDF links from the Guidance Notes / Guidelines page.
-  electric_safety_publications_guidelines:
-    page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/guidance_notes_guidelines/index.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # EMSD Electricity Safety publications (CoP) crawler.
-  # Emits PDF links from the Codes of Practice page.
-  electric_safety_publications_cop:
-    page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/codes_of_practice/index.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # EMSD Regulating Railway Safety crawler.
-  # Crawls the main page and sub-pages under /regulating_railway_safety/ for PDFs.
-  emsd.regulating_railway_safety:
-    start_url: "https://www.emsd.gov.hk/en/railway_safety/regulating_railway_safety/index.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # EMSD Railway Safety Publications crawler.
-  # Parses the table for PDF publications.
-  emsd.railway_safety_publication:
-    page_url: "https://www.emsd.gov.hk/en/railway_safety/publication/index.html"
-    request_delay_seconds: 0.25
-    request_jitter_seconds: 0.10
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
-
-  # EMSD Gas Safety Portal crawler.
-  # Crawls https://www.emsd.gov.hk/gsp/en/ to list sub-pages.
-  # Special handling for "Information for the Gas Trade" (b07.html) to list PDFs.
-  emsd.gas_safety_portal:
+  # ============================================================================
+  # EMSD - Electrical and Mechanical Services Department
+  # ============================================================================
+  emsd:
+    label: "Electrical and Mechanical Services Department"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
-    max_total_records: 50000
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
-
-  # EMSD Gas Safety Tips crawler.
-  # Recursively crawls English gas safety tips pages and PDF links.
-  emsd.gas_safety_tips:
-    start_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/index.html"
-    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/"
+    max_total_records: 50000
     content_element_id: "content"
-    faq_en_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/frequently_asked_questions/index.html"
-    faq_tc_url: "https://www.emsd.gov.hk/tc/gas_safety/gas_safety_tips_to_users/frequently_asked_questions/index.html"
-    suspension_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/suspension_of_approval_of_gas_appliance_and_recall/index.html"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+    pages:
+      electric_safety_cop:
+        # EMSD Electricity Safety - New Edition of Code of Practice.
+        landing_url: "https://www.emsd.gov.hk/en/electricity_safety/new_edition_cop/index.html"
 
-  # EMSD Gas Safety publications crawler.
-  # Crawls publication sub-pages and emits PDF links with discovered_from.
-  # Circular letters include date_of_issue from table column text.
-  emsd.gas_publications:
-    root_url: "https://www.emsd.gov.hk/en/gas_safety/publications/index.html"
-    subpages:
-      - "https://www.emsd.gov.hk/en/gas_safety/publications/general/index.html"
-      - "https://www.emsd.gov.hk/en/gas_safety/publications/codes_of_practice/index.html"
-      - "https://www.emsd.gov.hk/en/gas_safety/publications/guidance_notes/index.html"
-      - "https://www.emsd.gov.hk/en/gas_safety/publications/circular_letters/index.html"
-    general_tc_url: "https://www.emsd.gov.hk/tc/gas_safety/publications/general/index.html"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      electric_safety_publications_general:
+        # EMSD Electricity Safety publications (general) crawler.
+        page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/general/index.html#eps"
 
-  # EMSD Gas Safety statutory advisory bodies crawler.
-  # Collects sub-page URLs from statutory advisory bodies landing page.
-  emsd.gas_statutory_advisory_bodies:
-    page_url: "https://www.emsd.gov.hk/en/gas_safety/statutory_advisory_bodies/index.html"
-    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/statutory_advisory_bodies/"
-    content_element_id: "content"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      electric_safety_publications_guidelines:
+        # EMSD Electricity Safety publications (guidelines) crawler.
+        page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/guidance_notes_guidelines/index.html"
 
-  # EMSD Gas Safety related information for competent person crawler.
-  # Collects PDF URLs from the main page and one-level sub-pages.
-  emsd.gas_related_information_for_competent_person:
-    page_url: "https://www.emsd.gov.hk/en/gas_safety/related_information_for_competent_person/index.html"
-    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/related_information_for_competent_person/"
-    content_element_id: "content"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      electric_safety_publications_cop:
+        # EMSD Electricity Safety publications (CoP) crawler.
+        page_url: "https://www.emsd.gov.hk/en/electricity_safety/publications/codes_of_practice/index.html"
 
-  # EMSD Gas Safety approval schemes crawler.
-  # From the main page, discovers sub-pages and extracts PDF URLs from them.
-  emsd.gas_approval_schemes:
-    page_url: "https://www.emsd.gov.hk/en/gas_safety/approval_schemes/index.html"
-    scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/approval_schemes/"
-    content_element_id: "content"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      regulating_railway_safety:
+        # EMSD Regulating Railway Safety crawler.
+        start_url: "https://www.emsd.gov.hk/en/railway_safety/regulating_railway_safety/index.html"
 
-  # EMSD Lifts and Escalators Safety publications crawler.
-  # Crawls 3 section pages and emits PDF URLs with discovered_from.
-  # Nested sub-page crawling is configurable per section.
-  emsd.lifts_and_escalators_publications:
-    root_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/index.html"
-    section_urls:
-      general_report: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/general_report/index.html"
-      guidance_notes_guidelines: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/guidance_notes_guidelines/index.html"
-      code_of_practice: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/code_of_practice/index.html"
-    crawl_nested_subpages:
-      general_report: false
-      guidance_notes_guidelines: true
-      code_of_practice: true
-    max_nested_depth: 1
-    content_element_id: "content"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      railway_safety_publication:
+        # EMSD Railway Safety Publications crawler.
+        page_url: "https://www.emsd.gov.hk/en/railway_safety/publication/index.html"
 
-  # EMSD Lifts and Escalators Safety circulars crawler.
-  # Parses the circulars table and emits one record per PDF link.
-  emsd.lifts_and_escalators_circulars:
-    page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/index.html"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      gas_safety_portal:
+        # EMSD Gas Safety Portal crawler.
 
-  # EMSD Lifts and Escalators Safety registered workers info crawler.
-  # Extracts table PDFs with date and free-form PDFs without date.
-  emsd.lifts_and_escalators_registered_workers:
-    page_url: "https://www.emsd.gov.hk/tc/lifts_and_escalators_safety/information_for_the_registered_workers/index.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      gas_safety_tips:
+        # EMSD Gas Safety Tips crawler.
+        start_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/index.html"
+        scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/"
+        faq_en_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/frequently_asked_questions/index.html"
+        faq_tc_url: "https://www.emsd.gov.hk/tc/gas_safety/gas_safety_tips_to_users/frequently_asked_questions/index.html"
+        suspension_url: "https://www.emsd.gov.hk/en/gas_safety/gas_safety_tips_to_users/suspension_of_approval_of_gas_appliance_and_recall/index.html"
 
-  # EMSD Lifts and Escalators Safety statutory advisory bodies crawler.
-  # Extracts sub-page URLs and names from the landing page only.
-  emsd.lifts_and_escalators_statutory_advisory_bodies:
-    page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/index.html"
-    scope_prefix: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/"
-    content_element_id: "content"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      gas_publications:
+        # EMSD Gas Safety publications crawler.
+        root_url: "https://www.emsd.gov.hk/en/gas_safety/publications/index.html"
+        subpages:
+          - "https://www.emsd.gov.hk/en/gas_safety/publications/general/index.html"
+          - "https://www.emsd.gov.hk/en/gas_safety/publications/codes_of_practice/index.html"
+          - "https://www.emsd.gov.hk/en/gas_safety/publications/guidance_notes/index.html"
+          - "https://www.emsd.gov.hk/en/gas_safety/publications/circular_letters/index.html"
+        general_tc_url: "https://www.emsd.gov.hk/tc/gas_safety/publications/general/index.html"
 
-  # EMSD Lifts and Escalators Safety responsible persons corner crawler.
-  # Extracts all PDF URLs from the page.
-  emsd.lifts_and_escalators_responsible_persons_corner:
-    page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/index.html"
-    content_element_id: "content"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      gas_statutory_advisory_bodies:
+        # EMSD Gas Safety statutory advisory bodies crawler.
+        page_url: "https://www.emsd.gov.hk/en/gas_safety/statutory_advisory_bodies/index.html"
+        scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/statutory_advisory_bodies/"
 
-  # EMSD Publications technical specifications crawler.
-  # Extracts PDF URLs from the table with issue number/date metadata.
-  emsd.publications_technical_specifications:
-    page_url: "https://www.emsd.gov.hk/en/publications/technical_specifications/index.html"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      gas_related_information_for_competent_person:
+        # EMSD Gas Safety related information for competent person crawler.
+        page_url: "https://www.emsd.gov.hk/en/gas_safety/related_information_for_competent_person/index.html"
+        scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/related_information_for_competent_person/"
 
-  # EMSD O&M Best Practices handbooks crawler.
-  # Discovers booklet pages from landing page, then extracts PDF links from each.
-  emsd.publications_handbooks:
-    page_url: "https://bestpractice.emsd.gov.hk/en/booklet"
-    booklet_root: "https://bestpractice.emsd.gov.hk"
-    content_element_id: "bookletlistpage"
-    request_delay_seconds: 0.5
-    request_jitter_seconds: 0.25
-    max_total_records: 50000
-    backoff_base_seconds: 0.5
-    backoff_jitter_seconds: 0.25
+      gas_approval_schemes:
+        # EMSD Gas Safety approval schemes crawler.
+        page_url: "https://www.emsd.gov.hk/en/gas_safety/approval_schemes/index.html"
+        scope_prefix: "https://www.emsd.gov.hk/en/gas_safety/approval_schemes/"
+
+      lifts_and_escalators_publications:
+        # EMSD Lifts and Escalators Safety publications crawler.
+        root_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/index.html"
+        section_urls:
+          general_report: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/general_report/index.html"
+          guidance_notes_guidelines: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/guidance_notes_guidelines/index.html"
+          code_of_practice: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/code_of_practice/index.html"
+        crawl_nested_subpages:
+          general_report: false
+          guidance_notes_guidelines: true
+          code_of_practice: true
+        max_nested_depth: 1
+
+      lifts_and_escalators_circulars:
+        # EMSD Lifts and Escalators Safety circulars crawler.
+        page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/index.html"
+
+      lifts_and_escalators_registered_workers:
+        # EMSD Lifts and Escalators Safety registered workers info crawler.
+        page_url: "https://www.emsd.gov.hk/tc/lifts_and_escalators_safety/information_for_the_registered_workers/index.html"
+
+      lifts_and_escalators_statutory_advisory_bodies:
+        # EMSD Lifts and Escalators Safety statutory advisory bodies crawler.
+        page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/index.html"
+        scope_prefix: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/"
+
+      lifts_and_escalators_responsible_persons_corner:
+        # EMSD Lifts and Escalators Safety responsible persons corner crawler.
+        page_url: "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/index.html"
+
+      publications_technical_specifications:
+        # EMSD Publications technical specifications crawler.
+        page_url: "https://www.emsd.gov.hk/en/publications/technical_specifications/index.html"
+
+      publications_handbooks:
+        # EMSD O&M Best Practices handbooks crawler.
+        page_url: "https://bestpractice.emsd.gov.hk/en/booklet"
+        booklet_root: "https://bestpractice.emsd.gov.hk"
+        content_element_id: "bookletlistpage"

@@ -1,26 +1,28 @@
+/**
+ * Open Library Viewer
+ * 
+ * A static viewer for URL metadata records crawled from government sources.
+ * Reads JSONL data from a GitHub repository's `data` branch.
+ */
+
+// ============================================================================
+// DOM Elements
+// ============================================================================
+
 const els = {
   repoInput: document.getElementById("repoInput"),
   saveRepoBtn: document.getElementById("saveRepoBtn"),
-
-  datasetSelect: document.getElementById("datasetSelect"),
-  archiveField: document.getElementById("archiveField"),
-  archiveSelect: document.getElementById("archiveSelect"),
-
+  dateSelect: document.getElementById("dateSelect"),
   sourceFilter: document.getElementById("sourceFilter"),
-  domainFilter: document.getElementById("domainFilter"),
   searchInput: document.getElementById("searchInput"),
-
   pageSizeSelect: document.getElementById("pageSizeSelect"),
   status: document.getElementById("status"),
   downloadMenu: document.getElementById("downloadMenu"),
   downloadJsonLink: document.getElementById("downloadJsonLink"),
   runInfo: document.getElementById("runInfo"),
-
   downloadExcelBtn: document.getElementById("downloadExcelBtn"),
-
   reloadBtn: document.getElementById("reloadBtn"),
   resetBtn: document.getElementById("resetBtn"),
-
   resultInfo: document.getElementById("resultInfo"),
   prevBtn: document.getElementById("prevBtn"),
   pageInput: document.getElementById("pageInput"),
@@ -28,7 +30,6 @@ const els = {
   nextBtn: document.getElementById("nextBtn"),
   pageText: document.getElementById("pageText"),
   tbody: document.getElementById("tbody"),
-
   detailDialog: document.getElementById("detailDialog"),
   detailTitle: document.getElementById("detailTitle"),
   detailSubtitle: document.getElementById("detailSubtitle"),
@@ -38,151 +39,41 @@ const els = {
   copyJsonBtn: document.getElementById("copyJsonBtn"),
 };
 
-// Fallback repo for custom domains (where GitHub Pages inference won't work).
-const DEFAULT_REPO = { owner: "pyramid-ai-org", repo: "open-library" };
+// ============================================================================
+// Viewer Configuration
+// ============================================================================
 
-const SOURCE_GROUPS = [
-  { id: "archsd", label: "Architectural Services Department" },
-  { id: "bd", label: "Building Department" },
-  { id: "cedd", label: "Civil Engineering and Development Department" },
-  { id: "devb", label: "The Development Bureau" },
-  { id: "directory", label: "Telephone Directory" },
-  { id: "herbarium", label: "Hong Kong Herbarium" },
-  { id: "hksar", label: "HKSAR Press Releases" },
-];
+const VIEWER = {
+  defaultRepo: { owner: "", repo: "" },
+  sourceGroups: /** @type {Array<{id:string,label:string}>} */ ([]),
+  sourceGroupLabels: /** @type {Record<string, string>} */ ({}),
+  sourceGroupByCrawler: /** @type {Record<string, string>} */ ({}),
+};
 
-const SOURCE_GROUP_LABELS = Object.fromEntries(SOURCE_GROUPS.map((x) => [x.id, x.label]));
+// ============================================================================
+// Application State
+// ============================================================================
 
-const BD_SOURCE_NAMES = new Set([
-  "bd_basic_pages",
-  "codes_design_manuals_and_guidelines",
-  "practice_notes_and_circular_letters",
-  "central_data_bank",
-  "scheduled_areas",
-  "notices_and_reports",
-]);
-
-function sourceGroupFromCrawler(source) {
-  const s = String(source || "").trim().toLowerCase();
-  if (!s) return "";
-
-  if (s.startsWith("archsd_")) return "archsd";
-  if (s.startsWith("cedd_")) return "cedd";
-  if (s.startsWith("devb_")) return "devb";
-  if (s.startsWith("hksar_")) return "hksar";
-
-  if (s === "tel_directory" || s.startsWith("directory_")) return "directory";
-  if (s === "herbarium" || s.startsWith("herbarium_")) return "herbarium";
-
-  if (s.startsWith("bd_") || BD_SOURCE_NAMES.has(s)) return "bd";
-
-  return "";
-}
-
-/**
- * State
- */
 const state = {
   owner: "",
   repo: "",
   branch: "data",
   dataRoot: "data",
-
   records: /** @type {Array<any>} */ ([]),
   filteredIdx: /** @type {Array<number>} */ ([]),
-
   sortKey: "discovered_at_utc",
-  sortDir: "desc", // asc | desc
-
+  sortDir: "desc",
   page: 1,
   pageSize: 50,
-
   archiveIndex: /** @type {Array<any>} */ ([]),
-  selectedArchivePath: "",
-
+  selectedDataPath: "latest/urls.jsonl",
   viewerConfig: null,
-
   loading: false,
 };
 
-function metaValueForExcel(v) {
-  if (v === null || v === undefined) return "";
-  if (Array.isArray(v)) {
-    return v
-      .map((x) => String(x ?? "").trim())
-      .filter(Boolean)
-      .join("; ");
-  }
-  if (typeof v === "object") {
-    try {
-      return JSON.stringify(v);
-    } catch {
-      return String(v);
-    }
-  }
-  return String(v);
-}
-
-function downloadExcel() {
-  const XLSX = window.XLSX;
-  if (!XLSX || !XLSX.utils || !XLSX.writeFile) {
-    alert("Excel export library not loaded. Please refresh the page.");
-    return;
-  }
-
-  if (!state.records.length) {
-    alert("No records loaded yet.");
-    return;
-  }
-
-  const idx = state.filteredIdx.length ? state.filteredIdx : state.records.map((_, i) => i);
-  if (!idx.length) {
-    alert("No matching records to export.");
-    return;
-  }
-
-  const rows = idx.map((i) => {
-    const r = state.records[i];
-    const meta = r && r.meta && typeof r.meta === "object" ? r.meta : null;
-
-    // A few useful meta columns (works great for herbarium; harmless for others).
-    const speciesId = meta ? meta.species_id : null;
-    const familyName = meta ? meta.family_name : null;
-    const genusName = meta ? meta.genus_name : null;
-    const commonName = meta ? meta.common_name : null;
-    const chineseName = meta ? meta.chinese_name : null;
-
-    return {
-      name: r?.name ?? "",
-      url: r?.url ?? "",
-      domain: r?.domain ?? "",
-      source: r?.source ?? "",
-      discovered_at_utc: r?.discovered_at_utc ?? "",
-
-      species_id: metaValueForExcel(speciesId),
-      family_name: metaValueForExcel(familyName),
-      genus_name: metaValueForExcel(genusName),
-      common_name: metaValueForExcel(commonName),
-      chinese_name: metaValueForExcel(chineseName),
-
-      meta_json: meta ? metaValueForExcel(meta) : "",
-    };
-  });
-
-  const ws = XLSX.utils.json_to_sheet(rows);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "links");
-
-  const d = new Date();
-  const stamp = Number.isFinite(d.getTime()) ? d.toISOString().slice(0, 10) : "export";
-  XLSX.writeFile(wb, `open-library-${stamp}.xlsx`);
-}
-
-function closeDownloadMenu() {
-  if (els.downloadMenu && els.downloadMenu.open) {
-    els.downloadMenu.open = false;
-  }
-}
+// ============================================================================
+// Utility Functions
+// ============================================================================
 
 function setStatus(text) {
   els.status.textContent = text;
@@ -202,7 +93,6 @@ function formatDateUtc(value, opts = {}) {
   if (!s) return "";
 
   let d;
-  // Support YYYY-MM-DD and ISO timestamps.
   if (/^\d{4}-\d{2}-\d{2}$/.test(s)) {
     d = new Date(`${s}T00:00:00Z`);
   } else {
@@ -231,65 +121,27 @@ function humanBytes(n) {
     v /= 1024;
     i++;
   }
-  const digits = i === 0 ? 0 : i === 1 ? 1 : 1;
-  return `${v.toFixed(digits)} ${units[i]}`;
+  return `${v.toFixed(i === 0 ? 0 : 1)} ${units[i]}`;
 }
 
-function normalizeDataRootPath(p) {
-  const s = String(p || "").trim().replace(/^\/+/, "");
-  // GitHub tree API returns paths like `data/archive/...`; rawUrl expects relative to data root.
-  return s.startsWith("data/") ? s.slice("data/".length) : s;
-}
-
-function inferGitHubRepoFromPages() {
-  // For https://OWNER.github.io/REPO/
-  const host = window.location.hostname || "";
-  const isPages = host.endsWith(".github.io");
-  if (!isPages) return null;
-
-  const owner = host.split(".")[0] || "";
-  const parts = (window.location.pathname || "/").split("/").filter(Boolean);
-  const repo = parts[0] || "";
-  if (!owner || !repo) return null;
-
-  return { owner, repo };
-}
-
-function loadRepoFromQueryOrStorage() {
-  const url = new URL(window.location.href);
-  const qp = url.searchParams.get("repo") || "";
-  const stored = localStorage.getItem("ol_viewer_repo") || "";
-
-  const inferred = inferGitHubRepoFromPages();
-
-  const chosen = (
-    qp ||
-    stored ||
-    (inferred ? `${inferred.owner}/${inferred.repo}` : "") ||
-    `${DEFAULT_REPO.owner}/${DEFAULT_REPO.repo}`
-  ).trim();
-  const [owner, repo] = chosen.split("/");
-  if (owner && repo) {
-    state.owner = owner;
-    state.repo = repo;
-  }
-
-  if (els.repoInput) {
-    els.repoInput.value = state.owner && state.repo ? `${state.owner}/${state.repo}` : "";
+function safeHost(url) {
+  try {
+    return url ? new URL(url).hostname.toLowerCase() : "";
+  } catch {
+    return "";
   }
 }
 
-function saveRepo(value) {
-  const v = (value || "").trim();
-  const [owner, repo] = v.split("/");
-  if (!owner || !repo) {
-    alert("Repo must be like: owner/repo");
-    return;
-  }
-  state.owner = owner;
-  state.repo = repo;
-  localStorage.setItem("ol_viewer_repo", `${owner}/${repo}`);
+function compareValues(a, b) {
+  if (a === b) return 0;
+  if (a == null) return -1;
+  if (b == null) return 1;
+  return a < b ? -1 : 1;
 }
+
+// ============================================================================
+// URL Helpers
+// ============================================================================
 
 function rawUrl(path) {
   if (!state.owner || !state.repo) return "";
@@ -298,59 +150,195 @@ function rawUrl(path) {
 }
 
 function githubApiUrl(path) {
-  const clean = String(path || "").replace(/^\/+/, "");
-  return `https://api.github.com/${clean}`;
+  return `https://api.github.com/${String(path || "").replace(/^\/+/, "")}`;
 }
 
-function safeHost(url) {
-  const s = (url || "").trim();
-  if (!s) return "";
-  try {
-    return new URL(s).hostname.toLowerCase();
-  } catch {
-    return "";
-  }
+function repoFileUrl(path, branch = "main") {
+  if (!state.owner || !state.repo) return "";
+  const clean = String(path || "").replace(/^\/+/, "");
+  return `https://raw.githubusercontent.com/${state.owner}/${state.repo}/${branch}/${clean}`;
 }
+
+function normalizeDataRootPath(p) {
+  const s = String(p || "").trim().replace(/^\/+/, "");
+  return s.startsWith("data/") ? s.slice(5) : s;
+}
+
+// ============================================================================
+// Source Group Resolution
+// ============================================================================
+
+function sourceGroupFromCrawler(source) {
+  const s = String(source || "").trim().toLowerCase();
+  if (!s) return "";
+
+  // Check crawler-to-source mapping from settings.yaml
+  if (VIEWER.sourceGroupByCrawler[s]) {
+    return VIEWER.sourceGroupByCrawler[s];
+  }
+
+  // Handle dotted names like "emsd.gas_safety_portal"
+  const dottedMatch = s.match(/^([a-z_]+)\.([a-z_]+)$/);
+  if (dottedMatch) {
+    const [, prefix, suffix] = dottedMatch;
+    // Check if full dotted name maps
+    if (VIEWER.sourceGroupByCrawler[s]) {
+      return VIEWER.sourceGroupByCrawler[s];
+    }
+    // Check if suffix maps to a source
+    if (VIEWER.sourceGroupByCrawler[suffix]) {
+      return VIEWER.sourceGroupByCrawler[suffix];
+    }
+    // Check if prefix is a known source
+    if (VIEWER.sourceGroupLabels[prefix]) {
+      return prefix;
+    }
+  }
+
+  // Check if source itself is a known source ID
+  if (VIEWER.sourceGroupLabels[s]) {
+    return s;
+  }
+
+  // Fallback: extract prefix from underscore-separated name (e.g., "devb_press_releases" -> "devb")
+  const underscoreIdx = s.indexOf("_");
+  if (underscoreIdx > 0) {
+    const prefix = s.slice(0, underscoreIdx);
+    if (VIEWER.sourceGroupLabels[prefix]) {
+      return prefix;
+    }
+  }
+
+  return "";
+}
+
+// ============================================================================
+// Record Processing
+// ============================================================================
 
 function normalizeRecord(r) {
   const url = typeof r?.url === "string" ? r.url : "";
   const source = typeof r?.source === "string" ? r.source : "";
-  const sourceGroup = sourceGroupFromCrawler(source);
+
+  // Prefer source_id from record, then resolve from crawler name via settings mapping.
+  const sourceId = String(r?.source_id || "").trim().toLowerCase();
+  const sourceLabel = String(r?.source_label || "").trim();
+
+  const sourceGroup = sourceId
+    ? sourceId
+    : sourceGroupFromCrawler(source);
+
   return {
     url,
     name: typeof r?.name === "string" ? r.name : "",
     discovered_at_utc: typeof r?.discovered_at_utc === "string" ? r.discovered_at_utc : "",
     source,
     source_group: sourceGroup,
-    source_group_label: SOURCE_GROUP_LABELS[sourceGroup] || sourceGroup || "",
+    source_group_label: sourceLabel || VIEWER.sourceGroupLabels[sourceGroup] || sourceGroup || source,
     meta: r?.meta ?? null,
     domain: safeHost(url),
   };
 }
 
+function recordSortValue(rec, key) {
+  switch (key) {
+    case "discovered_at_utc": {
+      const t = Date.parse(rec.discovered_at_utc || "");
+      return Number.isFinite(t) ? t : rec.discovered_at_utc;
+    }
+    case "name":
+      return (rec.name || "").toLowerCase();
+    case "url":
+      return (rec.url || "").toLowerCase();
+    case "domain":
+      return (rec.domain || "").toLowerCase();
+    case "source":
+      return (rec.source_group_label || rec.source_group || rec.source || "").toLowerCase();
+    default:
+      return rec[key] ?? "";
+  }
+}
+
+// ============================================================================
+// Excel Export
+// ============================================================================
+
+function metaValueForExcel(v) {
+  if (v == null) return "";
+  if (Array.isArray(v)) {
+    return v.map((x) => String(x ?? "").trim()).filter(Boolean).join("; ");
+  }
+  if (typeof v === "object") {
+    try { return JSON.stringify(v); } catch { return String(v); }
+  }
+  return String(v);
+}
+
+function downloadExcel() {
+  const XLSX = window.XLSX;
+  if (!XLSX?.utils?.writeFile) {
+    alert("Excel export library not loaded. Please refresh the page.");
+    return;
+  }
+
+  if (!state.records.length) {
+    alert("No records loaded yet.");
+    return;
+  }
+
+  const idx = state.filteredIdx.length ? state.filteredIdx : state.records.map((_, i) => i);
+  if (!idx.length) {
+    alert("No matching records to export.");
+    return;
+  }
+
+  const rows = idx.map((i) => {
+    const r = state.records[i];
+    const meta = r?.meta && typeof r.meta === "object" ? r.meta : null;
+
+    return {
+      name: r?.name ?? "",
+      url: r?.url ?? "",
+      domain: r?.domain ?? "",
+      source: r?.source ?? "",
+      discovered_at_utc: r?.discovered_at_utc ?? "",
+      species_id: metaValueForExcel(meta?.species_id),
+      family_name: metaValueForExcel(meta?.family_name),
+      genus_name: metaValueForExcel(meta?.genus_name),
+      common_name: metaValueForExcel(meta?.common_name),
+      chinese_name: metaValueForExcel(meta?.chinese_name),
+      meta_json: meta ? metaValueForExcel(meta) : "",
+    };
+  });
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "links");
+
+  const stamp = new Date().toISOString().slice(0, 10);
+  XLSX.writeFile(wb, `open-library-${stamp}.xlsx`);
+}
+
+// ============================================================================
+// Detail Dialog Rendering
+// ============================================================================
+
 function metaGet(meta, key) {
   if (!meta || typeof meta !== "object") return null;
-  // eslint-disable-next-line no-prototype-builtins
-  if (!Object.prototype.hasOwnProperty.call(meta, key)) return null;
-  return meta[key];
+  return Object.prototype.hasOwnProperty.call(meta, key) ? meta[key] : null;
 }
 
 function departmentLines(value) {
-  // department_paths: [["Dept", "Division"], ...]
   if (!Array.isArray(value)) return [];
-  const lines = [];
-  for (const p of value) {
-    if (!Array.isArray(p)) continue;
-    const segs = p.map((x) => String(x || "").trim()).filter(Boolean);
-    if (segs.length) lines.push(segs.join(" -> "));
-  }
-  return lines;
+  return value
+    .filter(Array.isArray)
+    .map((p) => p.map((x) => String(x || "").trim()).filter(Boolean).join(" -> "))
+    .filter(Boolean);
 }
 
 function emailDisplay(v) {
-  if (v === null || v === undefined) return "N/A";
-  const s = String(v).trim();
-  return s ? s : "N/A";
+  const s = String(v ?? "").trim();
+  return s || "N/A";
 }
 
 function renderKvRows(rows) {
@@ -404,78 +392,120 @@ function renderKvRows(rows) {
   els.detailFields.replaceChildren(frag);
 }
 
-function compareValues(a, b) {
-  if (a === b) return 0;
-  if (a == null) return -1;
-  if (b == null) return 1;
-  return a < b ? -1 : 1;
+function openDetail(r) {
+  const title = r.name || "(no title)";
+  els.detailTitle.textContent = title;
+  els.detailSubtitle.textContent = `${r.domain || ""} • ${r.source_group_label || r.source || ""} • ${formatDateUtc(r.discovered_at_utc)}`;
+  els.detailOpenUrl.href = r.url || "#";
+
+  const payload = { url: r.url, name: r.name, discovered_at_utc: r.discovered_at_utc, source: r.source, meta: r.meta };
+  els.detailJson.textContent = JSON.stringify(payload, null, 2);
+
+  const meta = r?.meta && typeof r.meta === "object" ? r.meta : null;
+  const rows = [
+    { label: "URL", value: r.url || "", href: r.url || "" },
+    { label: "Name", value: r.name || "(no title)" },
+    { label: "Discovered at", value: formatDateUtc(r.discovered_at_utc) || "" },
+    { label: "Source", value: r.source || "" },
+    { label: "Website", value: r.domain || "" },
+  ];
+
+  // Add configured meta fields
+  const cfg = state.viewerConfig || {};
+  const srcCfg = cfg?.sources?.[r.source];
+  const fieldDefs = srcCfg?.fields || cfg?.defaults?.fields || [];
+  const already = new Set(rows.map((x) => x.label));
+
+  for (const def of fieldDefs) {
+    if (!def || def.type !== "meta") continue;
+    const label = String(def.label || "").trim();
+    if (!label || already.has(label)) continue;
+
+    // Try primary key then fallback keys
+    const keys = [def.key, ...(def.fallbackKeys || [])].map((k) => String(k || "").trim()).filter(Boolean);
+    let val = null;
+    for (const k of keys) {
+      const got = metaGet(meta, k);
+      if (got != null && !(typeof got === "string" && !got.trim())) {
+        val = got;
+        break;
+      }
+    }
+
+    // Apply formatting
+    const fmt = String(def.format || "").trim();
+
+    if (fmt === "departments") {
+      const lines = departmentLines(val);
+      if (!lines.length) continue;
+      rows.push({ label, kind: "departments", lines, limit: def.limit || 5 });
+      already.add(label);
+    } else if (fmt === "email") {
+      if (r.source === "tel_directory" || val != null) {
+        rows.push({ label, value: emailDisplay(val) });
+        already.add(label);
+      }
+    } else if (fmt === "date" && val != null) {
+      rows.push({ label, value: formatDateUtc(String(val)) });
+      already.add(label);
+    } else if (fmt === "url" && typeof val === "string" && val.trim()) {
+      rows.push({ label, value: val.trim(), href: val.trim() });
+      already.add(label);
+    } else if (val != null && !(typeof val === "string" && !val.trim())) {
+      rows.push({ label, value: String(val) });
+      already.add(label);
+    }
+  }
+
+  renderKvRows(rows);
+
+  els.copyJsonBtn.onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(payload));
+      setStatus("Copied JSON to clipboard");
+    } catch {
+      setStatus("Could not copy (browser blocked clipboard)");
+    }
+  };
+
+  els.detailDialog.showModal();
 }
 
-function recordSortValue(rec, key) {
-  switch (key) {
-    case "discovered_at_utc": {
-      const t = Date.parse(rec.discovered_at_utc || "");
-      return Number.isFinite(t) ? t : (rec.discovered_at_utc || "");
-    }
-    case "name":
-      return (rec.name || "").toLowerCase();
-    case "url":
-      return (rec.url || "").toLowerCase();
-    case "domain":
-      return (rec.domain || "").toLowerCase();
-    case "source":
-      return (rec.source || "").toLowerCase();
-    default:
-      return (rec[key] ?? "");
-  }
-}
+// ============================================================================
+// Filtering & Sorting
+// ============================================================================
 
 function rebuildFilters() {
   const sources = new Map();
-  const domains = new Map();
 
   for (const r of state.records) {
     if (r.source_group) sources.set(r.source_group, (sources.get(r.source_group) || 0) + 1);
-    if (r.domain) domains.set(r.domain, (domains.get(r.domain) || 0) + 1);
   }
 
   const sourceSelected = els.sourceFilter.value;
-  const domainSelected = els.domainFilter.value;
-
-  const domainOptions = Array.from(domains.entries()).sort((a, b) => b[1] - a[1]);
 
   els.sourceFilter.replaceChildren(new Option("All", ""));
-  for (const { id, label } of SOURCE_GROUPS) {
+  for (const { id, label } of VIEWER.sourceGroups) {
     const count = sources.get(id) || 0;
     if (!count) continue;
     els.sourceFilter.add(new Option(`${label} (${count})`, id));
   }
 
-  els.domainFilter.replaceChildren(new Option("All", ""));
-  for (const [d, count] of domainOptions) {
-    els.domainFilter.add(new Option(`${d} (${count})`, d));
-  }
-
   els.sourceFilter.value = sourceSelected;
-  els.domainFilter.value = domainSelected;
 }
 
 function applyFiltersAndSort() {
   const source = (els.sourceFilter.value || "").trim();
-  const domain = (els.domainFilter.value || "").trim();
   const q = (els.searchInput.value || "").trim().toLowerCase();
 
   const idx = [];
   for (let i = 0; i < state.records.length; i++) {
     const r = state.records[i];
     if (source && r.source_group !== source) continue;
-    if (domain && r.domain !== domain) continue;
-
     if (q) {
       const hay = `${r.name || ""}\n${r.url || ""}`.toLowerCase();
       if (!hay.includes(q)) continue;
     }
-
     idx.push(i);
   }
 
@@ -483,12 +513,8 @@ function applyFiltersAndSort() {
   idx.sort((ia, ib) => {
     const a = state.records[ia];
     const b = state.records[ib];
-    const va = recordSortValue(a, state.sortKey);
-    const vb = recordSortValue(b, state.sortKey);
-    const c = compareValues(va, vb);
-    if (c !== 0) return c * dirMul;
-    // stable-ish fallback
-    return (a.url || "").localeCompare(b.url || "") * dirMul;
+    const c = compareValues(recordSortValue(a, state.sortKey), recordSortValue(b, state.sortKey));
+    return c !== 0 ? c * dirMul : (a.url || "").localeCompare(b.url || "") * dirMul;
   });
 
   state.filteredIdx = idx;
@@ -501,9 +527,12 @@ function totalPages() {
 
 function clampPage() {
   const tp = totalPages();
-  if (state.page < 1) state.page = 1;
-  if (state.page > tp) state.page = tp;
+  state.page = Math.max(1, Math.min(state.page, tp));
 }
+
+// ============================================================================
+// Table Rendering
+// ============================================================================
 
 function renderTable() {
   clampPage();
@@ -528,139 +557,26 @@ function renderTable() {
   const frag = document.createDocumentFragment();
   for (let i = start; i < end; i++) {
     const r = state.records[state.filteredIdx[i]];
-
     const tr = document.createElement("tr");
     tr.tabIndex = 0;
     tr.addEventListener("click", () => openDetail(r));
-    tr.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") openDetail(r);
-    });
+    tr.addEventListener("keydown", (e) => e.key === "Enter" && openDetail(r));
 
-    const title = r.name || "(no title)";
     tr.innerHTML = `
-      <td class="cellTitle">${escapeHtml(title)}</td>
+      <td class="cellTitle">${escapeHtml(r.name || "(no title)")}</td>
       <td><span class="badge">${escapeHtml(r.domain || "(unknown)")}</span></td>
-      <td><span class="badge">${escapeHtml(r.source || "(unknown)")}</span></td>
+      <td><span class="badge">${escapeHtml(r.source_group_label || r.source_group || r.source || "(unknown)")}</span></td>
       <td title="${escapeHtml(r.discovered_at_utc || "")}">${escapeHtml(formatDateUtc(r.discovered_at_utc))}</td>
-      <td class="cellUrl"><a class="link" href="${escapeHtml(r.url || "#")}" target="_blank" rel="noreferrer">${escapeHtml(r.url || "")}</a></td>
+      <td class="cellUrl"><a class="link" href="${escapeHtml(r.url || "#")}" target="_blank" rel="noreferrer">URL</a></td>
     `;
     frag.appendChild(tr);
   }
   els.tbody.replaceChildren(frag);
 }
 
-function openDetail(r) {
-  const title = r.name || "(no title)";
-  els.detailTitle.textContent = title;
-  els.detailSubtitle.textContent = `${r.domain || ""} • ${r.source || ""} • ${formatDateUtc(r.discovered_at_utc)}`;
-  els.detailOpenUrl.href = r.url || "#";
-
-  const payload = {
-    url: r.url,
-    name: r.name,
-    discovered_at_utc: r.discovered_at_utc,
-    source: r.source,
-    meta: r.meta,
-  };
-
-  els.detailJson.textContent = JSON.stringify(payload, null, 2);
-
-  const meta = r.meta && typeof r.meta === "object" ? r.meta : null;
-
-  /** @type {Array<any>} */
-  const rows = [];
-
-  rows.push({ label: "URL", value: r.url || "", href: r.url || "" });
-  rows.push({ label: "Name", value: r.name || "(no title)" });
-  rows.push({ label: "Discovered at", value: formatDateUtc(r.discovered_at_utc) || "" });
-  rows.push({ label: "Source", value: r.source || "" });
-  rows.push({ label: "Website", value: r.domain || "" });
-
-  const cfg = state.viewerConfig || {};
-  const srcCfg = (cfg.sources && r.source && cfg.sources[r.source]) || null;
-  const fieldDefs =
-    (srcCfg && Array.isArray(srcCfg.fields) ? srcCfg.fields : null) ||
-    (cfg.defaults && Array.isArray(cfg.defaults.fields) ? cfg.defaults.fields : []);
-
-  const already = new Set(rows.map((x) => x.label));
-
-  for (const def of fieldDefs) {
-    if (!def || def.type !== "meta") continue;
-    const label = String(def.label || "").trim();
-    if (!label || already.has(label)) continue;
-
-    const keys = [String(def.key || "").trim()].filter(Boolean);
-    const fallbacks = Array.isArray(def.fallbackKeys) ? def.fallbackKeys.map(String) : [];
-    for (const k of fallbacks) {
-      const kk = String(k || "").trim();
-      if (kk) keys.push(kk);
-    }
-
-    let val = null;
-    for (const k of keys) {
-      const got = metaGet(meta, k);
-      if (got !== null && got !== undefined && !(typeof got === "string" && !got.trim())) {
-        val = got;
-        break;
-      }
-    }
-
-    // Special formatting
-    const fmt = String(def.format || "").trim();
-    if (fmt === "departments") {
-      const lines = departmentLines(val);
-      if (!lines.length) continue;
-      rows.push({ label, kind: "departments", lines, limit: def.limit || 5 });
-      already.add(label);
-      continue;
-    }
-
-    if (fmt === "email") {
-      // For tel_directory specifically, show Email even if null.
-      if ((r.source || "").toLowerCase() === "tel_directory") {
-        rows.push({ label, value: emailDisplay(val) });
-        already.add(label);
-      } else if (val !== null && val !== undefined) {
-        rows.push({ label, value: emailDisplay(val) });
-        already.add(label);
-      }
-      continue;
-    }
-
-    if (fmt === "date") {
-      if (val === null || val === undefined) continue;
-      rows.push({ label, value: formatDateUtc(String(val)) });
-      already.add(label);
-      continue;
-    }
-
-    if (fmt === "url") {
-      if (typeof val !== "string" || !val.trim()) continue;
-      rows.push({ label, value: val.trim(), href: val.trim() });
-      already.add(label);
-      continue;
-    }
-
-    if (val === null || val === undefined) continue;
-    if (typeof val === "string" && !val.trim()) continue;
-
-    rows.push({ label, value: String(val) });
-    already.add(label);
-  }
-
-  renderKvRows(rows);
-
-  els.copyJsonBtn.onclick = async () => {
-    try {
-      await navigator.clipboard.writeText(JSON.stringify(payload));
-      setStatus("Copied JSON to clipboard");
-    } catch {
-      setStatus("Could not copy (browser blocked clipboard)");
-    }
-  };
-
-  els.detailDialog.showModal();
-}
+// ============================================================================
+// Data Loading
+// ============================================================================
 
 async function fetchJson(url) {
   const res = await fetch(url, { cache: "no-store" });
@@ -674,123 +590,209 @@ async function loadViewerConfig() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     state.viewerConfig = await res.json();
   } catch {
-    state.viewerConfig = { version: 1, defaults: { fields: [] }, sources: {} };
+    state.viewerConfig = { version: 1, viewer: {}, defaults: { fields: [] }, sources: {} };
   }
+}
+
+async function loadSourceMapFromSettingsYaml() {
+  if (!state.owner || !state.repo) {
+    console.warn("[viewer] No repo configured, skipping settings.yaml load");
+    return;
+  }
+  
+  const yaml = window.jsyaml;
+  if (!yaml?.load) {
+    console.warn("[viewer] jsyaml not loaded, skipping settings.yaml parse");
+    return;
+  }
+
+  const url = repoFileUrl("config/settings.yaml", "main");
+  if (!url) {
+    console.warn("[viewer] Could not build settings.yaml URL");
+    return;
+  }
+
+  try {
+    console.log("[viewer] Loading settings.yaml from:", url);
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) {
+      console.warn("[viewer] Failed to fetch settings.yaml:", res.status);
+      return;
+    }
+
+    const text = await res.text();
+    const parsed = yaml.load(text);
+    const crawlers = parsed?.crawlers;
+    
+    if (!crawlers || typeof crawlers !== "object") {
+      console.warn("[viewer] No crawlers section in settings.yaml");
+      return;
+    }
+
+    const groups = [];
+    const byCrawler = {};
+
+    for (const [sourceIdRaw, sourceCfg] of Object.entries(crawlers)) {
+      const sourceId = String(sourceIdRaw || "").trim().toLowerCase();
+      if (!sourceId || !sourceCfg || typeof sourceCfg !== "object") continue;
+
+      const label = String(sourceCfg.label || sourceId).trim();
+      groups.push({ id: sourceId, label });
+
+      const pages = sourceCfg.pages;
+      if (!pages || typeof pages !== "object") continue;
+
+      for (const crawlerName of Object.keys(pages)) {
+        const key = String(crawlerName || "").trim().toLowerCase();
+        if (key) byCrawler[key] = sourceId;
+      }
+    }
+
+    if (groups.length) {
+      VIEWER.sourceGroups = groups;
+      VIEWER.sourceGroupLabels = Object.fromEntries(groups.map((x) => [x.id, x.label]));
+      console.log("[viewer] Loaded source groups:", groups.map(g => g.id).join(", "));
+    }
+
+    VIEWER.sourceGroupByCrawler = { ...VIEWER.sourceGroupByCrawler, ...byCrawler };
+    console.log("[viewer] Loaded crawler mappings:", Object.keys(byCrawler).length);
+  } catch (err) {
+    console.error("[viewer] Error loading settings.yaml:", err);
+  }
+}
+
+function applyViewerConfig() {
+  const viewerCfg = state.viewerConfig?.viewer || {};
+
+  const cfgRepo = viewerCfg.defaultRepo || {};
+  VIEWER.defaultRepo = {
+    owner: String(cfgRepo.owner || "").trim(),
+    repo: String(cfgRepo.repo || "").trim(),
+  };
+
+  const groups = Array.isArray(viewerCfg.sourceGroups)
+    ? viewerCfg.sourceGroups
+        .map((g) => ({
+          id: String(g?.id || "").trim().toLowerCase(),
+          label: String(g?.label || "").trim(),
+        }))
+        .filter((g) => g.id && g.label)
+    : [];
+
+  VIEWER.sourceGroups = groups;
+  VIEWER.sourceGroupLabels = Object.fromEntries(groups.map((x) => [x.id, x.label]));
+
+  const byCrawler = viewerCfg.sourceGroupByCrawler || {};
+  VIEWER.sourceGroupByCrawler = Object.fromEntries(
+    Object.entries(byCrawler)
+      .map(([k, v]) => [String(k || "").trim().toLowerCase(), String(v || "").trim().toLowerCase()])
+      .filter(([k, v]) => k && v)
+  );
 }
 
 async function tryBuildArchiveIndexFromGitTree() {
   if (!state.owner || !state.repo) return [];
-  // 1) Get ref for data branch
-  const refUrl = githubApiUrl(`repos/${state.owner}/${state.repo}/git/ref/heads/${state.branch}`);
-  const ref = await fetchJson(refUrl);
-  const commitSha = ref?.object?.sha;
-  if (!commitSha) return [];
 
-  // 2) Get commit -> tree sha
-  const commitUrl = githubApiUrl(`repos/${state.owner}/${state.repo}/git/commits/${commitSha}`);
-  const commit = await fetchJson(commitUrl);
-  const treeSha = commit?.tree?.sha;
-  if (!treeSha) return [];
+  try {
+    // Get ref for data branch
+    const ref = await fetchJson(githubApiUrl(`repos/${state.owner}/${state.repo}/git/ref/heads/${state.branch}`));
+    const commitSha = ref?.object?.sha;
+    if (!commitSha) return [];
 
-  // 3) Get full tree
-  const treeUrl = githubApiUrl(
-    `repos/${state.owner}/${state.repo}/git/trees/${treeSha}?recursive=1`
-  );
-  const tree = await fetchJson(treeUrl);
-  const items = Array.isArray(tree?.tree) ? tree.tree : [];
+    // Get commit -> tree sha
+    const commit = await fetchJson(githubApiUrl(`repos/${state.owner}/${state.repo}/git/commits/${commitSha}`));
+    const treeSha = commit?.tree?.sha;
+    if (!treeSha) return [];
 
-  const out = [];
-  const re = /^data\/archive\/(\d{4})\/(\d{2})\/(\d{2})\/urls\.jsonl$/;
-  for (const it of items) {
-    if (!it || it.type !== "blob" || typeof it.path !== "string") continue;
-    const m = it.path.match(re);
-    if (!m) continue;
-    const date = `${m[1]}-${m[2]}-${m[3]}`;
-    out.push({
-      date,
-      path: normalizeDataRootPath(it.path),
-      bytes: typeof it.size === "number" ? it.size : undefined,
-    });
+    // Get full tree
+    const tree = await fetchJson(githubApiUrl(`repos/${state.owner}/${state.repo}/git/trees/${treeSha}?recursive=1`));
+    const items = Array.isArray(tree?.tree) ? tree.tree : [];
+
+    const out = [];
+    const re = /^data\/archive\/(\d{4})\/(\d{2})\/(\d{2})\/urls\.jsonl$/;
+
+    for (const it of items) {
+      if (it?.type !== "blob" || typeof it?.path !== "string") continue;
+      const m = it.path.match(re);
+      if (!m) continue;
+      out.push({
+        date: `${m[1]}-${m[2]}-${m[3]}`,
+        path: normalizeDataRootPath(it.path),
+        bytes: typeof it.size === "number" ? it.size : undefined,
+      });
+    }
+
+    out.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    return out;
+  } catch {
+    return [];
   }
-
-  out.sort((a, b) => String(b.date).localeCompare(String(a.date)));
-  return out;
 }
 
 async function loadArchiveIndex() {
-  const url = rawUrl("archive/index.json");
-  if (!url) return;
+  if (!els.dateSelect) return;
 
+  let entries = [];
   try {
-    const obj = await fetchJson(url);
-    const entries = Array.isArray(obj?.archives) ? obj.archives : Array.isArray(obj) ? obj : [];
-    state.archiveIndex = entries;
+    const url = rawUrl("archive/index.json");
+    if (url) {
+      const obj = await fetchJson(url);
+      const rawEntries = obj?.archives || (Array.isArray(obj) ? obj : []);
 
-    els.archiveSelect.replaceChildren();
-    els.archiveSelect.add(new Option("Select an archive…", ""));
-
-    for (const e of entries) {
-      const path = normalizeDataRootPath((e.path || "").trim());
-      let date = (e.date || e.run_date_utc || "").trim();
-      if (!date && path) {
-        // Try infer from archive/YYYY/MM/DD/...
-        const m = path.match(/archive\/(\d{4})\/(\d{2})\/(\d{2})\//);
-        if (m) date = `${m[1]}-${m[2]}-${m[3]}`;
-      }
-      if (!path) continue;
-      const size = e.bytes != null ? ` (${humanBytes(e.bytes)})` : "";
-      els.archiveSelect.add(new Option(`${date || path}${size}`, path));
+      entries = rawEntries
+        .map((e) => {
+          const path = normalizeDataRootPath((e.path || "").trim());
+          let date = (e.date || e.run_date_utc || "").trim();
+          if (!date && path) {
+            const m = path.match(/archive\/(\d{4})\/(\d{2})\/(\d{2})\//);
+            if (m) date = `${m[1]}-${m[2]}-${m[3]}`;
+          }
+          return { date, path, bytes: typeof e.bytes === "number" ? e.bytes : undefined };
+        })
+        .filter((x) => x.path);
     }
-
-    if (els.archiveSelect.options.length > 1) {
-      // Default to most recent archive entry when user switches to Archive.
-      els.archiveSelect.selectedIndex = 1;
-      state.selectedArchivePath = String(els.archiveSelect.value || "");
-    }
-  } catch (err) {
-    // Fallback: build archive list from the data branch git tree.
-    try {
-      setStatus("Loading archives…");
-      const built = await tryBuildArchiveIndexFromGitTree();
-      state.archiveIndex = built;
-
-      els.archiveSelect.replaceChildren();
-      els.archiveSelect.add(new Option("Select an archive…", ""));
-      for (const e of built) {
-        const size = e.bytes != null ? ` (${humanBytes(e.bytes)})` : "";
-        els.archiveSelect.add(new Option(`${e.date}${size}`, e.path));
-      }
-
-      if (els.archiveSelect.options.length > 1) {
-        els.archiveSelect.selectedIndex = 1;
-        state.selectedArchivePath = String(els.archiveSelect.value || "");
-      }
-
-      setStatus(built.length ? `Loaded ${built.length} archives` : "No archives found");
-    } catch {
-      state.archiveIndex = [];
-      els.archiveSelect.replaceChildren(new Option("(no archives found)", ""));
-    }
+  } catch {
+    setStatus("Loading archives…");
+    entries = await tryBuildArchiveIndexFromGitTree();
   }
+
+  entries.sort((a, b) => String(b.date || "").localeCompare(String(a.date || "")));
+  state.archiveIndex = entries;
+
+  let latestDate = "";
+  try {
+    const latestSummary = await fetchJson(rawUrl("latest/summary.json"));
+    latestDate = String(latestSummary?.run_date_utc || "").trim();
+  } catch { /* ignore */ }
+
+  els.dateSelect.replaceChildren();
+  els.dateSelect.add(new Option(latestDate ? `Latest (${latestDate})` : "Latest", "latest/urls.jsonl"));
+
+  for (const e of entries) {
+    if (!e.path) continue;
+    const size = e.bytes != null ? ` (${humanBytes(e.bytes)})` : "";
+    els.dateSelect.add(new Option(`${e.date || e.path}${size}`, e.path));
+  }
+
+  els.dateSelect.value = "latest/urls.jsonl";
+  state.selectedDataPath = "latest/urls.jsonl";
+
+  setStatus(entries.length ? `Loaded ${entries.length} archive dates` : "No archives found");
 }
 
 async function loadRunInfo() {
   if (!els.runInfo) return;
   els.runInfo.textContent = "";
-  const url = rawUrl("latest/summary.json");
-  if (!url) return;
+
   try {
-    const s = await fetchJson(url);
-    const runDate = s?.run_date_utc || "";
+    const s = await fetchJson(rawUrl("latest/summary.json"));
+    const runDate = formatDateUtc(s?.run_date_utc) || "";
     const rows = s?.rows != null ? String(s.rows) : "";
     const crawler = s?.crawler || "";
-    const prettyRun = runDate ? formatDateUtc(String(runDate)) : "";
-    els.runInfo.textContent = prettyRun
-      ? `run: ${prettyRun}${rows ? ` • rows: ${rows}` : ""}${crawler ? ` • scope: ${crawler}` : ""}`
+    els.runInfo.textContent = runDate
+      ? `run: ${runDate}${rows ? ` • rows: ${rows}` : ""}${crawler ? ` • scope: ${crawler}` : ""}`
       : "";
-  } catch {
-    // ignore
-  }
+  } catch { /* ignore */ }
 }
 
 async function loadDataset() {
@@ -799,13 +801,10 @@ async function loadDataset() {
     return;
   }
 
-  const kind = els.datasetSelect.value;
-  const relPath =
-    kind === "archive" && state.selectedArchivePath
-      ? state.selectedArchivePath
-      : "latest/urls.jsonl";
-
+  const relPath = state.selectedDataPath || "latest/urls.jsonl";
+  const isLatest = relPath === "latest/urls.jsonl";
   const url = rawUrl(relPath);
+
   if (!url) {
     setStatus("Invalid repo configuration");
     return;
@@ -813,7 +812,7 @@ async function loadDataset() {
 
   if (els.downloadJsonLink) {
     els.downloadJsonLink.href = url;
-    els.downloadJsonLink.textContent = `JSONL (${kind === "archive" ? "archive" : "latest"})`;
+    els.downloadJsonLink.textContent = "JSONL";
     els.downloadJsonLink.removeAttribute("aria-disabled");
     els.downloadJsonLink.classList.remove("menu__item--disabled");
   }
@@ -823,8 +822,6 @@ async function loadDataset() {
   state.records = [];
   state.filteredIdx = [];
   setStatus("Loading…");
-
-  const startT = performance.now();
 
   try {
     const res = await fetch(url, { cache: "no-store" });
@@ -843,7 +840,6 @@ async function loadDataset() {
       const { value, done } = await reader.read();
       if (done) break;
       bytesRead += value?.byteLength || 0;
-
       buf += decoder.decode(value, { stream: true });
 
       let idx;
@@ -851,9 +847,9 @@ async function loadDataset() {
         const line = buf.slice(0, idx).trim();
         buf = buf.slice(idx + 1);
         if (!line) continue;
+
         try {
-          const obj = JSON.parse(line);
-          state.records.push(normalizeRecord(obj));
+          state.records.push(normalizeRecord(JSON.parse(line)));
         } catch {
           parseErrors++;
         }
@@ -861,22 +857,19 @@ async function loadDataset() {
 
         if (lines % 1000 === 0) {
           const pct = totalBytes ? Math.round((100 * bytesRead) / totalBytes) : 0;
-          setStatus(
-            totalBytes
-              ? `Loading… ${pct}% (${state.records.length.toLocaleString()} records)`
-              : `Loading… (${state.records.length.toLocaleString()} records)`
-          );
+          setStatus(totalBytes
+            ? `Loading… ${pct}% (${state.records.length.toLocaleString()} records)`
+            : `Loading… (${state.records.length.toLocaleString()} records)`);
           await new Promise((r) => setTimeout(r, 0));
         }
       }
     }
 
-    buf += decoder.decode();
-    const tail = buf.trim();
+    // Process remaining buffer
+    const tail = decoder.decode().trim();
     if (tail) {
       try {
-        const obj = JSON.parse(tail);
-        state.records.push(normalizeRecord(obj));
+        state.records.push(normalizeRecord(JSON.parse(tail)));
       } catch {
         parseErrors++;
       }
@@ -887,14 +880,12 @@ async function loadDataset() {
     renderTable();
 
     if (els.downloadExcelBtn) els.downloadExcelBtn.disabled = state.filteredIdx.length === 0;
-
-    // Keep status quiet after load; table/resultInfo already shows counts.
     setStatus(parseErrors ? `Idle (parse errors: ${parseErrors})` : "Idle");
 
-    if (kind !== "archive") {
+    if (isLatest) {
       await loadRunInfo();
-    } else {
-      if (els.runInfo) els.runInfo.textContent = "";
+    } else if (els.runInfo) {
+      els.runInfo.textContent = "";
     }
   } catch (err) {
     console.error(err);
@@ -906,9 +897,67 @@ async function loadDataset() {
   }
 }
 
+// ============================================================================
+// Repository Management
+// ============================================================================
+
+function inferGitHubRepoFromPages() {
+  const host = window.location.hostname || "";
+  if (!host.endsWith(".github.io")) return null;
+
+  const owner = host.split(".")[0] || "";
+  const parts = (window.location.pathname || "/").split("/").filter(Boolean);
+  const repo = parts[0] || "";
+
+  return (owner && repo) ? { owner, repo } : null;
+}
+
+function loadRepoFromQueryOrStorage() {
+  const url = new URL(window.location.href);
+  const qp = url.searchParams.get("repo") || "";
+  const stored = localStorage.getItem("ol_viewer_repo") || "";
+  const inferred = inferGitHubRepoFromPages();
+  const cfgRepo = VIEWER.defaultRepo.owner && VIEWER.defaultRepo.repo
+    ? `${VIEWER.defaultRepo.owner}/${VIEWER.defaultRepo.repo}`
+    : "";
+
+  const chosen = (qp || stored || (inferred ? `${inferred.owner}/${inferred.repo}` : "") || cfgRepo).trim();
+  const [owner, repo] = chosen.split("/");
+
+  if (owner && repo) {
+    state.owner = owner;
+    state.repo = repo;
+  }
+
+  if (els.repoInput) {
+    els.repoInput.value = state.owner && state.repo ? `${state.owner}/${state.repo}` : "";
+  }
+}
+
+function saveRepo(value) {
+  const v = (value || "").trim();
+  const [owner, repo] = v.split("/");
+  if (!owner || !repo) {
+    alert("Repo must be like: owner/repo");
+    return;
+  }
+  state.owner = owner;
+  state.repo = repo;
+  localStorage.setItem("ol_viewer_repo", `${owner}/${repo}`);
+}
+
+// ============================================================================
+// Event Handlers
+// ============================================================================
+
+function closeDownloadMenu() {
+  if (els.downloadMenu?.open) {
+    els.downloadMenu.open = false;
+  }
+}
+
 function resetFilters() {
   els.sourceFilter.value = "";
-  els.domainFilter.value = "";
   els.searchInput.value = "";
   state.sortKey = "discovered_at_utc";
   state.sortDir = "desc";
@@ -917,58 +966,45 @@ function resetFilters() {
   renderTable();
 }
 
+async function handleRepoChange() {
+  saveRepo(els.repoInput.value);
+  await loadSourceMapFromSettingsYaml();
+  await loadArchiveIndex();
+  await loadDataset();
+}
+
 function wireEvents() {
-  if (els.saveRepoBtn && els.repoInput) {
-    els.saveRepoBtn.addEventListener("click", async () => {
-      saveRepo(els.repoInput.value);
-      await loadArchiveIndex();
-      await loadDataset();
-    });
-
-    els.repoInput.addEventListener("keydown", async (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        saveRepo(els.repoInput.value);
-        await loadArchiveIndex();
-        await loadDataset();
-      }
-    });
-  }
-
-  els.datasetSelect.addEventListener("change", async () => {
-    const kind = els.datasetSelect.value;
-    els.archiveField.hidden = kind !== "archive";
-    if (kind === "archive" && state.archiveIndex.length === 0) {
-      await loadArchiveIndex();
+  // Repo input
+  els.saveRepoBtn?.addEventListener("click", handleRepoChange);
+  els.repoInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleRepoChange();
     }
-    state.selectedArchivePath = String(els.archiveSelect.value || "");
+  });
+
+  // Date select
+  els.dateSelect?.addEventListener("change", async () => {
+    state.selectedDataPath = String(els.dateSelect.value || "latest/urls.jsonl");
     await loadDataset();
   });
 
-  els.archiveSelect.addEventListener("change", async () => {
-    state.selectedArchivePath = String(els.archiveSelect.value || "");
-    await loadDataset();
-  });
-
+  // Filters
   els.sourceFilter.addEventListener("change", () => {
-    applyFiltersAndSort();
-    renderTable();
-  });
-
-  els.domainFilter.addEventListener("change", () => {
     applyFiltersAndSort();
     renderTable();
   });
 
   let searchTimer = null;
   els.searchInput.addEventListener("input", () => {
-    if (searchTimer) window.clearTimeout(searchTimer);
-    searchTimer = window.setTimeout(() => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
       applyFiltersAndSort();
       renderTable();
     }, 150);
   });
 
+  // Pagination
   els.pageSizeSelect.addEventListener("change", () => {
     state.pageSize = Number(els.pageSizeSelect.value) || 50;
     state.page = 1;
@@ -976,7 +1012,12 @@ function wireEvents() {
   });
 
   els.prevBtn.addEventListener("click", () => {
-    state.page -= 1;
+    state.page--;
+    renderTable();
+  });
+
+  els.nextBtn.addEventListener("click", () => {
+    state.page++;
     renderTable();
   });
 
@@ -986,7 +1027,7 @@ function wireEvents() {
     renderTable();
   };
 
-  els.goPageBtn?.addEventListener("click", () => goToPage());
+  els.goPageBtn?.addEventListener("click", goToPage);
   els.pageInput?.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -994,30 +1035,22 @@ function wireEvents() {
     }
   });
 
-  els.nextBtn.addEventListener("click", () => {
-    state.page += 1;
-    renderTable();
-  });
+  // Actions
+  els.reloadBtn.addEventListener("click", loadDataset);
+  els.resetBtn.addEventListener("click", resetFilters);
 
-  els.reloadBtn.addEventListener("click", async () => {
-    await loadDataset();
-  });
-
-  els.downloadJsonLink?.addEventListener("click", () => {
-    closeDownloadMenu();
-  });
-
+  els.downloadJsonLink?.addEventListener("click", closeDownloadMenu);
   els.downloadExcelBtn?.addEventListener("click", () => {
     downloadExcel();
     closeDownloadMenu();
   });
 
-  els.resetBtn.addEventListener("click", () => resetFilters());
-
+  // Sorting
   document.querySelectorAll("th[data-sort]").forEach((th) => {
     th.addEventListener("click", () => {
       const key = th.getAttribute("data-sort");
       if (!key) return;
+
       if (state.sortKey === key) {
         state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
       } else {
@@ -1029,25 +1062,32 @@ function wireEvents() {
     });
   });
 
-  // Close the record dialog when clicking the backdrop.
+  // Dialog handling
   els.detailDialog.addEventListener("click", (e) => {
     if (e.target === els.detailDialog) {
       els.detailDialog.close();
     }
   });
 
-  // Close the download menu when clicking outside of it.
+  // Close download menu on outside click
   document.addEventListener("click", (e) => {
-    if (!els.downloadMenu || !els.downloadMenu.open) return;
-    const t = /** @type {any} */ (e.target);
-    if (t && typeof els.downloadMenu.contains === "function" && els.downloadMenu.contains(t)) return;
-    closeDownloadMenu();
+    if (els.downloadMenu?.open && !els.downloadMenu.contains(e.target)) {
+      closeDownloadMenu();
+    }
   });
 }
 
+// ============================================================================
+// Main Entry Point
+// ============================================================================
+
 async function main() {
   await loadViewerConfig();
+  applyViewerConfig();
+
   loadRepoFromQueryOrStorage();
+  await loadSourceMapFromSettingsYaml();
+
   state.pageSize = Number(els.pageSizeSelect.value) || 50;
   wireEvents();
 

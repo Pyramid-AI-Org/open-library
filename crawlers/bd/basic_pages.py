@@ -44,7 +44,7 @@ class Crawler:
     name = "bd_basic_pages"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         targets = cfg.get("targets", [])
         if not targets:
@@ -57,7 +57,7 @@ class Crawler:
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -107,16 +107,16 @@ class Crawler:
             if can_page and can_page not in seen_urls:
                 seen_urls.add(can_page)
                 out.append(
-                    UrlRecord(
-                        url=can_page,
-                        name=page_name_label,
-                        discovered_at_utc=ctx.started_at_utc,
-                        source=self.name,
-                        meta={
+                    ctx.make_record(
+                    url=can_page,
+                    name=page_name_label,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta={
                             "is_index_page": True,
                             "file_ext": "html",
                         },
-                    )
+                )
                 )
 
             # 2. Extract PDF links
@@ -143,16 +143,16 @@ class Crawler:
                 name = _infer_name(link.text or "", can)
 
                 out.append(
-                    UrlRecord(
-                        url=can,
-                        name=name,
-                        discovered_at_utc=ctx.started_at_utc,
-                        source=self.name,
-                        meta={
+                    ctx.make_record(
+                    url=can,
+                    name=name,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta={
                             "from_page_url": page_url,
                             "file_ext": "pdf",
                         },
-                    )
+                )
                 )
 
                 if len(out) >= max_total_records:

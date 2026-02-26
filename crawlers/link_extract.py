@@ -17,7 +17,7 @@ class Crawler:
     name = "link_extract"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
         page_url = cfg.get("page_url")
         if not page_url:
             return []
@@ -28,8 +28,8 @@ class Crawler:
 
         resp = requests.get(
             page_url,
-            timeout=int(ctx.settings.get("http", {}).get("timeout_seconds", 30)),
-            headers={"User-Agent": ctx.settings.get("http", {}).get("user_agent", "")},
+            timeout=int(ctx.get_http_config().get("timeout_seconds", 30)),
+            headers={"User-Agent": ctx.get_http_config().get("user_agent", "")},
         )
         resp.raise_for_status()
 
@@ -46,7 +46,7 @@ class Crawler:
                 continue
             seen.add(link.href)
             records.append(
-                UrlRecord(
+                ctx.make_record(
                     url=link.href,
                     name=link.text or None,
                     discovered_at_utc=datetime.now(timezone.utc).isoformat(),

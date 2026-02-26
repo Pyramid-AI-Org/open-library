@@ -82,7 +82,7 @@ class Crawler:
     name = "herbarium"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
         api_url = str(
             cfg.get(
                 "api_url", "https://www.herbarium.gov.hk/plantdb/GetSpeciesList.php"
@@ -108,7 +108,7 @@ class Crawler:
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 60))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -198,7 +198,7 @@ class Crawler:
                 )
 
                 out.append(
-                    UrlRecord(
+                    ctx.make_record(
                         url=url,
                         name=name,
                         discovered_at_utc=discovered_at,

@@ -208,7 +208,7 @@ class Crawler:
     name = "emsd.lifts_and_escalators_registered_workers"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
         page_url = str(cfg.get("page_url", _DEFAULT_PAGE_URL)).strip()
         content_element_id = str(cfg.get("content_element_id", "content")).strip()
 
@@ -218,7 +218,7 @@ class Crawler:
         backoff_jitter = float(cfg.get("backoff_jitter_seconds", 0.25))
         max_total_records = int(cfg.get("max_total_records", 50000))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -262,7 +262,7 @@ class Crawler:
                     continue
 
                 out.append(
-                    UrlRecord(
+                    ctx.make_record(
                         url=can,
                         name=clean_text(link_text) or infer_name_from_link(link_text, can),
                         discovered_at_utc=ctx.run_date_utc,
@@ -298,7 +298,7 @@ class Crawler:
                     continue
 
                 out.append(
-                    UrlRecord(
+                    ctx.make_record(
                         url=can,
                         name=clean_text(link.text) or infer_name_from_link(link.text, can),
                         discovered_at_utc=ctx.run_date_utc,

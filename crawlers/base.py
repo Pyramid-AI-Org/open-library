@@ -15,15 +15,83 @@ class UrlRecord:
     name: str | None
     discovered_at_utc: str  # ISO-8601 string
     source: str
+    source_id: str  # Folder name (e.g., "devb", "bd")
+    source_label: str  # Human-readable label (e.g., "The Development Bureau")
     meta: dict[str, Any]
 
 
-@dataclass(frozen=True)
+@dataclass
 class RunContext:
     run_date_utc: str
     started_at_utc: str
     settings: dict[str, Any]
+    source_id: str  # Folder name for this crawler's source
+    source_label: str  # Human-readable label for this source
     debug: bool = False
+
+    def get_crawler_config(self, crawler_name: str) -> dict[str, Any]:
+        """
+        Get configuration for a specific crawler, merging source-level and page-level settings.
+        
+        New settings structure:
+          crawlers:
+            devb:
+              label: "The Development Bureau"
+              base_url: "https://www.devb.gov.hk"
+              pages:
+                devb_press_releases:
+                  years_back: 10
+                  ...
+        
+        Page-level settings override source-level settings.
+        """
+        crawlers_cfg = self.settings.get("crawlers", {})
+        source_cfg = crawlers_cfg.get(self.source_id, {})
+        pages_cfg = source_cfg.get("pages", {})
+        page_cfg = pages_cfg.get(crawler_name, {})
+        
+        # Merge: source-level defaults + page-level overrides
+        merged = {}
+        for k, v in source_cfg.items():
+            if k != "pages" and k != "label":
+                merged[k] = v
+        merged.update(page_cfg)
+        return merged
+    
+    def get_http_config(self) -> dict[str, Any]:
+        """Get HTTP configuration from settings."""
+        return self.settings.get("http", {})
+    
+    def make_record(
+        self,
+        url: str,
+        name: str | None,
+        discovered_at_utc: str,
+        source: str,
+        meta: dict[str, Any] | None = None,
+    ) -> UrlRecord:
+        """
+        Create a UrlRecord with source_id and source_label automatically populated.
+        
+        Args:
+            url: The URL of the record
+            name: Display name for the record
+            discovered_at_utc: ISO-8601 timestamp when discovered
+            source: The crawler name (e.g., "devb_press_releases")
+            meta: Optional metadata dictionary
+        
+        Returns:
+            UrlRecord with all fields populated
+        """
+        return UrlRecord(
+            url=url,
+            name=name,
+            discovered_at_utc=discovered_at_utc,
+            source=source,
+            source_id=self.source_id,
+            source_label=self.source_label,
+            meta=meta or {},
+        )
 
 
 class BaseCrawler(Protocol):

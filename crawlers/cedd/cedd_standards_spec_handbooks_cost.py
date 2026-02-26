@@ -429,7 +429,7 @@ class Crawler:
     name = "cedd_standards_spec_handbooks_cost"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
-        cfg = ctx.settings.get("crawlers", {}).get(self.name, {})
+        cfg = ctx.get_crawler_config(self.name)
 
         base_url = str(cfg.get("base_url", "https://www.cedd.gov.hk")).rstrip("/")
         page_url = str(
@@ -475,7 +475,7 @@ class Crawler:
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
 
-        http_cfg = ctx.settings.get("http", {})
+        http_cfg = ctx.get_http_config()
         timeout_seconds = int(http_cfg.get("timeout_seconds", 30))
         user_agent = str(http_cfg.get("user_agent", "")).strip()
         max_retries = int(http_cfg.get("max_retries", 3))
@@ -578,7 +578,7 @@ class Crawler:
                                 session=session,
                                 page_url=abs_url,
                                 base_url=base_url,
-                                discovered_at_utc=ctx.started_at_utc,
+                                ctx=ctx,
                                 source=self.name,
                                 timeout_seconds=timeout_seconds,
                                 max_retries=max_retries,
@@ -627,13 +627,13 @@ class Crawler:
                         meta["issue_date"] = issue_date
 
                     out.append(
-                        UrlRecord(
-                            url=abs_url,
-                            name=name,
-                            discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
-                            meta=meta,
-                        )
+                        ctx.make_record(
+                    url=abs_url,
+                    name=name,
+                    discovered_at_utc=ctx.started_at_utc,
+                    source=self.name,
+                    meta=meta,
+                )
                     )
                     if len(out) >= max_total_records:
                         break
