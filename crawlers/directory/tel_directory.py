@@ -159,10 +159,9 @@ def _department_id_from_path(path: list[str]) -> str | None:
     return _normalize_department_id(" -> ".join(path))
 
 
-def _dedup_key(phone_norm: str, department_id: str | None) -> str:
-    d = _normalize_department_id(department_id or "") or ""
-    # Stable, human-readable composite key.
-    return f"{phone_norm}|{d}"
+def _dedup_key(url: str) -> str:
+    # Stable key: one unique person/service detail page URL => one record.
+    return (url or "").strip()
 
 
 def _set_department_path(meta: dict[str, Any], path: list[str]) -> None:
@@ -396,6 +395,186 @@ def _normalize_email(value: str) -> str | None:
     if "@" not in s:
         return None
     return s
+
+
+@dataclass
+class _DetailField:
+    label: str
+    value: str
+    links: list[str]
+
+
+class _DetailTableParser(HTMLParser):
+    def __init__(self, *, base_url: str) -> None:
+        super().__init__()
+        self._base_url = base_url
+
+        self._in_detail_table = False
+        self._detail_table_depth = 0
+
+        self._in_tr = False
+        self._active_cell: str | None = None
+        self._th_parts: list[str] = []
+        self._td_parts: list[str] = []
+        self._td_links: list[str] = []
+
+        self.fields: list[_DetailField] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        t = tag.lower()
+
+        if t == "table":
+            cls = ""
+            for k, v in attrs:
+                if k.lower() == "class" and v:
+                    cls = v
+                    break
+            if not self._in_detail_table and "detail-table" in cls.lower():
+                self._in_detail_table = True
+                self._detail_table_depth = 1
+                return
+            if self._in_detail_table:
+                self._detail_table_depth += 1
+                return
+
+        if not self._in_detail_table:
+            return
+
+        if t == "tr":
+            self._in_tr = True
+            self._active_cell = None
+            self._th_parts = []
+            self._td_parts = []
+            self._td_links = []
+            return
+
+        if not self._in_tr:
+            return
+
+        if t == "th":
+            self._active_cell = "th"
+            return
+        if t == "td":
+            self._active_cell = "td"
+            return
+
+        if t == "br" and self._active_cell == "td":
+            self._td_parts.append("\n")
+            return
+
+        if t == "a" and self._active_cell == "td":
+            href = None
+            for k, v in attrs:
+                if k.lower() == "href" and v:
+                    href = v
+                    break
+            if href:
+                abs_href = urljoin(self._base_url, href)
+                can = _canonicalize_any_url(abs_href)
+                if can:
+                    self._td_links.append(can)
+
+    def handle_endtag(self, tag: str) -> None:
+        t = tag.lower()
+
+        if t == "table" and self._in_detail_table:
+            self._detail_table_depth -= 1
+            if self._detail_table_depth <= 0:
+                self._in_detail_table = False
+                self._detail_table_depth = 0
+            return
+
+        if not self._in_detail_table:
+            return
+
+        if t == "th" and self._active_cell == "th":
+            self._active_cell = None
+            return
+        if t == "td" and self._active_cell == "td":
+            self._active_cell = None
+            return
+
+        if t == "tr" and self._in_tr:
+            label = " ".join("".join(self._th_parts).split()).strip()
+            value_raw = "".join(self._td_parts)
+            lines = [" ".join(x.split()).strip() for x in value_raw.splitlines()]
+            value = "\n".join([x for x in lines if x])
+            if label:
+                self.fields.append(
+                    _DetailField(
+                        label=label,
+                        value=value,
+                        links=self._td_links[:],
+                    )
+                )
+            self._in_tr = False
+            self._active_cell = None
+            self._th_parts = []
+            self._td_parts = []
+            self._td_links = []
+
+    def handle_data(self, data: str) -> None:
+        if not self._in_detail_table or not self._in_tr:
+            return
+        if self._active_cell == "th":
+            self._th_parts.append(data)
+        elif self._active_cell == "td":
+            self._td_parts.append(data)
+
+
+def _extract_person_detail_fields(html: str, *, page_url: str) -> dict[str, Any]:
+    parser = _DetailTableParser(base_url=page_url)
+    parser.feed(html)
+
+    by_label: dict[str, _DetailField] = {}
+    for f in parser.fields:
+        key = " ".join((f.label or "").split()).strip().lower()
+        if key and key not in by_label:
+            by_label[key] = f
+
+    def _pick(*labels: str) -> _DetailField | None:
+        for label in labels:
+            f = by_label.get(label.lower())
+            if f:
+                return f
+        return None
+
+    name_field = _pick("full name", "service name")
+    title_field = _pick("post title")
+    dept_field = _pick("bureau / department / related organisation")
+    tel_field = _pick("office tel")
+    fax_field = _pick("fax", "office fax")
+    email_field = _pick("email")
+    address_field = _pick("office address")
+
+    department_parts = [
+        " ".join(x.split()).strip()
+        for x in (dept_field.value if dept_field else "").splitlines()
+    ]
+    department_parts = [x for x in department_parts if x]
+
+    email_value = _normalize_email(email_field.value if email_field else "")
+    if email_value is None and email_field:
+        for href in email_field.links:
+            hl = href.lower()
+            if hl.startswith("mailto:"):
+                email_value = _normalize_email(href[len("mailto:") :])
+                if email_value:
+                    break
+
+    return {
+        "name": (name_field.value if name_field else "") or None,
+        "post_title": (title_field.value if title_field else "") or None,
+        "department": " -> ".join(department_parts) if department_parts else None,
+        "department_parts": department_parts,
+        "department_root": department_parts[0] if department_parts else None,
+        "office_tel": (tel_field.value if tel_field else "") or None,
+        "office_tel_norm": _normalize_phone(tel_field.value if tel_field else ""),
+        "fax": (fax_field.value if fax_field else "") or None,
+        "fax_norm": _normalize_phone(fax_field.value if fax_field else ""),
+        "email": email_value,
+        "office_address": (address_field.value if address_field else "") or None,
+    }
 
 
 @dataclass
@@ -714,8 +893,8 @@ class Crawler:
     """Crawl Government Telephone Directory (tel.directory.gov.hk).
 
     Traversal: start from index URL, follow department/subdepartment links within
-    tel.directory.gov.hk, parse person/service rows from tables, and deduplicate
-    by (normalized office telephone, department).
+    tel.directory.gov.hk, discover person/service detail URLs from list tables,
+    fetch each detail page, and deduplicate by detail URL.
 
     Config: crawlers.tel_directory
       - index_url: https://tel.directory.gov.hk/index_ENG.html
@@ -774,8 +953,7 @@ class Crawler:
         queue: list[_QueueItem] = [_QueueItem(url=start, department_path=[])]
         visited_pages: set[str] = set()
 
-        # Track all known department paths for a page and the phones discovered on that page.
-        page_entries: dict[str, list[dict[str, Any]]] = {}
+        detail_cache: dict[str, dict[str, Any]] = {}
 
         record_by_key: dict[str, UrlRecord] = {}
         out: list[UrlRecord] = []
@@ -790,92 +968,36 @@ class Crawler:
                 return post_title_short
             return long
 
-        def _record_department_root(
-            *, dept_override: str | None, dept_path: list[str]
-        ) -> str | None:
-            if dept_override:
-                return _normalize_department_id(dept_override)
-            if dept_path:
-                return _normalize_department_id(dept_path[0])
-            return None
-
-        def _department_id(
-            *, is_enquiry_like: bool, department_root: str | None, dept_path: list[str]
-        ) -> str | None:
-            if is_enquiry_like:
-                return _normalize_department_id(department_root)
-            return _department_id_from_path(dept_path)
-
         def _make_meta(
             *,
             discovered_from: str,
             dedup_key: str,
+            detail_url: str,
             department_root: str | None,
-            dept_path: list[str],
+            department: str | None,
+            department_parts: list[str],
             post_title_short: str | None,
             post_title_long: str | None,
             office_tel: str | None,
             email: str | None,
+            fax: str | None,
+            office_address: str | None,
         ) -> dict[str, Any]:
             meta: dict[str, Any] = {
+                "detail_url": detail_url,
+                "department": department,
                 "department_root": department_root,
                 "post_title": post_title_short,
                 "post_title_long": post_title_long,
                 "office_tel": office_tel,
                 "email": email,
+                "fax": fax,
+                "office_address": office_address,
                 "discovered_from": discovered_from,
                 "dedup_key": dedup_key,
             }
-            _set_department_path(meta, dept_path)
+            _set_department_path(meta, department_parts)
             return meta
-
-        def _ensure_record_for_page_path(page_url: str, dept_path: list[str]) -> None:
-            entries = page_entries.get(page_url)
-            if not entries:
-                return
-
-            for e in entries:
-                phone_key = str(e.get("phone_key") or "").strip()
-                if not phone_key:
-                    continue
-
-                is_enquiry_like = bool(e.get("is_enquiry_like"))
-                department_root = _normalize_department_id(e.get("department_root"))
-                effective_dept_path = _effective_department_path(
-                    dept_path,
-                    is_enquiry_like=is_enquiry_like,
-                    department_root=department_root,
-                )
-
-                dept_id = _department_id(
-                    is_enquiry_like=is_enquiry_like,
-                    department_root=department_root,
-                    dept_path=effective_dept_path,
-                )
-                k = _dedup_key(phone_key, dept_id)
-                if k in record_by_key:
-                    continue
-
-                meta = _make_meta(
-                    discovered_from=page_url,
-                    dedup_key=k,
-                    department_root=department_root,
-                    dept_path=effective_dept_path,
-                    post_title_short=e.get("post_title"),
-                    post_title_long=e.get("post_title_long"),
-                    office_tel=e.get("office_tel"),
-                    email=e.get("email"),
-                )
-
-                rec = ctx.make_record(
-                    url=str(e.get("url") or page_url),
-                    name=e.get("name") or None,
-                    discovered_at_utc=discovered_at,
-                    source=self.name,
-                    meta=meta,
-                )
-                record_by_key[k] = rec
-                out.append(rec)
 
         while queue:
             item = queue.pop(0)
@@ -911,84 +1033,16 @@ class Crawler:
             ):
                 dept_path = dept_path_from_tree
 
-            # 1) Extract people from tables
+            # 1) Extract person/service detail URLs from list tables
             people = _extract_people_from_html(html, page_url=page_url)
-            entries_on_page: list[dict[str, Any]] = []
             for p in people:
-                phone_key = str(p.get("office_tel_norm") or "").strip()
-                if not phone_key:
+                person_url = str(p.get("person_url") or "").strip()
+                if not person_url:
                     continue
 
-                url = str(p.get("person_url") or "").strip()
-                if not url:
-                    # Fall back to the page we discovered them on.
-                    url = page_url
-
-                is_enquiry_like = bool(p.get("is_enquiry_like"))
-                dept_override = p.get("department_override")
-                department_root = _record_department_root(
-                    dept_override=(
-                        dept_override if isinstance(dept_override, str) else None
-                    ),
-                    dept_path=dept_path,
-                )
-
-                effective_dept_path = _effective_department_path(
-                    dept_path,
-                    is_enquiry_like=is_enquiry_like,
-                    department_root=department_root,
-                )
-
-                dept_id = _department_id(
-                    is_enquiry_like=is_enquiry_like,
-                    department_root=department_root,
-                    dept_path=effective_dept_path,
-                )
-                k = _dedup_key(phone_key, dept_id)
-
-                post_title_short = p.get("post_title")
-                post_title_long = _post_title_long_from_short(post_title_short)
-
-                # Persist enough information to mint additional records if this page
-                # is later discovered under a different department path.
-                entries_on_page.append(
-                    {
-                        "phone_key": phone_key,
-                        "url": url,
-                        "name": p.get("name") or None,
-                        "is_enquiry_like": is_enquiry_like,
-                        "department_root": department_root,
-                        "post_title": post_title_short,
-                        "post_title_long": post_title_long,
-                        "office_tel": p.get("office_tel"),
-                        "email": p.get("email"),
-                    }
-                )
-
+                k = _dedup_key(person_url)
                 existing = record_by_key.get(k)
-                if existing is None:
-                    meta = _make_meta(
-                        discovered_from=page_url,
-                        dedup_key=k,
-                        department_root=department_root,
-                        dept_path=effective_dept_path,
-                        post_title_short=post_title_short,
-                        post_title_long=post_title_long,
-                        office_tel=p.get("office_tel"),
-                        email=p.get("email"),
-                    )
-
-                    rec = ctx.make_record(
-                    url=url,
-                    name=p.get("name") or None,
-                    discovered_at_utc=discovered_at,
-                    source=self.name,
-                    meta=meta,
-                )
-                    record_by_key[k] = rec
-                    out.append(rec)
-                else:
-                    # Same (phone, department) encountered again: keep a single record.
+                if existing is not None:
                     if isinstance(existing.meta, dict) and isinstance(
                         existing.meta.get("discovered_from"), str
                     ):
@@ -998,22 +1052,108 @@ class Crawler:
                             existing.meta["discovered_from_urls"] = dfs
                         if page_url not in dfs:
                             dfs.append(page_url)
+                    continue
 
-                    if url and existing.url != url and isinstance(existing.meta, dict):
-                        other_urls = existing.meta.get("other_person_urls")
-                        if not isinstance(other_urls, list):
-                            other_urls = []
-                            existing.meta["other_person_urls"] = other_urls
-                        if url not in other_urls and url != existing.url:
-                            other_urls.append(url)
+                detail = detail_cache.get(person_url)
+                if detail is None:
+                    if ctx.debug:
+                        print(f"[{self.name}] Fetch detail {person_url}")
+                    detail_resp = _get_with_retries(
+                        session,
+                        person_url,
+                        timeout_seconds=timeout_seconds,
+                        max_retries=max_retries,
+                        backoff_base_seconds=backoff_base_seconds,
+                        backoff_jitter_seconds=backoff_jitter_seconds,
+                    )
+                    detail = _extract_person_detail_fields(
+                        detail_resp.text,
+                        page_url=person_url,
+                    )
+                    detail_cache[person_url] = detail
+
+                post_title_fallback = (
+                    p.get("post_title") if isinstance(p.get("post_title"), str) else None
+                )
+                if isinstance(post_title_fallback, str) and (
+                    "bureau / department / related organisation"
+                    in post_title_fallback.lower()
+                ):
+                    post_title_fallback = None
+
+                post_title_short = (
+                    detail.get("post_title")
+                    if isinstance(detail.get("post_title"), str)
+                    else post_title_fallback
+                )
+                post_title_long = _post_title_long_from_short(post_title_short)
+
+                department_parts = detail.get("department_parts")
+                if not isinstance(department_parts, list):
+                    department_parts = []
+
+                department_root = _normalize_department_id(
+                    detail.get("department_root") if isinstance(detail, dict) else None
+                )
+                if department_root is None and department_parts:
+                    department_root = _normalize_department_id(
+                        str(department_parts[0])
+                    )
+
+                office_tel = (
+                    detail.get("office_tel")
+                    if isinstance(detail.get("office_tel"), str)
+                    else p.get("office_tel")
+                )
+                email = (
+                    detail.get("email")
+                    if isinstance(detail.get("email"), str)
+                    else p.get("email")
+                )
+
+                meta = _make_meta(
+                    discovered_from=page_url,
+                    dedup_key=k,
+                    detail_url=person_url,
+                    department_root=department_root,
+                    department=(
+                        detail.get("department")
+                        if isinstance(detail.get("department"), str)
+                        else None
+                    ),
+                    department_parts=[str(x) for x in department_parts if isinstance(x, str)],
+                    post_title_short=post_title_short,
+                    post_title_long=post_title_long,
+                    office_tel=office_tel if isinstance(office_tel, str) else None,
+                    email=email if isinstance(email, str) else None,
+                    fax=(
+                        detail.get("fax") if isinstance(detail.get("fax"), str) else None
+                    ),
+                    office_address=(
+                        detail.get("office_address")
+                        if isinstance(detail.get("office_address"), str)
+                        else None
+                    ),
+                )
+
+                rec = ctx.make_record(
+                    url=person_url,
+                    name=(
+                        detail.get("name") if isinstance(detail.get("name"), str) else None
+                    )
+                    or (p.get("name") if isinstance(p.get("name"), str) else None),
+                    discovered_at_utc=discovered_at,
+                    source=self.name,
+                    meta=meta,
+                )
+                record_by_key[k] = rec
+                out.append(rec)
 
                 if len(out) >= max_total_records:
                     break
 
             if len(out) >= max_total_records:
                 break
-
-            page_entries[page_url] = entries_on_page
 
             # 2) Discover more office/department pages to crawl
             links = extract_links(html, base_url=page_url)
@@ -1048,9 +1188,6 @@ class Crawler:
                             next_path = [*dept_path, seg]
 
                 if can in visited_pages:
-                    # No refetch, but if we've already extracted entries from that page,
-                    # create additional records for the new department path.
-                    _ensure_record_for_page_path(can, next_path)
                     continue
 
                 queue.append(_QueueItem(url=can, department_path=next_path))
