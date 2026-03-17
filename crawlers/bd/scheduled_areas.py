@@ -96,7 +96,7 @@ class Crawler:
             can = _canonicalize_url(link.href)
             if not can:
                 continue
-            
+
             if _path_ext(can) not in _ALLOWED_DOC_EXTS:
                 continue
 
@@ -113,7 +113,7 @@ class Crawler:
                     discovered_at_utc=ctx.started_at_utc,
                     source=self.name,
                     meta={
-                        "from_page_url": page_url,
+                        "discovered_from": page_url,
                         "file_ext": "pdf",
                     },
                 )

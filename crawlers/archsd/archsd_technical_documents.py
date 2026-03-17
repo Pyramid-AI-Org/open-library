@@ -47,6 +47,20 @@ _EDITION_RE = re.compile(
 )
 
 
+def _publish_date_from_edition_date(edition_date: str | None) -> str | None:
+    """Convert edition string into crawler publish_date (01.01.YYYY).
+
+    ARCHSD edition values are treated as publish-year markers.
+    """
+    if not edition_date:
+        return None
+
+    m = re.search(r"\b(\d{4})\b", edition_date)
+    if not m:
+        return None
+    return f"01.01.{m.group(1)}"
+
+
 class _ArchsdItemContentParser(HTMLParser):
     """Parse ARCHSD 'item-content' blocks to associate Edition -> PDFs."""
 
@@ -705,23 +719,20 @@ class Crawler:
 
                 link_text = doc_url_to_text.get(can, "")
                 edition_date = doc_url_to_edition.get(can)
+                publish_date = _publish_date_from_edition_date(edition_date)
 
                 seen_docs.add(can)
-                ext = _path_ext(can)
 
                 out.append(
                     ctx.make_record(
-                    url=can,
-                    name=(link_text or None),
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta={
-                            "start_url": start_can,
+                        url=can,
+                        name=(link_text or None),
+                        discovered_at_utc=ctx.started_at_utc,
+                        source=self.name,
+                        publish_date=publish_date,
+                        meta={
                             "section": item.section,
                             "discovered_from": item.url,
-                            "file_ext": ext.lstrip("."
-                ),
-                            "edition_date": edition_date,
                         },
                     )
                 )

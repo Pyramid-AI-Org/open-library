@@ -19,6 +19,30 @@ def _is_pdf_url(url: str) -> bool:
     return path.endswith(".pdf")
 
 
+def _publish_date_from_circular_no(circular_no: str | None) -> str | None:
+    text = _clean_text(circular_no)
+    if not text:
+        return None
+
+    month_text, sep, year_text = text.partition("/")
+    if not sep:
+        return None
+    if not month_text.isdigit() or not year_text.isdigit():
+        return None
+
+    month = int(month_text)
+    year = int(year_text)
+    if not (1000 <= year <= 9999):
+        return None
+
+    # Historical circular numbers can be serial_no/year (e.g., 26/2004).
+    # For non-month serial numbers, keep year and fall back to January.
+    if not (1 <= month <= 12):
+        month = 1
+
+    return f"{year:04d}-{month:02d}-01"
+
+
 @dataclass(frozen=True)
 class _Row:
     circular_no: str | None
@@ -237,21 +261,16 @@ class Crawler:
                 continue
             seen.add(abs_url)
 
-            name_parts: list[str] = []
-            if row.circular_no:
-                name_parts.append(row.circular_no)
-            if row.title:
-                name_parts.append(row.title)
+            publish_date = _publish_date_from_circular_no(row.circular_no)
 
             out.append(
                 ctx.make_record(
                     url=abs_url,
-                    name=" - ".join(name_parts) or None,
+                    name=row.title,
                     discovered_at_utc=ctx.started_at_utc,
+                    publish_date=publish_date,
                     source=self.name,
                     meta={
-                        "circular_no": row.circular_no,
-                        "title": row.title,
                         "discovered_from": page_url,
                     },
                 )
@@ -260,5 +279,5 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-        out.sort(key=lambda r: (r.url, (r.meta.get("circular_no") or "")))
+        out.sort(key=lambda r: (r.url, r.publish_date or "", r.name or ""))
         return out

@@ -251,7 +251,7 @@ class _ArticleListTableParser(HTMLParser):
                         url=candidate,
                         title=title,
                         issue_date_raw=issue_date_raw,
-                        meta={"kind": "table", "variant": "current"},
+                        meta={},
                     )
                 )
                 return
@@ -266,7 +266,7 @@ class _ArticleListTableParser(HTMLParser):
                         url=candidate,
                         title=title,
                         issue_date_raw=None,
-                        meta={"kind": "index", "variant": "current"},
+                        meta={},
                     )
                 )
                 return

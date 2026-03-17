@@ -283,6 +283,32 @@ crawlers:
         content_element_id: "content"
 
   # ============================================================================
+  # HYD - Highways Department
+  # ============================================================================
+  hyd:
+    label: "Highways Department"
+    base_url: "https://www.hyd.gov.hk"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    content_element_id: "content"
+    pages:
+      hyd_technical_documents:
+        # HYD Technical Documents recursive PDF crawler.
+        start_url: "https://www.hyd.gov.hk/en/technical_references/technical_document/index.html"
+        scope_prefix: "/en/technical_references/technical_document/"
+        max_depth: 6
+        max_pages: 1200
+        max_out_links_per_page: 1000
+        exclude_page_urls:
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/road_notes/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/GIS_Specifications/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/structures_design_manual_2013/index.html"
+
+  # ============================================================================
   # DIRECTORY - Telephone Directory
   # ============================================================================
   directory:
@@ -297,6 +323,9 @@ crawlers:
         # HKSAR Government Telephone Directory (English) people crawler.
         index_url: "https://tel.directory.gov.hk/index_ENG.html"
         max_pages: 2000
+        refresh_sample_percent: 5
+        force_refresh_after_days: 30
+        detail_fetch_workers: 8
 
   # ============================================================================
   # HERBARIUM - Hong Kong Herbarium
@@ -435,3 +464,8 @@ crawlers:
         page_url: "https://bestpractice.emsd.gov.hk/en/booklet"
         booklet_root: "https://bestpractice.emsd.gov.hk"
         content_element_id: "bookletlistpage"
+        connect_timeout_seconds: 8
+        read_timeout_seconds: 25
+        max_retries: 1
+        max_runtime_seconds: 300
+        progress_every_pages: 2

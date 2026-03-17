@@ -18,6 +18,7 @@ from crawlers.base import (
     path_ext,
     sleep_seconds,
 )
+from crawlers.emsd.date_extract import extract_publish_date_near_href
 
 
 _ALLOWED_DOC_EXTS = {".pdf"}
@@ -198,14 +199,16 @@ class Crawler:
                 print(f"[{self.name}] Error fetching page: {e}")
             return []
 
+        html = _strip_html_comments(resp.text or "")
+
         parser = _ScopedAnchorParser(element_id=content_element_id)
-        parser.feed(_strip_html_comments(resp.text or ""))
+        parser.feed(html)
 
         links = parser.links
         if not links:
             # Fallback to all links if content element not found
             parser = _ScopedAnchorParser(element_id="")
-            parser.feed(_strip_html_comments(resp.text or ""))
+            parser.feed(html)
             links = parser.links
 
         out: list[UrlRecord] = []
@@ -226,11 +229,18 @@ class Crawler:
                 continue
             seen_urls.add(can)
 
+            publish_date = extract_publish_date_near_href(
+                html=html,
+                href=link.href,
+                link_text=link.text or "",
+            )
+
             out.append(
                 ctx.make_record(
                     url=can,
                     name=_infer_name(link.text or "", can),
                     discovered_at_utc=ctx.started_at_utc,
+                    publish_date=publish_date,
                     source=self.name,
                     meta={
                         "discovered_from": page_url,

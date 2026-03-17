@@ -61,7 +61,7 @@ const state = {
   dataRoot: "data",
   records: /** @type {Array<any>} */ ([]),
   filteredIdx: /** @type {Array<number>} */ ([]),
-  sortKey: "discovered_at_utc",
+  sortKey: "publish_date",
   sortDir: "desc",
   page: 1,
   pageSize: 50,
@@ -232,6 +232,7 @@ function normalizeRecord(r) {
     url,
     name: typeof r?.name === "string" ? r.name : "",
     discovered_at_utc: typeof r?.discovered_at_utc === "string" ? r.discovered_at_utc : "",
+    publish_date: typeof r?.publish_date === "string" ? r.publish_date : "",
     source,
     source_group: sourceGroup,
     source_group_label: sourceLabel || VIEWER.sourceGroupLabels[sourceGroup] || sourceGroup || source,
@@ -242,6 +243,12 @@ function normalizeRecord(r) {
 
 function recordSortValue(rec, key) {
   switch (key) {
+    case "publish_date": {
+      const s = (rec.publish_date || "").trim();
+      if (!s) return null;
+      const t = Date.parse(/^\d{4}-\d{2}-\d{2}$/.test(s) ? `${s}T00:00:00Z` : s);
+      return Number.isFinite(t) ? t : s;
+    }
     case "discovered_at_utc": {
       const t = Date.parse(rec.discovered_at_utc || "");
       return Number.isFinite(t) ? t : rec.discovered_at_utc;
@@ -395,17 +402,24 @@ function renderKvRows(rows) {
 function openDetail(r) {
   const title = r.name || "(no title)";
   els.detailTitle.textContent = title;
-  els.detailSubtitle.textContent = `${r.domain || ""} • ${r.source_group_label || r.source || ""} • ${formatDateUtc(r.discovered_at_utc)}`;
+  els.detailSubtitle.textContent = `${r.domain || ""} • ${r.source_group_label || r.source || ""} • ${formatDateUtc(r.publish_date) || "N/A"}`;
   els.detailOpenUrl.href = r.url || "#";
 
-  const payload = { url: r.url, name: r.name, discovered_at_utc: r.discovered_at_utc, source: r.source, meta: r.meta };
+  const payload = {
+    url: r.url,
+    name: r.name,
+    discovered_at_utc: r.discovered_at_utc,
+    publish_date: r.publish_date,
+    source: r.source,
+    meta: r.meta,
+  };
   els.detailJson.textContent = JSON.stringify(payload, null, 2);
 
   const meta = r?.meta && typeof r.meta === "object" ? r.meta : null;
   const rows = [
     { label: "URL", value: r.url || "", href: r.url || "" },
     { label: "Name", value: r.name || "(no title)" },
-    { label: "Discovered at", value: formatDateUtc(r.discovered_at_utc) || "" },
+    { label: "Publish date", value: formatDateUtc(r.publish_date) || "N/A" },
     { label: "Source", value: r.source || "" },
     { label: "Website", value: r.domain || "" },
   ];
@@ -566,7 +580,7 @@ function renderTable() {
       <td class="cellTitle">${escapeHtml(r.name || "(no title)")}</td>
       <td><span class="badge">${escapeHtml(r.domain || "(unknown)")}</span></td>
       <td><span class="badge">${escapeHtml(r.source_group_label || r.source_group || r.source || "(unknown)")}</span></td>
-      <td title="${escapeHtml(r.discovered_at_utc || "")}">${escapeHtml(formatDateUtc(r.discovered_at_utc))}</td>
+      <td title="${escapeHtml(r.publish_date || "")}">${escapeHtml(formatDateUtc(r.publish_date) || "N/A")}</td>
       <td class="cellUrl"><a class="link" href="${escapeHtml(r.url || "#")}" target="_blank" rel="noreferrer">URL</a></td>
     `;
     frag.appendChild(tr);
@@ -959,7 +973,7 @@ function closeDownloadMenu() {
 function resetFilters() {
   els.sourceFilter.value = "";
   els.searchInput.value = "";
-  state.sortKey = "discovered_at_utc";
+  state.sortKey = "publish_date";
   state.sortDir = "desc";
   state.page = 1;
   applyFiltersAndSort();
@@ -1055,7 +1069,7 @@ function wireEvents() {
         state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
       } else {
         state.sortKey = key;
-        state.sortDir = key === "discovered_at_utc" ? "desc" : "asc";
+        state.sortDir = key === "publish_date" ? "desc" : "asc";
       }
       applyFiltersAndSort();
       renderTable();

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import random
 import re
 from dataclasses import dataclass
 from datetime import datetime
@@ -293,25 +292,19 @@ class Crawler:
                 continue
             seen.add(abs_url)
 
-            name_parts: list[str] = []
-            if row.circular_no:
-                name_parts.append(row.circular_no)
-            if row.title:
-                name_parts.append(row.title)
-            name = " - ".join(name_parts) or None
+            name = row.title
 
             out.append(
                 ctx.make_record(
                     url=abs_url,
                     name=name,
                     discovered_at_utc=ctx.started_at_utc,
+                    publish_date=row.date_iso,
                     source=self.name,
                     meta={
                         "circular_no": row.circular_no,
-                        "title": row.title,
-                        "date": row.date_iso,
                         "section": row.section,
-                        "listing_url": page_url,
+                        "discovered_from": page_url,
                     },
                 )
             )
@@ -319,5 +312,5 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-        out.sort(key=lambda r: (r.url, (r.meta.get("date") or "")))
+        out.sort(key=lambda r: (r.url, (r.publish_date or "")))
         return out

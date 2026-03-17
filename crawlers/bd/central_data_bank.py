@@ -150,7 +150,7 @@ class Crawler:
                         discovered_at_utc=ctx.started_at_utc,
                         source=self.name,
                         meta={
-                            "page_url": page_url,
+                            "discovered_from": page_url,
                             "page_type": page_kind,
                             "file_ext": "pdf",
                         },

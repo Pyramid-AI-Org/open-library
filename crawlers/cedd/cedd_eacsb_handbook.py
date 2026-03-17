@@ -196,10 +196,7 @@ class Crawler:
                     name=c.title,
                     discovered_at_utc=ctx.started_at_utc,
                     source=self.name,
-                    meta={
-                        "discovered_from": page_url,
-                        "title": c.title,
-                    },
+                    meta={"discovered_from": page_url},
                 )
             )
 

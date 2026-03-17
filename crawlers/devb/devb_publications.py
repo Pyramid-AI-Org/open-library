@@ -19,6 +19,10 @@ from crawlers.devb.devb_construction_site_safety_manual import (
     CONSTRUCTION_SITE_SAFETY_MANUAL_PREFIX,
     parse_construction_site_safety_manual_page,
 )
+from crawlers.devb.devb_harmonisation_guideline import (
+    HARMONISATION_GUIDELINE_PREFIX,
+    parse_harmonisation_guideline_page,
+)
 from crawlers.devb.devb_standard_contract_documents import (
     STANDARD_CONTRACT_DOCS_PREFIX,
     parse_standard_contract_documents_page,
@@ -26,6 +30,11 @@ from crawlers.devb.devb_standard_contract_documents import (
 from crawlers.devb.devb_standard_consultancy_documents import (
     STANDARD_CONSULTANCY_DOCS_PREFIX,
     parse_standard_consultancy_documents_page,
+)
+from crawlers.devb.devb_works_digest import (
+    WORKS_DIGEST_PREFIX,
+    looks_like_full_text,
+    parse_works_digest_page,
 )
 from utils.html_links import HtmlLink, extract_links, extract_links_in_element
 
@@ -280,27 +289,19 @@ class Crawler:
                         continue
                     seen_docs.add(can)
 
-                    meta: dict[str, object] = {
-                        "seed_url": seed_can,
-                        "discovered_from": item.url,
-                        "depth": item.depth,
-                        "file_ext": ext.lstrip("."),
-                        "scope_page": item.url,
-                        "construction_site_safety_manual": True,
-                    }
-                    if hit.issue_date_raw:
-                        meta["issue_date_raw"] = hit.issue_date_raw
+                    meta: dict[str, object] = {"discovered_from": item.url}
                     if hit.meta:
                         meta.update(hit.meta)
 
                     out.append(
                         ctx.make_record(
-                    url=can,
-                    name=hit.title,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta=meta,
-                )
+                            url=can,
+                            name=hit.title,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                            publish_date=hit.issue_date_raw,
+                        )
                     )
 
                     if len(out) >= max_total_records:
@@ -368,27 +369,19 @@ class Crawler:
                         continue
                     seen_docs.add(can)
 
-                    meta: dict[str, object] = {
-                        "seed_url": seed_can,
-                        "discovered_from": item.url,
-                        "depth": item.depth,
-                        "file_ext": ext.lstrip("."),
-                        "scope_page": item.url,
-                        "standard_consultancy_document": True,
-                    }
-                    if hit.issue_date_raw:
-                        meta["issue_date_raw"] = hit.issue_date_raw
+                    meta: dict[str, object] = {"discovered_from": item.url}
                     if hit.meta:
                         meta.update(hit.meta)
 
                     out.append(
                         ctx.make_record(
-                    url=can,
-                    name=hit.title,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta=meta,
-                )
+                            url=can,
+                            name=hit.title,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                            publish_date=hit.issue_date_raw,
+                        )
                     )
 
                     if len(out) >= max_total_records:
@@ -453,27 +446,19 @@ class Crawler:
                         continue
                     seen_docs.add(can)
 
-                    meta: dict[str, object] = {
-                        "seed_url": seed_can,
-                        "discovered_from": item.url,
-                        "depth": item.depth,
-                        "file_ext": ext.lstrip("."),
-                        "scope_page": item.url,
-                        "standard_contract_documents": True,
-                    }
-                    if hit.issue_date_raw:
-                        meta["issue_date_raw"] = hit.issue_date_raw
+                    meta: dict[str, object] = {"discovered_from": item.url}
                     if hit.meta:
                         meta.update(hit.meta)
 
                     out.append(
                         ctx.make_record(
-                    url=can,
-                    name=hit.title,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta=meta,
-                )
+                            url=can,
+                            name=hit.title,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                            publish_date=hit.issue_date_raw,
+                        )
                     )
 
                     if len(out) >= max_total_records:
@@ -492,6 +477,179 @@ class Crawler:
                         if np.netloc.lower() != base_netloc:
                             continue
                         if not np.path.startswith(STANDARD_CONTRACT_DOCS_PREFIX):
+                            continue
+                        if _path_is_excluded(
+                            np.path, excluded_prefixes=excluded_prefixes
+                        ):
+                            continue
+
+                        if (
+                            next_can not in visited_pages
+                            and next_can not in skipped_pages
+                        ):
+                            queue.append(
+                                _QueueItem(
+                                    url=next_can,
+                                    depth=item.depth + 1,
+                                    discovered_from=item.url,
+                                )
+                            )
+
+                continue
+
+            # DEVb harmonisation guideline pages use article-list tables where
+            # publish date must come from the Issue Date column.
+            if p.path.startswith(HARMONISATION_GUIDELINE_PREFIX):
+                doc_hits, page_links = parse_harmonisation_guideline_page(
+                    resp.text,
+                    base_url=item.url,
+                    content_element_id=content_element_id,
+                )
+
+                for hit in doc_hits:
+                    can = _canonicalize_url(hit.url)
+                    if not can:
+                        continue
+
+                    ext = _path_ext(can)
+                    if ext not in _ALLOWED_DOC_EXTS:
+                        continue
+
+                    lp = urlparse(can)
+                    if lp.netloc.lower() != base_netloc:
+                        continue
+
+                    if can in seen_docs:
+                        continue
+                    seen_docs.add(can)
+
+                    meta: dict[str, object] = {"discovered_from": item.url}
+                    if hit.meta:
+                        meta.update(hit.meta)
+
+                    out.append(
+                        ctx.make_record(
+                            url=can,
+                            name=hit.title,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                            publish_date=hit.issue_date_raw,
+                        )
+                    )
+
+                    if len(out) >= max_total_records:
+                        break
+
+                if len(out) >= max_total_records:
+                    break
+
+                if item.depth < max_depth:
+                    for next_url in page_links:
+                        next_can = _canonicalize_url(next_url)
+                        if not next_can:
+                            continue
+
+                        np = urlparse(next_can)
+                        if np.netloc.lower() != base_netloc:
+                            continue
+                        if not np.path.startswith(HARMONISATION_GUIDELINE_PREFIX):
+                            continue
+                        if _path_is_excluded(
+                            np.path, excluded_prefixes=excluded_prefixes
+                        ):
+                            continue
+
+                        if (
+                            next_can not in visited_pages
+                            and next_can not in skipped_pages
+                        ):
+                            queue.append(
+                                _QueueItem(
+                                    url=next_can,
+                                    depth=item.depth + 1,
+                                    discovered_from=item.url,
+                                )
+                            )
+
+                continue
+
+            # Works Digest pages should carry issue-level date metadata and title prefix.
+            # If an issue provides FULL TEXT PDF, keep only FULL TEXT docs for that issue.
+            if p.path.startswith(WORKS_DIGEST_PREFIX):
+                doc_hits, page_links, issue_ctx = parse_works_digest_page(
+                    resp.text,
+                    page_url=item.url,
+                    content_element_id=content_element_id,
+                )
+
+                for hit in doc_hits:
+                    can = _canonicalize_url(hit.url)
+                    if not can:
+                        continue
+
+                    ext = _path_ext(can)
+                    if ext not in _ALLOWED_DOC_EXTS:
+                        continue
+
+                    lp = urlparse(can)
+                    if lp.netloc.lower() != base_netloc:
+                        continue
+
+                    if can in seen_docs:
+                        continue
+                    seen_docs.add(can)
+
+                    base_name = _infer_doc_name(hit.title, can)
+                    if issue_ctx.issue_number:
+                        doc_name = (
+                            f"Issue {issue_ctx.issue_number} - {base_name}"
+                            if base_name
+                            else f"Issue {issue_ctx.issue_number}"
+                        )
+                    else:
+                        doc_name = base_name
+
+                    is_full_text = looks_like_full_text(base_name, can)
+
+                    meta: dict[str, object] = {
+                        "discovered_from": item.url,
+                        "works_digest_is_full_text": bool(is_full_text),
+                    }
+                    if issue_ctx.issue_number:
+                        meta["works_digest_issue_number"] = issue_ctx.issue_number
+                    if issue_ctx.issue_key:
+                        meta["works_digest_issue_key"] = issue_ctx.issue_key
+                    if hit.meta:
+                        meta.update(hit.meta)
+
+                    out.append(
+                        ctx.make_record(
+                            url=can,
+                            name=doc_name,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                            publish_date=issue_ctx.publish_date_raw,
+                        )
+                    )
+
+                    if len(out) >= max_total_records:
+                        break
+
+                if len(out) >= max_total_records:
+                    break
+
+                if item.depth < max_depth:
+                    for next_url in page_links:
+                        next_can = _canonicalize_url(next_url)
+                        if not next_can:
+                            continue
+
+                        np = urlparse(next_can)
+                        if np.netloc.lower() != base_netloc:
+                            continue
+                        if not np.path.startswith(WORKS_DIGEST_PREFIX):
                             continue
                         if _path_is_excluded(
                             np.path, excluded_prefixes=excluded_prefixes
@@ -544,12 +702,7 @@ class Crawler:
                             discovered_at_utc=ctx.started_at_utc,
                             source=self.name,
                             meta={
-                                "seed_url": seed_can,
                                 "discovered_from": item.url,
-                                "depth": item.depth,
-                                "link_text": link.text,
-                                "file_ext": ext.lstrip("."),
-                                "scope_page": item.url,
                             },
                         )
                     )
@@ -580,5 +733,30 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-        out.sort(key=lambda r: (r.url or ""))
-        return out
+        # Works Digest rule: when an issue has FULL TEXT, keep only FULL TEXT
+        # records for that issue; otherwise retain all issue records.
+        issue_has_full_text: dict[str, bool] = {}
+        for rec in out:
+            issue_key = rec.meta.get("works_digest_issue_key")
+            if not isinstance(issue_key, str) or not issue_key:
+                continue
+            if bool(rec.meta.get("works_digest_is_full_text")):
+                issue_has_full_text[issue_key] = True
+            elif issue_key not in issue_has_full_text:
+                issue_has_full_text[issue_key] = False
+
+        filtered: list[UrlRecord] = []
+        for rec in out:
+            issue_key = rec.meta.get("works_digest_issue_key")
+            if not isinstance(issue_key, str) or not issue_key:
+                filtered.append(rec)
+                continue
+
+            if issue_has_full_text.get(issue_key, False):
+                if bool(rec.meta.get("works_digest_is_full_text")):
+                    filtered.append(rec)
+            else:
+                filtered.append(rec)
+
+        filtered.sort(key=lambda r: (r.url or ""))
+        return filtered

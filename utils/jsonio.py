@@ -30,3 +30,17 @@ def write_jsonl(path: Path, records: Iterable[dict[str, Any]]) -> int:
             f.write("\n")
             count += 1
     return count
+
+
+def iter_jsonl(path: Path) -> Iterable[dict[str, Any]]:
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            raw = line.strip()
+            if not raw:
+                continue
+            try:
+                obj = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(obj, dict):
+                yield obj

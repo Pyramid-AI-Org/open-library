@@ -475,7 +475,7 @@ class Crawler:
 
                     meta = {
                         "source_page": label,
-                        "page_url": url,
+                        "discovered_from": url,
                         "file_ext": "pdf",
                     }
                     if hit.ref_no:
@@ -489,12 +489,12 @@ class Crawler:
 
                     out.append(
                         ctx.make_record(
-                    url=hit.url,
-                    name=hit.name or "Untitled",
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta=meta,
-                )
+                            url=hit.url,
+                            name=hit.name or "Untitled",
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                        )
                     )
 
             except Exception as e:

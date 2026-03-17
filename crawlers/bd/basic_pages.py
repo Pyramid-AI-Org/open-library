@@ -108,15 +108,15 @@ class Crawler:
                 seen_urls.add(can_page)
                 out.append(
                     ctx.make_record(
-                    url=can_page,
-                    name=page_name_label,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta={
+                        url=can_page,
+                        name=page_name_label,
+                        discovered_at_utc=ctx.started_at_utc,
+                        source=self.name,
+                        meta={
                             "is_index_page": True,
                             "file_ext": "html",
                         },
-                )
+                    )
                 )
 
             # 2. Extract PDF links
@@ -144,15 +144,15 @@ class Crawler:
 
                 out.append(
                     ctx.make_record(
-                    url=can,
-                    name=name,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta={
-                            "from_page_url": page_url,
+                        url=can,
+                        name=name,
+                        discovered_at_utc=ctx.started_at_utc,
+                        source=self.name,
+                        meta={
+                            "discovered_from": page_url,
                             "file_ext": "pdf",
                         },
-                )
+                    )
                 )
 
                 if len(out) >= max_total_records:

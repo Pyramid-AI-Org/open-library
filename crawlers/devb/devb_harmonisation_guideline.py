@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html.parser import HTMLParser
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 
-STANDARD_CONTRACT_DOCS_PREFIX = (
-    "/en/publications_and_press_releases/publications/standard_contract_documents/"
+HARMONISATION_GUIDELINE_PREFIX = (
+    "/en/publications_and_press_releases/publications/devb-harmonisation-guideline/"
 )
 
 
@@ -18,32 +18,38 @@ def _normalize_ws(value: str | None) -> str | None:
     return s or None
 
 
-def _is_allowed_doc_url(url: str) -> bool:
-    lower = (url or "").lower()
+def _strip_query_fragment(url: str) -> str:
+    s = url or ""
     for sep in ("#", "?"):
-        if sep in lower:
-            lower = lower.split(sep, 1)[0]
-    return any(lower.endswith(ext) for ext in _ALLOWED_DOC_EXTS)
+        if sep in s:
+            s = s.split(sep, 1)[0]
+    return s
+
+
+def _doc_ext(url: str) -> str:
+    path = urlparse(_strip_query_fragment(url)).path.lower()
+    if "." not in path:
+        return ""
+    return "." + path.rsplit(".", 1)[-1]
+
+
+def _is_allowed_doc_url(url: str) -> bool:
+    return _doc_ext(url) in _ALLOWED_DOC_EXTS
 
 
 def _looks_like_html_page(url: str) -> bool:
     u = (url or "").lower()
     if u.endswith("/"):
         return True
-    if u.endswith(".html"):
-        return True
-    if u.endswith(".htm"):
-        return True
-    if u.endswith(".php"):
+    if u.endswith(".html") or u.endswith(".htm") or u.endswith(".php"):
         return True
     if "?" in u:
-        # Some DEVb pages use query flags (e.g., print=1).
         return True
     return False
 
 
 @dataclass(frozen=True)
-class StandardContractDocHit:
+class HarmonisationGuidelineHit:
     url: str
     title: str | None
     issue_date_raw: str | None
@@ -63,10 +69,8 @@ class _ArticleListTableParser(HTMLParser):
         self._base_url = base_url
         self._element_id = element_id
 
-        self.doc_hits: list[StandardContractDocHit] = []
+        self.doc_hits: list[HarmonisationGuidelineHit] = []
         self.page_links: set[str] = set()
-
-        self._current_section: str | None = None
 
         # If element_id is falsy, parse the entire HTML document.
         self._target_depth = 1 if not self._element_id else 0
@@ -96,7 +100,11 @@ class _ArticleListTableParser(HTMLParser):
         t = tag.lower()
         attrs_map = self._attrs_to_dict(attrs)
 
-        if self._target_depth == 0 and self._element_id and attrs_map.get("id") == self._element_id:
+        if (
+            self._target_depth == 0
+            and self._element_id
+            and attrs_map.get("id") == self._element_id
+        ):
             self._target_depth = 1
         elif self._target_depth > 0:
             self._target_depth += 1
@@ -155,12 +163,7 @@ class _ArticleListTableParser(HTMLParser):
         if self._target_depth > 0:
             self._target_depth -= 1
             if self._target_depth == 0:
-                self._in_table = False
-                self._table_depth = 0
-                self._in_tr = False
-                self._in_th = False
-                self._in_td = False
-                self._current_row_cells = []
+                self._reset_all()
                 return
 
         if not self._in_table:
@@ -168,11 +171,7 @@ class _ArticleListTableParser(HTMLParser):
 
         self._table_depth -= 1
         if self._table_depth == 0:
-            self._in_table = False
-            self._in_tr = False
-            self._in_th = False
-            self._in_td = False
-            self._current_row_cells = []
+            self._reset_all()
             return
 
         if t == "th":
@@ -197,122 +196,67 @@ class _ArticleListTableParser(HTMLParser):
 
         if t == "tr":
             self._in_tr = False
-
-            # Ignore header rows.
             if not self._current_row_cells:
                 return
-
             self._process_row(self._current_row_cells)
             self._current_row_cells = []
+
+    def _reset_all(self) -> None:
+        self._in_table = False
+        self._table_depth = 0
+        self._in_tr = False
+        self._in_th = False
+        self._in_td = False
+        self._current_row_cells = []
 
     def handle_data(self, data: str) -> None:
         if self._in_td and self._target_depth > 0:
             self._current_text_parts.append(data)
 
     def _process_row(self, cells: list[_Cell]) -> None:
-        # Collect in-scope page links (folder rows etc.).
+        # Collect in-scope page links (if any).
         for c in cells:
             for href in c.hrefs:
                 if (
-                    STANDARD_CONTRACT_DOCS_PREFIX in href
+                    HARMONISATION_GUIDELINE_PREFIX in href
                     and _looks_like_html_page(href)
                     and not _is_allowed_doc_url(href)
                 ):
                     self.page_links.add(href)
 
-        # Detect section header rows (admin procedures page style).
-        row_text = _normalize_ws(" ".join([c.text or "" for c in cells]))
-        any_hrefs = any(c.hrefs for c in cells)
-        any_doc_hrefs = any(_is_allowed_doc_url(h) for c in cells for h in c.hrefs)
-
-        if not any_hrefs and row_text and any(c.colspan >= 2 for c in cells):
-            self._current_section = row_text
+        # Header-only rows and non-content rows.
+        if not any(c.hrefs for c in cells):
             return
 
-        # 1) Practice notes tables (Clean / Track change) - only emit from clean column.
-        if len(cells) in (4, 5):
-            if len(cells) == 4:
-                item_idx, clean_idx, date_idx = 0, 1, 3
-            else:
-                item_idx, clean_idx, date_idx = 1, 2, 4
+        # Typical layout: Item | File | Issue Date
+        if len(cells) >= 3:
+            title = cells[0].text
+            issue_date_raw = cells[2].text
+            if not title:
+                return
 
-            title = cells[item_idx].text
-            issue_date_raw = cells[date_idx].text
-
-            clean_hrefs = [h for h in cells[clean_idx].hrefs if _is_allowed_doc_url(h)]
-            for href in clean_hrefs:
+            for href in cells[1].hrefs:
+                if not _is_allowed_doc_url(href):
+                    continue
                 self.doc_hits.append(
-                    StandardContractDocHit(
+                    HarmonisationGuidelineHit(
                         url=href,
                         title=title,
                         issue_date_raw=issue_date_raw,
                         meta={},
                     )
                 )
-            if clean_hrefs:
-                return
-
-        # 2) Administrative procedures content page (section + item rows)
-        if len(cells) >= 4:
-            first = (cells[0].text or "").strip()
-            title_candidate = cells[1].text
-            doc_hrefs = [h for h in cells[2].hrefs if _is_allowed_doc_url(h)]
-            issue_date_raw = cells[3].text
-
-            if (first in {"", "-", "–"} or first.isdigit()) and title_candidate and (
-                doc_hrefs or (issue_date_raw and any_doc_hrefs)
-            ):
-                for href in doc_hrefs:
-                    meta = {}
-                    if self._current_section:
-                        meta["section"] = self._current_section
-
-                    self.doc_hits.append(
-                        StandardContractDocHit(
-                            url=href,
-                            title=title_candidate,
-                            issue_date_raw=issue_date_raw,
-                            meta=meta,
-                        )
-                    )
-                if doc_hrefs:
-                    return
-
-        # 3) Standard contract docs index-style (number | title | file links)
-        if len(cells) >= 3:
-            first = (cells[0].text or "").strip()
-            title = cells[1].text
-            doc_hrefs: list[str] = []
-            for c in cells[2:]:
-                for h in c.hrefs:
-                    if _is_allowed_doc_url(h):
-                        doc_hrefs.append(h)
-
-            if (first.isdigit() or not first) and title and doc_hrefs:
-                for href in doc_hrefs:
-                    self.doc_hits.append(
-                        StandardContractDocHit(
-                            url=href,
-                            title=title,
-                            issue_date_raw=None,
-                            meta={},
-                        )
-                    )
-                return
 
 
-def parse_standard_contract_documents_page(
+def parse_harmonisation_guideline_page(
     html: str, *, base_url: str, content_element_id: str = "content"
-) -> tuple[list[StandardContractDocHit], list[str]]:
-    """Parse DEVb standard contract documents pages.
+) -> tuple[list[HarmonisationGuidelineHit], list[str]]:
+    """Parse DEVb harmonisation guideline pages.
 
-    Returns:
-      - doc hits: url + title + raw issue date (if present)
-      - page links: in-scope HTML pages to continue crawling
-
-    Notes:
-      - Emits ALL docs found, but for practice-notes tables only from the "Clean" column.
-      - Filters to .pdf/.doc/.docx only; ignores zip and other assets.
+    Rules:
+      - Title comes from the left item column.
+      - Date comes from the Issue Date column.
+      - Filters to .pdf/.doc/.docx only; ignores zip/xlsx and other assets.
       - Does not canonicalize or dedupe; caller should do that.
     """
 
@@ -324,10 +268,10 @@ def parse_standard_contract_documents_page(
         parser = _ArticleListTableParser(base_url=base_url, element_id="")
         parser.feed(html or "")
 
-    docs: list[StandardContractDocHit] = []
+    docs: list[HarmonisationGuidelineHit] = []
     for h in parser.doc_hits:
         if _is_allowed_doc_url(h.url):
             docs.append(h)
 
-    pages = [p for p in parser.page_links if STANDARD_CONTRACT_DOCS_PREFIX in p]
+    pages = [p for p in parser.page_links if HARMONISATION_GUIDELINE_PREFIX in p]
     return docs, pages

@@ -14,6 +14,7 @@ from crawlers.base import (
     path_ext,
     sleep_seconds,
 )
+from crawlers.emsd.date_extract import extract_publish_date_near_href
 from utils.html_links import extract_links, extract_links_in_element
 
 
@@ -195,11 +196,18 @@ class Crawler:
                     continue
                 seen_pdf_urls.add(can)
 
+                publish_date = extract_publish_date_near_href(
+                    html=html,
+                    href=link.href,
+                    link_text=link.text or "",
+                )
+
                 out.append(
                     ctx.make_record(
                         url=can,
                         name=_infer_name(link.text or "", can),
                         discovered_at_utc=ctx.started_at_utc,
+                        publish_date=publish_date,
                         source=self.name,
                         meta={
                             "discovered_from": sub_url,

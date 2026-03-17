@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from html.parser import HTMLParser
+import re
+from typing import Callable
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -24,10 +26,17 @@ class _Link:
 
 
 @dataclass(frozen=True)
-class _PwdmCurrentLink:
+class _DiscoveredDoc:
     href: str
-    row_title: str | None
-    text: str
+    name: str | None
+    publish_date: str | None = None
+
+
+@dataclass(frozen=True)
+class _TableRow:
+    cells: list[str]
+    links_by_col: dict[int, list[_Link]]
+    is_header: bool
 
 
 class _MainTableParser(HTMLParser):
@@ -255,12 +264,12 @@ class _ContentLinkParser(HTMLParser):
         self._current_link_text_parts.append(data)
 
 
-class _PwdmFirstTableCurrentParser(HTMLParser):
-    """Extract only 'Current' links from the first table on PWDM subpage."""
+class _FirstTableRowsParser(HTMLParser):
+    """Extract rows (cells + links) from the first table within #content."""
 
     def __init__(self, *, content_element_id: str = "content") -> None:
         super().__init__()
-        self.links: list[_PwdmCurrentLink] = []
+        self.rows: list[_TableRow] = []
 
         self._content_element_id = content_element_id
         self._content_depth = 0
@@ -271,12 +280,11 @@ class _PwdmFirstTableCurrentParser(HTMLParser):
 
         self._in_tr = False
         self._in_cell = False
-        self._cell_is_header = False
         self._cell_index = -1
 
-        self._header_cells: list[str] = []
         self._row_cells: list[str] = []
         self._row_links_by_col: dict[int, list[_Link]] = {}
+        self._row_has_th = False
 
         self._in_a = False
         self._current_href: str | None = None
@@ -332,6 +340,7 @@ class _PwdmFirstTableCurrentParser(HTMLParser):
             self._cell_index = -1
             self._row_cells = []
             self._row_links_by_col = {}
+            self._row_has_th = False
             return
 
         if not self._in_tr:
@@ -339,9 +348,10 @@ class _PwdmFirstTableCurrentParser(HTMLParser):
 
         if t in ("th", "td"):
             self._in_cell = True
-            self._cell_is_header = t == "th"
             self._cell_index += 1
             self._cell_text_parts = []
+            if t == "th":
+                self._row_has_th = True
             return
 
         if t == "a":
@@ -390,55 +400,27 @@ class _PwdmFirstTableCurrentParser(HTMLParser):
             cell_text = clean_text("".join(self._cell_text_parts))
             self._row_cells.append(cell_text)
             self._in_cell = False
-            self._cell_is_header = False
             self._cell_text_parts = []
             return
 
         if t == "tr" and self._in_tr:
             if self._row_cells:
-                is_header = False
-                if self._header_cells:
-                    is_header = False
-                elif any(clean_text(c) for c in self._row_cells):
-                    joined = " ".join(c.lower() for c in self._row_cells)
-                    if "current" in joined and "original" in joined:
-                        is_header = True
-
-                if is_header:
-                    self._header_cells = [c.lower() for c in self._row_cells]
-                else:
-                    row_title = self._row_cells[0] if self._row_cells else None
-                    current_idx: int | None = None
-                    for i, hdr in enumerate(self._header_cells):
-                        if "current" in hdr:
-                            current_idx = i
-                            break
-
-                    selected: list[_Link] = []
-                    if current_idx is not None:
-                        selected = self._row_links_by_col.get(current_idx, [])
-                    if not selected:
-                        for i in sorted(self._row_links_by_col.keys(), reverse=True):
-                            candidate = self._row_links_by_col.get(i, [])
-                            if candidate:
-                                selected = candidate
-                                break
-
-                    for link in selected:
-                        self.links.append(
-                            _PwdmCurrentLink(
-                                href=link.href,
-                                row_title=row_title or None,
-                                text=link.text,
-                            )
-                        )
-
+                self.rows.append(
+                    _TableRow(
+                        cells=list(self._row_cells),
+                        links_by_col={
+                            col: list(links)
+                            for col, links in self._row_links_by_col.items()
+                        },
+                        is_header=self._row_has_th,
+                    )
+                )
             self._in_tr = False
             self._in_cell = False
-            self._cell_is_header = False
             self._cell_index = -1
             self._row_cells = []
             self._row_links_by_col = {}
+            self._row_has_th = False
             return
 
         if t == "table" and self._table_depth > 0:
@@ -458,6 +440,128 @@ class _PwdmFirstTableCurrentParser(HTMLParser):
 
         if self._in_a and self._accessibility_depth == 0:
             self._current_link_text_parts.append(data)
+
+
+def _find_header_index(headers: list[str], *, terms: tuple[str, ...]) -> int | None:
+    for i, header in enumerate(headers):
+        normalized = clean_text(header).lower()
+        if any(term in normalized for term in terms):
+            return i
+    return None
+
+
+def _publish_date_from_no_cell(no_cell: str | None) -> str | None:
+    text = clean_text(no_cell or "")
+    if not text:
+        return None
+
+    match = re.search(r"/\s*(\d{4})\b", text)
+    if not match:
+        match = re.search(r"\b(19\d{2}|20\d{2})\b", text)
+    if not match:
+        return None
+
+    return f"{match.group(1)}-01-01"
+
+
+def _extract_pwdm_docs(rows: list[_TableRow]) -> list[_DiscoveredDoc]:
+    docs: list[_DiscoveredDoc] = []
+    headers: list[str] = []
+
+    for row in rows:
+        if row.is_header and not headers:
+            if any(clean_text(cell) for cell in row.cells):
+                headers = [clean_text(cell).lower() for cell in row.cells]
+            continue
+
+        if not row.cells:
+            continue
+
+        current_idx = _find_header_index(headers, terms=("current",))
+        name_idx = _find_header_index(
+            headers,
+            terms=("name/item", "name / item", "name"),
+        )
+
+        selected_links: list[_Link] = []
+        if current_idx is not None:
+            selected_links = list(row.links_by_col.get(current_idx, []))
+        if not selected_links:
+            for col in sorted(row.links_by_col.keys(), reverse=True):
+                candidates = row.links_by_col.get(col, [])
+                if candidates:
+                    selected_links = list(candidates)
+                    break
+
+        if not selected_links:
+            continue
+
+        row_name = ""
+        if name_idx is not None and 0 <= name_idx < len(row.cells):
+            row_name = clean_text(row.cells[name_idx])
+        if not row_name and row.cells:
+            row_name = clean_text(row.cells[0])
+
+        for link in selected_links:
+            docs.append(
+                _DiscoveredDoc(
+                    href=link.href,
+                    name=row_name or clean_text(link.text) or None,
+                )
+            )
+
+    return docs
+
+
+def _extract_title_no_docs(rows: list[_TableRow]) -> list[_DiscoveredDoc]:
+    docs: list[_DiscoveredDoc] = []
+    headers: list[str] = []
+
+    for row in rows:
+        if row.is_header and not headers:
+            if any(clean_text(cell) for cell in row.cells):
+                headers = [clean_text(cell).lower() for cell in row.cells]
+            continue
+
+        if not row.cells or not row.links_by_col:
+            continue
+
+        title_idx = _find_header_index(headers, terms=("title",))
+        no_idx = _find_header_index(headers, terms=("no.", "no"))
+
+        row_title = ""
+        if title_idx is not None and 0 <= title_idx < len(row.cells):
+            row_title = clean_text(row.cells[title_idx])
+        if not row_title and row.cells:
+            row_title = clean_text(row.cells[0])
+
+        no_value = (
+            row.cells[no_idx] if no_idx is not None and no_idx < len(row.cells) else ""
+        )
+        publish_date = _publish_date_from_no_cell(no_value)
+
+        for col in sorted(row.links_by_col.keys()):
+            for link in row.links_by_col.get(col, []):
+                docs.append(
+                    _DiscoveredDoc(
+                        href=link.href,
+                        name=row_title or clean_text(link.text) or None,
+                        publish_date=publish_date,
+                    )
+                )
+
+    return docs
+
+
+def _extract_first_table_docs(
+    html: str,
+    *,
+    content_element_id: str,
+    extractor: Callable[[list[_TableRow]], list[_DiscoveredDoc]],
+) -> list[_DiscoveredDoc]:
+    rows_parser = _FirstTableRowsParser(content_element_id=content_element_id)
+    rows_parser.feed(html)
+    return extractor(rows_parser.rows)
 
 
 class Crawler:
@@ -481,6 +585,18 @@ class Crawler:
         pwdm_path = str(
             cfg.get("pwdm_path", "/eng/publications/ceo/pwdm/index.html")
         ).strip()
+        title_no_paths_cfg = cfg.get(
+            "title_no_paths",
+            [
+                "/eng/publications/ceo/d-guidelines-frp/index.html",
+                "/eng/publications/ceo/guidelines-design-im-eco-as/index.html",
+            ],
+        )
+        title_no_paths = {
+            clean_text(str(path)).strip()
+            for path in title_no_paths_cfg
+            if clean_text(str(path)).strip()
+        }
         content_element_id = str(cfg.get("content_element_id", "content")).strip()
 
         max_total_records = int(cfg.get("max_total_records", 50000))
@@ -566,24 +682,31 @@ class Crawler:
             emitted_for_subpage = 0
 
             if fetch_ok:
-                discovered_links: list[_Link] = []
+                discovered_docs: list[_DiscoveredDoc] = []
 
                 if parsed_sub.path == pwdm_path:
-                    pwdm_parser = _PwdmFirstTableCurrentParser(
-                        content_element_id=content_element_id
+                    discovered_docs = _extract_first_table_docs(
+                        sub_resp_text,
+                        content_element_id=content_element_id,
+                        extractor=_extract_pwdm_docs,
                     )
-                    pwdm_parser.feed(sub_resp_text)
-                    for lk in pwdm_parser.links:
-                        name = clean_text(lk.row_title) or clean_text(lk.text)
-                        discovered_links.append(_Link(href=lk.href, text=name))
+                elif parsed_sub.path in title_no_paths:
+                    discovered_docs = _extract_first_table_docs(
+                        sub_resp_text,
+                        content_element_id=content_element_id,
+                        extractor=_extract_title_no_docs,
+                    )
                 else:
                     content_parser = _ContentLinkParser(
                         content_element_id=content_element_id
                     )
                     content_parser.feed(sub_resp_text)
-                    discovered_links = list(content_parser.links)
+                    discovered_docs = [
+                        _DiscoveredDoc(href=link.href, name=link.text)
+                        for link in content_parser.links
+                    ]
 
-                for doc_link in discovered_links:
+                for doc_link in discovered_docs:
                     abs_url = canonicalize_url(
                         urljoin(sub_url, doc_link.href),
                         encode_spaces=True,
@@ -601,21 +724,19 @@ class Crawler:
                     seen_urls.add(abs_url)
                     emitted_for_subpage += 1
 
-                    title = clean_text(doc_link.text) or infer_name_from_link(
-                        doc_link.text, abs_url
+                    title = clean_text(doc_link.name) or infer_name_from_link(
+                        doc_link.name, abs_url
                     )
 
                     out.append(
                         ctx.make_record(
-                    url=abs_url,
-                    name=title,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta={
-                                "title": title,
-                                "discovered_from": sub_url,
-                            },
-                )
+                            url=abs_url,
+                            name=title,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta={"discovered_from": sub_url},
+                            publish_date=doc_link.publish_date,
+                        )
                     )
 
                     if len(out) >= max_total_records:
@@ -632,17 +753,13 @@ class Crawler:
 
                 out.append(
                     ctx.make_record(
-                    url=sub_url,
-                    name=fallback_title,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta={
-                            "title": fallback_title,
-                            "discovered_from": page_url_canon,
-                            "fallback": "subpage_without_pdf",
-                        },
-                )
+                        url=sub_url,
+                        name=fallback_title,
+                        discovered_at_utc=ctx.started_at_utc,
+                        source=self.name,
+                        meta={"discovered_from": page_url_canon},
+                    )
                 )
 
-        out.sort(key=lambda r: (r.url, clean_text(str(r.meta.get("title") or ""))))
+        out.sort(key=lambda r: (r.url, clean_text(r.name or "")))
         return out

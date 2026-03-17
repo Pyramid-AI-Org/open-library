@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import copy
+import hashlib
 import json
 import random
 import re
+from collections import deque
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
@@ -395,6 +399,60 @@ def _normalize_email(value: str) -> str | None:
     if "@" not in s:
         return None
     return s
+
+
+def _parse_iso_datetime(value: str | None) -> datetime | None:
+    t = (value or "").strip()
+    if not t:
+        return None
+    try:
+        if t.endswith("Z"):
+            t = f"{t[:-1]}+00:00"
+        return datetime.fromisoformat(t)
+    except ValueError:
+        return None
+
+
+def _should_refresh_by_sampling(url: str, sample_percent: float) -> bool:
+    if sample_percent <= 0:
+        return False
+    if sample_percent >= 100:
+        return True
+
+    threshold = int(sample_percent * 100)
+    digest = hashlib.sha256((url or "").encode("utf-8")).digest()
+    bucket = int.from_bytes(digest[:8], "big") % 10000
+    return bucket < threshold
+
+
+def _should_refresh_detail(
+    person_url: str,
+    prior_record: dict[str, Any] | None,
+    *,
+    now_utc: datetime,
+    force_refresh_after_days: int,
+    refresh_sample_percent: float,
+) -> bool:
+    if prior_record is None:
+        return True
+
+    prior_discovered = _parse_iso_datetime(
+        prior_record.get("discovered_at_utc")
+        if isinstance(prior_record.get("discovered_at_utc"), str)
+        else None
+    )
+    if prior_discovered is None:
+        return True
+
+    if prior_discovered.tzinfo is None:
+        prior_discovered = prior_discovered.replace(tzinfo=timezone.utc)
+
+    if force_refresh_after_days > 0:
+        stale_before = now_utc - timedelta(days=force_refresh_after_days)
+        if prior_discovered <= stale_before:
+            return True
+
+    return _should_refresh_by_sampling(person_url, refresh_sample_percent)
 
 
 @dataclass
@@ -921,6 +979,9 @@ class Crawler:
 
         max_pages = int(cfg.get("max_pages", 2000))
         max_total_records = int(cfg.get("max_total_records", 50000))
+        refresh_sample_percent = float(cfg.get("refresh_sample_percent", 5.0))
+        force_refresh_after_days = int(cfg.get("force_refresh_after_days", 30))
+        detail_fetch_workers = max(1, int(cfg.get("detail_fetch_workers", 8)))
 
         backoff_base_seconds = float(cfg.get("backoff_base_seconds", 0.5))
         backoff_jitter_seconds = float(cfg.get("backoff_jitter_seconds", 0.25))
@@ -943,14 +1004,16 @@ class Crawler:
         if not start:
             return []
 
-        discovered_at = datetime.now(timezone.utc).isoformat()
+        now_utc = datetime.now(timezone.utc)
+        discovered_at = now_utc.isoformat()
 
         @dataclass(frozen=True)
         class _QueueItem:
             url: str
             department_path: list[str]
 
-        queue: list[_QueueItem] = [_QueueItem(url=start, department_path=[])]
+        queue: deque[_QueueItem] = deque([_QueueItem(url=start, department_path=[])])
+        enqueued_pages: set[str] = {start}
         visited_pages: set[str] = set()
 
         detail_cache: dict[str, dict[str, Any]] = {}
@@ -999,8 +1062,122 @@ class Crawler:
             _set_department_path(meta, department_parts)
             return meta
 
+        def _append_discovered_from(
+            meta: dict[str, Any], discovered_from_url: str
+        ) -> None:
+            if not isinstance(meta.get("discovered_from"), str):
+                meta["discovered_from"] = discovered_from_url
+            dfs = meta.get("discovered_from_urls")
+            if not isinstance(dfs, list):
+                dfs = []
+                meta["discovered_from_urls"] = dfs
+            if discovered_from_url not in dfs:
+                dfs.append(discovered_from_url)
+
+        def _build_record_from_detail(
+            *,
+            person_url: str,
+            dedup: str,
+            person_entry: dict[str, Any],
+            detail: dict[str, Any],
+            discovered_from: str,
+        ) -> UrlRecord:
+            post_title_fallback = (
+                person_entry.get("post_title")
+                if isinstance(person_entry.get("post_title"), str)
+                else None
+            )
+            if isinstance(post_title_fallback, str) and (
+                "bureau / department / related organisation"
+                in post_title_fallback.lower()
+            ):
+                post_title_fallback = None
+
+            post_title_short = (
+                detail.get("post_title")
+                if isinstance(detail.get("post_title"), str)
+                else post_title_fallback
+            )
+            post_title_long = _post_title_long_from_short(post_title_short)
+
+            department_parts = detail.get("department_parts")
+            if not isinstance(department_parts, list):
+                department_parts = []
+
+            department_root = _normalize_department_id(
+                detail.get("department_root") if isinstance(detail, dict) else None
+            )
+            if department_root is None and department_parts:
+                department_root = _normalize_department_id(str(department_parts[0]))
+
+            office_tel = (
+                detail.get("office_tel")
+                if isinstance(detail.get("office_tel"), str)
+                else person_entry.get("office_tel")
+            )
+            email = (
+                detail.get("email")
+                if isinstance(detail.get("email"), str)
+                else person_entry.get("email")
+            )
+
+            meta = _make_meta(
+                discovered_from=discovered_from,
+                dedup_key=dedup,
+                detail_url=person_url,
+                department_root=department_root,
+                department=(
+                    detail.get("department")
+                    if isinstance(detail.get("department"), str)
+                    else None
+                ),
+                department_parts=[
+                    str(x) for x in department_parts if isinstance(x, str)
+                ],
+                post_title_short=post_title_short,
+                post_title_long=post_title_long,
+                office_tel=office_tel if isinstance(office_tel, str) else None,
+                email=email if isinstance(email, str) else None,
+                fax=(detail.get("fax") if isinstance(detail.get("fax"), str) else None),
+                office_address=(
+                    detail.get("office_address")
+                    if isinstance(detail.get("office_address"), str)
+                    else None
+                ),
+            )
+            _append_discovered_from(meta, discovered_from)
+
+            return ctx.make_record(
+                url=person_url,
+                name=(
+                    detail.get("name") if isinstance(detail.get("name"), str) else None
+                )
+                or (
+                    person_entry.get("name")
+                    if isinstance(person_entry.get("name"), str)
+                    else None
+                ),
+                discovered_at_utc=discovered_at,
+                source=self.name,
+                meta=meta,
+            )
+
+        def _fetch_detail_concurrent(detail_url: str) -> dict[str, Any]:
+            local_session = requests.Session()
+            if user_agent:
+                local_session.headers.update({"User-Agent": user_agent})
+            detail_resp = _get_with_retries(
+                local_session,
+                detail_url,
+                timeout_seconds=timeout_seconds,
+                max_retries=max_retries,
+                backoff_base_seconds=backoff_base_seconds,
+                backoff_jitter_seconds=backoff_jitter_seconds,
+            )
+            return _extract_person_detail_fields(detail_resp.text, page_url=detail_url)
+
         while queue:
-            item = queue.pop(0)
+            item = queue.popleft()
             page_url = item.url
             dept_path = item.department_path
 
@@ -1035,6 +1212,7 @@ class Crawler:
 
             # 1) Extract person/service detail URLs from list tables
             people = _extract_people_from_html(html, page_url=page_url)
+            refresh_candidates: list[tuple[str, str, dict[str, Any]]] = []
             for p in people:
                 person_url = str(p.get("person_url") or "").strip()
                 if not person_url:
@@ -1046,111 +1224,99 @@ class Crawler:
                     if isinstance(existing.meta, dict) and isinstance(
                         existing.meta.get("discovered_from"), str
                     ):
-                        dfs = existing.meta.get("discovered_from_urls")
-                        if not isinstance(dfs, list):
-                            dfs = [existing.meta["discovered_from"]]
-                            existing.meta["discovered_from_urls"] = dfs
-                        if page_url not in dfs:
-                            dfs.append(page_url)
+                        _append_discovered_from(existing.meta, page_url)
                     continue
 
-                detail = detail_cache.get(person_url)
-                if detail is None:
-                    if ctx.debug:
-                        print(f"[{self.name}] Fetch detail {person_url}")
-                    detail_resp = _get_with_retries(
-                        session,
-                        person_url,
-                        timeout_seconds=timeout_seconds,
-                        max_retries=max_retries,
-                        backoff_base_seconds=backoff_base_seconds,
-                        backoff_jitter_seconds=backoff_jitter_seconds,
-                    )
-                    detail = _extract_person_detail_fields(
-                        detail_resp.text,
-                        page_url=person_url,
-                    )
-                    detail_cache[person_url] = detail
-
-                post_title_fallback = (
-                    p.get("post_title") if isinstance(p.get("post_title"), str) else None
+                prior = ctx.get_prior_record(person_url)
+                should_refresh = _should_refresh_detail(
+                    person_url,
+                    prior,
+                    now_utc=now_utc,
+                    force_refresh_after_days=force_refresh_after_days,
+                    refresh_sample_percent=refresh_sample_percent,
                 )
-                if isinstance(post_title_fallback, str) and (
-                    "bureau / department / related organisation"
-                    in post_title_fallback.lower()
-                ):
-                    post_title_fallback = None
-
-                post_title_short = (
-                    detail.get("post_title")
-                    if isinstance(detail.get("post_title"), str)
-                    else post_title_fallback
-                )
-                post_title_long = _post_title_long_from_short(post_title_short)
-
-                department_parts = detail.get("department_parts")
-                if not isinstance(department_parts, list):
-                    department_parts = []
-
-                department_root = _normalize_department_id(
-                    detail.get("department_root") if isinstance(detail, dict) else None
-                )
-                if department_root is None and department_parts:
-                    department_root = _normalize_department_id(
-                        str(department_parts[0])
-                    )
-
-                office_tel = (
-                    detail.get("office_tel")
-                    if isinstance(detail.get("office_tel"), str)
-                    else p.get("office_tel")
-                )
-                email = (
-                    detail.get("email")
-                    if isinstance(detail.get("email"), str)
-                    else p.get("email")
-                )
-
-                meta = _make_meta(
-                    discovered_from=page_url,
-                    dedup_key=k,
-                    detail_url=person_url,
-                    department_root=department_root,
-                    department=(
-                        detail.get("department")
-                        if isinstance(detail.get("department"), str)
+                if (not should_refresh) and isinstance(prior, dict):
+                    prior_name = (
+                        prior.get("name")
+                        if isinstance(prior.get("name"), str)
                         else None
-                    ),
-                    department_parts=[str(x) for x in department_parts if isinstance(x, str)],
-                    post_title_short=post_title_short,
-                    post_title_long=post_title_long,
-                    office_tel=office_tel if isinstance(office_tel, str) else None,
-                    email=email if isinstance(email, str) else None,
-                    fax=(
-                        detail.get("fax") if isinstance(detail.get("fax"), str) else None
-                    ),
-                    office_address=(
-                        detail.get("office_address")
-                        if isinstance(detail.get("office_address"), str)
-                        else None
-                    ),
-                )
-
-                rec = ctx.make_record(
-                    url=person_url,
-                    name=(
-                        detail.get("name") if isinstance(detail.get("name"), str) else None
                     )
-                    or (p.get("name") if isinstance(p.get("name"), str) else None),
-                    discovered_at_utc=discovered_at,
-                    source=self.name,
-                    meta=meta,
-                )
+                    prior_discovered_raw = prior.get("discovered_at_utc")
+                    prior_discovered = (
+                        prior_discovered_raw
+                        if isinstance(prior_discovered_raw, str)
+                        else discovered_at
+                    )
+                    prior_publish_date = (
+                        prior.get("publish_date")
+                        if isinstance(prior.get("publish_date"), str)
+                        else None
+                    )
+                    prior_meta_raw = prior.get("meta")
+                    prior_meta: dict[str, Any] = (
+                        copy.deepcopy(prior_meta_raw)
+                        if isinstance(prior_meta_raw, dict)
+                        else {}
+                    )
+                    prior_meta["detail_url"] = person_url
+                    prior_meta["dedup_key"] = k
+                    _append_discovered_from(prior_meta, page_url)
+
+                    rec = ctx.make_record(
+                        url=person_url,
+                        name=prior_name
+                        or (p.get("name") if isinstance(p.get("name"), str) else None),
+                        discovered_at_utc=prior_discovered,
+                        source=self.name,
+                        meta=prior_meta,
+                        publish_date=prior_publish_date,
+                    )
+                else:
+                    refresh_candidates.append((k, person_url, p))
+                    continue
+
                 record_by_key[k] = rec
                 out.append(rec)
 
                 if len(out) >= max_total_records:
                     break
+
+            if refresh_candidates and len(out) < max_total_records:
+                fetch_urls = [
+                    person_url
+                    for _, person_url, _ in refresh_candidates
+                    if person_url not in detail_cache
+                ]
+
+                if fetch_urls:
+                    workers = min(detail_fetch_workers, len(fetch_urls))
+                    with ThreadPoolExecutor(max_workers=workers) as pool:
+                        future_map = {
+                            pool.submit(
+                                _fetch_detail_concurrent, person_url
+                            ): person_url
+                            for person_url in fetch_urls
+                        }
+                        for future, person_url in future_map.items():
+                            if ctx.debug:
+                                print(f"[{self.name}] Fetch detail {person_url}")
+                            detail_cache[person_url] = future.result()
+
+                for k, person_url, p in refresh_candidates:
+                    detail = detail_cache.get(person_url)
+                    if not isinstance(detail, dict):
+                        continue
+                    rec = _build_record_from_detail(
+                        person_url=person_url,
+                        dedup=k,
+                        person_entry=p,
+                        detail=detail,
+                        discovered_from=page_url,
+                    )
+                    record_by_key[k] = rec
+                    out.append(rec)
+                    if len(out) >= max_total_records:
+                        break
 
             if len(out) >= max_total_records:
                 break
@@ -1189,8 +1355,11 @@ class Crawler:
 
                 if can in visited_pages:
                     continue
+                if can in enqueued_pages:
+                    continue
 
                 queue.append(_QueueItem(url=can, department_path=next_path))
+                enqueued_pages.add(can)
 
             # Polite pacing
             delay = request_delay_seconds

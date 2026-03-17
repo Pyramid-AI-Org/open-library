@@ -129,6 +129,7 @@ class Crawler:
         while current >= start_date:
             yyyymm = current.strftime("%Y%m")
             dd = current.strftime("%d")
+            publish_date = current.isoformat()
 
             for locale in locales:
                 if locale == "en":
@@ -186,10 +187,10 @@ class Crawler:
                             url=href,
                             name=(link.text or None),
                             discovered_at_utc=discovered_at,
+                            publish_date=publish_date,
                             source=self.name,
                             meta={
-                                "date_utc": current.isoformat(),
-                                "listing_url": listing_url,
+                                "discovered_from": listing_url,
                                 "locale": locale,
                             },
                         )
@@ -214,5 +215,5 @@ class Crawler:
 
             current -= timedelta(days=1)
 
-        out.sort(key=lambda r: (r.url, r.meta.get("date_utc") or ""))
+        out.sort(key=lambda r: (r.url, (r.publish_date or "")))
         return out

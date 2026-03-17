@@ -21,6 +21,13 @@ logger = logging.getLogger(__name__)
 
 _DEFAULT_PAGE_URL = "https://bestpractice.emsd.gov.hk/en/booklet"
 _DEFAULT_BOOKLET_ROOT = "https://bestpractice.emsd.gov.hk"
+_EXCLUDED_BOOKLET_SLUGS = {
+    "booklet",
+    "about-us",
+    "contact-us",
+    "disclaimer",
+    "privacy-policy",
+}
 
 
 def _canonicalize(url: str) -> str | None:
@@ -35,7 +42,9 @@ class Crawler:
 
         page_url = str(cfg.get("page_url", _DEFAULT_PAGE_URL)).strip()
         booklet_root = str(cfg.get("booklet_root", _DEFAULT_BOOKLET_ROOT)).rstrip("/")
-        content_element_id = str(cfg.get("content_element_id", "bookletlistpage")).strip()
+        content_element_id = str(
+            cfg.get("content_element_id", "bookletlistpage")
+        ).strip()
 
         request_delay = float(cfg.get("request_delay_seconds", 0.5))
         request_jitter = float(cfg.get("request_jitter_seconds", 0.25))
@@ -54,7 +63,9 @@ class Crawler:
 
         def _fetch(url: str) -> str:
             if request_delay > 0:
-                sleep_seconds(request_delay + random.uniform(0.0, max(0.0, request_jitter)))
+                sleep_seconds(
+                    request_delay + random.uniform(0.0, max(0.0, request_jitter))
+                )
             resp = get_with_retries(
                 session,
                 url,
@@ -69,7 +80,9 @@ class Crawler:
         try:
             landing_html = _fetch(page_url)
         except Exception as exc:
-            logger.error(f"[{self.name}] Failed to fetch landing page {page_url}: {exc}")
+            logger.error(
+                f"[{self.name}] Failed to fetch landing page {page_url}: {exc}"
+            )
             return []
 
         landing_links = extract_links_in_element(
@@ -93,6 +106,11 @@ class Crawler:
             parsed = urlparse(can)
             if parsed.query:
                 continue
+            parts = [part for part in parsed.path.split("/") if part]
+            if len(parts) < 2 or parts[0] not in {"en", "tc"}:
+                continue
+            if parts[-1].lower() in _EXCLUDED_BOOKLET_SLUGS:
+                continue
             if path_ext(can):
                 # Skip direct files (images/pdf/etc) on the landing page.
                 continue
@@ -111,14 +129,16 @@ class Crawler:
         out: list[UrlRecord] = []
         seen_pdf_urls: set[str] = set()
 
-        for booklet_url, booklet_name in booklet_pages:
+        for idx, (booklet_url, booklet_name) in enumerate(booklet_pages, start=1):
             if len(out) >= max_total_records:
                 break
 
             try:
                 booklet_html = _fetch(booklet_url)
             except Exception as exc:
-                logger.error(f"[{self.name}] Failed to fetch booklet page {booklet_url}: {exc}")
+                logger.error(
+                    f"[{self.name}] Failed to fetch booklet page {booklet_url}: {exc}"
+                )
                 continue
 
             for link in extract_links(booklet_html, base_url=booklet_url):
@@ -132,12 +152,12 @@ class Crawler:
 
                 out.append(
                     ctx.make_record(
-                    url=can,
-                    name=booklet_name,
-                    discovered_at_utc=ctx.run_date_utc,
-                    source=self.name,
-                    meta={"discovered_from": booklet_url},
-                )
+                        url=can,
+                        name=booklet_name,
+                        discovered_at_utc=ctx.run_date_utc,
+                        source=self.name,
+                        meta={"discovered_from": booklet_url},
+                    )
                 )
                 seen_pdf_urls.add(can)
 

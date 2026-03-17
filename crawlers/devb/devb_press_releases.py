@@ -670,17 +670,16 @@ class Crawler:
 
                         out.append(
                             ctx.make_record(
-                    url=final_url,
-                    name=localized_title,
-                    discovered_at_utc=discovered_at,
-                    source=self.name,
-                    meta={
-                                    "date": localized_date_iso,
-                                    "year": year,
-                                    "listing_url": localized_listing_url,
+                                url=final_url,
+                                name=localized_title,
+                                discovered_at_utc=discovered_at,
+                                source=self.name,
+                                publish_date=localized_date_iso,
+                                meta={
+                                    "discovered_from": localized_listing_url,
                                     "locale": locale,
                                 },
-                )
+                            )
                         )
                         added += 1
 
@@ -781,5 +780,5 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-        out.sort(key=lambda r: (r.url, (r.meta.get("date") or "")))
+        out.sort(key=lambda r: (r.url, (r.publish_date or "")))
         return out

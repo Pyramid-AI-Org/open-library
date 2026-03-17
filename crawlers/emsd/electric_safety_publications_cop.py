@@ -13,6 +13,7 @@ from crawlers.base import (
     get_with_retries,
     sleep_seconds,
 )
+from crawlers.emsd.date_extract import extract_publish_date_from_row_context
 from utils.html_links import extract_links, extract_links_in_element
 
 logger = logging.getLogger(__name__)
@@ -27,7 +28,7 @@ def _strip_html_comments(html: str) -> str:
 
 
 class Crawler:
-    name = "emsd.electric_safety_publications_cop"
+    name = "electric_safety_publications_cop"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         # 1. Load config
@@ -89,10 +90,17 @@ class Crawler:
             if not text:
                 text = parsed.path.split("/")[-1]
 
+            publish_date = extract_publish_date_from_row_context(
+                html=html,
+                href=link.href,
+                link_text=text,
+            )
+
             records.append(ctx.make_record(
                     url=link.href,
                     name=text,
                     discovered_at_utc=ctx.started_at_utc,
+                    publish_date=publish_date,
                     source=self.name,
                     meta={
                     "discovered_from": page_url

@@ -198,7 +198,6 @@ class Crawler:
 
                 issue_date_iso = _parse_ddmmyyyy_to_iso(item.get("IssueDate"))
                 revision_date_iso = _parse_ddmmyyyy_to_iso(item.get("RevisionDate"))
-                chosen_date_iso = issue_date_iso or revision_date_iso
 
                 for file_path in files_raw:
                     if file_path is None:
@@ -220,22 +219,21 @@ class Crawler:
                     name = title or circular_number or None
 
                     record = ctx.make_record(
-                    url=abs_url,
-                    name=name,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta={
+                        url=abs_url,
+                        name=name,
+                        discovered_at_utc=ctx.started_at_utc,
+                        source=self.name,
+                        publish_date=issue_date_iso,
+                        meta={
                             "circular_no": circular_number,
-                            "index_groups": index_groups,
-                            "date": chosen_date_iso,
-                            "issue_year": issue_year or None,
                             "issue_date": issue_date_iso,
+                            "index_groups": index_groups,
                             "revision_year": revision_year or None,
                             "revision_date": revision_date_iso,
                             "matched_years": [year],
                             "data_js_url": data_js_url,
                         },
-                )
+                    )
 
                     prev = by_url.get(abs_url)
                     if prev is None:
@@ -264,6 +262,7 @@ class Crawler:
                     name=rec.name,
                     discovered_at_utc=rec.discovered_at_utc,
                     source=rec.source,
+                    publish_date=rec.publish_date,
                     meta=meta,
                 )
             )

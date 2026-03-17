@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import random
+import re
 from dataclasses import dataclass
 from html.parser import HTMLParser
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 
@@ -20,12 +21,86 @@ from crawlers.base import (
 
 _ALLOWED_DOC_EXTS = {".pdf"}
 
+_MONTH_NAME_TO_NUMBER = {
+    "january": "01",
+    "february": "02",
+    "march": "03",
+    "april": "04",
+    "may": "05",
+    "june": "06",
+    "july": "07",
+    "august": "08",
+    "september": "09",
+    "october": "10",
+    "november": "11",
+    "december": "12",
+}
+
+_MONTH_YEAR_RE = re.compile(
+    r"\b("
+    r"January|February|March|April|May|June|July|August|September|October|November|December"
+    r")\s+(\d{4})\b",
+    re.IGNORECASE,
+)
+_YEAR_EDITION_RE = re.compile(r"\b(\d{4})\s+Edition\b", re.IGNORECASE)
+_AMENDMENT_YYYYMM_RE = re.compile(r"amend(?:ment)?[_-]?(\d{4})(\d{2})", re.IGNORECASE)
+_AMENDMENT_MONTH_YYYY_RE = re.compile(
+    r"amend(?:ment)?[^\d]*(\d{4})(\d{2})", re.IGNORECASE
+)
+
 
 _clean_text = clean_text
 _sleep_seconds = sleep_seconds
 _get_with_retries = get_with_retries
 _canonicalize_url = canonicalize_url
 _path_ext = path_ext
+
+
+def _extract_publish_date_from_text_and_url(
+    *,
+    primary_text: str | None,
+    row_title: str | None,
+    link_text: str | None,
+    url: str,
+) -> str | None:
+    """Best-effort publish date extraction from display text and file name.
+
+    Returns DD.MM.YYYY so shared normalization can convert to canonical output.
+    """
+
+    text_candidates = [
+        _clean_text(primary_text or ""),
+        _clean_text(row_title or ""),
+        _clean_text(link_text or ""),
+    ]
+
+    for text in text_candidates:
+        if not text:
+            continue
+
+        month_year_matches = list(_MONTH_YEAR_RE.finditer(text))
+        if month_year_matches:
+            month_name, year = month_year_matches[-1].groups()
+            month = _MONTH_NAME_TO_NUMBER.get(month_name.lower())
+            if month:
+                return f"01.{month}.{year}"
+
+        edition_matches = list(_YEAR_EDITION_RE.finditer(text))
+        if edition_matches:
+            year = edition_matches[-1].group(1)
+            return f"01.01.{year}"
+
+    file_name = (urlparse(url).path or "").rsplit("/", 1)[-1]
+    file_name = file_name.rsplit(".", 1)[0]
+    m = _AMENDMENT_YYYYMM_RE.search(file_name) or _AMENDMENT_MONTH_YYYY_RE.search(
+        file_name
+    )
+    if m:
+        year, month = m.groups()
+        if 1 <= int(month) <= 12:
+            return f"01.{month}.{year}"
+
+    return None
 
 
 @dataclass(frozen=True)
@@ -244,7 +319,6 @@ class Crawler:
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         cfg = ctx.get_crawler_config(self.name)
 
-        base_url = str(cfg.get("base_url", "https://www.bd.gov.hk")).rstrip("/")
         page_url = str(
             cfg.get(
                 "page_url",
@@ -318,14 +392,21 @@ class Crawler:
             else:
                 name = None
 
+            publish_date = _extract_publish_date_from_text_and_url(
+                primary_text=name,
+                row_title=row_title,
+                link_text=link_text,
+                url=can,
+            )
+
             out.append(
                 ctx.make_record(
                     url=can,
                     name=name,
                     discovered_at_utc=ctx.started_at_utc,
                     source=self.name,
+                    publish_date=publish_date,
                     meta={
-                        "start_url": page_url,
                         "discovered_from": page_url,
                         "file_ext": "pdf",
                         "tab": link.tab,
