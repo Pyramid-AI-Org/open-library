@@ -1,14 +1,14 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 72150,
-    "records_total": 72150,
+    "lines_total": 77196,
+    "records_total": 77196,
     "records_by_group": {
-      "other": 6644,
+      "other": 11608,
       "archsd.gov.hk": 184,
       "devb.gov.hk": 4055,
       "tel.directory.gov.hk": 16071,
-      "info.gov.hk": 45196
+      "info.gov.hk": 45278
     },
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
@@ -49,15 +49,22 @@
       "emsd.lifts_and_escalators_registered_workers": 9,
       "herbarium": 3348,
       "hyd_technical_documents": 351,
-      "hksar_press_releases": 45196
+      "hksar_press_releases": 45278,
+      "finance_meetings": 1035,
+      "finance_papers_reports": 833,
+      "development_meetings": 774,
+      "development_papers_reports": 678,
+      "finance_financial_proposals_considered": 894,
+      "public_works_papers_reports": 506,
+      "public_works_project_proposal_considered": 244
     },
     "parse_errors": 0
   },
   "groups": {
     "other": {
-      "records": 6644,
-      "unique_urls": 6620,
-      "duplicate_url_hits": 24,
+      "records": 11608,
+      "unique_urls": 9093,
+      "duplicate_url_hits": 2515,
       "missing_name": 0,
       "missing_meta": 0,
       "url_host_mismatch": 0,
@@ -73,7 +80,7 @@
             "source_label",
             "url"
           ],
-          "count": 6644
+          "count": 11608
         }
       ],
       "meta_schema_signatures": [
@@ -107,41 +114,46 @@
         },
         {
           "meta_keys": [
+            "discovered_from",
+            "locale"
+          ],
+          "count": 3320
+        },
+        {
+          "meta_keys": [
             "discovered_from"
           ],
           "count": 1750
         },
         {
           "meta_keys": [
+            "approved_date",
+            "commitment",
             "discovered_from",
-            "file_ext"
+            "locale",
+            "paper_no"
           ],
-          "count": 435
+          "count": 894
         },
         {
           "meta_keys": [
             "discovered_from",
-            "file_ext",
-            "issue_date",
-            "ref_no",
-            "source_page",
-            "tab"
+            "locale",
+            "paper_no"
           ],
-          "count": 221
-        },
-        {
-          "meta_keys": [
-            "conditions_of_permits",
-            "discovered_from",
-            "form_no",
-            "publish_date",
-            "remark"
-          ],
-          "count": 212
+          "count": 506
         }
       ],
-      "meta_schema_variants": 19,
+      "meta_schema_variants": 23,
       "top_meta_keys": [
+        [
+          "discovered_from",
+          8249
+        ],
+        [
+          "locale",
+          4964
+        ],
         [
           "chinese_name",
           3348
@@ -181,17 +193,13 @@
         [
           "genus_id",
           3348
-        ],
-        [
-          "genus_name",
-          3348
-        ],
-        [
-          "genus_name_chi",
-          3348
         ]
       ],
       "top_hosts": [
+        [
+          "www.legco.gov.hk",
+          4966
+        ],
         [
           "www.herbarium.gov.hk",
           3348
@@ -225,28 +233,24 @@
           2
         ],
         [
-          "www.legco.gov.hk",
-          2
-        ],
-        [
           "re.emsd.gov.hk",
           2
         ]
       ],
       "top_extensions": [
         [
-          ".html",
-          3828
+          ".pdf",
+          7780
         ],
         [
-          ".pdf",
-          2816
+          ".html",
+          3828
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-20T04:13:49.769698+00:00",
-        "max": "2026-03-20T04:13:49.769698+00:00",
-        "count": 5827
+        "min": "2026-03-20T16:30:09.618215+00:00",
+        "max": "2026-03-20T16:30:09.618215+00:00",
+        "count": 10791
       }
     },
     "archsd.gov.hk": {
@@ -310,8 +314,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-20T04:13:49.769698+00:00",
-        "max": "2026-03-20T04:13:49.769698+00:00",
+        "min": "2026-03-20T16:30:09.618215+00:00",
+        "max": "2026-03-20T16:30:09.618215+00:00",
         "count": 184
       }
     },
@@ -433,8 +437,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-20T04:13:49.769698+00:00",
-        "max": "2026-03-20T04:13:49.769698+00:00",
+        "min": "2026-03-20T16:30:09.618215+00:00",
+        "max": "2026-03-20T16:30:09.618215+00:00",
         "count": 4055
       }
     },
@@ -474,7 +478,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 14449
+          "count": 14448
         },
         {
           "meta_keys": [
@@ -492,7 +496,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 1310
+          "count": 1311
         },
         {
           "meta_keys": [
@@ -555,11 +559,11 @@
         ],
         [
           "department",
-          1310
+          1311
         ],
         [
           "fax",
-          1310
+          1311
         ]
       ],
       "top_hosts": [
@@ -576,13 +580,13 @@
       ],
       "discovered_at_range": {
         "min": "2026-02-28T04:57:39.512665+00:00",
-        "max": "2026-03-20T04:59:38.430829+00:00",
+        "max": "2026-03-20T17:20:03.073989+00:00",
         "count": 16071
       }
     },
     "info.gov.hk": {
-      "records": 45196,
-      "unique_urls": 45196,
+      "records": 45278,
+      "unique_urls": 45278,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -599,7 +603,7 @@
             "source_label",
             "url"
           ],
-          "count": 45196
+          "count": 45278
         }
       ],
       "meta_schema_signatures": [
@@ -608,36 +612,36 @@
             "discovered_from",
             "locale"
           ],
-          "count": 45196
+          "count": 45278
         }
       ],
       "meta_schema_variants": 1,
       "top_meta_keys": [
         [
           "discovered_from",
-          45196
+          45278
         ],
         [
           "locale",
-          45196
+          45278
         ]
       ],
       "top_hosts": [
         [
           "www.info.gov.hk",
-          45196
+          45278
         ]
       ],
       "top_extensions": [
         [
           ".htm",
-          45196
+          45278
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-20T04:13:49.777594+00:00",
-        "max": "2026-03-20T04:13:49.777594+00:00",
-        "count": 45196
+        "min": "2026-03-20T16:30:09.626222+00:00",
+        "max": "2026-03-20T16:30:09.626222+00:00",
+        "count": 45278
       }
     }
   },
@@ -645,9 +649,9 @@
     "record_size_bytes": {
       "min": 371,
       "max": 2386,
-      "mean": 614.8952182952183,
-      "p50": 440.0,
-      "p95": 1179.0
+      "mean": 609.8484506969273,
+      "p50": 447.0,
+      "p95": 1174.0
     },
     "anomaly_counts": {
       "bad_discovered_at_utc": 817
