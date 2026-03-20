@@ -1,14 +1,14 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 72143,
-    "records_total": 72143,
+    "lines_total": 72150,
+    "records_total": 72150,
     "records_by_group": {
       "other": 6644,
       "archsd.gov.hk": 184,
-      "devb.gov.hk": 4051,
-      "tel.directory.gov.hk": 16075,
-      "info.gov.hk": 45189
+      "devb.gov.hk": 4055,
+      "tel.directory.gov.hk": 16071,
+      "info.gov.hk": 45196
     },
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
@@ -27,12 +27,12 @@
       "cedd_standards_spec_handbooks_cost": 198,
       "cedd_eacsb_handbook": 1,
       "cedd_technical_circulars": 21,
-      "devb_press_releases": 3515,
-      "devb_speeches_and_presentations": 460,
+      "devb_press_releases": 3518,
+      "devb_speeches_and_presentations": 461,
       "devb_general_circulars": 2,
       "devb_planning_and_lands_technical_circulars": 4,
       "devb_works_technical_circulars_um": 70,
-      "tel_directory": 16075,
+      "tel_directory": 16071,
       "electric_safety_publications_guidelines": 40,
       "emsd.gas_statutory_advisory_bodies": 2,
       "emsd.lifts_and_escalators_statutory_advisory_bodies": 3,
@@ -49,7 +49,7 @@
       "emsd.lifts_and_escalators_registered_workers": 9,
       "herbarium": 3348,
       "hyd_technical_documents": 351,
-      "hksar_press_releases": 45189
+      "hksar_press_releases": 45196
     },
     "parse_errors": 0
   },
@@ -244,8 +244,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-19T04:23:30.714098+00:00",
-        "max": "2026-03-19T04:23:30.714098+00:00",
+        "min": "2026-03-20T04:13:49.769698+00:00",
+        "max": "2026-03-20T04:13:49.769698+00:00",
         "count": 5827
       }
     },
@@ -310,14 +310,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-19T04:23:30.714098+00:00",
-        "max": "2026-03-19T04:23:30.714098+00:00",
+        "min": "2026-03-20T04:13:49.769698+00:00",
+        "max": "2026-03-20T04:13:49.769698+00:00",
         "count": 184
       }
     },
     "devb.gov.hk": {
-      "records": 4051,
-      "unique_urls": 4051,
+      "records": 4055,
+      "unique_urls": 4055,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -334,7 +334,7 @@
             "source_label",
             "url"
           ],
-          "count": 4051
+          "count": 4055
         }
       ],
       "meta_schema_signatures": [
@@ -343,7 +343,7 @@
             "discovered_from",
             "locale"
           ],
-          "count": 3975
+          "count": 3979
         },
         {
           "meta_keys": [
@@ -377,11 +377,11 @@
       "top_meta_keys": [
         [
           "discovered_from",
-          3981
+          3985
         ],
         [
           "locale",
-          3975
+          3979
         ],
         [
           "circular_no",
@@ -419,13 +419,13 @@
       "top_hosts": [
         [
           "www.devb.gov.hk",
-          4051
+          4055
         ]
       ],
       "top_extensions": [
         [
           ".html",
-          3975
+          3979
         ],
         [
           ".pdf",
@@ -433,14 +433,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-19T04:23:30.714098+00:00",
-        "max": "2026-03-19T04:23:30.714098+00:00",
-        "count": 4051
+        "min": "2026-03-20T04:13:49.769698+00:00",
+        "max": "2026-03-20T04:13:49.769698+00:00",
+        "count": 4055
       }
     },
     "tel.directory.gov.hk": {
-      "records": 16075,
-      "unique_urls": 16075,
+      "records": 16071,
+      "unique_urls": 16071,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -457,7 +457,7 @@
             "source_label",
             "url"
           ],
-          "count": 16075
+          "count": 16071
         }
       ],
       "meta_schema_signatures": [
@@ -474,7 +474,7 @@
             "post_title",
             "post_title_long"
           ],
-          "count": 14453
+          "count": 14449
         },
         {
           "meta_keys": [
@@ -515,43 +515,43 @@
       "top_meta_keys": [
         [
           "dedup_key",
-          16075
+          16071
         ],
         [
           "department_paths",
-          16075
+          16071
         ],
         [
           "department_root",
-          16075
+          16071
         ],
         [
           "detail_url",
-          16075
+          16071
         ],
         [
           "discovered_from",
-          16075
+          16071
         ],
         [
           "discovered_from_urls",
-          16075
+          16071
         ],
         [
           "email",
-          16075
+          16071
         ],
         [
           "office_tel",
-          16075
+          16071
         ],
         [
           "post_title",
-          16075
+          16071
         ],
         [
           "post_title_long",
-          16075
+          16071
         ],
         [
           "department",
@@ -565,24 +565,24 @@
       "top_hosts": [
         [
           "www.directory.gov.hk",
-          16075
+          16071
         ]
       ],
       "top_extensions": [
         [
           ".jsp",
-          16075
+          16071
         ]
       ],
       "discovered_at_range": {
         "min": "2026-02-28T04:57:39.512665+00:00",
-        "max": "2026-03-19T05:15:41.914599+00:00",
-        "count": 16075
+        "max": "2026-03-20T04:59:38.430829+00:00",
+        "count": 16071
       }
     },
     "info.gov.hk": {
-      "records": 45189,
-      "unique_urls": 45189,
+      "records": 45196,
+      "unique_urls": 45196,
       "duplicate_url_hits": 0,
       "missing_name": 0,
       "missing_meta": 0,
@@ -599,7 +599,7 @@
             "source_label",
             "url"
           ],
-          "count": 45189
+          "count": 45196
         }
       ],
       "meta_schema_signatures": [
@@ -608,36 +608,36 @@
             "discovered_from",
             "locale"
           ],
-          "count": 45189
+          "count": 45196
         }
       ],
       "meta_schema_variants": 1,
       "top_meta_keys": [
         [
           "discovered_from",
-          45189
+          45196
         ],
         [
           "locale",
-          45189
+          45196
         ]
       ],
       "top_hosts": [
         [
           "www.info.gov.hk",
-          45189
+          45196
         ]
       ],
       "top_extensions": [
         [
           ".htm",
-          45189
+          45196
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-03-19T04:23:30.722462+00:00",
-        "max": "2026-03-19T04:23:30.722462+00:00",
-        "count": 45189
+        "min": "2026-03-20T04:13:49.777594+00:00",
+        "max": "2026-03-20T04:13:49.777594+00:00",
+        "count": 45196
       }
     }
   },
@@ -645,8 +645,8 @@
     "record_size_bytes": {
       "min": 371,
       "max": 2386,
-      "mean": 614.9491010908889,
-      "p50": 440,
+      "mean": 614.8952182952183,
+      "p50": 440.0,
       "p95": 1179.0
     },
     "anomaly_counts": {
@@ -656,152 +656,152 @@
       {
         "kind": "bad_discovered_at_utc",
         "line": 1,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 2,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 3,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 4,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 6,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 9,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 10,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 11,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 12,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 13,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 14,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 1090,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22693,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22694,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22695,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22696,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22697,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22698,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22699,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22700,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22701,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22702,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22703,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22704,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22705,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22706,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22707,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22708,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22709,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       },
       {
         "kind": "bad_discovered_at_utc",
         "line": 22710,
-        "detail": "2026-03-19"
+        "detail": "2026-03-20"
       }
     ]
   }
