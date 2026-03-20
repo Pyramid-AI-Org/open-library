@@ -33,6 +33,53 @@ crawlers:
         backoff_jitter_seconds: 0.25
 
   # ============================================================================
+  # LEGCO - Legislative Council
+  # ============================================================================
+  legco:
+    label: "Legislative Council"
+    base_url: "https://www.legco.gov.hk"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      development_meetings:
+        # LegCo Panel on Development meetings minutes and papers PDF crawler.
+        panel_slug: "development"
+        years_back: 5
+
+      development_papers_reports:
+        # LegCo Panel on Development papers-and-reports PDF crawler.
+        panel_slug: "development"
+        years_back: 5
+
+      finance_meetings:
+        # LegCo Finance Committee meetings minutes and papers PDF crawler.
+        panel_slug: "finance"
+        years_back: 5
+
+      finance_papers_reports:
+        # LegCo Finance Committee papers-and-reports PDF crawler.
+        panel_slug: "finance"
+        years_back: 5
+
+      finance_financial_proposals_considered:
+        # LegCo Finance Committee financial proposals considered PDF crawler.
+        panel_slug: "finance"
+        years_back: 5
+
+      public_works_project_proposal_considered:
+        # LegCo Public Works Subcommittee project proposals considered PWSC PDF crawler.
+        committee_slug: "public-works"
+        years_back: 5
+
+      public_works_papers_reports:
+        # LegCo Public Works Subcommittee papers-and-reports PDF crawler.
+        committee_slug: "public-works"
+        years_back: 5
+
+  # ============================================================================
   # DEVB - The Development Bureau
   # ============================================================================
   devb:
