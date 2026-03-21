@@ -356,6 +356,65 @@ crawlers:
           - "https://www.hyd.gov.hk/en/technical_references/technical_document/structures_design_manual_2013/index.html"
 
   # ============================================================================
+  # EPD - Environmental Protection Department
+  # ============================================================================
+  epd:
+    label: "Environmental Protection Department"
+    base_url: "https://www.epd.gov.hk"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      air:
+        # EPD Air main-content crawler (English + Traditional Chinese) with scoped traversal.
+        seed_url: "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_maincontent.html"
+        english_scope_prefix: "https://www.epd.gov.hk/epd/english/environmentinhk/air/"
+        tc_scope_prefix: "https://www.epd.gov.hk/epd/tc_chi/environmentinhk/air/"
+        content_element_id: "content"
+        max_depth: 6
+        max_pages: 1200
+        max_out_links_per_page: 1200
+        allowed_document_extensions:
+          - ".pdf"
+          - ".doc"
+          - ".docx"
+
+      publications_guidance_documents:
+        # EPD Guidance Documents crawler (English + Traditional Chinese).
+        locales:
+          - locale: "english"
+            discovered_from: "https://www.epd.gov.hk/epd/english/resources_pub/publications/GN/GNindex.html"
+            api_url: "https://www.epd.gov.hk/epd/english/api/gn/gnbase.json"
+          - locale: "tc_chi"
+            discovered_from: "https://www.epd.gov.hk/epd/tc_chi/resources_pub/publications/GN/GNindex.html"
+            api_url: "https://www.epd.gov.hk/epd/tc_chi/api/gn/gnbase.json"
+
+      publications_study_report:
+        # EPD Study Reports crawler (Air, Noise, Waste) using immediate PDF links only.
+        start_urls:
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/studyrpts/air_studyrpts.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/noise/studyrpts/noise_studyrpts.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/waste/studyrpts/waste_studyrpts.html"
+
+      publications_other_reports:
+        # EPD Other Reports crawler for the Regional Cooperation Plan page.
+        page_url: "https://www.epd.gov.hk/epd/english/resources_pub/publications/regional_cooperation_plan.html"
+
+      publications_technical_memorandum:
+        # EPD Technical Memorandum crawler with stream labels from table rows.
+        page_url: "https://www.epd.gov.hk/epd/english/envir_standards/statutory/esg_stat.html"
+
+      publications_propeccpns:
+        # EPD ProPECC Practice Notes crawler.
+        page_url: "https://www.epd.gov.hk/epd/english/resources_pub/publications/pub_propeccpns.html"
+
+      policy_documents:
+        # EPD Policy Documents crawler.
+        page_url: "https://www.epd.gov.hk/epd/english/resources_pub/policy_documents/index.html"
+
+  # ============================================================================
   # DIRECTORY - Telephone Directory
   # ============================================================================
   directory:
