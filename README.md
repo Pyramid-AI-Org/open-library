@@ -71,7 +71,7 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 | https://www.emsd.gov.hk/      | Done    |
 | https://www.hyd.gov.hk/       | Done    |
 | https://www.legco.gov.hk/     | Partial |
-| https://www.epd.gov.hk/       | TODO    |
+| https://www.epd.gov.hk/       | Partial |
 | https://www.wsd.gov.hk/       | TODO    |
 | https://www.dsd.gov.hk/       | TODO    |
 | https://www.hkfsd.gov.hk      | TODO    |
