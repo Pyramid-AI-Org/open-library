@@ -372,6 +372,67 @@ crawlers:
         seed_url: "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_maincontent.html"
         english_scope_prefix: "https://www.epd.gov.hk/epd/english/environmentinhk/air/"
         tc_scope_prefix: "https://www.epd.gov.hk/epd/tc_chi/environmentinhk/air/"
+        include_document_urls: false
+        content_element_id: "content"
+        max_depth: 6
+        max_pages: 1200
+        max_out_links_per_page: 1200
+        allowed_document_extensions:
+          - ".pdf"
+          - ".doc"
+          - ".docx"
+
+      eia_planning:
+        # EPD EIA Planning crawler (English + Traditional Chinese) with scoped traversal.
+        seed_url: "https://www.epd.gov.hk/epd/english/environmentinhk/eia_planning/eia_maincontent.html"
+        english_scope_prefix: "https://www.epd.gov.hk/epd/english/environmentinhk/eia_planning/"
+        tc_scope_prefix: "https://www.epd.gov.hk/epd/tc_chi/environmentinhk/eia_planning/"
+        include_document_urls: false
+        content_element_id: "content"
+        max_depth: 6
+        max_pages: 1200
+        max_out_links_per_page: 1200
+        allowed_document_extensions:
+          - ".pdf"
+          - ".doc"
+          - ".docx"
+
+      noise:
+        # EPD Noise crawler (English + Traditional Chinese) with scoped traversal.
+        seed_url: "https://www.epd.gov.hk/epd/english/environmentinhk/noise/noise_maincontent.html"
+        english_scope_prefix: "https://www.epd.gov.hk/epd/english/environmentinhk/noise/"
+        tc_scope_prefix: "https://www.epd.gov.hk/epd/tc_chi/environmentinhk/noise/"
+        include_document_urls: false
+        content_element_id: "content"
+        max_depth: 6
+        max_pages: 1200
+        max_out_links_per_page: 1200
+        allowed_document_extensions:
+          - ".pdf"
+          - ".doc"
+          - ".docx"
+
+      waste:
+        # EPD Waste crawler (English + Traditional Chinese) with scoped traversal.
+        seed_url: "https://www.epd.gov.hk/epd/english/environmentinhk/waste/waste_maincontent.html"
+        english_scope_prefix: "https://www.epd.gov.hk/epd/english/environmentinhk/waste/"
+        tc_scope_prefix: "https://www.epd.gov.hk/epd/tc_chi/environmentinhk/waste/"
+        include_document_urls: false
+        content_element_id: "content"
+        max_depth: 6
+        max_pages: 1200
+        max_out_links_per_page: 1200
+        allowed_document_extensions:
+          - ".pdf"
+          - ".doc"
+          - ".docx"
+
+      water:
+        # EPD Water crawler (English + Traditional Chinese) with scoped traversal.
+        seed_url: "https://www.epd.gov.hk/epd/english/environmentinhk/water/hkwqrc/overview/index.html"
+        english_scope_prefix: "https://www.epd.gov.hk/epd/english/environmentinhk/water/"
+        tc_scope_prefix: "https://www.epd.gov.hk/epd/tc_chi/environmentinhk/water/"
+        include_document_urls: false
         content_element_id: "content"
         max_depth: 6
         max_pages: 1200
