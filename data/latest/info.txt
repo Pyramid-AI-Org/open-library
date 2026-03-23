@@ -1,25 +1,25 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 78626 (parse_errors=0)
+Total records: 78879 (parse_errors=0)
 
 Records by website group:
 - archsd.gov.hk: 184 (0.2%)
-- devb.gov.hk: 4055 (5.2%)
-- info.gov.hk: 45111 (57.4%)
-- other: 13205 (16.8%)
+- devb.gov.hk: 4055 (5.1%)
+- info.gov.hk: 45030 (57.1%)
+- other: 13539 (17.2%)
 - tel.directory.gov.hk: 16071 (20.4%)
 
 Crawler sources (top 15):
-- hksar_press_releases: 45111
+- hksar_press_releases: 45030
 - tel_directory: 16071
 - devb_press_releases: 3518
 - herbarium: 3348
 - cedd_geo_publications: 1235
-- epd.air: 1193
 - finance_meetings: 1035
 - finance_financial_proposals_considered: 894
 - finance_papers_reports: 833
 - development_meetings: 774
 - development_papers_reports: 678
+- epd.waste: 595
 - public_works_papers_reports: 506
 - devb_speeches_and_presentations: 461
 - practice_notes_and_circular_letters: 458
@@ -28,31 +28,30 @@ Crawler sources (top 15):
 Per-group format + schema summary:
 
 [other]
-- records: 13205 | unique_urls: 10539 | dup_url_hits: 2666
+- records: 13539 | unique_urls: 11009 | dup_url_hits: 2530
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-03-22T04:20:34.736264+00:00 .. 2026-03-22T04:20:34.736264+00:00
+- discovered_at_utc: 2026-03-23T04:28:21.702523+00:00 .. 2026-03-23T04:28:21.702523+00:00
 - top url hosts:
   - www.legco.gov.hk: 4966
   - www.herbarium.gov.hk: 3348
-  - www.epd.gov.hk: 1537
+  - www.epd.gov.hk: 1871
   - www.cedd.gov.hk: 1463
   - www.bd.gov.hk: 891
   - www.emsd.gov.hk: 577
 - top url extensions:
-  - .pdf: 9094
-  - .html: 4101
+  - .pdf: 8180
+  - .html: 5349
+  - .php: 6
   - (no_ext): 4
-  - .doc: 4
-  - .docx: 2
 - top-level key signatures (urls.jsonl record format):
-  - count=13205 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'source_label', 'url']
+  - count=13539 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'source_label', 'url']
 - meta key signatures:
   - count=3348 meta_keys=['chinese_name', 'common_name', 'family_id', 'family_name', 'family_name_chi', 'family_name_sc', 'family_no', 'flower_period', 'fruit_period', 'genus_id', 'genus_name', 'genus_name_chi', 'genus_name_sc', 'infraspecific_authority', 'photo_multimedia_id', 'rare_plant_hk', 'sc_name', 'scientific_name', 'scientific_name_with_authority', 'species_authority', 'species_id', 'species_name', 'type']
+  - count=3334 meta_keys=['discovered_from']
   - count=3320 meta_keys=['discovered_from', 'locale']
-  - count=3000 meta_keys=['discovered_from']
 - meta schema variants: 26
 - most common meta keys:
-  - discovered_from: 9846
+  - discovered_from: 10180
   - locale: 5275
   - chinese_name: 3348
   - common_name: 3348
@@ -64,7 +63,7 @@ Per-group format + schema summary:
 [archsd.gov.hk]
 - records: 184 | unique_urls: 184 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-03-22T04:20:34.736264+00:00 .. 2026-03-22T04:20:34.736264+00:00
+- discovered_at_utc: 2026-03-23T04:28:21.702523+00:00 .. 2026-03-23T04:28:21.702523+00:00
 - top url hosts:
   - www.archsd.gov.hk: 184
 - top url extensions:
@@ -82,7 +81,7 @@ Per-group format + schema summary:
 [devb.gov.hk]
 - records: 4055 | unique_urls: 4055 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-03-22T04:20:34.736264+00:00 .. 2026-03-22T04:20:34.736264+00:00
+- discovered_at_utc: 2026-03-23T04:28:21.702523+00:00 .. 2026-03-23T04:28:21.702523+00:00
 - top url hosts:
   - www.devb.gov.hk: 4055
 - top url extensions:
@@ -108,7 +107,7 @@ Per-group format + schema summary:
 [tel.directory.gov.hk]
 - records: 16071 | unique_urls: 16071 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-02-28T04:57:39.512665+00:00 .. 2026-03-22T05:33:20.830040+00:00
+- discovered_at_utc: 2026-02-28T04:57:39.512665+00:00 .. 2026-03-23T05:47:48.028826+00:00
 - top url hosts:
   - www.directory.gov.hk: 16071
 - top url extensions:
@@ -116,8 +115,8 @@ Per-group format + schema summary:
 - top-level key signatures (urls.jsonl record format):
   - count=16071 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'source_label', 'url']
 - meta key signatures:
-  - count=14448 meta_keys=['dedup_key', 'department_paths', 'department_root', 'detail_url', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'post_title', 'post_title_long']
-  - count=1311 meta_keys=['dedup_key', 'department', 'department_paths', 'department_root', 'detail_url', 'discovered_from', 'discovered_from_urls', 'email', 'fax', 'office_address', 'office_tel', 'post_title', 'post_title_long']
+  - count=14445 meta_keys=['dedup_key', 'department_paths', 'department_root', 'detail_url', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'post_title', 'post_title_long']
+  - count=1314 meta_keys=['dedup_key', 'department', 'department_paths', 'department_root', 'detail_url', 'discovered_from', 'discovered_from_urls', 'email', 'fax', 'office_address', 'office_tel', 'post_title', 'post_title_long']
   - count=312 meta_keys=['dedup_key', 'department_paths', 'department_root', 'detail_url', 'discovered_from', 'discovered_from_urls', 'email', 'office_tel', 'other_person_urls', 'post_title', 'post_title_long']
 - meta schema variants: 3
 - most common meta keys:
@@ -131,58 +130,58 @@ Per-group format + schema summary:
   - office_tel: 16071
 
 [info.gov.hk]
-- records: 45111 | unique_urls: 45111 | dup_url_hits: 0
+- records: 45030 | unique_urls: 45030 | dup_url_hits: 0
 - completeness: missing_name=0 (0.0%) missing_meta=0 (0.0%)
-- discovered_at_utc: 2026-03-22T04:20:34.744242+00:00 .. 2026-03-22T04:20:34.744242+00:00
+- discovered_at_utc: 2026-03-23T04:28:21.710715+00:00 .. 2026-03-23T04:28:21.710715+00:00
 - top url hosts:
-  - www.info.gov.hk: 45111
+  - www.info.gov.hk: 45030
 - top url extensions:
-  - .htm: 45111
+  - .htm: 45030
 - top-level key signatures (urls.jsonl record format):
-  - count=45111 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'source_label', 'url']
+  - count=45030 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'source_label', 'url']
 - meta key signatures:
-  - count=45111 meta_keys=['discovered_from', 'locale']
+  - count=45030 meta_keys=['discovered_from', 'locale']
 - meta schema variants: 1
 - most common meta keys:
-  - discovered_from: 45111
-  - locale: 45111
+  - discovered_from: 45030
+  - locale: 45030
 
 General stats:
-- record JSON size (bytes): min=365 p50=448.0 mean=607.7 p95=1173.0 max=2386
+- record JSON size (bytes): min=365 p50=448 mean=606.8 p95=1173.0 max=2386
 
 Unusual records / anomalies:
-- bad_discovered_at_utc: 2414
+- bad_discovered_at_utc: 2748
 
 Examples (first 30):
-- line 1: bad_discovered_at_utc -> 2026-03-22
-- line 2: bad_discovered_at_utc -> 2026-03-22
-- line 3: bad_discovered_at_utc -> 2026-03-22
-- line 4: bad_discovered_at_utc -> 2026-03-22
-- line 5: bad_discovered_at_utc -> 2026-03-22
-- line 6: bad_discovered_at_utc -> 2026-03-22
-- line 7: bad_discovered_at_utc -> 2026-03-22
-- line 8: bad_discovered_at_utc -> 2026-03-22
-- line 9: bad_discovered_at_utc -> 2026-03-22
-- line 10: bad_discovered_at_utc -> 2026-03-22
-- line 11: bad_discovered_at_utc -> 2026-03-22
-- line 12: bad_discovered_at_utc -> 2026-03-22
-- line 13: bad_discovered_at_utc -> 2026-03-22
-- line 14: bad_discovered_at_utc -> 2026-03-22
-- line 15: bad_discovered_at_utc -> 2026-03-22
-- line 16: bad_discovered_at_utc -> 2026-03-22
-- line 17: bad_discovered_at_utc -> 2026-03-22
-- line 18: bad_discovered_at_utc -> 2026-03-22
-- line 19: bad_discovered_at_utc -> 2026-03-22
-- line 20: bad_discovered_at_utc -> 2026-03-22
-- line 21: bad_discovered_at_utc -> 2026-03-22
-- line 22: bad_discovered_at_utc -> 2026-03-22
-- line 23: bad_discovered_at_utc -> 2026-03-22
-- line 24: bad_discovered_at_utc -> 2026-03-22
-- line 25: bad_discovered_at_utc -> 2026-03-22
-- line 26: bad_discovered_at_utc -> 2026-03-22
-- line 27: bad_discovered_at_utc -> 2026-03-22
-- line 28: bad_discovered_at_utc -> 2026-03-22
-- line 29: bad_discovered_at_utc -> 2026-03-22
-- line 30: bad_discovered_at_utc -> 2026-03-22
+- line 1: bad_discovered_at_utc -> 2026-03-23
+- line 2: bad_discovered_at_utc -> 2026-03-23
+- line 3: bad_discovered_at_utc -> 2026-03-23
+- line 4: bad_discovered_at_utc -> 2026-03-23
+- line 5: bad_discovered_at_utc -> 2026-03-23
+- line 6: bad_discovered_at_utc -> 2026-03-23
+- line 7: bad_discovered_at_utc -> 2026-03-23
+- line 8: bad_discovered_at_utc -> 2026-03-23
+- line 9: bad_discovered_at_utc -> 2026-03-23
+- line 10: bad_discovered_at_utc -> 2026-03-23
+- line 11: bad_discovered_at_utc -> 2026-03-23
+- line 12: bad_discovered_at_utc -> 2026-03-23
+- line 13: bad_discovered_at_utc -> 2026-03-23
+- line 14: bad_discovered_at_utc -> 2026-03-23
+- line 15: bad_discovered_at_utc -> 2026-03-23
+- line 16: bad_discovered_at_utc -> 2026-03-23
+- line 17: bad_discovered_at_utc -> 2026-03-23
+- line 18: bad_discovered_at_utc -> 2026-03-23
+- line 19: bad_discovered_at_utc -> 2026-03-23
+- line 20: bad_discovered_at_utc -> 2026-03-23
+- line 21: bad_discovered_at_utc -> 2026-03-23
+- line 22: bad_discovered_at_utc -> 2026-03-23
+- line 23: bad_discovered_at_utc -> 2026-03-23
+- line 24: bad_discovered_at_utc -> 2026-03-23
+- line 25: bad_discovered_at_utc -> 2026-03-23
+- line 26: bad_discovered_at_utc -> 2026-03-23
+- line 27: bad_discovered_at_utc -> 2026-03-23
+- line 28: bad_discovered_at_utc -> 2026-03-23
+- line 29: bad_discovered_at_utc -> 2026-03-23
+- line 30: bad_discovered_at_utc -> 2026-03-23
 
 Wrote JSON report to: data-worktree/data/latest/stats.json
