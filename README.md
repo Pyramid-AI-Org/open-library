@@ -59,23 +59,23 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 - Singapore Code and standard https://info.corenet.gov.sg/resources/codes-and-regulations
 - Original set:
 
-| Website                       | Status  |
-| ----------------------------- | ------- |
-| https://www.info.gov.hk/gia/  | Done    |
-| https://www.directory.gov.hk/ | Done    |
-| https://www.devb.gov.hk/      | Done    |
-| https://www.archsd.gov.hk/    | Done    |
-| https://www.bd.gov.hk         | Done    |
-| https://www.cedd.gov.hk/      | Done    |
-| https://www.herbarium.gov.hk  | Done    |
-| https://www.emsd.gov.hk/      | Done    |
-| https://www.hyd.gov.hk/       | Done    |
-| https://www.legco.gov.hk/     | Partial |
-| https://www.epd.gov.hk/       | Partial |
-| https://www.wsd.gov.hk/       | Partial |
-| https://www.dsd.gov.hk/       | TODO    |
-| https://www.hkfsd.gov.hk      | TODO    |
-| https://www.labour.gov.hk     | TODO    |
-| https://www.landsd.gov.hk     | TODO    |
-| https://www.pland.gov.hk      | TODO    |
-| https://www.td.gov.hk         | TODO    |
+| Website                       | Status    |
+| ----------------------------- | --------- |
+| https://www.info.gov.hk/gia/  | Done      |
+| https://www.directory.gov.hk/ | Done      |
+| https://www.devb.gov.hk/      | Done      |
+| https://www.archsd.gov.hk/    | Done      |
+| https://www.bd.gov.hk         | Done      |
+| https://www.cedd.gov.hk/      | Done      |
+| https://www.herbarium.gov.hk  | Done      |
+| https://www.emsd.gov.hk/      | Done      |
+| https://www.hyd.gov.hk/       | Done      |
+| https://www.legco.gov.hk/     | Published |
+| https://www.epd.gov.hk/       | Published |
+| https://www.wsd.gov.hk/       | Partial   |
+| https://www.dsd.gov.hk/       | Partial   |
+| https://www.hkfsd.gov.hk      | TODO      |
+| https://www.labour.gov.hk     | TODO      |
+| https://www.landsd.gov.hk     | TODO      |
+| https://www.pland.gov.hk      | TODO      |
+| https://www.td.gov.hk         | TODO      |

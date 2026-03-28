@@ -330,6 +330,47 @@ crawlers:
         content_element_id: "content"
 
   # ============================================================================
+  # DSD - Drainage Services Department
+  # ============================================================================
+  dsd:
+    label: "Drainage Services Department"
+    base_url: "https://www.dsd.gov.hk"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      technical_manuals:
+        # DSD Technical Manuals table crawler.
+        locales:
+          - locale: "en"
+            page_url: "https://www.dsd.gov.hk/EN/Technical_Documents/Technical_Manuals/index.html"
+            data_js_url: "https://www.dsd.gov.hk/assets/js/EN/technicalmanual-data-compress.js"
+          - locale: "tc"
+            page_url: "https://www.dsd.gov.hk/TC/Technical_Documents/Technical_Manuals/index.html"
+            data_js_url: "https://www.dsd.gov.hk/assets/js/TC/technicalmanual-data-compress.js"
+
+      technical_circulars_and_practice_notes:
+        # DSD Technical Circulars and Practice Notes crawler (EN only).
+        page_url: "https://www.dsd.gov.hk/EN/Technical_Documents/DSD_Technical_Circulars_and_Practice_Notes/index.html"
+        technical_circulars_page_url: "https://www.dsd.gov.hk/EN/Technical_Documents/DSD_Technical_Circulars_and_Practice_Notes/DSD_Technical_Circulars/index.html"
+        technical_circulars_data_js_url: "https://www.dsd.gov.hk/assets/js/EN/guideline-data-compress-165.js"
+        practice_notes_page_url: "https://www.dsd.gov.hk/EN/Technical_Documents/DSD_Technical_Circulars_and_Practice_Notes/DSD_Practice_Notes/index.html"
+        practice_notes_data_js_url: "https://www.dsd.gov.hk/assets/js/EN/guideline-data-compress-166.js"
+
+      guidelines:
+        # DSD Guidelines crawler (EN only).
+        page_url: "https://www.dsd.gov.hk/EN/Technical_Documents/DSD_Guidelines/index.html"
+        data_js_url: "https://www.dsd.gov.hk/assets/js/EN/guideline-data-compress-47.js"
+
+      technical_papers_published_by_dsd:
+        # DSD Technical Papers Published by DSD crawler (EN only).
+        page_url: "https://www.dsd.gov.hk/EN/Technical_Documents/Technical_Papers_Published_by_DSD/index.html"
+        data_js_url: "https://www.dsd.gov.hk/assets/js/EN/technicalpaper-data-compress.js"
+        division_data_js_url: "https://www.dsd.gov.hk/assets/js/EN/technicalpaperdivision-data-compress.js"
+
+  # ============================================================================
   # HYD - Highways Department
   # ============================================================================
   hyd:
