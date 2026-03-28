@@ -356,6 +356,180 @@ crawlers:
           - "https://www.hyd.gov.hk/en/technical_references/technical_document/structures_design_manual_2013/index.html"
 
   # ============================================================================
+  # WSD - Water Supplies Department
+  # ============================================================================
+  wsd:
+    label: "Water Supplies Department"
+    base_url: "https://www.wsd.gov.hk"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    content_element_id: "content"
+    pages:
+      mechanical_electrical_ss:
+        # WSD Mechanical & Electrical Standard Specification crawler.
+        page_url: "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/mechanical-electrical-standard-specification/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/mechanical-electrical-standard-specification/"
+        content_element_id: "content"
+        max_subpages: 20
+
+      plumbing_requirements:
+        # WSD requirements for plumbing installation crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/"
+        content_element_id: "content"
+        latest_version_subpages:
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/technical-requirements-for-plumbing-works-in-bldgs/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/guide-to-application-for-water-supply/index.html"
+        previous_docs_subpage: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/previously-used-documents-hkwsr-hpi/index.html"
+        exclude_subpages:
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/common-observations-in-plumbing-proposals/index.html"
+
+      automatic_meter_reading:
+        # WSD Advanced Metering Infrastructure (AMI) PDF crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/automatic-meter-reading/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/automatic-meter-reading"
+        content_element_id: "content"
+        max_total_records: 50000
+
+      licensed_plumbers:
+        # WSD Licensed Plumbers recursive subpage crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/licensed-plumbers/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/licensed-plumbers"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      information_for_licensed_plumbers:
+        # WSD information for licensed plumbers crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/information-for-licensed-plumbers/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/information-for-licensed-plumbers"
+        content_element_id: "content"
+        exclude_subpages:
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/information-for-licensed-plumbers/demo-videos-on-installation-of-security-seals/index.html"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      cpd_for_licensed_plumbers:
+        # WSD CPD for licensed plumbers PDF crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/voluntary-continuing-professional-development-sche/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/voluntary-continuing-professional-development-sche"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      enhancing_plumbing_works_control:
+        # WSD voluntary scheme in enhancing plumbing works contractor PDF crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/voluntary-scheme-in-enhancing-plumbing-works-contr/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/voluntary-scheme-in-enhancing-plumbing-works-contr"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      good_practice_guide:
+        # WSD good practice guide on plumbing works PDF crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbing-works/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbing-works"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      water_efficiency_labelling_scheme:
+        # WSD water efficiency labelling scheme PDF crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      maintenance_of_internal_plumbing:
+        # WSD maintenance of internal plumbing mixed crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/maintenance-of-internal-plumbing/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/maintenance-of-internal-plumbing"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      enhancement_of_control_of_inside_services:
+        # WSD enhancement of control of inside services mixed crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/enhancement-of-control-of-inside-services/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/enhancement-of-control-of-inside-services"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      works_of_minor_nature:
+        # WSD works of a minor nature web-content crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/works-of-a-minor-nature/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/plumbing-engineering/works-of-a-minor-nature"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      water_safety_plan_for_buildings:
+        # WSD water safety plan for buildings web-content crawler.
+        page_url: "https://www.wsd.gov.hk/en/water-safety/water-safety-in-buildings/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/water-safety/water-safety-in-buildings"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      qualified_persons:
+        # WSD qualified persons mixed crawler.
+        page_url: "https://www.wsd.gov.hk/en/water-safety/qualified-persons/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/water-safety/qualified-persons"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      water_safety_plan_subsidy_scheme:
+        # WSD water safety plan subsidy scheme mixed crawler.
+        page_url: "https://www.wsd.gov.hk/en/water-safety/wspss/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/water-safety/wspss"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      fresh_water_management_system:
+        # WSD fresh water management system mixed crawler.
+        page_url: "https://www.wsd.gov.hk/en/water-safety/fresh-water-management-system-/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/water-safety/fresh-water-management-system-"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      flushing_water:
+        # WSD flushing water PDF crawler.
+        page_url: "https://www.wsd.gov.hk/en/water-safety/flushing-water/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/water-safety/flushing-water"
+        content_element_id: "content"
+        max_pages: 200
+        max_out_links_per_page: 500
+
+      guidelines_reports_drawings_specifications:
+        # WSD Guidelines, Reports, Drawings and Specifications scoped crawler.
+        page_url: "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/index.html"
+        scope_prefix: "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/"
+        content_element_id: "content"
+        target_subpages:
+          - "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/guidelines-excavation/index.html"
+          - "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/prevent-damage/index.html"
+          - "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/mainlaying-practice/index.html"
+        single_pdf_subpages:
+          - "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/guidelines-excavation/index.html"
+          - "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/prevent-damage/index.html"
+        mainlaying_subpage: "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/mainlaying-practice/index.html"
+        exclude_subpages: []
+
+        circular_letters:
+          # WSD Circular Letters crawler.
+          page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index.html"
+          pdf_scope_prefix: "https://www.wsd.gov.hk/"
+
+  # ============================================================================
   # EPD - Environmental Protection Department
   # ============================================================================
   epd:
