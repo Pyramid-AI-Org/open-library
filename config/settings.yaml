@@ -397,6 +397,43 @@ crawlers:
           - "https://www.hyd.gov.hk/en/technical_references/technical_document/structures_design_manual_2013/index.html"
 
   # ============================================================================
+  # FSD - Fire Services Department
+  # ============================================================================
+  fsd:
+    label: "Fire Services Department"
+    base_url: "https://www.hkfsd.gov.hk"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      circular_letters:
+        # FSD Circular Letters crawler.
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular.html"
+        pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
+
+      technical_guidance:
+        # FSD Technical Guidance crawler.
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/guidance.html"
+        pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
+
+      checklist:
+        # FSD Checklist crawler.
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/checklist.html"
+        pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
+
+      notices:
+        # FSD Notices index crawler (PDFs available directly on page).
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/"
+        pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
+
+      code_of_practice:
+        # FSD Code of Practice crawler (latest current edition only).
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/code.html"
+        pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
+
+  # ============================================================================
   # WSD - Water Supplies Department
   # ============================================================================
   wsd:

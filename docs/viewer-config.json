@@ -73,6 +73,10 @@
         "label": "Environmental Protection Department"
       },
       {
+        "id": "fsd",
+        "label": "Fire Services Department"
+      },
+      {
         "id": "wsd",
         "label": "Water Supplies Department"
       },
@@ -120,6 +124,21 @@
     ]
   },
   "sources": {
+    "circular_letters": {
+      "fields": [
+        {
+          "type": "meta",
+          "key": "circular_no",
+          "label": "Circular No."
+        },
+        {
+          "type": "meta",
+          "key": "discovered_from",
+          "label": "Discovered from",
+          "format": "url"
+        }
+      ]
+    },
     "devb_works_technical_circulars_um": {
       "fields": [
         {
