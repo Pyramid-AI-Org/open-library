@@ -434,6 +434,78 @@ crawlers:
         pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
 
   # ============================================================================
+  # LABOUR - Labour Department
+  # ============================================================================
+  labour:
+    label: "Labour Department"
+    base_url: "https://www.labour.gov.hk"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      faq:
+        # Labour Department Frequently Asked Questions crawler.
+        page_url: "https://www.labour.gov.hk/eng/faq/content.htm"
+        allowed_path_prefixes:
+          - "/eng/faq/"
+
+      occupational_safety_part_a:
+        # Labour Department Occupational Safety publications - Part A.
+        page_url: "https://www.labour.gov.hk/eng/public/content2_8a.htm"
+        crawl_tc_page: false
+
+      occupational_safety_part_b:
+        # Labour Department Occupational Safety publications - Part B.
+        page_url: "https://www.labour.gov.hk/eng/public/content2_8b.htm"
+        crawl_tc_page: false
+
+      occupational_safety_part_c:
+        # Labour Department Occupational Safety publications - Part C.
+        page_url: "https://www.labour.gov.hk/eng/public/content2_8c.htm"
+        crawl_tc_page: false
+
+      occupational_safety_part_d:
+        # Labour Department Occupational Safety publications - Part D.
+        page_url: "https://www.labour.gov.hk/eng/public/content2_8d.htm"
+        crawl_tc_page: false
+
+      occupational_safety_part_g:
+        # Labour Department Occupational Safety publications - Part G.
+        page_url_en: "https://www.labour.gov.hk/eng/public/content2_8g.htm"
+        page_url_tc: "https://www.labour.gov.hk/tc/public/content2_8g.htm"
+        page_url_tc_fallback: "https://www.labour.gov.hk/tc_chi/public/content2_8g.htm"
+
+      occupational_health_part_a:
+        # Labour Department Occupational Health publications - Part A.
+        page_url_en: "https://www.labour.gov.hk/eng/public/content2_9a.htm"
+        page_url_tc: "https://www.labour.gov.hk/tc/public/content2_9a.htm"
+        crawl_tc_page: false
+
+      occupational_health_part_b:
+        # Labour Department Occupational Health publications - Part B.
+        page_url_en: "https://www.labour.gov.hk/eng/public/content2_9b.htm"
+        page_url_tc: "https://www.labour.gov.hk/tc/public/content2_9b.htm"
+        crawl_tc_page: false
+
+      occupational_health_part_c:
+        # Labour Department Occupational Health publications - Part C.
+        page_url_en: "https://www.labour.gov.hk/eng/public/content2_9c.htm"
+        page_url_tc: "https://www.labour.gov.hk/tc/public/content2_9c.htm"
+        crawl_tc_page: false
+
+      occupational_health_part_d:
+        # Labour Department Occupational Health publications - Part D.
+        page_url_en: "https://www.labour.gov.hk/eng/public/content2_9d.htm"
+        page_url_tc: "https://www.labour.gov.hk/tc/public/content2_9d.htm"
+        crawl_tc_page: false
+
+      pressure_equipment:
+        # Labour Department Pressure Equipment publications (English only).
+        page_url: "https://www.labour.gov.hk/eng/public/content2_10.htm"
+
+  # ============================================================================
   # WSD - Water Supplies Department
   # ============================================================================
   wsd:
