@@ -521,6 +521,22 @@ crawlers:
         # Lands Department Joint Practice Notes crawler.
         page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html"
 
+      lao_practice_notes:
+        # Lands Department LAO Practice Notes crawler.
+        page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/lao.html"
+
+      smo_practice_notes:
+        # Lands Department SMO Practice Notes crawler.
+        page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/smo.html"
+
+      laco_circular_memorandum:
+        # Lands Department LACO Circular Memorandum crawler.
+        page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/laco.html"
+
+      info_notes:
+        # Lands Department Information Notes crawler.
+        page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/info-notes.html"
+
   # ============================================================================
   # WSD - Water Supplies Department
   # ============================================================================

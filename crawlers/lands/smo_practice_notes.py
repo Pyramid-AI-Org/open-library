@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import random
+import re
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from urllib.parse import urljoin
@@ -17,18 +18,19 @@ from crawlers.base import (
     sleep_seconds,
 )
 
-_DEFAULT_PAGE_URL = "https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html"
+_DEFAULT_PAGE_URL = "https://www.landsd.gov.hk/en/resources/practice-notes/smo.html"
+_ALLOWED_EXTENSIONS = {".pdf", ".rtf", ".doc", ".docx"}
 
 
 @dataclass(frozen=True)
 class _RowData:
+    pn_new: str
     subject: str
-    main_href: str | None
-    accessible_href: str | None
+    download_href: str | None
 
 
-class _JpnDesktopTableParser(HTMLParser):
-    """Extract JPN rows from desktop table #jpn."""
+class _SmoDesktopTableParser(HTMLParser):
+    """Extract SMO practice note rows from desktop table #smo_pn."""
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -38,11 +40,14 @@ class _JpnDesktopTableParser(HTMLParser):
         self._in_row = False
         self._in_td = False
         self._td_index = 0
-        self._current_td_text: list[str] = []
 
+        self._current_td_text: list[str] = []
+        self._in_subject_anchor = False
+        self._subject_anchor_text: list[str] = []
+
+        self._row_pn_new = ""
         self._row_subject = ""
-        self._row_main_href: str | None = None
-        self._row_accessible_href: str | None = None
+        self._row_download_href: str | None = None
 
         self.rows: list[_RowData] = []
 
@@ -50,7 +55,10 @@ class _JpnDesktopTableParser(HTMLParser):
         attrs_map = dict(attrs)
 
         if tag == "table":
-            if not self._in_target_table and clean_text(str(attrs_map.get("id") or "")) == "jpn":
+            if (
+                not self._in_target_table
+                and clean_text(str(attrs_map.get("id") or "")) == "smo_pn"
+            ):
                 self._in_target_table = True
                 self._table_depth = 1
                 return
@@ -66,9 +74,12 @@ class _JpnDesktopTableParser(HTMLParser):
             self._in_td = False
             self._td_index = 0
             self._current_td_text = []
+            self._in_subject_anchor = False
+            self._subject_anchor_text = []
+
+            self._row_pn_new = ""
             self._row_subject = ""
-            self._row_main_href = None
-            self._row_accessible_href = None
+            self._row_download_href = None
             return
 
         if not self._in_row:
@@ -78,16 +89,18 @@ class _JpnDesktopTableParser(HTMLParser):
             self._in_td = True
             self._td_index += 1
             self._current_td_text = []
+            self._in_subject_anchor = False
+            self._subject_anchor_text = []
             return
 
         if tag == "a" and self._in_td:
             href = clean_text(str(attrs_map.get("href") or ""))
-            if not href:
-                return
-            if self._td_index == 2 and self._row_main_href is None:
-                self._row_main_href = href
-            elif self._td_index == 3 and self._row_accessible_href is None:
-                self._row_accessible_href = href
+
+            if self._td_index == 3 and self._row_download_href is None and href:
+                self._row_download_href = href
+
+            if self._td_index == 4:
+                self._in_subject_anchor = True
 
     def handle_endtag(self, tag: str) -> None:
         if tag == "table" and self._in_target_table:
@@ -100,21 +113,41 @@ class _JpnDesktopTableParser(HTMLParser):
         if not self._in_target_table:
             return
 
+        if tag == "a":
+            self._in_subject_anchor = False
+            return
+
         if tag == "td" and self._in_td:
-            if self._td_index == 2:
-                self._row_subject = clean_text("".join(self._current_td_text))
+            if self._td_index == 1:
+                self._row_pn_new = clean_text("".join(self._current_td_text))
+
+            elif self._td_index == 4:
+                subject_from_anchor = clean_text("".join(self._subject_anchor_text))
+                subject_from_cell = clean_text("".join(self._current_td_text))
+                subject = subject_from_anchor or subject_from_cell
+                self._row_subject = re.sub(
+                    r"\s*\((PDF|Word|RTF)\s+file[s]?\)\s*",
+                    "",
+                    subject,
+                    flags=re.IGNORECASE,
+                ).strip()
+
             self._in_td = False
             self._current_td_text = []
+            self._in_subject_anchor = False
+            self._subject_anchor_text = []
             return
 
         if tag == "tr" and self._in_row:
+            pn_new = clean_text(self._row_pn_new)
             subject = clean_text(self._row_subject)
-            if subject and (self._row_main_href or self._row_accessible_href):
+
+            if pn_new and self._row_download_href and subject:
                 self.rows.append(
                     _RowData(
+                        pn_new=pn_new,
                         subject=subject,
-                        main_href=self._row_main_href,
-                        accessible_href=self._row_accessible_href,
+                        download_href=self._row_download_href,
                     )
                 )
 
@@ -122,21 +155,42 @@ class _JpnDesktopTableParser(HTMLParser):
             self._in_td = False
             self._td_index = 0
             self._current_td_text = []
+            self._in_subject_anchor = False
+            self._subject_anchor_text = []
+
+            self._row_pn_new = ""
             self._row_subject = ""
-            self._row_main_href = None
-            self._row_accessible_href = None
+            self._row_download_href = None
 
     def handle_data(self, data: str) -> None:
-        if self._in_row and self._in_td and self._td_index == 2:
-            self._current_td_text.append(data)
+        if not (self._in_row and self._in_td):
+            return
+
+        self._current_td_text.append(data)
+        if self._td_index == 4 and self._in_subject_anchor:
+            self._subject_anchor_text.append(data)
 
 
 def _canonicalize(url: str) -> str | None:
     return canonicalize_url(url, encode_spaces=True)
 
 
+def _publish_date_from_pn_new(pn_new: str) -> str | None:
+    m = re.search(r"(\d{1,2})\s*/\s*(\d{4})", pn_new)
+    if not m:
+        return None
+
+    month = int(m.group(1))
+    year = int(m.group(2))
+
+    if 1 <= month <= 12:
+        return f"{year:04d}-{month:02d}-01"
+
+    return f"{year:04d}-01-01"
+
+
 class Crawler:
-    name = "joint_practice_notes"
+    name = "smo_practice_notes"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         cfg = ctx.get_crawler_config(self.name)
@@ -171,55 +225,50 @@ class Crawler:
         )
         resp.encoding = "utf-8"
 
-        parser = _JpnDesktopTableParser()
+        parser = _SmoDesktopTableParser()
         parser.feed(resp.text or "")
 
         out: list[UrlRecord] = []
         seen_urls: set[str] = set()
 
         for row in parser.rows:
-            selected_url: str | None = None
-
-            # Prefer the accessible PDF; fall back to the main PDF only if needed.
-            for raw_href in (row.accessible_href, row.main_href):
-                if not raw_href:
-                    continue
-
-                candidate_url = _canonicalize(urljoin(page_url, raw_href))
-                if not candidate_url:
-                    continue
-                if path_ext(candidate_url) != ".pdf":
-                    continue
-
-                selected_url = candidate_url
-                break
-
-            if not selected_url:
-                continue
-            if selected_url in seen_urls:
-                continue
             if len(out) >= max_total_records:
                 break
+
+            raw_href = clean_text(str(row.download_href or ""))
+            if not raw_href:
+                continue
+
+            candidate_url = _canonicalize(urljoin(page_url, raw_href))
+            if not candidate_url:
+                continue
+            if path_ext(candidate_url) not in _ALLOWED_EXTENSIONS:
+                continue
+            if candidate_url in seen_urls:
+                continue
+
+            publish_date = _publish_date_from_pn_new(row.pn_new)
+            name = row.subject or f"SMO Practice Note {row.pn_new}"
 
             out.append(
                 ctx.make_record(
-                    url=selected_url,
-                    name=row.subject,
+                    url=candidate_url,
+                    name=name,
                     discovered_at_utc=ctx.run_date_utc,
                     source=self.name,
-                    meta={"discovered_from": page_url},
+                    publish_date=publish_date,
+                    meta={
+                        "discovered_from": page_url,
+                        "pn_no_new": row.pn_new,
+                    },
                 )
             )
-            seen_urls.add(selected_url)
-
-            if len(out) >= max_total_records:
-                break
+            seen_urls.add(candidate_url)
 
         out.sort(
             key=lambda r: (
                 r.url,
                 str(r.name or ""),
-                str(r.publish_date or ""),
                 str(r.meta.get("discovered_from") or ""),
             )
         )
