@@ -72,10 +72,10 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 | https://www.hyd.gov.hk/       | Done      |
 | https://www.legco.gov.hk/     | Published |
 | https://www.epd.gov.hk/       | Published |
-| https://www.wsd.gov.hk/       | Partial   |
-| https://www.dsd.gov.hk/       | Partial   |
-| https://www.hkfsd.gov.hk      | TODO      |
-| https://www.labour.gov.hk     | TODO      |
-| https://www.landsd.gov.hk     | TODO      |
+| https://www.wsd.gov.hk/       | Published |
+| https://www.dsd.gov.hk/       | Published |
+| https://www.hkfsd.gov.hk      | Published |
+| https://www.labour.gov.hk     | Published |
+| https://www.landsd.gov.hk     | Partial   |
 | https://www.pland.gov.hk      | TODO      |
 | https://www.td.gov.hk         | TODO      |

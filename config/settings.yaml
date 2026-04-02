@@ -506,6 +506,22 @@ crawlers:
         page_url: "https://www.labour.gov.hk/eng/public/content2_10.htm"
 
   # ============================================================================
+  # LANDS - Lands Department
+  # ============================================================================
+  lands:
+    label: "Lands Department"
+    base_url: "https://www.landsd.gov.hk"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      joint_practice_notes:
+        # Lands Department Joint Practice Notes crawler.
+        page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html"
+
+  # ============================================================================
   # WSD - Water Supplies Department
   # ============================================================================
   wsd:
