@@ -78,4 +78,4 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 | https://www.labour.gov.hk     | Published |
 | https://www.landsd.gov.hk     | Partial   |
 | https://www.pland.gov.hk      | Partial   |
-| https://www.td.gov.hk         | TODO      |
+| https://www.td.gov.hk         | Partial   |

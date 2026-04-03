@@ -562,6 +562,77 @@ crawlers:
         page_url: "https://www.pland.gov.hk/pland_en/tech_doc/jpn/index.html"
 
   # ============================================================================
+  # TD - Transport Department
+  # ============================================================================
+  td:
+    label: "Transport Department"
+    base_url: "https://www.td.gov.hk"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      annual_digest:
+        # TD Annual Transport Digest latest-year section/subsection page crawler.
+        annual_index_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/annual_transport_digest/index.html"
+        locales:
+          - "en"
+          - "tc"
+        max_section_probe: 24
+        consecutive_probe_miss_stop: 4
+
+      second_parking_demand:
+        # TD The Second Parking Demand Study Final Report crawler.
+        page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/the_second_parking_demand_study_final_report_/index.html"
+
+      transport_planning:
+        # TD Transport Planning and Design Manual crawler.
+        page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/tpdm/index.html"
+        publish_date: "2026-03-01"
+
+      third_comprehensive_study:
+        # TD The Third Comprehensive Transport Study chapter-page crawler.
+        page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/the_third_comprehensive_transport_study/index.html"
+        chapter_path_prefix: "/en/publications_and_press_releases/publications/free_publications/the_third_comprehensive_transport_study/"
+        publish_date: "1999-01-01"
+
+      free_publications:
+        # TD Free Publications index PDF crawler.
+        page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/index.html"
+
+      miscellaneous:
+        # TD miscellaneous free-publication pages crawler.
+        targets:
+          - key: "public_engagement_report_on_erp"
+            page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/public_engagement_report_on_erp/index.html"
+            selection_mode: "heading_text_match"
+            include_text: "Main Text"
+
+          - key: "environmental_report_of_transport_department"
+            page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/environmental_report_of_transport_department/index.html"
+            selection_mode: "latest_by_year_from_link_text"
+
+          - key: "survey_on_goods_vehicles_trip_characteristics_2011"
+            page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/survey_on_goods_vehicles_trip_characteristics_2011/index.html"
+            selection_mode: "heading_text_match"
+            include_text: "Report and Executive Summary"
+
+          - key: "atci2"
+            page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/atci2/index.html"
+            selection_mode: "latest_subpage_then_main_pdf"
+
+          - key: "traffic_study_for_mid_levels_area"
+            page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/Traffic_Study_for_Mid_Levels_Area/index.html"
+            selection_mode: "heading_text_match"
+            include_text: "Main Text"
+
+          - key: "tcsfr"
+            page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/tcsfr/index.html"
+            selection_mode: "heading_text_match"
+            include_text: "Report and Executive Summary"
+
+  # ============================================================================
   # WSD - Water Supplies Department
   # ============================================================================
   wsd:
