@@ -77,5 +77,5 @@ Configure it via `crawlers.link_extract` in [config/settings.yaml](config/settin
 | https://www.hkfsd.gov.hk      | Published |
 | https://www.labour.gov.hk     | Published |
 | https://www.landsd.gov.hk     | Partial   |
-| https://www.pland.gov.hk      | TODO      |
+| https://www.pland.gov.hk      | Partial   |
 | https://www.td.gov.hk         | TODO      |

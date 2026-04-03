@@ -538,6 +538,30 @@ crawlers:
         page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/info-notes.html"
 
   # ============================================================================
+  # PLAND - Planning Department
+  # ============================================================================
+  pland:
+    label: "Planning Department"
+    base_url: "https://www.pland.gov.hk"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      standards_guidelines:
+        # PlanD Hong Kong Planning Standards and Guidelines crawler.
+        page_url: "https://www.pland.gov.hk/pland_en/tech_doc/hkpsg/index.html"
+
+      practice_notes:
+        # PlanD Practice Notes for Professional Persons crawler.
+        page_url: "https://www.pland.gov.hk/pland_en/tech_doc/pnpp/index.html"
+
+      joint_practice_notes:
+        # PlanD Joint Practice Notes crawler.
+        page_url: "https://www.pland.gov.hk/pland_en/tech_doc/jpn/index.html"
+
+  # ============================================================================
   # WSD - Water Supplies Department
   # ============================================================================
   wsd:
