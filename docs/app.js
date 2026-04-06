@@ -256,20 +256,31 @@ async function ensureXlsxLoaded() {
         "https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js",
       ];
 
+      let lastError = null;
+
       for (const src of sources) {
         try {
           await loadScriptOnce(src);
           if (window.XLSX?.utils?.writeFile) return window.XLSX;
-        } catch {
+        } catch (err) {
+          lastError = err;
           // Try next CDN source.
         }
       }
 
-      throw new Error("XLSX library unavailable");
+      throw new Error(
+        `XLSX library unavailable (${lastError instanceof Error ? lastError.message : "load failed"})`
+      );
     })();
   }
 
-  return await xlsxLoadPromise;
+  try {
+    return await xlsxLoadPromise;
+  } catch (err) {
+    // Allow retry on next click in case this was a transient network/CSP issue.
+    xlsxLoadPromise = null;
+    throw err;
+  }
 }
 
 // ============================================================================
@@ -392,9 +403,11 @@ async function downloadExcel() {
   let XLSX;
   try {
     XLSX = await ensureXlsxLoaded();
-  } catch {
-    alert("Excel export library could not be loaded. Please check network/CSP and try again.");
-    setStatus("Excel export unavailable");
+  } catch (err) {
+    console.error(err);
+    const detail = err instanceof Error ? err.message : "unknown error";
+    alert(`Excel export library could not be loaded. ${detail}`);
+    setStatus("Excel export unavailable (see console)");
     return;
   }
 
