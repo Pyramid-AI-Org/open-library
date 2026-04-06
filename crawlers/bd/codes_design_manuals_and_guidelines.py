@@ -408,7 +408,6 @@ class Crawler:
                     publish_date=publish_date,
                     meta={
                         "discovered_from": page_url,
-                        "file_ext": "pdf",
                         "tab": link.tab,
                         "section": link.section,
                         "row_title": row_title,

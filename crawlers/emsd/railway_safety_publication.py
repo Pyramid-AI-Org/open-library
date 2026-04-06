@@ -117,10 +117,6 @@ class _TableParser(HTMLParser):
         if self._in_a:
             self._a_buffer.append(data)
 
-        # Capture TD text only if NOT inside an A tag to avoid duplication?
-        # Actually standard practice is to capture everything for the cell text.
-        # But for Category/Date columns, usually no links.
-        # For Publication column, we only care about the link text.
         if self._in_tr and self._current_col >= 0:
             self._td_buffer.append(data)
 
@@ -190,11 +186,7 @@ class Crawler:
                     name=title,
                     discovered_at_utc=ctx.started_at_utc,
                     source=self.name,
-                    meta={
-                        "discovered_from": page_url,
-                        "category": row.category,
-                        "date": row.date,
-                    },
+                    meta={"discovered_from": page_url, "category": row.category},
                 )
             )
 

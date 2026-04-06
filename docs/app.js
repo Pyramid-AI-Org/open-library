@@ -164,6 +164,114 @@ function normalizeDataRootPath(p) {
   return s.startsWith("data/") ? s.slice(5) : s;
 }
 
+function archiveDateFromPath(path) {
+  const s = String(path || "").trim();
+  const m = s.match(/archive\/(\d{4})\/(\d{2})\/(\d{2})\/urls\.jsonl$/);
+  if (!m) return "";
+  return `${m[1]}-${m[2]}-${m[3]}`;
+}
+
+function jsonlDownloadFileName() {
+  const relPath = String(state.selectedDataPath || "latest/urls.jsonl").trim();
+  const archiveDate = archiveDateFromPath(relPath);
+  const stamp = archiveDate || new Date().toISOString().slice(0, 10);
+  return `open-library-${stamp}.jsonl`;
+}
+
+function downloadBlobFile(blob, fileName) {
+  const objectUrl = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = objectUrl;
+  a.download = fileName;
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+}
+
+async function downloadJsonl() {
+  if (!state.owner || !state.repo) {
+    setStatus("Set repo (owner/repo) to load data");
+    return;
+  }
+
+  const relPath = String(state.selectedDataPath || "latest/urls.jsonl").trim();
+  const url = rawUrl(relPath);
+  if (!url) {
+    setStatus("Invalid repo configuration");
+    return;
+  }
+
+  try {
+    setStatus("Preparing JSONL download...");
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const blob = new Blob([text], { type: "application/x-ndjson;charset=utf-8" });
+    downloadBlobFile(blob, jsonlDownloadFileName());
+    setStatus("JSONL downloaded");
+  } catch (err) {
+    console.error(err);
+    setStatus("Failed to download JSONL");
+  }
+}
+
+let xlsxLoadPromise = null;
+
+function loadScriptOnce(src) {
+  return new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[data-lib-src="${src}"]`);
+    if (existing) {
+      if (existing.getAttribute("data-loaded") === "true") {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", () => resolve(), { once: true });
+      existing.addEventListener("error", () => reject(new Error(`Failed to load ${src}`)), { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.setAttribute("data-lib-src", src);
+    script.addEventListener("load", () => {
+      script.setAttribute("data-loaded", "true");
+      resolve();
+    }, { once: true });
+    script.addEventListener("error", () => reject(new Error(`Failed to load ${src}`)), { once: true });
+    document.head.appendChild(script);
+  });
+}
+
+async function ensureXlsxLoaded() {
+  if (window.XLSX?.utils?.writeFile) return window.XLSX;
+
+  if (!xlsxLoadPromise) {
+    xlsxLoadPromise = (async () => {
+      const sources = [
+        "./vendor/xlsx.full.min.js",
+        "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js",
+        "https://unpkg.com/xlsx@0.18.5/dist/xlsx.full.min.js",
+      ];
+
+      for (const src of sources) {
+        try {
+          await loadScriptOnce(src);
+          if (window.XLSX?.utils?.writeFile) return window.XLSX;
+        } catch {
+          // Try next CDN source.
+        }
+      }
+
+      throw new Error("XLSX library unavailable");
+    })();
+  }
+
+  return await xlsxLoadPromise;
+}
+
 // ============================================================================
 // Source Group Resolution
 // ============================================================================
@@ -222,7 +330,6 @@ function normalizeRecord(r) {
 
   // Prefer source_id from record, then resolve from crawler name via settings mapping.
   const sourceId = String(r?.source_id || "").trim().toLowerCase();
-  const sourceLabel = String(r?.source_label || "").trim();
 
   const sourceGroup = sourceId
     ? sourceId
@@ -235,7 +342,7 @@ function normalizeRecord(r) {
     publish_date: typeof r?.publish_date === "string" ? r.publish_date : "",
     source,
     source_group: sourceGroup,
-    source_group_label: sourceLabel || VIEWER.sourceGroupLabels[sourceGroup] || sourceGroup || source,
+    source_group_label: VIEWER.sourceGroupLabels[sourceGroup] || sourceGroup || source,
     meta: r?.meta ?? null,
     domain: safeHost(url),
   };
@@ -281,10 +388,13 @@ function metaValueForExcel(v) {
   return String(v);
 }
 
-function downloadExcel() {
-  const XLSX = window.XLSX;
-  if (!XLSX?.utils?.writeFile) {
-    alert("Excel export library not loaded. Please refresh the page.");
+async function downloadExcel() {
+  let XLSX;
+  try {
+    XLSX = await ensureXlsxLoaded();
+  } catch {
+    alert("Excel export library could not be loaded. Please check network/CSP and try again.");
+    setStatus("Excel export unavailable");
     return;
   }
 
@@ -825,7 +935,7 @@ async function loadDataset() {
   }
 
   if (els.downloadJsonLink) {
-    els.downloadJsonLink.href = url;
+    els.downloadJsonLink.href = "#";
     els.downloadJsonLink.textContent = "JSONL";
     els.downloadJsonLink.removeAttribute("aria-disabled");
     els.downloadJsonLink.classList.remove("menu__item--disabled");
@@ -1053,9 +1163,13 @@ function wireEvents() {
   els.reloadBtn.addEventListener("click", loadDataset);
   els.resetBtn.addEventListener("click", resetFilters);
 
-  els.downloadJsonLink?.addEventListener("click", closeDownloadMenu);
-  els.downloadExcelBtn?.addEventListener("click", () => {
-    downloadExcel();
+  els.downloadJsonLink?.addEventListener("click", async (e) => {
+    e.preventDefault();
+    await downloadJsonl();
+    closeDownloadMenu();
+  });
+  els.downloadExcelBtn?.addEventListener("click", async () => {
+    await downloadExcel();
     closeDownloadMenu();
   });
 

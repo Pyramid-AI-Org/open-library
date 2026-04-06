@@ -419,9 +419,6 @@ class Crawler:
 
                     seen_docs.add(candidate)
                     meta: dict[str, str] = {"discovered_from": item.url}
-                    publish_date = page_date_map.get(candidate)
-                    if publish_date:
-                        meta["publish_date"] = publish_date
                     out.append(
                         ctx.make_record(
                             url=candidate,
@@ -478,8 +475,6 @@ class Crawler:
 
             seen_docs.add(hit.url)
             meta: dict[str, str] = {"discovered_from": GIS_PAGE_URL}
-            if hit.publish_date:
-                meta["publish_date"] = hit.publish_date
 
             out.append(
                 ctx.make_record(

@@ -214,7 +214,6 @@ class Crawler:
 
             title = clean_text(row.title or "")
             title = _PDF_FILE_TRAILER_RE.sub("", title).strip()
-            jpn_no = clean_text(row.jpn_no or "")
             display_name = title
 
             out.append(
@@ -223,10 +222,7 @@ class Crawler:
                     name=display_name or None,
                     discovered_at_utc=ctx.started_at_utc,
                     source=self.name,
-                    meta={
-                        "discovered_from": page_url,
-                        "jpn_no": jpn_no or None,
-                    },
+                    meta={"discovered_from": page_url},
                 )
             )
             seen.add(can_url)

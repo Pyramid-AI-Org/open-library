@@ -265,7 +265,7 @@ class Crawler:
                     publish_date=publish_date,
                     meta={
                         "discovered_from": page_url,
-                        "pn_no_new": row.pn_new,
+                        "ref_no": row.pn_new,
                     },
                 )
             )

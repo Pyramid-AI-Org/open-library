@@ -234,7 +234,11 @@ class Crawler:
         seen_urls: set[str] = set()
         out: list[UrlRecord] = []
 
-        def _emit(pdf_url: str, name: str | None, discovered_from: str, extra_meta: dict | None = None) -> None:
+        def _emit(
+            pdf_url: str,
+            name: str | None,
+            discovered_from: str,
+        ) -> None:
             can = _canonicalize(pdf_url)
             if not can:
                 return
@@ -244,8 +248,6 @@ class Crawler:
                 return
 
             meta = {"discovered_from": discovered_from}
-            if extra_meta:
-                meta.update(extra_meta)
 
             out.append(
                 ctx.make_record(
@@ -260,7 +262,9 @@ class Crawler:
 
         def _fetch(url: str) -> str:
             if request_delay > 0:
-                sleep_seconds(request_delay + random.uniform(0.0, max(0.0, request_jitter)))
+                sleep_seconds(
+                    request_delay + random.uniform(0.0, max(0.0, request_jitter))
+                )
             resp = get_with_retries(
                 session,
                 url,
@@ -310,25 +314,16 @@ class Crawler:
                 if not anchors_in_row:
                     continue
 
-                date_of_issue = ""
-                if is_circular and len(row.cells) > 1:
-                    date_of_issue = row.cells[1].text
-
                 for a in anchors_in_row:
                     lang_group = _anchor_lang_group(a)
 
                     if is_general and lang_group == "other":
                         continue
 
-                    extra_meta: dict = {}
-                    if is_circular and date_of_issue:
-                        extra_meta["date_of_issue"] = date_of_issue
-
                     _emit(
                         pdf_url=a.href,
                         name=a.text,
                         discovered_from=page_url,
-                        extra_meta=extra_meta,
                     )
 
             if len(out) >= max_total_records:

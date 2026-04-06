@@ -337,7 +337,7 @@ class Crawler:
         parser.feed(html)
 
         out: list[UrlRecord] = []
-        seen_records: set[tuple[str, str, str]] = set()
+        seen_urls: set[str] = set()
 
         for href, link_text, section, is_pdf_class in parser.links:
             if len(out) >= max_total_records:
@@ -349,10 +349,10 @@ class Crawler:
             if path_ext(can) != ".pdf" and not is_pdf_class:
                 continue
 
-            name = clean_text(link_text) or infer_name_from_link(link_text, can)
-            dedupe_key = (can, str(name or ""), section)
-            if dedupe_key in seen_records:
+            if can in seen_urls:
                 continue
+
+            name = clean_text(link_text) or infer_name_from_link(link_text, can)
 
             out.append(
                 ctx.make_record(
@@ -367,7 +367,7 @@ class Crawler:
                     publish_date=_extract_publish_date(url=can, name=name),
                 )
             )
-            seen_records.add(dedupe_key)
+            seen_urls.add(can)
 
         out.sort(
             key=lambda r: (

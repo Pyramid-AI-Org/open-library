@@ -97,7 +97,7 @@ class Crawler:
                     name=clean_text(link.text) or infer_name_from_link(link.text, can),
                     discovered_at_utc=ctx.run_date_utc,
                     source=self.name,
-                    meta={},
+                    meta={"discovered_from": page_url},
                 )
             )
             seen_urls.add(can)

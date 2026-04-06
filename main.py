@@ -9,7 +9,7 @@ from typing import Any
 from crawlers.base import RunContext
 from utils.jsonio import iter_jsonl, sha256_file, write_json, write_jsonl
 from utils.settings import load_settings
-from utils.time import utc_date_yyyymmdd, utc_now
+from utils.time import utc_now
 
 
 def _get_source_label(settings: dict[str, Any], source_id: str) -> str:
@@ -140,7 +140,6 @@ def _run_one(
                 "publish_date": r.publish_date,
                 "source": r.source,
                 "source_id": r.source_id,
-                "source_label": r.source_label,
                 "meta": r.meta,
             }
         )
@@ -175,7 +174,12 @@ def main() -> int:
     previous_records_by_source = _load_previous_records_by_source(out_root)
 
     now = utc_now()
-    run_date = args.run_date.strip() or utc_date_yyyymmdd(now)
+    if args.run_date.strip():
+        # Parse provided date as YYYY-MM-DD and assume midnight UTC
+        from datetime import datetime
+        run_date = datetime.strptime(args.run_date.strip(), "%Y-%m-%d").replace(tzinfo=timezone.utc).isoformat()
+    else:
+        run_date = now.astimezone(timezone.utc).isoformat()
     started_at = now.astimezone(timezone.utc).isoformat()
 
     # Determine which crawlers to run

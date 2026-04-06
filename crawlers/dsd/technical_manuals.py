@@ -135,7 +135,7 @@ class Crawler:
             sleep_seconds(request_delay + random.uniform(0.0, max(0.0, request_jitter)))
 
         out: list[UrlRecord] = []
-        seen_keys: set[tuple[str, str]] = set()
+        seen_urls: set[str] = set()
 
         for locale_entry in locales_cfg:
             if len(out) >= max_total_records:
@@ -181,8 +181,7 @@ class Crawler:
                 if not chosen_pdf_url:
                     continue
 
-                dedupe_key = (chosen_pdf_url, locale)
-                if dedupe_key in seen_keys:
+                if chosen_pdf_url in seen_urls:
                     continue
 
                 publish_date = _extract_corrigendum_publish_date(row.name)
@@ -201,7 +200,7 @@ class Crawler:
                         publish_date=publish_date,
                     )
                 )
-                seen_keys.add(dedupe_key)
+                seen_urls.add(chosen_pdf_url)
 
         out.sort(
             key=lambda r: (

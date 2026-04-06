@@ -154,7 +154,9 @@ class _LacoDesktopTableParser(HTMLParser):
 
         if tag == "table":
             table_id = clean_text(str(attrs_map.get("id") or ""))
-            is_target = bool(_TABLE_ID_PATTERN.fullmatch(table_id)) or table_id == "laco_list"
+            is_target = (
+                bool(_TABLE_ID_PATTERN.fullmatch(table_id)) or table_id == "laco_list"
+            )
 
             if not self._in_target_table and is_target:
                 self._in_target_table = True
@@ -195,7 +197,12 @@ class _LacoDesktopTableParser(HTMLParser):
             self._subject_anchor_text = []
             return
 
-        if tag == "a" and self._in_td and self._td_index == 2 and self._row_download_href is None:
+        if (
+            tag == "a"
+            and self._in_td
+            and self._td_index == 2
+            and self._row_download_href is None
+        ):
             href = clean_text(str(attrs_map.get("href") or ""))
             if href:
                 self._row_download_href = href
@@ -450,8 +457,7 @@ class Crawler:
                     meta={
                         "discovered_from": page_url,
                         "section_name": row.section_name,
-                        "laco_cm_no": row.laco_cm_no,
-                        "issue_date_raw": row.issue_date,
+                        "ref_no": row.laco_cm_no,
                     },
                 )
             )
@@ -459,7 +465,7 @@ class Crawler:
         out.sort(
             key=lambda r: (
                 str(r.meta.get("section_name") or ""),
-                str(r.meta.get("laco_cm_no") or ""),
+                str(r.meta.get("ref_no") or ""),
                 r.url,
                 str(r.name or ""),
                 str(r.publish_date or ""),

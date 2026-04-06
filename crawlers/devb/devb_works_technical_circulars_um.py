@@ -226,12 +226,10 @@ class Crawler:
                         publish_date=issue_date_iso,
                         meta={
                             "circular_no": circular_number,
-                            "issue_date": issue_date_iso,
-                            "index_groups": index_groups,
                             "revision_year": revision_year or None,
                             "revision_date": revision_date_iso,
                             "matched_years": [year],
-                            "data_js_url": data_js_url,
+                            "discovered_from": data_js_url,
                         },
                     )
 

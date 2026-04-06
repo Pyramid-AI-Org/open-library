@@ -614,12 +614,7 @@ class Crawler:
 
                     meta: dict[str, object] = {
                         "discovered_from": item.url,
-                        "works_digest_is_full_text": bool(is_full_text),
                     }
-                    if issue_ctx.issue_number:
-                        meta["works_digest_issue_number"] = issue_ctx.issue_number
-                    if issue_ctx.issue_key:
-                        meta["works_digest_issue_key"] = issue_ctx.issue_key
                     if hit.meta:
                         meta.update(hit.meta)
 
@@ -733,30 +728,5 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-        # Works Digest rule: when an issue has FULL TEXT, keep only FULL TEXT
-        # records for that issue; otherwise retain all issue records.
-        issue_has_full_text: dict[str, bool] = {}
-        for rec in out:
-            issue_key = rec.meta.get("works_digest_issue_key")
-            if not isinstance(issue_key, str) or not issue_key:
-                continue
-            if bool(rec.meta.get("works_digest_is_full_text")):
-                issue_has_full_text[issue_key] = True
-            elif issue_key not in issue_has_full_text:
-                issue_has_full_text[issue_key] = False
-
-        filtered: list[UrlRecord] = []
-        for rec in out:
-            issue_key = rec.meta.get("works_digest_issue_key")
-            if not isinstance(issue_key, str) or not issue_key:
-                filtered.append(rec)
-                continue
-
-            if issue_has_full_text.get(issue_key, False):
-                if bool(rec.meta.get("works_digest_is_full_text")):
-                    filtered.append(rec)
-            else:
-                filtered.append(rec)
-
-        filtered.sort(key=lambda r: (r.url or ""))
-        return filtered
+        out.sort(key=lambda r: (r.url or ""))
+        return out

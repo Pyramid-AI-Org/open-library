@@ -30,7 +30,6 @@
   - `url` (string), `name` (string|null), `discovered_at_utc` (ISO-8601 string)
   - `source` (crawler name, e.g., "devb_press_releases")
   - `source_id` (folder name, e.g., "devb")
-  - `source_label` (human-readable, e.g., "The Development Bureau")
   - `meta` (object)
 - Determinism matters (data branch diffs): records are sorted before writing and JSON is emitted with sorted keys (`utils/jsonio.py`).
 

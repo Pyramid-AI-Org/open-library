@@ -22,9 +22,7 @@ from utils.html_links import HtmlLink
 
 logger = logging.getLogger(__name__)
 
-_DEFAULT_PAGE_URL = (
-    "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/index.html"
-)
+_DEFAULT_PAGE_URL = "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/index.html"
 
 
 @dataclass(frozen=True)
@@ -77,7 +75,9 @@ class _CircularTableParser(HTMLParser):
 
     @staticmethod
     def _class_set(attrs_map: dict[str, str]) -> set[str]:
-        return {c.strip().lower() for c in attrs_map.get("class", "").split() if c.strip()}
+        return {
+            c.strip().lower() for c in attrs_map.get("class", "").split() if c.strip()
+        }
 
     def _next_available_col(self) -> int:
         while self._col_cursor in self._row_text_by_col:
@@ -186,7 +186,9 @@ class _CircularTableParser(HTMLParser):
             if self._current_href:
                 link_text = clean_text("".join(self._current_a_text_parts))
                 self._current_cell_links.append(
-                    HtmlLink(href=urljoin(self.base_url, self._current_href), text=link_text)
+                    HtmlLink(
+                        href=urljoin(self.base_url, self._current_href), text=link_text
+                    )
                 )
             self._in_a = False
             self._current_href = None
@@ -199,10 +201,15 @@ class _CircularTableParser(HTMLParser):
                 self._row_text_by_col[self._current_col] = text
 
             if self._current_cell_links:
-                self._row_links_by_col[self._current_col] = list(self._current_cell_links)
+                self._row_links_by_col[self._current_col] = list(
+                    self._current_cell_links
+                )
 
             if self._current_rowspan > 1 and text:
-                self._active_spans[self._current_col] = (self._current_rowspan - 1, text)
+                self._active_spans[self._current_col] = (
+                    self._current_rowspan - 1,
+                    text,
+                )
 
             if self._in_th and text:
                 self._header_by_col[self._current_col] = text
@@ -222,7 +229,9 @@ class _CircularTableParser(HTMLParser):
             if self._row_has_th and not self._row_has_td:
                 return
 
-            date_col, circular_no_col, circular_links_col, category_col = self._resolve_col_indices()
+            date_col, circular_no_col, circular_links_col, category_col = (
+                self._resolve_col_indices()
+            )
 
             links = self._row_links_by_col.get(circular_links_col, [])
             if not links:
@@ -231,9 +240,12 @@ class _CircularTableParser(HTMLParser):
             self.rows.append(
                 _ParsedRow(
                     date=clean_text(self._row_text_by_col.get(date_col, "")) or None,
-                    circular_no=clean_text(self._row_text_by_col.get(circular_no_col, ""))
+                    circular_no=clean_text(
+                        self._row_text_by_col.get(circular_no_col, "")
+                    )
                     or None,
-                    category=clean_text(self._row_text_by_col.get(category_col, "")) or None,
+                    category=clean_text(self._row_text_by_col.get(category_col, ""))
+                    or None,
                     links=links,
                 )
             )
@@ -309,13 +321,13 @@ class Crawler:
                 out.append(
                     ctx.make_record(
                         url=can,
-                        name=clean_text(link.text) or infer_name_from_link(link.text, can),
+                        name=clean_text(link.text)
+                        or infer_name_from_link(link.text, can),
                         discovered_at_utc=ctx.run_date_utc,
                         source=self.name,
                         meta={
                             "discovered_from": page_url,
                             "category": row.category,
-                            "date": row.date,
                             "circular_no": row.circular_no,
                         },
                     )

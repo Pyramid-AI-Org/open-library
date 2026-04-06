@@ -74,7 +74,9 @@ class _PlainTableParser(HTMLParser):
 
     @staticmethod
     def _class_set(attrs_map: dict[str, str]) -> set[str]:
-        return {c.strip().lower() for c in attrs_map.get("class", "").split() if c.strip()}
+        return {
+            c.strip().lower() for c in attrs_map.get("class", "").split() if c.strip()
+        }
 
     def _next_available_col(self) -> int:
         while self._col_cursor in self._row_text_by_col:
@@ -171,7 +173,10 @@ class _PlainTableParser(HTMLParser):
             if self._cell_links:
                 self._row_links_by_col[self._current_col] = list(self._cell_links)
             if self._current_rowspan > 1 and text:
-                self._active_spans[self._current_col] = (self._current_rowspan - 1, text)
+                self._active_spans[self._current_col] = (
+                    self._current_rowspan - 1,
+                    text,
+                )
 
             self._in_td = False
             self._in_th = False
@@ -264,11 +269,11 @@ class Crawler:
                 out.append(
                     ctx.make_record(
                         url=can,
-                        name=clean_text(link_text) or infer_name_from_link(link_text, can),
+                        name=clean_text(link_text)
+                        or infer_name_from_link(link_text, can),
                         discovered_at_utc=ctx.run_date_utc,
                         source=self.name,
                         meta={
-                            "date": row.date,
                             "discovered_from": page_url,
                         },
                     )
@@ -300,7 +305,8 @@ class Crawler:
                 out.append(
                     ctx.make_record(
                         url=can,
-                        name=clean_text(link.text) or infer_name_from_link(link.text, can),
+                        name=clean_text(link.text)
+                        or infer_name_from_link(link.text, can),
                         discovered_at_utc=ctx.run_date_utc,
                         source=self.name,
                         meta={"discovered_from": page_url},

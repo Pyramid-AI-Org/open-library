@@ -22,7 +22,9 @@ from crawlers.base import (
 
 logger = logging.getLogger(__name__)
 
-_DEFAULT_PAGE_URL = "https://www.emsd.gov.hk/en/publications/technical_specifications/index.html"
+_DEFAULT_PAGE_URL = (
+    "https://www.emsd.gov.hk/en/publications/technical_specifications/index.html"
+)
 
 _ISSUE_INFO_RE = re.compile(
     r"\(\s*Issue\s*No\.?\s*[:.]?\s*([^,\)]+)\s*,\s*Issue\s*Date\s*[:.]?\s*([^\)]+)\)",
@@ -74,7 +76,9 @@ class _SpecTableParser(HTMLParser):
 
     @staticmethod
     def _class_set(attrs_map: dict[str, str]) -> set[str]:
-        return {c.strip().lower() for c in attrs_map.get("class", "").split() if c.strip()}
+        return {
+            c.strip().lower() for c in attrs_map.get("class", "").split() if c.strip()
+        }
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         t = tag.lower()
@@ -137,7 +141,12 @@ class _SpecTableParser(HTMLParser):
 
         if t == "a" and self._in_a:
             a_text = clean_text("".join(self._a_text_parts))
-            if self._in_td and self._col_idx == 2 and self._a_href and not self._pdf_href:
+            if (
+                self._in_td
+                and self._col_idx == 2
+                and self._a_href
+                and not self._pdf_href
+            ):
                 self._pdf_href = urljoin(self.base_url, self._a_href)
                 self._pdf_text = a_text
             self._in_a = False
@@ -255,9 +264,13 @@ class Crawler:
             base_name, issue_no, issue_date = _extract_issue_fields(row.desc)
             name = clean_text(base_name)
             if row.ref:
-                name = clean_text(f"{row.ref} - {name}") if name else clean_text(row.ref)
+                name = (
+                    clean_text(f"{row.ref} - {name}") if name else clean_text(row.ref)
+                )
             if not name:
-                name = clean_text(row.pdf_text) or infer_name_from_link(row.pdf_text, can)
+                name = clean_text(row.pdf_text) or infer_name_from_link(
+                    row.pdf_text, can
+                )
 
             out.append(
                 ctx.make_record(
@@ -265,10 +278,7 @@ class Crawler:
                     name=name,
                     discovered_at_utc=ctx.run_date_utc,
                     source=self.name,
-                    meta={
-                        "issue_no": issue_no or "-",
-                        "issue_date": issue_date,
-                    },
+                    meta={"issue_no": issue_no or "-", "discovered_from": page_url},
                 )
             )
             seen_urls.add(can)

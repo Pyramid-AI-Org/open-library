@@ -179,7 +179,8 @@ class Crawler:
 
         if request_delay_seconds > 0:
             _sleep_seconds(
-                request_delay_seconds + random.uniform(0.0, max(0.0, request_jitter_seconds))
+                request_delay_seconds
+                + random.uniform(0.0, max(0.0, request_jitter_seconds))
             )
 
         try:
@@ -242,10 +243,7 @@ class Crawler:
                     discovered_at_utc=ctx.started_at_utc,
                     publish_date=publish_date,
                     source=self.name,
-                    meta={
-                        "discovered_from": page_url,
-                        "file_ext": "pdf",
-                    },
+                    meta={"discovered_from": page_url},
                 )
             )
 

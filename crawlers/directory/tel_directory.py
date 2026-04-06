@@ -168,14 +168,6 @@ def _dedup_key(url: str) -> str:
     return (url or "").strip()
 
 
-def _set_department_path(meta: dict[str, Any], path: list[str]) -> None:
-    # Keep the schema stable: always a list of breadcrumb lists.
-    if path:
-        meta["department_paths"] = [path]
-    else:
-        meta["department_paths"] = []
-
-
 def _get_with_retries(
     session: requests.Session,
     url: str,
@@ -624,8 +616,6 @@ def _extract_person_detail_fields(html: str, *, page_url: str) -> dict[str, Any]
         "name": (name_field.value if name_field else "") or None,
         "post_title": (title_field.value if title_field else "") or None,
         "department": " -> ".join(department_parts) if department_parts else None,
-        "department_parts": department_parts,
-        "department_root": department_parts[0] if department_parts else None,
         "office_tel": (tel_field.value if tel_field else "") or None,
         "office_tel_norm": _normalize_phone(tel_field.value if tel_field else ""),
         "fax": (fax_field.value if fax_field else "") or None,
@@ -1035,10 +1025,7 @@ class Crawler:
             *,
             discovered_from: str,
             dedup_key: str,
-            detail_url: str,
-            department_root: str | None,
             department: str | None,
-            department_parts: list[str],
             post_title_short: str | None,
             post_title_long: str | None,
             office_tel: str | None,
@@ -1047,9 +1034,7 @@ class Crawler:
             office_address: str | None,
         ) -> dict[str, Any]:
             meta: dict[str, Any] = {
-                "detail_url": detail_url,
                 "department": department,
-                "department_root": department_root,
                 "post_title": post_title_short,
                 "post_title_long": post_title_long,
                 "office_tel": office_tel,
@@ -1059,20 +1044,14 @@ class Crawler:
                 "discovered_from": discovered_from,
                 "dedup_key": dedup_key,
             }
-            _set_department_path(meta, department_parts)
             return meta
 
         def _append_discovered_from(
             meta: dict[str, Any], discovered_from_url: str
         ) -> None:
+            meta.pop("discovered_from_urls", None)
             if not isinstance(meta.get("discovered_from"), str):
                 meta["discovered_from"] = discovered_from_url
-            dfs = meta.get("discovered_from_urls")
-            if not isinstance(dfs, list):
-                dfs = []
-                meta["discovered_from_urls"] = dfs
-            if discovered_from_url not in dfs:
-                dfs.append(discovered_from_url)
 
         def _build_record_from_detail(
             *,
@@ -1100,16 +1079,6 @@ class Crawler:
             )
             post_title_long = _post_title_long_from_short(post_title_short)
 
-            department_parts = detail.get("department_parts")
-            if not isinstance(department_parts, list):
-                department_parts = []
-
-            department_root = _normalize_department_id(
-                detail.get("department_root") if isinstance(detail, dict) else None
-            )
-            if department_root is None and department_parts:
-                department_root = _normalize_department_id(str(department_parts[0]))
-
             office_tel = (
                 detail.get("office_tel")
                 if isinstance(detail.get("office_tel"), str)
@@ -1124,16 +1093,11 @@ class Crawler:
             meta = _make_meta(
                 discovered_from=discovered_from,
                 dedup_key=dedup,
-                detail_url=person_url,
-                department_root=department_root,
                 department=(
                     detail.get("department")
                     if isinstance(detail.get("department"), str)
                     else None
                 ),
-                department_parts=[
-                    str(x) for x in department_parts if isinstance(x, str)
-                ],
                 post_title_short=post_title_short,
                 post_title_long=post_title_long,
                 office_tel=office_tel if isinstance(office_tel, str) else None,
@@ -1258,7 +1222,10 @@ class Crawler:
                         if isinstance(prior_meta_raw, dict)
                         else {}
                     )
-                    prior_meta["detail_url"] = person_url
+                    prior_meta.pop("detail_url", None)
+                    prior_meta.pop("department_root", None)
+                    prior_meta.pop("department_paths", None)
+                    prior_meta.pop("discovered_from_urls", None)
                     prior_meta["dedup_key"] = k
                     _append_discovered_from(prior_meta, page_url)
 

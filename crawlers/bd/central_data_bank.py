@@ -149,11 +149,7 @@ class Crawler:
                         name=_infer_name(link.text or "", can),
                         discovered_at_utc=ctx.started_at_utc,
                         source=self.name,
-                        meta={
-                            "discovered_from": page_url,
-                            "page_type": page_kind,
-                            "file_ext": "pdf",
-                        },
+                        meta={"discovered_from": page_url},
                     )
                 )
 

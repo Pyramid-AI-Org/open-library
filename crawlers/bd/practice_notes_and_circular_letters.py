@@ -211,43 +211,24 @@ class _PracticeNoteParser(HTMLParser):
         if t == "a" and self._in_tr:
             self._in_a = False
 
-            link_text = _clean_text(" ".join(self._text_parts))
-            # If we are inside an <a>, the text is link text.
-            # _text_parts currently collects all text in TD.
-            # This logic is a bit mixed. Let's fix.
-
             # If col 0, we take the href as main link.
             if self._td_index == 0:
                 if self._current_href:
                     self._current_main_link = self._current_href
 
-            # If col 1, we ignore "More details" or "Signed Copy" links.
-            # But we want the title text.
-            # Usually the title is direct text in TD, or inside an 'a' if it's a link?
-            # In PNBI example: <td ...>Title <a ...>More details</a> ...</td>
-            # So the title is text node in TD.
             pass
 
     def handle_data(self, data: str) -> None:
         if self._in_tr and self._capture_text:
             # Filtering for Col 1 (Title)
             if self._td_index == 1:
-                # Specialized logic: ignore "More details", "Signed Copy"
-                # If we are inside 'a', check the text?
                 if self._in_a:
                     t = data.strip().lower()
                     if "more details" in t or "signed copy" in t:
                         return
-                    # Depending on structure, main title might be linked or not.
-                    # In PNBI, Title is plain text.
-
             self._text_parts.append(data)
 
             if self._td_index == 1 and not self._in_a:
-                # Collect title parts outside of anchors (assuming title is text node)
-                # But wait, looking at PNBI snippet:
-                # <td class="v notices_title">Practice Notes...<a ...>More details</a>...</td>
-                # So title is a text node.
                 self._current_title_parts.append(data)
 
 
@@ -473,19 +454,7 @@ class Crawler:
                         continue
                     seen_urls.add(hit.url)
 
-                    meta = {
-                        "source_page": label,
-                        "discovered_from": url,
-                        "file_ext": "pdf",
-                    }
-                    if hit.ref_no:
-                        meta["ref_no"] = hit.ref_no
-                    if hit.date_str:
-                        meta["issue_date"] = hit.date_str
-                    if hit.tab:
-                        meta["tab"] = hit.tab
-                    if hit.year:
-                        meta["year"] = hit.year
+                    meta = {"source_page": label, "discovered_from": url}
 
                     out.append(
                         ctx.make_record(

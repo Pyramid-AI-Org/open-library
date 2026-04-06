@@ -175,7 +175,9 @@ class _PageParser(HTMLParser):
                 self._table_headers = [h.lower() for h in self._current_row_cells]
             elif self._row_has_td:
                 for idx, hdr in enumerate(self._table_headers):
-                    if hdr in _ISSUE_DATE_HEADERS and idx < len(self._current_row_cells):
+                    if hdr in _ISSUE_DATE_HEADERS and idx < len(
+                        self._current_row_cells
+                    ):
                         candidate = clean_text(self._current_row_cells[idx])
                         issue_date = candidate or None
                         break
@@ -380,7 +382,9 @@ class _HeadingScopedTableParser(HTMLParser):
                 self._table_headers = [h.lower() for h in self._current_row_cells]
             elif self._row_has_td:
                 for idx, hdr in enumerate(self._table_headers):
-                    if hdr in _ISSUE_DATE_HEADERS and idx < len(self._current_row_cells):
+                    if hdr in _ISSUE_DATE_HEADERS and idx < len(
+                        self._current_row_cells
+                    ):
                         candidate = clean_text(self._current_row_cells[idx])
                         issue_date = candidate or None
                         break
@@ -572,7 +576,9 @@ class Crawler:
                     if abs_url not in processed_special_pages:
                         processed_special_pages.add(abs_url)
                         if ctx.debug:
-                            print(f"[{self.name}] Fetch (special: stan-pah) -> {abs_url}")
+                            print(
+                                f"[{self.name}] Fetch (special: stan-pah) -> {abs_url}"
+                            )
                         try:
                             special_rows = crawl_stan_pah_subpage(
                                 session=session,
@@ -622,18 +628,15 @@ class Crawler:
                     meta: dict[str, str | None] = {
                         "discovered_from": current_url,
                     }
-                    issue_date = (source_link.issue_date or link.issue_date) if source_link else link.issue_date
-                    if issue_date:
-                        meta["issue_date"] = issue_date
 
                     out.append(
                         ctx.make_record(
-                    url=abs_url,
-                    name=name,
-                    discovered_at_utc=ctx.started_at_utc,
-                    source=self.name,
-                    meta=meta,
-                )
+                            url=abs_url,
+                            name=name,
+                            discovered_at_utc=ctx.started_at_utc,
+                            source=self.name,
+                            meta=meta,
+                        )
                     )
                     if len(out) >= max_total_records:
                         break
