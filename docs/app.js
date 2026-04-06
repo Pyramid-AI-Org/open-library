@@ -60,6 +60,7 @@ const state = {
   branch: "data",
   dataRoot: "data",
   records: /** @type {Array<any>} */ ([]),
+  rawRecords: /** @type {Array<any>} */ ([]),
   filteredIdx: /** @type {Array<number>} */ ([]),
   sortKey: "publish_date",
   sortDir: "desc",
@@ -167,8 +168,17 @@ function normalizeDataRootPath(p) {
 function archiveDateFromPath(path) {
   const s = String(path || "").trim();
   const m = s.match(/archive\/(\d{4})\/(\d{2})\/(\d{2})\/urls\.jsonl$/);
-  if (!m) return "";
-  return `${m[1]}-${m[2]}-${m[3]}`;
+  if (m) return `${m[1]}-${m[2]}-${m[3]}`;
+
+  const m2 = s.match(/archive_v2\/(\d{4})\/(\d{2})\/days\/(\d{2})\/meta\.json$/);
+  if (m2) return `${m2[1]}-${m2[2]}-${m2[3]}`;
+
+  return "";
+}
+
+function getSelectedArchiveEntry() {
+  const selected = String(state.selectedDataPath || "").trim();
+  return state.archiveIndex.find((e) => String(e.path || "").trim() === selected) || null;
 }
 
 function jsonlDownloadFileName() {
@@ -197,6 +207,24 @@ async function downloadJsonl() {
   }
 
   const relPath = String(state.selectedDataPath || "latest/urls.jsonl").trim();
+  const selectedEntry = getSelectedArchiveEntry();
+
+  if (selectedEntry?.format === "v2-delta") {
+    try {
+      setStatus("Preparing JSONL download...");
+      const lines = state.rawRecords.map((r) => JSON.stringify(r));
+      const text = `${lines.join("\n")}${lines.length ? "\n" : ""}`;
+      const blob = new Blob([text], { type: "application/x-ndjson;charset=utf-8" });
+      downloadBlobFile(blob, jsonlDownloadFileName());
+      setStatus("JSONL downloaded");
+      return;
+    } catch (err) {
+      console.error(err);
+      setStatus("Failed to download JSONL");
+      return;
+    }
+  }
+
   const url = rawUrl(relPath);
   if (!url) {
     setStatus("Invalid repo configuration");
@@ -907,12 +935,26 @@ async function loadArchiveIndex() {
       entries = rawEntries
         .map((e) => {
           const path = normalizeDataRootPath((e.path || "").trim());
+          const format = String(e.format || "legacy-full").trim() || "legacy-full";
           let date = (e.date || e.run_date_utc || "").trim();
           if (!date && path) {
             const m = path.match(/archive\/(\d{4})\/(\d{2})\/(\d{2})\//);
             if (m) date = `${m[1]}-${m[2]}-${m[3]}`;
           }
-          return { date, path, bytes: typeof e.bytes === "number" ? e.bytes : undefined };
+          if (!date && path) {
+            const m2 = path.match(/archive_v2\/(\d{4})\/(\d{2})\/days\/(\d{2})\//);
+            if (m2) date = `${m2[1]}-${m2[2]}-${m2[3]}`;
+          }
+          return {
+            date,
+            path,
+            format,
+            bytes: typeof e.bytes === "number" ? e.bytes : undefined,
+            basePath: normalizeDataRootPath((e.base_path || "").trim()),
+            addedPath: normalizeDataRootPath((e.added_path || "").trim()),
+            removedPath: normalizeDataRootPath((e.removed_path || "").trim()),
+            baseVersion: typeof e.base_version === "number" ? e.base_version : undefined,
+          };
         })
         .filter((x) => x.path);
     }
@@ -968,9 +1010,11 @@ async function loadDataset() {
 
   const relPath = state.selectedDataPath || "latest/urls.jsonl";
   const isLatest = relPath === "latest/urls.jsonl";
+  const selectedEntry = getSelectedArchiveEntry();
+  const isV2Delta = selectedEntry?.format === "v2-delta";
   const url = rawUrl(relPath);
 
-  if (!url) {
+  if (!url && !isV2Delta) {
     setStatus("Invalid repo configuration");
     return;
   }
@@ -985,10 +1029,86 @@ async function loadDataset() {
 
   state.loading = true;
   state.records = [];
+  state.rawRecords = [];
   state.filteredIdx = [];
   setStatus("Loading…");
 
   try {
+    if (isV2Delta) {
+      const basePath = String(selectedEntry.basePath || "").trim();
+      const addedPath = String(selectedEntry.addedPath || "").trim();
+      const removedPath = String(selectedEntry.removedPath || "").trim();
+      if (!basePath || !addedPath || !removedPath) {
+        throw new Error("Missing v2 archive paths");
+      }
+
+      setStatus("Reconstructing archive from base + delta...");
+
+      const [baseText, addedText, removedText] = await Promise.all([
+        fetch(rawUrl(basePath), { cache: "no-store" }).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.text();
+        }),
+        fetch(rawUrl(addedPath), { cache: "no-store" }).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.text();
+        }),
+        fetch(rawUrl(removedPath), { cache: "no-store" }).then((r) => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.text();
+        }),
+      ]);
+
+      const parseJsonl = (text) => text
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .map((line) => {
+          try {
+            return JSON.parse(line);
+          } catch {
+            return null;
+          }
+        })
+        .filter((x) => x && typeof x === "object");
+
+      const baseRecords = parseJsonl(baseText);
+      const addedRecords = parseJsonl(addedText);
+      const removedRecords = parseJsonl(removedText);
+
+      const keyOf = (rec) => {
+        const source = String(rec?.source || "").trim();
+        const urlPart = String(rec?.url || "").trim();
+        return source && urlPart ? `${source}|${urlPart}` : "";
+      };
+
+      const byKey = new Map();
+      for (const rec of baseRecords) {
+        const k = keyOf(rec);
+        if (k) byKey.set(k, rec);
+      }
+      for (const rec of removedRecords) {
+        const k = keyOf(rec);
+        if (k) byKey.delete(k);
+      }
+      for (const rec of addedRecords) {
+        const k = keyOf(rec);
+        if (k) byKey.set(k, rec);
+      }
+
+      state.rawRecords = Array.from(byKey.values());
+      state.records = state.rawRecords.map((r) => normalizeRecord(r));
+
+      rebuildFilters();
+      applyFiltersAndSort();
+      renderTable();
+
+      if (els.downloadExcelBtn) els.downloadExcelBtn.disabled = state.filteredIdx.length === 0;
+      setStatus("Idle");
+      if (els.runInfo) els.runInfo.textContent = "";
+      return;
+    }
+
     const res = await fetch(url, { cache: "no-store" });
     if (!res.ok || !res.body) throw new Error(`HTTP ${res.status}`);
 
@@ -1014,7 +1134,9 @@ async function loadDataset() {
         if (!line) continue;
 
         try {
-          state.records.push(normalizeRecord(JSON.parse(line)));
+          const obj = JSON.parse(line);
+          state.rawRecords.push(obj);
+          state.records.push(normalizeRecord(obj));
         } catch {
           parseErrors++;
         }
@@ -1034,7 +1156,9 @@ async function loadDataset() {
     const tail = decoder.decode().trim();
     if (tail) {
       try {
-        state.records.push(normalizeRecord(JSON.parse(tail)));
+        const obj = JSON.parse(tail);
+        state.rawRecords.push(obj);
+        state.records.push(normalizeRecord(obj));
       } catch {
         parseErrors++;
       }
