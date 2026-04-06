@@ -219,6 +219,15 @@ async function downloadJsonl() {
 
 let xlsxLoadPromise = null;
 
+function isXlsxReady() {
+  return Boolean(
+    window.XLSX?.writeFile
+    && window.XLSX?.utils?.json_to_sheet
+    && window.XLSX?.utils?.book_new
+    && window.XLSX?.utils?.book_append_sheet
+  );
+}
+
 function loadScriptOnce(src) {
   return new Promise((resolve, reject) => {
     const existing = document.querySelector(`script[data-lib-src="${src}"]`);
@@ -246,7 +255,7 @@ function loadScriptOnce(src) {
 }
 
 async function ensureXlsxLoaded() {
-  if (window.XLSX?.utils?.writeFile) return window.XLSX;
+  if (isXlsxReady()) return window.XLSX;
 
   if (!xlsxLoadPromise) {
     xlsxLoadPromise = (async () => {
@@ -261,7 +270,7 @@ async function ensureXlsxLoaded() {
       for (const src of sources) {
         try {
           await loadScriptOnce(src);
-          if (window.XLSX?.utils?.writeFile) return window.XLSX;
+          if (isXlsxReady()) return window.XLSX;
         } catch (err) {
           lastError = err;
           // Try next CDN source.
@@ -399,30 +408,9 @@ function metaValueForExcel(v) {
   return String(v);
 }
 
-async function downloadExcel() {
-  let XLSX;
-  try {
-    XLSX = await ensureXlsxLoaded();
-  } catch (err) {
-    console.error(err);
-    const detail = err instanceof Error ? err.message : "unknown error";
-    alert(`Excel export library could not be loaded. ${detail}`);
-    setStatus("Excel export unavailable (see console)");
-    return;
-  }
-
-  if (!state.records.length) {
-    alert("No records loaded yet.");
-    return;
-  }
-
+function buildExportRows() {
   const idx = state.filteredIdx.length ? state.filteredIdx : state.records.map((_, i) => i);
-  if (!idx.length) {
-    alert("No matching records to export.");
-    return;
-  }
-
-  const rows = idx.map((i) => {
+  return idx.map((i) => {
     const r = state.records[i];
     const meta = r?.meta && typeof r.meta === "object" ? r.meta : null;
 
@@ -431,15 +419,55 @@ async function downloadExcel() {
       url: r?.url ?? "",
       domain: r?.domain ?? "",
       source: r?.source ?? "",
+      publish_date: r?.publish_date ?? "",
       discovered_at_utc: r?.discovered_at_utc ?? "",
-      species_id: metaValueForExcel(meta?.species_id),
-      family_name: metaValueForExcel(meta?.family_name),
-      genus_name: metaValueForExcel(meta?.genus_name),
-      common_name: metaValueForExcel(meta?.common_name),
-      chinese_name: metaValueForExcel(meta?.chinese_name),
       meta_json: meta ? metaValueForExcel(meta) : "",
     };
   });
+}
+
+function escapeCsvCell(value) {
+  const s = String(value ?? "");
+  if (!/[",\n\r]/.test(s)) return s;
+  return `"${s.replaceAll('"', '""')}"`;
+}
+
+function downloadCsvFallback(rows) {
+  if (!rows.length) return;
+  const headers = Object.keys(rows[0]);
+  const lines = [
+    headers.map(escapeCsvCell).join(","),
+    ...rows.map((row) => headers.map((h) => escapeCsvCell(row[h] ?? "")).join(",")),
+  ];
+
+  // BOM helps Excel interpret UTF-8 correctly for non-ASCII text.
+  const csv = `\uFEFF${lines.join("\r\n")}`;
+  const stamp = new Date().toISOString().slice(0, 10);
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  downloadBlobFile(blob, `open-library-${stamp}.csv`);
+}
+
+async function downloadExcel() {
+  if (!state.records.length) {
+    alert("No records loaded yet.");
+    return;
+  }
+
+  const rows = buildExportRows();
+  if (!rows.length) {
+    alert("No matching records to export.");
+    return;
+  }
+
+  let XLSX;
+  try {
+    XLSX = await ensureXlsxLoaded();
+  } catch (err) {
+    console.error(err);
+    downloadCsvFallback(rows);
+    setStatus("XLSX unavailable, downloaded CSV fallback");
+    return;
+  }
 
   const ws = XLSX.utils.json_to_sheet(rows);
   const wb = XLSX.utils.book_new();
