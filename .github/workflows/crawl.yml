@@ -76,13 +76,29 @@ jobs:
           fi
 
       - name: Archive previous latest
+        env:
+          RUN_DATE: ${{ github.event.inputs.run_date }}
         run: |
           python - <<'PY'
+          import os
           from pathlib import Path
           from utils.data_rotation import archive_previous_latest
+          from utils.settings import load_settings
 
           data_root = Path('data-worktree/data')
-          res = archive_previous_latest(data_root)
+          run_date = (os.getenv("RUN_DATE") or "").strip() or None
+          settings = load_settings("config/settings.yaml")
+          archive_policy = settings.get("archive_policy", {}) if isinstance(settings, dict) else {}
+          raw_day = archive_policy.get("mid_month_refresh_day", 15) if isinstance(archive_policy, dict) else 15
+          try:
+              mid_month_refresh_day = int(raw_day)
+          except Exception:
+              mid_month_refresh_day = 15
+          res = archive_previous_latest(
+              data_root,
+              run_date=run_date,
+              mid_month_refresh_day=mid_month_refresh_day,
+          )
           print(f"archived={res.archived} path={res.archived_path}")
           PY
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import json
 from datetime import timezone
 from pathlib import Path
 from typing import Any
@@ -80,15 +81,83 @@ def _find_previous_urls_jsonl(out_root: Path) -> Path | None:
     return candidates[-1]
 
 
+def _record_key(rec: dict[str, Any]) -> tuple[str, str] | None:
+    source = rec.get("source")
+    url = rec.get("url")
+    if not isinstance(source, str) or not isinstance(url, str):
+        return None
+    s = source.strip()
+    u = url.strip()
+    if not s or not u:
+        return None
+    return s, u
+
+
+def _load_json_dict(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    try:
+        obj = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    if isinstance(obj, dict):
+        return obj
+    return {}
+
+
+def _load_v2_latest_records(out_root: Path) -> list[dict[str, Any]] | None:
+    root = out_root / "archive_v2"
+    if not root.exists():
+        return None
+
+    day_meta_paths = sorted(root.glob("*/*/days/*/meta.json"))
+    if not day_meta_paths:
+        return None
+
+    latest_meta_path = day_meta_paths[-1]
+    meta = _load_json_dict(latest_meta_path)
+    base_path = out_root / str(meta.get("base_path") or "")
+    added_path = out_root / str(meta.get("added_path") or "")
+    removed_path = out_root / str(meta.get("removed_path") or "")
+    if not base_path.exists() or not base_path.is_file():
+        return None
+
+    by_key: dict[tuple[str, str], dict[str, Any]] = {}
+    for rec in iter_jsonl(base_path):
+        key = _record_key(rec)
+        if key is None:
+            continue
+        by_key[key] = rec
+
+    if removed_path.exists() and removed_path.is_file():
+        for rec in iter_jsonl(removed_path):
+            key = _record_key(rec)
+            if key is None:
+                continue
+            by_key.pop(key, None)
+
+    if added_path.exists() and added_path.is_file():
+        for rec in iter_jsonl(added_path):
+            key = _record_key(rec)
+            if key is None:
+                continue
+            by_key[key] = rec
+
+    return list(by_key.values())
+
+
 def _load_previous_records_by_source(
     out_root: Path,
 ) -> dict[str, dict[str, dict[str, Any]]]:
-    path = _find_previous_urls_jsonl(out_root)
-    if path is None:
-        return {}
+    records = _load_v2_latest_records(out_root)
+    if records is None:
+        path = _find_previous_urls_jsonl(out_root)
+        if path is None:
+            return {}
+        records = list(iter_jsonl(path))
 
     out: dict[str, dict[str, dict[str, Any]]] = {}
-    for rec in iter_jsonl(path):
+    for rec in records:
         source = rec.get("source")
         url = rec.get("url")
         if not isinstance(source, str) or not isinstance(url, str):

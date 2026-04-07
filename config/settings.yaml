@@ -7,6 +7,10 @@ http:
   timeout_seconds: 60
   max_retries: 3
 
+archive_policy:
+  # Refresh the active month's base and rewrite that month's day deltas on this day.
+  mid_month_refresh_day: 15
+
 crawlers:
   # ============================================================================
   # HKSAR - HKSAR Press Releases
