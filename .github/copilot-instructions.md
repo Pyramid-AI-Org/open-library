@@ -6,7 +6,9 @@
 - Code lives on `main`; crawl outputs are published to a separate `data` branch via a git worktree (see .github/workflows/crawl.yml).
 - Output layout (relative to the data root):
   - `latest/urls.jsonl` (overwritten each run)
-  - `archive/YYYY/MM/DD/urls.jsonl` (previous `latest` is moved here)
+  - `archive_v2/YYYY/MM/base.jsonl` + `archive_v2/YYYY/MM/base.meta.json` (month base)
+  - `archive_v2/YYYY/MM/days/DD/{added.jsonl,removed.jsonl,meta.json}` (daily deltas)
+  - `archive/YYYY/MM/DD/urls.jsonl` (legacy archive format; still readable during migration)
 - A static viewer in `docs/` (GitHub Pages) reads JSONL from the `data` branch via `raw.githubusercontent.com` and uses `docs/viewer-config.json` to decide which `meta.*` fields to show.
 
 ## Key entrypoints & data contracts
@@ -77,11 +79,14 @@ crawlers:
 - Daily crawl: `.github/workflows/crawl.yml`
   - uses Python 3.11 (via `actions/setup-python`)
   - checks out code, creates/updates a `data` branch worktree at `./data-worktree`
-  - archives previous latest via `utils/data_rotation.archive_previous_latest`
+  - archives previous latest via `utils/data_rotation.archive_previous_latest` (v2 month base + daily delta strategy)
+    - first archive entry in month initializes `archive_v2/YYYY/MM/base.jsonl`
+    - normal days write `added/removed` deltas for the day
+    - on `archive_policy.mid_month_refresh_day` (default `15`), refreshes active month base and rewrites that month's deltas
   - runs `main.py` with `--out data-worktree/data`
   - generates viewer artifacts:
     - stats: `python -m scripts.data_stats --in data-worktree/data/latest/urls.jsonl --out-json data-worktree/data/latest/stats.json > .../info.txt || true`
-    - archive index: `python -m scripts.build_archive_index --data-root data-worktree/data`
+    - archive index: `python -m scripts.build_archive_index --data-root data-worktree/data` (indexes both legacy and v2 archives)
 - Pages deploy: `.github/workflows/pages.yml` publishes `docs/` as a static site.
 
 ## Useful local commands
@@ -97,5 +102,8 @@ crawlers:
 ## When changing the viewer
 
 - The viewer loads `docs/viewer-config.json` at runtime (`docs/app.js: loadViewerConfig()`). If you add/rename `meta` fields in crawlers, consider updating viewer-config so details dialogs show the new fields.
-- Archives are normally read from `archive/index.json`, but the viewer can fall back to enumerating the `data` branch git tree via the GitHub API (`docs/app.js: tryBuildArchiveIndexFromGitTree()`).
+- Archives are normally read from `archive/index.json`; the index includes both legacy full snapshots and v2 delta entries.
+- `latest` is still loaded directly from `latest/urls.jsonl`.
+- v2 archive days are reconstructed in the viewer from `base + removed + added` using paths in `archive/index.json`.
+- Legacy archives remain supported during migration.
 - Source groups in `viewer-config.json` should match the source IDs in `settings.yaml`.
