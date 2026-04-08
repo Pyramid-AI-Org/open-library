@@ -1,6 +1,16 @@
 {
-  "generated_at_utc": "2026-04-07T10:24:39.947402+00:00",
+  "generated_at_utc": "2026-04-08T06:46:53.321843+00:00",
   "archives": [
+    {
+      "date": "2026-04-08",
+      "path": "archive_v2/2026/04/days/08/meta.json",
+      "bytes": 0,
+      "format": "v2-delta",
+      "base_path": "archive_v2/2026/04/base.jsonl",
+      "added_path": "archive_v2/2026/04/days/08/added.jsonl",
+      "removed_path": "archive_v2/2026/04/days/08/removed.jsonl",
+      "base_version": 1
+    },
     {
       "date": "2026-04-07",
       "path": "archive/2026/04/07/urls.jsonl",
@@ -10,16 +20,6 @@
       "added_path": null,
       "removed_path": null,
       "base_version": null
-    },
-    {
-      "date": "2026-04-07",
-      "path": "archive_v2/2026/04/days/07/meta.json",
-      "bytes": 0,
-      "format": "v2-delta",
-      "base_path": "archive_v2/2026/04/base.jsonl",
-      "added_path": "archive_v2/2026/04/days/07/added.jsonl",
-      "removed_path": "archive_v2/2026/04/days/07/removed.jsonl",
-      "base_version": 1
     },
     {
       "date": "2026-04-06",
