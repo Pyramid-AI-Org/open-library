@@ -1,11 +1,134 @@
 {
-  "crawler": "devb.devb_press_releases",
+  "crawler": "all",
   "crawlers_considered": 115,
   "crawlers_due": [
+    "air",
+    "annual_digest",
+    "archsd_practices_and_guidelines",
+    "archsd_technical_documents",
+    "automatic_meter_reading",
+    "bd_basic_pages",
+    "cedd_ceo_publications",
+    "cedd_eacsb_handbook",
+    "cedd_geo_publications",
+    "cedd_standards_spec_handbooks_cost",
+    "cedd_technical_circulars",
+    "central_data_bank",
+    "checklist",
+    "circular_letters",
+    "code_of_practice",
+    "codes_design_manuals_and_guidelines",
+    "cpd_for_licensed_plumbers",
+    "devb_construction_site_safety_manual",
+    "devb_general_circulars",
+    "devb_planning_and_lands_technical_circulars",
+    "devb_publications",
+    "devb_speeches_and_presentations",
+    "devb_standard_consultancy_documents",
+    "devb_standard_contract_documents",
+    "devb_works_technical_circulars_um",
+    "development_meetings",
+    "development_papers_reports",
+    "eia_planning",
+    "electric_safety_cop",
+    "electric_safety_publications_cop",
+    "electric_safety_publications_general",
+    "electric_safety_publications_guidelines",
+    "enhancement_of_control_of_inside_services",
+    "enhancing_plumbing_works_control",
+    "faq",
+    "finance_financial_proposals_considered",
+    "finance_meetings",
+    "finance_papers_reports",
+    "flushing_water",
+    "free_publications",
+    "fresh_water_management_system",
+    "gas_approval_schemes",
+    "gas_publications",
+    "gas_related_information_for_competent_person",
+    "gas_safety_portal",
+    "gas_safety_tips",
+    "gas_statutory_advisory_bodies",
+    "good_practice_guide",
+    "guidelines",
+    "guidelines_reports_drawings_specifications",
+    "herbarium",
+    "hksar_press_releases",
+    "hyd_technical_documents",
+    "info_notes",
+    "information_for_licensed_plumbers",
+    "joint_practice_notes",
+    "joint_practice_notes",
+    "laco_circular_memorandum",
+    "lao_practice_notes",
+    "licensed_plumbers",
+    "lifts_and_escalators_circulars",
+    "lifts_and_escalators_publications",
+    "lifts_and_escalators_registered_workers",
+    "lifts_and_escalators_responsible_persons_corner",
+    "lifts_and_escalators_statutory_advisory_bodies",
+    "maintenance_of_internal_plumbing",
+    "mechanical_electrical_ss",
+    "miscellaneous",
+    "noise",
+    "notices",
+    "notices_and_reports",
+    "occupational_health_part_a",
+    "occupational_health_part_b",
+    "occupational_health_part_c",
+    "occupational_health_part_d",
+    "occupational_safety_part_a",
+    "occupational_safety_part_b",
+    "occupational_safety_part_c",
+    "occupational_safety_part_d",
+    "occupational_safety_part_g",
+    "plumbing_requirements",
+    "policy_documents",
+    "practice_notes",
+    "practice_notes_and_circular_letters",
+    "pressure_equipment",
+    "public_works_papers_reports",
+    "public_works_project_proposal_considered",
+    "publications_guidance_documents",
+    "publications_handbooks",
+    "publications_other_reports",
+    "publications_propeccpns",
+    "publications_study_report",
+    "publications_technical_memorandum",
+    "publications_technical_specifications",
+    "qualified_persons",
+    "railway_safety_publication",
+    "regulating_railway_safety",
+    "scheduled_areas",
+    "second_parking_demand",
+    "smo_practice_notes",
+    "standards_guidelines",
+    "technical_circulars_and_practice_notes",
+    "technical_guidance",
+    "technical_manuals",
+    "technical_papers_published_by_dsd",
+    "tel_directory",
+    "third_comprehensive_study",
+    "transport_planning",
+    "waste",
+    "water",
+    "water_efficiency_labelling_scheme",
+    "water_safety_plan_for_buildings",
+    "water_safety_plan_subsidy_scheme",
+    "works_of_minor_nature"
+  ],
+  "crawlers_failed": [
+    "bd_basic_pages",
+    "devb_construction_site_safety_manual",
+    "devb_standard_consultancy_documents",
+    "devb_standard_contract_documents",
+    "gas_safety_portal"
+  ],
+  "crawlers_skipped": [
     "devb_press_releases"
   ],
-  "crawlers_failed": [],
-  "crawlers_skipped": [
+  "crawlers_succeeded": [
+    "air",
     "annual_digest",
     "archsd_practices_and_guidelines",
     "archsd_technical_documents",
@@ -24,55 +147,51 @@
     "devb_general_circulars",
     "devb_planning_and_lands_technical_circulars",
     "devb_publications",
+    "devb_speeches_and_presentations",
+    "devb_works_technical_circulars_um",
+    "development_meetings",
+    "development_papers_reports",
+    "eia_planning",
     "electric_safety_cop",
     "electric_safety_publications_cop",
     "electric_safety_publications_general",
     "electric_safety_publications_guidelines",
-    "emsd.gas_approval_schemes",
-    "emsd.gas_publications",
-    "emsd.gas_related_information_for_competent_person",
-    "emsd.gas_safety_tips",
-    "emsd.gas_statutory_advisory_bodies",
-    "emsd.lifts_and_escalators_circulars",
-    "emsd.lifts_and_escalators_publications",
-    "emsd.lifts_and_escalators_registered_workers",
-    "emsd.lifts_and_escalators_responsible_persons_corner",
-    "emsd.lifts_and_escalators_statutory_advisory_bodies",
-    "emsd.publications_handbooks",
-    "emsd.publications_technical_specifications",
-    "emsd.railway_safety_publication",
-    "emsd.regulating_railway_safety",
     "enhancement_of_control_of_inside_services",
     "enhancing_plumbing_works_control",
-    "epd.air",
-    "epd.eia_planning",
-    "epd.noise",
-    "epd.policy_documents",
-    "epd.publications_guidance_documents",
-    "epd.publications_other_reports",
-    "epd.publications_propeccpns",
-    "epd.publications_study_report",
-    "epd.publications_technical_memorandum",
-    "epd.waste",
-    "epd.water",
     "faq",
+    "finance_financial_proposals_considered",
+    "finance_meetings",
+    "finance_papers_reports",
     "flushing_water",
     "free_publications",
     "fresh_water_management_system",
+    "gas_approval_schemes",
+    "gas_publications",
+    "gas_related_information_for_competent_person",
+    "gas_safety_tips",
+    "gas_statutory_advisory_bodies",
     "good_practice_guide",
     "guidelines",
     "guidelines_reports_drawings_specifications",
     "herbarium",
+    "hksar_press_releases",
     "hyd_technical_documents",
     "info_notes",
     "information_for_licensed_plumbers",
     "joint_practice_notes",
+    "joint_practice_notes",
     "laco_circular_memorandum",
     "lao_practice_notes",
     "licensed_plumbers",
+    "lifts_and_escalators_circulars",
+    "lifts_and_escalators_publications",
+    "lifts_and_escalators_registered_workers",
+    "lifts_and_escalators_responsible_persons_corner",
+    "lifts_and_escalators_statutory_advisory_bodies",
     "maintenance_of_internal_plumbing",
     "mechanical_electrical_ss",
     "miscellaneous",
+    "noise",
     "notices",
     "notices_and_reports",
     "occupational_health_part_a",
@@ -85,10 +204,22 @@
     "occupational_safety_part_d",
     "occupational_safety_part_g",
     "plumbing_requirements",
+    "policy_documents",
     "practice_notes",
     "practice_notes_and_circular_letters",
     "pressure_equipment",
+    "public_works_papers_reports",
+    "public_works_project_proposal_considered",
+    "publications_guidance_documents",
+    "publications_handbooks",
+    "publications_other_reports",
+    "publications_propeccpns",
+    "publications_study_report",
+    "publications_technical_memorandum",
+    "publications_technical_specifications",
     "qualified_persons",
+    "railway_safety_publication",
+    "regulating_railway_safety",
     "scheduled_areas",
     "second_parking_demand",
     "smo_practice_notes",
@@ -100,26 +231,928 @@
     "tel_directory",
     "third_comprehensive_study",
     "transport_planning",
+    "waste",
+    "water",
     "water_efficiency_labelling_scheme",
     "water_safety_plan_for_buildings",
     "water_safety_plan_subsidy_scheme",
     "works_of_minor_nature"
   ],
-  "crawlers_succeeded": [
-    "devb_press_releases"
-  ],
-  "rows": 31309,
+  "rows": 81968,
   "run_date_utc": "2026-04-11",
   "schedule": {
-    "devb_press_releases": {
+    "air": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
-      "manual_override": true,
+      "module_path": "epd.air",
+      "source_id": "epd"
+    },
+    "annual_digest": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "td.annual_digest",
+      "source_id": "td"
+    },
+    "archsd_practices_and_guidelines": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "archsd.archsd_practices_and_guidelines",
+      "source_id": "archsd"
+    },
+    "archsd_technical_documents": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "archsd.archsd_technical_documents",
+      "source_id": "archsd"
+    },
+    "automatic_meter_reading": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.automatic_meter_reading",
+      "source_id": "wsd"
+    },
+    "bd_basic_pages": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "bd.bd_basic_pages",
+      "source_id": "bd"
+    },
+    "cedd_ceo_publications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "cedd.cedd_ceo_publications",
+      "source_id": "cedd"
+    },
+    "cedd_eacsb_handbook": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "cedd.cedd_eacsb_handbook",
+      "source_id": "cedd"
+    },
+    "cedd_geo_publications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "cedd.cedd_geo_publications",
+      "source_id": "cedd"
+    },
+    "cedd_standards_spec_handbooks_cost": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "cedd.cedd_standards_spec_handbooks_cost",
+      "source_id": "cedd"
+    },
+    "cedd_technical_circulars": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "cedd.cedd_technical_circulars",
+      "source_id": "cedd"
+    },
+    "central_data_bank": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "bd.central_data_bank",
+      "source_id": "bd"
+    },
+    "checklist": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "fsd.checklist",
+      "source_id": "fsd"
+    },
+    "circular_letters": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "fsd.circular_letters",
+      "source_id": "fsd"
+    },
+    "code_of_practice": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "fsd.code_of_practice",
+      "source_id": "fsd"
+    },
+    "codes_design_manuals_and_guidelines": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "bd.codes_design_manuals_and_guidelines",
+      "source_id": "bd"
+    },
+    "cpd_for_licensed_plumbers": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.cpd_for_licensed_plumbers",
+      "source_id": "wsd"
+    },
+    "devb_construction_site_safety_manual": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_construction_site_safety_manual",
+      "source_id": "devb"
+    },
+    "devb_general_circulars": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_general_circulars",
+      "source_id": "devb"
+    },
+    "devb_planning_and_lands_technical_circulars": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_planning_and_lands_technical_circulars",
+      "source_id": "devb"
+    },
+    "devb_press_releases": {
+      "due_today": false,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": "2026-04-11",
       "module_path": "devb.devb_press_releases",
       "source_id": "devb"
+    },
+    "devb_publications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_publications",
+      "source_id": "devb"
+    },
+    "devb_speeches_and_presentations": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_speeches_and_presentations",
+      "source_id": "devb"
+    },
+    "devb_standard_consultancy_documents": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_standard_consultancy_documents",
+      "source_id": "devb"
+    },
+    "devb_standard_contract_documents": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_standard_contract_documents",
+      "source_id": "devb"
+    },
+    "devb_works_technical_circulars_um": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "devb.devb_works_technical_circulars_um",
+      "source_id": "devb"
+    },
+    "development_meetings": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "legco.development_meetings",
+      "source_id": "legco"
+    },
+    "development_papers_reports": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "legco.development_papers_reports",
+      "source_id": "legco"
+    },
+    "eia_planning": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.eia_planning",
+      "source_id": "epd"
+    },
+    "electric_safety_cop": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.electric_safety_cop",
+      "source_id": "emsd"
+    },
+    "electric_safety_publications_cop": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.electric_safety_publications_cop",
+      "source_id": "emsd"
+    },
+    "electric_safety_publications_general": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.electric_safety_publications_general",
+      "source_id": "emsd"
+    },
+    "electric_safety_publications_guidelines": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.electric_safety_publications_guidelines",
+      "source_id": "emsd"
+    },
+    "enhancement_of_control_of_inside_services": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.enhancement_of_control_of_inside_services",
+      "source_id": "wsd"
+    },
+    "enhancing_plumbing_works_control": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.enhancing_plumbing_works_control",
+      "source_id": "wsd"
+    },
+    "faq": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.faq",
+      "source_id": "labour"
+    },
+    "finance_financial_proposals_considered": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "legco.finance_financial_proposals_considered",
+      "source_id": "legco"
+    },
+    "finance_meetings": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "legco.finance_meetings",
+      "source_id": "legco"
+    },
+    "finance_papers_reports": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "legco.finance_papers_reports",
+      "source_id": "legco"
+    },
+    "flushing_water": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.flushing_water",
+      "source_id": "wsd"
+    },
+    "free_publications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "td.free_publications",
+      "source_id": "td"
+    },
+    "fresh_water_management_system": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.fresh_water_management_system",
+      "source_id": "wsd"
+    },
+    "gas_approval_schemes": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.gas_approval_schemes",
+      "source_id": "emsd"
+    },
+    "gas_publications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.gas_publications",
+      "source_id": "emsd"
+    },
+    "gas_related_information_for_competent_person": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.gas_related_information_for_competent_person",
+      "source_id": "emsd"
+    },
+    "gas_safety_portal": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.gas_safety_portal",
+      "source_id": "emsd"
+    },
+    "gas_safety_tips": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.gas_safety_tips",
+      "source_id": "emsd"
+    },
+    "gas_statutory_advisory_bodies": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.gas_statutory_advisory_bodies",
+      "source_id": "emsd"
+    },
+    "good_practice_guide": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.good_practice_guide",
+      "source_id": "wsd"
+    },
+    "guidelines": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "dsd.guidelines",
+      "source_id": "dsd"
+    },
+    "guidelines_reports_drawings_specifications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.guidelines_reports_drawings_specifications",
+      "source_id": "wsd"
+    },
+    "herbarium": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "herbarium.herbarium",
+      "source_id": "herbarium"
+    },
+    "hksar_press_releases": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "hksar.hksar_press_releases",
+      "source_id": "hksar"
+    },
+    "hyd_technical_documents": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "hyd.hyd_technical_documents",
+      "source_id": "hyd"
+    },
+    "info_notes": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "lands.info_notes",
+      "source_id": "lands"
+    },
+    "information_for_licensed_plumbers": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.information_for_licensed_plumbers",
+      "source_id": "wsd"
+    },
+    "joint_practice_notes": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "pland.joint_practice_notes",
+      "source_id": "pland"
+    },
+    "laco_circular_memorandum": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "lands.laco_circular_memorandum",
+      "source_id": "lands"
+    },
+    "lao_practice_notes": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "lands.lao_practice_notes",
+      "source_id": "lands"
+    },
+    "licensed_plumbers": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.licensed_plumbers",
+      "source_id": "wsd"
+    },
+    "lifts_and_escalators_circulars": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.lifts_and_escalators_circulars",
+      "source_id": "emsd"
+    },
+    "lifts_and_escalators_publications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.lifts_and_escalators_publications",
+      "source_id": "emsd"
+    },
+    "lifts_and_escalators_registered_workers": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.lifts_and_escalators_registered_workers",
+      "source_id": "emsd"
+    },
+    "lifts_and_escalators_responsible_persons_corner": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.lifts_and_escalators_responsible_persons_corner",
+      "source_id": "emsd"
+    },
+    "lifts_and_escalators_statutory_advisory_bodies": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.lifts_and_escalators_statutory_advisory_bodies",
+      "source_id": "emsd"
+    },
+    "maintenance_of_internal_plumbing": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.maintenance_of_internal_plumbing",
+      "source_id": "wsd"
+    },
+    "mechanical_electrical_ss": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.mechanical_electrical_ss",
+      "source_id": "wsd"
+    },
+    "miscellaneous": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "td.miscellaneous",
+      "source_id": "td"
+    },
+    "noise": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.noise",
+      "source_id": "epd"
+    },
+    "notices": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "fsd.notices",
+      "source_id": "fsd"
+    },
+    "notices_and_reports": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "bd.notices_and_reports",
+      "source_id": "bd"
+    },
+    "occupational_health_part_a": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_health_part_a",
+      "source_id": "labour"
+    },
+    "occupational_health_part_b": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_health_part_b",
+      "source_id": "labour"
+    },
+    "occupational_health_part_c": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_health_part_c",
+      "source_id": "labour"
+    },
+    "occupational_health_part_d": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_health_part_d",
+      "source_id": "labour"
+    },
+    "occupational_safety_part_a": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_safety_part_a",
+      "source_id": "labour"
+    },
+    "occupational_safety_part_b": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_safety_part_b",
+      "source_id": "labour"
+    },
+    "occupational_safety_part_c": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_safety_part_c",
+      "source_id": "labour"
+    },
+    "occupational_safety_part_d": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_safety_part_d",
+      "source_id": "labour"
+    },
+    "occupational_safety_part_g": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.occupational_safety_part_g",
+      "source_id": "labour"
+    },
+    "plumbing_requirements": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.plumbing_requirements",
+      "source_id": "wsd"
+    },
+    "policy_documents": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.policy_documents",
+      "source_id": "epd"
+    },
+    "practice_notes": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "pland.practice_notes",
+      "source_id": "pland"
+    },
+    "practice_notes_and_circular_letters": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "bd.practice_notes_and_circular_letters",
+      "source_id": "bd"
+    },
+    "pressure_equipment": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "labour.pressure_equipment",
+      "source_id": "labour"
+    },
+    "public_works_papers_reports": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "legco.public_works_papers_reports",
+      "source_id": "legco"
+    },
+    "public_works_project_proposal_considered": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "legco.public_works_project_proposal_considered",
+      "source_id": "legco"
+    },
+    "publications_guidance_documents": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.publications_guidance_documents",
+      "source_id": "epd"
+    },
+    "publications_handbooks": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.publications_handbooks",
+      "source_id": "emsd"
+    },
+    "publications_other_reports": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.publications_other_reports",
+      "source_id": "epd"
+    },
+    "publications_propeccpns": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.publications_propeccpns",
+      "source_id": "epd"
+    },
+    "publications_study_report": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.publications_study_report",
+      "source_id": "epd"
+    },
+    "publications_technical_memorandum": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.publications_technical_memorandum",
+      "source_id": "epd"
+    },
+    "publications_technical_specifications": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.publications_technical_specifications",
+      "source_id": "emsd"
+    },
+    "qualified_persons": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.qualified_persons",
+      "source_id": "wsd"
+    },
+    "railway_safety_publication": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.railway_safety_publication",
+      "source_id": "emsd"
+    },
+    "regulating_railway_safety": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "emsd.regulating_railway_safety",
+      "source_id": "emsd"
+    },
+    "scheduled_areas": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "bd.scheduled_areas",
+      "source_id": "bd"
+    },
+    "second_parking_demand": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "td.second_parking_demand",
+      "source_id": "td"
+    },
+    "smo_practice_notes": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "lands.smo_practice_notes",
+      "source_id": "lands"
+    },
+    "standards_guidelines": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "pland.standards_guidelines",
+      "source_id": "pland"
+    },
+    "technical_circulars_and_practice_notes": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "dsd.technical_circulars_and_practice_notes",
+      "source_id": "dsd"
+    },
+    "technical_guidance": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "fsd.technical_guidance",
+      "source_id": "fsd"
+    },
+    "technical_manuals": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "dsd.technical_manuals",
+      "source_id": "dsd"
+    },
+    "technical_papers_published_by_dsd": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "dsd.technical_papers_published_by_dsd",
+      "source_id": "dsd"
+    },
+    "tel_directory": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "directory.tel_directory",
+      "source_id": "directory"
+    },
+    "third_comprehensive_study": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "td.third_comprehensive_study",
+      "source_id": "td"
+    },
+    "transport_planning": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "td.transport_planning",
+      "source_id": "td"
+    },
+    "waste": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.waste",
+      "source_id": "epd"
+    },
+    "water": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "epd.water",
+      "source_id": "epd"
+    },
+    "water_efficiency_labelling_scheme": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.water_efficiency_labelling_scheme",
+      "source_id": "wsd"
+    },
+    "water_safety_plan_for_buildings": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.water_safety_plan_for_buildings",
+      "source_id": "wsd"
+    },
+    "water_safety_plan_subsidy_scheme": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.water_safety_plan_subsidy_scheme",
+      "source_id": "wsd"
+    },
+    "works_of_minor_nature": {
+      "due_today": true,
+      "enabled": true,
+      "interval_days": 1,
+      "last_successful_run_date": null,
+      "module_path": "wsd.works_of_minor_nature",
+      "source_id": "wsd"
     }
   },
-  "started_at_utc": "2026-04-11T12:26:08.462595+00:00"
+  "started_at_utc": "2026-04-11T12:40:07.536272+00:00"
 }
