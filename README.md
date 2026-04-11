@@ -5,6 +5,7 @@ Scheduled web crawlers that write small URL metadata into a **separate `data` br
 ## How data is stored
 
 - Latest run output is written to `data/latest/urls.jsonl` on the `data` branch.
+- Scheduler state is written to `data/latest/crawler_state.json` and tracks the last successful run date per crawler.
 - Before each new run, the previous `data/latest/urls.jsonl` is archived using the v2 strategy:
   - `data/archive_v2/YYYY/MM/base.jsonl` (month base)
   - `data/archive_v2/YYYY/MM/base.meta.json`
@@ -17,9 +18,20 @@ Scheduled web crawlers that write small URL metadata into a **separate `data` br
 Archive v2 policy summary:
 
 - `latest/urls.jsonl` remains the canonical full snapshot for the latest run.
+- A daily workflow run may skip sources that are not due; their prior records are carried forward so `latest/urls.jsonl` stays a full merged snapshot.
 - Each month has a base snapshot and per-day deltas (`added`/`removed`) keyed by `(source, url)`.
 - On `archive_policy.mid_month_refresh_day` (default `15`), the active month's base is refreshed and that same month's day deltas are rewritten against the refreshed base.
 - Previous months are immutable; only the active month is rewritten during mid-month refresh.
+
+## Scheduling
+
+- The GitHub Actions workflow still runs once per day.
+- Crawl cadence is configured in `config/settings.yaml` at the source level under `crawlers.<source>.schedule`.
+- The schedule currently supports:
+  - `enabled`: whether the entire source is eligible to run
+  - `interval_days`: minimum days between successful runs for every page under that source
+- Source-level schedule settings are inherited by all pages under that source.
+- A manual `--crawler ...` run bypasses schedule filtering and acts as an operator override.
 
 ## Running locally
 
@@ -43,6 +55,7 @@ Workflow: [.github/workflows/crawl.yml](.github/workflows/crawl.yml)
 
 - Runs daily at 02:00 UTC
 - Can be manually triggered and scoped to a single crawler via `workflow_dispatch`
+- Commits generated outputs from `data/latest`, `data/archive`, and `data/archive_v2`
 
 ## Viewer (GitHub Pages)
 
@@ -57,8 +70,8 @@ Deployed in: https://pyramid-ai-org.github.io/open-library/
 ## Adding a new crawler
 
 1. Create `crawlers/<name>.py` exporting a `Crawler` class with a `.crawl(ctx)` method.
-2. Add `<name>` to the list in `main.py` (intentional allowlist).
-3. Add config under `crawlers.<name>` in [config/settings.yaml](config/settings.yaml).
+2. Add config under `crawlers.<source>.pages.<crawler_name>` in [config/settings.yaml](config/settings.yaml).
+3. Optionally configure source-wide cadence under `crawlers.<source>.schedule`.
 
 ## Proof-of-concept crawler
 

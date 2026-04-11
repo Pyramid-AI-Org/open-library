@@ -9,8 +9,16 @@ from typing import Any
 
 from crawlers.base import RunContext
 from utils.jsonio import iter_jsonl, sha256_file, write_json, write_jsonl
+from utils.schedule import (
+    normalize_schedule_config,
+    parse_iso_date,
+    should_run_on_date,
+)
 from utils.settings import load_settings
 from utils.time import utc_now
+
+
+CRAWLER_STATE_FILE = "crawler_state.json"
 
 
 def _get_source_label(settings: dict[str, Any], source_id: str) -> str:
@@ -172,6 +180,123 @@ def _load_previous_records_by_source(
     return out
 
 
+def _crawler_state_path(out_root: Path) -> Path:
+    return out_root / "latest" / CRAWLER_STATE_FILE
+
+
+def _load_crawler_state(out_root: Path) -> dict[str, dict[str, Any]]:
+    path = _crawler_state_path(out_root)
+    state = _load_json_dict(path)
+    crawlers = state.get("crawlers")
+    return crawlers if isinstance(crawlers, dict) else {}
+
+
+def _write_crawler_state(
+    out_root: Path,
+    run_date: str,
+    state_by_crawler: dict[str, dict[str, Any]],
+) -> Path:
+    path = _crawler_state_path(out_root)
+    write_json(
+        path,
+        {
+            "updated_at_utc": utc_now().astimezone(timezone.utc).isoformat(),
+            "run_date_utc": run_date,
+            "crawlers": state_by_crawler,
+        },
+    )
+    return path
+
+
+def _select_crawlers_for_run(
+    crawlers: list[tuple[str, str, str]],
+    settings: dict[str, Any],
+    state_by_crawler: dict[str, dict[str, Any]],
+    run_day: str,
+) -> tuple[
+    list[tuple[str, str, str]],
+    list[str],
+    dict[str, dict[str, Any]],
+]:
+    due: list[tuple[str, str, str]] = []
+    skipped: list[str] = []
+    decisions: dict[str, dict[str, Any]] = {}
+    run_date_obj = parse_iso_date(run_day)
+    if run_date_obj is None:
+        raise ValueError(f"Invalid run day: {run_day}")
+
+    crawlers_cfg = settings.get("crawlers", {})
+
+    for source_id, crawler_name, module_path in crawlers:
+        source_cfg = crawlers_cfg.get(source_id, {})
+        page_cfg = {}
+        if isinstance(source_cfg, dict):
+            pages_cfg = source_cfg.get("pages", {})
+            if isinstance(pages_cfg, dict):
+                page_cfg = pages_cfg.get(crawler_name, {})
+
+        merged_cfg: dict[str, Any] = {}
+        if isinstance(source_cfg, dict):
+            for key, value in source_cfg.items():
+                if key not in {"pages", "label"}:
+                    merged_cfg[key] = value
+        if isinstance(page_cfg, dict):
+            merged_cfg.update(page_cfg)
+
+        schedule_cfg = normalize_schedule_config(merged_cfg)
+        prior_state = state_by_crawler.get(crawler_name, {})
+        last_run_day = None
+        if isinstance(prior_state, dict):
+            last_run_day = parse_iso_date(
+                str(prior_state.get("last_successful_run_date") or "")
+            )
+
+        is_due = should_run_on_date(run_date_obj, last_run_day, merged_cfg)
+        decisions[crawler_name] = {
+            "source_id": source_id,
+            "module_path": module_path,
+            "enabled": schedule_cfg["enabled"],
+            "interval_days": schedule_cfg["interval_days"],
+            "last_successful_run_date": (
+                prior_state.get("last_successful_run_date")
+                if isinstance(prior_state, dict)
+                else None
+            ),
+            "due_today": is_due,
+        }
+
+        if is_due:
+            due.append((source_id, crawler_name, module_path))
+        else:
+            skipped.append(crawler_name)
+
+    return due, skipped, decisions
+
+
+def _merge_records_for_latest(
+    previous_records_by_source: dict[str, dict[str, dict[str, Any]]],
+    successful_records_by_source: dict[str, list[dict[str, Any]]],
+) -> list[dict[str, Any]]:
+    merged_by_key: dict[tuple[str, str], dict[str, Any]] = {}
+
+    for source, by_url in previous_records_by_source.items():
+        if source in successful_records_by_source:
+            continue
+        for url, rec in by_url.items():
+            merged_by_key[(source, url)] = rec
+
+    for source, records in successful_records_by_source.items():
+        for rec in records:
+            key = _record_key(rec)
+            if key is None:
+                continue
+            merged_by_key[key] = rec
+
+    merged = list(merged_by_key.values())
+    merged.sort(key=lambda r: (r.get("url") or "", r.get("source") or ""))
+    return merged
+
+
 def _run_one(
     source_id: str,
     crawler_name: str,
@@ -241,15 +366,17 @@ def main() -> int:
     settings = load_settings(args.settings)
     out_root = Path(args.out)
     previous_records_by_source = _load_previous_records_by_source(out_root)
+    crawler_state = _load_crawler_state(out_root)
 
     now = utc_now()
     if args.run_date.strip():
-        # Parse provided date as YYYY-MM-DD and assume midnight UTC
-        from datetime import datetime
-        run_date = datetime.strptime(args.run_date.strip(), "%Y-%m-%d").replace(tzinfo=timezone.utc).isoformat()
+        run_date = args.run_date.strip()
+        if parse_iso_date(run_date) is None:
+            raise ValueError(f"Invalid run date: {run_date}")
     else:
-        run_date = now.astimezone(timezone.utc).isoformat()
+        run_date = now.astimezone(timezone.utc).date().isoformat()
     started_at = now.astimezone(timezone.utc).isoformat()
+    run_day = run_date
 
     # Determine which crawlers to run
     all_crawlers = _get_all_crawlers_from_settings(settings)
@@ -277,11 +404,35 @@ def main() -> int:
                 raise ValueError(f"Crawler not found: {crawler_arg}")
 
         crawlers_to_run = [found]
+        skipped_crawlers: list[str] = []
+        schedule_decisions = {
+            found[1]: {
+                "source_id": found[0],
+                "module_path": found[2],
+                "enabled": True,
+                "interval_days": 1,
+                "last_successful_run_date": (
+                    crawler_state.get(found[1], {}).get("last_successful_run_date")
+                    if isinstance(crawler_state.get(found[1]), dict)
+                    else None
+                ),
+                "due_today": True,
+                "manual_override": True,
+            }
+        }
     else:
-        # Run all crawlers
-        crawlers_to_run = all_crawlers
+        crawlers_to_run, skipped_crawlers, schedule_decisions = (
+            _select_crawlers_for_run(
+                all_crawlers,
+                settings,
+                crawler_state,
+                run_day,
+            )
+        )
 
-    all_records: list[dict[str, Any]] = []
+    successful_records_by_source: dict[str, list[dict[str, Any]]] = {}
+    succeeded_crawlers: list[str] = []
+    failed_crawlers: list[str] = []
     for source_id, crawler_name, module_path in crawlers_to_run:
         try:
             records = _run_one(
@@ -294,25 +445,49 @@ def main() -> int:
                 bool(args.debug),
                 prior_records_by_url=previous_records_by_source.get(crawler_name),
             )
-            all_records.extend(records)
+            successful_records_by_source[crawler_name] = records
+            succeeded_crawlers.append(crawler_name)
             print(f"  {module_path}: {len(records)} records")
         except Exception as e:
+            failed_crawlers.append(crawler_name)
             print(f"  {module_path}: ERROR - {e}")
             if args.debug:
                 raise
 
-    # Deterministic ordering & basic de-dup by url+source
-    all_records.sort(key=lambda r: (r.get("url") or "", r.get("source") or ""))
+    if args.crawler.strip():
+        skipped_crawlers = sorted(
+            name
+            for name in previous_records_by_source.keys()
+            if name not in successful_records_by_source and name not in failed_crawlers
+        )
+
+    all_records = _merge_records_for_latest(
+        previous_records_by_source,
+        successful_records_by_source,
+    )
+
+    updated_crawler_state = dict(crawler_state)
+    for crawler_name in succeeded_crawlers:
+        updated_crawler_state[crawler_name] = {
+            "last_successful_run_date": run_day,
+        }
 
     latest_dir = out_root / "latest"
     urls_path = latest_dir / "urls.jsonl"
     rows = write_jsonl(urls_path, all_records)
+    crawler_state_path = _write_crawler_state(out_root, run_date, updated_crawler_state)
 
     summary = {
         "run_date_utc": run_date,
         "started_at_utc": started_at,
         "crawler": crawler_arg or "all",
         "rows": rows,
+        "crawlers_considered": len(all_crawlers),
+        "crawlers_due": sorted(name for _, name, _ in crawlers_to_run),
+        "crawlers_skipped": sorted(skipped_crawlers),
+        "crawlers_succeeded": sorted(succeeded_crawlers),
+        "crawlers_failed": sorted(failed_crawlers),
+        "schedule": schedule_decisions,
     }
     write_json(latest_dir / "summary.json", summary)
 
@@ -331,6 +506,11 @@ def main() -> int:
                 "path": str((latest_dir / "summary.json").as_posix()),
                 "sha256": sha256_file(latest_dir / "summary.json"),
                 "bytes": (latest_dir / "summary.json").stat().st_size,
+            },
+            {
+                "path": str(crawler_state_path.as_posix()),
+                "sha256": sha256_file(crawler_state_path),
+                "bytes": crawler_state_path.stat().st_size,
             },
         ],
     }

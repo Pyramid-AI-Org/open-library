@@ -133,9 +133,10 @@ jobs:
           pushd data-worktree
 
           # Ensure we only commit data outputs
-          # Split add commands so if archive doesn't exist (first run), latest is still added
+          # Split add commands so if one subtree doesn't exist, others are still added.
           git add -f -A data/latest || true
           git add -f -A data/archive || true
+          git add -f -A data/archive_v2 || true
 
           if git diff --cached --quiet; then
             echo "No data changes to commit"

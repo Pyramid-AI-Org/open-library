@@ -17,6 +17,9 @@ crawlers:
   # ============================================================================
   hksar:
     label: "HKSAR Press Releases"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.info.gov.hk"
     pages:
       hksar_press_releases:
@@ -41,6 +44,9 @@ crawlers:
   # ============================================================================
   legco:
     label: "Legislative Council"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.legco.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
@@ -88,6 +94,9 @@ crawlers:
   # ============================================================================
   devb:
     label: "The Development Bureau"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.devb.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
@@ -153,6 +162,9 @@ crawlers:
   # ============================================================================
   bd:
     label: "Building Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.bd.gov.hk"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
@@ -221,6 +233,9 @@ crawlers:
   # ============================================================================
   archsd:
     label: "Architectural Services Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.archsd.gov.hk"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
@@ -269,6 +284,9 @@ crawlers:
   # ============================================================================
   cedd:
     label: "Civil Engineering and Development Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.cedd.gov.hk"
     backoff_base_seconds: 0.5
     backoff_jitter_seconds: 0.25
@@ -338,6 +356,9 @@ crawlers:
   # ============================================================================
   dsd:
     label: "Drainage Services Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.dsd.gov.hk"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
@@ -379,6 +400,9 @@ crawlers:
   # ============================================================================
   hyd:
     label: "Highways Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.hyd.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
@@ -405,6 +429,9 @@ crawlers:
   # ============================================================================
   fsd:
     label: "Fire Services Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.hkfsd.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
@@ -442,6 +469,9 @@ crawlers:
   # ============================================================================
   labour:
     label: "Labour Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.labour.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
@@ -514,6 +544,9 @@ crawlers:
   # ============================================================================
   lands:
     label: "Lands Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.landsd.gov.hk"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
@@ -546,6 +579,9 @@ crawlers:
   # ============================================================================
   pland:
     label: "Planning Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.pland.gov.hk"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
@@ -570,6 +606,9 @@ crawlers:
   # ============================================================================
   td:
     label: "Transport Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.td.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
@@ -641,6 +680,9 @@ crawlers:
   # ============================================================================
   wsd:
     label: "Water Supplies Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.wsd.gov.hk"
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
@@ -815,6 +857,9 @@ crawlers:
   # ============================================================================
   epd:
     label: "Environmental Protection Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     base_url: "https://www.epd.gov.hk"
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
@@ -935,6 +980,9 @@ crawlers:
   # ============================================================================
   directory:
     label: "Telephone Directory"
+    schedule:
+      enabled: true
+      interval_days: 1
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
     backoff_base_seconds: 0.5
@@ -954,6 +1002,9 @@ crawlers:
   # ============================================================================
   herbarium:
     label: "Hong Kong Herbarium"
+    schedule:
+      enabled: true
+      interval_days: 1
     request_delay_seconds: 0.25
     request_jitter_seconds: 0.10
     backoff_base_seconds: 0.5
@@ -980,6 +1031,9 @@ crawlers:
   # ============================================================================
   emsd:
     label: "Electrical and Mechanical Services Department"
+    schedule:
+      enabled: true
+      interval_days: 1
     request_delay_seconds: 0.5
     request_jitter_seconds: 0.25
     backoff_base_seconds: 0.5
