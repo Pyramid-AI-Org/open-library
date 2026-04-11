@@ -41,7 +41,7 @@ class Crawler:
     Configuration is list-driven via `targets`.
     """
 
-    name = "bd_basic_pages"
+    name = "basic_pages"
 
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         cfg = ctx.get_crawler_config(self.name)

@@ -70,6 +70,7 @@ const state = {
   selectedDataPath: "latest/urls.jsonl",
   viewerConfig: null,
   loading: false,
+  loadSeq: 0,
 };
 
 // ============================================================================
@@ -138,6 +139,21 @@ function compareValues(a, b) {
   if (a == null) return -1;
   if (b == null) return 1;
   return a < b ? -1 : 1;
+}
+
+function parseJsonlText(text) {
+  return String(text || "")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      try {
+        return JSON.parse(line);
+      } catch {
+        return null;
+      }
+    })
+    .filter((x) => x && typeof x === "object");
 }
 
 // ============================================================================
@@ -436,10 +452,48 @@ function metaValueForExcel(v) {
   return String(v);
 }
 
-function buildExportRows() {
-  const idx = state.filteredIdx.length ? state.filteredIdx : state.records.map((_, i) => i);
+async function buildExportRows() {
+  const relPath = String(state.selectedDataPath || "latest/urls.jsonl").trim();
+  const selectedEntry = getSelectedArchiveEntry();
+
+  let exportRawRecords = [];
+  if (selectedEntry?.format === "v2-delta") {
+    exportRawRecords = Array.isArray(state.rawRecords) ? [...state.rawRecords] : [];
+  } else {
+    const url = rawUrl(relPath);
+    if (!url) {
+      throw new Error("Invalid repo configuration");
+    }
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    exportRawRecords = parseJsonlText(await res.text());
+  }
+
+  const exportRecords = exportRawRecords.map((r) => normalizeRecord(r));
+  const source = (els.sourceFilter?.value || "").trim();
+  const q = (els.searchInput?.value || "").trim().toLowerCase();
+
+  const idx = [];
+  for (let i = 0; i < exportRecords.length; i++) {
+    const r = exportRecords[i];
+    if (source && r.source_group !== source) continue;
+    if (q) {
+      const hay = `${r.name || ""}\n${r.url || ""}`.toLowerCase();
+      if (!hay.includes(q)) continue;
+    }
+    idx.push(i);
+  }
+
+  const dirMul = state.sortDir === "asc" ? 1 : -1;
+  idx.sort((ia, ib) => {
+    const a = exportRecords[ia];
+    const b = exportRecords[ib];
+    const c = compareValues(recordSortValue(a, state.sortKey), recordSortValue(b, state.sortKey));
+    return c !== 0 ? c * dirMul : (a.url || "").localeCompare(b.url || "") * dirMul;
+  });
+
   return idx.map((i) => {
-    const r = state.records[i];
+    const r = exportRecords[i];
     const meta = r?.meta && typeof r.meta === "object" ? r.meta : null;
 
     return {
@@ -476,14 +530,24 @@ function downloadCsvFallback(rows) {
 }
 
 async function downloadExcel() {
-  if (!state.records.length) {
-    alert("No records loaded yet.");
+  if (!state.owner || !state.repo) {
+    setStatus("Set repo (owner/repo) to load data");
     return;
   }
 
-  const rows = buildExportRows();
+  let rows;
+  try {
+    setStatus("Preparing Excel export...");
+    rows = await buildExportRows();
+  } catch (err) {
+    console.error(err);
+    setStatus("Failed to prepare Excel export");
+    return;
+  }
+
   if (!rows.length) {
     alert("No matching records to export.");
+    setStatus("No matching records to export");
     return;
   }
 
@@ -501,8 +565,9 @@ async function downloadExcel() {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, "links");
 
-  const stamp = new Date().toISOString().slice(0, 10);
+  const stamp = archiveDateFromPath(state.selectedDataPath) || new Date().toISOString().slice(0, 10);
   XLSX.writeFile(wb, `open-library-${stamp}.xlsx`);
+  setStatus("Excel downloaded");
 }
 
 // ============================================================================
@@ -1013,6 +1078,7 @@ async function loadDataset() {
   const selectedEntry = getSelectedArchiveEntry();
   const isV2Delta = selectedEntry?.format === "v2-delta";
   const url = rawUrl(relPath);
+  const loadSeq = ++state.loadSeq;
 
   if (!url && !isV2Delta) {
     setStatus("Invalid repo configuration");
@@ -1031,6 +1097,7 @@ async function loadDataset() {
   state.records = [];
   state.rawRecords = [];
   state.filteredIdx = [];
+  renderTable();
   setStatus("Loading…");
 
   try {
@@ -1059,22 +1126,11 @@ async function loadDataset() {
         }),
       ]);
 
-      const parseJsonl = (text) => text
-        .split("\n")
-        .map((line) => line.trim())
-        .filter(Boolean)
-        .map((line) => {
-          try {
-            return JSON.parse(line);
-          } catch {
-            return null;
-          }
-        })
-        .filter((x) => x && typeof x === "object");
+      if (loadSeq !== state.loadSeq) return;
 
-      const baseRecords = parseJsonl(baseText);
-      const addedRecords = parseJsonl(addedText);
-      const removedRecords = parseJsonl(removedText);
+      const baseRecords = parseJsonlText(baseText);
+      const addedRecords = parseJsonlText(addedText);
+      const removedRecords = parseJsonlText(removedText);
 
       const keyOf = (rec) => {
         const source = String(rec?.source || "").trim();
@@ -1096,6 +1152,8 @@ async function loadDataset() {
         if (k) byKey.set(k, rec);
       }
 
+      if (loadSeq !== state.loadSeq) return;
+
       state.rawRecords = Array.from(byKey.values());
       state.records = state.rawRecords.map((r) => normalizeRecord(r));
 
@@ -1116,12 +1174,19 @@ async function loadDataset() {
     const reader = res.body.getReader();
     const decoder = new TextDecoder("utf-8");
 
+    const nextRawRecords = [];
+    const nextRecords = [];
     let bytesRead = 0;
     let buf = "";
     let lines = 0;
     let parseErrors = 0;
 
     while (true) {
+      if (loadSeq !== state.loadSeq) {
+        try { await reader.cancel(); } catch { /* ignore */ }
+        return;
+      }
+
       const { value, done } = await reader.read();
       if (done) break;
       bytesRead += value?.byteLength || 0;
@@ -1135,8 +1200,8 @@ async function loadDataset() {
 
         try {
           const obj = JSON.parse(line);
-          state.rawRecords.push(obj);
-          state.records.push(normalizeRecord(obj));
+          nextRawRecords.push(obj);
+          nextRecords.push(normalizeRecord(obj));
         } catch {
           parseErrors++;
         }
@@ -1144,25 +1209,31 @@ async function loadDataset() {
 
         if (lines % 1000 === 0) {
           const pct = totalBytes ? Math.round((100 * bytesRead) / totalBytes) : 0;
-          setStatus(totalBytes
-            ? `Loading… ${pct}% (${state.records.length.toLocaleString()} records)`
-            : `Loading… (${state.records.length.toLocaleString()} records)`);
+          if (loadSeq === state.loadSeq) {
+            setStatus(totalBytes
+              ? `Loading… ${pct}% (${nextRecords.length.toLocaleString()} records)`
+              : `Loading… (${nextRecords.length.toLocaleString()} records)`);
+          }
           await new Promise((r) => setTimeout(r, 0));
         }
       }
     }
 
-    // Process remaining buffer
-    const tail = decoder.decode().trim();
+    const tail = `${buf}${decoder.decode()}`.trim();
     if (tail) {
       try {
         const obj = JSON.parse(tail);
-        state.rawRecords.push(obj);
-        state.records.push(normalizeRecord(obj));
+        nextRawRecords.push(obj);
+        nextRecords.push(normalizeRecord(obj));
       } catch {
         parseErrors++;
       }
     }
+
+    if (loadSeq !== state.loadSeq) return;
+
+    state.rawRecords = nextRawRecords;
+    state.records = nextRecords;
 
     rebuildFilters();
     applyFiltersAndSort();
@@ -1177,12 +1248,15 @@ async function loadDataset() {
       els.runInfo.textContent = "";
     }
   } catch (err) {
+    if (loadSeq !== state.loadSeq) return;
     console.error(err);
     setStatus("Failed to load JSONL (check repo/branch/path)");
     els.tbody.replaceChildren();
     els.resultInfo.textContent = "No data loaded";
   } finally {
-    state.loading = false;
+    if (loadSeq === state.loadSeq) {
+      state.loading = false;
+    }
   }
 }
 

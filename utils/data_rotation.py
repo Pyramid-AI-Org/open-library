@@ -39,6 +39,12 @@ def _read_json(path: Path) -> dict[str, Any]:
     return {}
 
 
+def _latest_summary_run_date(data_root: Path) -> str:
+    summary = _read_json(data_root / "latest" / "summary.json")
+    raw = str(summary.get("run_date_utc") or "").strip()
+    return raw[:10] if raw else ""
+
+
 def _write_json(path: Path, obj: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -298,6 +304,10 @@ def archive_previous_latest(
 
     if run_date is None:
         run_date = utc_date_yyyymmdd(utc_now())
+
+    latest_run_date = _latest_summary_run_date(data_root)
+    if latest_run_date == run_date:
+        return RotationResult(archived=False, archived_path=None)
 
     yyyy, mm, dd = run_date.split("-")
     month_dir = _month_dir(data_root, yyyy, mm)
