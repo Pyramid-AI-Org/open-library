@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 27821,
-    "records_total": 27821,
+    "lines_total": 31309,
+    "records_total": 31309,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
       "epd.publications_other_reports": 3,
@@ -28,6 +28,7 @@
       "cedd_standards_spec_handbooks_cost": 198,
       "cedd_eacsb_handbook": 1,
       "cedd_technical_circulars": 21,
+      "devb_press_releases": 3535,
       "devb_publications": 1598,
       "devb_general_circulars": 2,
       "devb_planning_and_lands_technical_circulars": 4,
@@ -74,7 +75,7 @@
       "occupational_safety_part_b": 16,
       "info_notes": 10,
       "joint_practice_notes": 16,
-      "laco_circular_memorandum": 94,
+      "laco_circular_memorandum": 47,
       "lao_practice_notes": 95,
       "smo_practice_notes": 4,
       "standards_guidelines": 12,
@@ -3063,6 +3064,134 @@
         "min": "2026-04-11T04:21:21.162860+00:00",
         "max": "2026-04-11T04:21:21.162860+00:00",
         "count": 21
+      }
+    },
+    "devb_press_releases": {
+      "records": 3535,
+      "unique_urls": 3535,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 0,
+        "warnings": 0,
+        "by_kind": {}
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 3535
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "locale"
+          ],
+          "count": 3535
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2...",
+            "count": 20
+          },
+          {
+            "value": "https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2...",
+            "count": 20
+          },
+          {
+            "value": "https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2...",
+            "count": 20
+          },
+          {
+            "value": "https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2...",
+            "count": 20
+          },
+          {
+            "value": "https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2...",
+            "count": 20
+          }
+        ],
+        "locale": [
+          {
+            "value": "tc",
+            "count": 1906
+          },
+          {
+            "value": "en",
+            "count": 1629
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "discovered_from",
+          3535
+        ],
+        [
+          "locale",
+          3535
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.devb.gov.hk",
+          3535
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".html",
+          3535
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-04-11T12:26:08.462595+00:00",
+        "max": "2026-04-11T12:26:08.462595+00:00",
+        "count": 3535
       }
     },
     "devb_publications": {
@@ -9010,9 +9139,9 @@
       }
     },
     "laco_circular_memorandum": {
-      "records": 94,
+      "records": 47,
       "unique_urls": 47,
-      "duplicate_url_hits": 47,
+      "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 0,
         "warnings": 0,
@@ -9036,7 +9165,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 47,
+          "null": 27,
           "invalid": 0
         },
         "source": {
@@ -9061,7 +9190,7 @@
             "source_id",
             "url"
           ],
-          "count": 94
+          "count": 47
         }
       ],
       "meta_schema_signatures": [
@@ -9071,7 +9200,7 @@
             "ref_no",
             "section_name"
           ],
-          "count": 94
+          "count": 47
         }
       ],
       "meta_schema_variants": 1,
@@ -9080,39 +9209,35 @@
         "discovered_from": [
           {
             "value": "https://www.landsd.gov.hk/en/resources/practice-notes/laco.html",
-            "count": 94
+            "count": 47
           }
         ],
         "ref_no": [
           {
-            "value": "LACO CM No. 21",
-            "count": 3
-          },
-          {
             "value": "LACO CM No. 12",
-            "count": 2
+            "count": 1
           },
           {
             "value": "LACO CM No. 18",
-            "count": 2
+            "count": 1
+          },
+          {
+            "value": "LACO CM No. 21",
+            "count": 1
           },
           {
             "value": "LACO CM No. 22",
-            "count": 2
+            "count": 1
           },
           {
             "value": "LACO CM No. 23",
-            "count": 2
+            "count": 1
           }
         ],
         "section_name": [
           {
             "value": "List by Legal Advisory and Conveyancing Office Circular Memoranda Number",
-            "count": 47
-          },
-          {
-            "value": "Lands Department Consent Scheme",
-            "count": 18
+            "count": 27
           },
           {
             "value": "Re-organisation and relocation of Legal Advisory and Conveyancing Offices",
@@ -9121,43 +9246,39 @@
           {
             "value": "Others",
             "count": 8
-          },
-          {
-            "value": "Approval of Deed of Mutual Covenant",
-            "count": 7
           }
         ]
       },
       "top_meta_keys": [
         [
           "discovered_from",
-          94
+          47
         ],
         [
           "ref_no",
-          94
+          47
         ],
         [
           "section_name",
-          94
+          47
         ]
       ],
       "top_hosts": [
         [
           "www.landsd.gov.hk",
-          94
+          47
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          94
+          47
         ]
       ],
       "discovered_at_range": {
         "min": "2026-04-11T04:21:21.162860+00:00",
         "max": "2026-04-11T04:21:21.162860+00:00",
-        "count": 94
+        "count": 47
       }
     },
     "lao_practice_notes": {
@@ -12155,9 +12276,9 @@
     "record_size_bytes": {
       "min": 318,
       "max": 1398,
-      "mean": 788.8492146220481,
-      "p50": 898,
-      "p95": 1035.0
+      "mean": 750.0338241400236,
+      "p50": 881,
+      "p95": 1028.0
     },
     "issue_counts": {
       "by_severity": {
@@ -12464,7 +12585,7 @@
         "kind": "meta_value_outlier",
         "source": "technical_circulars_and_practice_notes",
         "field": "meta.discovered_from",
-        "line": 20397,
+        "line": 23932,
         "detail": "rare value in source: https://www.dsd.gov.hk/EN/Technical_Documents/DSD_Technical_Circulars_and_Practice_Notes/index.html"
       },
       {
@@ -12472,7 +12593,7 @@
         "kind": "meta_value_outlier",
         "source": "emsd.lifts_and_escalators_circulars",
         "field": "meta.category",
-        "line": 20785,
+        "line": 24320,
         "detail": "rare value in source: Lift [Overload]"
       },
       {
@@ -12480,7 +12601,7 @@
         "kind": "meta_type_outlier",
         "source": "emsd.lifts_and_escalators_circulars",
         "field": "meta.circular_no",
-        "line": 20785,
+        "line": 24320,
         "detail": "value type null differs from dominant type str in source"
       },
       {
@@ -12488,7 +12609,7 @@
         "kind": "meta_value_outlier",
         "source": "emsd.lifts_and_escalators_circulars",
         "field": "meta.category",
-        "line": 20801,
+        "line": 24336,
         "detail": "rare value in source: Lift [Overload]"
       },
       {
@@ -12496,7 +12617,7 @@
         "kind": "meta_value_outlier",
         "source": "emsd.lifts_and_escalators_circulars",
         "field": "meta.category",
-        "line": 20803,
+        "line": 24338,
         "detail": "rare value in source: Escalator and Lift [Others]"
       },
       {
@@ -12504,7 +12625,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_technical_memorandum",
         "field": "meta.stream",
-        "line": 21781,
+        "line": 25316,
         "detail": "rare value in source: Water"
       },
       {
@@ -12512,7 +12633,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_study_report",
         "field": "meta.discovered_from",
-        "line": 21826,
+        "line": 25361,
         "detail": "rare value in source: https://www.epd.gov.hk/epd/english/environmentinhk/air/studyrpts/ferries_ULSD.html"
       },
       {
@@ -12520,7 +12641,7 @@
         "kind": "meta_type_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.code",
-        "line": 21928,
+        "line": 25463,
         "detail": "value type null differs from dominant type str in source"
       },
       {
@@ -12528,7 +12649,7 @@
         "kind": "meta_type_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.code",
-        "line": 21930,
+        "line": 25465,
         "detail": "value type null differs from dominant type str in source"
       },
       {
@@ -12536,7 +12657,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.programme_area",
-        "line": 22025,
+        "line": 25560,
         "detail": "rare value in source: 其他"
       },
       {
@@ -12544,7 +12665,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.programme_area",
-        "line": 22071,
+        "line": 25606,
         "detail": "rare value in source: 其他"
       },
       {
@@ -12552,7 +12673,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.programme_area",
-        "line": 22072,
+        "line": 25607,
         "detail": "rare value in source: 其他"
       },
       {
@@ -12560,7 +12681,7 @@
         "kind": "missing_required_field",
         "source": "herbarium",
         "field": "meta.discovered_from",
-        "line": 22834,
+        "line": 26369,
         "detail": "missing required field"
       },
       {
@@ -12568,7 +12689,7 @@
         "kind": "meta_value_outlier",
         "source": "herbarium",
         "field": "meta.fruit_period",
-        "line": 22834,
+        "line": 26369,
         "detail": "rare value in source: 1,2,3,4,5,6,7,8,9,10,11,12"
       }
     ]

@@ -1,33 +1,34 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 27821 (parse_errors=0)
+Total records: 31309 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.7%)
 - archsd_practices_and_guidelines: 53 (0.2%)
-- archsd_technical_documents: 131 (0.5%)
+- archsd_technical_documents: 131 (0.4%)
 - automatic_meter_reading: 10 (0.0%)
 - cedd_ceo_publications: 8 (0.0%)
 - cedd_eacsb_handbook: 1 (0.0%)
-- cedd_geo_publications: 1235 (4.4%)
-- cedd_standards_spec_handbooks_cost: 198 (0.7%)
+- cedd_geo_publications: 1235 (3.9%)
+- cedd_standards_spec_handbooks_cost: 198 (0.6%)
 - cedd_technical_circulars: 21 (0.1%)
 - central_data_bank: 18 (0.1%)
 - checklist: 8 (0.0%)
-- circular_letters: 104 (0.4%)
+- circular_letters: 104 (0.3%)
 - code_of_practice: 1 (0.0%)
 - codes_design_manuals_and_guidelines: 50 (0.2%)
-- cpd_for_licensed_plumbers: 14 (0.1%)
+- cpd_for_licensed_plumbers: 14 (0.0%)
 - devb_general_circulars: 2 (0.0%)
 - devb_planning_and_lands_technical_circulars: 4 (0.0%)
-- devb_publications: 1598 (5.7%)
+- devb_press_releases: 3535 (11.3%)
+- devb_publications: 1598 (5.1%)
 - electric_safety_cop: 22 (0.1%)
 - electric_safety_publications_cop: 4 (0.0%)
 - electric_safety_publications_general: 47 (0.2%)
 - electric_safety_publications_guidelines: 40 (0.1%)
 - emsd.gas_approval_schemes: 20 (0.1%)
 - emsd.gas_publications: 94 (0.3%)
-- emsd.gas_related_information_for_competent_person: 14 (0.1%)
-- emsd.gas_safety_tips: 71 (0.3%)
+- emsd.gas_related_information_for_competent_person: 14 (0.0%)
+- emsd.gas_safety_tips: 71 (0.2%)
 - emsd.gas_statutory_advisory_bodies: 2 (0.0%)
 - emsd.lifts_and_escalators_circulars: 148 (0.5%)
 - emsd.lifts_and_escalators_publications: 59 (0.2%)
@@ -40,33 +41,33 @@ Records by source:
 - emsd.regulating_railway_safety: 7 (0.0%)
 - enhancement_of_control_of_inside_services: 11 (0.0%)
 - enhancing_plumbing_works_control: 3 (0.0%)
-- epd.air: 273 (1.0%)
-- epd.eia_planning: 293 (1.1%)
+- epd.air: 273 (0.9%)
+- epd.eia_planning: 293 (0.9%)
 - epd.noise: 110 (0.4%)
 - epd.policy_documents: 13 (0.0%)
-- epd.publications_guidance_documents: 311 (1.1%)
+- epd.publications_guidance_documents: 311 (1.0%)
 - epd.publications_other_reports: 3 (0.0%)
 - epd.publications_propeccpns: 16 (0.1%)
 - epd.publications_study_report: 41 (0.1%)
 - epd.publications_technical_memorandum: 20 (0.1%)
-- epd.waste: 595 (2.1%)
-- epd.water: 246 (0.9%)
-- faq: 44 (0.2%)
+- epd.waste: 595 (1.9%)
+- epd.water: 246 (0.8%)
+- faq: 44 (0.1%)
 - flushing_water: 1 (0.0%)
 - free_publications: 11 (0.0%)
 - fresh_water_management_system: 17 (0.1%)
 - good_practice_guide: 1 (0.0%)
 - guidelines: 5 (0.0%)
 - guidelines_reports_drawings_specifications: 8 (0.0%)
-- herbarium: 3348 (12.0%)
-- hyd_technical_documents: 351 (1.3%)
+- herbarium: 3348 (10.7%)
+- hyd_technical_documents: 351 (1.1%)
 - info_notes: 10 (0.0%)
 - information_for_licensed_plumbers: 4 (0.0%)
 - joint_practice_notes: 16 (0.1%)
-- laco_circular_memorandum: 94 (0.3%)
+- laco_circular_memorandum: 47 (0.2%)
 - lao_practice_notes: 95 (0.3%)
 - licensed_plumbers: 8 (0.0%)
-- maintenance_of_internal_plumbing: 15 (0.1%)
+- maintenance_of_internal_plumbing: 15 (0.0%)
 - mechanical_electrical_ss: 125 (0.4%)
 - miscellaneous: 6 (0.0%)
 - notices: 8 (0.0%)
@@ -78,27 +79,27 @@ Records by source:
 - occupational_safety_part_a: 34 (0.1%)
 - occupational_safety_part_b: 16 (0.1%)
 - occupational_safety_part_c: 31 (0.1%)
-- occupational_safety_part_d: 70 (0.3%)
+- occupational_safety_part_d: 70 (0.2%)
 - occupational_safety_part_g: 65 (0.2%)
 - plumbing_requirements: 5 (0.0%)
 - practice_notes: 11 (0.0%)
-- practice_notes_and_circular_letters: 458 (1.6%)
+- practice_notes_and_circular_letters: 458 (1.5%)
 - pressure_equipment: 16 (0.1%)
 - qualified_persons: 4 (0.0%)
-- scheduled_areas: 346 (1.2%)
+- scheduled_areas: 346 (1.1%)
 - second_parking_demand: 11 (0.0%)
 - smo_practice_notes: 4 (0.0%)
 - standards_guidelines: 12 (0.0%)
 - technical_circulars_and_practice_notes: 55 (0.2%)
 - technical_guidance: 3 (0.0%)
 - technical_manuals: 17 (0.1%)
-- technical_papers_published_by_dsd: 104 (0.4%)
-- tel_directory: 16020 (57.6%)
+- technical_papers_published_by_dsd: 104 (0.3%)
+- tel_directory: 16020 (51.2%)
 - third_comprehensive_study: 11 (0.0%)
 - transport_planning: 11 (0.0%)
 - water_efficiency_labelling_scheme: 31 (0.1%)
 - water_safety_plan_for_buildings: 11 (0.0%)
-- water_safety_plan_subsidy_scheme: 14 (0.1%)
+- water_safety_plan_subsidy_scheme: 14 (0.0%)
 - works_of_minor_nature: 1 (0.0%)
 
 Per-source schema and validation summary:
@@ -781,6 +782,34 @@ Per-source schema and validation summary:
   - discovered_from: 21
 - top scalar meta values (sample):
   - discovered_from: https://www.cedd.gov.hk/eng/publications/technical-circulars/index.html (21)
+
+[devb_press_releases]
+- records: 3535 | unique_urls: 3535 | dup_url_hits: 0
+- issues: errors=0 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=0 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=0 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-04-11T12:26:08.462595+00:00 .. 2026-04-11T12:26:08.462595+00:00
+- top url hosts:
+  - www.devb.gov.hk: 3535
+- top url extensions:
+  - .html: 3535
+- top-level key signatures (urls.jsonl record format):
+  - count=3535 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=3535 meta_keys=['discovered_from', 'locale']
+- meta schema variants: 1
+- most common meta keys:
+  - discovered_from: 3535
+  - locale: 3535
+- top scalar meta values (sample):
+  - discovered_from: https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2... (20), https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2... (20), https://www.devb.gov.hk/en/publications_and_press_releases/press/index_year_2... (20)
+  - locale: tc (1906), en (1629)
 
 [devb_publications]
 - records: 1598 | unique_urls: 1598 | dup_url_hits: 0
@@ -2076,34 +2105,34 @@ Per-source schema and validation summary:
   - discovered_from: https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html (8), https://www.pland.gov.hk/pland_en/tech_doc/jpn/index.html (8)
 
 [laco_circular_memorandum]
-- records: 94 | unique_urls: 47 | dup_url_hits: 47
+- records: 47 | unique_urls: 47 | dup_url_hits: 0
 - issues: errors=0 warnings=0
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=47 invalid=0
+  - publish_date: missing=0 null=27 invalid=0
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
 - discovered_at_utc: 2026-04-11T04:21:21.162860+00:00 .. 2026-04-11T04:21:21.162860+00:00
 - top url hosts:
-  - www.landsd.gov.hk: 94
+  - www.landsd.gov.hk: 47
 - top url extensions:
-  - .pdf: 94
+  - .pdf: 47
 - top-level key signatures (urls.jsonl record format):
-  - count=94 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=47 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=94 meta_keys=['discovered_from', 'ref_no', 'section_name']
+  - count=47 meta_keys=['discovered_from', 'ref_no', 'section_name']
 - meta schema variants: 1
 - most common meta keys:
-  - discovered_from: 94
-  - ref_no: 94
-  - section_name: 94
+  - discovered_from: 47
+  - ref_no: 47
+  - section_name: 47
 - top scalar meta values (sample):
-  - discovered_from: https://www.landsd.gov.hk/en/resources/practice-notes/laco.html (94)
-  - ref_no: LACO CM No. 21 (3), LACO CM No. 12 (2), LACO CM No. 18 (2)
-  - section_name: List by Legal Advisory and Conveyancing Office Circular Memoranda Number (47), Lands Department Consent Scheme (18), Re-organisation and relocation of Legal Advisory and Conveyancing Offices (12)
+  - discovered_from: https://www.landsd.gov.hk/en/resources/practice-notes/laco.html (47)
+  - ref_no: LACO CM No. 12 (1), LACO CM No. 18 (1), LACO CM No. 21 (1)
+  - section_name: List by Legal Advisory and Conveyancing Office Circular Memoranda Number (27), Re-organisation and relocation of Legal Advisory and Conveyancing Offices (12), Others (8)
 
 [lao_practice_notes]
 - records: 95 | unique_urls: 95 | dup_url_hits: 0
@@ -2837,7 +2866,7 @@ Per-source schema and validation summary:
   - discovered_from: https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbin... (1)
 
 General stats:
-- record JSON size (bytes): min=318 p50=898 mean=788.8 p95=1035.0 max=1398
+- record JSON size (bytes): min=318 p50=881 mean=750.0 p95=1028.0 max=1398
 
 Unusual records / issues:
 - error:missing_required_field: 3348
@@ -2881,19 +2910,19 @@ Examples (first 50):
 - line 2537 [warning] cedd_standards_spec_handbooks_cost meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/construction/index.html
 - line 2538 [warning] cedd_standards_spec_handbooks_cost meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/construction/index.html
 - line 2551 [warning] cedd_standards_spec_handbooks_cost meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/cedd-library/index.html
-- line 20397 [warning] technical_circulars_and_practice_notes meta.discovered_from meta_value_outlier -> rare value in source: https://www.dsd.gov.hk/EN/Technical_Documents/DSD_Technical_Circulars_and_Practice_Notes/index.html
-- line 20785 [warning] emsd.lifts_and_escalators_circulars meta.category meta_value_outlier -> rare value in source: Lift [Overload]
-- line 20785 [warning] emsd.lifts_and_escalators_circulars meta.circular_no meta_type_outlier -> value type null differs from dominant type str in source
-- line 20801 [warning] emsd.lifts_and_escalators_circulars meta.category meta_value_outlier -> rare value in source: Lift [Overload]
-- line 20803 [warning] emsd.lifts_and_escalators_circulars meta.category meta_value_outlier -> rare value in source: Escalator and Lift [Others]
-- line 21781 [warning] epd.publications_technical_memorandum meta.stream meta_value_outlier -> rare value in source: Water
-- line 21826 [warning] epd.publications_study_report meta.discovered_from meta_value_outlier -> rare value in source: https://www.epd.gov.hk/epd/english/environmentinhk/air/studyrpts/ferries_ULSD.html
-- line 21928 [warning] epd.publications_guidance_documents meta.code meta_type_outlier -> value type null differs from dominant type str in source
-- line 21930 [warning] epd.publications_guidance_documents meta.code meta_type_outlier -> value type null differs from dominant type str in source
-- line 22025 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 其他
-- line 22071 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 其他
-- line 22072 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 其他
-- line 22834 [error] herbarium meta.discovered_from missing_required_field -> missing required field
-- line 22834 [warning] herbarium meta.fruit_period meta_value_outlier -> rare value in source: 1,2,3,4,5,6,7,8,9,10,11,12
+- line 23932 [warning] technical_circulars_and_practice_notes meta.discovered_from meta_value_outlier -> rare value in source: https://www.dsd.gov.hk/EN/Technical_Documents/DSD_Technical_Circulars_and_Practice_Notes/index.html
+- line 24320 [warning] emsd.lifts_and_escalators_circulars meta.category meta_value_outlier -> rare value in source: Lift [Overload]
+- line 24320 [warning] emsd.lifts_and_escalators_circulars meta.circular_no meta_type_outlier -> value type null differs from dominant type str in source
+- line 24336 [warning] emsd.lifts_and_escalators_circulars meta.category meta_value_outlier -> rare value in source: Lift [Overload]
+- line 24338 [warning] emsd.lifts_and_escalators_circulars meta.category meta_value_outlier -> rare value in source: Escalator and Lift [Others]
+- line 25316 [warning] epd.publications_technical_memorandum meta.stream meta_value_outlier -> rare value in source: Water
+- line 25361 [warning] epd.publications_study_report meta.discovered_from meta_value_outlier -> rare value in source: https://www.epd.gov.hk/epd/english/environmentinhk/air/studyrpts/ferries_ULSD.html
+- line 25463 [warning] epd.publications_guidance_documents meta.code meta_type_outlier -> value type null differs from dominant type str in source
+- line 25465 [warning] epd.publications_guidance_documents meta.code meta_type_outlier -> value type null differs from dominant type str in source
+- line 25560 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 其他
+- line 25606 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 其他
+- line 25607 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 其他
+- line 26369 [error] herbarium meta.discovered_from missing_required_field -> missing required field
+- line 26369 [warning] herbarium meta.fruit_period meta_value_outlier -> rare value in source: 1,2,3,4,5,6,7,8,9,10,11,12
 
 Wrote JSON report to: data-worktree/data/latest/stats.json

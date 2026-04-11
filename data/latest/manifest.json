@@ -1,18 +1,23 @@
 {
-  "generated_at_utc": "2026-04-11T06:35:22.998615+00:00",
+  "generated_at_utc": "2026-04-11T12:34:34.781835+00:00",
   "outputs": [
     {
-      "bytes": 22159359,
+      "bytes": 23780847,
       "path": "data-worktree/data/latest/urls.jsonl",
-      "rows": 27821,
-      "sha256": "297b060310fab0372cc711008abe7043adeb217795e1df7ecbff10f411a3d339"
+      "rows": 31309,
+      "sha256": "42026af70c301ac279528ca6964eab1a82f0863f7286019180c5567761f2cb2d"
     },
     {
-      "bytes": 150,
+      "bytes": 3813,
       "path": "data-worktree/data/latest/summary.json",
-      "sha256": "9dd78fd1fcfa16099a47eac3e0ba36c75fb7fcd3060be002da047d714a778a2c"
+      "sha256": "69e690fcb20f6b065b0d7f0b977e026b944e7decc7e1ac94709b937df212fd9a"
+    },
+    {
+      "bytes": 194,
+      "path": "data-worktree/data/latest/crawler_state.json",
+      "sha256": "7d9a3456bfff38c9a751f5d91c9e320189540947867a874a3f025c0f9b8579c5"
     }
   ],
-  "run_date_utc": "2026-04-11T04:21:21.162860+00:00",
+  "run_date_utc": "2026-04-11",
   "schema_version": 2
 }
