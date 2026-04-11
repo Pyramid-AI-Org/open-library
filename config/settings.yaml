@@ -142,20 +142,20 @@ crawlers:
         max_pages: 2000
         max_out_links_per_page: 500
 
-      devb_construction_site_safety_manual:
-        # DevB Construction Site Safety Manual crawler.
-        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/construction_site_safety_manual/index.html"
-        content_element_id: "content"
+      # devb_construction_site_safety_manual:
+      #   # DevB Construction Site Safety Manual crawler.
+      #   page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/construction_site_safety_manual/index.html"
+      #   content_element_id: "content"
 
-      devb_standard_consultancy_documents:
-        # DevB Standard Consultancy Documents crawler.
-        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/standard_consultancy_documents/index.html"
-        content_element_id: "content"
+      # devb_standard_consultancy_documents:
+      #   # DevB Standard Consultancy Documents crawler.
+      #   page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/standard_consultancy_documents/index.html"
+      #   content_element_id: "content"
 
-      devb_standard_contract_documents:
-        # DevB Standard Contract Documents crawler.
-        page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/standard_contract_documents/index.html"
-        content_element_id: "content"
+      # devb_standard_contract_documents:
+      #   # DevB Standard Contract Documents crawler.
+      #   page_url: "https://www.devb.gov.hk/en/publications_and_press_releases/publications/standard_contract_documents/index.html"
+      #   content_element_id: "content"
 
   # ============================================================================
   # BD - Building Department
@@ -195,7 +195,7 @@ crawlers:
           - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBConstructSys.html"
           - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBFSImprovementWorks.html"
 
-      bd_basic_pages:
+      basic_pages:
         # BD Basic Pages crawler.
         targets:
           - name: "modular_integrated_construction"
@@ -847,10 +847,10 @@ crawlers:
         mainlaying_subpage: "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/mainlaying-practice/index.html"
         exclude_subpages: []
 
-        circular_letters:
-          # WSD Circular Letters crawler.
-          page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index.html"
-          pdf_scope_prefix: "https://www.wsd.gov.hk/"
+      circular_letters:
+        # WSD Circular Letters crawler.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index.html"
+        pdf_scope_prefix: "https://www.wsd.gov.hk/"
 
   # ============================================================================
   # EPD - Environmental Protection Department
