@@ -28,10 +28,6 @@ _DEFAULT_MAX_DEPTH = 6
 _DEFAULT_MAX_PAGES = 1200
 _DEFAULT_MAX_OUT_LINKS_PER_PAGE = 1200
 _DEFAULT_ALLOWED_DOC_EXTENSIONS = {".pdf", ".doc", ".docx"}
-_GENERIC_TITLE_SUFFIXES = (
-    "| environmental protection department",
-    "- environmental protection department",
-)
 _LOW_SIGNAL_LINK_TEXTS = {
     "next",
     "previous",
@@ -340,17 +336,11 @@ def _choose_page_name(*, page_title: str, link_text: str, current_url: str) -> s
     link_name = clean_text(link_text)
     fallback = infer_name_from_link(link_text, current_url)
 
-    if title and link_name:
-        # EPD pages often reuse a generic title for all child pages.
-        if _looks_generic_title(title) and _is_meaningful_link_text(link_name):
-            return link_name
+    # Prefer anchor text globally when it is present and not purely navigational.
+    if _is_meaningful_link_text(link_name):
+        return link_name
 
-    return title or link_name or fallback
-
-
-def _looks_generic_title(title: str) -> bool:
-    lower = title.lower()
-    return any(lower.endswith(suffix) for suffix in _GENERIC_TITLE_SUFFIXES)
+    return title or fallback
 
 
 def _is_meaningful_link_text(text: str) -> bool:
