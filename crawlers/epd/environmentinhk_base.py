@@ -28,6 +28,24 @@ _DEFAULT_MAX_DEPTH = 6
 _DEFAULT_MAX_PAGES = 1200
 _DEFAULT_MAX_OUT_LINKS_PER_PAGE = 1200
 _DEFAULT_ALLOWED_DOC_EXTENSIONS = {".pdf", ".doc", ".docx"}
+_GENERIC_TITLE_SUFFIXES = (
+    "| environmental protection department",
+    "- environmental protection department",
+)
+_LOW_SIGNAL_LINK_TEXTS = {
+    "next",
+    "previous",
+    "prev",
+    "back",
+    "top",
+    "more",
+    "details",
+    "click here",
+    "here",
+    "english",
+    "tc",
+    "chi",
+}
 
 
 @dataclass(frozen=True)
@@ -172,10 +190,10 @@ class EnvironmentInHKBaseCrawler:
             visited_pages.add(current_url)
 
             page_title = _extract_page_title(html)
-            page_name = (
-                page_title
-                or clean_text(item.link_text)
-                or infer_name_from_link(item.link_text, current_url)
+            page_name = _choose_page_name(
+                page_title=page_title,
+                link_text=item.link_text,
+                current_url=current_url,
             )
             _append_record(
                 out=out,
@@ -315,6 +333,36 @@ def _extract_page_title(html: str) -> str:
     parser = _TitleParser()
     parser.feed(html)
     return parser.title()
+
+
+def _choose_page_name(*, page_title: str, link_text: str, current_url: str) -> str | None:
+    title = clean_text(page_title)
+    link_name = clean_text(link_text)
+    fallback = infer_name_from_link(link_text, current_url)
+
+    if title and link_name:
+        # EPD pages often reuse a generic title for all child pages.
+        if _looks_generic_title(title) and _is_meaningful_link_text(link_name):
+            return link_name
+
+    return title or link_name or fallback
+
+
+def _looks_generic_title(title: str) -> bool:
+    lower = title.lower()
+    return any(lower.endswith(suffix) for suffix in _GENERIC_TITLE_SUFFIXES)
+
+
+def _is_meaningful_link_text(text: str) -> bool:
+    lower = clean_text(text).lower()
+    if not lower:
+        return False
+    if lower in _LOW_SIGNAL_LINK_TEXTS:
+        return False
+    # Single-character labels (e.g. "1") are usually navigation-only.
+    if len(lower) <= 1:
+        return False
+    return True
 
 
 def _sleep_with_jitter(base_delay: float, jitter: float) -> None:
