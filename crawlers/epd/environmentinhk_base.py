@@ -345,9 +345,27 @@ def _fetch_html(
         max_retries=max_retries,
         backoff_base_seconds=backoff_base,
         backoff_jitter_seconds=backoff_jitter,
+        response_hook=_apply_charset_fix,
     )
-    resp.encoding = "utf-8"
     return resp.text or ""
+
+
+def _apply_charset_fix(resp: requests.Response) -> None:
+    content_type = (resp.headers.get("Content-Type") or "").lower()
+    is_html = (
+        ("text/html" in content_type)
+        or ("application/xhtml" in content_type)
+        or not content_type
+    )
+    if not is_html:
+        return
+
+    encoding = (resp.encoding or "").strip().lower()
+    if encoding and encoding not in {"iso-8859-1", "latin-1"}:
+        return
+
+    guessed = (getattr(resp, "apparent_encoding", None) or "").strip()
+    resp.encoding = guessed or "utf-8"
 
 
 def _url_exists(
@@ -407,13 +425,19 @@ def _append_record(
 ) -> None:
     if url in seen_urls:
         return
+
+    locale = _infer_locale_from_url(url) or _infer_locale_from_url(discovered_from)
+    meta = {"discovered_from": discovered_from}
+    if locale:
+        meta["locale"] = locale
+
     out.append(
         ctx.make_record(
             url=url,
             name=name,
             discovered_at_utc=ctx.run_date_utc,
             source=source,
-            meta={"discovered_from": discovered_from},
+            meta=meta,
         )
     )
     seen_urls.add(url)
@@ -472,6 +496,15 @@ def _rewrite_english_to_tc(url: str) -> str | None:
     if token not in url:
         return None
     return url.replace(token, "/epd/tc_chi/", 1)
+
+
+def _infer_locale_from_url(url: str) -> str | None:
+    lower = url.lower()
+    if "/epd/english/" in lower:
+        return "en"
+    if "/epd/tc_chi/" in lower:
+        return "tc"
+    return None
 
 
 def _canonicalize(url: str) -> str | None:
