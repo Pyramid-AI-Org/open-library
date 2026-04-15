@@ -1,45 +1,55 @@
 {
-  "generated_at_utc": "2026-04-14T07:43:58.446563+00:00",
+  "generated_at_utc": "2026-04-15T07:41:57.898507+00:00",
   "archives": [
+    {
+      "date": "2026-04-15",
+      "path": "archive_v2/2026/04/days/15/meta.json",
+      "bytes": 30549863,
+      "format": "v2-delta",
+      "base_path": "archive_v2/2026/04/base.jsonl",
+      "added_path": "archive_v2/2026/04/days/15/added.jsonl",
+      "removed_path": "archive_v2/2026/04/days/15/removed.jsonl",
+      "base_version": 2
+    },
     {
       "date": "2026-04-14",
       "path": "archive_v2/2026/04/days/14/meta.json",
-      "bytes": 30586755,
+      "bytes": 30531767,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/04/base.jsonl",
       "added_path": "archive_v2/2026/04/days/14/added.jsonl",
       "removed_path": "archive_v2/2026/04/days/14/removed.jsonl",
-      "base_version": 1
+      "base_version": 2
     },
     {
       "date": "2026-04-13",
       "path": "archive_v2/2026/04/days/13/meta.json",
-      "bytes": 30606945,
+      "bytes": 30564594,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/04/base.jsonl",
       "added_path": "archive_v2/2026/04/days/13/added.jsonl",
       "removed_path": "archive_v2/2026/04/days/13/removed.jsonl",
-      "base_version": 1
+      "base_version": 2
     },
     {
       "date": "2026-04-12",
       "path": "archive_v2/2026/04/days/12/meta.json",
-      "bytes": 30594876,
+      "bytes": 30598924,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/04/base.jsonl",
       "added_path": "archive_v2/2026/04/days/12/added.jsonl",
       "removed_path": "archive_v2/2026/04/days/12/removed.jsonl",
-      "base_version": 1
+      "base_version": 2
     },
     {
       "date": "2026-04-11",
       "path": "archive_v2/2026/04/days/11/meta.json",
-      "bytes": 1645536,
+      "bytes": 9658735,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/04/base.jsonl",
       "added_path": "archive_v2/2026/04/days/11/added.jsonl",
       "removed_path": "archive_v2/2026/04/days/11/removed.jsonl",
-      "base_version": 1
+      "base_version": 2
     },
     {
       "date": "2026-04-07",
