@@ -1,23 +1,23 @@
 {
-  "generated_at_utc": "2026-05-24T08:51:45.686667+00:00",
+  "generated_at_utc": "2026-05-25T09:19:02.059225+00:00",
   "outputs": [
     {
-      "bytes": 44831540,
+      "bytes": 44804592,
       "path": "data-worktree/data/latest/urls.jsonl",
-      "rows": 82170,
-      "sha256": "d084ca360ce6ae88dff6205fb286e29d7102749eb31ebc6bf8d3ba286c2277ff"
+      "rows": 82102,
+      "sha256": "46cee51c4262bc26e10e368f467a48790b0f1df6e33fc96b81d10ed05745d333"
     },
     {
       "bytes": 34254,
       "path": "data-worktree/data/latest/summary.json",
-      "sha256": "9f62f1833a96cbfa5df7254535142055ab85f09f6a4aad3716cbed32d3be3f61"
+      "sha256": "57c3d3ca44b402880ba77273a38b07e220b303184ff8f640575f1240df4c8847"
     },
     {
       "bytes": 9753,
       "path": "data-worktree/data/latest/crawler_state.json",
-      "sha256": "9df4fa734b0cd6742b358b67ea1b16f88ab12afde02a4c182950c108016ceed2"
+      "sha256": "021685ac8d4485c40d22f64e304cd4ac89e1442571156076fbb76442daed7b74"
     }
   ],
-  "run_date_utc": "2026-05-24",
+  "run_date_utc": "2026-05-25",
   "schema_version": 2
 }
