@@ -1145,3 +1145,27 @@ crawlers:
         max_retries: 1
         max_runtime_seconds: 300
         progress_every_pages: 2
+
+  # ============================================================================
+  # EMSD_BEEO - EMSD Building Energy Efficiency Ordinance (Codes & Guidelines)
+  # Separate source (own tag) so BEEO docs can be ingested independently of the
+  # broader emsd backlog. See PAI-1097.
+  # ============================================================================
+  emsd_beeo:
+    label: "EMSD - Building Energy Efficiency Ordinance"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.emsd.gov.hk"
+    request_delay_seconds: 0.25
+    request_jitter_seconds: 0.10
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    content_element_id: "content"
+    pages:
+      beeo_codes_guidelines:
+        # EMSD BEEO Codes of Practice (BEC/EAC) and Technical Guidelines
+        # (TG-BEC/TG-EAC) PDF crawler.
+        page_url: "https://www.emsd.gov.hk/beeo/en/mibec_beeo_codtechguidelines.html"
+        scope_prefix: "https://www.emsd.gov.hk/beeo/"
