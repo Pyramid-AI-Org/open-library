@@ -1,23 +1,23 @@
 {
-  "generated_at_utc": "2026-08-09T06:43:13.903799+00:00",
+  "generated_at_utc": "2026-08-10T06:54:02.277423+00:00",
   "outputs": [
     {
-      "bytes": 42363841,
+      "bytes": 42321184,
       "path": "data-worktree/data/latest/urls.jsonl",
-      "rows": 77632,
-      "sha256": "b0ae7a71f938422413e0fed1633564c264a49180c979d7e457852acf247c1a2d"
+      "rows": 77558,
+      "sha256": "eb3b04fcdbc16a0fa3b1e0ee0901f0392e51506b15b04ada7a906cdf18afbe5b"
     },
     {
       "bytes": 34559,
       "path": "data-worktree/data/latest/summary.json",
-      "sha256": "380af7c5fd0568bb57019174be753e0324b697687cef08f8d82ef08d4ee7c0ff"
+      "sha256": "c1d6fcafe397bf9b0f151ebd1a07fca6f935b95e0d6a83caddb654c71d5ba524"
     },
     {
       "bytes": 9838,
       "path": "data-worktree/data/latest/crawler_state.json",
-      "sha256": "4363c014c70a99eda55d6e4063691551d88c0ce187299779b370127b379aa41f"
+      "sha256": "e1017a6f1dcb576751798b1aff36a3289f6e7621b626381e95f12f46f75f65bb"
     }
   ],
-  "run_date_utc": "2026-08-09",
+  "run_date_utc": "2026-08-10",
   "schema_version": 2
 }
