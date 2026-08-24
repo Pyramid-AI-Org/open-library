@@ -83,7 +83,7 @@ kept fully separate end to end:
 | --- | --- | --- | --- |
 | Buildings Department | Building and Construction Authority | `bca` | Harvested |
 | Legislative Council | Parliament of Singapore | `parliament` | Harvested — intermittently behind an AWS WAF challenge |
-| EMSD | Energy Market Authority | `ema` | Harvested |
+| EMSD | Energy Market Authority | `ema` | Blocked from some networks — Imperva bot challenge |
 | Fire Services Department | Singapore Civil Defence Force | `scdf` | Harvested |
 | Telephone Directory | Singapore Government Directory | `sgdi` | Harvested (pages by design) |
 | Labour Department | Ministry of Manpower | `mom` | Harvested |
