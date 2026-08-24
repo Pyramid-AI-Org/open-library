@@ -14,6 +14,7 @@ from utils.schedule import (
     parse_iso_date,
     should_run_on_date,
 )
+from utils.ca import install_ca_bundle
 from utils.settings import load_settings
 from utils.time import utc_now
 
@@ -362,6 +363,9 @@ def main() -> int:
     )
 
     args = ap.parse_args()
+
+    # Some sites send an incomplete certificate chain; see utils/ca.py.
+    install_ca_bundle(verbose=bool(args.debug))
 
     settings = load_settings(args.settings)
     out_root = Path(args.out)
