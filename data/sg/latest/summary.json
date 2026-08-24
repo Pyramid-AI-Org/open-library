@@ -1,8 +1,8 @@
 {
-  "crawler": "sgdi.organs_of_state",
+  "crawler": "parliament.bills_introduced",
   "crawlers_considered": 62,
   "crawlers_due": [
-    "organs_of_state"
+    "bills_introduced"
   ],
   "crawlers_failed": [],
   "crawlers_skipped": [
@@ -37,7 +37,7 @@
     "nparks.publications_resources",
     "nparks.services",
     "nparks.who_we_are",
-    "parliament.bills_introduced",
+    "parliament.order_paper",
     "parliament.votes_and_proceedings",
     "pub.circulars",
     "pub.codes_of_practice",
@@ -49,6 +49,7 @@
     "scdf.fire_safety_circulars",
     "scdf.petroleum_and_flammable_materials",
     "sgdi.ministries",
+    "sgdi.organs_of_state",
     "sgdi.statutory_boards",
     "sla.circulars",
     "sla.legislation",
@@ -59,20 +60,20 @@
     "ura.master_plan"
   ],
   "crawlers_succeeded": [
-    "sgdi.organs_of_state"
+    "parliament.bills_introduced"
   ],
-  "rows": 5832,
+  "rows": 9392,
   "run_date_utc": "2026-08-24",
   "schedule": {
-    "sgdi.organs_of_state": {
+    "parliament.bills_introduced": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": "2026-08-24",
       "manual_override": true,
-      "module_path": "sgdi.organs_of_state",
-      "source_id": "sgdi"
+      "module_path": "parliament.bills_introduced",
+      "source_id": "parliament"
     }
   },
-  "started_at_utc": "2026-08-24T06:46:13.171207+00:00"
+  "started_at_utc": "2026-08-24T09:03:43.397029+00:00"
 }
