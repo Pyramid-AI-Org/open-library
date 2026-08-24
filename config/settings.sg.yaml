@@ -320,8 +320,12 @@ crawlers:
         # Change-of-use rules and the solar deployment
         # requirements - technical conditions on how JTC premises
         # may be used and altered.
+        # The section landing page 404s since Aug 2026; the child pages are
+        # alive and linked from the /get-help hub, so seed there. Start URLs
+        # are fetched regardless of the prefix filter; only links out of them
+        # must match it.
         start_urls:
-          - "https://www.jtc.gov.sg/get-help/managing-your-tenancy-or-lease"
+          - "https://www.jtc.gov.sg/get-help"
         allowed_path_prefixes:
           - "/get-help/managing-your-tenancy-or-lease"
         max_depth: 3
@@ -494,6 +498,9 @@ crawlers:
     sitemap_url: "https://www.mom.gov.sg/sitemap.xml"
     document_hosts:
       - "www.mom.gov.sg"
+      # The child sitemaps list pages on the bare host, so relative links
+      # resolve there too.
+      - "mom.gov.sg"
     document_path_prefixes:
       - "/-/media/mom/documents/"
     external_document_hosts:
