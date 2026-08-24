@@ -812,7 +812,7 @@ crawlers:
         # than reporting an empty collection. To re-capture: open the listing
         # in a browser, click page 2, and read the `next-action` request
         # header off that POST.
-        action_id: "REPLACE-ME-capture-from-a-live-pagination-request"
+        action_id: "7f643b87656c0c1046945063694ee9a404a648a5c4"
         form_fields:
           _1_parliOptions: ""
           _1_from: ""
@@ -832,7 +832,7 @@ crawlers:
         engine: server_action
         start_url: "https://www.parliament.gov.sg/parliamentary-business/bills-introduced"
         label: "Bills Introduced"
-        action_id: "REPLACE-ME-capture-from-a-live-pagination-request"
+        action_id: "7f20370fa7fced498f1fcafee03b02cce4cebdbd3c"
         form_fields:
           _1_name: ""
           _1_title: ""

@@ -303,10 +303,20 @@ def test_the_limit_is_raised_so_one_call_does_it() -> None:
     crawler.crawl(ctx("parliament"))
 
     assert len(session.calls) == 1, "filter_count was 2 and page_size 1000; no second call is needed"
-    sent = {k: v[1] for k, v in session.calls[0]["files"].items()}
+    files = session.calls[0]["files"]
+    sent = {k: v[1] for k, v in files}
     assert sent["_1_limit"] == "1000"
     assert sent["_1_offset"] == "0"
     assert session.calls[0]["headers"]["next-action"] == "deadbeef"
+
+    # The argument slots must come after the group entries they reference.
+    # React reads the parts in order, so a "0" sent before _1_offset resolves
+    # against an empty group: the server then answers page one for every
+    # offset, with a correct filter_count, and the crawler looks healthy while
+    # collecting a tenth of the collection.
+    names = [k for k, _ in files]
+    assert names.index("0") > names.index("_1_offset"), names
+    assert names.index("0") > names.index("_1_limit"), names
 
 
 def test_a_stale_action_id_raises_rather_than_reporting_nothing() -> None:

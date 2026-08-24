@@ -510,9 +510,20 @@ class ServerActionCrawler(_PayloadCrawlerBase):
             form[offset_field] = str(offset)
             form[limit_field] = str(page_size)
 
+            # Field order is load-bearing. React resolves the argument slots
+            # ("0", "1", ...) against the "$K<n>" groups assembled from the
+            # `_<n>_*` entries, and it reads the parts in order: an argument
+            # that arrives before its group sees an empty group. The app sends
+            # every group entry first and the argument slots last, so a request
+            # with "0" in the middle silently loses offset and limit and the
+            # server answers page one every time - with a correct
+            # filter_count, which is what makes it look like a working crawler
+            # stuck on the first page.
+            ordered = sorted(form.items(), key=lambda kv: kv[0].isdigit())
+
             response = session.post(
                 start_url,
-                files={k: (None, v) for k, v in form.items()},  # multipart, as the app sends
+                files=[(k, (None, v)) for k, v in ordered],  # multipart, as the app sends
                 headers={"next-action": action_id, "Accept": "text/x-component"},
                 timeout=http["timeout_seconds"],
             )
