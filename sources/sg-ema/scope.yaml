@@ -1,0 +1,280 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Energy Market Authority
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Electrical and Mechanical Services Department (EMSD), with BCA
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: ema
+label: "Energy Market Authority"
+base_url: "https://www.ema.gov.sg"
+hk_equivalent: "Electrical and Mechanical Services Department (EMSD), with BCA"
+mandate: >
+  EMA regulates the electricity and gas industries in Singapore. With BCA
+  it covers the ground of the Hong Kong Electrical and Mechanical Services
+  Department: EMA takes electricity and gas safety and licensing, BCA
+  takes building energy efficiency and lift and escalator safety. The
+  split matters - two of the four EMSD areas are not EMA's at all.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # counts below are measured, not estimated
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: adobe-aem
+  evidence: >
+    Assets under /content/dam/corporate/; /content/<site>/language-
+    masters/ paths; AEM .coredownload.pdf renditions; Angular templating
+    on listings
+  server_rendered: partial
+  content_element_id: null
+  document_labels: link-text-or-payload-field
+  api:
+    # Both of these were found on 21 August by reading window.performance
+    # resource entries on a rendered listing page - the request the page makes
+    # is visible after the fact even when you could not intercept it.
+    page_index: "/bin/servlets/custom-sitemap"
+    graphql_index: "/graphql/list.json"
+    graphql_execute: "/graphql/execute.json{shortForm}"
+
+discovery:
+  method: api-index
+  sitemap_url: null
+  note: >
+    CORRECTED after the 21 August run. The earlier reading - "no machine-
+    readable discovery surface at all" - was wrong, and expensively so: it
+    pushed this source onto a spider that could only see server-rendered
+    pages and returned 94 records. EMA in fact has two machine-readable
+    indexes, neither at a conventional path.
+
+      * /bin/servlets/custom-sitemap returns JSON, not XML: an array of
+        {Pagepath, title, description} covering all 1,452 published pages.
+        Pagepath is the authoring path - strip the
+        /content/corporate/language-masters/en/home prefix to get the public
+        URL.
+
+      * /graphql/list.json enumerates every AEM GraphQL persisted query on the
+        site, with its full query text. Executing each one at
+        /graphql/execute.json<shortForm> returns the collections the Angular
+        listings render - which is where nearly all of EMA's documents live.
+        This one endpoint took the source from 94 records to 822.
+
+    Neither is linked from anywhere. The way to find them again after a
+    redesign is the same way they were found: load a listing page in a browser
+    and read performance.getEntriesByType('resource') for fetch/XHR entries.
+  robots_txt: null
+  robots_disallow: []
+
+asset_hosts:
+  documents:
+    - "www.ema.gov.sg"
+  document_path_prefixes:
+    - "/content/dam/corporate/"
+  external_references:
+    - "sso.agc.gov.sg"
+    - "assets.egazette.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+# Two passes, and both are needed:
+#   page pass     every in-scope path from the custom-sitemap servlet, fetched
+#                 as HTML, anchors read for documents and external references.
+#                 This is what finds the Statutes Online links.
+#   graphql pass  every persisted query from /graphql/list.json, executed, and
+#                 every /content/dam/ document path in the response recorded
+#                 with the nearest title and date field. This is what finds
+#                 the documents the Angular listings render.
+# Rows below are named for the section a record belongs to, so a coverage
+# regression can be localised to one part of the site.
+
+crawlers:
+  - name: licences
+    module: crawlers/ema/licences.py
+    engine: api-index
+    intent: [collection_items, page_text]
+    path_prefixes: ["/regulations-licences/licences"]
+    graphql_query: "/corporate/licensing-information"
+    expected:
+      pages: 15
+      documents: 504
+      external_references: 2
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Licence conditions, application forms, codes of practice and the
+      determinations issued under them, for every class of electricity and gas
+      licensee. By volume this is the source - 504 of EMA's 694 documents -
+      and none of it was visible to the first crawl.
+
+  - name: regulations
+    module: crawlers/ema/regulations.py
+    engine: spider
+    intent: [page_text, external_references]
+    start_urls:
+      - "https://www.ema.gov.sg/regulations-licences/regulations/acts-regulations"
+    path_prefixes: ["/regulations-licences/regulations"]
+    expected:
+      pages: 19
+      documents: 5
+      external_references: 41
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The Electricity Act, the Gas Act, the District Cooling Act and their
+      subsidiary regulations. Server-rendered, and almost every link leaves for
+      Statutes Online, so these are external references rather than documents.
+    notes: >
+      The binding technical standard for electrical installations is Singapore
+      Standard SS 638, sold by Enterprise Singapore. EMA names it but does not
+      publish it; SS 650, TR 77 and TR 25 are the same. None can be collected.
+
+  - name: regulatory_publications
+    module: crawlers/ema/regulatory_publications.py
+    engine: api-index
+    intent: [collection_items, page_text]
+    path_prefixes: ["/regulations-licences/regulatory-publications"]
+    graphql_query: "/corporate/regulationPolicyPapersModel"
+    expected:
+      pages: 1
+      documents: 14
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      EMA's technical library: the Gas Safety Code, the Transmission Code, the
+      Gas Metering Code and the policy papers issued under them. The direct
+      equivalent of the EMSD electricity and gas safety codes.
+    run_notes: >
+      The 21 August spider returned zero here, exactly as the survey feared.
+      The GraphQL pass returns the collection whole. One listing page, no
+      pagination.
+
+  - name: circulars
+    module: crawlers/ema/circulars.py
+    engine: api-index
+    intent: [collection_items]
+    graphql_query: "/corporate/circularsPageList-query"
+    expected:
+      documents: 29
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The circular series - how EMA amends and interprets the codes between
+      editions. The query takes an optional date filter; called without one it
+      returns the whole series.
+
+  - name: forms
+    module: crawlers/ema/forms.py
+    engine: api-index
+    intent: [collection_items, page_text]
+    path_prefixes: ["/resources/forms"]
+    graphql_query: "/corporate/resourcesFormsList"
+    expected:
+      pages: 1
+      documents: 23
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Forms and agreements that are part of a regulatory process - a
+      submission is judged against the current version of the form, so the form
+      is part of the requirement.
+
+  - name: educational_materials
+    module: crawlers/ema/educational_materials.py
+    engine: api-index
+    intent: [collection_items, page_text]
+    path_prefixes: ["/resources/educational-materials"]
+    graphql_query: "/corporate/resources_educational_material"
+    rest_alternative: "/bin/corporate-site/education-material"
+    expected:
+      pages: 1
+      documents: 27
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Licensing handbooks and electrical and gas safety guidance - the applied
+      half of EMA's published material.
+    notes: >
+      This is the one collection with two routes to it: the GraphQL persisted
+      query, and a plain REST servlet at /bin/corporate-site/education-material
+      that returns 38 items with publishdate and resourcesPdf. The REST route
+      carries dates the GraphQL route does not; prefer it for this row.
+
+  - name: corporate_publications
+    module: crawlers/ema/corporate_publications.py
+    engine: api-index
+    intent: [collection_items, page_text]
+    path_prefixes: ["/resources/corporate-publications"]
+    graphql_query: "/corporate/resourceCorporatePublicationModel"
+    expected:
+      pages: 13
+      documents: 23
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Annual reports and the Singapore Energy Statistics series. Borderline
+      corporate literature, kept because the statistics volumes are cited as
+      reference data.
+
+  - name: statistics
+    module: crawlers/ema/statistics.py
+    engine: spider
+    intent: [section_documents, page_text]
+    path_prefixes: ["/resources/statistics", "/resources/singapore-energy-statistics"]
+    expected:
+      pages: 30
+      documents: 63
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Half-hourly and monthly market data and the Singapore Energy Statistics
+      chapters. Server-rendered, so the page pass reaches it.
+    run_notes: >
+      The matching persisted query, /corporate/statistics-list, answers HTTP
+      500. That is a server fault, not an empty collection - the page pass
+      covers this row, and the 500 must not be silently read as zero.
+
+  - name: industry_reports
+    module: crawlers/ema/industry_reports.py
+    engine: spider
+    intent: [section_documents, page_text]
+    path_prefixes: ["/resources/industry-reports"]
+    expected:
+      pages: 5
+      documents: 6
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Market and system studies EMA publishes for industry planning.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/media"
+    reason: >
+      Press releases.
+  - path: "/partnerships"
+    reason: >
+      Consultations and industry engagement - useful context, high churn.
+  - path: "/our-energy-story"
+    reason: >
+      Public education content.
+
+deferred:
+  - target: "Lift and escalator safety, and building energy efficiency"
+    reason: >
+      Two of the four Hong Kong EMSD areas are BCA's in Singapore, not
+      EMA's, and are already covered by the BCA source. Recorded here so
+      the gap is visibly a mapping decision rather than a miss.
+  - target: "Electrical products safety"
+    reason: >
+      Consumer product registration sits with the Consumer Product Safety
+      Office under Enterprise Singapore - a third agency, unreconnoitred.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 800."
+  - "Documents >= 690. A result near 90 means the GraphQL pass did not run and only server-rendered pages were seen."
+  - 'The "Gas Safety Code" appears by name.'
+  - "Every document URL sits under /content/dam/corporate/ on www.ema.gov.sg."
+  - "Acts records point at sso.agc.gov.sg and are typed as external references."
+  - "/graphql/list.json returns 200 and enumerates at least 8 persisted queries; a 404 means the site has been rebuilt and discovery must be redone."
+  - "statistics-list answers HTTP 500 - do not treat that as an empty collection; the statistics pages are covered by the page pass instead."

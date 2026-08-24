@@ -1,0 +1,107 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Ministry of National Development
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Development Bureau (DEVB)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: mnd
+label: "Ministry of National Development"
+base_url: "https://www.mnd.gov.sg"
+hk_equivalent: "Development Bureau (DEVB)"
+mandate: >
+  MND is the ministry the equivalence document maps the Hong Kong
+  Development Bureau to. The honest finding from the survey is that the
+  mapping does not carry the material: MND is a policy ministry with no
+  circular library and no technical guidelines library. The Development
+  Bureau's technical circulars and codes are, in Singapore, published by
+  MND's statutory boards - BCA and URA - both of which are already sources
+  in their own right.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitefinity
+  evidence: >
+    Documents under /docs/default-source/ with ?sfvrsn=, plus a newer
+    /api/media/<uuid> route whose CMS layer is unconfirmed
+  server_rendered: partial
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: spider
+  sitemap_url: null
+  note: >
+    robots.txt answers HTTP 202 - a bot challenge, not a policy - and
+    sitemap.xml could not be retrieved behind it across repeated attempts.
+    A crawler that honours robots.txt will refuse to crawl this site at
+    all until that is resolved with the site owner. This row is specified
+    but should not be enabled until then.
+  robots_txt: null
+  robots_disallow: []
+
+asset_hosts:
+  documents:
+    - "www.mnd.gov.sg"
+  document_path_prefixes:
+    - "/docs/default-source/"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: publications
+    module: crawlers/mnd/publications.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.mnd.gov.sg/our-work"
+    path_prefixes:
+      - "/our-work"
+    expected:
+      pages: 10
+      documents: 8
+      measured: false         # not yet run live - survey estimate
+    rationale: >
+      MND's published policy documents - the sustainability blueprint, the
+      climate action plan and the urban sustainability series. Thin, and
+      policy rather than technical, but it is what this ministry
+      publishes.
+    notes: >
+      Listing pages are JavaScript-rendered; detail pages are server-
+      rendered. Combined with the robots.txt challenge, expect this row to
+      under-collect badly until both are resolved.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/newsroom"
+    reason: >
+      Press releases, speeches and parliamentary Q&As. Voluminous and not
+      reference material - though note the Hong Kong DEVB source does
+      collect press releases, so a reviewer may reasonably want this
+      included for parity.
+
+deferred:
+  - target: "The real Development Bureau equivalent"
+    reason: >
+      For technical circulars, general circulars and codes of practice the
+      Singapore analogues are BCA and URA, not MND. Both are already
+      sources. This is recorded so the thinness of sg-mnd reads as a
+      mapping finding rather than a missed section.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Disabled by default - do not enable until the robots.txt 202 challenge is resolved with MND."
+  - "If enabled: every document URL sits under /docs/default-source/ on www.mnd.gov.sg."
+  - "If enabled: expect fewer than 20 records. That is the correct result, not a failure."

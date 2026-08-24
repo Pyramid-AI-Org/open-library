@@ -1,0 +1,168 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Singapore Government Directory Interactive
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Government Telephone Directory
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: sgdi
+label: "Singapore Government Directory Interactive"
+base_url: "https://www.sgdi.gov.sg"
+hk_equivalent: "Government Telephone Directory"
+mandate: >
+  SGDI is the Singapore counterpart of the Hong Kong Government Telephone
+  Directory already in the library. It publishes no documents at all - it
+  is a hierarchy of organisational contact records - so this source
+  collects pages rather than files.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitefinity
+  evidence: >
+    meta generator Sitefinity 14.4.8147.0 DX; ?sfvrsn= on assets
+  server_rendered: true
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: spider
+  sitemap_url: null
+  note: >
+    Both robots.txt and sitemap.xml return 404. There is no discovery surface,
+    and the hierarchy has to be walked.
+
+    CORRECTED after the 21 August run in one important respect. The survey said
+    the hierarchy was "small"; it is not. Every statutory board and department
+    link on /statutory-boards points into the /ministries tree - the URL shape
+    is /ministries/<ministry>/statutory-boards/<board> - so the three original
+    rows were not three branches but one, and the /statutory-boards row as
+    specified matched a single page. Below that, each unit page links to its
+    sub-units and then to individual officer records, and the tree keeps going:
+    a depth-3 crawl queued over 1,400 pages and was still growing.
+
+    The row set below reflects what this source is for. Two levels of the
+    hierarchy - agency and department - is the useful artefact: it is the
+    authoritative list of who exists in the Singapore government, which is what
+    the Hong Kong Government Telephone Directory row provides and what the
+    other twelve sources are cross-referenced against. Officer-level records
+    are a third level, of much lower value to a document library, and they are
+    also exactly the material the July 2026 policy change is withdrawing. The
+    crawl is bounded at depth 2 deliberately, and the row below says so rather
+    than quietly stopping.
+  robots_txt: null
+  robots_disallow: []
+
+asset_hosts:
+  documents:
+    - "www.sgdi.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: ministries
+    module: crawlers/sgdi/ministries.py
+    engine: spider
+    intent: [page_text]
+    start_urls:
+      - "https://www.sgdi.gov.sg/ministries"
+    path_prefixes:
+      - "/ministries"
+    expected:
+      pages: 286
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The 16 ministries and, beneath each, their departments and committees.
+      Server-rendered, no pagination anywhere.
+    run_notes: >
+      Crawled to depth 2 from /ministries. See the truncation note on the
+      source as a whole.
+
+  - name: statutory_boards
+    module: crawlers/sgdi/statutory_boards.py
+    engine: spider
+    intent: [page_text]
+    start_urls:
+      - "https://www.sgdi.gov.sg/statutory-boards"
+    path_prefixes:
+      - "/statutory-boards"
+    expected:
+      pages: 402
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      All 73 statutory boards and the units beneath them.
+    run_notes: >
+      CORRECTED. The first attempt returned exactly one page, and the reason is
+      a good example of a filter that is right about the section and wrong about
+      the URLs: the boards are listed on /statutory-boards but every link goes
+      to /ministries/<ministry>/statutory-boards/<board>. A path_prefixes value
+      of "/statutory-boards" therefore matched the listing page and nothing on
+      it. The prefix list now covers both shapes.
+
+  - name: organs_of_state
+    module: crawlers/sgdi/organs_of_state.py
+    engine: spider
+    intent: [page_text]
+    start_urls:
+      - "https://www.sgdi.gov.sg/organs-of-state"
+    path_prefixes:
+      - "/organs-of-state"
+    expected:
+      pages: 11
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The 10 organs of state - Attorney-General's Chambers, the courts,
+      Parliament, the Public Service Commission and the rest.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/other-organisations/schools"
+    reason: >
+      Several hundred school entries; a different kind of record and a
+      large volume increase. Include deliberately if wanted, not by
+      default.
+  - path: "/public-services"
+    reason: >
+      An A-Z service index that duplicates the hierarchy.
+
+notes: >
+  Time-sensitive, and it affects what this source can ever contain. SGDI
+  carries a standing notice that from 1 July 2026 it lists senior
+  personnel only, as an anti-impersonation measure. That date has passed,
+  so the directory being crawled is already the reduced version and is not
+  comparable with what the Hong Kong crawler collected. If historical
+  depth matters, check the Internet Archive for pre-July-2026 snapshots
+  before assuming current coverage is representative.
+
+# --- Verification -----------------------------------------------------------
+truncation:
+  measured_on: "2026-08-21"
+  pages_collected: 699
+  page_budget: 700
+  queue_remaining: 343
+  note: >
+    This run hit its budget with 343 pages still queued, and the number is
+    recorded rather than rounded away. It is not a coverage failure to be fixed
+    by raising the cap: what remains below depth 2 is officer-level records,
+    which this source does not want. Read it as "the boundary was reached where
+    it was drawn", and change the depth rather than the budget if the boundary
+    should move.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 690 page records."
+  - "All 16 ministries and all 73 statutory boards are represented."
+  - "No document records - this source collects pages by design."
+  - "statutory_boards returns hundreds of pages, not one. One page means the path prefix has stopped matching /ministries/*/statutory-boards/*."
+  - "The truncation block above is refreshed whenever the crawl is re-run; a run that reports no truncation where the last one did has probably lost a branch."

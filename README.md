@@ -67,6 +67,43 @@ A static viewer UI is available under [docs/](docs/) and is designed to be deplo
 
 Deployed in: https://pyramid-ai-org.github.io/open-library/
 
+## Singapore library
+
+The Singapore collection lives alongside Hong Kong in the same codebase but is
+kept fully separate end to end:
+
+- Config: [config/settings.sg.yaml](config/settings.sg.yaml) (15 sources, 62 crawler rows).
+- Data: `data/sg/` on the `data` branch — its own `latest/`, `crawler_state.json` and `archive_v2/`.
+- Workflow: [.github/workflows/crawl-sg.yml](.github/workflows/crawl-sg.yml), daily at 03:00 UTC.
+- Viewer: [docs/sg/](docs/sg/) — deployed at `/sg/` on the Pages site.
+- Scope specs: [sources/](sources/) — one reviewable `scope.yaml` per source, per the
+  pattern in [onboarding-pattern.md](onboarding-pattern.md).
+
+| Hong Kong department | Singapore agency | source | Status |
+| --- | --- | --- | --- |
+| Buildings Department | Building and Construction Authority | `bca` | Harvested |
+| Legislative Council | Parliament of Singapore | `parliament` | Harvested — intermittently behind an AWS WAF challenge |
+| EMSD | Energy Market Authority | `ema` | Harvested |
+| Fire Services Department | Singapore Civil Defence Force | `scdf` | Harvested |
+| Telephone Directory | Singapore Government Directory | `sgdi` | Harvested (pages by design) |
+| Labour Department | Ministry of Manpower | `mom` | Harvested |
+| HK Herbarium | National Parks Board | `nparks` | Harvested |
+| EPD | National Environment Agency | `nea` | Harvested |
+| Planning Department | Urban Redevelopment Authority | `ura` | Harvested |
+| Lands Department | Singapore Land Authority | `sla` | Harvested |
+| DSD + WSD | PUB, National Water Agency | `pub` | Partial — 2 rows are JS listings; CORENET is the better route |
+| ArchSD | JTC Corporation | `jtc` | Harvested |
+| HyD + TD | Land Transport Authority | `lta` | Partial — 1 row blocked |
+| ArchSD | Housing & Development Board | `hdb` | Blocked — 403 + JS-only bodies |
+| DEVB | Ministry of National Development | `mnd` | Disabled — robots.txt bot challenge |
+
+Run Singapore sources locally with:
+
+```bash
+python main.py --settings config/settings.sg.yaml --out ./local-data
+python main.py --crawler sla.circulars --settings config/settings.sg.yaml --out ./local-data
+```
+
 ## Adding a new crawler
 
 1. Create `crawlers/<name>.py` exporting a `Crawler` class with a `.crawl(ctx)` method.

@@ -1,0 +1,224 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Parliament of Singapore
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Legislative Council (LegCo)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: parliament
+label: "Parliament of Singapore"
+base_url: "https://www.parliament.gov.sg"
+hk_equivalent: "Legislative Council (LegCo)"
+mandate: >
+  Parliament is the Singapore counterpart of the Hong Kong Legislative
+  Council already in the library. The Hong Kong deck asked for panel
+  minutes and papers, Finance Committee papers and Public Works
+  Subcommittee reports, covering roughly five years. The mapping is the
+  weakest in this set and the reason is structural, not a gap in the
+  survey - see the note below.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: next-js
+  evidence: >
+    CORRECTED after the 21 August run. The corporate shell is Sitefinity
+    (documents under /docs/default-source/ with ?sfvrsn=), but
+    /parliamentary-business/** is a Next.js app in front of a Directus
+    backend: the page ships self.__next_f.push([...]) flight chunks, the
+    listings paginate through Next.js server actions, and the files are
+    served from /api/media/<uuid>/<filename>. Hansard is a third system
+    again, the SPA at sprs.parl.gov.sg.
+  server_rendered: payload      # the data is in the response, not in the DOM
+  content_element_id: null
+  document_labels: payload-fields   # fileTitle / description, not anchor text
+
+discovery:
+  method: payload
+  sitemap_url: null
+  note: >
+    robots.txt answers HTTP 202 - a bot-mitigation interstitial rather than a
+    policy - and sitemap.xml could not be retrieved behind it. The same
+    challenge answers 202 with an empty body to background fetches; a real
+    navigation passes it, after which same-origin fetches from the page
+    succeed. Keep retries and backoff generous and treat 202-with-empty-body
+    as "challenge", not as "no content". Discovery is not needed for the three
+    rows below: each is a single entry point whose payload carries the whole
+    collection.
+  robots_txt: null
+  robots_disallow: []
+
+asset_hosts:
+  documents:
+    - "www.parliament.gov.sg"
+  document_path_prefixes:
+    # CORRECTED 21 August 2026. The survey read "/docs/default-source/" off the
+    # corporate pages, which is right for the rest of the site and wrong for
+    # every document this source actually wants. Parliamentary papers are
+    # served by a Directus media route: /api/media/<uuid>/<filename>. The old
+    # prefix excluded all of them, which is why 120 listing pages yielded zero
+    # documents on the first run.
+    - "/api/media/"
+    - "/docs/default-source/"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: order_paper
+    module: crawlers/parliament/order_paper.py
+    engine: payload
+    intent: [collection_items, page_text]
+    start_urls:
+      - "https://www.parliament.gov.sg/parliamentary-business/order-paper"
+    path_prefixes:
+      - "/parliamentary-business/order-paper"
+    payload:
+      route: flight-initData
+      note: >
+        This listing needs no pagination at all. The first response embeds the
+        entire collection in its flight payload under the key `initData`, as
+        {"meta":{"filter_count":2168},"data":[...]}. Concatenate the
+        self.__next_f.push([n,"..."]) chunks, JSON-unescape each, find
+        "initData":, and read the balanced object that follows. Each item
+        carries id, fileTitle, fileUrl, fileSize, date and parliaments.title.
+        `fileUrl` is already the correct /api/media/ path - use it, do not
+        rebuild it.
+    expected:
+      pages: 1
+      documents: 2168
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The agenda of each sitting - what Parliament was asked to consider and
+      when. The series runs back to 22 April 1955, which makes it the deepest
+      single run of primary material in the Singapore set.
+    run_notes: >
+      21 August 2026: 2,168 documents, all URLs verified as HTTP 200 on a
+      ten-document spot check. This replaces the earlier "40 pages, zero
+      documents" result, which was caused by two mistakes at once - the wrong
+      document_path_prefixes, and treating a payload-rendered listing as an
+      anchor-bearing page. Nothing was wrong with the site.
+
+  - name: votes_and_proceedings
+    module: crawlers/parliament/votes_and_proceedings.py
+    engine: payload
+    intent: [collection_items, page_text]
+    start_urls:
+      - "https://www.parliament.gov.sg/parliamentary-business/votes-and-proceedings"
+    path_prefixes:
+      - "/parliamentary-business/votes-and-proceedings"
+    payload:
+      route: server-action
+      note: >
+        Unlike the Order Paper, this page embeds only the first ten records,
+        under the key `initialMPs`. The rest come from a Next.js server action:
+        POST the same URL with a FormData body carrying _1_parliOptions,
+        _1_from, _1_to, _1_offset, _1_limit and "0", plus the page's own
+        `next-action` and `next-router-state-tree` headers. _1_limit is not
+        capped - one call with limit=1000 returns all 619. Items nest the file
+        under `report`; build the URL as
+        /api/media/<report.id>/<report.filename_download with spaces replaced
+        by hyphens>. The action id is a build hash: read it off a live
+        pagination request rather than hard-coding it, and expect HTTP 500 when
+        it goes stale after a deploy.
+    expected:
+      pages: 1
+      documents: 619
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The formal record of each sitting's decisions - the nearest Singapore
+      equivalent of the Hong Kong committee minutes. Runs back to 12 January
+      2005; the oldest entries are .doc rather than .pdf.
+    run_notes: >
+      21 August 2026: 619 documents with real filenames. An earlier attempt
+      inferred URLs as /api/media/<record id> because the payload it had read
+      carried no file field; those inferred URLs were wrong and have been
+      replaced. Read the `report` sub-object - do not guess a URL shape.
+
+  - name: bills_introduced
+    module: crawlers/parliament/bills_introduced.py
+    engine: payload
+    intent: [collection_items, page_text]
+    start_urls:
+      - "https://www.parliament.gov.sg/parliamentary-business/bills-introduced"
+    path_prefixes:
+      - "/parliamentary-business/bills-introduced"
+    payload:
+      route: server-action
+      note: >
+        Same server-action shape as votes_and_proceedings, with its own field
+        names: _1_name, _1_title, _1_yearOption, _1_offset, _1_limit, "0".
+        One call with limit=1000 returns all 772. The response is a flight
+        stream whose line 1 is the plain JSON {"meta":{"filter_count":772},
+        "data":[...]}. Each record carries title (the Bill number, e.g.
+        "18/2026"), description (the Bill name), date_introduced, a `file`
+        object and sometimes a `corrigenda` object - take both.
+    expected:
+      pages: 1
+      documents: 772
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Every Bill as introduced, back to January 2006. For a library whose
+      subject is regulation this is the most valuable of the three rows: it is
+      where changes to the Acts the codes are written under first appear.
+    run_notes: >
+      21 August 2026: 772 documents. No record in the current data carries a
+      corrigenda file, but the field exists and is handled.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/mps"
+    reason: >
+      Member biographies and constituency information.
+  - path: "/about-us/visit-us"
+    reason: >
+      Visitor information.
+  - path: "/news"
+    reason: >
+      Press releases.
+
+deferred:
+  - target: "Hansard (Official Reports) via the SPRS JSON API"
+    reason: >
+      Hansard is not published as documents at all - it exists only inside
+      the SPRS web app. But the app is backed by a clean JSON endpoint
+      that returns a whole sitting in one call:
+      sprs.parl.gov.sg/search/getHansardReport/?sittingDate=DD-MM-YYYY,
+      with metadata, attendance and the full debate text. There is no
+      sitting-date index endpoint, so dates must be enumerated from the
+      Order Paper listing first. This is a better acquisition path than
+      PDFs would have been, and it deserves a purpose-built API crawler
+      rather than being forced into a section spider.
+  - target: "Papers Presented to Parliament"
+    reason: >
+      The on-site page only points out to the National Archives. No
+      browsable repository exists on parliament.gov.sg.
+
+notes: >
+  Expect substantially fewer documents per year than Hong Kong, and
+  concentrated differently. Singapore's Parliament has no standing panel
+  system producing per-meeting minutes and papers, and nothing corresponds
+  to the Public Works Subcommittee at all. The substance that Hong Kong
+  carries in committee papers is carried here in Hansard - which is why
+  the deferred Hansard row matters more than the three document rows
+  above.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 3,500 across the three crawlers."
+  - "Every document URL sits under /api/media/ on www.parliament.gov.sg."
+  - "order_paper returns filter_count records, not a page of ten - a result of 10 means the payload key was missed."
+  - "votes_and_proceedings and bills_introduced each return their filter_count in a single server-action call."
+  - "No record under /mps/ or /news/."
+  - "Spot-check 10 document URLs return HTTP 200."
+  - "A stale next-action header shows up as HTTP 500, not as an empty result - fail loudly rather than recording zero."

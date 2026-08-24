@@ -48,6 +48,9 @@ const VIEWER = {
   sourceGroups: /** @type {Array<{id:string,label:string}>} */ ([]),
   sourceGroupLabels: /** @type {Record<string, string>} */ ({}),
   sourceGroupByCrawler: /** @type {Record<string, string>} */ ({}),
+  // Path of the crawler settings file used to derive source groups.
+  // Overridable per page via viewer-config.json (viewer.settingsPath).
+  settingsPath: "config/settings.yaml",
 };
 
 // ============================================================================
@@ -864,7 +867,7 @@ async function loadSourceMapFromSettingsYaml() {
     return;
   }
 
-  const url = repoFileUrl("config/settings.yaml", "main");
+  const url = repoFileUrl(VIEWER.settingsPath || "config/settings.yaml", "main");
   if (!url) {
     console.warn("[viewer] Could not build settings.yaml URL");
     return;
@@ -927,6 +930,13 @@ function applyViewerConfig() {
     owner: String(cfgRepo.owner || "").trim(),
     repo: String(cfgRepo.repo || "").trim(),
   };
+
+  if (viewerCfg.dataRoot) {
+    state.dataRoot = String(viewerCfg.dataRoot).trim().replace(/\/+$/, "");
+  }
+  if (viewerCfg.settingsPath) {
+    VIEWER.settingsPath = String(viewerCfg.settingsPath).trim();
+  }
 
   const groups = Array.isArray(viewerCfg.sourceGroups)
     ? viewerCfg.sourceGroups

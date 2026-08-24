@@ -1,0 +1,251 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Building and Construction Authority (BCA)
+# =============================================================================
+# This file is the reviewable statement of *what we intend to collect and why*.
+# It replaces the slide deck of screenshots with arrows drawn on them: each
+# `crawlers:` row is one arrow, `intent` is the note written beside it, and
+# `rationale` is the reason a person gave for drawing it.
+#
+# Review checklist for a human approver:
+#   * Is every row's `intent` what you actually want from that part of the site?
+#   * Do the `excludes` cut the right things - and only those?
+#   * Is anything regulatory missing? Check `deferred` and `out_of_scope` below,
+#     which record the sections that were looked at and consciously left out.
+#   * Are the `expected` counts in the right order of magnitude? They were
+#     measured during survey; a later run that is far off means the site moved.
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: bca
+label: "Building and Construction Authority"
+base_url: "https://www1.bca.gov.sg"
+mandate: >
+  BCA regulates building safety, structural engineering and construction
+  standards in Singapore under the Building Control Act. It is the Singapore
+  counterpart of the Hong Kong Buildings Department, which is already in the
+  library, so the same classes of material are in scope: codes, acts and
+  regulations, approved documents, practice circulars, technical guidebooks
+  and the design guidance that accompanies them.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"          # first full harvest; 1,027 records
+
+
+# --- Platform ---------------------------------------------------------------
+# What the site is built on decides how it is crawled. Getting this right is
+# most of the work; everything below follows from it.
+platform:
+  name: isomer-next
+  evidence: 'html[data-theme="isomer-next"]; assets served from isomer-user-content.by.gov.sg'
+  server_rendered: true          # plain requests is enough - no browser needed
+  content_element_id: main-content
+  document_labels: aria-label    # full titles live in aria-label, not link text
+  collection_pages: flight-payload  # listings ship every item in __next_f
+
+discovery:
+  method: sitemap
+  sitemap_url: "https://www1.bca.gov.sg/sitemap.xml"
+  total_urls: 843
+  lastmod_present: true          # gives per-page freshness with no extra fetch
+  robots_txt: "https://www1.bca.gov.sg/robots.txt"
+  robots_disallow: ["/search"]   # honoured: nothing in scope sits under /search
+
+asset_hosts:
+  documents:
+    - www1.bca.gov.sg
+    - www2.bca.gov.sg
+    - isomer-user-content.by.gov.sg   # the shared Isomer asset host
+    # Circular items are BCA's own regardless of where the file sits, and a
+    # sixth of them sit elsewhere: go.gov.sg is the government URL shortener,
+    # and older circulars were published on the CORENET portal. Found on the
+    # first full harvest - the original survey missed them because it only
+    # looked at links on content pages, not at collection items.
+    - go.gov.sg
+    - info.corenet.gov.sg
+    - www.corenet.gov.sg
+    - www.mom.gov.sg                  # one joint MOM-BCA advisory
+  external_references:
+    # Singapore Statutes Online holds the Acts and subsidiary legislation the
+    # BCA codes are written under. Not a BCA host, but dropping these would
+    # lose the primary law the whole library is meant to point at.
+    - sso.agc.gov.sg
+
+# --- Scope -------------------------------------------------------------------
+# intent vocabulary:
+#   section_documents  every document linked from every page under the prefixes
+#   collection_items   every item in a listing page's collection
+#   page_text          the page itself, as an HTML record (its own web-text)
+# A row may combine intents, e.g. [section_documents, page_text].
+
+crawlers:
+  - name: safety_and_standards
+    module: crawlers/bca/safety_and_standards.py
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/safety-and-standards/"
+    excludes:
+      - pattern: "^/safety-and-standards/enforcement-actions/"
+        reason: >
+          Enforcement notices name individual contractors and turn over
+          constantly. They are case records rather than standards, and they
+          would dominate the daily diff without adding reference value.
+    expected:
+      pages: 56
+      documents: 378
+      external_references: 54
+      measured: true          # 21 Aug 2026 live run
+                                # point-in-time ?DocDate= versions, kept
+                                # because the version is the citation
+    rationale: >
+      The regulatory core of the site. The Building Control Act page alone
+      carries the Approved Document, the Code on Accessibility, the Codes of
+      Practice on Buildability and the environmental sustainability codes,
+      plus links to 19 Acts and regulations on Statutes Online. The rest of
+      the tree holds the structural plan-submission guidelines, periodic
+      building inspection requirements, lift and escalator regulations,
+      amusement ride safety and civil defence shelter standards.
+    evidence:
+      - "/safety-and-standards/building-control-act/ - 26 PDFs, 19 legislation links"
+      - "/safety-and-standards/applications-and-licenses/ - 22 pages, 126 PDFs, 25 legislation links"
+      - "/safety-and-standards/lifts-escalators-and-mechanised-car-parking-systems/ - 14 pages, 90 PDFs"
+      - "/safety-and-standards/construction-quality/ - 5 pages, 73 PDFs"
+
+  - name: sustainability_legislation
+    module: crawlers/bca/sustainability_legislation.py
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/sustainability/legislation-on-environmental-sustainability-for-buildings/"
+    excludes:
+      - pattern: "/sustainability/greenmark/"
+        reason: >
+          Green Mark is a certification scheme with promotional and
+          award-listing pages. The binding requirements it references are
+          already captured through the legislation pages here.
+    expected:
+      pages: 7
+      documents: 55
+      external_references: 10
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Building Control (Environmental Sustainability) Regulations and the
+      codes issued under them - the code for new buildings, the code for
+      existing buildings, the Mandatory Energy Improvement code and the
+      periodic energy audit code. These are mandatory instruments, not scheme
+      literature, which is why this sits in scope while Green Mark does not.
+    evidence:
+      - ".../new-buildings-and-existing-buildings-undergoing-major-additions-and-alterations/ - 26 PDFs"
+      - ".../government-land-sales/ - 13 PDFs"
+
+  - name: guidebooks_and_publications
+    module: crawlers/bca/guidebooks_and_publications.py
+    intent: [section_documents, collection_items, page_text]
+    path_prefixes:
+      - "/resources/guidebooks-and-publications/"
+    expected:
+      pages: 8
+      documents: 44
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Technical guidebooks that sit alongside the codes: the fixed-installation
+      regulation guides, the maintenance outcome guidebook, good-practice
+      guides for lift owners and the sustainable construction series.
+    notes: >
+      The section landing page is itself a collection listing - its DOM shows
+      7 documents while the response carries 29. The section crawler reads the
+      flight payload as well as the DOM, so the hidden items are collected.
+
+  - name: accessibility_and_universal_design
+    module: crawlers/bca/accessibility_and_universal_design.py
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/home-and-building-owners/accessibility-and-universal-design/"
+    expected:
+      pages: 5
+      documents: 7
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Universal Design guides and the Universal Design Index. Filed under a
+      public-facing part of the site, but the material is design guidance that
+      accompanies the Code on Accessibility, so it belongs with the technical
+      set rather than with consumer content.
+
+  - name: circulars
+    module: crawlers/bca/circulars.py
+    intent: [collection_items, page_text]
+    listing_urls:
+      - "https://www1.bca.gov.sg/resources/circulars/"
+    expected:
+      pages: 52
+      documents: 351
+      items: 404
+      earliest: "2018-02-18"
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Circulars are how BCA announces changes to the regulations and how they
+      are to be applied - the Singapore equivalent of the Buildings Department
+      practice notes and circular letters already in the library. Without them
+      the codes are a snapshot with no running amendment history.
+    notes: >
+      The listing paginates ten items across 41 pages in the browser, but the
+      entire collection - title, date and target for all 404 items - is in the
+      flight payload of the first response. One request, no pagination.
+      Items are not all PDFs on a BCA host: 51 are web pages, some behind
+      go.gov.sg short links, and a handful of older ones sit on the CORENET
+      portal. Host filtering is therefore deliberately not applied to
+      collection items - a circular is a circular wherever BCA chose to put it.
+
+# --- Looked at, left out -----------------------------------------------------
+# Recording these matters as much as recording what is in scope: it is the
+# difference between "we decided not to" and "we never noticed".
+
+out_of_scope:
+  - path: "/resources/newsroom/"
+    count: 304
+    reason: "Press releases and media coverage. Not reference material."
+  - path: "/resources/past-articles/"
+    count: 131
+    reason: "Magazine back-issues; editorial rather than regulatory."
+  - path: "/growth-and-transformation/"
+    count: 192
+    reason: >
+      Industry development, grants, manpower and awards. Occasionally cites a
+      technical guide, but the guides themselves are published under
+      /resources/guidebooks-and-publications/, which is in scope.
+  - path: "/sustainability/greenmark/"
+    count: 10
+    reason: "Certification scheme literature; see sustainability_legislation."
+  - path: "/safety-and-standards/enforcement-actions/"
+    count: 4
+    reason: "Named-party case records; high churn, low reference value."
+  - path: "/about-us/, /e-services/, /contact-us/"
+    reason: "Corporate and transactional pages."
+
+deferred:
+  - target: "https://info.corenet.gov.sg/resources/codes-and-regulations"
+    reason: >
+      CORENET is the whole-of-government submission portal and carries the
+      consolidated codes and regulations for several agencies, not just BCA.
+      It is already noted in the repository TODO. It deserves its own source
+      entry rather than being folded into bca, because its records span
+      agencies and it is not an Isomer site.
+  - target: "https://sso.agc.gov.sg"
+    reason: >
+      Recorded here only as external references reached from BCA pages. A
+      full Statutes Online crawler would serve every Singapore source and
+      should be built once, at jurisdiction level, not per agency.
+
+# --- Verification ------------------------------------------------------------
+# What a person should check on the first real run before trusting the source.
+acceptance:
+  - "Total records >= 950 across the five crawlers (measured 1009 at survey)."
+  - "circulars yields ~404 items with a publish_date on essentially all of them."
+  - "No record from a host outside asset_hosts (checked mechanically)."
+  - "No record under the out_of_scope paths (checked mechanically)."
+  - 'Both "Approved Document" and "Code on Accessibility in the Built Environment 2025" appear by name.'
+  - "Spot-check 10 document URLs return HTTP 200 with a PDF content type."

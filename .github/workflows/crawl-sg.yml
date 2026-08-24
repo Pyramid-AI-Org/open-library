@@ -1,0 +1,151 @@
+name: Daily Web Crawl (Singapore)
+
+on:
+  schedule:
+    - cron: "0 3 * * *" # Daily at 3 AM UTC, offset from the Hong Kong run
+  workflow_dispatch:
+    inputs:
+      crawler:
+        description: "Specific crawler module to run (e.g. sla.circulars). Empty runs all Singapore sources."
+        required: false
+        default: ""
+      debug:
+        description: "Enable debug mode"
+        required: false
+        default: "false"
+      run_date:
+        description: "UTC date YYYY-MM-DD (defaults to today)"
+        required: false
+        default: ""
+
+# Same group as the Hong Kong workflow so the two runs never push the
+# data branch concurrently.
+concurrency:
+  group: crawler-data
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('crawlers/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r crawlers/requirements.txt
+
+      - name: Prepare data worktree (data branch)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git fetch origin data
+          git worktree add -B data data-worktree origin/data
+          mkdir -p data-worktree/data/sg
+
+      - name: Archive previous latest
+        env:
+          RUN_DATE: ${{ github.event.inputs.run_date }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from utils.data_rotation import archive_previous_latest
+          from utils.settings import load_settings
+
+          data_root = Path('data-worktree/data/sg')
+          run_date = (os.getenv("RUN_DATE") or "").strip() or None
+          settings = load_settings("config/settings.sg.yaml")
+          archive_policy = settings.get("archive_policy", {}) if isinstance(settings, dict) else {}
+          raw_day = archive_policy.get("mid_month_refresh_day", 15) if isinstance(archive_policy, dict) else 15
+          try:
+              mid_month_refresh_day = int(raw_day)
+          except Exception:
+              mid_month_refresh_day = 15
+          res = archive_previous_latest(
+              data_root,
+              run_date=run_date,
+              mid_month_refresh_day=mid_month_refresh_day,
+          )
+          print(f"archived={res.archived} path={res.archived_path}")
+          PY
+
+      - name: Run crawler(s)
+        env:
+          CRAWLER: ${{ github.event.inputs.crawler }}
+          DEBUG: ${{ github.event.inputs.debug }}
+          RUN_DATE: ${{ github.event.inputs.run_date }}
+        run: |
+          args=""
+          if [ -n "$CRAWLER" ]; then args="$args --crawler $CRAWLER"; fi
+          if [ "$DEBUG" = "true" ]; then args="$args --debug"; fi
+          if [ -n "$RUN_DATE" ]; then args="$args --run-date $RUN_DATE"; fi
+
+          python main.py $args --settings config/settings.sg.yaml --out data-worktree/data/sg
+
+      - name: Generate latest stats (for viewer)
+        run: |
+          python -m scripts.data_stats \
+            --in data-worktree/data/sg/latest/urls.jsonl \
+            --out-json data-worktree/data/sg/latest/stats.json \
+            > data-worktree/data/sg/latest/info.txt || true
+
+      - name: Build archive index (for viewer)
+        run: |
+          python -m scripts.build_archive_index --data-root data-worktree/data/sg
+
+      - name: Commit and push data branch
+        run: |
+          pushd data-worktree
+
+          git add -f -A data/sg/latest || true
+          git add -f -A data/sg/archive || true
+          git add -f -A data/sg/archive_v2 || true
+
+          if git diff --cached --quiet; then
+            echo "No data changes to commit"
+            popd
+            exit 0
+          fi
+
+          stamp=$(date -u +"%Y-%m-%d")
+          git commit -m "Daily crawl data (SG): $stamp" || true
+
+          # Another workflow may have pushed between our fetch and now.
+          for i in 1 2 3; do
+            if git push origin data; then break; fi
+            git pull --rebase origin data
+          done
+
+          popd
+
+      - name: Upload logs/data snapshot (debugging)
+        uses: actions/upload-artifact@v4
+        with:
+          name: crawl-sg-snapshot-${{ github.run_id }}
+          path: |
+            data-worktree/data/sg/latest/*.json
+            data-worktree/data/sg/latest/*.jsonl
+          retention-days: 7

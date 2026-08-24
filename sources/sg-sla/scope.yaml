@@ -1,0 +1,148 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Singapore Land Authority
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Lands Department (LandsD)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: sla
+label: "Singapore Land Authority"
+base_url: "https://www.sla.gov.sg"
+hk_equivalent: "Lands Department (LandsD)"
+mandate: >
+  SLA manages State land and the land registry and survey system, and is
+  the counterpart of the Hong Kong Lands Department already in the
+  library. The Hong Kong requirement was narrow and precise: under
+  Resources, go to Practice Notes and Information Notes, open each and
+  download the whole PDF rather than the per-section split. SLA matches
+  that shape almost exactly.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: isomer
+  evidence: >
+    Assets on isomer-user-content.by.gov.sg under tenant 73; Made with
+    Isomer footer
+  server_rendered: true
+  content_element_id: main-content
+  document_labels: aria-label
+  collection_pages: flight-payload
+
+discovery:
+  method: sitemap
+  sitemap_url: "https://www.sla.gov.sg/sitemap.xml"
+  note: >
+    ~330 pages with lastmod; the 332 circulars are not in it - they are
+    collection items.
+  robots_txt: "https://www.sla.gov.sg/robots.txt"
+  robots_disallow: ["/search"]
+
+asset_hosts:
+  documents:
+    - "www.sla.gov.sg"
+    - "isomer-user-content.by.gov.sg"
+  external_references:
+    - "sso.agc.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: circulars
+    module: crawlers/sla/circulars.py
+    engine: collection
+    intent: [collection_items, page_text]
+    listing_urls:
+      - "https://www.sla.gov.sg/news/circulars/"
+    expected:
+      pages: 1
+      documents: 332
+      items: 332
+      earliest: "1999-01-01"
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The direct Lands Department equivalent and the highest-value target
+      on the site: 332 circulars and notices from 1999 to the present.
+      Chief Surveyor notices and circulars, practice circulars, the Chief
+      Surveyor directives and guidelines, consolidated practice circulars,
+      and the circulars to professional institutes. Each row links
+      straight to the whole PDF with no intermediate page and no per-
+      section split, which is exactly what the Hong Kong note asked for.
+    evidence:
+      - "332 items across 13 categories, 1999-2026"
+      - "142 Chief Surveyor Notices; 83 Chief Surveyor Circulars; 60 Practice Circulars"
+      - "13 Chief Surveyor Directives - the survey practice directives"
+    notes: >
+      Unlike URA, SLA's migration re-hosted the full back catalogue onto
+      the Isomer asset host, so 2003 and 2004 circulars are as reachable
+      as this year's. No backfill gap here.
+    run_notes: >
+      CONFIRMED on the 21 August run: 332 items, every one carrying a
+      date, spanning 1999 to 2026, all recovered from one response.
+
+  - name: property_boundaries
+    module: crawlers/sla/property_boundaries.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/regulatory/property-boundaries"
+    expected:
+      pages: 6
+      documents: 6
+      measured: false         # not yet run live - survey estimate
+    rationale: >
+      Cadastral and property boundary survey requirements - the survey
+      practice half of the Lands Department mapping.
+
+  - name: legislation
+    module: crawlers/sla/legislation.py
+    engine: sitemap
+    intent: [page_text, external_references]
+    path_prefixes:
+      - "/news/legislation"
+    expected:
+      pages: 1
+      external_references: 13
+      measured: false         # not yet run live - survey estimate
+    rationale: >
+      The 13 Acts SLA administers - State Lands, State Lands Protection,
+      Land Surveyors, Boundaries and Survey Maps, Land Titles. All on
+      Statutes Online, recorded as external references.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/news/press-releases"
+    reason: >
+      Press releases.
+  - path: "/properties"
+    reason: >
+      Property rental and state land tenancy administration.
+  - path: "/about-us"
+    reason: >
+      Corporate pages.
+
+deferred:
+  - target: "Land Surveyors Board directives on lsb.mlaw.gov.sg"
+    reason: >
+      The LSB Directives on Land Survey and Geomatics Practices are
+      published by a different body under a different ministry.
+      Substantively adjacent; a separate source.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 340 across the three crawlers."
+  - "circulars returns ~332 items, the earliest from 1999."
+  - 'A "Chief Surveyor" circular and a "Practice Circular" both appear.'
+  - "Every document URL sits on isomer-user-content.by.gov.sg under tenant 73, or on www.sla.gov.sg."
+  - "Legislation records point at sso.agc.gov.sg and are typed as external references."

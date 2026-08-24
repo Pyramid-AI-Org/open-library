@@ -1,0 +1,234 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - National Parks Board
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Hong Kong Herbarium
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: nparks
+label: "National Parks Board"
+base_url: "https://www.nparks.gov.sg"
+hk_equivalent: "Hong Kong Herbarium"
+mandate: >
+  NParks manages Singapore's greenery, biodiversity and the Singapore
+  Botanic Gardens, whose herbarium (SING) is the counterpart of the Hong
+  Kong Herbarium already in the library. Two things are in scope: the
+  plant records that answer the herbarium mapping, and the greenery and
+  landscape technical standards that developments are assessed against -
+  which have no Hong Kong analogue but are the same class of material as
+  everything else here.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitefinity
+  evidence: >
+    meta generator Sitefinity 14.4 DX on the main host; ?sfvrsn= on
+    assets; documents under /docs/default-source/ and /-/media/nparks-
+    real-content/. Two subdomains run Isomer instead: sbg.nparks.gov.sg
+    and cuge.nparks.gov.sg
+  server_rendered: true
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: sitemap
+  sitemap_url: "https://www.nparks.gov.sg/sitemap/sitemap.xml"
+  note: >
+    1,197 pages at the non-standard /sitemap/sitemap.xml, with no lastmod.
+    /sitemap.xml itself 404s. Far too small to cover Flora & Fauna Web, whose
+    species records are enumerated separately - see the deferred row.
+
+    CHANGED after the 21 August run. The three rows below were originally
+    written as narrow section spiders seeded from three known pages, and that
+    is what limited the first harvest to 119 records: two of the three seeds
+    are pages whose listings are JavaScript-rendered, so the spider saw the
+    seed and nothing under it. The sitemap does not have that problem. The
+    source now drives off the sitemap, filtered to the six in-scope top-level
+    sections, and the rows below are named for those sections rather than for
+    the seeds. 260 pages, 199 documents.
+
+    Worth recording because it is counter-intuitive: NParks is a Sitefinity
+    site whose *pages* are server-rendered but whose *listings* are not. A
+    seed-and-follow crawl is the wrong shape here even though every individual
+    page fetch works perfectly. Checked explicitly on 25 sampled
+    /publications-resources pages - the raw HTML contains no
+    /docs/default-source/ URL that the DOM does not also contain, so nothing
+    is hidden in a payload; the documents simply are not on those pages.
+  robots_txt: "https://www.nparks.gov.sg/robots.txt"
+  robots_disallow: []
+
+asset_hosts:
+  documents:
+    - "www.nparks.gov.sg"
+    - "isomer-user-content.by.gov.sg"
+    - "skyrisegreenery.nparks.gov.sg"
+    - "cuge.nparks.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+# Driven from the sitemap, filtered to these six top-level sections. CUGE is a
+# separate host and keeps its own row.
+
+crawlers:
+  - name: publications_resources
+    module: crawlers/nparks/publications_resources.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes: ["/publications-resources"]
+    expected:
+      pages: 111
+      documents: 2
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Includes the Guidelines on Greenery Provision and Tree Conservation for
+      Developments - NParks acting as a development control authority, and the
+      row a building professional actually needs.
+    evidence:
+      - "guidelines-greenery-provision-tree-conservation-developments-version-5.pdf"
+      - "terms-access-guidelines-greenery-provision-tree-conservation-developments.pdf"
+    run_notes: >
+      111 pages for 2 documents looks like a failure and is not. This section
+      is mostly web articles - gardening and biodiversity explainers written as
+      HTML, with no attached files. Verified on a 25-page sample: raw HTML and
+      DOM agree, nothing hidden. Do not "fix" this row by widening it.
+
+  - name: services
+    module: crawlers/nparks/services.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes: ["/services"]
+    expected:
+      pages: 45
+      documents: 41
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Development plan submission, tree conservation applications, permits and
+      the forms and checklists that go with them. The regulatory heart of this
+      source.
+
+  - name: nature
+    module: crawlers/nparks/nature.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes: ["/nature"]
+    expected:
+      pages: 65
+      documents: 55
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Biodiversity guidelines and resources, including the Handbook on Habitat
+      Restoration and its per-chapter volumes.
+
+  - name: learn
+    module: crawlers/nparks/learn.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes: ["/learn"]
+    expected:
+      pages: 30
+      documents: 99
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Technical guidebooks and training material - the largest single document
+      count in this source, and a section the original three-seed scope missed
+      entirely.
+
+  - name: who_we_are
+    module: crawlers/nparks/who_we_are.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes: ["/who-we-are"]
+    expected:
+      pages: 6
+      documents: 2
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      Corporate pages, kept only for the small number of statutory documents
+      filed under them.
+
+  - name: cuge_standards
+    module: crawlers/nparks/cuge_standards.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://cuge.nparks.gov.sg/resources/publications/"
+      - "https://cuge.nparks.gov.sg/resources/"
+    path_prefixes: ["/"]      # bounded by host, not by path - the site is small
+    expected:
+      pages: 25
+      documents: 20
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The CUGE Standards - the CS series covering soil mixtures, turfgrass
+      installation, rooftop greenery design loads and substrates, and
+      biodiversity on roof gardens. The closest thing NParks has to a
+      technical-document library, and free to download unlike most Singapore
+      standards.
+    evidence:
+      - "CS A03:2013 Specifications for Soil Mixture for General Landscaping Use"
+      - "CS E01:2009 Guidelines on Design Loads for Rooftop Greenery"
+    notes: >
+      CUGE runs on Isomer while the parent site runs Sitefinity, so its PDFs
+      sit on isomer-user-content.by.gov.sg and older ones on
+      skyrisegreenery.nparks.gov.sg. Both hosts are in the document allowlist.
+      Because cuge.nparks.gov.sg is a separate origin it cannot be harvested
+      from a page context on www.nparks.gov.sg - it needs its own run, and its
+      output is a separate CSV.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/gardens-parks-and-nature"
+    reason: >
+      Visitor information for parks and gardens.
+  - path: "/news-and-events"
+    reason: >
+      Press releases and events.
+  - path: "/visit"
+    reason: >
+      739 park, garden and trail pages - visitor information. The single
+      largest section of the site and the least relevant to this library.
+  - path: "/get-involved"
+    reason: >
+      Volunteering and community programmes.
+
+deferred:
+  - target: "Flora & Fauna Web species records"
+    reason: >
+      This is the real herbarium equivalent and it is crawlable, but it
+      needs its own crawler shape rather than a section spider. Records
+      are server-rendered at /florafaunaweb/{flora|fauna}/{d1}/{d2}/{id},
+      where the two path segments are simply the first and second digits
+      of the id - so the whole database can be enumerated by iterating
+      integers, with no search API needed. Each record carries a last-
+      updated date, which substitutes for the missing sitemap lastmod.
+      Tens of thousands of records: worth doing, and worth doing
+      deliberately rather than bolting onto a section crawler.
+  - target: "SING herbarium specimen database"
+    reason: >
+      The Singapore Botanic Gardens herbarium holds ~800,000 specimens but
+      its digitalisation is not public until March 2027. Today the only
+      access is through JSTOR Global Plants and BRAHMS, both third-party
+      and partly paywalled. The direct Hong Kong Herbarium equivalent
+      therefore does not exist yet; Flora & Fauna Web is the usable
+      substitute.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 450 on www.nparks.gov.sg, plus >= 45 from the CUGE run."
+  - "Documents >= 195 on the main host, >= 20 from CUGE."
+  - 'The "Guidelines on Greenery Provision" document appears by name.'
+  - "cuge_standards returns CS-series documents."
+  - "No record under /visit/ or /news/."
+  - "publications_resources returns ~111 pages and ~2 documents - a much larger document count there means the section filter has drifted."

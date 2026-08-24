@@ -1,0 +1,218 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - PUB, Singapore's National Water Agency
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Drainage Services Department (DSD) and Water Supplies Department (WSD)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: pub
+label: "PUB, Singapore's National Water Agency"
+base_url: "https://www.pub.gov.sg"
+hk_equivalent: "Drainage Services Department (DSD) and Water Supplies Department (WSD)"
+mandate: >
+  PUB manages Singapore's entire water loop - catchment, supply, used
+  water, drainage and flood management. It is the Singapore counterpart of
+  two Hong Kong departments at once: the Drainage Services Department and
+  the Water Supplies Department, both already in the library. The material
+  in scope is therefore the union of theirs: drainage and sewerage codes
+  of practice, technical handbooks and engineering procedures, industry
+  circulars, and the plumbing and water-service requirements that licensed
+  plumbers work to.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitecore
+  evidence: >
+    Assets served from /-/media/ (the Sitecore media handler); listing
+    filters keyed on braced Sitecore item GUIDs; legacy .aspx routes still
+    indexed
+  server_rendered: partial
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: spider
+  sitemap_url: null
+  note: >
+    /sitemap.xml returns 404 and robots.txt declares no Sitemap. There is
+    no discovery surface, so the crawl is seeded from the professional
+    resource hubs and bounded by a path allowlist.
+  robots_txt: "https://www.pub.gov.sg/robots.txt"
+  robots_disallow: []
+  robots_note: >
+    robots.txt allows the default agent but names ClaudeBot, GPTBot, CCBot
+    and a dozen other AI crawlers with Disallow: /. This crawler
+    identifies as OpenLibraryCrawler and is not in that list, but the
+    site's intent is plain - keep the delay generous and do not
+    impersonate a browser.
+
+asset_hosts:
+  documents:
+    - "www.pub.gov.sg"
+  document_path_prefixes:
+    - "/-/media/"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: guides_and_handbooks
+    module: crawlers/pub/guides_and_handbooks.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.pub.gov.sg/Professionals/Resources/Guides-and-Handbooks"
+    path_prefixes:
+      - "/Professionals/Resources/Guides-and-Handbooks"
+    expected:
+      pages: 1
+      documents: 30
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The direct analogue of the DSD technical manuals and guidelines. It
+      carries the Drainage Handbook (Managing Urban Runoff), the ABC
+      Waters Design Guidelines and their engineering procedures, the
+      Flood-Resilient Developments Guidebook, the Earth Control Measures
+      guidebook, the Sewer CCTV guidebook and the Handbook on Application
+      for Water Supply. It is also the one high-value PUB listing that is
+      fully server-rendered, so it is the most reliable row in this
+      source.
+    evidence:
+      - "managingUrbanRunoff.pdf - the drainage handbook"
+      - "Engineering Procedures for ABC Waters Design Features, 2024 edition"
+      - "ECM-Guidebook.pdf; Sewer_CCTV_Guidebook_Oct-2023.pdf"
+
+  - name: codes_of_practice
+    module: crawlers/pub/codes_of_practice.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.pub.gov.sg/Professionals/Resources/Code-of-Practices"
+    path_prefixes:
+      - "/Professionals/Resources/Code-of-Practices"
+    expected:
+      pages: 1
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The binding drainage and sewerage codes: the Code of Practice on
+      Surface Water Drainage, the Code of Practice on Sewerage and
+      Sanitary Works, the Code of Practice on Coastal Protection, and the
+      standard drawings issued with them. These are what a qualified
+      person designs to, and they are the closest thing PUB has to the DSD
+      technical circulars.
+    notes: >
+      This listing renders its titles but not its document links - the
+      hrefs arrive by JavaScript. A plain HTTP crawl will therefore under-
+      collect here, and the expected count is a floor, not a total. The
+      standard drawings sub-listing is filtered by braced Sitecore item
+      GUIDs which are only emitted by the filter control; four of the five
+      category GUIDs are unknown. Resolve by finding the underlying JSON
+      endpoint with a browser network capture before trusting this row.
+    run_notes: >
+      CONFIRMED on the 21 August run: this listing returned zero
+      documents. The titles render but the hrefs arrive by JavaScript,
+      exactly as the survey predicted. Do not treat this row's coverage as
+      meaningful until the underlying JSON endpoint is captured from a
+      browser - and note that PUB's circulars are mirrored server-rendered
+      on CORENET, which is the better acquisition path either way.
+
+  - name: circulars
+    module: crawlers/pub/circulars.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.pub.gov.sg/Professionals/Resources/Circulars"
+    path_prefixes:
+      - "/Professionals/Resources/Circulars"
+    expected:
+      pages: 1
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Industry circulars - the running record of how PUB's requirements
+      change, and the equivalent of the DSD technical circulars and the
+      WSD plumbing circulars. Categories include Licensed Plumbers,
+      Building Plans, Earth Control Measures, Fittings and Standards, Used
+      Water Management and Water Storage Tanks.
+    notes: >
+      28 circulars exist; the listing is JavaScript-rendered and
+      paginated, so a plain crawl reaches far fewer. PUB circulars are
+      also mirrored on the CORENET portal under /docs/default-source/pub-
+      circulars/, which is server-rendered - see the deferred CORENET
+      source, which would cover this row properly.
+    run_notes: >
+      CONFIRMED on the 21 August run: zero documents returned. JavaScript-
+      rendered and paginated. The CORENET mirror at /docs/default-
+      source/pub-circulars/ is server-rendered and should be used instead
+      of this listing.
+
+  - name: requirements
+    module: crawlers/pub/requirements.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.pub.gov.sg/Professionals/Requirements"
+    path_prefixes:
+      - "/Professionals/Requirements"
+    expected:
+      pages: 33
+      documents: 56
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The WSD half of this source. Water supply services, water fittings,
+      water storage tanks, licensed plumbers and qualified-person
+      submissions. The Hong Kong deck asked for the web text of these
+      pages as well as the PDFs, and that matters more here than it did
+      there: PUB states most plumbing requirements as page text rather
+      than as documents, so a PDF-only crawl would return almost nothing
+      from a section that is genuinely substantive.
+    evidence:
+      - "PUB's Stipulation of Standards and Requirements for Water Fittings"
+      - "WELS Guidebook; Water Efficiency Ratings and Requirements"
+      - "Demerit Point System for licensed plumbers"
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/Public/"
+    reason: >
+      Consumer-facing water conservation and education content.
+  - path: "/Resources/Publications/Research-and-Development"
+    reason: >
+      The Innovation in Water Singapore magazine series - industry
+      literature, not technical standards.
+  - path: "/Corporate/"
+    reason: >
+      Corporate, careers and tender pages.
+
+deferred:
+  - target: "Singapore Standard SS 636 (Code of Practice for Water Services)"
+    reason: >
+      The binding plumbing standard is an Enterprise Singapore standard
+      sold through the Singapore Standards eShop, not a PUB publication.
+      It cannot be collected. PUB's pages cite it; the library can point
+      at the citation but not the text.
+  - target: "PUB circulars via CORENET"
+    reason: >
+      The CORENET portal mirrors PUB circulars server-rendered at
+      /docs/default-source/pub-circulars/, and exposes a JSON API. That is
+      a better acquisition path than PUB's own JavaScript listing - see
+      sources/sg-corenet.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 60 across the four crawlers."
+  - 'Both "Managing Urban Runoff" and "ABC Waters Design Guidelines" appear by name.'
+  - 'The "Code of Practice on Surface Water Drainage" appears.'
+  - "Every document URL sits under /-/media/ on www.pub.gov.sg."
+  - "No crawler reports hitting its page budget."
+  - "Re-measure codes_of_practice and circulars once the JavaScript listings are solved - their expected counts are floors, not totals."
