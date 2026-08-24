@@ -274,7 +274,7 @@ class SectionSpiderCrawler:
                         url=page_url,
                         name=page_title or infer_name_from_link(None, page_url),
                         discovered_at_utc=ctx.started_at_utc,
-                        source=self.name,
+                        source=f"{ctx.source_id}.{self.name}",
                         publish_date=None,
                         meta={
                             "record_kind": "page",
@@ -325,7 +325,7 @@ class SectionSpiderCrawler:
                             url=identity,
                             name=title,
                             discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
+                            source=f"{ctx.source_id}.{self.name}",
                             publish_date=None,
                             meta=meta,
                         )

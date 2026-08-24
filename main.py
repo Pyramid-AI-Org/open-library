@@ -244,7 +244,12 @@ def _select_crawlers_for_run(
             merged_cfg.update(page_cfg)
 
         schedule_cfg = normalize_schedule_config(merged_cfg)
-        prior_state = state_by_crawler.get(crawler_name, {})
+        # State is keyed by module_path; fall back to the bare crawler name
+        # for state files written before that change.
+        prior_state = (
+            state_by_crawler.get(module_path)
+            or state_by_crawler.get(crawler_name, {})
+        )
         last_run_day = None
         if isinstance(prior_state, dict):
             last_run_day = parse_iso_date(
@@ -252,7 +257,7 @@ def _select_crawlers_for_run(
             )
 
         is_due = should_run_on_date(run_date_obj, last_run_day, merged_cfg)
-        decisions[crawler_name] = {
+        decisions[module_path] = {
             "source_id": source_id,
             "module_path": module_path,
             "enabled": schedule_cfg["enabled"],
@@ -268,7 +273,7 @@ def _select_crawlers_for_run(
         if is_due:
             due.append((source_id, crawler_name, module_path))
         else:
-            skipped.append(crawler_name)
+            skipped.append(module_path)
 
     return due, skipped, decisions
 
@@ -406,14 +411,14 @@ def main() -> int:
         crawlers_to_run = [found]
         skipped_crawlers: list[str] = []
         schedule_decisions = {
-            found[1]: {
+            found[2]: {
                 "source_id": found[0],
                 "module_path": found[2],
                 "enabled": True,
                 "interval_days": 1,
                 "last_successful_run_date": (
-                    crawler_state.get(found[1], {}).get("last_successful_run_date")
-                    if isinstance(crawler_state.get(found[1]), dict)
+                    (crawler_state.get(found[2]) or crawler_state.get(found[1]) or {}).get("last_successful_run_date")
+                    if isinstance(crawler_state.get(found[2]) or crawler_state.get(found[1]), dict)
                     else None
                 ),
                 "due_today": True,
@@ -443,13 +448,15 @@ def main() -> int:
                 run_date,
                 started_at,
                 bool(args.debug),
-                prior_records_by_url=previous_records_by_source.get(crawler_name),
+                prior_records_by_url=previous_records_by_source.get(module_path),
             )
-            successful_records_by_source[crawler_name] = records
-            succeeded_crawlers.append(crawler_name)
+            # Key by module_path: bare crawler names (e.g. "circulars") repeat
+            # across sources and would silently overwrite each other here.
+            successful_records_by_source[module_path] = records
+            succeeded_crawlers.append(module_path)
             print(f"  {module_path}: {len(records)} records")
         except Exception as e:
-            failed_crawlers.append(crawler_name)
+            failed_crawlers.append(module_path)
             print(f"  {module_path}: ERROR - {e}")
             if args.debug:
                 raise

@@ -364,7 +364,7 @@ class _PayloadCrawlerBase:
                         url=canonical,
                         name=title_with_date or title,
                         discovered_at_utc=ctx.started_at_utc,
-                        source=self.name,
+                        source=f"{ctx.source_id}.{self.name}",
                         publish_date=normalize_publish_date(date_value),
                         meta={
                             "kind": "document",
@@ -444,7 +444,7 @@ class FlightPayloadCrawler(_PayloadCrawlerBase):
                 url=canonicalize_url(start_url),
                 name=cfg.get("label") or self.name.replace("_", " ").title(),
                 discovered_at_utc=ctx.started_at_utc,
-                source=self.name,
+                source=f"{ctx.source_id}.{self.name}",
                 publish_date=None,
                 meta={"kind": "page", "file_type": "html"},
             )
@@ -549,7 +549,7 @@ class ServerActionCrawler(_PayloadCrawlerBase):
                 url=canonicalize_url(start_url),
                 name=cfg.get("label") or self.name.replace("_", " ").title(),
                 discovered_at_utc=ctx.started_at_utc,
-                source=self.name,
+                source=f"{ctx.source_id}.{self.name}",
                 publish_date=None,
                 meta={"kind": "page", "file_type": "html"},
             )
@@ -676,7 +676,7 @@ class ApiIndexCrawler(_PayloadCrawlerBase):
                 url=url,
                 name=info.get("title"),
                 discovered_at_utc=ctx.started_at_utc,
-                source=self.name,
+                source=f"{ctx.source_id}.{self.name}",
                 publish_date=normalize_publish_date(info.get("date")),
                 meta={
                     "kind": "document",

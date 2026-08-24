@@ -148,7 +148,7 @@ def test_corenet_circulars_are_kept_and_marked_external() -> None:
 def test_records_carry_source_identity() -> None:
     for record in _run("vehicle_parking"):
         assert record.source_id == "lta"
-        assert record.source == "vehicle_parking"
+        assert record.source == "lta.vehicle_parking"
         assert record.source_label == "Land Transport Authority"
 
 

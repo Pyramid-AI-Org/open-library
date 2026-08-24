@@ -380,6 +380,12 @@ def parse_sitemap(xml_text: str) -> tuple[list[SitemapEntry], list[str]]:
     """
     entries: list[SitemapEntry] = []
     nested: list[str] = []
+    # Some sitemaps (NParks) are served with a UTF-8 BOM and no charset
+    # header, so the BOM survives decoding (possibly mangled to "ï»¿") and
+    # ElementTree rejects the document. Start at the first "<".
+    start = xml_text.find("<")
+    if start > 0:
+        xml_text = xml_text[start:]
     try:
         root = ElementTree.fromstring(xml_text)
     except ElementTree.ParseError:
@@ -644,7 +650,7 @@ class IsomerSectionCrawler(_IsomerBase):
                             url=canon_page,
                             name=page_title or infer_name_from_link(None, canon_page),
                             discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
+                            source=f"{ctx.source_id}.{self.name}",
                             publish_date=entry.lastmod,
                             meta={
                                 "record_kind": "page",
@@ -720,7 +726,7 @@ class IsomerSectionCrawler(_IsomerBase):
                         url=identity,
                         name=title or infer_name_from_link(link.text, canon),
                         discovered_at_utc=ctx.started_at_utc,
-                        source=self.name,
+                        source=f"{ctx.source_id}.{self.name}",
                         publish_date=None,
                         meta=meta,
                     )
@@ -785,7 +791,7 @@ class IsomerCollectionCrawler(_IsomerBase):
                             url=canon_listing,
                             name=listing_title or "Collection listing",
                             discovered_at_utc=ctx.started_at_utc,
-                            source=self.name,
+                            source=f"{ctx.source_id}.{self.name}",
                             publish_date=None,
                             meta={"record_kind": "index_page", "file_ext": "html"},
                         )
@@ -828,7 +834,7 @@ class IsomerCollectionCrawler(_IsomerBase):
                         url=canon,
                         name=title or infer_name_from_link(None, canon),
                         discovered_at_utc=ctx.started_at_utc,
-                        source=self.name,
+                        source=f"{ctx.source_id}.{self.name}",
                         publish_date=item.formatted_date or None,
                         meta=meta,
                     )

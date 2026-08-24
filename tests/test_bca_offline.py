@@ -162,7 +162,7 @@ def test_circulars_reads_the_whole_collection() -> None:
 def test_records_carry_source_identity() -> None:
     for record in _run("safety_and_standards"):
         assert record.source_id == "bca"
-        assert record.source == "safety_and_standards"
+        assert record.source == "bca.safety_and_standards"
         assert record.source_label == "Building and Construction Authority"
 
 

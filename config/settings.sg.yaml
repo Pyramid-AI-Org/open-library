@@ -701,33 +701,33 @@ crawlers:
         # 111 pages, 2 documents. That ratio is correct - see the module
         # docstring before "fixing" it.
         engine: sitemap
-        allowed_path_prefixes:
+        path_prefixes:
           - "/publications-resources"
         emit_page_records: true
 
       services:
         # Development plan submission, tree conservation, permits, forms.
         engine: sitemap
-        allowed_path_prefixes:
+        path_prefixes:
           - "/services"
         emit_page_records: true
 
       nature:
         engine: sitemap
-        allowed_path_prefixes:
+        path_prefixes:
           - "/nature"
         emit_page_records: true
 
       learn:
         # The largest document count in this source.
         engine: sitemap
-        allowed_path_prefixes:
+        path_prefixes:
           - "/learn"
         emit_page_records: true
 
       who_we_are:
         engine: sitemap
-        allowed_path_prefixes:
+        path_prefixes:
           - "/who-we-are"
         emit_page_records: true
 
@@ -739,7 +739,7 @@ crawlers:
           - "https://cuge.nparks.gov.sg/resources/"
         allowed_hosts:
           - "cuge.nparks.gov.sg"
-        allowed_path_prefixes:
+        path_prefixes:
           - "/"
         max_depth: 3
         max_pages: 200
@@ -1070,7 +1070,7 @@ crawlers:
           - "/statutory-boards"
           - "/ministries"
         max_depth: 2
-        max_pages: 500        # measured 21 Aug 2026: 402 pages at depth 2
+        max_pages: 800   # raised from 500: run truncated with 186 queued        # measured 21 Aug 2026: 402 pages at depth 2
         emit_page_records: true
       organs_of_state:
         # The 10 organs of state - Attorney-General's Chambers,
@@ -1081,7 +1081,7 @@ crawlers:
         allowed_path_prefixes:
           - "/organs-of-state"
         max_depth: 2
-        max_pages: 40         # measured 21 Aug 2026: 11 pages at depth 2
+        max_pages: 120   # raised from 40: run truncated with 41 queued         # measured 21 Aug 2026: 11 pages at depth 2
         emit_page_records: true
 
 # ============================================================================
