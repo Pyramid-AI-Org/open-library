@@ -1,0 +1,2085 @@
+Input: ..\ol-data-worktree\data\sg\latest\urls.jsonl
+Total records: 5832 (parse_errors=0)
+
+Records by source:
+- bca.accessibility_and_universal_design: 12 (0.2%)
+- bca.circulars: 403 (6.9%)
+- bca.guidebooks_and_publications: 52 (0.9%)
+- bca.safety_and_standards: 471 (8.1%)
+- bca.sustainability_legislation: 72 (1.2%)
+- ema.industry_reports: 1 (0.0%)
+- ema.regulations: 1 (0.0%)
+- ema.statistics: 2 (0.0%)
+- jtc.development_and_renovation: 23 (0.4%)
+- jtc.tenancy_requirements: 49 (0.8%)
+- lta.active_mobility: 7 (0.1%)
+- lta.development_construction_resources: 13 (0.2%)
+- lta.railway_protection: 22 (0.4%)
+- lta.street_works: 42 (0.7%)
+- lta.transport_infrastructure_standards: 19 (0.3%)
+- lta.vehicle_parking: 3 (0.1%)
+- mom.workplace_safety_and_health: 509 (8.7%)
+- mom.wsh_circulars: 153 (2.6%)
+- mom.wsh_legislation: 32 (0.5%)
+- nea.circulars: 123 (2.1%)
+- nea.development_control: 29 (0.5%)
+- nea.legislation: 90 (1.5%)
+- nea.pollution_control: 139 (2.4%)
+- nea.practices_and_guidelines: 49 (0.8%)
+- nea.publications: 49 (0.8%)
+- nparks.cuge_standards: 25 (0.4%)
+- nparks.learn: 129 (2.2%)
+- nparks.nature: 120 (2.1%)
+- nparks.publications_resources: 113 (1.9%)
+- nparks.services: 86 (1.5%)
+- nparks.who_we_are: 8 (0.1%)
+- parliament.bills_introduced: 1 (0.0%)
+- parliament.votes_and_proceedings: 1 (0.0%)
+- pub.circulars: 1 (0.0%)
+- pub.codes_of_practice: 1 (0.0%)
+- pub.guides_and_handbooks: 31 (0.5%)
+- pub.requirements: 88 (1.5%)
+- scdf.acts_codes_and_regulations: 289 (5.0%)
+- scdf.advisories: 36 (0.6%)
+- scdf.fire_code: 152 (2.6%)
+- scdf.fire_safety_circulars: 102 (1.7%)
+- scdf.petroleum_and_flammable_materials: 62 (1.1%)
+- sgdi.ministries: 350 (6.0%)
+- sgdi.organs_of_state: 82 (1.4%)
+- sgdi.statutory_boards: 687 (11.8%)
+- sla.circulars: 333 (5.7%)
+- sla.legislation: 15 (0.3%)
+- sla.property_boundaries: 17 (0.3%)
+- ura.circulars: 62 (1.1%)
+- ura.conservation: 150 (2.6%)
+- ura.development_control: 342 (5.9%)
+- ura.master_plan: 184 (3.2%)
+
+Per-source schema and validation summary:
+
+[scdf.acts_codes_and_regulations]
+- records: 289 | unique_urls: 289 | dup_url_hits: 0
+- issues: errors=10 warnings=16
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=289 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=10 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.scdf.gov.sg: 288
+  - info.corenet.gov.sg: 1
+- top url extensions:
+  - .pdf: 246
+  - .docx: 18
+  - (no_ext): 11
+  - .doc: 8
+  - .zip: 4
+  - .xls: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=289 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=263 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+  - count=13 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=10 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 4
+- most common meta keys:
+  - crawl_depth: 289
+  - file_ext: 289
+  - record_kind: 289
+  - discovered_from: 279
+  - discovered_from_title: 279
+  - fetch_url: 266
+  - declared_file_size: 3
+  - declared_file_type: 3
+- top scalar meta values (sample):
+  - crawl_depth: 1 (187), 0 (102)
+  - discovered_from: https://www.scdf.gov.sg/fire-safety-services-listing/downloads/acts-codes-and... (101), https://www.scdf.gov.sg/fire-safety-services-listing/downloads/acts-codes-and... (48), https://www.scdf.gov.sg/fire-safety-services-listing/downloads/forms (47)
+  - discovered_from_title: Hero banner for Acts, Codes &amp; Regulations (101), Hero banner for Fire Code 2013 (48), Hero banner for Forms (47)
+  - file_ext: pdf (246), docx (18), html (10)
+  - record_kind: document (278), page (10), external_reference (1)
+  - fetch_url: https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/circular-amendme... (1), https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/circular-amendme... (1), https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/circular-issues-... (1)
+
+[scdf.fire_code]
+- records: 152 | unique_urls: 152 | dup_url_hits: 0
+- issues: errors=38 warnings=18
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=152 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=38 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.scdf.gov.sg: 151
+  - info.corenet.gov.sg: 1
+- top url extensions:
+  - .pdf: 107
+  - (no_ext): 39
+  - .zip: 4
+  - .xls: 1
+  - .docx: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=152 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=106 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+  - count=38 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+  - count=6 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+- meta schema variants: 4
+- most common meta keys:
+  - crawl_depth: 152
+  - file_ext: 152
+  - record_kind: 152
+  - discovered_from: 114
+  - discovered_from_title: 114
+  - fetch_url: 108
+  - declared_file_size: 2
+  - declared_file_type: 2
+- top scalar meta values (sample):
+  - crawl_depth: 1 (117), 2 (31), 0 (4)
+  - discovered_from: https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/circulars (101), https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/codes-and... (6), https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/table-of-... (2)
+  - discovered_from_title: Hero banner for Acts, Codes &amp; Regulations (101), Hero banner for Related Tables and Diagrams of Chapter 1 (6), Hero banner for 1.1 Scope (2)
+  - file_ext: pdf (107), html (38), zip (4)
+  - record_kind: document (113), page (38), external_reference (1)
+  - declared_file_size: 20.65MB (1), 40.17MB (1)
+
+[scdf.fire_safety_circulars]
+- records: 102 | unique_urls: 102 | dup_url_hits: 0
+- issues: errors=1 warnings=6
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=102 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.scdf.gov.sg: 101
+  - info.corenet.gov.sg: 1
+- top url extensions:
+  - .pdf: 94
+  - .zip: 4
+  - (no_ext): 2
+  - .xls: 1
+  - .docx: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=102 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=95 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+  - count=6 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 3
+- most common meta keys:
+  - crawl_depth: 102
+  - file_ext: 102
+  - record_kind: 102
+  - discovered_from: 101
+  - discovered_from_title: 101
+  - fetch_url: 95
+- top scalar meta values (sample):
+  - crawl_depth: 0 (102)
+  - discovered_from: https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/circulars (101)
+  - discovered_from_title: Hero banner for Acts, Codes &amp; Regulations (101)
+  - file_ext: pdf (94), zip (4),  (1)
+  - record_kind: document (100), external_reference (1), page (1)
+  - fetch_url: https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/circular-amendme... (1), https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/circular-amendme... (1), https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/circular-issues-... (1)
+
+[nparks.cuge_standards]
+- records: 25 | unique_urls: 25 | dup_url_hits: 0
+- issues: errors=25 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=25 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=25 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - cuge.nparks.gov.sg: 25
+- top url extensions:
+  - (no_ext): 25
+- top-level key signatures (urls.jsonl record format):
+  - count=25 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=25 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 25
+  - file_ext: 25
+  - record_kind: 25
+- top scalar meta values (sample):
+  - crawl_depth: 1 (11), 2 (10), 3 (2)
+  - file_ext: html (25)
+  - record_kind: page (25)
+
+[ura.development_control]
+- records: 342 | unique_urls: 342 | dup_url_hits: 0
+- issues: errors=150 warnings=29
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=192 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=150 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=5
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 181
+  - www.ura.gov.sg: 150
+  - go.gov.sg: 11
+- top url extensions:
+  - .pdf: 177
+  - (no_ext): 161
+  - .doc: 4
+- top-level key signatures (urls.jsonl record format):
+  - count=342 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=179 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=150 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=7 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 5
+- most common meta keys:
+  - record_kind: 342
+  - sitemap_lastmod: 342
+  - file_ext: 331
+  - discovered_from: 192
+  - discovered_from_title: 192
+  - declared_file_size: 186
+  - declared_file_type: 186
+- top scalar meta values (sample):
+  - declared_file_size: 122 KB (6), 1.8 MB (6), 162 KB (5)
+  - declared_file_type: pdf (180), doc (4), zip (2)
+  - discovered_from: https://www.ura.gov.sg/guidelines/development-control/development-control-han... (32), https://www.ura.gov.sg/guidelines/development-control/development-control-han... (31), https://www.ura.gov.sg/guidelines/development-control/development-control-han... (31)
+  - discovered_from_title: Greenery (94), Allowable Uses (35), Bonus GFA Incentive Schemes (21)
+  - record_kind: document (181), page (150), external_reference (11)
+  - sitemap_lastmod: 2026-07-27T08:18:55.222Z (33), 2026-06-06T18:27:20.219Z (32), 2026-06-06T17:31:02.462Z (32)
+
+[bca.circulars]
+- records: 403 | unique_urls: 403 | dup_url_hits: 0
+- issues: errors=1 warnings=2
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 347
+  - www1.bca.gov.sg: 37
+  - go.gov.sg: 14
+  - info.corenet.gov.sg: 3
+  - www.corenet.gov.sg: 1
+  - www.mom.gov.sg: 1
+- top url extensions:
+  - .pdf: 351
+  - (no_ext): 52
+- top-level key signatures (urls.jsonl record format):
+  - count=403 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=217 meta_keys=['collection', 'date_raw', 'discovered_from', 'file_ext', 'record_kind']
+  - count=134 meta_keys=['collection', 'date_raw', 'declared_file_size', 'declared_file_type', 'discovered_from', 'file_ext', 'record_kind']
+  - count=51 meta_keys=['collection', 'date_raw', 'discovered_from', 'record_kind']
+- meta schema variants: 4
+- most common meta keys:
+  - record_kind: 403
+  - collection: 402
+  - date_raw: 402
+  - discovered_from: 402
+  - file_ext: 352
+  - declared_file_size: 134
+  - declared_file_type: 134
+- top scalar meta values (sample):
+  - collection: Circulars (402)
+  - date_raw: 1 September 2022 (11), 1 June 2021 (8), 1 September 2019 (8)
+  - discovered_from: https://www1.bca.gov.sg/resources/circulars/ (402)
+  - record_kind: document (351), page (51), index_page (1)
+  - file_ext: pdf (351), html (1)
+  - declared_file_size: 193 KB (3), 299 KB (2), 148 KB (2)
+
+[ura.master_plan]
+- records: 184 | unique_urls: 184 | dup_url_hits: 0
+- issues: errors=85 warnings=21
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=99 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=85 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 97
+  - www.ura.gov.sg: 85
+  - go.gov.sg: 2
+- top url extensions:
+  - .pdf: 97
+  - (no_ext): 87
+- top-level key signatures (urls.jsonl record format):
+  - count=184 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=97 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=85 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=2 meta_keys=['discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 3
+- most common meta keys:
+  - record_kind: 184
+  - sitemap_lastmod: 184
+  - file_ext: 182
+  - discovered_from: 99
+  - discovered_from_title: 99
+  - declared_file_size: 97
+  - declared_file_type: 97
+- top scalar meta values (sample):
+  - discovered_from: https://www.ura.gov.sg/land-planning/master-plan/control-plans/list-of-street... (59), https://www.ura.gov.sg/land-planning/master-plan/amendments-to-master-plan/20... (7), https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/tanjong-pag... (6)
+  - discovered_from_title: List of Street Block Plans (59), Amendments to Master Plan 2025 (17), &#x27;From Dreams to Rail-ity&#x27; (6)
+  - record_kind: document (97), page (85), external_reference (2)
+  - sitemap_lastmod: 2026-07-20T10:10:14.489Z (60), 2026-07-24T01:32:29.131Z (8), 2026-06-05T09:46:35.961Z (7)
+  - declared_file_size: 1.1 MB (9), 1.3 MB (7), 1.2 MB (5)
+  - declared_file_type: pdf (97)
+
+[ura.conservation]
+- records: 150 | unique_urls: 150 | dup_url_hits: 0
+- issues: errors=17 warnings=4
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=133 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=17 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 131
+  - www.ura.gov.sg: 17
+  - go.gov.sg: 2
+- top url extensions:
+  - .pdf: 127
+  - (no_ext): 19
+  - .docx: 3
+  - .doc: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=150 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=122 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=17 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=9 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 4
+- most common meta keys:
+  - record_kind: 150
+  - sitemap_lastmod: 150
+  - file_ext: 148
+  - discovered_from: 133
+  - discovered_from_title: 133
+  - declared_file_size: 122
+  - declared_file_type: 122
+- top scalar meta values (sample):
+  - discovered_from: https://www.ura.gov.sg/guidelines/conservation/secondary-settlement/ (24), https://www.ura.gov.sg/guidelines/conservation/residential-historic-districts/ (22), https://www.ura.gov.sg/guidelines/conservation/historic-districts/ (19)
+  - discovered_from_title: Planning Parameters and Restoration Guidelines for Secondary Settlements (24), Planning Parameters and Restoration Guidelines for Residential Historic Distr... (22), Planning Parameters and Restoration Guidelines for Historic Districts (19)
+  - record_kind: document (131), page (17), external_reference (2)
+  - sitemap_lastmod: 2026-07-01T11:37:32.891Z (25), 2026-07-01T00:08:11.578Z (23), 2026-06-26T09:09:00.889Z (20)
+  - declared_file_size: 1.2 MB (9), 1 MB (7), 1.1 MB (4)
+  - declared_file_type: pdf (118), docx (3), doc (1)
+
+[bca.safety_and_standards]
+- records: 471 | unique_urls: 471 | dup_url_hits: 0
+- issues: errors=57 warnings=10
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=414 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=57 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=6
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 378
+  - www1.bca.gov.sg: 57
+  - sso.agc.gov.sg: 35
+  - info.corenet.gov.sg: 1
+- top url extensions:
+  - .pdf: 374
+  - (no_ext): 92
+  - .xlsx: 2
+  - .xls: 1
+  - .zip: 1
+  - .docx: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=471 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=332 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=57 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=46 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 6
+- most common meta keys:
+  - record_kind: 471
+  - sitemap_lastmod: 471
+  - file_ext: 436
+  - discovered_from: 414
+  - discovered_from_title: 414
+  - declared_file_size: 333
+  - declared_file_type: 333
+  - fetch_url: 26
+- top scalar meta values (sample):
+  - declared_file_size: 70 KB (8), 451 KB (8), 75 KB (7)
+  - declared_file_type: pdf (328), docx (2), xls (1)
+  - discovered_from: https://www1.bca.gov.sg/safety-and-standards/construction-quality/conquas-for... (67), https://www1.bca.gov.sg/safety-and-standards/applications-and-licenses/struct... (65), https://www1.bca.gov.sg/safety-and-standards/lifts-escalators-and-mechanised-... (56)
+  - discovered_from_title: Resources from Past Events (71), CONQUAS for Public Projects (67), Guidelines for ST Plan Applications (65)
+  - fetch_url: https://info.corenet.gov.sg/docs/default-source/bca-circulars/circular-on-str... (1), https://sso.agc.gov.sg//SL/BCA1989-S443-2012?DocDate=20221028 (1), https://sso.agc.gov.sg/SL-Rev/BCA1989-RG2/Published/20020131?DocDate=20020131 (1)
+  - file_ext: pdf (374), html (57), xlsx (2)
+
+[bca.sustainability_legislation]
+- records: 72 | unique_urls: 72 | dup_url_hits: 0
+- issues: errors=7 warnings=3
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=65 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=7 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 55
+  - sso.agc.gov.sg: 9
+  - www1.bca.gov.sg: 7
+  - info.corenet.gov.sg: 1
+- top url extensions:
+  - .pdf: 51
+  - (no_ext): 16
+  - .xlsx: 5
+- top-level key signatures (urls.jsonl record format):
+  - count=72 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=56 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=7 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=5 meta_keys=['discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 4
+- most common meta keys:
+  - record_kind: 72
+  - sitemap_lastmod: 72
+  - discovered_from: 65
+  - discovered_from_title: 65
+  - file_ext: 63
+  - declared_file_size: 56
+  - declared_file_type: 56
+  - fetch_url: 4
+- top scalar meta values (sample):
+  - declared_file_size: 167 KB (2), 2.1 MB (2), 119 KB (2)
+  - declared_file_type: pdf (51), xlsx (5)
+  - discovered_from: https://www1.bca.gov.sg/sustainability/legislation-on-environmental-sustainab... (33), https://www1.bca.gov.sg/sustainability/legislation-on-environmental-sustainab... (13), https://www1.bca.gov.sg/sustainability/legislation-on-environmental-sustainab... (11)
+  - discovered_from_title: Regulatory Requirements for New Buildings and Existing Buildings undergoing M... (33), Regulatory Requirements for Existing Buildings (13), Mandatory Higher Green Mark Standard for Government Land Sales (GLS) (11)
+  - file_ext: pdf (51), html (7), xlsx (5)
+  - record_kind: document (56), external_reference (9), page (7)
+
+[lta.active_mobility]
+- records: 7 | unique_urls: 7 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=7 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.lta.gov.sg: 4
+  - info.corenet.gov.sg: 3
+- top url extensions:
+  - .pdf: 5
+  - .doc: 1
+  - .html: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=7 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=3 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+  - count=3 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 3
+- most common meta keys:
+  - crawl_depth: 7
+  - file_ext: 7
+  - record_kind: 7
+  - discovered_from: 6
+  - discovered_from_title: 6
+  - fetch_url: 3
+- top scalar meta values (sample):
+  - crawl_depth: 0 (7)
+  - discovered_from: https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (6)
+  - discovered_from_title: Active Mobility Proposals and Requirements (6)
+  - fetch_url: https://info.corenet.gov.sg/docs/default-source/lta-circulars/active-mobility... (1), https://info.corenet.gov.sg/docs/default-source/lta-circulars/expansion-of-th... (1), https://info.corenet.gov.sg/docs/default-source/lta-circulars/publication-of-... (1)
+  - file_ext: pdf (5), doc (1), html (1)
+  - record_kind: external_reference (3), document (3), page (1)
+
+[lta.development_construction_resources]
+- records: 13 | unique_urls: 13 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=13 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.lta.gov.sg: 12
+  - info.corenet.gov.sg: 1
+- top url extensions:
+  - .pdf: 10
+  - (no_ext): 1
+  - .docx: 1
+  - .html: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=13 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=12 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 13
+  - file_ext: 13
+  - record_kind: 13
+  - discovered_from: 12
+  - discovered_from_title: 12
+- top scalar meta values (sample):
+  - crawl_depth: 0 (13)
+  - discovered_from: https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (12)
+  - discovered_from_title: Development & Construction Specifications and Resources (12)
+  - file_ext: pdf (10),  (1), docx (1)
+  - record_kind: document (11), external_reference (1), page (1)
+
+[bca.guidebooks_and_publications]
+- records: 52 | unique_urls: 52 | dup_url_hits: 0
+- issues: errors=8 warnings=5
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=44 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=8 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 44
+  - www1.bca.gov.sg: 8
+- top url extensions:
+  - .pdf: 44
+  - (no_ext): 8
+- top-level key signatures (urls.jsonl record format):
+  - count=52 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=36 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=8 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=8 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 3
+- most common meta keys:
+  - file_ext: 52
+  - record_kind: 52
+  - sitemap_lastmod: 52
+  - discovered_from: 44
+  - discovered_from_title: 44
+  - declared_file_size: 36
+  - declared_file_type: 36
+- top scalar meta values (sample):
+  - declared_file_size: 3.6 MB (2), 2.8 MB (2), 388 KB (1)
+  - declared_file_type: pdf (36)
+  - discovered_from: https://www1.bca.gov.sg/resources/guidebooks-and-publications/ (29), https://www1.bca.gov.sg/resources/guidebooks-and-publications/fixed-installat... (8), https://www1.bca.gov.sg/resources/guidebooks-and-publications/fixed-installat... (3)
+  - discovered_from_title: Guidebooks and Publications (29), Fixed Installation Regulations (8), Fixed Installations Maintenance Outcome Guidebook (3)
+  - file_ext: pdf (44), html (8)
+  - record_kind: document (44), page (8)
+
+[bca.accessibility_and_universal_design]
+- records: 12 | unique_urls: 12 | dup_url_hits: 0
+- issues: errors=5 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=7 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=5 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 7
+  - www1.bca.gov.sg: 5
+- top url extensions:
+  - .pdf: 5
+  - (no_ext): 5
+  - .xlsx: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=12 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=7 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=5 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - file_ext: 12
+  - record_kind: 12
+  - sitemap_lastmod: 12
+  - declared_file_size: 7
+  - declared_file_type: 7
+  - discovered_from: 7
+  - discovered_from_title: 7
+- top scalar meta values (sample):
+  - declared_file_size: 564 KB (2), 40.7 MB (1), 25.8 MB (1)
+  - declared_file_type: pdf (5), xlsx (2)
+  - discovered_from: https://www1.bca.gov.sg/home-and-building-owners/accessibility-and-universal-... (4), https://www1.bca.gov.sg/home-and-building-owners/accessibility-and-universal-... (3)
+  - discovered_from_title: Universal Design Guides (4), Universal Design Index (UDi) (3)
+  - file_ext: pdf (5), html (5), xlsx (2)
+  - record_kind: document (7), page (5)
+
+[sla.circulars]
+- records: 333 | unique_urls: 333 | dup_url_hits: 0
+- issues: errors=1 warnings=6
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 332
+  - www.sla.gov.sg: 1
+- top url extensions:
+  - .pdf: 328
+  - .tsv: 4
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=333 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=332 meta_keys=['collection', 'date_raw', 'discovered_from', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - file_ext: 333
+  - record_kind: 333
+  - collection: 332
+  - date_raw: 332
+  - discovered_from: 332
+- top scalar meta values (sample):
+  - collection: Circulars (332)
+  - date_raw: 31 March 2005 (9), 15 July 2003 (7), 10 February 2026 (4)
+  - discovered_from: https://www.sla.gov.sg/news/circulars/ (332)
+  - file_ext: pdf (328), tsv (4), html (1)
+  - record_kind: document (332), index_page (1)
+
+[sla.property_boundaries]
+- records: 17 | unique_urls: 17 | dup_url_hits: 0
+- issues: errors=6 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=11 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=6 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - isomer-user-content.by.gov.sg: 11
+  - www.sla.gov.sg: 6
+- top url extensions:
+  - .pdf: 11
+  - (no_ext): 6
+- top-level key signatures (urls.jsonl record format):
+  - count=17 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=11 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=6 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - file_ext: 17
+  - record_kind: 17
+  - sitemap_lastmod: 17
+  - discovered_from: 11
+  - discovered_from_title: 11
+- top scalar meta values (sample):
+  - discovered_from: https://www.sla.gov.sg/regulatory/property-boundaries/conducting-a-cadastral-... (6), https://www.sla.gov.sg/regulatory/property-boundaries/survey-maps-and-plans/ (5)
+  - discovered_from_title: Conducting a Cadastral Survey (For Registered Surveyors) (6), Survey Maps and Plans (5)
+  - file_ext: pdf (11), html (6)
+  - record_kind: document (11), page (6)
+  - sitemap_lastmod: 2025-08-01T02:31:26.356Z (7), 2025-10-27T03:48:37.022Z (6), 2025-09-04T08:13:14.930Z (1)
+
+[mom.workplace_safety_and_health]
+- records: 509 | unique_urls: 509 | dup_url_hits: 0
+- issues: errors=229 warnings=186
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=280 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=229 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T06:18:17.548306+00:00 .. 2026-08-24T06:18:17.548306+00:00
+- top url hosts:
+  - mom.gov.sg: 490
+  - sso.agc.gov.sg: 19
+- top url extensions:
+  - (no_ext): 248
+  - .pdf: 237
+  - .docx: 10
+  - .xlsx: 8
+  - .doc: 4
+  - .xls: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=509 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=261 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=229 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=15 meta_keys=['discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 4
+- most common meta keys:
+  - record_kind: 509
+  - sitemap_lastmod: 509
+  - file_ext: 490
+  - discovered_from: 280
+  - discovered_from_title: 280
+  - fetch_url: 4
+- top scalar meta values (sample):
+  - discovered_from: https://mom.gov.sg/workplace-safety-and-health/work-injury-compensation/resou... (69), https://mom.gov.sg/workplace-safety-and-health/wsh-reports-and-statistics (62), https://mom.gov.sg/workplace-safety-and-health/major-hazard-installations/pre... (10)
+  - discovered_from_title: Resources and tools for work injury compensation (69), Workplace safety and health reports and statistics (62), Preparing for safety case (10)
+  - file_ext: pdf (237), html (229), docx (10)
+  - record_kind: document (261), page (229), external_reference (19)
+  - sitemap_lastmod: 2024-03-14 (153), 2026-02-04 (70), 2026-05-04 (63)
+  - fetch_url: https://sso.agc.gov.sg/Act/ITA1947?ProvIds=pr7-.,pr19A-. (1), https://sso.agc.gov.sg/Act/WICA2019?ProvIds=Sc2-XX-Sc2- (1), https://sso.agc.gov.sg/Act/WSHA2006?ProvIds=Sc3- (1)
+
+[mom.wsh_circulars]
+- records: 153 | unique_urls: 153 | dup_url_hits: 0
+- issues: errors=1 warnings=4
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=152 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T06:17:55.480857+00:00 .. 2026-08-24T06:17:55.480857+00:00
+- top url hosts:
+  - mom.gov.sg: 153
+- top url extensions:
+  - .pdf: 150
+  - .docx: 2
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=153 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=152 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=1 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - file_ext: 153
+  - record_kind: 153
+  - sitemap_lastmod: 153
+  - discovered_from: 152
+  - discovered_from_title: 152
+- top scalar meta values (sample):
+  - discovered_from: https://mom.gov.sg/workplace-safety-and-health/wsh-circulars (152)
+  - discovered_from_title: WSH circulars (152)
+  - file_ext: pdf (150), docx (2), html (1)
+  - record_kind: document (152), page (1)
+  - sitemap_lastmod: 2026-03-13 (153)
+
+[mom.wsh_legislation]
+- records: 32 | unique_urls: 32 | dup_url_hits: 0
+- issues: errors=1 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=31 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T06:28:39.957265+00:00 .. 2026-08-24T06:28:39.957265+00:00
+- top url hosts:
+  - sso.agc.gov.sg: 31
+  - mom.gov.sg: 1
+- top url extensions:
+  - (no_ext): 32
+- top-level key signatures (urls.jsonl record format):
+  - count=32 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=31 meta_keys=['discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
+  - count=1 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - record_kind: 32
+  - sitemap_lastmod: 32
+  - discovered_from: 31
+  - discovered_from_title: 31
+  - file_ext: 1
+- top scalar meta values (sample):
+  - file_ext: html (1)
+  - record_kind: external_reference (31), page (1)
+  - sitemap_lastmod: 2026-01-14 (32)
+  - discovered_from: https://mom.gov.sg/legislation/workplace-safety-and-health (31)
+  - discovered_from_title: Legislation for workplace safety and health (31)
+
+[nea.legislation]
+- records: 90 | unique_urls: 90 | dup_url_hits: 0
+- issues: errors=24 warnings=6
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=90 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=24 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nea.gov.sg: 76
+  - sso.agc.gov.sg: 14
+- top url extensions:
+  - .pdf: 52
+  - (no_ext): 38
+- top-level key signatures (urls.jsonl record format):
+  - count=90 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=65 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=24 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+- meta schema variants: 3
+- most common meta keys:
+  - crawl_depth: 90
+  - file_ext: 90
+  - record_kind: 90
+  - discovered_from: 66
+  - discovered_from_title: 66
+  - fetch_url: 1
+- top scalar meta values (sample):
+  - crawl_depth: 1 (68), 0 (22)
+  - discovered_from: https://www.nea.gov.sg/corporate-functions/resources/legislation-internationa... (21), https://www.nea.gov.sg/corporate-functions/resources/legislation-internationa... (19), https://www.nea.gov.sg/corporate-functions/resources/legislation-internationa... (19)
+  - discovered_from_title: Legislation (21), Montreal Protocol (19), Circulars on Control of Hazardous Wastes and Other Wastes (19)
+  - file_ext: pdf (52), html (24),  (14)
+  - record_kind: document (52), page (24), external_reference (14)
+  - fetch_url: https://www.nea.gov.sg/docs/default-source/resource/legislation/cvpa-manual-(... (1)
+
+[sla.legislation]
+- records: 15 | unique_urls: 15 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=14 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - sso.agc.gov.sg: 14
+  - www.sla.gov.sg: 1
+- top url extensions:
+  - (no_ext): 15
+- top-level key signatures (urls.jsonl record format):
+  - count=15 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=14 meta_keys=['discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
+  - count=1 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - record_kind: 15
+  - sitemap_lastmod: 15
+  - discovered_from: 14
+  - discovered_from_title: 14
+  - file_ext: 1
+- top scalar meta values (sample):
+  - discovered_from: https://www.sla.gov.sg/news/legislation/ (14)
+  - discovered_from_title: Legislation (14)
+  - record_kind: external_reference (14), page (1)
+  - sitemap_lastmod: 2025-06-26T07:13:20.306Z (15)
+  - file_ext: html (1)
+
+[nea.pollution_control]
+- records: 139 | unique_urls: 139 | dup_url_hits: 0
+- issues: errors=60 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=139 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=60 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nea.gov.sg: 131
+  - sso.agc.gov.sg: 8
+- top url extensions:
+  - (no_ext): 68
+  - .pdf: 59
+  - .xlsx: 7
+  - .docx: 5
+- top-level key signatures (urls.jsonl record format):
+  - count=139 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=73 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=60 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+  - count=6 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+- meta schema variants: 3
+- most common meta keys:
+  - crawl_depth: 139
+  - file_ext: 139
+  - record_kind: 139
+  - discovered_from: 79
+  - discovered_from_title: 79
+  - fetch_url: 6
+- top scalar meta values (sample):
+  - crawl_depth: 2 (123), 1 (15), 0 (1)
+  - discovered_from: https://www.nea.gov.sg/our-services/pollution-control/water-quality/aquatic-f... (19), https://www.nea.gov.sg/our-services/pollution-control/water-quality/aerosol-g... (12), https://www.nea.gov.sg/our-services/pollution-control/chemical-safety/hazardo... (8)
+  - discovered_from_title: Aquatic Facilities (AF) (19), Aerosol-generating Systems (AGS) (12), Hazardous Substances (8)
+  - fetch_url: https://sso.agc.gov.sg//SL/EPHA1987-S644-2021?DocDate=20240930 (1), https://sso.agc.gov.sg/SL-Supp/S643-2021/Published/20210830?DocDate=20210830 (1), https://sso.agc.gov.sg/SL-Supp/S645-2021/Published/20210830?DocDate=20210830 (1)
+  - file_ext: html (60), pdf (59),  (8)
+  - record_kind: document (71), page (60), external_reference (8)
+
+[ema.regulations]
+- records: 1 | unique_urls: 1 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.ema.gov.sg: 1
+- top url extensions:
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 1
+  - file_ext: 1
+  - record_kind: 1
+- top scalar meta values (sample):
+  - crawl_depth: 0 (1)
+  - file_ext: html (1)
+  - record_kind: page (1)
+
+[ema.industry_reports]
+- records: 1 | unique_urls: 1 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.ema.gov.sg: 1
+- top url extensions:
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 1
+  - file_ext: 1
+  - record_kind: 1
+- top scalar meta values (sample):
+  - crawl_depth: 0 (1)
+  - file_ext: html (1)
+  - record_kind: page (1)
+
+[ema.statistics]
+- records: 2 | unique_urls: 2 | dup_url_hits: 0
+- issues: errors=2 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=2 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=2 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.ema.gov.sg: 2
+- top url extensions:
+  - (no_ext): 2
+- top-level key signatures (urls.jsonl record format):
+  - count=2 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=2 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 2
+  - file_ext: 2
+  - record_kind: 2
+- top scalar meta values (sample):
+  - crawl_depth: 0 (2)
+  - file_ext: html (2)
+  - record_kind: page (2)
+
+[jtc.development_and_renovation]
+- records: 23 | unique_urls: 23 | dup_url_hits: 0
+- issues: errors=7 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=23 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=7 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.jtc.gov.sg: 23
+- top url extensions:
+  - .pdf: 16
+  - (no_ext): 7
+- top-level key signatures (urls.jsonl record format):
+  - count=23 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=16 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=7 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 23
+  - file_ext: 23
+  - record_kind: 23
+  - discovered_from: 16
+  - discovered_from_title: 16
+- top scalar meta values (sample):
+  - crawl_depth: 0 (15), 1 (8)
+  - discovered_from: https://www.jtc.gov.sg/get-help/development-and-renovation-works/development-... (14), https://www.jtc.gov.sg/get-help/development-and-renovation-works/fitting-out-... (2)
+  - discovered_from_title: Development and renovation forms and documents (14), Fitting-out and renovation works (2)
+  - file_ext: pdf (16), html (7)
+  - record_kind: document (16), page (7)
+
+[jtc.tenancy_requirements]
+- records: 49 | unique_urls: 49 | dup_url_hits: 0
+- issues: errors=18 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=49 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=18 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T06:29:02.550518+00:00 .. 2026-08-24T06:29:02.550518+00:00
+- top url hosts:
+  - www.jtc.gov.sg: 49
+- top url extensions:
+  - .pdf: 29
+  - (no_ext): 18
+  - .xlsx: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=49 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=31 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=18 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 49
+  - file_ext: 49
+  - record_kind: 49
+  - discovered_from: 31
+  - discovered_from_title: 31
+- top scalar meta values (sample):
+  - crawl_depth: 1 (46), 0 (2), 2 (1)
+  - discovered_from: https://www.jtc.gov.sg/get-help/managing-your-tenancy-or-lease/tenancy-and-le... (9), https://www.jtc.gov.sg/get-help/managing-your-tenancy-or-lease/notice-of-mort... (3), https://www.jtc.gov.sg/get-help/managing-your-tenancy-or-lease/notice-of-hire... (3)
+  - discovered_from_title: Tenancy and lease forms and documents (9), Notice of mortgage or charge (3), Notice of hire purchase (3)
+  - file_ext: pdf (29), html (18), xlsx (2)
+  - record_kind: document (31), page (18)
+
+[lta.railway_protection]
+- records: 22 | unique_urls: 22 | dup_url_hits: 0
+- issues: errors=1 warnings=3
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=22 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.lta.gov.sg: 22
+- top url extensions:
+  - .pdf: 20
+  - .doc: 1
+  - .html: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=22 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=21 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 22
+  - file_ext: 22
+  - record_kind: 22
+  - discovered_from: 21
+  - discovered_from_title: 21
+- top scalar meta values (sample):
+  - crawl_depth: 0 (22)
+  - discovered_from: https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (21)
+  - discovered_from_title: Requirements for Developments within Railway Protection and Road Structure Sa... (21)
+  - file_ext: pdf (20), doc (1), html (1)
+  - record_kind: document (21), page (1)
+
+[lta.street_works]
+- records: 42 | unique_urls: 42 | dup_url_hits: 0
+- issues: errors=4 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=42 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=4 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.lta.gov.sg: 42
+- top url extensions:
+  - .pdf: 21
+  - .doc: 5
+  - .docx: 4
+  - .html: 4
+  - .zip: 3
+  - .xlsx: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=42 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=38 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=4 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 42
+  - file_ext: 42
+  - record_kind: 42
+  - discovered_from: 38
+  - discovered_from_title: 38
+- top scalar meta values (sample):
+  - crawl_depth: 0 (30), 1 (12)
+  - discovered_from: https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (29), https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (5), https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (2)
+  - discovered_from_title: Requirements for Street Work Proposals (29), GIS Data Hub Collection (5), Authorisation of Security Officers to Regulate Traffic for Road Works (2)
+  - file_ext: pdf (21), doc (5), docx (4)
+  - record_kind: document (38), page (4)
+
+[lta.transport_infrastructure_standards]
+- records: 19 | unique_urls: 19 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=19 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.lta.gov.sg: 19
+- top url extensions:
+  - .pdf: 18
+  - .html: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=19 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=18 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 19
+  - file_ext: 19
+  - record_kind: 19
+  - discovered_from: 18
+  - discovered_from_title: 18
+- top scalar meta values (sample):
+  - crawl_depth: 0 (19)
+  - discovered_from: https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (18)
+  - discovered_from_title: Transport Infrastructure Specifications and Design Criteria (18)
+  - file_ext: pdf (18), html (1)
+  - record_kind: document (18), page (1)
+
+[lta.vehicle_parking]
+- records: 3 | unique_urls: 3 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=3 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.lta.gov.sg: 3
+- top url extensions:
+  - .pdf: 2
+  - .html: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=3 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=2 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 3
+  - file_ext: 3
+  - record_kind: 3
+  - discovered_from: 2
+  - discovered_from_title: 2
+- top scalar meta values (sample):
+  - crawl_depth: 0 (3)
+  - discovered_from: https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matter... (2)
+  - discovered_from_title: Requirements for Vehicle Parking Proposals (2)
+  - file_ext: pdf (2), html (1)
+  - record_kind: document (2), page (1)
+
+[nea.circulars]
+- records: 123 | unique_urls: 123 | dup_url_hits: 0
+- issues: errors=8 warnings=2
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=123 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=8 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nea.gov.sg: 123
+- top url extensions:
+  - .pdf: 115
+  - (no_ext): 8
+- top-level key signatures (urls.jsonl record format):
+  - count=123 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=115 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=8 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 123
+  - file_ext: 123
+  - record_kind: 123
+  - discovered_from: 115
+  - discovered_from_title: 115
+- top scalar meta values (sample):
+  - crawl_depth: 1 (82), 0 (41)
+  - file_ext: pdf (115), html (8)
+  - record_kind: document (115), page (8)
+  - discovered_from: https://www.nea.gov.sg/corporate-functions/resources/circulars/climate-change... (40), https://www.nea.gov.sg/corporate-functions/resources/circulars (40), https://www.nea.gov.sg/corporate-functions/resources/circulars/hazardous-subs... (34)
+  - discovered_from_title: Climate Change & Energy Efficiency Circulars (40), Development Control Circulars (40), Hazardous Substance Control Circulars (34)
+
+[nea.practices_and_guidelines]
+- records: 49 | unique_urls: 49 | dup_url_hits: 0
+- issues: errors=3 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=49 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=3 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nea.gov.sg: 49
+- top url extensions:
+  - .pdf: 44
+  - (no_ext): 3
+  - .docx: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=49 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=26 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=19 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+  - count=3 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 4
+- most common meta keys:
+  - crawl_depth: 49
+  - file_ext: 49
+  - record_kind: 49
+  - discovered_from: 46
+  - discovered_from_title: 46
+  - fetch_url: 19
+  - declared_file_size: 1
+  - declared_file_type: 1
+- top scalar meta values (sample):
+  - crawl_depth: 0 (40), 1 (9)
+  - file_ext: pdf (44), html (3), docx (2)
+  - record_kind: document (46), page (3)
+  - discovered_from: https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines (39), https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines... (7)
+  - discovered_from_title: Guidelines (39), Practices (7)
+  - declared_file_size: 570.54 KB (1)
+
+[nea.publications]
+- records: 49 | unique_urls: 49 | dup_url_hits: 0
+- issues: errors=13 warnings=6
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=49 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=13 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nea.gov.sg: 49
+- top url extensions:
+  - .pdf: 36
+  - (no_ext): 13
+- top-level key signatures (urls.jsonl record format):
+  - count=49 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=35 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=13 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+- meta schema variants: 3
+- most common meta keys:
+  - crawl_depth: 49
+  - file_ext: 49
+  - record_kind: 49
+  - discovered_from: 36
+  - discovered_from_title: 36
+  - fetch_url: 1
+- top scalar meta values (sample):
+  - crawl_depth: 1 (47), 0 (2)
+  - file_ext: pdf (36), html (13)
+  - record_kind: document (36), page (13)
+  - discovered_from: https://www.nea.gov.sg/corporate-functions/resources/publications/annual-reports (12), https://www.nea.gov.sg/corporate-functions/resources/publications/books-journ... (10), https://www.nea.gov.sg/corporate-functions/resources/publications/books-journ... (4)
+  - discovered_from_title: Annual Reports (12), 10th Anniversary Book (10), Books, Journals and Magazines (4)
+  - fetch_url: https://www.nea.gov.sg/docs/default-source/envision/worldwide.pdf?sfvrsn=4121... (1)
+
+[nea.development_control]
+- records: 29 | unique_urls: 29 | dup_url_hits: 0
+- issues: errors=11 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=29 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=11 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nea.gov.sg: 29
+- top url extensions:
+  - .pdf: 14
+  - (no_ext): 11
+  - .doc: 3
+  - .docx: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=29 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=18 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=11 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 29
+  - file_ext: 29
+  - record_kind: 29
+  - discovered_from: 18
+  - discovered_from_title: 18
+- top scalar meta values (sample):
+  - crawl_depth: 0 (17), 1 (12)
+  - discovered_from: https://www.nea.gov.sg/our-services/development-control (16), https://www.nea.gov.sg/our-services/development-control/guidelines-for-buildi... (1), https://www.nea.gov.sg/our-services/development-control/guidelines-for-buildi... (1)
+  - discovered_from_title: Overview (16), Building Plan (BP) (1), Environmental Information (EI) (1)
+  - file_ext: pdf (14), html (11), doc (3)
+  - record_kind: document (18), page (11)
+
+[nparks.learn]
+- records: 129 | unique_urls: 129 | dup_url_hits: 0
+- issues: errors=30 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=129 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=30 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nparks.gov.sg: 129
+- top url extensions:
+  - .pdf: 98
+  - (no_ext): 30
+  - .ppt: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=129 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=52 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=47 meta_keys=['discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=30 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 3
+- most common meta keys:
+  - file_ext: 129
+  - record_kind: 129
+  - sitemap_lastmod: 129
+  - discovered_from: 99
+  - discovered_from_title: 99
+  - fetch_url: 47
+- top scalar meta values (sample):
+  - discovered_from: https://www.nparks.gov.sg/learn/resources/responsible-human-wildlife-encounters (22), https://www.nparks.gov.sg/learn/resources/that's-wild-podcast (15), https://www.nparks.gov.sg/learn/programmes/every-child-seed/every-child-seed-... (10)
+  - discovered_from_title: Responsible human-wildlife encounters in our City in Nature (22), That&#39;s Wild Podcast (15), Every Child a Seed reflections and photo gallery (10)
+  - file_ext: pdf (98), html (30), ppt (1)
+  - record_kind: document (99), page (30)
+  - sitemap_lastmod: null (129)
+  - fetch_url: https://www.nparks.gov.sg/docs/default-source/learn-docs/programme/every-chil... (1), https://www.nparks.gov.sg/docs/default-source/learn-docs/programme/every-chil... (1), https://www.nparks.gov.sg/docs/default-source/learn-docs/programme/every-chil... (1)
+
+[nparks.nature]
+- records: 120 | unique_urls: 120 | dup_url_hits: 0
+- issues: errors=65 warnings=16
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=120 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=65 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nparks.gov.sg: 120
+- top url extensions:
+  - (no_ext): 65
+  - .pdf: 55
+- top-level key signatures (urls.jsonl record format):
+  - count=120 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=65 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=45 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=10 meta_keys=['discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 3
+- most common meta keys:
+  - file_ext: 120
+  - record_kind: 120
+  - sitemap_lastmod: 120
+  - discovered_from: 55
+  - discovered_from_title: 55
+  - fetch_url: 10
+- top scalar meta values (sample):
+  - discovered_from: https://www.nparks.gov.sg/nature/enhancing-biodiversity-guidelines-resources/... (27), https://www.nparks.gov.sg/nature/environmental-studies-sustainable-development (10), https://www.nparks.gov.sg/nature/enhancing-biodiversity-guidelines-resources (10)
+  - discovered_from_title: Handbook on Habitat Restoration (individual chapters) (27), Environmental studies for sustainable development (10), Enhancing biodiversity: guidelines and resources (10)
+  - fetch_url: https://www.nparks.gov.sg/docs/default-source/nature-docs/environmental-studi... (1), https://www.nparks.gov.sg/docs/default-source/nature-docs/environmental-studi... (1), https://www.nparks.gov.sg/docs/default-source/nature-docs/environmental-studi... (1)
+  - file_ext: html (65), pdf (55)
+  - record_kind: page (65), document (55)
+  - sitemap_lastmod: null (120)
+
+[nparks.services]
+- records: 86 | unique_urls: 86 | dup_url_hits: 0
+- issues: errors=45 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=86 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=45 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nparks.gov.sg: 86
+- top url extensions:
+  - (no_ext): 45
+  - .pdf: 38
+  - .docx: 3
+- top-level key signatures (urls.jsonl record format):
+  - count=86 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=45 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=22 meta_keys=['discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=19 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 3
+- most common meta keys:
+  - file_ext: 86
+  - record_kind: 86
+  - sitemap_lastmod: 86
+  - discovered_from: 41
+  - discovered_from_title: 41
+  - fetch_url: 22
+- top scalar meta values (sample):
+  - discovered_from: https://www.nparks.gov.sg/services/development-plan-submission (6), https://www.nparks.gov.sg/services/request-plant-health-laboratories-advisory... (4), https://www.nparks.gov.sg/services/research-programmes/TFER-GFS (4)
+  - discovered_from_title: Development plan submission (6), Request plant health laboratories and advisory services (4), Tropical Forest Ecology Research Grants and Fellowships Scheme&#160; (4)
+  - file_ext: html (45), pdf (38), docx (3)
+  - record_kind: page (45), document (41)
+  - sitemap_lastmod: null (86)
+  - fetch_url: https://www.nparks.gov.sg/docs/default-source/resources/2024/development-subm... (1), https://www.nparks.gov.sg/docs/default-source/resources/2025/faqs---cessation... (1), https://www.nparks.gov.sg/docs/default-source/services-docs/apply-research-pe... (1)
+
+[nparks.publications_resources]
+- records: 113 | unique_urls: 113 | dup_url_hits: 0
+- issues: errors=111 warnings=4
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=113 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=111 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nparks.gov.sg: 113
+- top url extensions:
+  - (no_ext): 111
+  - .pdf: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=113 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=111 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=2 meta_keys=['discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - file_ext: 113
+  - record_kind: 113
+  - sitemap_lastmod: 113
+  - discovered_from: 2
+  - discovered_from_title: 2
+  - fetch_url: 2
+- top scalar meta values (sample):
+  - discovered_from: https://www.nparks.gov.sg/publications-resources/guidelines-greenery-provisio... (2)
+  - discovered_from_title: Guidelines on Greenery Provision and Tree Conservation for Developments&#160;... (2)
+  - fetch_url: https://www.nparks.gov.sg/docs/default-source/resources/2025/guidelines-green... (1), https://www.nparks.gov.sg/docs/default-source/resources/guidelines-on-greener... (1)
+  - file_ext: html (111), pdf (2)
+  - record_kind: page (111), document (2)
+  - sitemap_lastmod: null (113)
+
+[nparks.who_we_are]
+- records: 8 | unique_urls: 8 | dup_url_hits: 0
+- issues: errors=6 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=8 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=6 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.nparks.gov.sg: 8
+- top url extensions:
+  - (no_ext): 6
+  - .pdf: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=8 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=6 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=2 meta_keys=['discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - file_ext: 8
+  - record_kind: 8
+  - sitemap_lastmod: 8
+  - discovered_from: 2
+  - discovered_from_title: 2
+  - fetch_url: 2
+- top scalar meta values (sample):
+  - discovered_from: https://www.nparks.gov.sg/who-we-are/mission-history (2)
+  - discovered_from_title: Mission and history (2)
+  - fetch_url: https://www.nparks.gov.sg/docs/default-source/who-we-are-docs/mission-and-his... (1), https://www.nparks.gov.sg/docs/default-source/who-we-are-docs/mission-and-his... (1)
+  - file_ext: html (6), pdf (2)
+  - record_kind: page (6), document (2)
+  - sitemap_lastmod: null (8)
+
+[parliament.bills_introduced]
+- records: 1 | unique_urls: 1 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.parliament.gov.sg: 1
+- top url extensions:
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=1 meta_keys=['file_type', 'kind']
+- meta schema variants: 1
+- most common meta keys:
+  - file_type: 1
+  - kind: 1
+- top scalar meta values (sample):
+  - file_type: html (1)
+  - kind: page (1)
+
+[parliament.votes_and_proceedings]
+- records: 1 | unique_urls: 1 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.parliament.gov.sg: 1
+- top url extensions:
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=1 meta_keys=['file_type', 'kind']
+- meta schema variants: 1
+- most common meta keys:
+  - file_type: 1
+  - kind: 1
+- top scalar meta values (sample):
+  - file_type: html (1)
+  - kind: page (1)
+
+[pub.requirements]
+- records: 88 | unique_urls: 88 | dup_url_hits: 0
+- issues: errors=33 warnings=3
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=88 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=33 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.pub.gov.sg: 88
+- top url extensions:
+  - .pdf: 53
+  - (no_ext): 33
+  - .zip: 1
+  - .docx: 1
+- top-level key signatures (urls.jsonl record format):
+  - count=88 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=55 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=33 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 88
+  - file_ext: 88
+  - record_kind: 88
+  - discovered_from: 55
+  - discovered_from_title: 55
+- top scalar meta values (sample):
+  - crawl_depth: 2 (47), 1 (31), 3 (9)
+  - discovered_from: https://www.pub.gov.sg/Professionals/Requirements/Application (12), https://www.pub.gov.sg/Professionals/Requirements/Qualified-Persons/Quick-Sub... (10), https://www.pub.gov.sg/Professionals/Requirements/Earth-Control-Measures/ECM-... (8)
+  - discovered_from_title: Application Forms (12), Quick Submission Guides (10), ECM Guidelines for Stakeholders (8)
+  - file_ext: pdf (53), html (33), zip (1)
+  - record_kind: document (55), page (33)
+
+[pub.guides_and_handbooks]
+- records: 31 | unique_urls: 31 | dup_url_hits: 0
+- issues: errors=1 warnings=5
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=31 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.pub.gov.sg: 31
+- top url extensions:
+  - .pdf: 27
+  - .docx: 1
+  - .zip: 1
+  - .doc: 1
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=31 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=30 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - crawl_depth: 31
+  - file_ext: 31
+  - record_kind: 31
+  - discovered_from: 30
+  - discovered_from_title: 30
+- top scalar meta values (sample):
+  - crawl_depth: 0 (31)
+  - discovered_from: https://www.pub.gov.sg/Professionals/Resources/Guides-and-Handbooks (30)
+  - discovered_from_title: Guides &amp; Handbooks (30)
+  - file_ext: pdf (27), docx (1), zip (1)
+  - record_kind: document (30), page (1)
+
+[pub.circulars]
+- records: 1 | unique_urls: 1 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.pub.gov.sg: 1
+- top url extensions:
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 1
+  - file_ext: 1
+  - record_kind: 1
+- top scalar meta values (sample):
+  - crawl_depth: 0 (1)
+  - file_ext: html (1)
+  - record_kind: page (1)
+
+[pub.codes_of_practice]
+- records: 1 | unique_urls: 1 | dup_url_hits: 0
+- issues: errors=1 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.pub.gov.sg: 1
+- top url extensions:
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 1
+  - file_ext: 1
+  - record_kind: 1
+- top scalar meta values (sample):
+  - crawl_depth: 0 (1)
+  - file_ext: html (1)
+  - record_kind: page (1)
+
+[scdf.petroleum_and_flammable_materials]
+- records: 62 | unique_urls: 62 | dup_url_hits: 0
+- issues: errors=8 warnings=4
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=62 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=8 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=4
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.scdf.gov.sg: 62
+- top url extensions:
+  - .pdf: 44
+  - (no_ext): 8
+  - .docx: 4
+  - .doc: 4
+  - .xlsx: 2
+- top-level key signatures (urls.jsonl record format):
+  - count=62 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=45 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+  - count=8 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+  - count=6 meta_keys=['crawl_depth', 'declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+- meta schema variants: 4
+- most common meta keys:
+  - crawl_depth: 62
+  - file_ext: 62
+  - record_kind: 62
+  - discovered_from: 54
+  - discovered_from_title: 54
+  - fetch_url: 51
+  - declared_file_size: 6
+  - declared_file_type: 6
+- top scalar meta values (sample):
+  - crawl_depth: 0 (36), 1 (26)
+  - declared_file_size: 1.37MB (1), 136.50KB (1), 181.90KB (1)
+  - declared_file_type: pdf (5), docx (1)
+  - discovered_from: https://www.scdf.gov.sg/fire-safety-services-listing/petroleum-and-flammable-... (35), https://www.scdf.gov.sg/fire-safety-services-listing/petroleum-and-flammable-... (9), https://www.scdf.gov.sg/fire-safety-services-listing/petroleum-and-flammable-... (4)
+  - discovered_from_title: Hero banner for Petroleum and Flammable Material Licences (35), Hero banner for Information of P&amp;FM Transport Licence (9), Hero banner for Information of P&amp;FM Storage Licence (4)
+  - fetch_url: https://www.scdf.gov.sg/docs/default-source/comm.---volunteers-(docs)/latest-... (1), https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/petroleum-and-fl... (1), https://www.scdf.gov.sg/docs/default-source/fire-safety-docs/petroleum-and-fl... (1)
+
+[scdf.advisories]
+- records: 36 | unique_urls: 36 | dup_url_hits: 0
+- issues: errors=1 warnings=2
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=36 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=3
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.scdf.gov.sg: 36
+- top url extensions:
+  - .pdf: 35
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=36 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=34 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'fetch_url', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=1 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 3
+- most common meta keys:
+  - crawl_depth: 36
+  - file_ext: 36
+  - record_kind: 36
+  - discovered_from: 35
+  - discovered_from_title: 35
+  - fetch_url: 34
+- top scalar meta values (sample):
+  - crawl_depth: 0 (36)
+  - discovered_from: https://www.scdf.gov.sg/home/about-scdf/media-room/publications/fire-safety-a... (35)
+  - discovered_from_title: Hero banner for Fire Safety &amp; Emergency Advisories (35)
+  - fetch_url: https://www.scdf.gov.sg/docs/default-source/media-room-(publications)/posters... (1), https://www.scdf.gov.sg/docs/default-source/media-room-(publications)/posters... (1), https://www.scdf.gov.sg/docs/default-source/media-room-(publications)/posters... (1)
+  - file_ext: pdf (35), html (1)
+  - record_kind: document (35), page (1)
+
+[sgdi.ministries]
+- records: 350 | unique_urls: 350 | dup_url_hits: 0
+- issues: errors=350 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=350 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=350 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.sgdi.gov.sg: 350
+- top url extensions:
+  - (no_ext): 350
+- top-level key signatures (urls.jsonl record format):
+  - count=350 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=350 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 350
+  - file_ext: 350
+  - record_kind: 350
+- top scalar meta values (sample):
+  - crawl_depth: 2 (333), 1 (16), 0 (1)
+  - file_ext: html (350)
+  - record_kind: page (350)
+
+[sgdi.statutory_boards]
+- records: 687 | unique_urls: 687 | dup_url_hits: 0
+- issues: errors=687 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=687 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=687 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T06:29:37.223440+00:00 .. 2026-08-24T06:29:37.223440+00:00
+- top url hosts:
+  - www.sgdi.gov.sg: 687
+- top url extensions:
+  - (no_ext): 687
+- top-level key signatures (urls.jsonl record format):
+  - count=687 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=687 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 687
+  - file_ext: 687
+  - record_kind: 687
+- top scalar meta values (sample):
+  - crawl_depth: 2 (621), 1 (65), 0 (1)
+  - file_ext: html (687)
+  - record_kind: page (687)
+
+[sgdi.organs_of_state]
+- records: 82 | unique_urls: 82 | dup_url_hits: 0
+- issues: errors=82 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=82 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=82 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-24T06:46:13.171207+00:00 .. 2026-08-24T06:46:13.171207+00:00
+- top url hosts:
+  - www.sgdi.gov.sg: 82
+- top url extensions:
+  - (no_ext): 82
+- top-level key signatures (urls.jsonl record format):
+  - count=82 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=82 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+- meta schema variants: 1
+- most common meta keys:
+  - crawl_depth: 82
+  - file_ext: 82
+  - record_kind: 82
+- top scalar meta values (sample):
+  - crawl_depth: 2 (71), 1 (10), 0 (1)
+  - file_ext: html (82)
+  - record_kind: page (82)
+
+[ura.circulars]
+- records: 62 | unique_urls: 62 | dup_url_hits: 0
+- issues: errors=1 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=1 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-24T05:09:10.489964+00:00 .. 2026-08-24T05:09:10.489964+00:00
+- top url hosts:
+  - www.ura.gov.sg: 62
+- top url extensions:
+  - (no_ext): 62
+- top-level key signatures (urls.jsonl record format):
+  - count=62 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=61 meta_keys=['collection', 'date_raw', 'discovered_from', 'record_kind']
+  - count=1 meta_keys=['file_ext', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - record_kind: 62
+  - collection: 61
+  - date_raw: 61
+  - discovered_from: 61
+  - file_ext: 1
+- top scalar meta values (sample):
+  - file_ext: html (1)
+  - record_kind: page (61), index_page (1)
+  - collection: Circulars (61)
+  - date_raw: 1 December 2025 (4), 22 May 2026 (2), 4 April 2022 (2)
+  - discovered_from: https://www.ura.gov.sg/guidelines/circulars/ (61)
+
+General stats:
+- record JSON size (bytes): min=254 p50=542.0 mean=530.9 p95=815.0 max=1132
+
+Unusual records / issues:
+- error:missing_required_field: 2224
+- warning:meta_value_outlier: 371
+
+Examples (first 50):
+- line 1 [warning] scdf.acts_codes_and_regulations meta.file_ext meta_value_outlier -> rare value in source:
+- line 1 [warning] scdf.acts_codes_and_regulations meta.record_kind meta_value_outlier -> rare value in source: external_reference
+- line 2 [warning] scdf.fire_code meta.file_ext meta_value_outlier -> rare value in source:
+- line 2 [warning] scdf.fire_code meta.record_kind meta_value_outlier -> rare value in source: external_reference
+- line 3 [warning] scdf.fire_safety_circulars meta.file_ext meta_value_outlier -> rare value in source:
+- line 3 [warning] scdf.fire_safety_circulars meta.record_kind meta_value_outlier -> rare value in source: external_reference
+- line 4 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 5 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 6 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 7 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 8 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 9 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 10 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 11 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 12 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 13 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 14 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 15 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 16 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 17 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 18 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 19 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 20 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 21 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 22 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 23 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 24 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 25 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 26 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 27 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 28 [error] nparks.cuge_standards meta.discovered_from missing_required_field -> missing required field
+- line 29 [warning] ura.development_control meta.declared_file_type meta_value_outlier -> rare value in source: zip
+- line 30 [warning] ura.development_control meta.declared_file_type meta_value_outlier -> rare value in source: zip
+- line 48 [warning] ura.development_control meta.discovered_from_title meta_value_outlier -> rare value in source: Development Control Guidelines
+- line 51 [warning] ura.master_plan meta.discovered_from meta_value_outlier -> rare value in source: https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/regional-plans/west/green--blue-and-reimagined-places/
+- line 51 [warning] ura.master_plan meta.discovered_from_title meta_value_outlier -> rare value in source: Green, Blue and Reimagined Places
+- line 51 [warning] ura.master_plan meta.record_kind meta_value_outlier -> rare value in source: external_reference
+- line 54 [warning] ura.conservation meta.record_kind meta_value_outlier -> rare value in source: external_reference
+- line 55 [warning] ura.master_plan meta.discovered_from meta_value_outlier -> rare value in source: https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/regional-plans/north-east/paya-lebar-air-base/
+- line 55 [warning] ura.master_plan meta.discovered_from_title meta_value_outlier -> rare value in source: Paya Lebar Air Base
+- line 55 [warning] ura.master_plan meta.record_kind meta_value_outlier -> rare value in source: external_reference
+- line 56 [warning] ura.conservation meta.record_kind meta_value_outlier -> rare value in source: external_reference
+- line 145 [warning] bca.safety_and_standards meta.declared_file_type meta_value_outlier -> rare value in source: docx
+- line 189 [warning] bca.safety_and_standards meta.file_ext meta_value_outlier -> rare value in source: xlsx
+- line 199 [warning] bca.safety_and_standards meta.declared_file_type meta_value_outlier -> rare value in source: xls
+- line 199 [warning] bca.safety_and_standards meta.file_ext meta_value_outlier -> rare value in source: xls
+- line 333 [warning] bca.safety_and_standards meta.declared_file_type meta_value_outlier -> rare value in source: xlsx
+- line 333 [warning] bca.safety_and_standards meta.file_ext meta_value_outlier -> rare value in source: xlsx
+- line 358 [warning] bca.safety_and_standards meta.declared_file_type meta_value_outlier -> rare value in source: zip
+- line 358 [warning] bca.safety_and_standards meta.file_ext meta_value_outlier -> rare value in source: zip
+
+Wrote JSON report to: ..\ol-data-worktree\data\sg\latest\stats.json
