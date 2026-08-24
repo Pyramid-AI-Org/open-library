@@ -400,7 +400,12 @@ def main() -> int:
                 found = (source_id, crawler_name, module_path)
                 break
 
-        if not found:
+        # A bare source id runs every row under that source. Batching a run
+        # source by source is how you keep a first run, or a re-run after a
+        # site changes, from hitting fifteen agencies at once.
+        source_rows = [c for c in all_crawlers if c[0] == crawler_arg]
+
+        if not found and not source_rows:
             # Try to parse as source.crawler format
             if "." in crawler_arg:
                 source_id, crawler_name = crawler_arg.split(".", 1)
@@ -408,22 +413,23 @@ def main() -> int:
             else:
                 raise ValueError(f"Crawler not found: {crawler_arg}")
 
-        crawlers_to_run = [found]
+        crawlers_to_run = source_rows if source_rows else [found]
         skipped_crawlers: list[str] = []
         schedule_decisions = {
-            found[2]: {
-                "source_id": found[0],
-                "module_path": found[2],
+            mp: {
+                "source_id": sid,
+                "module_path": mp,
                 "enabled": True,
                 "interval_days": 1,
                 "last_successful_run_date": (
-                    (crawler_state.get(found[2]) or crawler_state.get(found[1]) or {}).get("last_successful_run_date")
-                    if isinstance(crawler_state.get(found[2]) or crawler_state.get(found[1]), dict)
+                    (crawler_state.get(mp) or crawler_state.get(cn) or {}).get("last_successful_run_date")
+                    if isinstance(crawler_state.get(mp) or crawler_state.get(cn), dict)
                     else None
                 ),
                 "due_today": True,
                 "manual_override": True,
             }
+            for sid, cn, mp in crawlers_to_run
         }
     else:
         crawlers_to_run, skipped_crawlers, schedule_decisions = (

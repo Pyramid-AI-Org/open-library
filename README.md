@@ -97,11 +97,37 @@ kept fully separate end to end:
 | ArchSD | Housing & Development Board | `hdb` | Blocked — 403 + JS-only bodies |
 | DEVB | Ministry of National Development | `mnd` | Disabled — robots.txt bot challenge |
 
+### Pausing and scoping the Singapore run
+
+The nightly run has a kill switch. Set the repository variable
+`SG_CRAWL_PAUSED` to `true` and the 03:00 UTC job stops before a runner
+starts, so no requests are made:
+
+```bash
+gh variable set SG_CRAWL_PAUSED --body true    # pause
+gh variable set SG_CRAWL_PAUSED --body false   # resume
+```
+
+Manual dispatch still works while paused, which is what makes it safe to
+pause during an investigation. Scope a dispatch with the `crawler` input:
+a bare source id (`sla`) runs all of that source's rows, a dotted name
+(`sla.circulars`) runs one row, and an empty value runs all fifteen
+sources. Batching a first run source by source, rather than letting one
+job hit fifteen agencies at once, keeps our footprint small on sites that
+are quick to challenge automated traffic.
+
+To stop a run already in flight: `gh run cancel <run-id>`, or disable the
+workflow entirely with `gh workflow disable crawl-sg.yml`. To retire a
+single source without touching the workflow, set
+`crawlers.<source>.schedule.enabled: false` in `config/settings.sg.yaml` —
+its existing records are carried forward rather than dropped.
+
 Run Singapore sources locally with:
 
 ```bash
 python main.py --settings config/settings.sg.yaml --out ./local-data
-python main.py --crawler sla.circulars --settings config/settings.sg.yaml --out ./local-data
+python main.py --crawler sla --settings config/settings.sg.yaml --out ./local-data           # one source
+python main.py --crawler sla.circulars --settings config/settings.sg.yaml --out ./local-data # one row
 ```
 
 ## Adding a new crawler

@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       crawler:
-        description: "Specific crawler module to run (e.g. sla.circulars). Empty runs all Singapore sources."
+        description: "Scope the run: a source (e.g. sla) runs all its rows, a row (e.g. sla.circulars) runs one. Empty runs all 15 sources."
         required: false
         default: ""
       debug:
@@ -28,6 +28,14 @@ jobs:
   crawl:
     runs-on: ubuntu-latest
     timeout-minutes: 360
+
+    # Kill switch. Set the repository variable SG_CRAWL_PAUSED to "true"
+    # (Settings -> Secrets and variables -> Actions -> Variables, or
+    # `gh variable set SG_CRAWL_PAUSED --body true`) and the nightly run stops
+    # without starting a runner or making a single request. Manual dispatch
+    # still works while paused, so a source can be re-run by hand during an
+    # investigation. Unset it, or set it to anything else, to resume.
+    if: github.event_name == 'workflow_dispatch' || vars.SG_CRAWL_PAUSED != 'true'
 
     permissions:
       contents: write
