@@ -79,23 +79,28 @@ kept fully separate end to end:
 - Scope specs: [sources/](sources/) — one reviewable `scope.yaml` per source, per the
   pattern in [onboarding-pattern.md](onboarding-pattern.md).
 
-| Hong Kong department | Singapore agency | source | Status |
-| --- | --- | --- | --- |
-| Buildings Department | Building and Construction Authority | `bca` | Harvested |
-| Legislative Council | Parliament of Singapore | `parliament` | Harvested — intermittently behind an AWS WAF challenge |
-| EMSD | Energy Market Authority | `ema` | Blocked from some networks — Imperva bot challenge |
-| Fire Services Department | Singapore Civil Defence Force | `scdf` | Harvested |
-| Telephone Directory | Singapore Government Directory | `sgdi` | Harvested (pages by design) |
-| Labour Department | Ministry of Manpower | `mom` | Harvested |
-| HK Herbarium | National Parks Board | `nparks` | Harvested |
-| EPD | National Environment Agency | `nea` | Harvested |
-| Planning Department | Urban Redevelopment Authority | `ura` | Harvested |
-| Lands Department | Singapore Land Authority | `sla` | Harvested |
-| DSD + WSD | PUB, National Water Agency | `pub` | Partial — 2 rows are JS listings; CORENET is the better route |
-| ArchSD | JTC Corporation | `jtc` | Harvested |
-| HyD + TD | Land Transport Authority | `lta` | Partial — 1 row blocked |
-| ArchSD | Housing & Development Board | `hdb` | Blocked — 403 + JS-only bodies |
-| DEVB | Ministry of National Development | `mnd` | Disabled — robots.txt bot challenge |
+| Hong Kong department | Singapore agency | source | Records | Documents | Status |
+| --- | --- | --- | ---: | ---: | --- |
+| Legislative Council | Parliament of Singapore | `parliament` | 3,562 | 3,559 | Harvested — order papers, bills and proceedings back to 1955 |
+| Government Telephone Directory | Singapore Government Directory | `sgdi` | 1,119 | 0 | Harvested — directory pages by design |
+| Buildings Department | Building and Construction Authority | `bca` | 1,010 | 837 | Harvested |
+| Planning Department | Urban Redevelopment Authority | `ura` | 738 | 409 | Harvested |
+| Labour Department | Ministry of Manpower | `mom` | 694 | 413 | Harvested |
+| Fire Services Department | Singapore Civil Defence Force | `scdf` | 641 | 580 | Harvested |
+| Hong Kong Herbarium | National Parks Board | `nparks` | 481 | 199 | Harvested |
+| EPD | National Environment Agency | `nea` | 479 | 338 | Harvested |
+| Lands Department | Singapore Land Authority | `sla` | 365 | 343 | Harvested |
+| DSD + WSD | PUB, National Water Agency | `pub` | 121 | 85 | Partial — 2 rows are JS listings; CORENET is the better route |
+| HyD + TD | Land Transport Authority | `lta` | 106 | 93 | Harvested |
+| ArchSD | JTC Corporation | `jtc` | 72 | 47 | Harvested |
+| EMSD | Energy Market Authority | `ema` | 4 | 0 | Blocked — Imperva bot challenge answers every endpoint |
+| ArchSD | Housing & Development Board | `hdb` | 0 | 0 | Blocked — 403 across the whole domain |
+| DEVB | Ministry of National Development | `mnd` | 0 | 0 | Disabled — robots.txt bot challenge |
+| CEDD | split across LTA / JTC / PUB | — | — | — | Covered by the three sources above |
+
+Totals as of the 24 August 2026 run: **9,392 records, 6,903 documents**.
+EMA and HDB are recorded as blocked rather than worked around; both were
+reachable during the 21 August survey, so the nightly run retries them.
 
 ### Pausing and scoping the Singapore run
 
