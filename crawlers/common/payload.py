@@ -367,7 +367,7 @@ class _PayloadCrawlerBase:
                         source=f"{ctx.source_id}.{self.name}",
                         publish_date=normalize_publish_date(date_value),
                         meta={
-                            "kind": "document",
+                            "record_kind": "document",
                             "file_type": path_ext(canonical).lstrip("."),
                             "found_on": found_on,
                             "size_bytes": file_obj.get("filesize") or item.get("fileSize")
@@ -446,7 +446,7 @@ class FlightPayloadCrawler(_PayloadCrawlerBase):
                 discovered_at_utc=ctx.started_at_utc,
                 source=f"{ctx.source_id}.{self.name}",
                 publish_date=None,
-                meta={"kind": "page", "file_type": "html"},
+                meta={"record_kind": "page", "file_type": "html"},
             )
         )
         records.sort(key=lambda r: r.url)
@@ -562,7 +562,7 @@ class ServerActionCrawler(_PayloadCrawlerBase):
                 discovered_at_utc=ctx.started_at_utc,
                 source=f"{ctx.source_id}.{self.name}",
                 publish_date=None,
-                meta={"kind": "page", "file_type": "html"},
+                meta={"record_kind": "page", "file_type": "html"},
             )
         )
         records.sort(key=lambda r: r.url)
@@ -690,7 +690,7 @@ class ApiIndexCrawler(_PayloadCrawlerBase):
                 source=f"{ctx.source_id}.{self.name}",
                 publish_date=normalize_publish_date(info.get("date")),
                 meta={
-                    "kind": "document",
+                    "record_kind": "document",
                     "file_type": path_ext(url).lstrip("."),
                     "found_on": found_on,
                 },

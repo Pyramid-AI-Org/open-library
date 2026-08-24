@@ -230,12 +230,12 @@ def test_one_request_returns_the_whole_order_paper() -> None:
     payload.get_with_retries = stub_get(ORDER_PAPER)  # type: ignore[assignment]
     records = crawler.crawl(ctx("parliament"))
 
-    documents = [r for r in records if r.meta.get("kind") == "document"]
+    documents = [r for r in records if r.meta.get("record_kind") == "document"]
     assert len(documents) == 3, f"expected 3 documents, got {len(documents)}"
     assert all(r.url.startswith("https://www.parliament.gov.sg/api/media/") for r in documents)
     assert any("Order Paper No. 34" in (r.name or "") for r in documents)
     # A page record for the listing itself, so coverage is auditable.
-    assert any(r.meta.get("kind") == "page" for r in records)
+    assert any(r.meta.get("record_kind") == "page" for r in records)
 
 
 def test_a_partial_payload_is_reported_not_silently_accepted(capsys=None) -> None:
@@ -285,7 +285,7 @@ def test_the_server_action_returns_both_the_bill_and_its_corrigendum() -> None:
     payload._PayloadCrawlerBase._session = staticmethod(lambda ctx: session)  # type: ignore[assignment]
 
     records = crawler.crawl(ctx("parliament"))
-    documents = [r for r in records if r.meta.get("kind") == "document"]
+    documents = [r for r in records if r.meta.get("record_kind") == "document"]
 
     assert len(documents) == 3, f"2 bills + 1 corrigendum = 3, got {len(documents)}"
     urls = {r.url for r in documents}
@@ -362,7 +362,7 @@ def test_the_api_index_crawler_reads_an_unknown_schema() -> None:
     records = crawler.crawl(ctx("ema"))
 
     assert len(records) == 2
-    assert all(r.meta["kind"] == "document" for r in records)
+    assert all(r.meta["record_kind"] == "document" for r in records)
     assert {r.meta["file_type"] for r in records} == {"pdf", "docx"}
 
 
