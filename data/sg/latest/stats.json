@@ -1,12 +1,13 @@
 {
-  "input": "C:\\Users\\nkcng\\Documents\\GitHub\\ol-data-worktree\\data\\sg\\latest\\urls.jsonl",
+  "input": "data-worktree/data/sg/latest/urls.jsonl",
   "totals": {
-    "lines_total": 9392,
-    "records_total": 9392,
+    "lines_total": 8704,
+    "records_total": 8704,
     "records_by_source": {
       "scdf.acts_codes_and_regulations": 289,
       "scdf.fire_code": 152,
       "scdf.fire_safety_circulars": 102,
+      "ema.regulations": 67,
       "nparks.cuge_standards": 25,
       "ura.development_control": 342,
       "bca.circulars": 403,
@@ -26,11 +27,16 @@
       "nea.legislation": 90,
       "sla.legislation": 15,
       "nea.pollution_control": 139,
-      "ema.regulations": 1,
-      "ema.industry_reports": 1,
-      "ema.statistics": 2,
+      "ema.licences": 495,
+      "ema.regulatory_publications": 16,
+      "ema.circulars": 29,
+      "ema.forms": 25,
+      "ema.corporate_publications": 16,
+      "ema.educational_materials": 29,
+      "ema.industry_reports": 11,
+      "ema.statistics": 20,
       "jtc.development_and_renovation": 23,
-      "jtc.tenancy_requirements": 49,
+      "jtc.tenancy_requirements": 48,
       "lta.railway_protection": 22,
       "lta.street_works": 42,
       "lta.transport_infrastructure_standards": 19,
@@ -44,9 +50,9 @@
       "nparks.services": 86,
       "nparks.publications_resources": 113,
       "nparks.who_we_are": 8,
-      "parliament.bills_introduced": 773,
       "parliament.order_paper": 2169,
-      "parliament.votes_and_proceedings": 620,
+      "parliament.bills_introduced": 1,
+      "parliament.votes_and_proceedings": 1,
       "pub.requirements": 88,
       "pub.guides_and_handbooks": 31,
       "pub.circulars": 1,
@@ -378,8 +384,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 289
       }
     },
@@ -688,8 +694,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 152
       }
     },
@@ -921,9 +927,234 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 102
+      }
+    },
+    "ema.regulations": {
+      "records": 67,
+      "unique_urls": 67,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 19,
+        "warnings": 2,
+        "by_kind": {
+          "meta_value_outlier": 2,
+          "missing_required_field": 19
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 67,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 19,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 67
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 46
+        },
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 19
+        },
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "discovered_from",
+            "discovered_from_title",
+            "fetch_url",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 2
+        }
+      ],
+      "meta_schema_variants": 3,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "crawl_depth": [
+          {
+            "value": "0",
+            "count": 44
+          },
+          {
+            "value": "2",
+            "count": 18
+          },
+          {
+            "value": "1",
+            "count": 5
+          }
+        ],
+        "discovered_from": [
+          {
+            "value": "https://www.ema.gov.sg/regulations-licences/regulations/acts-regulations",
+            "count": 43
+          },
+          {
+            "value": "https://www.ema.gov.sg/regulations-licences/regulations/policies-frameworks/v...",
+            "count": 3
+          },
+          {
+            "value": "https://www.ema.gov.sg/regulations-licences/regulations/policies-frameworks/r...",
+            "count": 1
+          },
+          {
+            "value": "https://www.ema.gov.sg/regulations-licences/regulations/market-operations/mar...",
+            "count": 1
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "About EMA",
+            "count": 48
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "",
+            "count": 39
+          },
+          {
+            "value": "html",
+            "count": 19
+          },
+          {
+            "value": "pdf",
+            "count": 9
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "external_reference",
+            "count": 43
+          },
+          {
+            "value": "page",
+            "count": 19
+          },
+          {
+            "value": "document",
+            "count": 5
+          }
+        ],
+        "fetch_url": [
+          {
+            "value": "https://sso.agc.gov.sg/SL/116A-RG1?DocDate=20190830",
+            "count": 1
+          },
+          {
+            "value": "https://sso.agc.gov.sg/SL/DCA2001-N1?DocDate=20140917",
+            "count": 1
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "crawl_depth",
+          67
+        ],
+        [
+          "file_ext",
+          67
+        ],
+        [
+          "record_kind",
+          67
+        ],
+        [
+          "discovered_from",
+          48
+        ],
+        [
+          "discovered_from_title",
+          48
+        ],
+        [
+          "fetch_url",
+          2
+        ]
+      ],
+      "top_hosts": [
+        [
+          "sso.agc.gov.sg",
+          39
+        ],
+        [
+          "www.ema.gov.sg",
+          24
+        ],
+        [
+          "assets.egazette.gov.sg",
+          4
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          58
+        ],
+        [
+          ".pdf",
+          9
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 67
       }
     },
     "nparks.cuge_standards": {
@@ -1054,8 +1285,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 25
       }
     },
@@ -1362,8 +1593,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 342
       }
     },
@@ -1622,8 +1853,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 403
       }
     },
@@ -1893,8 +2124,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 184
       }
     },
@@ -2198,8 +2429,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 150
       }
     },
@@ -2563,8 +2794,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 471
       }
     },
@@ -2882,8 +3113,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 72
       }
     },
@@ -3090,8 +3321,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 7
       }
     },
@@ -3277,8 +3508,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 13
       }
     },
@@ -3529,8 +3760,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 52
       }
     },
@@ -3770,8 +4001,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 12
       }
     },
@@ -3961,8 +4192,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 333
       }
     },
@@ -4152,8 +4383,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 17
       }
     },
@@ -4441,8 +4672,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T06:18:17.548306+00:00",
-        "max": "2026-08-24T06:18:17.548306+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 509
       }
     },
@@ -4613,8 +4844,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T06:17:55.480857+00:00",
-        "max": "2026-08-24T06:17:55.480857+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 153
       }
     },
@@ -4772,8 +5003,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T06:28:39.957265+00:00",
-        "max": "2026-08-24T06:28:39.957265+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 32
       }
     },
@@ -5005,8 +5236,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 90
       }
     },
@@ -5163,8 +5394,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 15
       }
     },
@@ -5432,20 +5663,142 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 139
       }
     },
-    "ema.regulations": {
-      "records": 1,
-      "unique_urls": 1,
+    "ema.licences": {
+      "records": 495,
+      "unique_urls": 495,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 1,
+        "errors": 990,
         "warnings": 0,
         "by_kind": {
-          "missing_required_field": 1
+          "null_required_field": 495,
+          "missing_required_field": 495
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 495,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 195,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 495,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 495
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "found_on",
+            "record_kind"
+          ],
+          "count": 495
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_type": [
+          {
+            "value": "pdf",
+            "count": 495
+          }
+        ],
+        "found_on": [
+          {
+            "value": "https://www.ema.gov.sg/regulations-licences/licences",
+            "count": 495
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 495
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_type",
+          495
+        ],
+        [
+          "found_on",
+          495
+        ],
+        [
+          "record_kind",
+          495
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.ema.gov.sg",
+          495
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          495
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 495
+      }
+    },
+    "ema.regulatory_publications": {
+      "records": 16,
+      "unique_urls": 16,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 16,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 16
         }
       },
       "required_field_null_missing_invalid": {
@@ -5466,7 +5819,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 1,
+          "null": 0,
           "invalid": 0
         },
         "source": {
@@ -5475,7 +5828,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 1,
+          "missing": 16,
           "null": 0,
           "invalid": 0
         }
@@ -5491,82 +5844,582 @@
             "source_id",
             "url"
           ],
-          "count": 1
+          "count": 16
         }
       ],
       "meta_schema_signatures": [
         {
           "meta_keys": [
-            "crawl_depth",
-            "file_ext",
+            "file_type",
+            "found_on",
             "record_kind"
           ],
-          "count": 1
+          "count": 16
         }
       ],
       "meta_schema_variants": 1,
       "meta_type_variation": {},
       "meta_top_scalar_values": {
-        "crawl_depth": [
+        "file_type": [
           {
-            "value": "0",
-            "count": 1
+            "value": "pdf",
+            "count": 16
           }
         ],
-        "file_ext": [
+        "found_on": [
           {
-            "value": "html",
-            "count": 1
+            "value": "https://www.ema.gov.sg/regulations-licences/regulatory-publications",
+            "count": 16
           }
         ],
         "record_kind": [
           {
-            "value": "page",
-            "count": 1
+            "value": "document",
+            "count": 16
           }
         ]
       },
       "top_meta_keys": [
         [
-          "crawl_depth",
-          1
+          "file_type",
+          16
         ],
         [
-          "file_ext",
-          1
+          "found_on",
+          16
         ],
         [
           "record_kind",
-          1
+          16
         ]
       ],
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          1
+          16
         ]
       ],
       "top_extensions": [
         [
-          "(no_ext)",
-          1
+          ".pdf",
+          16
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
-        "count": 1
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 16
+      }
+    },
+    "ema.circulars": {
+      "records": 29,
+      "unique_urls": 29,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 29,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 29
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 29,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 29
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "found_on",
+            "record_kind"
+          ],
+          "count": 29
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_type": [
+          {
+            "value": "pdf",
+            "count": 29
+          }
+        ],
+        "found_on": [
+          {
+            "value": "https://www.ema.gov.sg/regulations-licences/regulatory-publications",
+            "count": 29
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 29
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_type",
+          29
+        ],
+        [
+          "found_on",
+          29
+        ],
+        [
+          "record_kind",
+          29
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.ema.gov.sg",
+          29
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          29
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 29
+      }
+    },
+    "ema.forms": {
+      "records": 25,
+      "unique_urls": 25,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 25,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 25
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 25,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 25,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 25
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "found_on",
+            "record_kind"
+          ],
+          "count": 25
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_type": [
+          {
+            "value": "zip",
+            "count": 13
+          },
+          {
+            "value": "pdf",
+            "count": 9
+          },
+          {
+            "value": "docx",
+            "count": 3
+          }
+        ],
+        "found_on": [
+          {
+            "value": "https://www.ema.gov.sg/resources/forms",
+            "count": 25
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 25
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_type",
+          25
+        ],
+        [
+          "found_on",
+          25
+        ],
+        [
+          "record_kind",
+          25
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.ema.gov.sg",
+          25
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".zip",
+          13
+        ],
+        [
+          ".pdf",
+          9
+        ],
+        [
+          ".docx",
+          3
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 25
+      }
+    },
+    "ema.corporate_publications": {
+      "records": 16,
+      "unique_urls": 16,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 16,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 16
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 16,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 16
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "found_on",
+            "record_kind"
+          ],
+          "count": 16
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_type": [
+          {
+            "value": "pdf",
+            "count": 16
+          }
+        ],
+        "found_on": [
+          {
+            "value": "https://www.ema.gov.sg/resources/corporate-publications",
+            "count": 16
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 16
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_type",
+          16
+        ],
+        [
+          "found_on",
+          16
+        ],
+        [
+          "record_kind",
+          16
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.ema.gov.sg",
+          16
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          16
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 16
+      }
+    },
+    "ema.educational_materials": {
+      "records": 29,
+      "unique_urls": 29,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 29,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 29
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 29,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 29
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "found_on",
+            "record_kind"
+          ],
+          "count": 29
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_type": [
+          {
+            "value": "pdf",
+            "count": 29
+          }
+        ],
+        "found_on": [
+          {
+            "value": "https://www.ema.gov.sg/resources/educational-materials",
+            "count": 29
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 29
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_type",
+          29
+        ],
+        [
+          "found_on",
+          29
+        ],
+        [
+          "record_kind",
+          29
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.ema.gov.sg",
+          29
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          29
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 29
       }
     },
     "ema.industry_reports": {
-      "records": 1,
-      "unique_urls": 1,
+      "records": 11,
+      "unique_urls": 11,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 1,
+        "errors": 5,
         "warnings": 0,
         "by_kind": {
-          "missing_required_field": 1
+          "missing_required_field": 5
         }
       },
       "required_field_null_missing_invalid": {
@@ -5587,7 +6440,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 1,
+          "null": 11,
           "invalid": 0
         },
         "source": {
@@ -5596,7 +6449,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 1,
+          "missing": 5,
           "null": 0,
           "invalid": 0
         }
@@ -5612,82 +6465,132 @@
             "source_id",
             "url"
           ],
-          "count": 1
+          "count": 11
         }
       ],
       "meta_schema_signatures": [
         {
           "meta_keys": [
             "crawl_depth",
+            "discovered_from",
+            "discovered_from_title",
             "file_ext",
             "record_kind"
           ],
-          "count": 1
+          "count": 6
+        },
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 5
         }
       ],
-      "meta_schema_variants": 1,
+      "meta_schema_variants": 2,
       "meta_type_variation": {},
       "meta_top_scalar_values": {
         "crawl_depth": [
+          {
+            "value": "1",
+            "count": 10
+          },
           {
             "value": "0",
             "count": 1
           }
         ],
+        "discovered_from": [
+          {
+            "value": "https://www.ema.gov.sg/resources/industry-reports/open-electricity-market-cus...",
+            "count": 5
+          },
+          {
+            "value": "https://www.ema.gov.sg/resources/industry-reports/energy-2050-committee-report",
+            "count": 1
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "About EMA",
+            "count": 6
+          }
+        ],
         "file_ext": [
           {
+            "value": "pdf",
+            "count": 6
+          },
+          {
             "value": "html",
-            "count": 1
+            "count": 5
           }
         ],
         "record_kind": [
           {
+            "value": "document",
+            "count": 6
+          },
+          {
             "value": "page",
-            "count": 1
+            "count": 5
           }
         ]
       },
       "top_meta_keys": [
         [
           "crawl_depth",
-          1
+          11
         ],
         [
           "file_ext",
-          1
+          11
         ],
         [
           "record_kind",
-          1
+          11
+        ],
+        [
+          "discovered_from",
+          6
+        ],
+        [
+          "discovered_from_title",
+          6
         ]
       ],
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          1
+          11
         ]
       ],
       "top_extensions": [
         [
+          ".pdf",
+          6
+        ],
+        [
           "(no_ext)",
-          1
+          5
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
-        "count": 1
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 11
       }
     },
     "ema.statistics": {
-      "records": 2,
-      "unique_urls": 2,
+      "records": 20,
+      "unique_urls": 20,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 2,
+        "errors": 13,
         "warnings": 0,
         "by_kind": {
-          "missing_required_field": 2
+          "missing_required_field": 13
         }
       },
       "required_field_null_missing_invalid": {
@@ -5708,7 +6611,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 2,
+          "null": 20,
           "invalid": 0
         },
         "source": {
@@ -5717,7 +6620,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 2,
+          "missing": 13,
           "null": 0,
           "invalid": 0
         }
@@ -5733,7 +6636,7 @@
             "source_id",
             "url"
           ],
-          "count": 2
+          "count": 20
         }
       ],
       "meta_schema_signatures": [
@@ -5743,61 +6646,131 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 2
+          "count": 13
+        },
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 7
         }
       ],
-      "meta_schema_variants": 1,
+      "meta_schema_variants": 2,
       "meta_type_variation": {},
       "meta_top_scalar_values": {
         "crawl_depth": [
+          {
+            "value": "1",
+            "count": 10
+          },
+          {
+            "value": "2",
+            "count": 8
+          },
           {
             "value": "0",
             "count": 2
           }
         ],
+        "discovered_from": [
+          {
+            "value": "https://www.ema.gov.sg/resources/singapore-energy-statistics/chapter1",
+            "count": 2
+          },
+          {
+            "value": "https://www.ema.gov.sg/resources/statistics/average-monthly-uniform-singapore...",
+            "count": 2
+          },
+          {
+            "value": "https://www.ema.gov.sg/resources/statistics/installed-capacity-of-grid-connec...",
+            "count": 2
+          },
+          {
+            "value": "https://www.ema.gov.sg/resources/statistics/number-of-grid-connected-solar-ph...",
+            "count": 1
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "About EMA",
+            "count": 7
+          }
+        ],
         "file_ext": [
           {
             "value": "html",
+            "count": 13
+          },
+          {
+            "value": "xlsx",
+            "count": 5
+          },
+          {
+            "value": "pdf",
             "count": 2
           }
         ],
         "record_kind": [
           {
             "value": "page",
-            "count": 2
+            "count": 13
+          },
+          {
+            "value": "document",
+            "count": 7
           }
         ]
       },
       "top_meta_keys": [
         [
           "crawl_depth",
-          2
+          20
         ],
         [
           "file_ext",
-          2
+          20
         ],
         [
           "record_kind",
-          2
+          20
+        ],
+        [
+          "discovered_from",
+          7
+        ],
+        [
+          "discovered_from_title",
+          7
         ]
       ],
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          2
+          20
         ]
       ],
       "top_extensions": [
         [
           "(no_ext)",
+          13
+        ],
+        [
+          ".xlsx",
+          5
+        ],
+        [
+          ".pdf",
           2
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
-        "count": 2
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 20
       }
     },
     "jtc.development_and_renovation": {
@@ -5970,21 +6943,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 23
       }
     },
     "jtc.tenancy_requirements": {
-      "records": 49,
-      "unique_urls": 49,
+      "records": 48,
+      "unique_urls": 48,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 18,
-        "warnings": 1,
+        "warnings": 2,
         "by_kind": {
           "missing_required_field": 18,
-          "meta_value_outlier": 1
+          "meta_value_outlier": 2
         }
       },
       "required_field_null_missing_invalid": {
@@ -6005,7 +6978,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 49,
+          "null": 48,
           "invalid": 0
         },
         "source": {
@@ -6030,7 +7003,7 @@
             "source_id",
             "url"
           ],
-          "count": 49
+          "count": 48
         }
       ],
       "meta_schema_signatures": [
@@ -6042,7 +7015,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 31
+          "count": 30
         },
         {
           "meta_keys": [
@@ -6063,7 +7036,7 @@
           },
           {
             "value": "0",
-            "count": 2
+            "count": 1
           },
           {
             "value": "2",
@@ -6117,7 +7090,7 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 29
+            "count": 28
           },
           {
             "value": "html",
@@ -6131,7 +7104,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 31
+            "count": 30
           },
           {
             "value": "page",
@@ -6142,35 +7115,35 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          49
+          48
         ],
         [
           "file_ext",
-          49
+          48
         ],
         [
           "record_kind",
-          49
+          48
         ],
         [
           "discovered_from",
-          31
+          30
         ],
         [
           "discovered_from_title",
-          31
+          30
         ]
       ],
       "top_hosts": [
         [
           "www.jtc.gov.sg",
-          49
+          48
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          29
+          28
         ],
         [
           "(no_ext)",
@@ -6182,9 +7155,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T06:29:02.550518+00:00",
-        "max": "2026-08-24T06:29:02.550518+00:00",
-        "count": 49
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 48
       }
     },
     "lta.railway_protection": {
@@ -6354,8 +7327,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 22
       }
     },
@@ -6582,8 +7555,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 42
       }
     },
@@ -6745,8 +7718,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 19
       }
     },
@@ -6908,8 +7881,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 3
       }
     },
@@ -7100,8 +8073,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 123
       }
     },
@@ -7352,8 +8325,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 49
       }
     },
@@ -7573,8 +8546,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 49
       }
     },
@@ -7773,8 +8746,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 29
       }
     },
@@ -8014,8 +8987,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 129
       }
     },
@@ -8247,8 +9220,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 120
       }
     },
@@ -8487,8 +9460,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 86
       }
     },
@@ -8666,8 +9639,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 113
       }
     },
@@ -8844,177 +9817,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 8
-      }
-    },
-    "parliament.bills_introduced": {
-      "records": 773,
-      "unique_urls": 773,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 773,
-        "warnings": 2,
-        "by_kind": {
-          "missing_required_field": 773,
-          "meta_value_outlier": 2
-        }
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 1,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 773,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 773
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "file_type",
-            "found_on",
-            "record_kind",
-            "size_bytes"
-          ],
-          "count": 772
-        },
-        {
-          "meta_keys": [
-            "file_type",
-            "record_kind"
-          ],
-          "count": 1
-        }
-      ],
-      "meta_schema_variants": 2,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "file_type": [
-          {
-            "value": "pdf",
-            "count": 772
-          },
-          {
-            "value": "html",
-            "count": 1
-          }
-        ],
-        "found_on": [
-          {
-            "value": "https://www.parliament.gov.sg/parliamentary-business/bills-introduced",
-            "count": 772
-          }
-        ],
-        "record_kind": [
-          {
-            "value": "document",
-            "count": 772
-          },
-          {
-            "value": "page",
-            "count": 1
-          }
-        ],
-        "size_bytes": [
-          {
-            "value": "79127",
-            "count": 2
-          },
-          {
-            "value": "82972",
-            "count": 2
-          },
-          {
-            "value": "37711",
-            "count": 2
-          },
-          {
-            "value": "217123",
-            "count": 1
-          },
-          {
-            "value": "96124",
-            "count": 1
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "file_type",
-          773
-        ],
-        [
-          "record_kind",
-          773
-        ],
-        [
-          "found_on",
-          772
-        ],
-        [
-          "size_bytes",
-          772
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.parliament.gov.sg",
-          773
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          772
-        ],
-        [
-          "(no_ext)",
-          1
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-08-24T09:03:43.397029+00:00",
-        "max": "2026-08-24T09:03:43.397029+00:00",
-        "count": 773
       }
     },
     "parliament.order_paper": {
@@ -9185,16 +9990,15 @@
         "count": 2169
       }
     },
-    "parliament.votes_and_proceedings": {
-      "records": 620,
-      "unique_urls": 620,
+    "parliament.bills_introduced": {
+      "records": 1,
+      "unique_urls": 1,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 620,
-        "warnings": 2,
+        "errors": 1,
+        "warnings": 0,
         "by_kind": {
-          "missing_required_field": 620,
-          "meta_value_outlier": 2
+          "missing_required_field": 1
         }
       },
       "required_field_null_missing_invalid": {
@@ -9224,7 +10028,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 620,
+          "missing": 1,
           "null": 0,
           "invalid": 0
         }
@@ -9240,19 +10044,10 @@
             "source_id",
             "url"
           ],
-          "count": 620
+          "count": 1
         }
       ],
       "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "file_type",
-            "found_on",
-            "record_kind",
-            "size_bytes"
-          ],
-          "count": 619
-        },
         {
           "meta_keys": [
             "file_type",
@@ -9261,104 +10056,158 @@
           "count": 1
         }
       ],
-      "meta_schema_variants": 2,
+      "meta_schema_variants": 1,
       "meta_type_variation": {},
       "meta_top_scalar_values": {
         "file_type": [
-          {
-            "value": "pdf",
-            "count": 446
-          },
-          {
-            "value": "doc",
-            "count": 173
-          },
           {
             "value": "html",
             "count": 1
           }
         ],
-        "found_on": [
-          {
-            "value": "https://www.parliament.gov.sg/parliamentary-business/votes-and-proceedings",
-            "count": 619
-          }
-        ],
         "record_kind": [
-          {
-            "value": "document",
-            "count": 619
-          },
           {
             "value": "page",
             "count": 1
-          }
-        ],
-        "size_bytes": [
-          {
-            "value": "61440",
-            "count": 7
-          },
-          {
-            "value": "34816",
-            "count": 7
-          },
-          {
-            "value": "47104",
-            "count": 5
-          },
-          {
-            "value": "62464",
-            "count": 4
-          },
-          {
-            "value": "60928",
-            "count": 4
           }
         ]
       },
       "top_meta_keys": [
         [
           "file_type",
-          620
+          1
         ],
         [
           "record_kind",
-          620
-        ],
-        [
-          "found_on",
-          619
-        ],
-        [
-          "size_bytes",
-          619
+          1
         ]
       ],
       "top_hosts": [
         [
           "www.parliament.gov.sg",
-          620
+          1
         ]
       ],
       "top_extensions": [
-        [
-          ".pdf",
-          446
-        ],
-        [
-          ".doc",
-          173
-        ],
         [
           "(no_ext)",
           1
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T09:03:40.424324+00:00",
-        "max": "2026-08-24T09:03:40.424324+00:00",
-        "count": 620
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 1
+      }
+    },
+    "parliament.votes_and_proceedings": {
+      "records": 1,
+      "unique_urls": 1,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 1,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 1
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 1,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 1,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 1
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "record_kind"
+          ],
+          "count": 1
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_type": [
+          {
+            "value": "html",
+            "count": 1
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "page",
+            "count": 1
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_type",
+          1
+        ],
+        [
+          "record_kind",
+          1
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.parliament.gov.sg",
+          1
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          1
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
+        "count": 1
       }
     },
     "pub.requirements": {
@@ -9580,8 +10429,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 88
       }
     },
@@ -9768,8 +10617,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 31
       }
     },
@@ -9889,8 +10738,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 1
       }
     },
@@ -10010,8 +10859,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 1
       }
     },
@@ -10324,8 +11173,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 62
       }
     },
@@ -10525,8 +11374,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 36
       }
     },
@@ -10655,8 +11504,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 350
       }
     },
@@ -10785,8 +11634,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T06:29:37.223440+00:00",
-        "max": "2026-08-24T06:29:37.223440+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 687
       }
     },
@@ -10915,8 +11764,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T06:46:13.171207+00:00",
-        "max": "2026-08-24T06:46:13.171207+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 82
       }
     },
@@ -11085,8 +11934,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T05:09:10.489964+00:00",
-        "max": "2026-08-24T05:09:10.489964+00:00",
+        "min": "2026-08-25T02:13:08.549651+00:00",
+        "max": "2026-08-25T02:13:08.549651+00:00",
         "count": 62
       }
     }
@@ -11095,18 +11944,19 @@
     "record_size_bytes": {
       "min": 254,
       "max": 1132,
-      "mean": 515.0672913117547,
-      "p50": 495.0,
-      "p95": 780.0
+      "mean": 508.8915441176471,
+      "p50": 469.0,
+      "p95": 788.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 377,
-        "error": 5784
+        "warning": 376,
+        "error": 5531
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 377,
-        "error:missing_required_field": 5784
+        "warning:meta_value_outlier": 376,
+        "error:missing_required_field": 5036,
+        "error:null_required_field": 495
       }
     },
     "issue_examples": [
@@ -11157,38 +12007,6 @@
         "field": "meta.record_kind",
         "line": 3,
         "detail": "rare value in source: external_reference"
-      },
-      {
-        "severity": "error",
-        "kind": "missing_required_field",
-        "source": "nparks.cuge_standards",
-        "field": "meta.discovered_from",
-        "line": 4,
-        "detail": "missing required field"
-      },
-      {
-        "severity": "error",
-        "kind": "missing_required_field",
-        "source": "nparks.cuge_standards",
-        "field": "meta.discovered_from",
-        "line": 5,
-        "detail": "missing required field"
-      },
-      {
-        "severity": "error",
-        "kind": "missing_required_field",
-        "source": "nparks.cuge_standards",
-        "field": "meta.discovered_from",
-        "line": 6,
-        "detail": "missing required field"
-      },
-      {
-        "severity": "error",
-        "kind": "missing_required_field",
-        "source": "nparks.cuge_standards",
-        "field": "meta.discovered_from",
-        "line": 7,
-        "detail": "missing required field"
       },
       {
         "severity": "error",
@@ -11359,11 +12177,43 @@
         "detail": "missing required field"
       },
       {
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "nparks.cuge_standards",
+        "field": "meta.discovered_from",
+        "line": 29,
+        "detail": "missing required field"
+      },
+      {
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "nparks.cuge_standards",
+        "field": "meta.discovered_from",
+        "line": 30,
+        "detail": "missing required field"
+      },
+      {
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "nparks.cuge_standards",
+        "field": "meta.discovered_from",
+        "line": 31,
+        "detail": "missing required field"
+      },
+      {
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "nparks.cuge_standards",
+        "field": "meta.discovered_from",
+        "line": 32,
+        "detail": "missing required field"
+      },
+      {
         "severity": "warning",
         "kind": "meta_value_outlier",
         "source": "ura.development_control",
         "field": "meta.declared_file_type",
-        "line": 29,
+        "line": 33,
         "detail": "rare value in source: zip"
       },
       {
@@ -11371,7 +12221,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.development_control",
         "field": "meta.declared_file_type",
-        "line": 30,
+        "line": 34,
         "detail": "rare value in source: zip"
       },
       {
@@ -11379,7 +12229,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.development_control",
         "field": "meta.discovered_from_title",
-        "line": 48,
+        "line": 52,
         "detail": "rare value in source: Development Control Guidelines"
       },
       {
@@ -11387,7 +12237,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.master_plan",
         "field": "meta.discovered_from",
-        "line": 51,
+        "line": 55,
         "detail": "rare value in source: https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/regional-plans/west/green--blue-and-reimagined-places/"
       },
       {
@@ -11395,7 +12245,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.master_plan",
         "field": "meta.discovered_from_title",
-        "line": 51,
+        "line": 55,
         "detail": "rare value in source: Green, Blue and Reimagined Places"
       },
       {
@@ -11403,7 +12253,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.master_plan",
         "field": "meta.record_kind",
-        "line": 51,
+        "line": 55,
         "detail": "rare value in source: external_reference"
       },
       {
@@ -11411,7 +12261,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.conservation",
         "field": "meta.record_kind",
-        "line": 54,
+        "line": 58,
         "detail": "rare value in source: external_reference"
       },
       {
@@ -11419,7 +12269,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.master_plan",
         "field": "meta.discovered_from",
-        "line": 55,
+        "line": 59,
         "detail": "rare value in source: https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/regional-plans/north-east/paya-lebar-air-base/"
       },
       {
@@ -11427,7 +12277,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.master_plan",
         "field": "meta.discovered_from_title",
-        "line": 55,
+        "line": 59,
         "detail": "rare value in source: Paya Lebar Air Base"
       },
       {
@@ -11435,7 +12285,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.master_plan",
         "field": "meta.record_kind",
-        "line": 55,
+        "line": 59,
         "detail": "rare value in source: external_reference"
       },
       {
@@ -11443,7 +12293,7 @@
         "kind": "meta_value_outlier",
         "source": "ura.conservation",
         "field": "meta.record_kind",
-        "line": 56,
+        "line": 60,
         "detail": "rare value in source: external_reference"
       },
       {
@@ -11451,7 +12301,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.declared_file_type",
-        "line": 145,
+        "line": 149,
         "detail": "rare value in source: docx"
       },
       {
@@ -11459,7 +12309,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.file_ext",
-        "line": 189,
+        "line": 193,
         "detail": "rare value in source: xlsx"
       },
       {
@@ -11467,7 +12317,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.declared_file_type",
-        "line": 199,
+        "line": 203,
         "detail": "rare value in source: xls"
       },
       {
@@ -11475,7 +12325,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.file_ext",
-        "line": 199,
+        "line": 203,
         "detail": "rare value in source: xls"
       },
       {
@@ -11483,7 +12333,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.declared_file_type",
-        "line": 333,
+        "line": 337,
         "detail": "rare value in source: xlsx"
       },
       {
@@ -11491,7 +12341,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.file_ext",
-        "line": 333,
+        "line": 337,
         "detail": "rare value in source: xlsx"
       },
       {
@@ -11499,7 +12349,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.declared_file_type",
-        "line": 358,
+        "line": 362,
         "detail": "rare value in source: zip"
       },
       {
@@ -11507,7 +12357,7 @@
         "kind": "meta_value_outlier",
         "source": "bca.safety_and_standards",
         "field": "meta.file_ext",
-        "line": 358,
+        "line": 362,
         "detail": "rare value in source: zip"
       }
     ]
