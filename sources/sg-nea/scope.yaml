@@ -1,0 +1,238 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - National Environment Agency
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Environmental Protection Department (EPD)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: nea
+label: "National Environment Agency"
+base_url: "https://www.nea.gov.sg"
+hk_equivalent: "Environmental Protection Department (EPD)"
+mandate: >
+  NEA regulates pollution control, environmental health, waste and
+  hazardous substances in Singapore. It is the counterpart of the Hong
+  Kong Environmental Protection Department already in the library, and the
+  Hong Kong deck's requirement translates directly: guidance documents,
+  policy documents and publications as files, plus the web text of the
+  Air, Noise, Water, Waste and Legislation topic trees.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitecore
+  evidence: >
+    Every document under /docs/default-source/; Sitecore ?sfvrsn= version
+    parameters; item GUIDs appended to filenames on collision
+  server_rendered: true
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: sitemap
+  sitemap_url: "https://www.nea.gov.sg/sitemap.xml"
+  note: >
+    A sitemap exists with ~520 entries, but every single lastmod reads
+    2018-06-27 and the paths predate two site reorganisations. It is
+    usable as a seed list and useless as a freshness signal - do not let
+    the crawler report those dates as publication dates.
+  robots_txt: "https://www.nea.gov.sg/robots.txt"
+  robots_disallow: ["/search"]
+
+asset_hosts:
+  documents:
+    - "www.nea.gov.sg"
+  document_path_prefixes:
+    - "/docs/default-source/"
+  external_references:
+    - "sso.agc.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: practices_and_guidelines
+    module: crawlers/nea/practices_and_guidelines.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines"
+    path_prefixes:
+      - "/corporate-functions/resources/practices-and-guidelines"
+    expected:
+      pages: 3
+      documents: 46
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The guidance-document core: the Code of Practice on Environmental
+      Health, the codes for Environmental Control Officers and
+      Coordinators, the waste collector and vector control codes, and the
+      cross-topic guideline set covering boundary noise limits for ACMV
+      systems, pollution control studies and noise mitigation for
+      foodshops and entertainment outlets.
+    evidence:
+      - "copeh-2025.pdf - Code of Practice on Environmental Health, 17th ed"
+      - "Technical Guideline on Boundary Noise Limit for ACMV Systems"
+      - "Good Practice Guide for Noise Mitigation - Foodshops"
+
+  - name: circulars
+    module: crawlers/nea/circulars.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.nea.gov.sg/corporate-functions/resources/circulars"
+    path_prefixes:
+      - "/corporate-functions/resources/circulars"
+    expected:
+      pages: 8
+      documents: 115
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Four circular series - Development Control, Hazardous Substance
+      Control, Radiation Protection, and Climate Change & Energy
+      Efficiency - reaching back to 1995. Each is a plain server-rendered
+      table of title, PDF, size and date, which makes this the easiest
+      high-yield row on the site.
+    evidence:
+      - "31 Development Control circulars, 1995 to Dec 2025"
+      - "28 Hazardous Substance Control circulars under /docs/default-source/hs/"
+
+  - name: development_control
+    module: crawlers/nea/development_control.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.nea.gov.sg/our-services/development-control"
+    path_prefixes:
+      - "/our-services/development-control"
+    expected:
+      pages: 11
+      documents: 18
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Singapore's nearest thing to a statutory environmental impact
+      regime: the Pollution Control Study guidelines, air dispersion
+      modelling guidelines, the Quantitative Risk Assessment criteria and
+      technical guidance, and the land traffic noise impact assessment
+      guideline. This is the row that answers the Hong Kong deck's EA &
+      Planning section.
+    notes: >
+      Hong Kong's EIA Ordinance has no Singapore equivalent. NEA regulates
+      through Environmental Information submissions and Pollution Control
+      Studies at building-plan stage instead, which is why this material
+      sits under development control rather than in a register.
+
+  - name: pollution_control
+    module: crawlers/nea/pollution_control.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.nea.gov.sg/our-services/pollution-control"
+    path_prefixes:
+      - "/our-services/pollution-control"
+    expected:
+      pages: 59
+      documents: 71
+      external_references: 9
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The Air, Noise, Water, chemical safety and toxic industrial waste
+      topic trees. The Hong Kong deck asked for web text here rather than
+      files, and that instruction is load-bearing on this site: NEA states
+      several binding limits only as HTML tables - the 36-row trade
+      effluent discharge limits and the industrial and construction
+      boundary noise limits have no PDF at all. A document-only crawl
+      would miss the actual standards.
+    evidence:
+      - "Trade effluent discharge limits - web table, no PDF"
+      - "Construction and industrial noise limits - web tables, no PDF"
+
+  - name: publications
+    module: crawlers/nea/publications.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.nea.gov.sg/corporate-functions/resources/publications"
+    path_prefixes:
+      - "/corporate-functions/resources/publications"
+    expected:
+      pages: 13
+      documents: 36
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Annual and sustainability reports and the environment yearbooks -
+      the publications row of the Hong Kong deck.
+
+  - name: legislation
+    module: crawlers/nea/legislation.py
+    engine: spider
+    intent: [page_text, external_references]
+    start_urls:
+      - "https://www.nea.gov.sg/corporate-functions/resources/legislation-international-law"
+    path_prefixes:
+      - "/corporate-functions/resources/legislation-international-law"
+    expected:
+      pages: 12
+      documents: 30
+      external_references: 14
+      measured: true          # 21 Aug 2026 live run
+      truncated_queue: 12   # stopped at max_pages - these are floors
+    rationale: >
+      The Acts NEA administers - Environmental Protection and Management,
+      Environmental Public Health, Hazardous Waste, Resource
+      Sustainability, Transboundary Haze Pollution - and their subsidiary
+      legislation. All the text lives on Singapore Statutes Online rather
+      than on NEA, so these are recorded as external references. Dropping
+      them would leave codes of practice in the library with no route to
+      the law behind them.
+    notes: >
+      The Code of Practice on Pollution Control is Singapore Standard SS
+      593, sold by Enterprise Singapore and not published by NEA. It
+      cannot be collected; the guideline set above is the free substitute.
+    run_notes: >
+      The 21 August run stopped at its page budget with 12 URLs still
+      queued; the counts here are floors.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/media/news"
+    reason: >
+      Press releases. Also the one JavaScript-rendered listing on the
+      site.
+  - path: "/our-services/waste-management"
+    reason: >
+      Largely public-facing programme pages; the technical 3R guidebooks
+      are reached through practices_and_guidelines instead.
+  - path: "/corporate-functions/about-nea"
+    reason: >
+      Corporate pages.
+
+deferred:
+  - target: "Singapore Standard SS 593 (Code of Practice for Pollution Control)"
+    reason: >
+      A paid Enterprise Singapore standard, not an NEA publication. Not
+      collectable.
+  - target: "sso.agc.gov.sg full legislation text"
+    reason: >
+      Recorded here only as references reached from NEA pages. A Statutes
+      Online source should be built once at jurisdiction level - it now
+      serves BCA, LTA, NEA, MOM, SLA and EMA.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 200 across the six crawlers."
+  - 'The "Code of Practice on Environmental Health" appears by name.'
+  - "Every document URL sits under /docs/default-source/ on www.nea.gov.sg."
+  - "Legislation records point at sso.agc.gov.sg and are typed as external references."
+  - "No record carries 2018-06-27 as a publish date - that is the sitemap's stale stamp, not a date."
+  - "pollution_control returns page records, not only documents - the limits tables are web text."

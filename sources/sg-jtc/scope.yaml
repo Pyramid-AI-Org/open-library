@@ -1,0 +1,121 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - JTC Corporation
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Architectural Services Department (ArchSD), with HDB
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: jtc
+label: "JTC Corporation"
+base_url: "https://www.jtc.gov.sg"
+hk_equivalent: "Architectural Services Department (ArchSD), with HDB"
+mandate: >
+  JTC develops Singapore's industrial land and estates. With HDB it covers
+  the Hong Kong Architectural Services Department's ground, and it is also
+  one of the agencies the equivalence document names for the Civil
+  Engineering and Development Department. Its technical library is small
+  but genuinely regulatory: the design and renovation requirements every
+  JTC tenant and their consultants build to.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitecore
+  evidence: >
+    robots.txt disallows /sitecore; assets under /-/media/project/jtc-
+    cx/corpweb/ (Sitecore Helix convention)
+  server_rendered: true
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: spider
+  sitemap_url: null
+  note: >
+    /sitemap.xml returns the site's HTML error page - a soft 404, so a
+    crawler must check content rather than status. robots.txt declares no
+    sitemap. Crawl by link-following from the section hub.
+  robots_txt: "https://www.jtc.gov.sg/robots.txt"
+  robots_disallow: ["/sitecore"]
+
+asset_hosts:
+  documents:
+    - "www.jtc.gov.sg"
+  document_path_prefixes:
+    - "/-/media/project/jtc-cx/corpweb/assets/"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: development_and_renovation
+    module: crawlers/jtc/development_and_renovation.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.jtc.gov.sg/get-help/development-and-renovation-works/development-and-renovation-forms-and-documents"
+      - "https://www.jtc.gov.sg/get-help/development-and-renovation-works"
+    path_prefixes:
+      - "/get-help/development-and-renovation-works"
+    expected:
+      pages: 8
+      documents: 16
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      JTC's technical requirements for building on its land: the Urban
+      Design Requirements, the Space Submission Handbook, the Fitting-out
+      and Renovation Works Guidebook with its annexes, the usage
+      guidelines for JTC premises and the plot ratio exemptions. The
+      forms-and-documents page is fully server-rendered, which makes this
+      the reliable row here.
+    evidence:
+      - "urban-design-guidelines.pdf"
+      - "space-submission-handbook.pdf"
+      - "fitting-out-and-renovation-works-guidelines_v2.pdf plus annexes A-J"
+
+  - name: tenancy_requirements
+    module: crawlers/jtc/tenancy_requirements.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.jtc.gov.sg/get-help/managing-your-tenancy-or-lease"
+    path_prefixes:
+      - "/get-help/managing-your-tenancy-or-lease"
+    expected:
+      pages: 18
+      documents: 30
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Change-of-use rules and the solar deployment requirements -
+      technical conditions on how JTC premises may be used and altered.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/find-land/land-for-tender"
+    reason: >
+      Per-parcel tender conditions - high churn, project-specific rather
+      than general standards, and the listing is JavaScript-rendered.
+  - path: "/news-and-resources"
+    reason: >
+      Press releases and corporate publications.
+  - path: "/who-we-are"
+    reason: >
+      Corporate pages.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 25 across the two crawlers."
+  - 'The "Space Submission Handbook" appears by name.'
+  - "Every document URL sits under /-/media/project/jtc-cx/corpweb/assets/ on www.jtc.gov.sg."
+  - "No record under /find-land/land-for-tender/."
+  - "No crawler reports hitting its page budget."

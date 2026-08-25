@@ -1,0 +1,185 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Urban Redevelopment Authority
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Planning Department (PlanD)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: ura
+label: "Urban Redevelopment Authority"
+base_url: "https://www.ura.gov.sg"
+hk_equivalent: "Planning Department (PlanD)"
+mandate: >
+  URA is Singapore's national land use planning and conservation authority
+  and the counterpart of the Hong Kong Planning Department already in the
+  library. The Hong Kong deck asked for the full version of each Hong Kong
+  Planning Standards and Guidelines chapter - explicitly not the summaries
+  - plus the joint practice notes and the practice notes for professional
+  persons.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: isomer
+  evidence: >
+    Assets on isomer-user-content.by.gov.sg under tenant 467; Made with
+    Isomer footer
+  server_rendered: true
+  content_element_id: main-content
+  document_labels: aria-label
+  collection_pages: flight-payload
+
+discovery:
+  method: sitemap
+  sitemap_url: "https://www.ura.gov.sg/sitemap.xml"
+  note: >
+    ~700 pages with real lastmod dates, but no documents - the sitemap
+    discovers pages and the files are harvested from them.
+  robots_txt: "https://www.ura.gov.sg/robots.txt"
+  robots_disallow: ["/search"]
+
+asset_hosts:
+  documents:
+    - "www.ura.gov.sg"
+    - "isomer-user-content.by.gov.sg"
+  external_references:
+    - "info.corenet.gov.sg"
+    - "go.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: circulars
+    module: crawlers/ura/circulars.py
+    engine: collection
+    intent: [collection_items, page_text]
+    listing_urls:
+      - "https://www.ura.gov.sg/guidelines/circulars/"
+    expected:
+      pages: 62
+      items: 61
+      measured: true          # 21 Aug 2026 live run
+      truncated_queue: 10   # stopped at max_pages - these are floors
+    rationale: >
+      URA circulars are the closest thing to the Hong Kong practice notes:
+      how development control requirements change and how they are
+      applied. 61 items across development control, urban design,
+      conservation and Controller of Housing.
+    notes: >
+      Two warnings. The circular body is HTML on the detail page and the
+      PDF is an optional annex - some circulars have none at all - so a
+      PDF-only crawl would silently miss most of the content, which is why
+      page records are emitted here. And the listing starts at 2021:
+      pre-2021 circulars exist only as orphaned
+      download_file.aspx?f={GUID} URLs with no on-site index. That
+      backfill is a known gap, not an oversight.
+    run_notes: >
+      The 21 August run returned all 61 circulars as page records and no
+      attached PDFs. That is the correct result, not an under-collection:
+      the circular body is the HTML page and the PDFs are optional annexes
+      that many circulars do not have. The run also stopped with 10 URLs
+      queued.
+
+  - name: development_control
+    module: crawlers/ura/development_control.py
+    engine: sitemap
+    intent: [page_text, section_documents]
+    path_prefixes:
+      - "/guidelines/development-control/"
+    expected:
+      pages: 60
+      documents: 84
+      external_references: 44
+      measured: true          # 21 Aug 2026 live run
+      truncated_queue: 34   # stopped at max_pages - these are floors
+    rationale: >
+      The 17 use-type development control handbooks plus the gross floor
+      area handbook - Singapore's equivalent of the Hong Kong Planning
+      Standards and Guidelines chapters.
+    notes: >
+      This row inverts the Hong Kong instruction, and deliberately. In
+      Hong Kong the full chapter was the PDF and the summary was to be
+      skipped. Here the full handbook is the HTML page and the only PDF is
+      the 'Guidelines at a Glance' summary. Taking the documents alone
+      would collect precisely what the original reviewer told us not to
+      collect, so page text is the point of this row and the documents are
+      secondary.
+    run_notes: >
+      The 21 August run stopped at its page budget with 34 URLs queued, so
+      84 documents is a floor. It did return page records for the
+      handbooks, which is the substance of this row.
+
+  - name: conservation
+    module: crawlers/ura/conservation.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/guidelines/conservation/"
+      - "/conservation/conservation-resources"
+    expected:
+      pages: 17
+      documents: 131
+      external_references: 2
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Conservation guidelines and the technical handbooks issued with them
+      - envelope control, additions and alterations, historic districts,
+      the Do-It-Right guides and the shophouse and bungalow technical
+      supplements.
+
+  - name: master_plan
+    module: crawlers/ura/master_plan.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/land-planning/master-plan"
+    expected:
+      pages: 30
+      documents: 14
+      measured: true          # 21 Aug 2026 live run
+      truncated_queue: 12   # stopped at max_pages - these are floors
+    rationale: >
+      The Master Plan written statement and its amendments - the statutory
+      land use plan every development is assessed against.
+    run_notes: >
+      The 21 August run stopped at its page budget with 12 URLs queued.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/media-room"
+    reason: >
+      Press releases.
+  - path: "/Corporate/Media-Room"
+    reason: >
+      Legacy press room path.
+  - path: "/guidelines/best-practices"
+    reason: >
+      Editorial articles on design quality rather than requirements.
+      Judgement call - worth revisiting if the reviewer disagrees.
+
+deferred:
+  - target: "Pre-2021 URA circulars"
+    reason: >
+      Absent from the current listing. They survive only as
+      download_file.aspx?f={GUID} URLs discoverable through search
+      engines. Recovering them needs a decision on whether search-engine
+      seeding is acceptable as a discovery method.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 120 across the four crawlers."
+  - 'The "Master Plan" written statement appears by name.'
+  - "circulars returns ~61 items, each with a publication date."
+  - "development_control returns page records for all 17 handbooks - not only the summary PDFs."
+  - "No record under /media-room/."

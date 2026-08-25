@@ -179,9 +179,14 @@ class RunContext:
         source_cfg = crawlers_cfg.get(self.source_id, {})
         pages_cfg = source_cfg.get("pages", {})
 
-        page_cfg = pages_cfg.get(crawler_name, {})
+        # A settings key written with no body parses as None, not {}, and the
+        # `{}` default never applies because the key does exist. Coerce it:
+        # a crawler whose behaviour is entirely in code has nothing to
+        # configure, and emsd.gas_safety_portal crashed on every run for want
+        # of these two `or {}`.
+        page_cfg = pages_cfg.get(crawler_name) or {}
         if not page_cfg and "." in crawler_name:
-            page_cfg = pages_cfg.get(crawler_name.rsplit(".", 1)[-1], {})
+            page_cfg = pages_cfg.get(crawler_name.rsplit(".", 1)[-1]) or {}
 
         # Merge: source-level defaults + page-level overrides
         merged = {}
@@ -297,7 +302,15 @@ def get_with_retries(
             resp = session.get(url, params=params, timeout=timeout_seconds)
             if resp.status_code in retry_statuses:
                 if attempt >= max_retries:
+                    # raise_for_status is a no-op for retryable non-error
+                    # statuses (e.g. 202 from an AWS WAF challenge), so raise
+                    # explicitly once retries are exhausted.
                     resp.raise_for_status()
+                    raise requests.HTTPError(
+                        f"{resp.status_code} still returned for {url} "
+                        f"after {max_retries} retries",
+                        response=resp,
+                    )
 
                 if parse_retry_after_seconds:
                     retry_after = resp.headers.get("Retry-After")

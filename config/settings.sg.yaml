@@ -1,0 +1,1216 @@
+# Singapore sources configuration (separate from Hong Kong settings.yaml)
+
+http:
+  user_agent: "OpenLibraryCrawler/0.1 (+https://github.com/Pyramid-AI-Org/open-library)"
+  timeout_seconds: 60
+  max_retries: 3
+
+archive_policy:
+  mid_month_refresh_day: 15
+
+crawlers:
+# ============================================================================
+# BCA - Building and Construction Authority (Singapore)
+# ----------------------------------------------------------------------------
+# Paste this block into config/settings.yaml under `crawlers:`, keeping the
+# two-space indentation shown here.
+#
+# Scope is defined in sources/sg-bca/scope.yaml. Every `pages:` entry below
+# corresponds to one crawler row there; if you change a path prefix here,
+# change it there too so the approved scope and the running code stay in step.
+# ============================================================================
+  bca:
+    label: "Building and Construction Authority"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www1.bca.gov.sg"
+    sitemap_url: "https://www1.bca.gov.sg/sitemap.xml"
+
+    # Isomer-Next wraps page content in <main id="main-content">. Scoping to it
+    # keeps the header, mega-menu, breadcrumb and footer out of the results.
+    content_element_id: "main-content"
+
+    # BCA serves its own uploads from the shared Isomer asset host, so a file
+    # on isomer-user-content.by.gov.sg reached from a BCA page is a BCA
+    # document. sso.agc.gov.sg is Singapore Statutes Online: not BCA's, but it
+    # holds the Acts and subsidiary legislation the codes are written under, so
+    # those links are recorded as external references rather than dropped.
+    document_hosts:
+      - "www1.bca.gov.sg"
+      - "www2.bca.gov.sg"
+      - "isomer-user-content.by.gov.sg"
+      # Circulars are frequently published behind the government URL shortener
+      # or on the CORENET portal rather than on BCA's own host.
+      - "go.gov.sg"
+      - "info.corenet.gov.sg"
+      - "www.corenet.gov.sg"
+      - "www.mom.gov.sg"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".zip"]
+
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+
+    pages:
+      safety_and_standards:
+        # The regulatory core: Building Control Act and its regulations, the
+        # accessibility codes, construction quality, plan-submission
+        # guidelines, periodic inspections, lifts and escalators, amusement
+        # rides, civil defence shelters.
+        path_prefixes:
+          - "/safety-and-standards/"
+        exclude_path_patterns:
+          # Enforcement notices name individual firms and change constantly;
+          # they are case records, not standards.
+          - "^/safety-and-standards/enforcement-actions/"
+        emit_page_records: true
+        max_pages: 200
+
+      sustainability_legislation:
+        # Building Control (Environmental Sustainability) regime only. The
+        # Green Mark scheme pages under /sustainability/greenmark/ are
+        # promotional and stay out of scope.
+        path_prefixes:
+          - "/sustainability/legislation-on-environmental-sustainability-for-buildings/"
+        emit_page_records: true
+        max_pages: 60
+
+      guidebooks_and_publications:
+        # Technical guidebooks. The section landing page is itself a
+        # collection listing, so the payload reader picks up items that are
+        # not otherwise linked from any sub-page.
+        path_prefixes:
+          - "/resources/guidebooks-and-publications/"
+        emit_page_records: true
+        max_pages: 60
+
+      accessibility_and_universal_design:
+        # Universal Design guides and index material. Filed under
+        # home-and-building-owners on the site, but technical design guidance.
+        path_prefixes:
+          - "/home-and-building-owners/accessibility-and-universal-design/"
+        emit_page_records: true
+        max_pages: 40
+
+      circulars:
+        # ~400 items, ten per rendered page, all present in one response.
+        listing_urls:
+          - "https://www1.bca.gov.sg/resources/circulars/"
+        emit_page_records: true
+
+# ============================================================================
+# EMA - Energy Market Authority (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-ema/scope.yaml. Platform: adobe-aem.
+#
+# REWRITTEN 21 August 2026. The previous block ran three section spiders and
+# collected 94 records. EMA's listings are Angular, so the spiders saw the
+# landing pages and nothing under them. Two out-of-band indexes fix it:
+#
+#   /bin/servlets/custom-sitemap   JSON, all 1,452 published pages
+#   /graphql/list.json             every AEM persisted query, with its text
+#
+# Executing the persisted queries took the source from 94 records to 822.
+# Neither endpoint is linked from anywhere; both were found by loading a
+# listing in a browser and reading performance.getEntriesByType('resource').
+# ============================================================================
+  ema:
+    label: "Energy Market Authority"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.ema.gov.sg"
+    page_index_url: "https://www.ema.gov.sg/bin/servlets/custom-sitemap"
+    # Pagepath in that index is the authoring path; strip this prefix for the
+    # public URL.
+    page_index_path_prefix: "/content/corporate/language-masters/en/home"
+    graphql_index_url: "https://www.ema.gov.sg/graphql/list.json"
+    document_hosts:
+      - "www.ema.gov.sg"
+    document_path_prefixes:
+      - "/content/dam/corporate/"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+      - "assets.egazette.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+
+      # --- collections behind persisted queries -----------------------------
+
+      licences:
+        engine: api_index
+        base_url: "https://www.ema.gov.sg"
+        endpoints:
+          - "/graphql/execute.json/corporate/licensing-information"
+        found_on: "https://www.ema.gov.sg/regulations-licences/licences"
+
+      regulatory_publications:
+        engine: api_index
+        base_url: "https://www.ema.gov.sg"
+        endpoints:
+          - "/graphql/execute.json/corporate/regulationPolicyPapersModel"
+        found_on: "https://www.ema.gov.sg/regulations-licences/regulatory-publications"
+
+      circulars:
+        engine: api_index
+        base_url: "https://www.ema.gov.sg"
+        endpoints:
+          - "/graphql/execute.json/corporate/circularsPageList-query"
+        found_on: "https://www.ema.gov.sg/regulations-licences/regulatory-publications"
+
+      forms:
+        engine: api_index
+        base_url: "https://www.ema.gov.sg"
+        endpoints:
+          - "/graphql/execute.json/corporate/resourcesFormsList"
+        found_on: "https://www.ema.gov.sg/resources/forms"
+
+      educational_materials:
+        engine: api_index
+        base_url: "https://www.ema.gov.sg"
+        endpoints:
+          # REST first: it carries publishdate, the GraphQL route does not.
+          - "/bin/corporate-site/education-material"
+          - "/graphql/execute.json/corporate/resources_educational_material"
+        found_on: "https://www.ema.gov.sg/resources/educational-materials"
+
+      corporate_publications:
+        engine: api_index
+        base_url: "https://www.ema.gov.sg"
+        endpoints:
+          - "/graphql/execute.json/corporate/resourceCorporatePublicationModel"
+        found_on: "https://www.ema.gov.sg/resources/corporate-publications"
+
+      # --- sections that really are server-rendered --------------------------
+
+      regulations:
+        engine: spider
+        start_urls:
+          - "https://www.ema.gov.sg/regulations-licences/regulations/acts-regulations"
+        allowed_path_prefixes:
+          - "/regulations-licences/regulations"
+        max_depth: 3
+        max_pages: 40
+        emit_page_records: true
+
+      statistics:
+        # /corporate/statistics-list answers HTTP 500, so this row is served by
+        # the section crawl instead. Listed in tolerate_statuses so a future
+        # attempt on the query fails visibly rather than silently.
+        engine: spider
+        tolerate_statuses: [500]
+        start_urls:
+          - "https://www.ema.gov.sg/resources/statistics"
+          - "https://www.ema.gov.sg/resources/singapore-energy-statistics"
+        allowed_path_prefixes:
+          - "/resources/statistics"
+          - "/resources/singapore-energy-statistics"
+        max_depth: 3
+        max_pages: 60
+        emit_page_records: true
+
+      industry_reports:
+        engine: spider
+        start_urls:
+          - "https://www.ema.gov.sg/resources/industry-reports"
+        allowed_path_prefixes:
+          - "/resources/industry-reports"
+        max_depth: 3
+        max_pages: 30
+        emit_page_records: true
+
+# ============================================================================
+# HDB - Housing & Development Board (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-hdb/scope.yaml. Platform: sitecore.
+# ============================================================================
+  hdb:
+    label: "Housing & Development Board"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.hdb.gov.sg"
+    sitemap_url: "https://www.hdb.gov.sg/sitemap.xml"
+    document_hosts:
+      - "www.hdb.gov.sg"
+    document_path_prefixes:
+      - "/-/media/"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      building_professionals:
+        # The consultants-and-contractors library: HDB(ARCH)
+        # technical requirements, the civil and structural plan
+        # submission guidelines, the renovation and A&A
+        # guidelines, the documents-and-checklists set, and the
+        # updates page that functions as HDB's circular series.
+        path_prefixes:
+          - "/business-partners/building-professionals-bgbiz"
+          - "/business/building-professionals-bgbiz"
+        max_pages: 60
+        emit_page_records: true
+      town_design_guides:
+        # One design guide per town, setting the urban design and
+        # architectural standards for public housing estates - the
+        # closest HDB analogue to the ArchSD design manuals.
+        path_prefixes:
+          - "/about-us/our-role/plan-and-design-towns"
+        max_pages: 60
+        emit_page_records: true
+
+# ============================================================================
+# JTC - JTC Corporation (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-jtc/scope.yaml. Platform: sitecore.
+# ============================================================================
+  jtc:
+    label: "JTC Corporation"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.jtc.gov.sg"
+    document_hosts:
+      - "www.jtc.gov.sg"
+    document_path_prefixes:
+      - "/-/media/project/jtc-cx/corpweb/assets/"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      development_and_renovation:
+        # JTC's technical requirements for building on its land:
+        # the Urban Design Requirements, the Space Submission
+        # Handbook, the Fitting-out and Renovation Works Guidebook
+        # with its annexes, the usage guidelines for JTC premises
+        # and the plot ratio exemptions. The forms-and-documents
+        # page is fully server-rendered, which makes this the
+        # reliable row here.
+        start_urls:
+          - "https://www.jtc.gov.sg/get-help/development-and-renovation-works/development-and-renovation-forms-and-documents"
+          - "https://www.jtc.gov.sg/get-help/development-and-renovation-works"
+        allowed_path_prefixes:
+          - "/get-help/development-and-renovation-works"
+        max_depth: 3
+        max_pages: 40
+        emit_page_records: true
+      tenancy_requirements:
+        # Change-of-use rules and the solar deployment
+        # requirements - technical conditions on how JTC premises
+        # may be used and altered.
+        # The section landing page 404s since Aug 2026; the child pages are
+        # alive and linked from the /get-help hub, so seed there. Start URLs
+        # are fetched regardless of the prefix filter; only links out of them
+        # must match it.
+        start_urls:
+          - "https://www.jtc.gov.sg/get-help"
+        allowed_path_prefixes:
+          - "/get-help/managing-your-tenancy-or-lease"
+        max_depth: 3
+        max_pages: 40
+        emit_page_records: true
+
+# ============================================================================
+# LTA - Land Transport Authority (Singapore)
+# ----------------------------------------------------------------------------
+# Paste this block into config/settings.yaml under `crawlers:`, keeping the
+# two-space indentation shown here.
+#
+# Scope is defined in sources/sg-lta/scope.yaml. Every `pages:` entry below
+# corresponds to one crawler row there; if you change a prefix here, change it
+# there too so the approved scope and the running code stay in step.
+#
+# LTA is Adobe AEM with no sitemap, so discovery is a bounded spider. The
+# safety comes from three bounds applied together - a path allowlist, a depth
+# limit and a page budget - rather than from any one of them.
+# ============================================================================
+  lta:
+    label: "Land Transport Authority"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.lta.gov.sg"
+
+    # AEM keeps every published asset under /content/dam/. Nothing in the
+    # navigation points there, which makes this a sharper document filter than
+    # any content-container heuristic - and it means the spider does not need
+    # to identify navigation at all.
+    document_hosts:
+      - "www.lta.gov.sg"
+    document_path_prefixes:
+      - "/content/dam/ltagov/"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip", ".dwg"]
+
+    # LTA publishes its circulars on the whole-of-government CORENET portal
+    # rather than on its own site. They are LTA's circulars, so they are
+    # recorded - as external references, since the host is not LTA's.
+    external_document_hosts:
+      - "info.corenet.gov.sg"
+      - "www.corenet.gov.sg"
+
+    # CORENET hangs a cache-busting ?sfvrsn= parameter off every asset URL.
+    # Left in the record identity it would make each circular look new on
+    # every run; the fetchable URL is kept in meta.fetch_url.
+    strip_document_query: true
+
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    max_out_links_per_page: 800
+
+    pages:
+      transport_infrastructure_standards:
+        # Civil Design Criteria, Infrastructure and Architectural Design
+        # Criteria, Materials & Workmanship specifications, Standard Details of
+        # Road Elements. The heart of the source.
+        start_urls:
+          - "https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/Transport_Infrastructure_Design_Criteria_and_Specifications.html"
+        allowed_path_prefixes:
+          - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/Transport_Infrastructure"
+        emit_page_records: true
+        max_depth: 3
+        max_pages: 60
+
+      street_works:
+        # Codes of practice for street works, works on public streets and
+        # traffic control at work zones, plus TIA guidelines and the forms.
+        start_urls:
+          - "https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/street_works/requirements_for_street_work_proposals.html"
+        allowed_path_prefixes:
+          - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/street_works/"
+        emit_page_records: true
+        max_depth: 4
+        max_pages: 120
+
+      vehicle_parking:
+        start_urls:
+          - "https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/vehicle_parking/requirements_for_vehicle_parking_proposals.html"
+        allowed_path_prefixes:
+          - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/vehicle_parking/"
+        emit_page_records: true
+        max_depth: 3
+        max_pages: 40
+
+      active_mobility:
+        start_urls:
+          - "https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/active-mobility/Active_Mobility_Proposals_and_Requirements.html"
+        allowed_path_prefixes:
+          - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/active-mobility/"
+        emit_page_records: true
+        max_depth: 3
+        max_pages: 40
+
+      railway_protection:
+        start_urls:
+          - "https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/railway_protection_road_structure_safety_zones/requirements_for_developments_within_railway_protection_and_road_structure_safety_zone.html"
+        allowed_path_prefixes:
+          - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/railway_protection_road_structure_safety_zones/"
+        emit_page_records: true
+        max_depth: 3
+        max_pages: 40
+
+      development_construction_resources:
+        # The section hub. Depth 0 keeps it on the hub page itself - the
+        # sub-sections below it have their own rows, and letting this row
+        # follow into them would duplicate every record under a second
+        # crawler name and blur the coverage report.
+        start_urls:
+          - "https://www.lta.gov.sg/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources.html"
+        allowed_path_prefixes:
+          - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources"
+        emit_page_records: true
+        max_depth: 0
+        max_pages: 5
+
+# ============================================================================
+# MND - Ministry of National Development (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-mnd/scope.yaml. Platform: sitefinity.
+# ============================================================================
+  mnd:
+    label: "Ministry of National Development"
+    schedule:
+      enabled: false
+      interval_days: 1
+    base_url: "https://www.mnd.gov.sg"
+    document_hosts:
+      - "www.mnd.gov.sg"
+    document_path_prefixes:
+      - "/docs/default-source/"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      publications:
+        # MND's published policy documents - the sustainability
+        # blueprint, the climate action plan and the urban
+        # sustainability series. Thin, and policy rather than
+        # technical, but it is what this ministry publishes.
+        start_urls:
+          - "https://www.mnd.gov.sg/our-work"
+        allowed_path_prefixes:
+          - "/our-work"
+        max_depth: 3
+        max_pages: 40
+        emit_page_records: true
+
+# ============================================================================
+# MOM - Ministry of Manpower (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-mom/scope.yaml. Platform: sitecore.
+# ============================================================================
+  mom:
+    label: "Ministry of Manpower"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.mom.gov.sg"
+    sitemap_url: "https://www.mom.gov.sg/sitemap.xml"
+    document_hosts:
+      - "www.mom.gov.sg"
+      # The child sitemaps list pages on the bare host, so relative links
+      # resolve there too.
+      - "mom.gov.sg"
+    document_path_prefixes:
+      - "/-/media/mom/documents/"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      wsh_circulars:
+        # The best PDF target on MOM: workplace safety and health
+        # circulars from 1999 to the present, grouped by year but
+        # with every link present in the served HTML. This is the
+        # direct equivalent of the Hong Kong occupational safety
+        # and health document sets.
+        path_prefixes:
+          - "/workplace-safety-and-health/wsh-circulars"
+        max_pages: 60
+        emit_page_records: true
+      wsh_legislation:
+        # The Workplace Safety and Health Act and its ~45
+        # subsidiary regulations - construction, work at heights,
+        # confined spaces, noise, scaffolds. All the text is on
+        # Singapore Statutes Online rather than on MOM, so these
+        # are external references. They are the law the codes of
+        # practice are written under and belong in the library
+        # alongside them.
+        path_prefixes:
+          - "/legislation/workplace-safety-and-health"
+        max_pages: 60
+        emit_page_records: true
+      workplace_safety_and_health:
+        # The rest of the WSH tree: pressure vessels and lifting
+        # equipment, medical and hygiene monitoring, occupational
+        # disease reporting, risk management, and the reports and
+        # statistics series. The Hong Kong pressure equipment
+        # slide maps here - though note the finding below, because
+        # MOM states most of this as web text rather than as
+        # documents.
+        path_prefixes:
+          - "/workplace-safety-and-health"
+        exclude_path_patterns:
+          - "^/workplace-safety-and-health/wsh-circulars"
+        max_pages: 250   # raised from 60: 21 Aug run truncated its queue
+        emit_page_records: true
+
+# ============================================================================
+# NEA - National Environment Agency (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-nea/scope.yaml. Platform: sitecore.
+# ============================================================================
+  nea:
+    label: "National Environment Agency"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.nea.gov.sg"
+    sitemap_url: "https://www.nea.gov.sg/sitemap.xml"
+    document_hosts:
+      - "www.nea.gov.sg"
+    document_path_prefixes:
+      - "/docs/default-source/"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      practices_and_guidelines:
+        # The guidance-document core: the Code of Practice on
+        # Environmental Health, the codes for Environmental
+        # Control Officers and Coordinators, the waste collector
+        # and vector control codes, and the cross-topic guideline
+        # set covering boundary noise limits for ACMV systems,
+        # pollution control studies and noise mitigation for
+        # foodshops and entertainment outlets.
+        start_urls:
+          - "https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines"
+        allowed_path_prefixes:
+          - "/corporate-functions/resources/practices-and-guidelines"
+        max_depth: 3
+        max_pages: 40
+        emit_page_records: true
+      circulars:
+        # Four circular series - Development Control, Hazardous
+        # Substance Control, Radiation Protection, and Climate
+        # Change & Energy Efficiency - reaching back to 1995. Each
+        # is a plain server-rendered table of title, PDF, size and
+        # date, which makes this the easiest high-yield row on the
+        # site.
+        start_urls:
+          - "https://www.nea.gov.sg/corporate-functions/resources/circulars"
+        allowed_path_prefixes:
+          - "/corporate-functions/resources/circulars"
+        max_depth: 2
+        max_pages: 20
+        emit_page_records: true
+      development_control:
+        # Singapore's nearest thing to a statutory environmental
+        # impact regime: the Pollution Control Study guidelines,
+        # air dispersion modelling guidelines, the Quantitative
+        # Risk Assessment criteria and technical guidance, and the
+        # land traffic noise impact assessment guideline. This is
+        # the row that answers the Hong Kong deck's EA & Planning
+        # section.
+        start_urls:
+          - "https://www.nea.gov.sg/our-services/development-control"
+        allowed_path_prefixes:
+          - "/our-services/development-control"
+        max_depth: 3
+        max_pages: 30
+        emit_page_records: true
+      pollution_control:
+        # The Air, Noise, Water, chemical safety and toxic
+        # industrial waste topic trees. The Hong Kong deck asked
+        # for web text here rather than files, and that
+        # instruction is load-bearing on this site: NEA states
+        # several binding limits only as HTML tables - the 36-row
+        # trade effluent discharge limits and the industrial and
+        # construction boundary noise limits have no PDF at all. A
+        # document-only crawl would miss the actual standards.
+        start_urls:
+          - "https://www.nea.gov.sg/our-services/pollution-control"
+        allowed_path_prefixes:
+          - "/our-services/pollution-control"
+        max_depth: 4
+        max_pages: 120
+        emit_page_records: true
+      publications:
+        # Annual and sustainability reports and the environment
+        # yearbooks - the publications row of the Hong Kong deck.
+        start_urls:
+          - "https://www.nea.gov.sg/corporate-functions/resources/publications"
+        allowed_path_prefixes:
+          - "/corporate-functions/resources/publications"
+        max_depth: 3
+        max_pages: 20
+        emit_page_records: true
+      legislation:
+        # The Acts NEA administers - Environmental Protection and
+        # Management, Environmental Public Health, Hazardous
+        # Waste, Resource Sustainability, Transboundary Haze
+        # Pollution - and their subsidiary legislation. All the
+        # text lives on Singapore Statutes Online rather than on
+        # NEA, so these are recorded as external references.
+        # Dropping them would leave codes of practice in the
+        # library with no route to the law behind them.
+        start_urls:
+          - "https://www.nea.gov.sg/corporate-functions/resources/legislation-international-law"
+        allowed_path_prefixes:
+          - "/corporate-functions/resources/legislation-international-law"
+        max_depth: 2
+        max_pages: 60   # raised from 15: 21 Aug run truncated its queue
+        emit_page_records: true
+
+# ============================================================================
+# NPARKS - National Parks Board (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-nparks/scope.yaml. Platform: sitefinity.
+#
+# REWRITTEN 21 August 2026. The previous block seeded three section spiders
+# from three known pages and collected 119 records. Two of those three seeds
+# are JavaScript-rendered listings, so the spider saw the seed and nothing
+# under it. Driving from the sitemap instead gives 260 pages and 199
+# documents, and the rows below are named for site sections rather than for
+# seeds so a coverage regression can be localised.
+#
+# The counter-intuitive part, worth keeping in mind for other Sitefinity
+# sites: every individual page fetch worked perfectly the whole time. Page
+# fetches succeeding is not the same as the crawl working.
+# ============================================================================
+  nparks:
+    label: "National Parks Board"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.nparks.gov.sg"
+    # Non-standard path. /sitemap.xml itself 404s.
+    sitemap_url: "https://www.nparks.gov.sg/sitemap/sitemap.xml"
+    document_hosts:
+      - "www.nparks.gov.sg"
+      - "isomer-user-content.by.gov.sg"
+      - "skyrisegreenery.nparks.gov.sg"
+      - "cuge.nparks.gov.sg"
+    document_path_prefixes:
+      - "/docs/default-source/"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      publications_resources:
+        # 111 pages, 2 documents. That ratio is correct - see the module
+        # docstring before "fixing" it.
+        engine: sitemap
+        path_prefixes:
+          - "/publications-resources"
+        emit_page_records: true
+
+      services:
+        # Development plan submission, tree conservation, permits, forms.
+        engine: sitemap
+        path_prefixes:
+          - "/services"
+        emit_page_records: true
+
+      nature:
+        engine: sitemap
+        path_prefixes:
+          - "/nature"
+        emit_page_records: true
+
+      learn:
+        # The largest document count in this source.
+        engine: sitemap
+        path_prefixes:
+          - "/learn"
+        emit_page_records: true
+
+      who_we_are:
+        engine: sitemap
+        path_prefixes:
+          - "/who-we-are"
+        emit_page_records: true
+
+      cuge_standards:
+        # Separate origin, so a separate run.
+        engine: spider
+        start_urls:
+          - "https://cuge.nparks.gov.sg/resources/publications/"
+          - "https://cuge.nparks.gov.sg/resources/"
+        allowed_hosts:
+          - "cuge.nparks.gov.sg"
+        path_prefixes:
+          - "/"
+        max_depth: 3
+        max_pages: 200
+        emit_page_records: true
+
+    # Deliberately not crawled: /visit (739 park and trail pages),
+    # /news (182 press releases), /get-involved. See scope.yaml.
+
+# ============================================================================
+# PARLIAMENT - Parliament of Singapore (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-parliament/scope.yaml. Platform: next-js over Directus.
+#
+# CORRECTED 21 August 2026. The first version of this block described a
+# section spider over /docs/default-source/. Both halves were wrong: the
+# listings render from a payload rather than from anchors, and the documents
+# are served from /api/media/. It ran cleanly and collected nothing.
+# ============================================================================
+  parliament:
+    label: "Parliament of Singapore"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.parliament.gov.sg"
+    document_hosts:
+      - "www.parliament.gov.sg"
+    document_path_prefixes:
+      - "/api/media/"
+      - "/docs/default-source/"     # the corporate side of the site
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    # robots.txt and the listing pages answer HTTP 202 with an empty body when
+    # the bot-mitigation interstitial fires. That is a challenge, not a "no
+    # content" - retry it rather than recording zero.
+    retry_statuses: [202, 429, 500, 502, 503, 504]
+    max_total_records: 50000
+    pages:
+      order_paper:
+        # 2,168 documents, 1955 to date. No pagination: the whole collection
+        # ships in the first response under `initData`.
+        engine: flight_payload
+        start_url: "https://www.parliament.gov.sg/parliamentary-business/order-paper"
+        payload_key: "initData"
+        label: "Order Paper"
+        record:
+          url_field: "fileUrl"
+          title_fields: ["fileTitle", "filename_download"]
+          date_fields: ["date"]
+
+      votes_and_proceedings:
+        # 619 documents, 2005 to date. Ten records in the payload, the rest
+        # through the server action below.
+        engine: server_action
+        start_url: "https://www.parliament.gov.sg/parliamentary-business/votes-and-proceedings"
+        label: "Votes and Proceedings"
+        # A BUILD HASH, not a constant. It changes on every site deploy and a
+        # stale value returns HTTP 500 - which this engine raises on rather
+        # than reporting an empty collection. To re-capture: open the listing
+        # in a browser, click page 2, and read the `next-action` request
+        # header off that POST.
+        action_id: "7f643b87656c0c1046945063694ee9a404a648a5c4"
+        form_fields:
+          _1_parliOptions: ""
+          _1_from: ""
+          _1_to: ""
+          "0": '[null,"$K1"]'
+        offset_field: "_1_offset"
+        limit_field: "_1_limit"
+        page_size: 1000          # the limit is not capped server-side
+        record:
+          file_field: "report"
+          url_template: "/api/media/{id}/{filename}"
+          title_fields: ["description", "title"]
+          date_fields: ["date"]
+
+      bills_introduced:
+        # 772 documents, 2006 to date.
+        engine: server_action
+        start_url: "https://www.parliament.gov.sg/parliamentary-business/bills-introduced"
+        label: "Bills Introduced"
+        action_id: "7f20370fa7fced498f1fcafee03b02cce4cebdbd3c"
+        form_fields:
+          _1_name: ""
+          _1_title: ""
+          _1_yearOption: ""
+          "0": '[null,"$K1"]'
+        offset_field: "_1_offset"
+        limit_field: "_1_limit"
+        page_size: 1000
+        record:
+          file_field: "file"
+          extra_file_fields: ["corrigenda"]
+          url_template: "/api/media/{id}/{filename}"
+          title_fields: ["description"]
+          date_fields: ["date_introduced"]
+
+# ============================================================================
+# PUB - PUB, Singapore's National Water Agency (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-pub/scope.yaml. Platform: sitecore.
+# ============================================================================
+  pub:
+    label: "PUB, Singapore's National Water Agency"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.pub.gov.sg"
+    document_hosts:
+      - "www.pub.gov.sg"
+    document_path_prefixes:
+      - "/-/media/"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      guides_and_handbooks:
+        # The direct analogue of the DSD technical manuals and
+        # guidelines. It carries the Drainage Handbook (Managing
+        # Urban Runoff), the ABC Waters Design Guidelines and
+        # their engineering procedures, the Flood-Resilient
+        # Developments Guidebook, the Earth Control Measures
+        # guidebook, the Sewer CCTV guidebook and the Handbook on
+        # Application for Water Supply. It is also the one high-
+        # value PUB listing that is fully server-rendered, so it
+        # is the most reliable row in this source.
+        start_urls:
+          - "https://www.pub.gov.sg/Professionals/Resources/Guides-and-Handbooks"
+        allowed_path_prefixes:
+          - "/Professionals/Resources/Guides-and-Handbooks"
+        max_depth: 2
+        max_pages: 30
+        emit_page_records: true
+      codes_of_practice:
+        # The binding drainage and sewerage codes: the Code of
+        # Practice on Surface Water Drainage, the Code of Practice
+        # on Sewerage and Sanitary Works, the Code of Practice on
+        # Coastal Protection, and the standard drawings issued
+        # with them. These are what a qualified person designs to,
+        # and they are the closest thing PUB has to the DSD
+        # technical circulars.
+        start_urls:
+          - "https://www.pub.gov.sg/Professionals/Resources/Code-of-Practices"
+        allowed_path_prefixes:
+          - "/Professionals/Resources/Code-of-Practices"
+        max_depth: 3
+        max_pages: 30
+        emit_page_records: true
+      circulars:
+        # Industry circulars - the running record of how PUB's
+        # requirements change, and the equivalent of the DSD
+        # technical circulars and the WSD plumbing circulars.
+        # Categories include Licensed Plumbers, Building Plans,
+        # Earth Control Measures, Fittings and Standards, Used
+        # Water Management and Water Storage Tanks.
+        start_urls:
+          - "https://www.pub.gov.sg/Professionals/Resources/Circulars"
+        allowed_path_prefixes:
+          - "/Professionals/Resources/Circulars"
+        max_depth: 2
+        max_pages: 20
+        emit_page_records: true
+      requirements:
+        # The WSD half of this source. Water supply services,
+        # water fittings, water storage tanks, licensed plumbers
+        # and qualified-person submissions. The Hong Kong deck
+        # asked for the web text of these pages as well as the
+        # PDFs, and that matters more here than it did there: PUB
+        # states most plumbing requirements as page text rather
+        # than as documents, so a PDF-only crawl would return
+        # almost nothing from a section that is genuinely
+        # substantive.
+        start_urls:
+          - "https://www.pub.gov.sg/Professionals/Requirements"
+        allowed_path_prefixes:
+          - "/Professionals/Requirements"
+        max_depth: 3
+        max_pages: 60
+        emit_page_records: true
+
+# ============================================================================
+# SCDF - Singapore Civil Defence Force (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-scdf/scope.yaml. Platform: sitefinity.
+# ============================================================================
+  scdf:
+    label: "Singapore Civil Defence Force"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.scdf.gov.sg"
+    sitemap_url: "https://www.scdf.gov.sg/sitemap/sitemap.xml"
+    document_hosts:
+      - "www.scdf.gov.sg"
+    document_path_prefixes:
+      - "/docs/default-source/"
+    external_document_hosts:
+      - "info.corenet.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      acts_codes_and_regulations:
+        # The single highest-yield page on the site and the direct
+        # answer to the Hong Kong requirement: the Fire Safety Act
+        # and its subsidiary legislation, the codes of practice,
+        # and the associated forms, all as downloadable files on
+        # one server-rendered page.
+        start_urls:
+          - "https://www.scdf.gov.sg/fire-safety-services-listing/downloads/acts-codes-and-regulations"
+        allowed_path_prefixes:
+          - "/fire-safety-services-listing/downloads"
+        max_depth: 3
+        max_pages: 40
+        emit_page_records: true
+      fire_code:
+        # The Fire Code itself - the Code of Practice for Fire
+        # Precautions in Buildings - plus the rapid transit and
+        # road tunnel codes. The Hong Kong note beside the
+        # equivalent slide read 'download only the 13th version is
+        # okay'; here the current consolidated Fire Code 2023
+        # plays that role.
+        start_urls:
+          - "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023"
+          - "https://www.scdf.gov.sg/fire-safety-services-listing/cpfprts-2022"
+          - "https://www.scdf.gov.sg/fire-safety-services-listing/code-of-practice-for-fire-precautions-in-road-tunnels-(cpfprt)-2025"
+        allowed_path_prefixes:
+          - "/fire-safety-services-listing/fire-code-2023"
+          - "/fire-safety-services-listing/cpfprts-2022"
+          - "/fire-safety-services-listing/code-of-practice-for-fire-precautions-in-road-tunnels-(cpfprt)-2025"
+        max_depth: 2
+        max_pages: 40
+        emit_page_records: true
+      fire_safety_circulars:
+        # Circular letters - amendments to the Fire Code and how
+        # it is to be applied. Without them the code is a snapshot
+        # with no amendment history, which is the same argument
+        # that put the BCA circulars in scope.
+        start_urls:
+          - "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/circulars"
+        allowed_path_prefixes:
+          - "/fire-safety-services-listing/fire-code-2023/circulars"
+        max_depth: 2
+        max_pages: 20
+        emit_page_records: true
+      petroleum_and_flammable_materials:
+        # Petroleum and flammable materials licensing, storage
+        # requirements and the transport circulars for dangerous
+        # goods - the hazardous-materials half of SCDF's
+        # regulatory remit.
+        start_urls:
+          - "https://www.scdf.gov.sg/fire-safety-services-listing/petroleum-and-flammable-material-licences"
+        allowed_path_prefixes:
+          - "/fire-safety-services-listing/petroleum-and-flammable-material-licences"
+        max_depth: 3
+        max_pages: 30
+        emit_page_records: true
+      advisories:
+        # Fire safety and emergency advisories - the notices and
+        # guidance row of the Hong Kong deck.
+        start_urls:
+          - "https://www.scdf.gov.sg/home/about-scdf/media-room/publications/fire-safety-and-emergency-advisories"
+        allowed_path_prefixes:
+          - "/home/about-scdf/media-room/publications/fire-safety-and-emergency-advisories"
+        max_depth: 2
+        max_pages: 20
+        emit_page_records: true
+
+# ============================================================================
+# SGDI - Singapore Government Directory Interactive (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-sgdi/scope.yaml. Platform: sitefinity.
+# ============================================================================
+  sgdi:
+    label: "Singapore Government Directory Interactive"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.sgdi.gov.sg"
+    document_hosts:
+      - "www.sgdi.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    # Bounded at depth 2 on purpose: agency and department level is the useful
+    # artefact. Depth 3 is officer records - lower value to a document library,
+    # far larger, and the material the July 2026 policy change is withdrawing.
+    pages:
+      ministries:
+        # The 16 ministries and, beneath each, its departments,
+        # statutory boards and committees, down to the officer
+        # records. Three levels deep, all server-rendered, no
+        # pagination anywhere.
+        start_urls:
+          - "https://www.sgdi.gov.sg/ministries"
+        allowed_path_prefixes:
+          - "/ministries"
+        max_depth: 2
+        max_pages: 400        # measured 21 Aug 2026: 286 pages at depth 2
+        emit_page_records: true
+      statutory_boards:
+        # CORRECTED 21 August 2026: the boards are listed on /statutory-boards
+        # but every link goes to /ministries/<ministry>/statutory-boards/<board>.
+        # The old single prefix matched the listing page and nothing on it.
+        # All 73 statutory boards, listed on a single page.
+        start_urls:
+          - "https://www.sgdi.gov.sg/statutory-boards"
+        allowed_path_prefixes:
+          - "/statutory-boards"
+          - "/ministries"
+        max_depth: 2
+        max_pages: 800   # raised from 500: run truncated with 186 queued        # measured 21 Aug 2026: 402 pages at depth 2
+        emit_page_records: true
+      organs_of_state:
+        # The 10 organs of state - Attorney-General's Chambers,
+        # the courts, Parliament, the Public Service Commission
+        # and the rest.
+        start_urls:
+          - "https://www.sgdi.gov.sg/organs-of-state"
+        allowed_path_prefixes:
+          - "/organs-of-state"
+        max_depth: 2
+        max_pages: 120   # raised from 40: run truncated with 41 queued         # measured 21 Aug 2026: 11 pages at depth 2
+        emit_page_records: true
+
+# ============================================================================
+# SLA - Singapore Land Authority (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-sla/scope.yaml. Platform: isomer.
+# ============================================================================
+  sla:
+    label: "Singapore Land Authority"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.sla.gov.sg"
+    sitemap_url: "https://www.sla.gov.sg/sitemap.xml"
+    content_element_id: "main-content"
+    document_hosts:
+      - "www.sla.gov.sg"
+      - "isomer-user-content.by.gov.sg"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      circulars:
+        # The direct Lands Department equivalent and the highest-
+        # value target on the site: 332 circulars and notices from
+        # 1999 to the present. Chief Surveyor notices and
+        # circulars, practice circulars, the Chief Surveyor
+        # directives and guidelines, consolidated practice
+        # circulars, and the circulars to professional institutes.
+        # Each row links straight to the whole PDF with no
+        # intermediate page and no per-section split, which is
+        # exactly what the Hong Kong note asked for.
+        listing_urls:
+          - "https://www.sla.gov.sg/news/circulars/"
+        emit_page_records: true
+      property_boundaries:
+        # Cadastral and property boundary survey requirements -
+        # the survey practice half of the Lands Department
+        # mapping.
+        path_prefixes:
+          - "/regulatory/property-boundaries"
+        max_pages: 60
+        emit_page_records: true
+      legislation:
+        # The 13 Acts SLA administers - State Lands, State Lands
+        # Protection, Land Surveyors, Boundaries and Survey Maps,
+        # Land Titles. All on Statutes Online, recorded as
+        # external references.
+        path_prefixes:
+          - "/news/legislation"
+        max_pages: 60
+        emit_page_records: true
+
+# ============================================================================
+# URA - Urban Redevelopment Authority (Singapore)
+# ----------------------------------------------------------------------------
+# Paste into config/settings.yaml under `crawlers:`, keeping this indentation.
+# Scope: sources/sg-ura/scope.yaml. Platform: isomer.
+# ============================================================================
+  ura:
+    label: "Urban Redevelopment Authority"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.ura.gov.sg"
+    sitemap_url: "https://www.ura.gov.sg/sitemap.xml"
+    content_element_id: "main-content"
+    document_hosts:
+      - "www.ura.gov.sg"
+      - "isomer-user-content.by.gov.sg"
+    external_document_hosts:
+      - "info.corenet.gov.sg"
+      - "go.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      circulars:
+        # URA circulars are the closest thing to the Hong Kong
+        # practice notes: how development control requirements
+        # change and how they are applied. 61 items across
+        # development control, urban design, conservation and
+        # Controller of Housing.
+        listing_urls:
+          - "https://www.ura.gov.sg/guidelines/circulars/"
+        emit_page_records: true
+      development_control:
+        # The 17 use-type development control handbooks plus the
+        # gross floor area handbook - Singapore's equivalent of
+        # the Hong Kong Planning Standards and Guidelines
+        # chapters.
+        path_prefixes:
+          - "/guidelines/development-control/"
+        max_pages: 150   # raised from 60: 21 Aug run truncated its queue
+        emit_page_records: true
+      conservation:
+        # Conservation guidelines and the technical handbooks
+        # issued with them - envelope control, additions and
+        # alterations, historic districts, the Do-It-Right guides
+        # and the shophouse and bungalow technical supplements.
+        path_prefixes:
+          - "/guidelines/conservation/"
+          - "/conservation/conservation-resources"
+        max_pages: 60
+        emit_page_records: true
+      master_plan:
+        # The Master Plan written statement and its amendments -
+        # the statutory land use plan every development is
+        # assessed against.
+        path_prefixes:
+          - "/land-planning/master-plan"
+        max_pages: 150   # raised from 60: 21 Aug run truncated its queue
+        emit_page_records: true
+

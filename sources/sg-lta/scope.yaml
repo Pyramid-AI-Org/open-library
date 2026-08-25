@@ -1,0 +1,285 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Land Transport Authority (LTA)
+# =============================================================================
+# This file is the reviewable statement of *what we intend to collect and why*.
+# It replaces the slide deck of screenshots with arrows drawn on them: each
+# `crawlers:` row is one arrow, `intent` is the note written beside it, and
+# `rationale` is the reason a person gave for drawing it.
+#
+# Review checklist for a human approver:
+#   * Is every row's `intent` what you actually want from that part of the site?
+#   * Do the `excludes` cut the right things - and only those?
+#   * Is anything technical missing? Check `deferred` and `out_of_scope` below.
+#   * Are the `expected` counts the right order of magnitude?
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: lta
+label: "Land Transport Authority"
+base_url: "https://www.lta.gov.sg"
+mandate: >
+  LTA plans, designs, builds and maintains Singapore's land transport
+  infrastructure - roads, expressways, rail and the street environment. It is
+  the Singapore counterpart of the Hong Kong Highways Department, and to a
+  lesser extent the Transport Department, both already in the library. The
+  material in scope is therefore the same class: design criteria, materials and
+  workmanship specifications, standard details, codes of practice for street
+  works, and the forms and checklists that are part of those regulatory
+  processes.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+# Different from BCA in the way that matters most: no sitemap. Everything below
+# follows from that.
+platform:
+  name: adobe-aem
+  evidence: >
+    Pages served under /content/ltagov/en/**.html; every published asset lives
+    under /content/dam/ltagov/. Both are AEM's standard content and asset
+    trees.
+  server_rendered: true          # documents are in the HTML; requests is enough
+  content_element_id: null       # not needed - see discovery note below
+  document_labels: link-text     # no aria-label convention; anchor text plus
+                                 # the heading above it carry the titles
+  collection_pages: none
+
+discovery:
+  method: spider
+  sitemap_url: null
+  sitemap_html: "https://www.lta.gov.sg/content/ltagov/en/sitemap.html"
+  note: >
+    /sitemap.xml and /robots.txt both 404, so there is no machine-readable
+    discovery surface and the page set is found by following links, bounded by
+    a path allowlist, a depth limit and a page budget. Because AEM keeps every
+    asset under /content/dam/, documents separate from navigation by path
+    alone, which is why no content-container id is needed even though the
+    spider sees the whole page.
+
+    FOUND on the 21 August run: there IS an HTML sitemap, at
+    /content/ltagov/en/sitemap.html. It is linked only from the page footer.
+    For the development_construction_specifications_resources branch it lists
+    13 pages, which is one more than link-following reached - the DBC officer
+    sub-page .../dbc/dbc-officer-roads-parking.html appears only there, and so
+    does the .../active-mobility.html section landing page. Seed from the HTML
+    sitemap in future rather than from the section hub: it is cheaper and it is
+    more complete.
+  access_note: >
+    This source cannot be harvested the way the other twelve are. The browser
+    automation path refuses to run page scripts on lta.gov.sg by policy, and
+    the crawl host's own network cannot reach .gov.sg. The 21 August harvest
+    went through a fetching proxy that returns each page as markdown with its
+    links intact - one page per call, slower, but enough. Two pages were
+    refused by that proxy specifically (PROXY_REJECTED) while their siblings on
+    the same host succeeded, so the refusal looks page-specific rather than a
+    host block; both are worth retrying.
+  robots_txt: null
+  robots_disallow: []
+
+asset_hosts:
+  documents:
+    - www.lta.gov.sg              # files under /content/dam/ltagov/ only
+  external_references:
+    # LTA publishes its circulars on the whole-of-government CORENET portal
+    # rather than on its own site. They are LTA's circulars and belong in the
+    # library; the host is not LTA's, so they are marked external.
+    - info.corenet.gov.sg
+    - www.corenet.gov.sg
+
+# --- Scope -------------------------------------------------------------------
+# intent vocabulary:
+#   section_documents  every document reachable from the pages under a prefix
+#   page_text          the page itself, as an HTML record
+#   external_references  primary material on another host
+
+crawlers:
+  - name: transport_infrastructure_standards
+    module: crawlers/lta/transport_infrastructure_standards.py
+    intent: [section_documents, page_text]
+    start_urls:
+      - ".../development_construction_specifications_resources/Transport_Infrastructure_Design_Criteria_and_Specifications.html"
+    allowed_path_prefixes:
+      - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/Transport_Infrastructure"
+    expected:
+      pages: 1
+      documents: 16
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The engineering core, and the direct analogue of the Highways Department
+      technical document set: Civil Design Criteria for Road and Rail Transit
+      Systems and for Civil & Structural Works, the Infrastructure Design
+      Criteria volumes A to C, the Architectural Design Criteria sections, the
+      Materials and Workmanship specifications for civil, structural, M&E and
+      architectural works, and the Standard Details of Road Elements. Anyone
+      designing or building to LTA requirements works from these.
+    evidence:
+      - "Civil Design Criteria for Civil & Structural Works, Rev A3 Dec 2025 - EGD09106A3-Overall.pdf"
+      - "Materials and Workmanship Specifications for Civil & Structural Works, Rev A2 - EGD09104A2-Overall.pdf"
+      - "Standard Details of Road Elements, Revision I Mar 2026"
+      - "Infrastructure Design Criteria Volumes A, B Part I and C, Rev A1"
+    notes: >
+      Superseded revisions are kept where LTA still publishes them - the
+      revision in force when a project was designed is the one that governs it,
+      so a library holding only the current edition cannot answer questions
+      about past work.
+
+  - name: street_works
+    module: crawlers/lta/street_works.py
+    intent: [section_documents, page_text]
+    allowed_path_prefixes:
+      - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/street_works/"
+    expected:
+      pages: 4
+      documents: 35
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The regulatory layer over anyone digging up or building beside a public
+      street: the Code of Practice on Street Works Proposals relating to
+      Development Works, the Code of Practice for Works on Public Streets, and
+      the Code of Practice for Traffic Control at Work Zone. The Transport
+      Impact Assessment guidelines sit here too, and are a mandatory input to
+      most development submissions.
+    evidence:
+      - "Code of Practice for Works on Public Streets, Apr 2026"
+      - "Code of Practice for Traffic Control at Work Zone, Apr 2026"
+      - "RT-COP v2.0, April 2019 - street works relating to development works"
+      - "TIA Guidelines plus the Jan 2020 addendum"
+    notes: >
+      The forms and checklists in this section are kept. They are not
+      literature: a submission is judged against the current version of the
+      form, so the form is part of the requirement.
+
+  - name: vehicle_parking
+    module: crawlers/lta/vehicle_parking.py
+    intent: [section_documents, page_text]
+    allowed_path_prefixes:
+      - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/vehicle_parking/"
+    expected:
+      pages: 2
+      documents: 1
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The Code of Practice on Vehicle Parking Provision in Development
+      Proposals sets the parking provision every development in Singapore is
+      designed against. A small section carrying one high-value document.
+
+  - name: active_mobility
+    module: crawlers/lta/active_mobility.py
+    intent: [section_documents, page_text, external_references]
+    allowed_path_prefixes:
+      - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/active-mobility/"
+    expected:
+      pages: 1
+      documents: 2
+      external_references: 3
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The Active Mobility Design Guide and its submission checklist - the
+      walking and cycling standards developments are assessed against. The
+      three circulars that issued them live on CORENET rather than on LTA's
+      own site, which is the first place this source needs the external-host
+      rule.
+
+  - name: railway_protection
+    module: crawlers/lta/railway_protection.py
+    intent: [section_documents, page_text]
+    allowed_path_prefixes:
+      - "/content/ltagov/en/industry_innovations/industry_matters/development_construction_specifications_resources/railway_protection_road_structure_safety_zones/"
+    expected:
+      pages: 1
+      documents: 0            # see run_notes - the page that holds them was refused
+      documents_target: 10
+      measured: partial       # 21 August 2026
+    rationale: >
+      Requirements for developments inside railway protection and road
+      structure safety zones. These are hard constraints on anyone building
+      near an MRT line, a tunnel or a road structure, and they have no
+      equivalent in the Hong Kong set - Singapore regulates proximity to rail
+      far more explicitly.
+    run_notes: >
+      21 August 2026: one page record, zero documents. The section landing page
+      was reachable; the page that actually carries the requirements -
+      .../requirements_for_developments_within_railway_protection_and_road_structure_safety_zone.html
+      - was refused four times by the fetching proxy while its siblings
+      succeeded. This is the one genuinely incomplete row in this source. Its
+      documents are hard constraints on anyone building near an MRT line, so it
+      is worth a retry rather than a shrug.
+
+  - name: development_construction_resources
+    module: crawlers/lta/development_construction_resources.py
+    intent: [page_documents, page_text]
+    start_urls:
+      - ".../development_construction_specifications_resources.html"
+    expected:
+      pages: 2
+      documents: 11
+      external_references: 1
+      measured: true          # live run, 21 August 2026
+    rationale: >
+      The section hub carries documents of its own that belong to no
+      sub-section: the submission requirements for DG and CG stages, the
+      development works submission templates, preliminaries for construction
+      works, the service standard and fee schedule, and the Walking and Cycling
+      Design Guide.
+    notes: >
+      Depth is pinned to 0 so this row stays on the hub page. The sub-sections
+      have their own rows, and letting the hub follow into them would record
+      every document twice under two crawler names - which would inflate the
+      totals and make a coverage regression impossible to localise.
+
+# --- Looked at, left out -----------------------------------------------------
+
+out_of_scope:
+  - path: "/content/ltagov/en/newsroom/"
+    reason: "Press releases and media coverage. Not reference material."
+  - path: "/content/ltagov/en/getting_around/"
+    reason: >
+      Public-facing travel information - fares, routes, timetables. Useful to
+      commuters, not a technical or regulatory reference.
+  - path: "/content/ltagov/en/who_we_are/"
+    reason: >
+      Corporate pages, annual reports and the journals and newsletters series.
+      The Quick Guide for Development Proposals sits under here and is worth a
+      second look, but the rest is corporate literature.
+  - path: "/content/ltagov/en/upcoming_projects/"
+    reason: "Project announcements and construction updates; high churn, no standards."
+  - path: "https://onemotoring.lta.gov.sg/"
+    reason: >
+      Vehicle ownership and motorist services - a separate portal with a
+      separate audience. If vehicle standards are wanted later it deserves its
+      own source rather than being folded in here.
+
+deferred:
+  - target: "https://info.corenet.gov.sg/resources/circulars"
+    reason: >
+      LTA's circulars are published to CORENET, not to lta.gov.sg. This source
+      catches the ones linked from LTA pages, which is a fraction of the whole.
+      CORENET carries circulars for BCA, LTA, URA, SCDF, PUB and NEA together
+      and is not an Isomer site, so it should be built once as its own source
+      rather than partially duplicated inside each agency. Already noted in the
+      repository TODO and in sources/sg-bca/scope.yaml.
+  - target: "Quick Guide for Development Proposals series"
+    reason: >
+      Filed under who_we_are/journals_and_newsletters rather than with the
+      technical material. Substantively in scope; needs a look at whether the
+      series is stable enough to crawl as its own row.
+
+# --- Verification ------------------------------------------------------------
+acceptance:
+  - "Total records >= 80 across the six crawlers. Measured 21 August 2026: 80 (11 pages, 65 documents, 4 external references)."
+  - 'The "Civil Design Criteria" and "Materials and Workmanship" documents both appear.'
+  - 'The "Code of Practice for Works on Public Streets" appears.'
+  - 'The "Standard Details of Road Elements" appears.'
+  - "Every document URL sits under /content/dam/ltagov/ or on a CORENET host."
+  - "No record under /content/ltagov/en/newsroom/ or /getting_around/."
+  - "No crawler reports hitting its page budget - that message means incomplete coverage."
+  - "railway_protection returns more than zero documents. Until it does, this source is knowingly short one row."
+  - "A GIS Data Hub row appears under street_works: the three .zip layer bundles and the Road Name Road Code .xlsx are reached only from .../requirements_for_street_work_proposals/gis_data_hub_collection.html."
+  - "Spot-check 10 document URLs return HTTP 200 with the expected content type."

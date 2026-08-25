@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "viewer": {
+    "defaultRepo": {
+      "owner": "pyramid-ai-org",
+      "repo": "open-library"
+    },
+    "dataRoot": "data/sg",
+    "settingsPath": "config/settings.sg.yaml",
+    "sourceGroups": [
+      { "id": "bca", "label": "Building and Construction Authority" },
+      { "id": "ema", "label": "Energy Market Authority" },
+      { "id": "hdb", "label": "Housing & Development Board" },
+      { "id": "jtc", "label": "JTC Corporation" },
+      { "id": "lta", "label": "Land Transport Authority" },
+      { "id": "mnd", "label": "Ministry of National Development" },
+      { "id": "mom", "label": "Ministry of Manpower" },
+      { "id": "nea", "label": "National Environment Agency" },
+      { "id": "nparks", "label": "National Parks Board" },
+      { "id": "parliament", "label": "Parliament of Singapore" },
+      { "id": "pub", "label": "PUB, National Water Agency" },
+      { "id": "scdf", "label": "Singapore Civil Defence Force" },
+      { "id": "sgdi", "label": "Singapore Government Directory" },
+      { "id": "sla", "label": "Singapore Land Authority" },
+      { "id": "ura", "label": "Urban Redevelopment Authority" }
+    ]
+  },
+  "defaults": {
+    "fields": [
+      { "type": "meta", "key": "date_utc", "label": "Date", "format": "date" },
+      { "type": "meta", "key": "date", "label": "Date", "format": "date" },
+      { "type": "meta", "key": "type", "label": "Type" },
+      { "type": "meta", "key": "section", "label": "Section" },
+      { "type": "meta", "key": "title", "label": "Title" },
+      { "type": "meta", "key": "discovered_from", "label": "Discovered from", "format": "url" }
+    ]
+  },
+  "sources": {}
+}

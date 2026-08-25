@@ -1,0 +1,202 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Singapore Civil Defence Force
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Fire Services Department (FSD)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: scdf
+label: "Singapore Civil Defence Force"
+base_url: "https://www.scdf.gov.sg"
+hk_equivalent: "Fire Services Department (FSD)"
+mandate: >
+  SCDF regulates fire safety in buildings in Singapore under the Fire
+  Safety Act, and is the counterpart of the Hong Kong Fire Services
+  Department already in the library. The Hong Kong deck asked for the Fire
+  Protection section and, within it, every PDF from the circular letters,
+  codes of practice, notices, guidance and checklists pages. The mapping
+  is unusually clean.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitefinity
+  evidence: >
+    Sitefinity 14.4 DX; documents under /docs/default-source/ with
+    ?sfvrsn= version parameters
+  server_rendered: true
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: spider
+  sitemap_url: "https://www.scdf.gov.sg/sitemap/sitemap.xml"
+  note: >
+    A sitemap exists at the non-standard /sitemap/sitemap.xml with ~800
+    HTML pages, no lastmod and no documents. Useful as a seed, but the
+    documents still have to be harvested from the pages, so the section
+    spider is used.
+  robots_txt: "https://www.scdf.gov.sg/robots.txt"
+  robots_disallow: ["/staticfile"]
+  robots_note: >
+    robots.txt blocks roughly 66 named scraper user agents outright -
+    Wget, HTTrack and similar. The crawler must identify honestly as
+    itself and must not borrow one of those names.
+
+asset_hosts:
+  documents:
+    - "www.scdf.gov.sg"
+  document_path_prefixes:
+    - "/docs/default-source/"
+  external_references:
+    - "info.corenet.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: acts_codes_and_regulations
+    module: crawlers/scdf/acts_codes_and_regulations.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.scdf.gov.sg/fire-safety-services-listing/downloads/acts-codes-and-regulations"
+    path_prefixes:
+      - "/fire-safety-services-listing/downloads"
+    expected:
+      pages: 10
+      documents: 278
+      external_references: 1
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The single highest-yield page on the site and the direct answer to
+      the Hong Kong requirement: the Fire Safety Act and its subsidiary
+      legislation, the codes of practice, and the associated forms, all as
+      downloadable files on one server-rendered page.
+    evidence:
+      - "~70 PDFs on one page"
+      - "Fire Safety Act and regulations"
+      - "Codes of practice and prescribed forms"
+    run_notes: >
+      CONFIRMED on the 21 August run: 278 documents, well above the survey
+      estimate of 70. The single richest page in the Singapore set.
+
+  - name: fire_code
+    module: crawlers/scdf/fire_code.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023"
+      - "https://www.scdf.gov.sg/fire-safety-services-listing/cpfprts-2022"
+      - "https://www.scdf.gov.sg/fire-safety-services-listing/code-of-practice-for-fire-precautions-in-road-tunnels-(cpfprt)-2025"
+    path_prefixes:
+      - "/fire-safety-services-listing/fire-code-2023"
+      - "/fire-safety-services-listing/cpfprts-2022"
+      - "/fire-safety-services-listing/code-of-practice-for-fire-precautions-in-road-tunnels-(cpfprt)-2025"
+    expected:
+      pages: 12
+      documents: 108
+      external_references: 1
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The Fire Code itself - the Code of Practice for Fire Precautions in
+      Buildings - plus the rapid transit and road tunnel codes. The Hong
+      Kong note beside the equivalent slide read 'download only the 13th
+      version is okay'; here the current consolidated Fire Code 2023 plays
+      that role.
+    notes: >
+      The Fire Code also exists as several hundred per-clause HTML pages.
+      Depth is held low deliberately so the crawler records the
+      consolidated document rather than exploding into clause pages.
+
+  - name: fire_safety_circulars
+    module: crawlers/scdf/fire_safety_circulars.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/circulars"
+    path_prefixes:
+      - "/fire-safety-services-listing/fire-code-2023/circulars"
+    expected:
+      pages: 1
+      documents: 100
+      external_references: 1
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Circular letters - amendments to the Fire Code and how it is to be
+      applied. Without them the code is a snapshot with no amendment
+      history, which is the same argument that put the BCA circulars in
+      scope.
+    evidence:
+      - "Amendments to Fire Code 2023, 4th batch"
+      - "Publication of CPFPRT 2025 edition"
+
+  - name: petroleum_and_flammable_materials
+    module: crawlers/scdf/petroleum_and_flammable_materials.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.scdf.gov.sg/fire-safety-services-listing/petroleum-and-flammable-material-licences"
+    path_prefixes:
+      - "/fire-safety-services-listing/petroleum-and-flammable-material-licences"
+    expected:
+      pages: 8
+      documents: 54
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Petroleum and flammable materials licensing, storage requirements
+      and the transport circulars for dangerous goods - the hazardous-
+      materials half of SCDF's regulatory remit.
+
+  - name: advisories
+    module: crawlers/scdf/advisories.py
+    engine: spider
+    intent: [section_documents, page_text]
+    start_urls:
+      - "https://www.scdf.gov.sg/home/about-scdf/media-room/publications/fire-safety-and-emergency-advisories"
+    path_prefixes:
+      - "/home/about-scdf/media-room/publications/fire-safety-and-emergency-advisories"
+    expected:
+      pages: 7
+      documents: 105
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      Fire safety and emergency advisories - the notices and guidance row
+      of the Hong Kong deck.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/home/community-volunteers"
+    reason: >
+      Community and volunteer programme pages.
+  - path: "/home/careers"
+    reason: >
+      Recruitment.
+  - path: "/home/about-scdf/media-room/news-centre"
+    reason: >
+      Press releases.
+
+deferred:
+  - target: "SCDF circulars on CORENET"
+    reason: >
+      info.corenet.gov.sg carries an scdf-circulars folder whose extent is
+      unconfirmed. The CORENET source would cover it properly.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 200 across the five crawlers."
+  - 'The consolidated "Fire Code" document appears by name.'
+  - "Every document URL sits under /docs/default-source/ on www.scdf.gov.sg."
+  - "No record under /home/careers/ or the news centre."
+  - "fire_code returns the consolidated documents, not hundreds of per-clause pages."
+  - "No crawler reports hitting its page budget."

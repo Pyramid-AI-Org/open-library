@@ -1,0 +1,178 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Housing & Development Board
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Architectural Services Department (ArchSD), with JTC
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: hdb
+label: "Housing & Development Board"
+base_url: "https://www.hdb.gov.sg"
+hk_equivalent: "Architectural Services Department (ArchSD), with JTC"
+mandate: >
+  HDB designs and builds Singapore's public housing and, with JTC, covers
+  the ground the Hong Kong Architectural Services Department covers. The
+  Hong Kong material was technical documents, practices and guidelines,
+  BIM guides and specifications; HDB's equivalents sit in its building
+  professionals section.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitecore
+  evidence: >
+    Sitecore media handler at /-/media/ with iar= and hash= protection
+    parameters; .ashx renditions
+  server_rendered: shell-only
+  content_element_id: null
+  document_labels: link-text
+  note: >
+    CORRECTED after the 21 August run. "Partial" was too kind. The server
+    returns the header, breadcrumb and left-hand navigation tree; the entire
+    content region arrives by JavaScript. Pages that visibly hold PDFs in a
+    browser - "Documents and Checklists for Renovation and A&A Works",
+    "Documents and Checklists for Building Plan Submissions", "Application
+    Forms for Building Professionals", the town design guides - return
+    navigation links and nothing else. This was confirmed three ways: a
+    body-content prompt returned empty, a trailing-slash variant returned the
+    same, and the legacy /cs/infoweb/ prefix 404s. The only /-/media/ URLs in
+    the served HTML are the logo and two banner images.
+
+discovery:
+  method: sitemap
+  sitemap_url: "https://www.hdb.gov.sg/sitemap.xml"
+  note: >
+    A flat sitemap of 1,000+ pages with real lastmod timestamps - the best
+    discovery surface of the three ArchSD-equivalent agencies, and the
+    only one supporting cheap incremental recrawls.
+  robots_txt: "https://www.hdb.gov.sg/robots.txt"
+  robots_disallow: ["~150 transactional e-service paths"]
+  access: blocked-for-documents
+  access_note: >
+    Two independent obstacles, and they compound.
+
+      1. HTTP 403 for the browser route. www.hdb.gov.sg returns 403 to every
+         request from the browser automation path used for the other twelve
+         Singapore sources - the homepage included, not just deep pages. This
+         is a WAF or IP-reputation decision, not a robots policy, and it is
+         not something to work around.
+
+      2. No documents without JavaScript for the fetch route. The proxy that
+         can reach the host retrieves only the server shell (see platform
+         note), so the page inventory comes back complete and the document
+         inventory comes back empty.
+
+    Each route is blocked by exactly the thing the other route would have
+    solved. The 21 August run therefore produced 39 page records and zero
+    documents, which is an honest floor rather than a coverage claim.
+
+    To finish this source, one of: a headless browser that can reach the host,
+    an agreed crawl path with HDB, or the Sitecore layout/GraphQL endpoint if
+    HDB will expose one. Do not close it by inferring /-/media/ paths from
+    page paths - the mirroring is a pattern, not a guarantee, and a library
+    full of guessed URLs is worse than one with a recorded gap.
+
+asset_hosts:
+  documents:
+    - "www.hdb.gov.sg"
+  document_path_prefixes:
+    - "/-/media/"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: building_professionals
+    module: crawlers/hdb/building_professionals.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/business-partners/building-professionals-bgbiz"
+      - "/business/building-professionals-bgbiz"
+    expected:
+      pages: 32
+      documents: 0            # blocked - see discovery.access_note
+      documents_target: 30    # what a working run should find
+      measured: partial       # pages measured 21 August 2026; documents not reachable
+    rationale: >
+      The consultants-and-contractors library: HDB(ARCH) technical
+      requirements, the civil and structural plan submission guidelines,
+      the renovation and A&A guidelines, the documents-and-checklists set,
+      and the updates page that functions as HDB's circular series.
+    evidence:
+      - "hdb-arch-technical-requirements.pdf"
+      - "HDBCSGuidelinePlanSub.pdf - C&S plan submission and as-built"
+      - "bim-guide-v2.pdf under /-/media/doc/BQG/"
+    notes: >
+      The sitemap is genuinely good: 102 URLs matched the in-scope patterns
+      across three passes, the /business-partners/ and /about-us/our-role/
+      trees are fully enumerated, and every navigation link on every fetched
+      page resolved to a URL already in the sitemap. No orphan pages. Page
+      discovery is a solved problem for this source; document extraction is
+      not.
+    run_notes: >
+      21 August 2026: 32 page records, 0 documents. One page could not be
+      fetched at all - /apply-for-renovation-permit/terms-and-conditions is
+      inside the robots-disallowed e-service area, along with the rest of
+      /apply-for-* and /enquiry-on-*. That one is a policy boundary and is
+      respected, not a bug.
+
+  - name: town_design_guides
+    module: crawlers/hdb/town_design_guides.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/about-us/our-role/plan-and-design-towns"
+    expected:
+      pages: 7
+      documents: 0            # blocked - see discovery.access_note
+      documents_target: 20    # what a working run should find
+      measured: partial       # pages measured 21 August 2026; documents not reachable
+    rationale: >
+      One design guide per town, setting the urban design and
+      architectural standards for public housing estates - the closest HDB
+      analogue to the ArchSD design manuals.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/residential"
+    reason: >
+      Consumer-facing flat buying, renting and servicing.
+  - path: "/about-us/news-and-publications/press-releases"
+    reason: >
+      Press releases.
+  - path: "/business-partners/tenderers"
+    reason: >
+      Live tender opportunities - high churn, handled by a separate
+      portal.
+
+deferred:
+  - target: "HDB document listings behind JavaScript"
+    reason: >
+      The documents-and-checklists and updates pages need a rendering
+      fetcher to enumerate fully. Until then this source under-collects
+      and says so.
+  - target: "BIM guidance"
+    reason: >
+      HDB's own BIM guide is v2.0 from 2015. The current authority is
+      BCA's BIM Guide v3.0, already reachable through the BCA source - do
+      not treat HDB's as current.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Page records >= 39. This is the part that currently works."
+  - "Documents: currently 0 and expected to be 0 until the access problem is solved. A run that returns a handful of /-/media/ URLs has almost certainly picked up logos and banners - check the extensions before believing it."
+  - 'Once unblocked: the "HDB(ARCH) Technical Requirements" document appears by name.'
+  - "Every document URL sits under /-/media/ on www.hdb.gov.sg."
+  - "No record under /residential/."
+  - "No inferred or constructed document URLs. Every URL in this source must have been read from a page."

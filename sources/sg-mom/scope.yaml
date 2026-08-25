@@ -1,0 +1,179 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Ministry of Manpower
+# =============================================================================
+# The reviewable statement of what we intend to collect and why. Each
+# `crawlers:` row is one arrow from the Hong Kong review deck, `intent` is the
+# note beside it, `rationale` is the reason a person gave for drawing it.
+#
+# Hong Kong counterpart: Labour Department (LD)
+#
+# Status moves review -> approved once a person has signed off. Code should not
+# be merged from a spec still marked `review`.
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: mom
+label: "Ministry of Manpower"
+base_url: "https://www.mom.gov.sg"
+hk_equivalent: "Labour Department (LD)"
+mandate: >
+  MOM regulates workplace safety and health in Singapore under the
+  Workplace Safety and Health Act, and is the counterpart of the Hong Kong
+  Labour Department already in the library. The Hong Kong deck asked for
+  the occupational safety, occupational health and pressure equipment
+  sections, every PDF in each, plus the labour legislation FAQ pages as
+  web text.
+surveyed_on: "2026-08-21"
+surveyed_by: "claude"
+harvested_on: "2026-08-21"   # see `measured:` on each row below
+
+# --- Platform ---------------------------------------------------------------
+platform:
+  name: sitecore
+  evidence: >
+    Documents under /-/media/mom/documents/; Sitecore item GUIDs as query
+    parameters; .ashx media handler
+  server_rendered: true
+  content_element_id: null
+  document_labels: link-text
+
+discovery:
+  method: sitemap
+  sitemap_url: "https://www.mom.gov.sg/sitemap.xml"
+  note: >
+    A sitemap index with six children, one of which - workplace-safety-
+    and-health.xml - carries ~320 URLs with real lastmod dates. The index
+    is why the engine had to learn to follow nested sitemaps: read as a
+    urlset it yields nothing at all.
+  robots_txt: "https://www.mom.gov.sg/robots.txt"
+  robots_disallow: ["/upgrade-ie", "/ebook/*", "/beta/*", "/faq/?faq&faqItem="]
+
+asset_hosts:
+  documents:
+    - "www.mom.gov.sg"
+  document_path_prefixes:
+    - "/-/media/mom/documents/"
+  external_references:
+    - "sso.agc.gov.sg"
+
+# --- Scope ------------------------------------------------------------------
+crawlers:
+  - name: wsh_circulars
+    module: crawlers/mom/wsh_circulars.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/workplace-safety-and-health/wsh-circulars"
+    expected:
+      pages: 1
+      documents: 152
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The best PDF target on MOM: workplace safety and health circulars
+      from 1999 to the present, grouped by year but with every link
+      present in the served HTML. This is the direct equivalent of the
+      Hong Kong occupational safety and health document sets.
+    evidence:
+      - "~100 circulars, 1999-2026, under /-/media/mom/documents/safety-health/circulars/"
+      - "circular-20260316-vertical-lifters-in-conveyor-systems.pdf"
+    run_notes: >
+      The 21 August run returned 152 circulars from a single listing page
+      - every link is present in the served HTML, grouped by year. The
+      easiest high-yield row in this source, and it needed no pagination
+      at all.
+
+  - name: wsh_legislation
+    module: crawlers/mom/wsh_legislation.py
+    engine: sitemap
+    intent: [page_text, external_references]
+    path_prefixes:
+      - "/legislation/workplace-safety-and-health"
+    expected:
+      pages: 7
+      documents: 3
+      external_references: 59
+      measured: true          # 21 Aug 2026 live run
+    rationale: >
+      The Workplace Safety and Health Act and its ~45 subsidiary
+      regulations - construction, work at heights, confined spaces, noise,
+      scaffolds. All the text is on Singapore Statutes Online rather than
+      on MOM, so these are external references. They are the law the codes
+      of practice are written under and belong in the library alongside
+      them.
+
+  - name: workplace_safety_and_health
+    module: crawlers/mom/workplace_safety_and_health.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/workplace-safety-and-health"
+    excludes:
+      - pattern: "^/workplace-safety-and-health/wsh-circulars"
+        reason: "Covered by its own crawler row; would duplicate records."
+    expected:
+      pages: 60
+      documents: 232
+      external_references: 3
+      measured: true          # 21 Aug 2026 live run
+      truncated_queue: 97   # stopped at max_pages - these are floors
+    rationale: >
+      The rest of the WSH tree: pressure vessels and lifting equipment,
+      medical and hygiene monitoring, occupational disease reporting, risk
+      management, and the reports and statistics series. The Hong Kong
+      pressure equipment slide maps here - though note the finding below,
+      because MOM states most of this as web text rather than as
+      documents.
+    notes: >
+      The pressure vessels pages carry no PDFs at all - the requirements
+      are page text. Emitting page records is therefore not optional on
+      this row; a document-only crawl returns an empty section that looks
+      like a bug.
+    run_notes: >
+      The 21 August run stopped at its page budget with 97 URLs still
+      queued, so 232 documents is a floor rather than a total. Raise
+      max_pages before treating the count as coverage.
+
+# --- Looked at, left out ----------------------------------------------------
+out_of_scope:
+  - path: "/newsroom"
+    reason: >
+      Press releases and speeches.
+  - path: "/passes-and-permits"
+    reason: >
+      Immigration and work pass administration - a different domain
+      entirely.
+  - path: "/employment-practices"
+    reason: >
+      Employment law guidance for the public rather than technical safety
+      standards.
+  - path: "/faq"
+    reason: >
+      robots.txt disallows the ?faqItem= parameter these pages are
+      addressed by. The Hong Kong deck wanted the FAQ pages as web text;
+      honouring robots means not taking them. Raise with the site owner
+      rather than working around it.
+
+deferred:
+  - target: "WSH Council publications on www.tal.sg"
+    reason: >
+      The Approved Codes of Practice and WSH Guidelines are not MOM's -
+      they belong to the Workplace Safety and Health Council, which has
+      migrated from wshc.sg to tal.sg/wshc. That host has no robots.txt
+      and no sitemap, its listings are JavaScript-rendered behind a Load
+      more control, and its canonical index pages were returning HTTP 500
+      during the survey. Detail pages are server-rendered and do expose
+      their PDF, so a crawl is feasible once the listing problem is
+      solved. It is a separate source, not a row here, because it is a
+      different body on a different host.
+
+# --- Verification -----------------------------------------------------------
+acceptance:
+  - "Total records >= 250 across the three crawlers."
+  - "wsh_circulars returns >= 80 documents spanning at least 1999 to the current year."
+  - "Every document URL sits under /-/media/mom/documents/ on www.mom.gov.sg."
+  - "Legislation records point at sso.agc.gov.sg and are typed as external references."
+  - "workplace_safety_and_health returns page records - the pressure equipment requirements are web text."
+  - "No record under /faq/ - robots.txt disallows it."

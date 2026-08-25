@@ -67,6 +67,74 @@ A static viewer UI is available under [docs/](docs/) and is designed to be deplo
 
 Deployed in: https://pyramid-ai-org.github.io/open-library/
 
+## Singapore library
+
+The Singapore collection lives alongside Hong Kong in the same codebase but is
+kept fully separate end to end:
+
+- Config: [config/settings.sg.yaml](config/settings.sg.yaml) (15 sources, 62 crawler rows).
+- Data: `data/sg/` on the `data` branch — its own `latest/`, `crawler_state.json` and `archive_v2/`.
+- Workflow: [.github/workflows/crawl-sg.yml](.github/workflows/crawl-sg.yml), daily at 03:00 UTC.
+- Viewer: [docs/sg/](docs/sg/) — deployed at `/sg/` on the Pages site.
+- Scope specs: [sources/](sources/) — one reviewable `scope.yaml` per source, per the
+  pattern in [onboarding-pattern.md](onboarding-pattern.md).
+
+| Hong Kong department | Singapore agency | source | Records | Documents | Status |
+| --- | --- | --- | ---: | ---: | --- |
+| Legislative Council | Parliament of Singapore | `parliament` | 3,562 | 3,559 | Harvested — order papers, bills and proceedings back to 1955 |
+| Government Telephone Directory | Singapore Government Directory | `sgdi` | 1,119 | 0 | Harvested — directory pages by design |
+| Buildings Department | Building and Construction Authority | `bca` | 1,010 | 837 | Harvested |
+| Planning Department | Urban Redevelopment Authority | `ura` | 738 | 409 | Harvested |
+| Labour Department | Ministry of Manpower | `mom` | 694 | 413 | Harvested |
+| Fire Services Department | Singapore Civil Defence Force | `scdf` | 641 | 580 | Harvested |
+| Hong Kong Herbarium | National Parks Board | `nparks` | 481 | 199 | Harvested |
+| EPD | National Environment Agency | `nea` | 479 | 338 | Harvested |
+| Lands Department | Singapore Land Authority | `sla` | 365 | 343 | Harvested |
+| DSD + WSD | PUB, National Water Agency | `pub` | 121 | 85 | Partial — 2 rows are JS listings; CORENET is the better route |
+| HyD + TD | Land Transport Authority | `lta` | 106 | 93 | Harvested |
+| ArchSD | JTC Corporation | `jtc` | 72 | 47 | Harvested |
+| EMSD | Energy Market Authority | `ema` | 4 | 0 | Blocked — Imperva bot challenge answers every endpoint |
+| ArchSD | Housing & Development Board | `hdb` | 0 | 0 | Blocked — 403 across the whole domain |
+| DEVB | Ministry of National Development | `mnd` | 0 | 0 | Disabled — robots.txt bot challenge |
+| CEDD | split across LTA / JTC / PUB | — | — | — | Covered by the three sources above |
+
+Totals as of the 24 August 2026 run: **9,392 records, 6,903 documents**.
+EMA and HDB are recorded as blocked rather than worked around; both were
+reachable during the 21 August survey, so the nightly run retries them.
+
+### Pausing and scoping the Singapore run
+
+The nightly run has a kill switch. Set the repository variable
+`SG_CRAWL_PAUSED` to `true` and the 03:00 UTC job stops before a runner
+starts, so no requests are made:
+
+```bash
+gh variable set SG_CRAWL_PAUSED --body true    # pause
+gh variable set SG_CRAWL_PAUSED --body false   # resume
+```
+
+Manual dispatch still works while paused, which is what makes it safe to
+pause during an investigation. Scope a dispatch with the `crawler` input:
+a bare source id (`sla`) runs all of that source's rows, a dotted name
+(`sla.circulars`) runs one row, and an empty value runs all fifteen
+sources. Batching a first run source by source, rather than letting one
+job hit fifteen agencies at once, keeps our footprint small on sites that
+are quick to challenge automated traffic.
+
+To stop a run already in flight: `gh run cancel <run-id>`, or disable the
+workflow entirely with `gh workflow disable crawl-sg.yml`. To retire a
+single source without touching the workflow, set
+`crawlers.<source>.schedule.enabled: false` in `config/settings.sg.yaml` —
+its existing records are carried forward rather than dropped.
+
+Run Singapore sources locally with:
+
+```bash
+python main.py --settings config/settings.sg.yaml --out ./local-data
+python main.py --crawler sla --settings config/settings.sg.yaml --out ./local-data           # one source
+python main.py --crawler sla.circulars --settings config/settings.sg.yaml --out ./local-data # one row
+```
+
 ## Adding a new crawler
 
 1. Create `crawlers/<name>.py` exporting a `Crawler` class with a `.crawl(ctx)` method.
