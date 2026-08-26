@@ -1,0 +1,71 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Civil Aviation Authority of Singapore
+# =============================================================================
+# Hong Kong counterpart: none directly; this is a Singapore-specific constraint
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: caas
+label: "Civil Aviation Authority of Singapore"
+base_url: "https://www.caas.gov.sg"
+hk_equivalent: "none - added for obstacle height control"
+mandate: >
+  CAAS is in the library for one reason: obstacle limitation surfaces. An
+  aerodrome's height limits bind building height across a wide area around
+  Changi, Seletar and Paya Lebar, so this is design input for projects
+  nowhere near an airport boundary. Everything else CAAS regulates -
+  airworthiness, licensing, aircraft operations, unmanned aircraft - is
+  aviation regulation and is out of scope.
+surveyed_on: "2026-08-25"
+surveyed_by: "claude"
+harvested_on: "2026-08-25"
+
+platform_notes: >
+  Isomer, so the sitemap engine applies unchanged and documents land on the
+  shared Isomer asset host. 594 sitemap URLs in total, of which 23 are
+  construction-relevant - hence narrow prefixes rather than a whole-site walk.
+
+crawlers:
+  - name: airport_and_aerodrome
+    module: crawlers/caas/airport_and_aerodrome.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes: ["/resources/regulatory-requirements-and-guidelines/airport-and-aerodrome"]
+    expected:
+      measured: true          # 25 Aug 2026 live run
+      records: 32
+      documents: 34
+    rationale: >
+      Advisory circulars on handling of obstructions and terminal safety codes
+      of practice. The obstruction guidance is the construction-relevant core.
+
+  - name: obstacle_height_control
+    module: crawlers/caas/obstacle_height_control.py
+    engine: sitemap
+    intent: [page_text, section_documents]
+    expected:
+      measured: true
+      records: 7
+    rationale: >
+      The height limits themselves and the clearance application a developer
+      files when a structure may penetrate them.
+
+  - name: legislation
+    module: crawlers/caas/legislation.py
+    engine: sitemap
+    intent: [page_text, external_references]
+    expected:
+      measured: true
+      records: 81
+    rationale: >
+      The Air Navigation Act and subsidiary legislation behind height control.
+      Mostly links out to Statutes Online, recorded as external references.
+
+excluded:
+  - what: "Past versions of requirements and guidelines"
+    reason: "Superseded editions; the current set is what a project team needs."
+  - what: "Airworthiness, personnel licensing, aircraft operations, unmanned aircraft, newsroom"
+    reason: "Aviation regulation, not construction."

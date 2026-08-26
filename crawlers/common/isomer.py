@@ -362,6 +362,15 @@ def _local(tag: str) -> str:
     return tag.rsplit("}", 1)[-1]
 
 
+# Document paths as they appear inside a framework payload, where they are
+# JSON-escaped strings rather than anchors. Anchored to the extension list so a
+# stray word ending in ".doc" in prose is not mistaken for a file.
+_PAYLOAD_DOC_RE = re.compile(
+    r"/[A-Za-z0-9._/\-%]{2,240}?\.(?:pdf|docx?|xlsx?|pptx?|zip)",
+    re.IGNORECASE,
+)
+
+
 def parse_sitemap(xml_text: str) -> tuple[list[SitemapEntry], list[str]]:
     """Parse a sitemap into (page entries, nested sitemap urls).
 
@@ -577,6 +586,42 @@ class IsomerSectionCrawler(_IsomerBase):
     max_total_records      Safety cap on records emitted.
     """
 
+    def _page_entries(
+        self,
+        ctx: RunContext,
+        *,
+        cfg: dict[str, Any],
+        session: requests.Session,
+        prefixes: list[str],
+        excludes: list,
+    ) -> list[SitemapEntry] | None:
+        """The page list to walk. Override to read it from somewhere else.
+
+        Returning ``None`` means the list could not be read at all, which is a
+        failure rather than an empty section; returning ``[]`` means the source
+        was read and genuinely holds nothing under the configured prefixes.
+        """
+        sitemap_url = str(cfg.get("sitemap_url", "")).strip()
+        sitemap_text = self._fetch(session, sitemap_url, ctx=ctx, cfg=cfg)
+        if not sitemap_text:
+            return None
+
+        found, nested = parse_sitemap(sitemap_text)
+        # A sitemap index lists further sitemaps rather than pages. Following
+        # them is not optional: several agencies publish only an index, and a
+        # crawler that stops at the top level reports zero pages while looking
+        # perfectly healthy.
+        for child_url in nested[: int(cfg.get("max_child_sitemaps", 30))]:
+            child_text = self._fetch(session, child_url, ctx=ctx, cfg=cfg)
+            if not child_text:
+                continue
+            child_entries, _ = parse_sitemap(child_text)
+            found.extend(child_entries)
+
+        entries = [e for e in found if _path_matches(e.url, prefixes, excludes)]
+        entries.sort(key=lambda e: e.url)
+        return entries
+
     def crawl(self, ctx: RunContext) -> list[UrlRecord]:
         cfg = self._config(ctx)
 
@@ -599,31 +644,19 @@ class IsomerSectionCrawler(_IsomerBase):
         max_pages = int(cfg.get("max_pages", 1000))
         max_records = int(cfg.get("max_total_records", 50000))
         read_collection_payload = bool(cfg.get("read_collection_payload", True))
+        read_payload_documents = bool(cfg.get("read_payload_documents", False))
 
         session = self._session(ctx)
-
-        sitemap_text = self._fetch(session, sitemap_url, ctx=ctx, cfg=cfg)
-        if not sitemap_text:
-            return []
 
         site_host = (urlparse(sitemap_url).netloc or "").lower()
         if not doc_hosts:
             doc_hosts = {site_host, "isomer-user-content.by.gov.sg"}
 
-        found, nested = parse_sitemap(sitemap_text)
-        # A sitemap index lists further sitemaps rather than pages. Following
-        # them is not optional: several agencies publish only an index, and a
-        # crawler that stops at the top level reports zero pages while looking
-        # perfectly healthy.
-        for child_url in nested[: int(cfg.get("max_child_sitemaps", 30))]:
-            child_text = self._fetch(session, child_url, ctx=ctx, cfg=cfg)
-            if not child_text:
-                continue
-            child_entries, _ = parse_sitemap(child_text)
-            found.extend(child_entries)
-
-        entries = [e for e in found if _path_matches(e.url, prefixes, excludes)]
-        entries.sort(key=lambda e: e.url)
+        entries = self._page_entries(
+            ctx, cfg=cfg, session=session, prefixes=prefixes, excludes=excludes
+        )
+        if entries is None:
+            return []
 
         if not entries and ctx.debug:
             print(
@@ -674,6 +707,22 @@ class IsomerSectionCrawler(_IsomerBase):
                             href=urljoin(entry.url, item.href),
                             text=item.title,
                             aria_label=item.title,
+                        )
+                    )
+
+            # Some pages name their documents only inside the framework
+            # payload, never as an anchor: IMDA's codes of practice list twenty
+            # PDFs under /assets/<uuid>.pdf that a DOM reader cannot see, so the
+            # page looks like prose with no attachments. Opt-in, because
+            # scanning raw payload text is a blunter instrument than reading
+            # anchors and would add noise to sources that do not need it.
+            if read_payload_documents:
+                for href in sorted(set(_PAYLOAD_DOC_RE.findall(html))):
+                    links.append(
+                        PageLink(
+                            href=urljoin(entry.url, href),
+                            text=None,
+                            aria_label=None,
                         )
                     )
 

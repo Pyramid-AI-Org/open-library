@@ -1,0 +1,55 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - IMDA (buildings subset only)
+# =============================================================================
+# Hong Kong counterpart: none directly; in-building infocomm provisioning
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: imda
+label: "Infocomm Media Development Authority"
+base_url: "https://www.imda.gov.sg"
+hk_equivalent: "none - in-building info-communication facilities"
+mandate: >
+  One code earns IMDA its place: COPIF, the Code of Practice for
+  Info-communication Facilities in Buildings. It is mandatory design input -
+  the risers, ducts, lead-in pipes and equipment rooms a development must
+  provide - and its requirements also appear in land-use proposals submitted
+  to URA. Everything else IMDA regulates is media and telecoms policy.
+surveyed_on: "2026-08-25"
+surveyed_by: "claude"
+harvested_on: "2026-08-25"
+
+platform_notes: >
+  Next.js over Sitecore. The sitemap is large - 11,331 URLs - so the prefixes
+  here are deliberately narrow, naming three pages rather than a section.
+
+  The documents are named only inside the framework payload: twenty PDFs under
+  /assets/<uuid>.pdf, with no anchor in the DOM. A link-reading crawler sees
+  prose with no attachments and reports a healthy zero. This row therefore
+  runs with read_payload_documents, an opt-in added for exactly this shape.
+
+crawlers:
+  - name: building_facilities_codes
+    module: crawlers/imda/building_facilities_codes.py
+    engine: sitemap
+    intent: [section_documents, page_text]
+    path_prefixes:
+      - "/regulations-and-licensing-listing/code-of-practice-for-info-communication-facilities-in-buildings"
+      - "/regulations-and-licensing-listing/code-of-practice-for-internal-telecom-wiring"
+      - "/regulations-and-licensing-listing/interconnection-and-access/imdas-requirements-to-be-included-in-land-use-proposal-submissions-to-ura"
+    expected:
+      measured: true          # 25 Aug 2026 live run
+      records: 24
+      documents: 20
+    rationale: >
+      COPIF, the internal telecom wiring code, and the URA land-use submission
+      requirements that cite them.
+
+excluded:
+  - what: "Broadcasting, telecoms competition, online safety, spectrum, postal codes of practice"
+    reason: >
+      Media and telecoms regulation. The library collects what governs how
+      things get built.

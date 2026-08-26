@@ -1214,3 +1214,371 @@ crawlers:
         max_pages: 150   # raised from 60: 21 Aug run truncated its queue
         emit_page_records: true
 
+# ============================================================================
+# CAAS - Civil Aviation Authority of Singapore
+# ----------------------------------------------------------------------------
+# Scope: sources/sg-caas/scope.yaml. Platform: Isomer, so the sitemap engine
+# applies unchanged and documents land on the shared Isomer asset host.
+#
+# Included for one reason: obstacle limitation surfaces. An aerodrome's height
+# limits bind building height across a wide area around Changi, Seletar and
+# Paya Lebar, so this is design input for projects nowhere near an airport
+# boundary. The rest of CAAS - airworthiness, personnel licensing, aircraft
+# operations, unmanned aircraft - is aviation regulation, not construction, and
+# is deliberately out of scope.
+# ============================================================================
+  caas:
+    label: "Civil Aviation Authority of Singapore"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.caas.gov.sg"
+    sitemap_url: "https://www.caas.gov.sg/sitemap.xml"
+    content_element_id: "main-content"
+    document_hosts:
+      - "www.caas.gov.sg"
+      - "isomer-user-content.by.gov.sg"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      airport_and_aerodrome:
+        # 31 documents measured 25 Aug 2026: advisory circulars on obstruction
+        # handling, wildlife hazard, terminal safety codes of practice.
+        path_prefixes:
+          - "/resources/regulatory-requirements-and-guidelines/airport-and-aerodrome"
+        exclude_path_patterns:
+          # Superseded editions are kept on their own page; the current set is
+          # what a project team needs.
+          - "past-versions-of-requirements"
+        emit_page_records: true
+        max_pages: 60
+
+      obstacle_height_control:
+        # The height limits and the clearance application process.
+        path_prefixes:
+          - "/industry/airspace-management-and-aerial-activities/obstacle-height-control"
+          - "/e-services-and-forms/application-for-obstacle-clearance"
+          - "/industry/airports-and-aerodrome-safety"
+        emit_page_records: true
+        max_pages: 40
+
+      legislation:
+        # Air Navigation Act and subsidiary legislation - the statutory basis
+        # for height control. Mostly links out to Statutes Online, which is
+        # recorded as an external reference.
+        path_prefixes:
+          - "/resources/legislation"
+        emit_page_records: true
+        max_pages: 40
+
+# ============================================================================
+# WSHC - Workplace Safety and Health Council (Singapore)
+# ----------------------------------------------------------------------------
+# Scope: sources/sg-wshc/scope.yaml. Platform: Sitecore, on the Tripartite
+# Alliance host - wshc.sg now redirects to www.tal.sg/wshc, so the old hostname
+# is not the one to configure.
+#
+# Discovery is a single JSON request: GetJsonWshcResourceList returns all 1,688
+# resources with the Council's own two-level taxonomy attached. The scope below
+# is expressed in those categories rather than URL prefixes, so it says what a
+# reviewer would say: codes and guidelines in, posters out.
+#
+# Measured 25 Aug 2026: 1,688 entries, of which 134 are Codes of Practice, WSH
+# Guidelines, Guides and Handbooks or advisories. 864 entries are collateral -
+# posters, presentation slides, pictograms, banners, cards, flyers, training
+# slides - and are excluded on the same judgement that keeps press releases out
+# of the Hong Kong set: they are communication material, not reference
+# material. Bulletins and newsletters (268) are also out; they report on the
+# standards rather than setting them.
+# ============================================================================
+  wshc:
+    label: "Workplace Safety and Health Council"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.tal.sg"
+    # Present so the inherited engine can derive its host defaults; discovery
+    # itself is the JSON index on each row.
+    sitemap_url: "https://www.tal.sg/wshc"
+    content_element_id: null
+    document_hosts:
+      - "www.tal.sg"
+      - "tal.sg"
+    document_path_prefixes:
+      # Sitecore serves every published file from the media library.
+      - "/wshc/-/media/"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      codes_and_guidelines:
+        # 134 entries measured 25 Aug 2026.
+        engine: json_index
+        index_url: "https://www.tal.sg/wshc/api/tal/Resources/GetJsonWshcResourceList"
+        url_field: "url"
+        date_field: "date"
+        category_field: "resourceChildTypeName"
+        include_categories:
+          - "Codes of Practice"
+          - "WSH Guidelines"
+          - "Guides and Handbooks"
+          - "WSH Advisory"
+          - "Technical Advisories"
+        path_prefixes:
+          - "/wshc/resources/"
+        emit_page_records: true
+        max_pages: 300
+
+      advisories_and_alerts:
+        # 230 entries measured: WSH Alerts (227) and WSH Lessons (3).
+        engine: json_index
+        index_url: "https://www.tal.sg/wshc/api/tal/Resources/GetJsonWshcResourceList"
+        url_field: "url"
+        date_field: "date"
+        category_field: "resourceChildTypeName"
+        include_categories:
+          - "WSH Alerts"
+          - "WSH Lessons"
+        path_prefixes:
+          - "/wshc/resources/"
+        emit_page_records: true
+        max_pages: 400
+
+      practical_guidance:
+        # 171 entries measured: checklists and articles, case studies, kits.
+        engine: json_index
+        index_url: "https://www.tal.sg/wshc/api/tal/Resources/GetJsonWshcResourceList"
+        url_field: "url"
+        date_field: "date"
+        category_field: "resourceChildTypeName"
+        include_categories:
+          - "Checklists and Articles"
+          - "Case studies"
+          - "Resource Kits"
+        path_prefixes:
+          - "/wshc/resources/"
+        emit_page_records: true
+        max_pages: 300
+
+# ============================================================================
+# CORENET X - building submission portal (Singapore)
+# ----------------------------------------------------------------------------
+# Scope: sources/sg-corenet/scope.yaml. Platform: Sitefinity - documents are
+# served from /docs/default-source/ and the content container is id="content",
+# not the "main-content" the Isomer sources use.
+#
+# There is no usable sitemap: /sitemap.xml returns the application shell. The
+# section pages are server-rendered, so the bounded spider reaches them; the
+# by-regulatory-agencies and by-key-gateways tabs are JS-driven and hold no
+# documents of their own, which is why they are not seeded.
+#
+# Known limit, recorded rather than papered over: the circulars listing renders
+# client-side. This collects the circulars reachable from content pages, not a
+# guaranteed-complete circular series.
+# ============================================================================
+  corenet:
+    label: "CORENET X"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://info.corenet.gov.sg"
+    content_element_id: "content"
+    document_hosts:
+      - "info.corenet.gov.sg"
+      - "www.corenet.gov.sg"
+    document_path_prefixes:
+      - "/docs/default-source/"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      code_of_practice:
+        # 9 documents measured 25 Aug 2026 on the landing page alone.
+        engine: spider
+        start_urls:
+          - "https://info.corenet.gov.sg/regulatory-process/corenet-x-code-of-practice"
+        allowed_path_prefixes:
+          - "/regulatory-process/corenet-x-code-of-practice"
+        max_depth: 2
+        max_pages: 40
+        emit_page_records: true
+
+      submission_process:
+        engine: spider
+        start_urls:
+          - "https://info.corenet.gov.sg/regulatory-process/about-the-new-submission-process/3-gateway-process"
+          - "https://info.corenet.gov.sg/regulatory-process/other-building-works/conservation"
+        allowed_path_prefixes:
+          - "/regulatory-process/about-the-new-submission-process"
+          - "/regulatory-process/other-building-works"
+        max_depth: 3
+        max_pages: 80
+        emit_page_records: true
+
+      resources:
+        engine: spider
+        start_urls:
+          - "https://info.corenet.gov.sg/resources/codes-and-regulations"
+          - "https://info.corenet.gov.sg/resources/circulars"
+        allowed_path_prefixes:
+          - "/resources"
+        exclude_path_patterns:
+          # Events and past events are scheduling notices, not reference
+          # material.
+          - "^/resources/events"
+          - "^/resources/past--events"
+        max_depth: 3
+        max_pages: 80
+        emit_page_records: true
+
+# ============================================================================
+# IMDA - Infocomm Media Development Authority (buildings subset only)
+# ----------------------------------------------------------------------------
+# Scope: sources/sg-imda/scope.yaml. Platform: Next.js over Sitecore.
+#
+# IMDA is in the library for one reason: COPIF. The Code of Practice for
+# Info-communication Facilities in Buildings is mandatory design input - risers,
+# ducts, lead-in pipes and equipment rooms a development must provide - and its
+# requirements are also cited in land-use submissions to URA. Everything else
+# IMDA regulates is media and telecoms policy and is out of scope.
+#
+# The sitemap has 11,331 URLs, so the prefixes here are deliberately narrow.
+# The documents are listed only in the framework payload (20 PDFs under
+# /assets/<uuid>.pdf), which is why read_payload_documents is on for this row.
+# ============================================================================
+  imda:
+    label: "Infocomm Media Development Authority"
+    schedule:
+      enabled: true
+      interval_days: 1
+    base_url: "https://www.imda.gov.sg"
+    sitemap_url: "https://www.imda.gov.sg/sitemap.xml"
+    content_element_id: null
+    document_hosts:
+      - "www.imda.gov.sg"
+    document_path_prefixes:
+      - "/assets/"
+      - "/-/media/"
+    external_document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx", ".zip"]
+    strip_document_query: true
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    backoff_base_seconds: 0.5
+    backoff_jitter_seconds: 0.25
+    max_total_records: 50000
+    pages:
+      building_facilities_codes:
+        # 20 documents measured 25 Aug 2026 on the COPIF page alone.
+        read_payload_documents: true
+        path_prefixes:
+          - "/regulations-and-licensing-listing/code-of-practice-for-info-communication-facilities-in-buildings"
+          - "/regulations-and-licensing-listing/code-of-practice-for-internal-telecom-wiring"
+          - "/regulations-and-licensing-listing/interconnection-and-access/imdas-requirements-to-be-included-in-land-use-proposal-submissions-to-ura"
+        emit_page_records: true
+        max_pages: 40
+
+# ============================================================================
+# SSO - Singapore Statutes Online (construction legislation subset)
+# ----------------------------------------------------------------------------
+# Scope: sources/sg-sso/scope.yaml.
+#
+# The primary law our codes are written under. Twelve Acts, each verified to
+# answer 200 on 25 Aug 2026, fetched as a named list rather than discovered:
+# the statute book is thousands of instruments and almost none of it is about
+# building, so precision beats volume here.
+#
+# Two cautions, recorded because they should govern any change to this block.
+#
+# 1. Rate limits are real. A path that answers 200 answers 403 minutes later
+#    under load, then recovers. That is why request_delay_seconds is 4.0 here
+#    against 0.5 everywhere else, max_depth is 0 so nothing is followed, and
+#    the row is a list of twelve rather than a crawl. Do not "optimise" this.
+#
+# 2. robots.txt itself returns 403, so AGC's stated crawl policy cannot be
+#    read. This block is written to be defensible without it - a dozen slow
+#    requests a day for public legislation - but if the collection is ever
+#    widened, ask AGC first rather than inferring consent from silence.
+#
+# Subsidiary legislation is deliberately not collected yet; see the module
+# docstring and the scope spec.
+# ============================================================================
+  sso:
+    label: "Singapore Statutes Online"
+    schedule:
+      # DISABLED, and not to be re-enabled by changing the user agent.
+      #
+      # Statutes Online refuses this crawler by identity: with our user agent
+      # every Act returns 403, and with a browser user agent the same URL
+      # returns 200 (measured 26 Aug 2026). robots.txt also returns 403, so
+      # there is no published policy to read either way. Between those two
+      # facts, the site is declining automated clients, and the only way past
+      # it would be to present the crawler as a browser - defeating an access
+      # control rather than honouring it. We do not do that.
+      #
+      # The rows below are kept, verified and ready so that the day AGC says
+      # yes - or publishes an API - this is a one-line change. Until then it
+      # stays off. See sources/sg-sso/scope.yaml `open_questions`.
+      enabled: false
+      interval_days: 7
+    base_url: "https://sso.agc.gov.sg"
+    content_element_id: null
+    document_hosts:
+      - "sso.agc.gov.sg"
+    document_extensions: [".pdf", ".doc", ".docx"]
+    strip_document_query: true
+    # Twenty seconds, not 0.5. Measured 25 Aug 2026: twelve requests at four
+    # second spacing tripped the limiter and the next ten came back 403, while
+    # a single request minutes later answered 200. The limiter counts a burst,
+    # so the delay has to be long enough that a dozen requests do not look like
+    # one. See caution 1 above.
+    request_delay_seconds: 20.0
+    request_jitter_seconds: 6.0
+    backoff_base_seconds: 5.0
+    backoff_jitter_seconds: 2.0
+    max_total_records: 50000
+    pages:
+      construction_legislation:
+        engine: spider
+        # Verified 200 on 25 Aug 2026, all twelve.
+        start_urls:
+          - "https://sso.agc.gov.sg/Act/BCA1989"    # Building Control Act
+          - "https://sso.agc.gov.sg/Act/WSHA2006"   # Workplace Safety and Health Act
+          - "https://sso.agc.gov.sg/Act/FSA1993"    # Fire Safety Act
+          - "https://sso.agc.gov.sg/Act/PA1998"     # Planning Act
+          - "https://sso.agc.gov.sg/Act/SDA1999"    # Sewerage and Drainage Act
+          - "https://sso.agc.gov.sg/Act/EPMA1999"   # Environmental Protection and Management Act
+          - "https://sso.agc.gov.sg/Act/BMSMA2004"  # Building Maintenance and Strata Management Act
+          - "https://sso.agc.gov.sg/Act/PTA2005"    # Parks and Trees Act
+          - "https://sso.agc.gov.sg/Act/SWA1995"    # Street Works Act
+          - "https://sso.agc.gov.sg/Act/LAA1966"    # Land Acquisition Act
+          - "https://sso.agc.gov.sg/Act/ECA2012"    # Energy Conservation Act
+          - "https://sso.agc.gov.sg/Act/EPHA1987"   # Environmental Public Health Act
+        allowed_path_prefixes:
+          - "/Act/"
+        # Zero: fetch exactly what is listed and follow nothing. An Act page
+        # links to its whole amendment history and to every other Act it
+        # references, so any depth above zero walks the statute book.
+        max_depth: 0
+        max_pages: 20
+        emit_page_records: true

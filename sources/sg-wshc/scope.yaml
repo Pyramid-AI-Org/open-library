@@ -1,0 +1,98 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Workplace Safety and Health Council
+# =============================================================================
+# Hong Kong counterpart: Labour Department (occupational safety material)
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: wshc
+label: "Workplace Safety and Health Council"
+base_url: "https://www.tal.sg"
+hk_equivalent: "Labour Department (LD) - occupational safety and health sets"
+mandate: >
+  The Council issues the Approved Codes of Practice and WSH Guidelines that
+  a worksite is actually held to under the Workplace Safety and Health Act.
+  MOM, already in the library, publishes the legislation and the circulars;
+  the Council publishes the practice standards beneath them. Collecting one
+  without the other leaves the shelf half full.
+surveyed_on: "2026-08-25"
+surveyed_by: "claude"
+harvested_on: "2026-08-25"
+
+platform_notes: >
+  Sitecore, served from the Tripartite Alliance host. wshc.sg 301-redirects to
+  www.tal.sg/wshc, so the old hostname is not the one to configure.
+
+  Discovery is a single request. GetJsonWshcResourceList returns all 1,688
+  resources with the Council's own two-level taxonomy attached, which is why
+  the scope below is written in those categories rather than URL prefixes: it
+  can be argued about in the publisher's own terms. Documents sit one hop
+  further, on each resource's detail page, under /wshc/-/media/.
+
+crawlers:
+  - name: codes_and_guidelines
+    module: crawlers/wshc/codes_and_guidelines.py
+    engine: json_index
+    intent: [section_documents, page_text]
+    categories:
+      - "Codes of Practice"
+      - "WSH Guidelines"
+      - "Guides and Handbooks"
+      - "WSH Advisory"
+      - "Technical Advisories"
+    expected:
+      index_entries: 134
+      measured: true          # 25 Aug 2026 live run
+      records: 268
+      documents: 134
+    rationale: >
+      The standards themselves. This is the row that earns the source its
+      place: an Approved Code of Practice is the document a project is
+      audited against.
+
+  - name: advisories_and_alerts
+    module: crawlers/wshc/advisories_and_alerts.py
+    engine: json_index
+    intent: [section_documents, page_text]
+    categories: ["WSH Alerts", "WSH Lessons"]
+    expected:
+      index_entries: 230
+      measured: true
+      records: 460
+    rationale: >
+      Incident-driven notices naming the failure mode and the control that was
+      expected. Read next to the codes, they are how a requirement gets
+      explained, and they are the closest Singapore equivalent to the Hong
+      Kong incident bulletins.
+
+  - name: practical_guidance
+    module: crawlers/wshc/practical_guidance.py
+    engine: json_index
+    intent: [section_documents, page_text]
+    categories: ["Checklists and Articles", "Case studies", "Resource Kits"]
+    expected:
+      index_entries: 171
+      measured: true
+      records: 341
+    rationale: >
+      The applied layer beneath the codes - what a supervisor is handed rather
+      than what the regulation says.
+
+excluded:
+  - what: "Posters, presentation slides, pictograms, banners, cards, flyers, training slides"
+    count: 864
+    reason: >
+      Communication material, not reference material. Same judgement that
+      keeps HKSAR press releases out of the Hong Kong set: a poster restates a
+      requirement that is already collected in the code it came from.
+  - what: "WSH Bulletins and WSH Insights"
+    count: 268
+    reason: >
+      Newsletters. They report on the standards rather than setting them. This
+      is the borderline call in this source - if the library later wants a
+      news layer, these are where it starts.
+  - what: "Event resources, e-learning, videos"
+    reason: "Scheduling and delivery material with no standing reference value."
