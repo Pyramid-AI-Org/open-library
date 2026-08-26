@@ -464,6 +464,14 @@ crawlers:
         page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/code.html"
         pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
 
+      licensing_food_premises:
+        # FSD Fire Safety Requirements for Licensed/Registered Food Premises
+        # (restaurants, factory canteens, food factories/bakeries, karaoke,
+        # cold stores) crawler. Current documents only by default.
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_food.html"
+        pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
+        include_previous_revisions: false
+
   # ============================================================================
   # LABOUR - Labour Department
   # ============================================================================
