@@ -108,8 +108,14 @@ class JsonIndexSectionCrawler(IsomerSectionCrawler):
         url_field = str(cfg.get("url_field", "url"))
         date_field = str(cfg.get("date_field", "") or "")
         category_field = str(cfg.get("category_field", "") or "")
-        include = {str(c).strip().lower() for c in _as_list(cfg.get("include_categories"))}
-        exclude = {str(c).strip().lower() for c in _as_list(cfg.get("exclude_categories"))}
+        include = {
+            str(c).strip().lower()
+            for c in _as_list(cfg.get("include_categories"))
+        }
+        exclude = {
+            str(c).strip().lower()
+            for c in _as_list(cfg.get("exclude_categories"))
+        }
 
         entries: list[SitemapEntry] = []
         seen: set[str] = set()
