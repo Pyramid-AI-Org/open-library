@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 77773,
-    "records_total": 77773,
+    "lines_total": 77840,
+    "records_total": 77840,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
       "epd.publications_other_reports": 3,
@@ -64,6 +64,7 @@
       "herbarium": 3348,
       "checklist": 8,
       "circular_letters": 143,
+      "licensing_food_premises": 67,
       "technical_guidance": 3,
       "notices": 7,
       "code_of_practice": 1,
@@ -8031,6 +8032,132 @@
         "count": 143
       }
     },
+    "licensing_food_premises": {
+      "records": 67,
+      "unique_urls": 67,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 0,
+        "warnings": 1,
+        "by_kind": {
+          "meta_value_outlier": 1
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 67,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 67
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "section"
+          ],
+          "count": 67
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_food.html",
+            "count": 67
+          }
+        ],
+        "section": [
+          {
+            "value": "Restaurant",
+            "count": 27
+          },
+          {
+            "value": "Other Requirements for Food Premises",
+            "count": 16
+          },
+          {
+            "value": "Food Factory / Bakery",
+            "count": 10
+          },
+          {
+            "value": "Factory Canteen",
+            "count": 7
+          },
+          {
+            "value": "Important Advice",
+            "count": 3
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "discovered_from",
+          67
+        ],
+        [
+          "section",
+          67
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.hkfsd.gov.hk",
+          67
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          67
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-26T00:00:00+00:00",
+        "max": "2026-08-26T00:00:00+00:00",
+        "count": 67
+      }
+    },
     "technical_guidance": {
       "records": 3,
       "unique_urls": 3,
@@ -13238,17 +13365,17 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1398,
-      "mean": 527.4304192971854,
-      "p50": 400,
+      "mean": 527.3192317574512,
+      "p50": 400.0,
       "p95": 985.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 1700,
+        "warning": 1701,
         "error": 3370
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 1696,
+        "warning:meta_value_outlier": 1697,
         "error:missing_required_field": 3370,
         "warning:meta_type_outlier": 4
       }

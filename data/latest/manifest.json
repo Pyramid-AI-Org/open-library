@@ -1,23 +1,23 @@
 {
-  "generated_at_utc": "2026-08-25T06:35:43.608632+00:00",
+  "generated_at_utc": "2026-08-26T03:01:51.185523+00:00",
   "outputs": [
     {
-      "bytes": 42408226,
+      "bytes": 42434978,
       "path": "data-worktree/data/latest/urls.jsonl",
-      "rows": 77773,
-      "sha256": "d82a7462609f7aeae6aa70538d1dfdadc653085c3c06ffca66b07806c2677c82"
+      "rows": 77840,
+      "sha256": "262283f4799bf39a0ece2a2d5128f836080f186d191231f643c7927b0d8787a3"
     },
     {
-      "bytes": 36145,
+      "bytes": 4051,
       "path": "data-worktree/data/latest/summary.json",
-      "sha256": "3db628f5b2c26b01b6783f26b0bcc2b7fbb368bdffbc5234331341a3825ccada"
+      "sha256": "f52dec61920eaf2f1d3902d757753f1888053d85edf1ef20e9018e23e7758336"
     },
     {
-      "bytes": 20373,
+      "bytes": 20464,
       "path": "data-worktree/data/latest/crawler_state.json",
-      "sha256": "a04b5196bf07d416b6aa31f0f51324c861f8b659f49f800f1f52ad6dde2c52dc"
+      "sha256": "7599b5d1d161210686edb44f62b8254006a3215317e230dd3ecec01d563fceae"
     }
   ],
-  "run_date_utc": "2026-08-25",
+  "run_date_utc": "2026-08-26",
   "schema_version": 2
 }

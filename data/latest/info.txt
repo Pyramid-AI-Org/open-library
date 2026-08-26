@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 77773 (parse_errors=0)
+Total records: 77840 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.3%)
@@ -73,6 +73,7 @@ Records by source:
 - laco_circular_memorandum: 47 (0.1%)
 - lao_practice_notes: 101 (0.1%)
 - licensed_plumbers: 8 (0.0%)
+- licensing_food_premises: 67 (0.1%)
 - maintenance_of_internal_plumbing: 15 (0.0%)
 - mechanical_electrical_ss: 125 (0.2%)
 - miscellaneous: 6 (0.0%)
@@ -1823,6 +1824,34 @@ Per-source schema and validation summary:
   - category: Administration (13), Application of Water Supply (12), Hong Kong Waterworks Standard Requirements (5)
   - pdf_no: 3/2006 (1), 5/1996 (1), 3/2010 (1)
 
+[licensing_food_premises]
+- records: 67 | unique_urls: 67 | dup_url_hits: 0
+- issues: errors=0 warnings=1
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=67 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=0 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-08-26T00:00:00+00:00 .. 2026-08-26T00:00:00+00:00
+- top url hosts:
+  - www.hkfsd.gov.hk: 67
+- top url extensions:
+  - .pdf: 67
+- top-level key signatures (urls.jsonl record format):
+  - count=67 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=67 meta_keys=['discovered_from', 'section']
+- meta schema variants: 1
+- most common meta keys:
+  - discovered_from: 67
+  - section: 67
+- top scalar meta values (sample):
+  - discovered_from: https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_food.html (67)
+  - section: Restaurant (27), Other Requirements for Food Premises (16), Food Factory / Bakery (10)
+
 [technical_guidance]
 - records: 3 | unique_urls: 3 | dup_url_hits: 0
 - issues: errors=0 warnings=0
@@ -3068,11 +3097,11 @@ Per-source schema and validation summary:
   - discovered_from: https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbin... (1)
 
 General stats:
-- record JSON size (bytes): min=204 p50=400 mean=527.4 p95=985.0 max=1398
+- record JSON size (bytes): min=204 p50=400.0 mean=527.3 p95=985.0 max=1398
 
 Unusual records / issues:
 - error:missing_required_field: 3370
-- warning:meta_value_outlier: 1696
+- warning:meta_value_outlier: 1697
 - warning:meta_type_outlier: 4
 
 Examples (first 50):
