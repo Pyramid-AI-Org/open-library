@@ -98,6 +98,30 @@ kept fully separate end to end:
 | DEVB | Ministry of National Development | `mnd` | 0 | 0 | Disabled — robots.txt bot challenge |
 | CEDD | split across LTA / JTC / PUB | — | — | — | Covered by the three sources above |
 
+### Singapore - construction sources beyond the department mapping
+
+Five sources added 25-26 August 2026. The first four are live; the fifth is
+built but disabled, and the reason matters more than the row count.
+
+| Source | source | Records | Documents | Status |
+| --- | --- | ---: | ---: | --- |
+| Workplace Safety and Health Council | `wshc` | 1,069 | ~535 | Harvested - Approved Codes of Practice, WSH Guidelines, advisories, alerts |
+| Civil Aviation Authority | `caas` | 120 | 34 | Harvested - obstacle height control, aerodrome safeguarding |
+| IMDA (buildings subset) | `imda` | 24 | 20 | Harvested - COPIF and internal telecom wiring |
+| CORENET X | `corenet` | 18 | 9 | Harvested - CORENET X Code of Practice and submission process |
+| Singapore Statutes Online | `sso` | 0 | 0 | **Disabled** - the site refuses this crawler by user agent (403 for us, 200 for a browser) and its robots.txt also returns 403. Rows are verified and ready for the day AGC permits collection; we do not disguise the crawler to get past a block. See [sources/sg-sso/scope.yaml](sources/sg-sso/scope.yaml) |
+
+Two notes on scope, both recorded in the scope specs rather than left implicit:
+
+- **WSHC** excludes 864 collateral items (posters, slides, pictograms, banners)
+  and 268 newsletters, on the same judgement that keeps press releases out of
+  the Hong Kong set. The 535 kept are the standards and the guidance beneath
+  them.
+- **CORENET X** turned out to be smaller than its page titles suggest. Its
+  "codes and regulations" page is a directory of links to seven agencies -
+  BCA, URA, SCDF, PUB, NParks, NEA, LTA - each already a first-class source
+  here. The unique material is the Code of Practice, not a codes library.
+
 Totals as of the 24 August 2026 run: **9,392 records, 6,903 documents**.
 EMA and HDB are recorded as blocked rather than worked around; both were
 reachable during the 21 August survey, so the nightly run retries them.

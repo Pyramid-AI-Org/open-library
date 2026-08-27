@@ -1,0 +1,89 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - CORENET X
+# =============================================================================
+# Hong Kong counterpart: none directly; the submission-process layer
+# =============================================================================
+
+spec_version: 1
+status: review
+jurisdiction: SG
+source_id: corenet
+label: "CORENET X"
+base_url: "https://info.corenet.gov.sg"
+hk_equivalent: "none - submission process and code of practice"
+mandate: >
+  CORENET X is the portal every regulatory submission passes through. Its Code
+  of Practice states how a submission must be prepared and what the model has
+  to contain, so it governs the form of nearly everything else the library
+  holds.
+
+  A correction worth recording, because it was the reason this source was
+  ranked highest before it was measured: the "codes and regulations" page is
+  not a codes library. It is a directory of links to seven agencies - BCA, URA,
+  SCDF, PUB, NParks, NEA, LTA - all of which the library already crawls
+  directly. The unique material here is the Code of Practice and the process
+  documentation, and that is a much smaller set than the page title suggests.
+  Measured: 18 records, against an estimate of 150-250.
+surveyed_on: "2026-08-25"
+surveyed_by: "claude"
+harvested_on: "2026-08-25"
+
+platform_notes: >
+  Sitefinity. Documents are served from /docs/default-source/ and the content
+  container is id="content", not the "main-content" the Isomer sources use.
+  /sitemap.xml returns the application shell rather than a sitemap, so
+  discovery is a bounded spider over server-rendered section pages. The
+  by-regulatory-agencies and by-key-gateways tabs are JS-driven and hold no
+  documents of their own, so they are not seeded.
+
+crawlers:
+  - name: code_of_practice
+    module: crawlers/corenet/code_of_practice.py
+    engine: spider
+    intent: [section_documents, page_text]
+    expected:
+      measured: true          # 25 Aug 2026 live run
+      records: 10
+      documents: 9
+    rationale: >
+      The CORENET X Code of Practice and its edition-by-edition summaries of
+      changes. The single most valuable thing on this source.
+
+  - name: submission_process
+    module: crawlers/corenet/submission_process.py
+    engine: spider
+    intent: [page_text]
+    expected:
+      measured: true
+      records: 6
+      documents: 0
+    rationale: >
+      The 3-Gateway process, Direct Submission Process, workflows and the
+      routes for conservation, external works, Part-ST and infrastructure.
+      Web text with no attachments - that is the correct result here, not an
+      under-collection.
+
+  - name: resources
+    module: crawlers/corenet/resources.py
+    engine: spider
+    intent: [section_documents, page_text]
+    expected:
+      measured: partial
+      records: 2
+    rationale: >
+      Circulars and project references.
+    known_limit: >
+      The circulars listing renders client-side, so this collects the
+      circulars reachable from content pages and not a guaranteed-complete
+      circular series. Recorded rather than papered over; closing it needs the
+      same payload recon that EMA and Parliament needed.
+
+excluded:
+  - what: "Events and past events"
+    reason: "Scheduling notices, not reference material."
+  - what: "The agency links on /resources/codes-and-regulations"
+    reason: >
+      They point at BCA, URA, SCDF, PUB, NParks, NEA and LTA, which are
+      already first-class sources in this library. Following them would
+      duplicate records under the wrong agency.

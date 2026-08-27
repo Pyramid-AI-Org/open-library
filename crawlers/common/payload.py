@@ -62,6 +62,7 @@ from crawlers.base import (
     UrlRecord,
     canonicalize_url,
     clean_text,
+    compute_backoff_seconds,
     get_with_retries,
     normalize_publish_date,
     path_ext,
@@ -458,6 +459,11 @@ class FlightPayloadCrawler(_PayloadCrawlerBase):
 # --------------------------------------------------------------------------
 
 
+# Statuses a bot-mitigation layer uses to answer with a challenge rather than
+# the resource. They are not errors, so nothing raises on them by default.
+_CHALLENGE_STATUSES = (202, 429, 503)
+
+
 class ServerActionCrawler(_PayloadCrawlerBase):
     """Fetch a whole collection through a Next.js server action.
 
@@ -501,6 +507,8 @@ class ServerActionCrawler(_PayloadCrawlerBase):
         items: list[dict] = []
         expected: int | None = None
         offset = 0
+        attempt = 0
+        max_retries = int(http.get("max_retries", 3) or 3)
 
         while True:
             form: dict[str, str] = {
@@ -533,10 +541,43 @@ class ServerActionCrawler(_PayloadCrawlerBase):
                     "almost certainly stale after a site deploy - re-capture it. "
                     "Refusing to report an empty collection." % self.name
                 )
+            # A bot-mitigation challenge answers 202 with an empty body. That is
+            # a success status, so raise_for_status lets it through, and the
+            # body then reads as "no collection" - indistinguishable from a
+            # section that is genuinely empty. Retrying is the right response to
+            # a challenge; giving up quietly is not.
+            if response.status_code in _CHALLENGE_STATUSES:
+                if attempt < max_retries:
+                    attempt += 1
+                    sleep_seconds(
+                        compute_backoff_seconds(
+                            attempt,
+                            base=float(cfg.get("backoff_base_seconds", 0.5)),
+                            jitter=float(cfg.get("backoff_jitter_seconds", 0.25)),
+                        )
+                    )
+                    continue
+                raise requests.HTTPError(
+                    "[%s] %d still returned for %s after %d retries. This is a "
+                    "bot-mitigation challenge, not an empty collection."
+                    % (self.name, response.status_code, start_url, max_retries),
+                    response=response,
+                )
             response.raise_for_status()
 
             collection = first_collection(response.text)
             if not isinstance(collection, dict):
+                # The body carried no collection at all. On the first page that
+                # is a failed read, not an empty section: report it rather than
+                # returning a lone page record that would overwrite a good
+                # snapshot with nothing.
+                if not items:
+                    raise RuntimeError(
+                        "[%s] no collection in the first server-action response "
+                        "for %s. The action_id may be stale, or a challenge "
+                        "answered instead of the app. Refusing to report an "
+                        "empty collection." % (self.name, start_url)
+                    )
                 break
 
             batch = collection.get("data") or []

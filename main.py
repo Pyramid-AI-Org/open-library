@@ -101,6 +101,24 @@ def _record_key(rec: dict[str, Any]) -> tuple[str, str] | None:
     return s, u
 
 
+# A run that returns this fraction or less of the previous snapshot is treated
+# as a failure rather than an emptied section. Two thirds is deliberately loose:
+# sites do genuinely retire material, and the point is to catch a collapse to
+# near-nothing, not to freeze the collection against ordinary change.
+COLLAPSE_RATIO = 0.34
+
+# Below this, proportion means little - a four-record section dropping to one is
+# not evidence of anything.
+COLLAPSE_MIN_PRIOR = 10
+
+
+def _is_collapsed_result(new_count: int, prior_count: int) -> bool:
+    """Did this run lose most of what the source held last time?"""
+    if prior_count < COLLAPSE_MIN_PRIOR:
+        return False
+    return new_count <= prior_count * COLLAPSE_RATIO
+
+
 def _load_json_dict(path: Path) -> dict[str, Any]:
     if not path.exists():
         return {}
@@ -458,9 +476,23 @@ def main() -> int:
             )
             # Key by module_path: bare crawler names (e.g. "circulars") repeat
             # across sources and would silently overwrite each other here.
-            successful_records_by_source[module_path] = records
-            succeeded_crawlers.append(module_path)
-            print(f"  {module_path}: {len(records)} records")
+            prior_count = len(previous_records_by_source.get(module_path) or {})
+            if _is_collapsed_result(len(records), prior_count):
+                # A crawler that answers with a small fraction of what it held
+                # yesterday has almost certainly been blocked or had its route
+                # moved, not been emptied by the agency. Treat it as a failure
+                # so the carry-forward keeps the good snapshot: a bot challenge
+                # returns HTTP 200, so nothing else here will catch it.
+                failed_crawlers.append(module_path)
+                print(
+                    f"  {module_path}: {len(records)} records - COLLAPSED from "
+                    f"{prior_count}; keeping the previous snapshot. Investigate "
+                    f"before trusting this source again."
+                )
+            else:
+                successful_records_by_source[module_path] = records
+                succeeded_crawlers.append(module_path)
+                print(f"  {module_path}: {len(records)} records")
         except Exception as e:
             failed_crawlers.append(module_path)
             print(f"  {module_path}: ERROR - {e}")

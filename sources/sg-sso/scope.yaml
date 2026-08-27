@@ -1,0 +1,90 @@
+# =============================================================================
+# Open Library scope specification
+# Singapore - Singapore Statutes Online (construction subset)
+# =============================================================================
+# Hong Kong counterpart: none - primary legislation was never collected for HK
+# =============================================================================
+
+spec_version: 1
+status: blocked         # collection declined by the source; see `open_questions`
+jurisdiction: SG
+source_id: sso
+label: "Singapore Statutes Online"
+base_url: "https://sso.agc.gov.sg"
+hk_equivalent: "none - the law beneath every code already collected"
+mandate: >
+  Every code, circular and guideline in this library is written under an Act.
+  Until now those Acts appeared only as external references, recorded when some
+  other agency happened to link to one. This source collects the law itself, so
+  a reader can get from a requirement to its statutory basis without leaving
+  the library.
+surveyed_on: "2026-08-25"
+surveyed_by: "claude"
+harvested_on: "2026-08-25"
+
+platform_notes: >
+  Full law text is server-rendered - roughly 450 KB of HTML per Act - so there
+  is no payload or API to find. The difficulty is entirely rate limiting.
+
+  Rate limiting is real - twelve requests at four-second spacing tripped it,
+  and the following ten returned 403 while a single request minutes later
+  answered 200 - so the row is paced at twenty seconds, weekly.
+
+  But pacing is not the blocker. Measured 26 Aug 2026: with this crawler's user
+  agent every Act returns 403, and with a browser user agent the same URL
+  returns 200. The refusal is by client identity, not by rate. Together with a
+  robots.txt that also returns 403, the site is declining automated clients and
+  publishing no policy that would say otherwise.
+
+  The source is therefore disabled rather than made to work. Presenting the
+  crawler as a browser would defeat an access control instead of honouring it,
+  and no amount of politeness elsewhere in the config makes that acceptable.
+
+crawlers:
+  - name: construction_legislation
+    module: crawlers/sso/construction_legislation.py
+    engine: spider
+    intent: [page_text]
+    acts:
+      - { code: BCA1989,   title: "Building Control Act" }
+      - { code: WSHA2006,  title: "Workplace Safety and Health Act" }
+      - { code: FSA1993,   title: "Fire Safety Act" }
+      - { code: PA1998,    title: "Planning Act" }
+      - { code: SDA1999,   title: "Sewerage and Drainage Act" }
+      - { code: EPMA1999,  title: "Environmental Protection and Management Act" }
+      - { code: BMSMA2004, title: "Building Maintenance and Strata Management Act" }
+      - { code: PTA2005,   title: "Parks and Trees Act" }
+      - { code: SWA1995,   title: "Street Works Act" }
+      - { code: LAA1966,   title: "Land Acquisition Act" }
+      - { code: ECA2012,   title: "Energy Conservation Act" }
+      - { code: EPHA1987,  title: "Environmental Public Health Act" }
+    expected:
+      acts_listed: 12
+      measured: false         # blocked before any record was collected
+    rationale: >
+      A named list, not a crawl. The statute book is thousands of instruments
+      and almost none of it concerns how a building is built, so naming twelve
+      Acts buys precision and costs a dozen slow requests a week. max_depth is
+      zero because an Act page links to its entire amendment history and to
+      every Act it cites - any depth above zero walks the statute book.
+
+excluded:
+  - what: "Subsidiary legislation under each Act"
+    reason: >
+      Deliberately deferred, not overlooked. Each Act carries its own
+      regulations, and pulling them in multiplies the request count against a
+      source that has already shown it will push back. This is the obvious
+      next increment once the twelve Acts have run cleanly for a while.
+  - what: "The rest of the statute book"
+    reason: "Not construction. Precision over volume."
+
+open_questions:
+  - question: "Is automated collection acceptable to AGC?"
+    detail: >
+      robots.txt returns 403, so AGC's stated crawl policy cannot be read and
+      consent cannot be inferred from it either way. This row is written to be
+      defensible without it - a dozen slow requests a week for public
+      legislation, no subsidiary walk - but it is a judgement, not a
+      permission. Ask AGC before widening the scope, and treat a request to
+      stop as decisive.
+    owner: "product / legal"
