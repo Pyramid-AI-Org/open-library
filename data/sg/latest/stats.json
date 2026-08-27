@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/sg/latest/urls.jsonl",
   "totals": {
-    "lines_total": 8704,
-    "records_total": 8704,
+    "lines_total": 9905,
+    "records_total": 9905,
     "records_by_source": {
       "scdf.acts_codes_and_regulations": 289,
       "scdf.fire_code": 152,
@@ -11,12 +11,17 @@
       "nparks.cuge_standards": 25,
       "ura.development_control": 342,
       "bca.circulars": 403,
-      "ura.master_plan": 184,
+      "ura.master_plan": 177,
       "ura.conservation": 150,
       "bca.safety_and_standards": 471,
       "bca.sustainability_legislation": 72,
+      "corenet.code_of_practice": 10,
       "lta.active_mobility": 7,
+      "corenet.submission_process": 6,
+      "corenet.resources": 2,
       "lta.development_construction_resources": 13,
+      "caas.airport_and_aerodrome": 32,
+      "caas.obstacle_height_control": 7,
       "bca.guidebooks_and_publications": 52,
       "bca.accessibility_and_universal_design": 12,
       "sla.circulars": 333,
@@ -26,7 +31,8 @@
       "mom.wsh_legislation": 32,
       "nea.legislation": 90,
       "sla.legislation": 15,
-      "nea.pollution_control": 139,
+      "nea.pollution_control": 140,
+      "caas.legislation": 81,
       "ema.licences": 495,
       "ema.regulatory_publications": 16,
       "ema.circulars": 29,
@@ -36,13 +42,13 @@
       "ema.industry_reports": 11,
       "ema.statistics": 20,
       "jtc.development_and_renovation": 23,
-      "jtc.tenancy_requirements": 48,
+      "jtc.tenancy_requirements": 49,
       "lta.railway_protection": 22,
       "lta.street_works": 42,
       "lta.transport_infrastructure_standards": 19,
       "lta.vehicle_parking": 3,
       "nea.circulars": 123,
-      "nea.practices_and_guidelines": 49,
+      "nea.practices_and_guidelines": 48,
       "nea.publications": 49,
       "nea.development_control": 29,
       "nparks.learn": 129,
@@ -62,6 +68,9 @@
       "sgdi.ministries": 350,
       "sgdi.statutory_boards": 687,
       "sgdi.organs_of_state": 82,
+      "wshc.practical_guidance": 341,
+      "wshc.advisories_and_alerts": 460,
+      "wshc.codes_and_guidelines": 268,
       "ura.circulars": 62
     },
     "parse_errors": 0
@@ -384,8 +393,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 289
       }
     },
@@ -694,8 +703,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 152
       }
     },
@@ -927,8 +936,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 102
       }
     },
@@ -1152,8 +1161,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 67
       }
     },
@@ -1285,8 +1294,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 25
       }
     },
@@ -1378,7 +1387,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 7
+          "count": 9
         },
         {
           "meta_keys": [
@@ -1387,7 +1396,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 4
+          "count": 2
         },
         {
           "meta_keys": [
@@ -1428,7 +1437,7 @@
         "declared_file_type": [
           {
             "value": "pdf",
-            "count": 180
+            "count": 182
           },
           {
             "value": "doc",
@@ -1557,11 +1566,11 @@
         ],
         [
           "declared_file_size",
-          186
+          188
         ],
         [
           "declared_file_type",
-          186
+          188
         ]
       ],
       "top_hosts": [
@@ -1593,8 +1602,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 342
       }
     },
@@ -1853,21 +1862,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 403
       }
     },
     "ura.master_plan": {
-      "records": 184,
-      "unique_urls": 184,
+      "records": 177,
+      "unique_urls": 177,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 85,
-        "warnings": 21,
+        "errors": 83,
+        "warnings": 20,
         "by_kind": {
-          "meta_value_outlier": 21,
-          "missing_required_field": 85
+          "meta_value_outlier": 20,
+          "missing_required_field": 83
         }
       },
       "required_field_null_missing_invalid": {
@@ -1888,7 +1897,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 99,
+          "null": 94,
           "invalid": 0
         },
         "source": {
@@ -1897,7 +1906,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 85,
+          "missing": 83,
           "null": 0,
           "invalid": 0
         }
@@ -1913,7 +1922,7 @@
             "source_id",
             "url"
           ],
-          "count": 184
+          "count": 177
         }
       ],
       "meta_schema_signatures": [
@@ -1927,7 +1936,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 97
+          "count": 92
         },
         {
           "meta_keys": [
@@ -1935,7 +1944,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 85
+          "count": 83
         },
         {
           "meta_keys": [
@@ -1969,7 +1978,7 @@
           },
           {
             "value": "https://www.ura.gov.sg/land-planning/master-plan/amendments-to-master-plan/20...",
-            "count": 4
+            "count": 3
           }
         ],
         "discovered_from_title": [
@@ -1979,7 +1988,7 @@
           },
           {
             "value": "Amendments to Master Plan 2025",
-            "count": 17
+            "count": 13
           },
           {
             "value": "&#x27;From Dreams to Rail-ity&#x27;",
@@ -1987,7 +1996,7 @@
           },
           {
             "value": "List of Gazetted Proposed Amendments to Master Plan 2025",
-            "count": 4
+            "count": 3
           },
           {
             "value": "A Cool City in a Warming World",
@@ -1997,11 +2006,11 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 97
+            "count": 92
           },
           {
             "value": "page",
-            "count": 85
+            "count": 83
           },
           {
             "value": "external_reference",
@@ -2026,8 +2035,8 @@
             "count": 5
           },
           {
-            "value": "2026-08-24T01:44:58.817Z",
-            "count": 5
+            "value": "2026-08-25T03:45:06.795Z",
+            "count": 4
           }
         ],
         "declared_file_size": [
@@ -2044,69 +2053,69 @@
             "count": 5
           },
           {
-            "value": "649.76 KB",
+            "value": "598.20 KB",
             "count": 3
           },
           {
-            "value": "598.20 KB",
-            "count": 3
+            "value": "804.99 KB",
+            "count": 2
           }
         ],
         "declared_file_type": [
           {
             "value": "pdf",
-            "count": 97
+            "count": 92
           }
         ],
         "file_ext": [
           {
             "value": "pdf",
-            "count": 97
+            "count": 92
           },
           {
             "value": "html",
-            "count": 85
+            "count": 83
           }
         ]
       },
       "top_meta_keys": [
         [
           "record_kind",
-          184
+          177
         ],
         [
           "sitemap_lastmod",
-          184
+          177
         ],
         [
           "file_ext",
-          182
+          175
         ],
         [
           "discovered_from",
-          99
+          94
         ],
         [
           "discovered_from_title",
-          99
+          94
         ],
         [
           "declared_file_size",
-          97
+          92
         ],
         [
           "declared_file_type",
-          97
+          92
         ]
       ],
       "top_hosts": [
         [
           "isomer-user-content.by.gov.sg",
-          97
+          92
         ],
         [
           "www.ura.gov.sg",
-          85
+          83
         ],
         [
           "go.gov.sg",
@@ -2116,17 +2125,17 @@
       "top_extensions": [
         [
           ".pdf",
-          97
+          92
         ],
         [
           "(no_ext)",
-          87
+          85
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
-        "count": 184
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 177
       }
     },
     "ura.conservation": {
@@ -2429,8 +2438,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 150
       }
     },
@@ -2794,8 +2803,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 471
       }
     },
@@ -3113,9 +3122,199 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 72
+      }
+    },
+    "corenet.code_of_practice": {
+      "records": 10,
+      "unique_urls": 10,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 1,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 1
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 10,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 1,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 10
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "discovered_from",
+            "discovered_from_title",
+            "fetch_url",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 9
+        },
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 1
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "crawl_depth": [
+          {
+            "value": "0",
+            "count": 10
+          }
+        ],
+        "discovered_from": [
+          {
+            "value": "https://info.corenet.gov.sg/regulatory-process/corenet-x-code-of-practice",
+            "count": 9
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "CORENET X Code of Practice",
+            "count": 9
+          }
+        ],
+        "fetch_url": [
+          {
+            "value": "https://info.corenet.gov.sg/docs/default-source/default-document-library/anne...",
+            "count": 1
+          },
+          {
+            "value": "https://info.corenet.gov.sg/docs/default-source/default-document-library/anne...",
+            "count": 1
+          },
+          {
+            "value": "https://info.corenet.gov.sg/docs/default-source/default-document-library/anne...",
+            "count": 1
+          },
+          {
+            "value": "https://info.corenet.gov.sg/docs/default-source/default-document-library/anne...",
+            "count": 1
+          },
+          {
+            "value": "https://info.corenet.gov.sg/docs/default-source/default-document-library/core...",
+            "count": 1
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "pdf",
+            "count": 9
+          },
+          {
+            "value": "html",
+            "count": 1
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 9
+          },
+          {
+            "value": "page",
+            "count": 1
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "crawl_depth",
+          10
+        ],
+        [
+          "file_ext",
+          10
+        ],
+        [
+          "record_kind",
+          10
+        ],
+        [
+          "discovered_from",
+          9
+        ],
+        [
+          "discovered_from_title",
+          9
+        ],
+        [
+          "fetch_url",
+          9
+        ]
+      ],
+      "top_hosts": [
+        [
+          "info.corenet.gov.sg",
+          10
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          9
+        ],
+        [
+          "(no_ext)",
+          1
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 10
       }
     },
     "lta.active_mobility": {
@@ -3321,9 +3520,263 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 7
+      }
+    },
+    "corenet.submission_process": {
+      "records": 6,
+      "unique_urls": 6,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 6,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 6
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 6,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 6,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 6
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 6
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "crawl_depth": [
+          {
+            "value": "1",
+            "count": 2
+          },
+          {
+            "value": "0",
+            "count": 2
+          },
+          {
+            "value": "2",
+            "count": 1
+          },
+          {
+            "value": "3",
+            "count": 1
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "html",
+            "count": 6
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "page",
+            "count": 6
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "crawl_depth",
+          6
+        ],
+        [
+          "file_ext",
+          6
+        ],
+        [
+          "record_kind",
+          6
+        ]
+      ],
+      "top_hosts": [
+        [
+          "info.corenet.gov.sg",
+          6
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          6
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 6
+      }
+    },
+    "corenet.resources": {
+      "records": 2,
+      "unique_urls": 2,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 2,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 2
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 2,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 2,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 2
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 2
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "crawl_depth": [
+          {
+            "value": "0",
+            "count": 2
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "html",
+            "count": 2
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "page",
+            "count": 2
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "crawl_depth",
+          2
+        ],
+        [
+          "file_ext",
+          2
+        ],
+        [
+          "record_kind",
+          2
+        ]
+      ],
+      "top_hosts": [
+        [
+          "info.corenet.gov.sg",
+          2
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          2
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 2
       }
     },
     "lta.development_construction_resources": {
@@ -3508,9 +3961,369 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 13
+      }
+    },
+    "caas.airport_and_aerodrome": {
+      "records": 32,
+      "unique_urls": 32,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 1,
+        "warnings": 2,
+        "by_kind": {
+          "missing_required_field": 1,
+          "meta_value_outlier": 2
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 31,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 1,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 32
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 31
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 1
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.caas.gov.sg/resources/regulatory-requirements-and-guidelines/airp...",
+            "count": 31
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "Airport and aerodrome",
+            "count": 31
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "pdf",
+            "count": 31
+          },
+          {
+            "value": "html",
+            "count": 1
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 31
+          },
+          {
+            "value": "page",
+            "count": 1
+          }
+        ],
+        "sitemap_lastmod": [
+          {
+            "value": "2026-05-12T08:34:41.105Z",
+            "count": 32
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_ext",
+          32
+        ],
+        [
+          "record_kind",
+          32
+        ],
+        [
+          "sitemap_lastmod",
+          32
+        ],
+        [
+          "discovered_from",
+          31
+        ],
+        [
+          "discovered_from_title",
+          31
+        ]
+      ],
+      "top_hosts": [
+        [
+          "isomer-user-content.by.gov.sg",
+          31
+        ],
+        [
+          "www.caas.gov.sg",
+          1
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          31
+        ],
+        [
+          "(no_ext)",
+          1
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 32
+      }
+    },
+    "caas.obstacle_height_control": {
+      "records": 7,
+      "unique_urls": 7,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 3,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 3
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 4,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 3,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 7
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 3
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 3
+        },
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 1
+        }
+      ],
+      "meta_schema_variants": 3,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.caas.gov.sg/industry/airports-and-aerodrome-safety/",
+            "count": 4
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "Airports and aerodrome safety",
+            "count": 4
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "pdf",
+            "count": 3
+          },
+          {
+            "value": "html",
+            "count": 3
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 3
+          },
+          {
+            "value": "page",
+            "count": 3
+          },
+          {
+            "value": "external_reference",
+            "count": 1
+          }
+        ],
+        "sitemap_lastmod": [
+          {
+            "value": "2026-05-16T14:43:38.828Z",
+            "count": 5
+          },
+          {
+            "value": "2026-07-30T18:02:05.807Z",
+            "count": 1
+          },
+          {
+            "value": "2026-05-07T13:36:05.248Z",
+            "count": 1
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "record_kind",
+          7
+        ],
+        [
+          "sitemap_lastmod",
+          7
+        ],
+        [
+          "file_ext",
+          6
+        ],
+        [
+          "discovered_from",
+          4
+        ],
+        [
+          "discovered_from_title",
+          4
+        ]
+      ],
+      "top_hosts": [
+        [
+          "isomer-user-content.by.gov.sg",
+          3
+        ],
+        [
+          "www.caas.gov.sg",
+          3
+        ],
+        [
+          "sso.agc.gov.sg",
+          1
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          4
+        ],
+        [
+          ".pdf",
+          3
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 7
       }
     },
     "bca.guidebooks_and_publications": {
@@ -3760,8 +4573,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 52
       }
     },
@@ -4001,8 +4814,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 12
       }
     },
@@ -4192,8 +5005,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 333
       }
     },
@@ -4383,8 +5196,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 17
       }
     },
@@ -4672,8 +5485,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 509
       }
     },
@@ -4844,8 +5657,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 153
       }
     },
@@ -5003,8 +5816,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 32
       }
     },
@@ -5236,8 +6049,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 90
       }
     },
@@ -5394,14 +6207,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 15
       }
     },
     "nea.pollution_control": {
-      "records": 139,
-      "unique_urls": 139,
+      "records": 140,
+      "unique_urls": 140,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 60,
@@ -5429,7 +6242,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 139,
+          "null": 140,
           "invalid": 0
         },
         "source": {
@@ -5454,7 +6267,7 @@
             "source_id",
             "url"
           ],
-          "count": 139
+          "count": 140
         }
       ],
       "meta_schema_signatures": [
@@ -5466,7 +6279,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 73
+          "count": 74
         },
         {
           "meta_keys": [
@@ -5494,7 +6307,7 @@
         "crawl_depth": [
           {
             "value": "2",
-            "count": 123
+            "count": 124
           },
           {
             "value": "1",
@@ -5573,12 +6386,12 @@
         ],
         "file_ext": [
           {
-            "value": "html",
+            "value": "pdf",
             "count": 60
           },
           {
-            "value": "pdf",
-            "count": 59
+            "value": "html",
+            "count": 60
           },
           {
             "value": "",
@@ -5596,7 +6409,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 71
+            "count": 72
           },
           {
             "value": "page",
@@ -5611,23 +6424,23 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          139
+          140
         ],
         [
           "file_ext",
-          139
+          140
         ],
         [
           "record_kind",
-          139
+          140
         ],
         [
           "discovered_from",
-          79
+          80
         ],
         [
           "discovered_from_title",
-          79
+          80
         ],
         [
           "fetch_url",
@@ -5637,7 +6450,7 @@
       "top_hosts": [
         [
           "www.nea.gov.sg",
-          131
+          132
         ],
         [
           "sso.agc.gov.sg",
@@ -5651,7 +6464,7 @@
         ],
         [
           ".pdf",
-          59
+          60
         ],
         [
           ".xlsx",
@@ -5663,9 +6476,216 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
-        "count": 139
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 140
+      }
+    },
+    "caas.legislation": {
+      "records": 81,
+      "unique_urls": 81,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 9,
+        "warnings": 3,
+        "by_kind": {
+          "meta_value_outlier": 3,
+          "missing_required_field": 9
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 72,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 9,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 81
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 72
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 9
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.caas.gov.sg/resources/legislation/air-navigation-act/",
+            "count": 41
+          },
+          {
+            "value": "https://www.caas.gov.sg/resources/legislation/civil-aviation-authority-of-sin...",
+            "count": 17
+          },
+          {
+            "value": "https://www.caas.gov.sg/resources/legislation/carriage-by-air-act/",
+            "count": 3
+          },
+          {
+            "value": "https://www.caas.gov.sg/resources/legislation/energy-conservation-act/",
+            "count": 3
+          },
+          {
+            "value": "https://www.caas.gov.sg/resources/legislation/tokyo-convention-act/",
+            "count": 3
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "Air Navigation Act 1966",
+            "count": 41
+          },
+          {
+            "value": "Civil Aviation Authority of Singapore Act 2009",
+            "count": 17
+          },
+          {
+            "value": "Carriage by Air Act 1988",
+            "count": 3
+          },
+          {
+            "value": "Energy Conservation Act 2012",
+            "count": 3
+          },
+          {
+            "value": "Tokyo Convention Act 1971",
+            "count": 3
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "external_reference",
+            "count": 72
+          },
+          {
+            "value": "page",
+            "count": 9
+          }
+        ],
+        "sitemap_lastmod": [
+          {
+            "value": "2026-04-22T06:39:50.489Z",
+            "count": 42
+          },
+          {
+            "value": "2026-04-22T06:39:53.732Z",
+            "count": 18
+          },
+          {
+            "value": "2026-05-13T08:33:48.055Z",
+            "count": 4
+          },
+          {
+            "value": "2026-04-22T06:39:54.965Z",
+            "count": 4
+          },
+          {
+            "value": "2026-04-22T06:39:58.315Z",
+            "count": 4
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "html",
+            "count": 9
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "record_kind",
+          81
+        ],
+        [
+          "sitemap_lastmod",
+          81
+        ],
+        [
+          "discovered_from",
+          72
+        ],
+        [
+          "discovered_from_title",
+          72
+        ],
+        [
+          "file_ext",
+          9
+        ]
+      ],
+      "top_hosts": [
+        [
+          "sso.agc.gov.sg",
+          72
+        ],
+        [
+          "www.caas.gov.sg",
+          9
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          81
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 81
       }
     },
     "ema.licences": {
@@ -5785,8 +6805,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 495
       }
     },
@@ -5906,8 +6926,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 16
       }
     },
@@ -6027,8 +7047,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 29
       }
     },
@@ -6164,8 +7184,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 25
       }
     },
@@ -6285,8 +7305,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 16
       }
     },
@@ -6406,8 +7426,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 29
       }
     },
@@ -6577,8 +7597,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 11
       }
     },
@@ -6768,8 +7788,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 20
       }
     },
@@ -6943,21 +7963,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 23
       }
     },
     "jtc.tenancy_requirements": {
-      "records": 48,
-      "unique_urls": 48,
+      "records": 49,
+      "unique_urls": 49,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 18,
-        "warnings": 2,
+        "warnings": 1,
         "by_kind": {
           "missing_required_field": 18,
-          "meta_value_outlier": 2
+          "meta_value_outlier": 1
         }
       },
       "required_field_null_missing_invalid": {
@@ -6978,7 +7998,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 48,
+          "null": 49,
           "invalid": 0
         },
         "source": {
@@ -7003,7 +8023,7 @@
             "source_id",
             "url"
           ],
-          "count": 48
+          "count": 49
         }
       ],
       "meta_schema_signatures": [
@@ -7015,7 +8035,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 30
+          "count": 31
         },
         {
           "meta_keys": [
@@ -7036,7 +8056,7 @@
           },
           {
             "value": "0",
-            "count": 1
+            "count": 2
           },
           {
             "value": "2",
@@ -7090,7 +8110,7 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 28
+            "count": 29
           },
           {
             "value": "html",
@@ -7104,7 +8124,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 30
+            "count": 31
           },
           {
             "value": "page",
@@ -7115,35 +8135,35 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          48
+          49
         ],
         [
           "file_ext",
-          48
+          49
         ],
         [
           "record_kind",
-          48
+          49
         ],
         [
           "discovered_from",
-          30
+          31
         ],
         [
           "discovered_from_title",
-          30
+          31
         ]
       ],
       "top_hosts": [
         [
           "www.jtc.gov.sg",
-          48
+          49
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          28
+          29
         ],
         [
           "(no_ext)",
@@ -7155,9 +8175,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
-        "count": 48
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 49
       }
     },
     "lta.railway_protection": {
@@ -7327,8 +8347,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 22
       }
     },
@@ -7555,8 +8575,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 42
       }
     },
@@ -7718,8 +8738,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 19
       }
     },
@@ -7881,8 +8901,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 3
       }
     },
@@ -8073,14 +9093,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 123
       }
     },
     "nea.practices_and_guidelines": {
-      "records": 49,
-      "unique_urls": 49,
+      "records": 48,
+      "unique_urls": 48,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 3,
@@ -8107,7 +9127,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 49,
+          "null": 48,
           "invalid": 0
         },
         "source": {
@@ -8132,7 +9152,7 @@
             "source_id",
             "url"
           ],
-          "count": 49
+          "count": 48
         }
       ],
       "meta_schema_signatures": [
@@ -8144,7 +9164,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 26
+          "count": 25
         },
         {
           "meta_keys": [
@@ -8184,7 +9204,7 @@
         "crawl_depth": [
           {
             "value": "0",
-            "count": 40
+            "count": 39
           },
           {
             "value": "1",
@@ -8194,7 +9214,7 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 44
+            "count": 43
           },
           {
             "value": "html",
@@ -8208,7 +9228,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 46
+            "count": 45
           },
           {
             "value": "page",
@@ -8218,7 +9238,7 @@
         "discovered_from": [
           {
             "value": "https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines",
-            "count": 39
+            "count": 38
           },
           {
             "value": "https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines...",
@@ -8228,7 +9248,7 @@
         "discovered_from_title": [
           {
             "value": "Guidelines",
-            "count": 39
+            "count": 38
           },
           {
             "value": "Practices",
@@ -8273,23 +9293,23 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          49
+          48
         ],
         [
           "file_ext",
-          49
+          48
         ],
         [
           "record_kind",
-          49
+          48
         ],
         [
           "discovered_from",
-          46
+          45
         ],
         [
           "discovered_from_title",
-          46
+          45
         ],
         [
           "fetch_url",
@@ -8307,13 +9327,13 @@
       "top_hosts": [
         [
           "www.nea.gov.sg",
-          49
+          48
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          44
+          43
         ],
         [
           "(no_ext)",
@@ -8325,9 +9345,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
-        "count": 49
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 48
       }
     },
     "nea.publications": {
@@ -8546,8 +9566,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 49
       }
     },
@@ -8746,8 +9766,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 29
       }
     },
@@ -8987,8 +10007,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 129
       }
     },
@@ -9220,8 +10240,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 120
       }
     },
@@ -9460,8 +10480,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 86
       }
     },
@@ -9639,8 +10659,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 113
       }
     },
@@ -9817,8 +10837,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 8
       }
     },
@@ -10429,8 +11449,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 88
       }
     },
@@ -10617,8 +11637,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 31
       }
     },
@@ -10738,8 +11758,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 1
       }
     },
@@ -10859,8 +11879,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 1
       }
     },
@@ -11173,8 +12193,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 62
       }
     },
@@ -11374,8 +12394,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 36
       }
     },
@@ -11504,8 +12524,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 350
       }
     },
@@ -11634,8 +12654,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 687
       }
     },
@@ -11764,9 +12784,684 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 82
+      }
+    },
+    "wshc.practical_guidance": {
+      "records": 341,
+      "unique_urls": 341,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 171,
+        "warnings": 7,
+        "by_kind": {
+          "meta_value_outlier": 7,
+          "missing_required_field": 171
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 170,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 171,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 341
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 171
+        },
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 170
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.tal.sg/wshc/resources/publications/checklists-and-articles/ckmbt-...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/publications/checklists-and-articles/manufa...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/publications/checklists-and-articles/manufa...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/publications/checklists-and-articles/woodwo...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/publications/checklists-and-articles/manufa...",
+            "count": 1
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "CKMbT International Pte Ltd Commitment to Workplace Safety and Health",
+            "count": 1
+          },
+          {
+            "value": "Manufacturing Sector – Amputations in Singapore",
+            "count": 1
+          },
+          {
+            "value": "Manufacturing Sector: Machinery Hazards in Food &amp; Beverage Manufacturing",
+            "count": 1
+          },
+          {
+            "value": "Woodworking Sector - Amputations in Woodworking",
+            "count": 1
+          },
+          {
+            "value": "Manufacturing Sector – Amputations in Metalworking",
+            "count": 1
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "html",
+            "count": 171
+          },
+          {
+            "value": "pdf",
+            "count": 130
+          },
+          {
+            "value": "zip",
+            "count": 33
+          },
+          {
+            "value": "xlsx",
+            "count": 6
+          },
+          {
+            "value": "pptx",
+            "count": 1
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "page",
+            "count": 171
+          },
+          {
+            "value": "document",
+            "count": 170
+          }
+        ],
+        "sitemap_lastmod": [
+          {
+            "value": "2021-01-08",
+            "count": 12
+          },
+          {
+            "value": "2013-09-06",
+            "count": 12
+          },
+          {
+            "value": "2024-03-27",
+            "count": 10
+          },
+          {
+            "value": "2023-09-07",
+            "count": 10
+          },
+          {
+            "value": "2023-02-03",
+            "count": 8
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_ext",
+          341
+        ],
+        [
+          "record_kind",
+          341
+        ],
+        [
+          "sitemap_lastmod",
+          341
+        ],
+        [
+          "discovered_from",
+          170
+        ],
+        [
+          "discovered_from_title",
+          170
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.tal.sg",
+          341
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          171
+        ],
+        [
+          ".pdf",
+          130
+        ],
+        [
+          ".zip",
+          33
+        ],
+        [
+          ".xlsx",
+          6
+        ],
+        [
+          ".pptx",
+          1
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 341
+      }
+    },
+    "wshc.advisories_and_alerts": {
+      "records": 460,
+      "unique_urls": 460,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 230,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 230
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 230,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 230,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 460
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 230
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 230
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-alerts/wsh-alert-accident-a...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-alerts/wsh-alert-accident-a...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-alerts/wsh-alert-accident-a...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-alerts/wsh-alert-accident-a...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-alerts/wsh-alert-accident-a...",
+            "count": 1
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "WSH Alert Accident Advisory 22 Jan 2016 Worker Killed by Fallen Metal Structure",
+            "count": 1
+          },
+          {
+            "value": "WSH Alert Accident Advisory 25 Jan 2016 Worker Struck by Pipe Connector",
+            "count": 1
+          },
+          {
+            "value": "WSH Alert Accident Advisory 25 Feb 2016 Driver Pinned Between Vehicle and Wall",
+            "count": 1
+          },
+          {
+            "value": "WSH Alert Accident Advisory 10 Mar 2016 Fatally Injured Worker Found in Waste...",
+            "count": 1
+          },
+          {
+            "value": "WSH Alert Accident Advisory 11 Mar 2016 Worker Fatally Injured from Fall",
+            "count": 1
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "pdf",
+            "count": 230
+          },
+          {
+            "value": "html",
+            "count": 230
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 230
+          },
+          {
+            "value": "page",
+            "count": 230
+          }
+        ],
+        "sitemap_lastmod": [
+          {
+            "value": "2018-07-26",
+            "count": 16
+          },
+          {
+            "value": "2016-04-29",
+            "count": 14
+          },
+          {
+            "value": "2016-04-22",
+            "count": 10
+          },
+          {
+            "value": "2018-02-26",
+            "count": 10
+          },
+          {
+            "value": "2021-05-19",
+            "count": 10
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_ext",
+          460
+        ],
+        [
+          "record_kind",
+          460
+        ],
+        [
+          "sitemap_lastmod",
+          460
+        ],
+        [
+          "discovered_from",
+          230
+        ],
+        [
+          "discovered_from_title",
+          230
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.tal.sg",
+          460
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          230
+        ],
+        [
+          "(no_ext)",
+          230
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 460
+      }
+    },
+    "wshc.codes_and_guidelines": {
+      "records": 268,
+      "unique_urls": 268,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 134,
+        "warnings": 5,
+        "by_kind": {
+          "meta_value_outlier": 5,
+          "missing_required_field": 134
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 134,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 134,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 268
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 134
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 134
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-advisory/wsh-advisory-25-ma...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-advisory/workplace-accident...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-advisory/wsh-advisory-for-f...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-advisory/wsh-advisory-on-ve...",
+            "count": 1
+          },
+          {
+            "value": "https://www.tal.sg/wshc/resources/newsletters/wsh-advisory/wsh-advisory-27-ja...",
+            "count": 1
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "WSH Advisory 25 March 2026 WSH Advisory for Fatal Accidents in Second Half of...",
+            "count": 1
+          },
+          {
+            "value": "Workplace Accidents Involving Compressed Gas Cylinders in 1H2025",
+            "count": 1
+          },
+          {
+            "value": "WSH Advisory for Fatal Accidents in First Half of 2025",
+            "count": 1
+          },
+          {
+            "value": "WSH Advisory on Vehicular-related Workplace Fatal Injuries in December 2025",
+            "count": 1
+          },
+          {
+            "value": "WSH Advisory 27 January 2026 Worker Pinned by Toppled Gate",
+            "count": 1
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "html",
+            "count": 134
+          },
+          {
+            "value": "pdf",
+            "count": 129
+          },
+          {
+            "value": "zip",
+            "count": 3
+          },
+          {
+            "value": "ppt",
+            "count": 2
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 134
+          },
+          {
+            "value": "page",
+            "count": 134
+          }
+        ],
+        "sitemap_lastmod": [
+          {
+            "value": "2024-03-27",
+            "count": 16
+          },
+          {
+            "value": "2025-09-30",
+            "count": 14
+          },
+          {
+            "value": "2024-10-09",
+            "count": 14
+          },
+          {
+            "value": "2025-03-27",
+            "count": 12
+          },
+          {
+            "value": "2022-09-13",
+            "count": 12
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_ext",
+          268
+        ],
+        [
+          "record_kind",
+          268
+        ],
+        [
+          "sitemap_lastmod",
+          268
+        ],
+        [
+          "discovered_from",
+          134
+        ],
+        [
+          "discovered_from_title",
+          134
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.tal.sg",
+          268
+        ]
+      ],
+      "top_extensions": [
+        [
+          "(no_ext)",
+          134
+        ],
+        [
+          ".pdf",
+          129
+        ],
+        [
+          ".zip",
+          3
+        ],
+        [
+          ".ppt",
+          2
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
+        "count": 268
       }
     },
     "ura.circulars": {
@@ -11934,8 +13629,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
+        "min": "2026-08-27T02:06:47.342013+00:00",
+        "max": "2026-08-27T02:06:47.342013+00:00",
         "count": 62
       }
     }
@@ -11944,18 +13639,18 @@
     "record_size_bytes": {
       "min": 254,
       "max": 1132,
-      "mean": 508.8915441176471,
-      "p50": 469.0,
-      "p95": 788.0
+      "mean": 511.9716304896517,
+      "p50": 472,
+      "p95": 777.7
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 376,
-        "error": 5531
+        "warning": 391,
+        "error": 6086
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 376,
-        "error:missing_required_field": 5036,
+        "warning:meta_value_outlier": 391,
+        "error:missing_required_field": 5591,
         "error:null_required_field": 495
       }
     },
@@ -12297,68 +13992,68 @@
         "detail": "rare value in source: external_reference"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.declared_file_type",
-        "line": 149,
-        "detail": "rare value in source: docx"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.submission_process",
+        "field": "meta.discovered_from",
+        "line": 79,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.file_ext",
-        "line": 193,
-        "detail": "rare value in source: xlsx"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.submission_process",
+        "field": "meta.discovered_from",
+        "line": 80,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.declared_file_type",
-        "line": 203,
-        "detail": "rare value in source: xls"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.submission_process",
+        "field": "meta.discovered_from",
+        "line": 81,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.file_ext",
-        "line": 203,
-        "detail": "rare value in source: xls"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.submission_process",
+        "field": "meta.discovered_from",
+        "line": 82,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.declared_file_type",
-        "line": 337,
-        "detail": "rare value in source: xlsx"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.code_of_practice",
+        "field": "meta.discovered_from",
+        "line": 83,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.file_ext",
-        "line": 337,
-        "detail": "rare value in source: xlsx"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.submission_process",
+        "field": "meta.discovered_from",
+        "line": 84,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.declared_file_type",
-        "line": 362,
-        "detail": "rare value in source: zip"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.submission_process",
+        "field": "meta.discovered_from",
+        "line": 85,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "bca.safety_and_standards",
-        "field": "meta.file_ext",
-        "line": 362,
-        "detail": "rare value in source: zip"
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.resources",
+        "field": "meta.discovered_from",
+        "line": 86,
+        "detail": "missing required field"
       }
     ]
   }
