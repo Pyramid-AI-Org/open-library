@@ -1,75 +1,76 @@
-Input: data-worktree/data/sg/latest/urls.jsonl
-Total records: 9905 (parse_errors=0)
+Input: C:\Users\nkcng\Documents\GitHub\ol-data-worktree\data\sg\latest\urls.jsonl
+Total records: 11320 (parse_errors=0)
 
 Records by source:
 - bca.accessibility_and_universal_design: 12 (0.1%)
-- bca.circulars: 403 (4.1%)
+- bca.circulars: 403 (3.6%)
 - bca.guidebooks_and_publications: 52 (0.5%)
-- bca.safety_and_standards: 471 (4.8%)
-- bca.sustainability_legislation: 72 (0.7%)
+- bca.safety_and_standards: 471 (4.2%)
+- bca.sustainability_legislation: 72 (0.6%)
 - caas.airport_and_aerodrome: 32 (0.3%)
-- caas.legislation: 81 (0.8%)
+- caas.legislation: 81 (0.7%)
 - caas.obstacle_height_control: 7 (0.1%)
 - corenet.code_of_practice: 10 (0.1%)
 - corenet.resources: 2 (0.0%)
 - corenet.submission_process: 6 (0.1%)
 - ema.circulars: 29 (0.3%)
-- ema.corporate_publications: 16 (0.2%)
+- ema.corporate_publications: 16 (0.1%)
 - ema.educational_materials: 29 (0.3%)
-- ema.forms: 25 (0.3%)
+- ema.forms: 25 (0.2%)
 - ema.industry_reports: 11 (0.1%)
-- ema.licences: 495 (5.0%)
-- ema.regulations: 67 (0.7%)
-- ema.regulatory_publications: 16 (0.2%)
+- ema.licences: 495 (4.4%)
+- ema.regulations: 67 (0.6%)
+- ema.regulatory_publications: 16 (0.1%)
 - ema.statistics: 20 (0.2%)
+- imda.building_facilities_codes: 24 (0.2%)
 - jtc.development_and_renovation: 23 (0.2%)
-- jtc.tenancy_requirements: 49 (0.5%)
+- jtc.tenancy_requirements: 49 (0.4%)
 - lta.active_mobility: 7 (0.1%)
 - lta.development_construction_resources: 13 (0.1%)
 - lta.railway_protection: 22 (0.2%)
 - lta.street_works: 42 (0.4%)
 - lta.transport_infrastructure_standards: 19 (0.2%)
 - lta.vehicle_parking: 3 (0.0%)
-- mom.workplace_safety_and_health: 509 (5.1%)
-- mom.wsh_circulars: 153 (1.5%)
+- mom.workplace_safety_and_health: 509 (4.5%)
+- mom.wsh_circulars: 153 (1.4%)
 - mom.wsh_legislation: 32 (0.3%)
-- nea.circulars: 123 (1.2%)
+- nea.circulars: 123 (1.1%)
 - nea.development_control: 29 (0.3%)
-- nea.legislation: 90 (0.9%)
-- nea.pollution_control: 140 (1.4%)
-- nea.practices_and_guidelines: 48 (0.5%)
-- nea.publications: 49 (0.5%)
-- nparks.cuge_standards: 25 (0.3%)
-- nparks.learn: 129 (1.3%)
-- nparks.nature: 120 (1.2%)
-- nparks.publications_resources: 113 (1.1%)
-- nparks.services: 86 (0.9%)
+- nea.legislation: 90 (0.8%)
+- nea.pollution_control: 140 (1.2%)
+- nea.practices_and_guidelines: 48 (0.4%)
+- nea.publications: 49 (0.4%)
+- nparks.cuge_standards: 25 (0.2%)
+- nparks.learn: 129 (1.1%)
+- nparks.nature: 120 (1.1%)
+- nparks.publications_resources: 113 (1.0%)
+- nparks.services: 86 (0.8%)
 - nparks.who_we_are: 8 (0.1%)
-- parliament.bills_introduced: 1 (0.0%)
-- parliament.order_paper: 2169 (21.9%)
-- parliament.votes_and_proceedings: 1 (0.0%)
+- parliament.bills_introduced: 773 (6.8%)
+- parliament.order_paper: 2169 (19.2%)
+- parliament.votes_and_proceedings: 620 (5.5%)
 - pub.circulars: 1 (0.0%)
 - pub.codes_of_practice: 1 (0.0%)
 - pub.guides_and_handbooks: 31 (0.3%)
-- pub.requirements: 88 (0.9%)
-- scdf.acts_codes_and_regulations: 289 (2.9%)
-- scdf.advisories: 36 (0.4%)
-- scdf.fire_code: 152 (1.5%)
-- scdf.fire_safety_circulars: 102 (1.0%)
-- scdf.petroleum_and_flammable_materials: 62 (0.6%)
-- sgdi.ministries: 350 (3.5%)
-- sgdi.organs_of_state: 82 (0.8%)
-- sgdi.statutory_boards: 687 (6.9%)
-- sla.circulars: 333 (3.4%)
-- sla.legislation: 15 (0.2%)
+- pub.requirements: 88 (0.8%)
+- scdf.acts_codes_and_regulations: 289 (2.6%)
+- scdf.advisories: 36 (0.3%)
+- scdf.fire_code: 152 (1.3%)
+- scdf.fire_safety_circulars: 102 (0.9%)
+- scdf.petroleum_and_flammable_materials: 62 (0.5%)
+- sgdi.ministries: 350 (3.1%)
+- sgdi.organs_of_state: 82 (0.7%)
+- sgdi.statutory_boards: 687 (6.1%)
+- sla.circulars: 333 (2.9%)
+- sla.legislation: 15 (0.1%)
 - sla.property_boundaries: 17 (0.2%)
-- ura.circulars: 62 (0.6%)
-- ura.conservation: 150 (1.5%)
-- ura.development_control: 342 (3.5%)
-- ura.master_plan: 177 (1.8%)
-- wshc.advisories_and_alerts: 460 (4.6%)
-- wshc.codes_and_guidelines: 268 (2.7%)
-- wshc.practical_guidance: 341 (3.4%)
+- ura.circulars: 62 (0.5%)
+- ura.conservation: 150 (1.3%)
+- ura.development_control: 342 (3.0%)
+- ura.master_plan: 177 (1.6%)
+- wshc.advisories_and_alerts: 460 (4.1%)
+- wshc.codes_and_guidelines: 268 (2.4%)
+- wshc.practical_guidance: 341 (3.0%)
 
 Per-source schema and validation summary:
 
@@ -1482,6 +1483,42 @@ Per-source schema and validation summary:
   - file_ext: html (13), xlsx (5), pdf (2)
   - record_kind: page (13), document (7)
 
+[imda.building_facilities_codes]
+- records: 24 | unique_urls: 24 | dup_url_hits: 0
+- issues: errors=4 warnings=3
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=20 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=4 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-27T05:36:23.510685+00:00 .. 2026-08-27T05:36:23.510685+00:00
+- top url hosts:
+  - www.imda.gov.sg: 24
+- top url extensions:
+  - .pdf: 20
+  - (no_ext): 4
+- top-level key signatures (urls.jsonl record format):
+  - count=24 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=20 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=4 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+- meta schema variants: 2
+- most common meta keys:
+  - file_ext: 24
+  - record_kind: 24
+  - sitemap_lastmod: 24
+  - discovered_from: 20
+  - discovered_from_title: 20
+- top scalar meta values (sample):
+  - discovered_from: https://www.imda.gov.sg/regulations-and-licensing-listing/code-of-practice-fo... (20)
+  - discovered_from_title: Code of Practice for COPIF (20)
+  - file_ext: pdf (20), html (4)
+  - record_kind: document (20), page (4)
+  - sitemap_lastmod: 2024-05-23T02:20:52.000Z (21), 2021-04-06T08:04:35.000Z (1), 2024-07-11T08:26:25.000Z (1)
+
 [jtc.development_and_renovation]
 - records: 23 | unique_urls: 23 | dup_url_hits: 0
 - issues: errors=7 warnings=0
@@ -2054,6 +2091,40 @@ Per-source schema and validation summary:
   - record_kind: page (6), document (2)
   - sitemap_lastmod: null (8)
 
+[parliament.bills_introduced]
+- records: 773 | unique_urls: 773 | dup_url_hits: 0
+- issues: errors=773 warnings=2
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=1 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=773 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-27T05:36:16.973365+00:00 .. 2026-08-27T05:36:16.973365+00:00
+- top url hosts:
+  - www.parliament.gov.sg: 773
+- top url extensions:
+  - .pdf: 772
+  - (no_ext): 1
+- top-level key signatures (urls.jsonl record format):
+  - count=773 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=772 meta_keys=['file_type', 'found_on', 'record_kind', 'size_bytes']
+  - count=1 meta_keys=['file_type', 'record_kind']
+- meta schema variants: 2
+- most common meta keys:
+  - file_type: 773
+  - record_kind: 773
+  - found_on: 772
+  - size_bytes: 772
+- top scalar meta values (sample):
+  - file_type: pdf (772), html (1)
+  - found_on: https://www.parliament.gov.sg/parliamentary-business/bills-introduced (772)
+  - record_kind: document (772), page (1)
+  - size_bytes: 79127 (2), 82972 (2), 37711 (2)
+
 [parliament.order_paper]
 - records: 2169 | unique_urls: 2169 | dup_url_hits: 0
 - issues: errors=2169 warnings=2
@@ -2065,7 +2136,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=2169 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-08-24T09:03:36.650332+00:00 .. 2026-08-24T09:03:36.650332+00:00
+- discovered_at_utc: 2026-08-27T05:36:16.973365+00:00 .. 2026-08-27T05:36:16.973365+00:00
 - top url hosts:
   - www.parliament.gov.sg: 2169
 - top url extensions:
@@ -2088,61 +2159,40 @@ Per-source schema and validation summary:
   - record_kind: document (2168), page (1)
   - size_bytes: 27905 (2), 36364 (2), 63975 (2)
 
-[parliament.bills_introduced]
-- records: 1 | unique_urls: 1 | dup_url_hits: 0
-- issues: errors=1 warnings=0
-- required field quality (missing/null/invalid):
-  - url: missing=0 null=0 invalid=0
-  - name: missing=0 null=0 invalid=0
-  - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=1 invalid=0
-  - source: missing=0 null=0 invalid=0
-  - meta.discovered_from: missing=1 null=0 invalid=0
-- schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-08-25T02:13:08.549651+00:00 .. 2026-08-25T02:13:08.549651+00:00
-- top url hosts:
-  - www.parliament.gov.sg: 1
-- top url extensions:
-  - (no_ext): 1
-- top-level key signatures (urls.jsonl record format):
-  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
-- meta key signatures:
-  - count=1 meta_keys=['file_type', 'record_kind']
-- meta schema variants: 1
-- most common meta keys:
-  - file_type: 1
-  - record_kind: 1
-- top scalar meta values (sample):
-  - file_type: html (1)
-  - record_kind: page (1)
-
 [parliament.votes_and_proceedings]
-- records: 1 | unique_urls: 1 | dup_url_hits: 0
-- issues: errors=1 warnings=0
+- records: 620 | unique_urls: 620 | dup_url_hits: 0
+- issues: errors=620 warnings=2
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
   - publish_date: missing=0 null=1 invalid=0
   - source: missing=0 null=0 invalid=0
-  - meta.discovered_from: missing=1 null=0 invalid=0
-- schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-08-25T02:13:08.549651+00:00 .. 2026-08-25T02:13:08.549651+00:00
+  - meta.discovered_from: missing=620 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=2
+- discovered_at_utc: 2026-08-27T05:36:16.973365+00:00 .. 2026-08-27T05:36:16.973365+00:00
 - top url hosts:
-  - www.parliament.gov.sg: 1
+  - www.parliament.gov.sg: 620
 - top url extensions:
+  - .pdf: 446
+  - .doc: 173
   - (no_ext): 1
 - top-level key signatures (urls.jsonl record format):
-  - count=1 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=620 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
+  - count=619 meta_keys=['file_type', 'found_on', 'record_kind', 'size_bytes']
   - count=1 meta_keys=['file_type', 'record_kind']
-- meta schema variants: 1
+- meta schema variants: 2
 - most common meta keys:
-  - file_type: 1
-  - record_kind: 1
+  - file_type: 620
+  - record_kind: 620
+  - found_on: 619
+  - size_bytes: 619
 - top scalar meta values (sample):
-  - file_type: html (1)
-  - record_kind: page (1)
+  - file_type: pdf (446), doc (173), html (1)
+  - found_on: https://www.parliament.gov.sg/parliamentary-business/votes-and-proceedings (619)
+  - record_kind: document (619), page (1)
+  - size_bytes: 61440 (7), 34816 (7), 47104 (5)
 
 [pub.requirements]
 - records: 88 | unique_urls: 88 | dup_url_hits: 0
@@ -2488,7 +2538,7 @@ Per-source schema and validation summary:
   - discovered_from_title: 170
 - top scalar meta values (sample):
   - discovered_from: https://www.tal.sg/wshc/resources/publications/checklists-and-articles/ckmbt-... (1), https://www.tal.sg/wshc/resources/publications/checklists-and-articles/manufa... (1), https://www.tal.sg/wshc/resources/publications/checklists-and-articles/manufa... (1)
-  - discovered_from_title: CKMbT International Pte Ltd Commitment to Workplace Safety and Health (1), Manufacturing Sector â€“ Amputations in Singapore (1), Manufacturing Sector: Machinery Hazards in Food &amp; Beverage Manufacturing (1)
+  - discovered_from_title: CKMbT International Pte Ltd Commitment to Workplace Safety and Health (1), Manufacturing Sector ¡V Amputations in Singapore (1), Manufacturing Sector: Machinery Hazards in Food &amp; Beverage Manufacturing (1)
   - file_ext: html (171), pdf (130), zip (33)
   - record_kind: page (171), document (170)
   - sitemap_lastmod: 2021-01-08 (12), 2013-09-06 (12), 2024-03-27 (10)
@@ -2603,12 +2653,12 @@ Per-source schema and validation summary:
   - discovered_from: https://www.ura.gov.sg/guidelines/circulars/ (61)
 
 General stats:
-- record JSON size (bytes): min=254 p50=472 mean=512.0 p95=777.7 max=1132
+- record JSON size (bytes): min=254 p50=493.0 mean=512.9 p95=764.0 max=1132
 
 Unusual records / issues:
-- error:missing_required_field: 5591
+- error:missing_required_field: 6986
 - error:null_required_field: 495
-- warning:meta_value_outlier: 391
+- warning:meta_value_outlier: 398
 
 Examples (first 50):
 - line 1 [warning] scdf.acts_codes_and_regulations meta.file_ext meta_value_outlier -> rare value in source:
@@ -2662,4 +2712,4 @@ Examples (first 50):
 - line 85 [error] corenet.submission_process meta.discovered_from missing_required_field -> missing required field
 - line 86 [error] corenet.resources meta.discovered_from missing_required_field -> missing required field
 
-Wrote JSON report to: data-worktree/data/sg/latest/stats.json
+Wrote JSON report to: C:\Users\nkcng\Documents\GitHub\ol-data-worktree\data\sg\latest\stats.json

@@ -1,8 +1,8 @@
 {
-  "input": "data-worktree/data/sg/latest/urls.jsonl",
+  "input": "C:\\Users\\nkcng\\Documents\\GitHub\\ol-data-worktree\\data\\sg\\latest\\urls.jsonl",
   "totals": {
-    "lines_total": 9905,
-    "records_total": 9905,
+    "lines_total": 11320,
+    "records_total": 11320,
     "records_by_source": {
       "scdf.acts_codes_and_regulations": 289,
       "scdf.fire_code": 152,
@@ -41,6 +41,7 @@
       "ema.educational_materials": 29,
       "ema.industry_reports": 11,
       "ema.statistics": 20,
+      "imda.building_facilities_codes": 24,
       "jtc.development_and_renovation": 23,
       "jtc.tenancy_requirements": 49,
       "lta.railway_protection": 22,
@@ -56,9 +57,9 @@
       "nparks.services": 86,
       "nparks.publications_resources": 113,
       "nparks.who_we_are": 8,
+      "parliament.bills_introduced": 773,
       "parliament.order_paper": 2169,
-      "parliament.bills_introduced": 1,
-      "parliament.votes_and_proceedings": 1,
+      "parliament.votes_and_proceedings": 620,
       "pub.requirements": 88,
       "pub.guides_and_handbooks": 31,
       "pub.circulars": 1,
@@ -7793,6 +7794,182 @@
         "count": 20
       }
     },
+    "imda.building_facilities_codes": {
+      "records": 24,
+      "unique_urls": 24,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 4,
+        "warnings": 3,
+        "by_kind": {
+          "missing_required_field": 4,
+          "meta_value_outlier": 3
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 20,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 4,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 24
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 20
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 4
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.imda.gov.sg/regulations-and-licensing-listing/code-of-practice-fo...",
+            "count": 20
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "Code of Practice for COPIF",
+            "count": 20
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "pdf",
+            "count": 20
+          },
+          {
+            "value": "html",
+            "count": 4
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 20
+          },
+          {
+            "value": "page",
+            "count": 4
+          }
+        ],
+        "sitemap_lastmod": [
+          {
+            "value": "2024-05-23T02:20:52.000Z",
+            "count": 21
+          },
+          {
+            "value": "2021-04-06T08:04:35.000Z",
+            "count": 1
+          },
+          {
+            "value": "2024-07-11T08:26:25.000Z",
+            "count": 1
+          },
+          {
+            "value": "2024-10-10T07:57:37.000Z",
+            "count": 1
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_ext",
+          24
+        ],
+        [
+          "record_kind",
+          24
+        ],
+        [
+          "sitemap_lastmod",
+          24
+        ],
+        [
+          "discovered_from",
+          20
+        ],
+        [
+          "discovered_from_title",
+          20
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.imda.gov.sg",
+          24
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          20
+        ],
+        [
+          "(no_ext)",
+          4
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T05:36:23.510685+00:00",
+        "max": "2026-08-27T05:36:23.510685+00:00",
+        "count": 24
+      }
+    },
     "jtc.development_and_renovation": {
       "records": 23,
       "unique_urls": 23,
@@ -10842,6 +11019,174 @@
         "count": 8
       }
     },
+    "parliament.bills_introduced": {
+      "records": 773,
+      "unique_urls": 773,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 773,
+        "warnings": 2,
+        "by_kind": {
+          "missing_required_field": 773,
+          "meta_value_outlier": 2
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 1,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 773,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 773
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "found_on",
+            "record_kind",
+            "size_bytes"
+          ],
+          "count": 772
+        },
+        {
+          "meta_keys": [
+            "file_type",
+            "record_kind"
+          ],
+          "count": 1
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_type": [
+          {
+            "value": "pdf",
+            "count": 772
+          },
+          {
+            "value": "html",
+            "count": 1
+          }
+        ],
+        "found_on": [
+          {
+            "value": "https://www.parliament.gov.sg/parliamentary-business/bills-introduced",
+            "count": 772
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 772
+          },
+          {
+            "value": "page",
+            "count": 1
+          }
+        ],
+        "size_bytes": [
+          {
+            "value": "79127",
+            "count": 2
+          },
+          {
+            "value": "82972",
+            "count": 2
+          },
+          {
+            "value": "37711",
+            "count": 2
+          },
+          {
+            "value": "217123",
+            "count": 1
+          },
+          {
+            "value": "96124",
+            "count": 1
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_type",
+          773
+        ],
+        [
+          "record_kind",
+          773
+        ],
+        [
+          "found_on",
+          772
+        ],
+        [
+          "size_bytes",
+          772
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.parliament.gov.sg",
+          773
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          772
+        ],
+        [
+          "(no_ext)",
+          1
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-08-27T05:36:16.973365+00:00",
+        "max": "2026-08-27T05:36:16.973365+00:00",
+        "count": 773
+      }
+    },
     "parliament.order_paper": {
       "records": 2169,
       "unique_urls": 2169,
@@ -11005,130 +11350,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-24T09:03:36.650332+00:00",
-        "max": "2026-08-24T09:03:36.650332+00:00",
+        "min": "2026-08-27T05:36:16.973365+00:00",
+        "max": "2026-08-27T05:36:16.973365+00:00",
         "count": 2169
       }
     },
-    "parliament.bills_introduced": {
-      "records": 1,
-      "unique_urls": 1,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 1,
-        "warnings": 0,
-        "by_kind": {
-          "missing_required_field": 1
-        }
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 1,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 1,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 1
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "file_type",
-            "record_kind"
-          ],
-          "count": 1
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "file_type": [
-          {
-            "value": "html",
-            "count": 1
-          }
-        ],
-        "record_kind": [
-          {
-            "value": "page",
-            "count": 1
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "file_type",
-          1
-        ],
-        [
-          "record_kind",
-          1
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.parliament.gov.sg",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          "(no_ext)",
-          1
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
-        "count": 1
-      }
-    },
     "parliament.votes_and_proceedings": {
-      "records": 1,
-      "unique_urls": 1,
+      "records": 620,
+      "unique_urls": 620,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 1,
-        "warnings": 0,
+        "errors": 620,
+        "warnings": 2,
         "by_kind": {
-          "missing_required_field": 1
+          "missing_required_field": 620,
+          "meta_value_outlier": 2
         }
       },
       "required_field_null_missing_invalid": {
@@ -11158,7 +11394,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 1,
+          "missing": 620,
           "null": 0,
           "invalid": 0
         }
@@ -11174,10 +11410,19 @@
             "source_id",
             "url"
           ],
-          "count": 1
+          "count": 620
         }
       ],
       "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_type",
+            "found_on",
+            "record_kind",
+            "size_bytes"
+          ],
+          "count": 619
+        },
         {
           "meta_keys": [
             "file_type",
@@ -11186,48 +11431,104 @@
           "count": 1
         }
       ],
-      "meta_schema_variants": 1,
+      "meta_schema_variants": 2,
       "meta_type_variation": {},
       "meta_top_scalar_values": {
         "file_type": [
+          {
+            "value": "pdf",
+            "count": 446
+          },
+          {
+            "value": "doc",
+            "count": 173
+          },
           {
             "value": "html",
             "count": 1
           }
         ],
+        "found_on": [
+          {
+            "value": "https://www.parliament.gov.sg/parliamentary-business/votes-and-proceedings",
+            "count": 619
+          }
+        ],
         "record_kind": [
+          {
+            "value": "document",
+            "count": 619
+          },
           {
             "value": "page",
             "count": 1
+          }
+        ],
+        "size_bytes": [
+          {
+            "value": "61440",
+            "count": 7
+          },
+          {
+            "value": "34816",
+            "count": 7
+          },
+          {
+            "value": "47104",
+            "count": 5
+          },
+          {
+            "value": "62464",
+            "count": 4
+          },
+          {
+            "value": "60928",
+            "count": 4
           }
         ]
       },
       "top_meta_keys": [
         [
           "file_type",
-          1
+          620
         ],
         [
           "record_kind",
-          1
+          620
+        ],
+        [
+          "found_on",
+          619
+        ],
+        [
+          "size_bytes",
+          619
         ]
       ],
       "top_hosts": [
         [
           "www.parliament.gov.sg",
-          1
+          620
         ]
       ],
       "top_extensions": [
+        [
+          ".pdf",
+          446
+        ],
+        [
+          ".doc",
+          173
+        ],
         [
           "(no_ext)",
           1
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-08-25T02:13:08.549651+00:00",
-        "max": "2026-08-25T02:13:08.549651+00:00",
-        "count": 1
+        "min": "2026-08-27T05:36:16.973365+00:00",
+        "max": "2026-08-27T05:36:16.973365+00:00",
+        "count": 620
       }
     },
     "pub.requirements": {
@@ -13639,18 +13940,18 @@
     "record_size_bytes": {
       "min": 254,
       "max": 1132,
-      "mean": 511.9716304896517,
-      "p50": 472,
-      "p95": 777.7
+      "mean": 512.9140459363957,
+      "p50": 493.0,
+      "p95": 764.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 391,
-        "error": 6086
+        "warning": 398,
+        "error": 7481
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 391,
-        "error:missing_required_field": 5591,
+        "warning:meta_value_outlier": 398,
+        "error:missing_required_field": 6986,
         "error:null_required_field": 495
       }
     },
