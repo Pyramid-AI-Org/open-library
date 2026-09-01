@@ -150,6 +150,45 @@ jobs:
 
           popd
 
+      # Runs after the commit on purpose: a regressed run must still publish its
+      # data, but it must not look green. A crawler that reports success while
+      # collecting nothing is the failure mode that hid LegCo, the FSD circular
+      # letters and the EMSD gas portal for months.
+      - name: Fail on silent-failure regressions
+        if: always()
+        run: |
+          summary=data-worktree/data/latest/summary.json
+          if [ ! -f "$summary" ]; then
+            echo "No summary.json produced; nothing to check."
+            exit 0
+          fi
+
+          python - "$summary" <<'PY'
+          import json, sys
+
+          summary = json.load(open(sys.argv[1], encoding="utf-8"))
+          zeroed = summary.get("regressions_zeroed") or []
+          dropped = summary.get("regressions_dropped") or []
+
+          for entry in dropped:
+              print(
+                  f"::warning::{entry['crawler']} collected {entry['current']} records, "
+                  f"down from {entry['previous']}"
+              )
+
+          for entry in zeroed:
+              print(
+                  f"::error::{entry['crawler']} collected 0 records but held "
+                  f"{entry['previous']} in the previous run"
+              )
+
+          if zeroed:
+              print(f"\n{len(zeroed)} crawler(s) silently stopped collecting. Data was still published.")
+              sys.exit(1)
+
+          print("No silent-failure regressions detected.")
+          PY
+
       - name: Upload logs/data snapshot (debugging)
         uses: actions/upload-artifact@v4
         with:

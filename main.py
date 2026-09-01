@@ -296,6 +296,53 @@ def _select_crawlers_for_run(
     return due, skipped, decisions
 
 
+def _detect_regressions(
+    previous_records_by_source: dict[str, dict[str, dict[str, Any]]],
+    successful_records_by_source: dict[str, list[dict[str, Any]]],
+    *,
+    drop_ratio: float = 0.5,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Find crawlers that reported success while collecting nothing (or far less).
+
+    A crawler that fetches nothing and exits 0 looks identical to one whose
+    source genuinely has no documents. That is how LegCo (7 pages), the FSD
+    circular letters and the EMSD gas portal each stayed broken for months while
+    the scheduler recorded successful runs every day. Comparing this run against
+    the previous snapshot is the cheapest signal that something regressed.
+
+    Only crawlers that previously returned records are considered, so a brand new
+    crawler yielding nothing on its first run is not reported here.
+    """
+    zeroed: list[dict[str, Any]] = []
+    dropped: list[dict[str, Any]] = []
+
+    for source, records in successful_records_by_source.items():
+        # Results are keyed by module_path ("pland.practice_notes") but the
+        # previous snapshot is keyed by each record's own `source` field, which
+        # is the bare crawler name. Fall back to the bare name, the same way the
+        # scheduler state lookup does.
+        prior = previous_records_by_source.get(source)
+        if prior is None and "." in source:
+            prior = previous_records_by_source.get(source.rsplit(".", 1)[-1])
+
+        previous = len(prior or {})
+        if previous == 0:
+            continue
+
+        current = len(records)
+        if current == 0:
+            zeroed.append({"crawler": source, "previous": previous})
+        elif current < previous * drop_ratio:
+            dropped.append(
+                {"crawler": source, "previous": previous, "current": current}
+            )
+
+    return (
+        sorted(zeroed, key=lambda r: r["crawler"]),
+        sorted(dropped, key=lambda r: r["crawler"]),
+    )
+
+
 def _merge_records_for_latest(
     previous_records_by_source: dict[str, dict[str, dict[str, Any]]],
     successful_records_by_source: dict[str, list[dict[str, Any]]],
@@ -506,6 +553,21 @@ def main() -> int:
             if name not in successful_records_by_source and name not in failed_crawlers
         )
 
+    zeroed, dropped = _detect_regressions(
+        previous_records_by_source,
+        successful_records_by_source,
+    )
+    for entry in zeroed:
+        print(
+            f"  REGRESSION {entry['crawler']}: returned 0 records "
+            f"but held {entry['previous']} in the previous run"
+        )
+    for entry in dropped:
+        print(
+            f"  WARNING {entry['crawler']}: {entry['current']} records, "
+            f"down from {entry['previous']} in the previous run"
+        )
+
     all_records = _merge_records_for_latest(
         previous_records_by_source,
         successful_records_by_source,
@@ -532,6 +594,11 @@ def main() -> int:
         "crawlers_skipped": sorted(skipped_crawlers),
         "crawlers_succeeded": sorted(succeeded_crawlers),
         "crawlers_failed": sorted(failed_crawlers),
+        # Reported in the summary rather than raised here: the run must still
+        # publish its data, so the workflow inspects these after the commit step
+        # and fails the job then.
+        "regressions_zeroed": zeroed,
+        "regressions_dropped": dropped,
         "schedule": schedule_decisions,
     }
     write_json(latest_dir / "summary.json", summary)
