@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 78610,
-    "records_total": 78610,
+    "lines_total": 78535,
+    "records_total": 78535,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
       "epd.publications_other_reports": 3,
@@ -34,7 +34,7 @@
       "devb_publications": 1603,
       "devb_general_circulars": 3,
       "devb_planning_and_lands_technical_circulars": 4,
-      "devb_works_technical_circulars_um": 346,
+      "devb_works_technical_circulars_um": 71,
       "tel_directory": 16049,
       "guidelines": 5,
       "technical_circulars_and_practice_notes": 56,
@@ -81,9 +81,9 @@
       "occupational_health_part_a": 4,
       "occupational_safety_part_b": 18,
       "info_notes": 11,
+      "lao_practice_notes": 301,
       "joint_practice_notes": 18,
       "laco_circular_memorandum": 47,
-      "lao_practice_notes": 101,
       "smo_practice_notes": 4,
       "standards_guidelines": 12,
       "practice_notes": 11,
@@ -3865,14 +3865,14 @@
       }
     },
     "devb_works_technical_circulars_um": {
-      "records": 346,
-      "unique_urls": 346,
+      "records": 71,
+      "unique_urls": 71,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 0,
-        "warnings": 65,
+        "warnings": 3,
         "by_kind": {
-          "meta_value_outlier": 65
+          "meta_value_outlier": 3
         }
       },
       "required_field_null_missing_invalid": {
@@ -3918,7 +3918,7 @@
             "source_id",
             "url"
           ],
-          "count": 346
+          "count": 71
         }
       ],
       "meta_schema_signatures": [
@@ -3930,18 +3930,18 @@
             "revision_date",
             "revision_year"
           ],
-          "count": 346
+          "count": 71
         }
       ],
       "meta_schema_variants": 1,
       "meta_type_variation": {
         "revision_date": {
-          "null": 302,
-          "str": 44
+          "str": 36,
+          "null": 35
         },
         "revision_year": {
-          "null": 302,
-          "str": 44
+          "str": 36,
+          "null": 35
         }
       },
       "meta_top_scalar_values": {
@@ -3951,32 +3951,32 @@
             "count": 5
           },
           {
-            "value": "32/2004",
-            "count": 5
-          },
-          {
-            "value": "11/2007",
+            "value": "10/1997",
             "count": 3
           },
           {
-            "value": "04/1998",
+            "value": "06/2005",
             "count": 3
           },
           {
-            "value": "19/1997",
-            "count": 3
+            "value": "50/2002",
+            "count": 1
+          },
+          {
+            "value": "03/2023",
+            "count": 1
           }
         ],
         "discovered_from": [
           {
             "value": "https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcircular...",
-            "count": 346
+            "count": 71
           }
         ],
         "revision_date": [
           {
             "value": "null",
-            "count": 302
+            "count": 35
           },
           {
             "value": "2021-06-02",
@@ -3998,7 +3998,7 @@
         "revision_year": [
           {
             "value": "null",
-            "count": 302
+            "count": 35
           },
           {
             "value": "2021",
@@ -4013,53 +4013,49 @@
             "count": 4
           },
           {
-            "value": "2014",
-            "count": 3
+            "value": "2018",
+            "count": 2
           }
         ]
       },
       "top_meta_keys": [
         [
           "circular_no",
-          346
+          71
         ],
         [
           "discovered_from",
-          346
+          71
         ],
         [
           "matched_years",
-          346
+          71
         ],
         [
           "revision_date",
-          346
+          71
         ],
         [
           "revision_year",
-          346
+          71
         ]
       ],
       "top_hosts": [
         [
           "www.devb.gov.hk",
-          346
+          71
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          345
-        ],
-        [
-          ".jpg",
-          1
+          71
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-02T12:24:05.744622+00:00",
-        "max": "2026-09-02T12:24:05.744622+00:00",
-        "count": 346
+        "min": "2026-09-01T07:18:01.066058+00:00",
+        "max": "2026-09-01T07:18:01.066058+00:00",
+        "count": 71
       }
     },
     "tel_directory": {
@@ -10130,6 +10126,157 @@
         "count": 11
       }
     },
+    "lao_practice_notes": {
+      "records": 301,
+      "unique_urls": 301,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 0,
+        "warnings": 0,
+        "by_kind": {}
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 301
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "record_kind",
+            "ref_no"
+          ],
+          "count": 301
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/lao.html",
+            "count": 301
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "attachment",
+            "count": 200
+          },
+          {
+            "value": "note",
+            "count": 101
+          }
+        ],
+        "ref_no": [
+          {
+            "value": "6/2023",
+            "count": 14
+          },
+          {
+            "value": "1/2020A",
+            "count": 11
+          },
+          {
+            "value": "1/2026",
+            "count": 8
+          },
+          {
+            "value": "2/2023",
+            "count": 8
+          },
+          {
+            "value": "3/2026",
+            "count": 8
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "discovered_from",
+          301
+        ],
+        [
+          "record_kind",
+          301
+        ],
+        [
+          "ref_no",
+          301
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.landsd.gov.hk",
+          301
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          260
+        ],
+        [
+          ".docx",
+          23
+        ],
+        [
+          ".rtf",
+          13
+        ],
+        [
+          ".doc",
+          5
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-09-02T00:00:00+00:00",
+        "max": "2026-09-02T00:00:00+00:00",
+        "count": 301
+      }
+    },
     "joint_practice_notes": {
       "records": 18,
       "unique_urls": 18,
@@ -10376,138 +10523,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 47
-      }
-    },
-    "lao_practice_notes": {
-      "records": 101,
-      "unique_urls": 101,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 101
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from",
-            "ref_no"
-          ],
-          "count": 101
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/lao.html",
-            "count": 101
-          }
-        ],
-        "ref_no": [
-          {
-            "value": "3/2000A",
-            "count": 1
-          },
-          {
-            "value": "4/2000(B)",
-            "count": 1
-          },
-          {
-            "value": "2/2001",
-            "count": 1
-          },
-          {
-            "value": "3/2001",
-            "count": 1
-          },
-          {
-            "value": "6/2001",
-            "count": 1
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          101
-        ],
-        [
-          "ref_no",
-          101
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.landsd.gov.hk",
-          101
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          86
-        ],
-        [
-          ".rtf",
-          11
-        ],
-        [
-          ".doc",
-          4
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-01T00:00:00+00:00",
-        "max": "2026-09-01T00:00:00+00:00",
-        "count": 101
       }
     },
     "smo_practice_notes": {
@@ -13373,17 +13388,17 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1398,
-      "mean": 526.5573336725607,
-      "p50": 400.0,
+      "mean": 526.4174062519895,
+      "p50": 400,
       "p95": 984.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 1767,
+        "warning": 1705,
         "error": 3370
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 1763,
+        "warning:meta_value_outlier": 1701,
         "error:missing_required_field": 3370,
         "warning:meta_type_outlier": 4
       }
@@ -13777,17 +13792,17 @@
         "severity": "warning",
         "kind": "meta_value_outlier",
         "source": "devb_works_technical_circulars_um",
-        "field": "meta.revision_date",
-        "line": 6142,
-        "detail": "rare value in source: 2016-07-14"
+        "field": "meta.revision_year",
+        "line": 6129,
+        "detail": "rare value in source: 2019"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
         "source": "devb_works_technical_circulars_um",
         "field": "meta.revision_year",
-        "line": 6142,
-        "detail": "rare value in source: 2016"
+        "line": 6152,
+        "detail": "rare value in source: 2017"
       }
     ]
   }

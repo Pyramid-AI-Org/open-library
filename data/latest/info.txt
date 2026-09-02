@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 78610 (parse_errors=0)
+Total records: 78535 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.3%)
@@ -24,7 +24,7 @@ Records by source:
 - devb_press_releases: 3644 (4.6%)
 - devb_publications: 1603 (2.0%)
 - devb_speeches_and_presentations: 481 (0.6%)
-- devb_works_technical_circulars_um: 346 (0.4%)
+- devb_works_technical_circulars_um: 71 (0.1%)
 - electric_safety_cop: 22 (0.0%)
 - electric_safety_publications_cop: 4 (0.0%)
 - electric_safety_publications_general: 47 (0.1%)
@@ -46,7 +46,7 @@ Records by source:
 - emsd.regulating_railway_safety: 7 (0.0%)
 - enhancement_of_control_of_inside_services: 11 (0.0%)
 - enhancing_plumbing_works_control: 3 (0.0%)
-- epd.air: 275 (0.3%)
+- epd.air: 275 (0.4%)
 - epd.eia_planning: 293 (0.4%)
 - epd.noise: 110 (0.1%)
 - epd.policy_documents: 13 (0.0%)
@@ -71,7 +71,7 @@ Records by source:
 - information_for_licensed_plumbers: 4 (0.0%)
 - joint_practice_notes: 18 (0.0%)
 - laco_circular_memorandum: 47 (0.1%)
-- lao_practice_notes: 101 (0.1%)
+- lao_practice_notes: 301 (0.4%)
 - licensed_plumbers: 8 (0.0%)
 - licensing_food_premises: 67 (0.1%)
 - maintenance_of_internal_plumbing: 15 (0.0%)
@@ -967,8 +967,8 @@ Per-source schema and validation summary:
   - section: Housing, Planning and Lands Bureau (HPLB) Technical Circulars (2), Development Bureau Technical Circulars (Planning and Lands) (1), Housing, Planning and Lands Bureau (HPLB) and Environment, Transport and Work... (1)
 
 [devb_works_technical_circulars_um]
-- records: 346 | unique_urls: 346 | dup_url_hits: 0
-- issues: errors=0 warnings=65
+- records: 71 | unique_urls: 71 | dup_url_hits: 0
+- issues: errors=0 warnings=3
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
@@ -977,31 +977,30 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-02T12:24:05.744622+00:00 .. 2026-09-02T12:24:05.744622+00:00
+- discovered_at_utc: 2026-09-01T07:18:01.066058+00:00 .. 2026-09-01T07:18:01.066058+00:00
 - top url hosts:
-  - www.devb.gov.hk: 346
+  - www.devb.gov.hk: 71
 - top url extensions:
-  - .pdf: 345
-  - .jpg: 1
+  - .pdf: 71
 - top-level key signatures (urls.jsonl record format):
-  - count=346 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=71 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=346 meta_keys=['circular_no', 'discovered_from', 'matched_years', 'revision_date', 'revision_year']
+  - count=71 meta_keys=['circular_no', 'discovered_from', 'matched_years', 'revision_date', 'revision_year']
 - meta schema variants: 1
 - meta keys with type variation:
-  - revision_date: {'null': 302, 'str': 44}
-  - revision_year: {'null': 302, 'str': 44}
+  - revision_date: {'str': 36, 'null': 35}
+  - revision_year: {'str': 36, 'null': 35}
 - most common meta keys:
-  - circular_no: 346
-  - discovered_from: 346
-  - matched_years: 346
-  - revision_date: 346
-  - revision_year: 346
+  - circular_no: 71
+  - discovered_from: 71
+  - matched_years: 71
+  - revision_date: 71
+  - revision_year: 71
 - top scalar meta values (sample):
-  - circular_no: 04/2005 (5), 32/2004 (5), 11/2007 (3)
-  - discovered_from: https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcircular... (346)
-  - revision_date: null (302), 2021-06-02 (6), 2021-07-27 (3)
-  - revision_year: null (302), 2021 (16), 2023 (7)
+  - circular_no: 04/2005 (5), 10/1997 (3), 06/2005 (3)
+  - discovered_from: https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcircular... (71)
+  - revision_date: null (35), 2021-06-02 (6), 2021-07-27 (3)
+  - revision_year: null (35), 2021 (16), 2023 (7)
 
 [tel_directory]
 - records: 16049 | unique_urls: 16049 | dup_url_hits: 0
@@ -2310,6 +2309,39 @@ Per-source schema and validation summary:
   - discovered_from: https://www.landsd.gov.hk/en/resources/practice-notes/info-notes.html (11)
   - topic: Land Sale (4), Premium Assessment (1), Development Submissions under Lease (1)
 
+[lao_practice_notes]
+- records: 301 | unique_urls: 301 | dup_url_hits: 0
+- issues: errors=0 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=0 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=0 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-09-02T00:00:00+00:00 .. 2026-09-02T00:00:00+00:00
+- top url hosts:
+  - www.landsd.gov.hk: 301
+- top url extensions:
+  - .pdf: 260
+  - .docx: 23
+  - .rtf: 13
+  - .doc: 5
+- top-level key signatures (urls.jsonl record format):
+  - count=301 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=301 meta_keys=['discovered_from', 'record_kind', 'ref_no']
+- meta schema variants: 1
+- most common meta keys:
+  - discovered_from: 301
+  - record_kind: 301
+  - ref_no: 301
+- top scalar meta values (sample):
+  - discovered_from: https://www.landsd.gov.hk/en/resources/practice-notes/lao.html (301)
+  - record_kind: attachment (200), note (101)
+  - ref_no: 6/2023 (14), 1/2020A (11), 1/2026 (8)
+
 [joint_practice_notes]
 - records: 18 | unique_urls: 18 | dup_url_hits: 0
 - issues: errors=0 warnings=0
@@ -2366,36 +2398,6 @@ Per-source schema and validation summary:
   - discovered_from: https://www.landsd.gov.hk/en/resources/practice-notes/laco.html (47)
   - ref_no: LACO CM No. 12 (1), LACO CM No. 18 (1), LACO CM No. 21 (1)
   - section_name: List by Legal Advisory and Conveyancing Office Circular Memoranda Number (27), Re-organisation and relocation of Legal Advisory and Conveyancing Offices (12), Others (8)
-
-[lao_practice_notes]
-- records: 101 | unique_urls: 101 | dup_url_hits: 0
-- issues: errors=0 warnings=0
-- required field quality (missing/null/invalid):
-  - url: missing=0 null=0 invalid=0
-  - name: missing=0 null=0 invalid=0
-  - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=0 invalid=0
-  - source: missing=0 null=0 invalid=0
-  - meta.discovered_from: missing=0 null=0 invalid=0
-- schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-01T00:00:00+00:00 .. 2026-09-01T00:00:00+00:00
-- top url hosts:
-  - www.landsd.gov.hk: 101
-- top url extensions:
-  - .pdf: 86
-  - .rtf: 11
-  - .doc: 4
-- top-level key signatures (urls.jsonl record format):
-  - count=101 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
-- meta key signatures:
-  - count=101 meta_keys=['discovered_from', 'ref_no']
-- meta schema variants: 1
-- most common meta keys:
-  - discovered_from: 101
-  - ref_no: 101
-- top scalar meta values (sample):
-  - discovered_from: https://www.landsd.gov.hk/en/resources/practice-notes/lao.html (101)
-  - ref_no: 3/2000A (1), 4/2000(B) (1), 2/2001 (1)
 
 [smo_practice_notes]
 - records: 4 | unique_urls: 4 | dup_url_hits: 0
@@ -3099,11 +3101,11 @@ Per-source schema and validation summary:
   - discovered_from: https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbin... (1)
 
 General stats:
-- record JSON size (bytes): min=204 p50=400.0 mean=526.6 p95=984.0 max=1398
+- record JSON size (bytes): min=204 p50=400 mean=526.4 p95=984.0 max=1398
 
 Unusual records / issues:
 - error:missing_required_field: 3370
-- warning:meta_value_outlier: 1763
+- warning:meta_value_outlier: 1701
 - warning:meta_type_outlier: 4
 
 Examples (first 50):
@@ -3155,7 +3157,7 @@ Examples (first 50):
 - line 2584 [warning] cedd_standards_spec_handbooks_cost meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/construction/index.html
 - line 2585 [warning] cedd_standards_spec_handbooks_cost meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/construction/index.html
 - line 2598 [warning] cedd_standards_spec_handbooks_cost meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/cedd-library/index.html
-- line 6142 [warning] devb_works_technical_circulars_um meta.revision_date meta_value_outlier -> rare value in source: 2016-07-14
-- line 6142 [warning] devb_works_technical_circulars_um meta.revision_year meta_value_outlier -> rare value in source: 2016
+- line 6129 [warning] devb_works_technical_circulars_um meta.revision_year meta_value_outlier -> rare value in source: 2019
+- line 6152 [warning] devb_works_technical_circulars_um meta.revision_year meta_value_outlier -> rare value in source: 2017
 
 Wrote JSON report to: data-worktree/data/latest/stats.json

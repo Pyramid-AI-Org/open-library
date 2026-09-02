@@ -1,8 +1,8 @@
 {
-  "crawler": "devb.devb_works_technical_circulars_um",
+  "crawler": "lands.lao_practice_notes",
   "crawlers_considered": 140,
   "crawlers_due": [
-    "devb_works_technical_circulars_um"
+    "lao_practice_notes"
   ],
   "crawlers_failed": [],
   "crawlers_skipped": [
@@ -114,22 +114,22 @@
     "works_of_minor_nature"
   ],
   "crawlers_succeeded": [
-    "devb.devb_works_technical_circulars_um"
+    "lands.lao_practice_notes"
   ],
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 78610,
+  "rows": 78535,
   "run_date_utc": "2026-09-02",
   "schedule": {
-    "devb.devb_works_technical_circulars_um": {
+    "lands.lao_practice_notes": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": "2026-09-02",
       "manual_override": true,
-      "module_path": "devb.devb_works_technical_circulars_um",
-      "source_id": "devb"
+      "module_path": "lands.lao_practice_notes",
+      "source_id": "lands"
     }
   },
-  "started_at_utc": "2026-09-02T12:24:05.744622+00:00"
+  "started_at_utc": "2026-09-02T12:25:23.769446+00:00"
 }
