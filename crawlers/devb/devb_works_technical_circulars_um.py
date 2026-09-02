@@ -42,6 +42,9 @@ _path_ext = path_ext
 
 
 _LIST_RE = re.compile(r"var\s+list\s*=\s*(\[[\s\S]*?\])\s*(?:;|%|$)")
+_SUPERSEDED_LIST_RE = re.compile(
+    r"var\s+supersededList\s*=\s*(\[[\s\S]*?\])\s*(?:;|%|$)"
+)
 
 
 @dataclass(frozen=True)
@@ -56,10 +59,10 @@ class _CircularFile:
     revision_date_iso: str | None
 
 
-def _extract_active_list(js_text: str) -> list[dict[str, Any]]:
-    m = _LIST_RE.search(js_text or "")
+def _extract_list(js_text: str, pattern: re.Pattern[str], label: str) -> list[dict[str, Any]]:
+    m = pattern.search(js_text or "")
     if not m:
-        raise ValueError("Could not locate 'var list = [...]' in JS payload")
+        raise ValueError(f"Could not locate '{label}' in JS payload")
 
     payload = m.group(1)
     try:
@@ -118,6 +121,7 @@ class Crawler:
         ).strip()
 
         years_back = int(cfg.get("years_back", 10))
+        include_superseded = bool(cfg.get("include_superseded", False))
         include_revision_year_matches = bool(
             cfg.get("include_revision_year_matches", True)
         )
@@ -153,7 +157,30 @@ class Crawler:
             backoff_jitter_seconds=backoff_jitter_seconds,
         )
 
-        items = _extract_active_list(resp.text)
+        items = _extract_list(resp.text, _LIST_RE, "var list = [...]")
+        if include_superseded:
+            # A circular that has been superseded still governs the work approved
+            # under it, and the site keeps that history in the same payload.
+            try:
+                superseded = _extract_list(
+                    resp.text, _SUPERSEDED_LIST_RE, "var supersededList = [...]"
+                )
+            except ValueError as exc:
+                superseded = []
+                if ctx.debug:
+                    print(f"[{self.name}] No superseded list: {exc}")
+
+            # Superseded entries carry IssueDate (dd/mm/yyyy) but no IssueYear,
+            # so the year filter below would drop every one of them.
+            for entry in superseded:
+                if entry.get("IssueYear"):
+                    continue
+                issued = str(entry.get("IssueDate") or "").strip()
+                year = issued.rsplit("/", 1)[-1] if "/" in issued else ""
+                if len(year) == 4 and year.isdigit():
+                    entry = dict(entry)
+                    entry["IssueYear"] = year
+                items.append(entry)
 
         # url -> (UrlRecord skeleton + matched years)
         by_url: dict[str, tuple[UrlRecord, set[str]]] = {}

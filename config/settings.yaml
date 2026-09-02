@@ -129,8 +129,12 @@ crawlers:
 
       devb_works_technical_circulars_um:
         # DevB Works Technical Circulars (in force) via JS dataset.
+        # The dataset runs back to 1973; years_back: 10 was reading only a
+        # tenth of it and leaving ~270 circulars uncollected.
         data_js_url: "https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcirculars_53.js"
-        years_back: 10
+        years_back: 55
+        # A superseded circular still governs the work approved under it.
+        include_superseded: true
         include_revision_year_matches: true
         request_delay_seconds: 0.0
         request_jitter_seconds: 0.0
