@@ -19,11 +19,13 @@ Config:
     content_element_id  element to look inside (default "content")
     doc_extensions      extensions to keep (default pdf/doc/docx/xls/xlsx)
     url_prefix          optional prefix every kept document must start with
+    exclude_url_patterns  regexes; a document whose URL matches any is skipped
 """
 
 from __future__ import annotations
 
 import random
+import re
 
 import requests
 
@@ -71,6 +73,15 @@ class ContentPdfCrawler:
             if str(e).strip()
         )
         url_prefix = str(cfg.get("url_prefix", "")).strip()
+        # Several departments publish a signed scan and a zipped archive of
+        # superseded editions alongside each current document. They carry no
+        # text the current version does not, so they are excluded by pattern
+        # rather than collected and parsed twice.
+        exclude_patterns = [
+            re.compile(str(pat), re.IGNORECASE)
+            for pat in (cfg.get("exclude_url_patterns") or [])
+            if str(pat).strip()
+        ]
 
         request_delay_seconds = float(cfg.get("request_delay_seconds", 0.5))
         request_jitter_seconds = float(cfg.get("request_jitter_seconds", 0.25))
@@ -127,6 +138,8 @@ class ContentPdfCrawler:
                 if path_ext(can) not in doc_exts:
                     continue
                 if url_prefix and not can.startswith(url_prefix):
+                    continue
+                if any(pat.search(can) for pat in exclude_patterns):
                     continue
                 if can in seen:
                     continue

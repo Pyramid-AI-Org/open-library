@@ -109,6 +109,46 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      devb_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.devb.gov.hk/en/publications_and_press_releases/publications/construction_site_safety_manual/index.html"
+          - "https://www.devb.gov.hk/en/publications_and_press_releases/publications/devb-harmonisation-guideline/index.html"
+          - "https://www.devb.gov.hk/en/construction_sector_matters/contractors/applications_as_public_works/index.html"
+          - "https://www.devb.gov.hk/en/construction_sector_matters/contractors/considerate_contractors_site/index.html"
+          - "https://www.devb.gov.hk/en/construction_sector_matters/contractors/contractor_management_handbook/index.html"
+          - "https://www.devb.gov.hk/en/construction_sector_matters/contractors/contractor_management_handbook_prelease/index.html"
+          - "https://www.devb.gov.hk/en/construction_sector_matters/contractors/helping_business/index.html"
+          - "https://www.devb.gov.hk/en/construction_sector_matters/contractors/updated_contractor_information_prescribed_forms/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual-concrete-seminar-2023/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2005/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2006/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2007/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2008/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2009/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2010/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2011/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2012/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2013/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2014/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2015/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2016/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2017/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2018/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2019/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2021/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concrete_seminar_2022/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/low_carbon_concrete_trophy_competition_2022/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/past_research_projects/index.html"
+          - "https://www.devb.gov.hk/en/issues_in_focus/streamlining_development_control/administrative_measures/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       devb_press_releases:
         # DevB Press Releases (English) index crawler.
         years_back: 10
@@ -182,6 +222,73 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      bd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_circulars.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/bmg.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDB.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnap.html"
+          - "https://www.bd.gov.hk/en/resources/forms/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/scheduled-areas/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/pv-panel/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/precautionary-measures-typhoon-season/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/pre-accepted-computer-programs/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnrc.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnbi.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_reports.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_notice.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_CEPAS.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/modular-integrated-construction/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/index-pre-acceptance-mechanism.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/common-conditions-and-requirements/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/suos2011.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/MWTG.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/MWGG.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBFSImprovementWorks.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBConstructSys.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildMaterial.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/CDBBuildComp.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank/index_news.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/pnap/adv/adv033.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/pnap/app/app041.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/pnap/app/app157.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/pnrc/pnrc38.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/pnrc/pnrc69.html"
+          - "https://www.bd.gov.hk/en/resources/online-tools/as-search/index.html"
+          - "https://www.bd.gov.hk/en/resources/online-tools/building-information-modelling/index.html"
+          - "https://www.bd.gov.hk/en/resources/online-tools/building-information-modelling/index_statutory_submissions.html"
+          - "https://www.bd.gov.hk/en/resources/online-tools/electronic-submission-hub/professionals/index.html"
+          - "https://www.bd.gov.hk/en/resources/registration-guides/index_RGBS_RSC.html"
+          - "https://www.bd.gov.hk/en/resources/registration-guides/index_RMWC_company.html"
+          - "https://www.bd.gov.hk/en/resources/registration-guides/index_RMWC_individual.html"
+          - "https://www.bd.gov.hk/en/resources/registration-guides/index_building_professionals.html"
+          - "https://www.bd.gov.hk/en/resources/registration-guides/index_news.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/building-safety/index.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/financial-assistance/index_RAS.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/financial-assistance/index_bsi_loanscheme.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/financial-assistance/pilot-scheme-water-seepage/index.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/fire-safety/index.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/fire-safety/index_fsi_improvement.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/licensing-advisory-services/pre-accepted-temporary-structures.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/licensing-advisory-services/private-columbaria.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/licensing-advisory-services/scs-non-purpose-built-school-and-kindergarten.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/licensing-advisory-services/scs-restaurant-licences.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/licensing-advisory-services/useful-information.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/mbis/index_OBB.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/mbis/property-owners-and-owners-corporation/index_mbis_owners_assistance.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/mwis/property-owners-and-owners-corporation/index.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/mwis/useful-information/index_complying_mbis_mwis.html"
+          - "https://www.bd.gov.hk/en/safety-inspection/slope-safety/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       codes_design_manuals_and_guidelines:
         # Building Department codes, design manuals, and guidelines crawler.
         page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/index.html"
@@ -195,6 +302,23 @@ crawlers:
           - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/bmg.html"
           - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/suos2011.html"
 
+      codes_and_references_sections:
+        # The thirteen codes-and-references sections that had no crawler.
+        page_urls:
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/modular-integrated-construction/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/pv-panel/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/public-open-space/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/legal-matters/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/pre-accepted-computer-programs/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/central-data-bank-pre-acceptance/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/innovative-building-materials-and-technologies/index-pre-acceptance-mechanism.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/epidemic-prevention-information/index-drainage-systems.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/precautionary-measures-typhoon-season/index.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/transitional-housing-initiatives/thi_modification_exemption_list.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/GFA.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/index_TeachingKit.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/index.html"
+
       common_conditions_and_requirements:
         # Structural submission conditions (SE-SA / SE-SC). 266 documents on one
         # page, none of which were held: the section was never seeded at all.
@@ -207,7 +331,9 @@ crawlers:
         url_joint: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
         url_pnbi: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnbi.html"
         url_circulars: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_circulars.html"
-        years_back: 10
+        # PNAPs and circular letters run back to the 1970s. A ten-year window
+        # left 551 of them uncollected — by far the largest BD gap.
+        years_back: 55
 
       central_data_bank:
         # BD Central Data Bank crawler.
@@ -315,6 +441,42 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      cedd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.cedd.gov.hk/eng/publications/eacsb-handbook/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-geotechnical/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-port-works/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-objects-general/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/CEWTPI-disclaimer/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/geo/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/index.html"
+          - "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/2014/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/cedd-innovation-series/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/cedd-playbook/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/environmental-report/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/miscellaneous/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/scct/technical-notes/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/scct/whats-new/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1-2010/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs3-2013/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2006/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2020/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-pah/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-smm/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/stem/ten-treasures/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       cedd_technical_circulars:
         # CEDD Technical Circulars crawler.
         page_url: "https://www.cedd.gov.hk/eng/publications/technical-circulars/index.html"
@@ -425,6 +587,18 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      dsd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.dsd.gov.hk/EN/TechnicalDocuments/DSD_BIM_Reference_Materials/DSD_BIM_Objects/index.html"
+          - "https://www.dsd.gov.hk/EN/Technical_Documents/NEC_Corner/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       technical_manuals:
         # DSD Technical Manuals table crawler.
         locales:
@@ -470,6 +644,38 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      hyd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/GIS_Specifications/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/guidance_notes/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2012/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2013/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2014/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2015/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2016/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2017/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2018/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2019/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2020/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er2021/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er202223/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/er202324/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_report/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/others/streamlining/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/road_notes/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/structures_design_manual_2013/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/manual/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/related_documents/index.html"
+          - "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/related_documents/simplified_guidelines/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       hyd_standard_drawings:
         # Highways, lighting and structures standard drawings. A sibling branch
         # of technical_document/ that was never seeded: 581 drawings, none held.
@@ -510,6 +716,31 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      fsd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_food.html"
+          - "https://www.hkfsd.gov.hk/eng/aboutus/enquiry/download/index.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular_old.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/notices/code.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/notices/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/fire-safety/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/fire-safety/cap572_succ/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/fire-safety/fsi_sample/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/fsd_cwci/index.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/licensing_intro.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premise_pe.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_columbaria.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_ewaste.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_school.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       circular_letters:
         # FSD Circular Letters crawler.
         page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular.html"
@@ -571,6 +802,85 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      labour_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.labour.gov.hk/eng/public/content2_9c.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_9b.htm"
+          - "https://www.labour.gov.hk/eng/faq/oshq9_whole.html"
+          - "https://www.labour.gov.hk/eng/faq/oshq8_whole.html"
+          - "https://www.labour.gov.hk/eng/public/content2_10.htm"
+          - "https://www.labour.gov.hk/eng/faq/oshq4_whole.html"
+          - "https://www.labour.gov.hk/eng/faq/cap57l_whole.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_8c.htm"
+          - "https://www.labour.gov.hk/eng/faq/smw_coverage.htm"
+          - "https://www.labour.gov.hk/eng/faq/oshq7_whole.html"
+          - "https://www.labour.gov.hk/eng/faq/cap57n_whole.htm"
+          - "https://www.labour.gov.hk/eng/faq/cap57m_whole.htm"
+          - "https://www.labour.gov.hk/eng/faq/cap57b_whole.htm"
+          - "https://www.labour.gov.hk/eng/faq/cap282d_whole.htm"
+          - "https://www.labour.gov.hk/eng/public/Adopt_Employee_oriented_Good_People_Management.htm"
+          - "https://www.labour.gov.hk/eng/public/Calculation_of_Relevant_Statutory_Entitlements.htm"
+          - "https://www.labour.gov.hk/eng/public/ConciseGuide.htm"
+          - "https://www.labour.gov.hk/eng/public/Employment_of_the_Elderly.htm"
+          - "https://www.labour.gov.hk/eng/public/Establish_Effective_Communication_and_Consultation_between_Employers_and_Employees.htm"
+          - "https://www.labour.gov.hk/eng/public/Family_friendly_Employment_Practices_Working_Parents.htm"
+          - "https://www.labour.gov.hk/eng/public/Family_friendly_Employment_Practices_Young_Employees.htm"
+          - "https://www.labour.gov.hk/eng/public/Maternity_Protection_2020.htm"
+          - "https://www.labour.gov.hk/eng/public/PlaySafe.htm"
+          - "https://www.labour.gov.hk/eng/public/Use_Written_Employment_Contract.htm"
+          - "https://www.labour.gov.hk/eng/public/Wage_Reductions_and_Retrenchments.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_1.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_12.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_2.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_4.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_4a.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_5.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_7.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_8e.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_8f.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_9e.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_smw.htm"
+          - "https://www.labour.gov.hk/eng/public/content2_smw_2025.htm"
+          - "https://www.labour.gov.hk/eng/public/content3_smw.htm"
+          - "https://www.labour.gov.hk/eng/public/content4_smw.htm"
+          - "https://www.labour.gov.hk/eng/public/csc.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2003/home/index.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2005/home/index.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2007/home/index.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2010/home/index.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2012/home/index.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2013/home/index.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2015/home/index.htm"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2017/index.html"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2019/index.html"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2021/index.html"
+          - "https://www.labour.gov.hk/eng/public/dd/lab/report/2023/index.html"
+          - "https://www.labour.gov.hk/eng/public/emp_cont/index.htm"
+          - "https://www.labour.gov.hk/eng/public/eo.htm"
+          - "https://www.labour.gov.hk/eng/public/gpm_1.htm"
+          - "https://www.labour.gov.hk/eng/public/gpm_2.htm"
+          - "https://www.labour.gov.hk/eng/public/iprd/2011/ldtannualreport2011.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2014/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2015/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2016/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2017/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2018/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2019/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2020/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2021/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2022/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2023/index.html"
+          - "https://www.labour.gov.hk/eng/public/iprd/2024/index.html"
+          - "https://www.labour.gov.hk/eng/public/proper_keeping_WER.htm"
+          - "https://www.labour.gov.hk/eng/public/typhoon.htm"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       faq:
         # Labour Department Frequently Asked Questions crawler.
         page_url: "https://www.labour.gov.hk/eng/faq/content.htm"
@@ -646,6 +956,20 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      lands_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.landsd.gov.hk/en/resources/practice-notes/lao.html"
+          - "https://www.landsd.gov.hk/en/resources/practice-notes/laco.html"
+          - "https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html"
+          - "https://www.landsd.gov.hk/en/resources/practice-notes/smo.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       joint_practice_notes:
         # Lands Department Joint Practice Notes crawler.
         page_url: "https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html"
@@ -681,6 +1005,19 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      pland_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.pland.gov.hk/pland_en/tech_doc/hkpsg/index.html"
+          - "https://www.pland.gov.hk/pland_en/resources/approved_pb/others/index.html"
+          - "https://www.pland.gov.hk/pland_en/resources/site_wind/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       standards_guidelines:
         # PlanD Hong Kong Planning Standards and Guidelines crawler.
         page_url: "https://www.pland.gov.hk/pland_en/tech_doc/hkpsg/index.html"
@@ -716,6 +1053,21 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      td_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/environmental_report_of_transport_department/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/atc2024/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/annual_transport_digest/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/Traffic_Study_for_Mid_Levels_Area/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       annual_digest:
         # TD Annual Transport Digest latest-year section/subsection page crawler.
         annual_index_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/annual_transport_digest/index.html"
@@ -823,6 +1175,48 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      wsd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.wsd.gov.hk/en/water-safety/fresh-water-management-system-/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/common-observations-in-plumbing-proposals/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/automatic-meter-reading/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/faqs-for-obsolete-cls/index.html"
+          - "https://www.wsd.gov.hk/en/water-safety/flushing-water/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/information-for-licensed-plumbers/demo-videos-on-installation-of-security-seals/index.html"
+          - "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/standard-drawings/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/voluntary-continuing-professional-development-sche/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/information-for-licensed-plumbers/do-not-install-unauthorised-fresh-water-cooling-to/index.html"
+          - "https://www.wsd.gov.hk/en/water-safety/wspss/index.html"
+          - "https://www.wsd.gov.hk/en/water-safety/water-safety-in-buildings/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/licensed-plumbers/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/information-for-licensed-plumbers/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/licensed-plumbers/how-to-apply/application-for-licence/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/pipes-and-fittings-to-be-used-in-inside-service-or/voluntary-ga-shop-scheme/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/pipes-and-fittings-to-be-used-in-inside-service-or/voluntary-labelling-scheme-on-drinking-water-dispe/application-requirements/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/pipes-and-fittings-to-be-used-in-inside-service-or/voluntary-labelling-scheme-on-drinking-water-dispe/how-to-apply/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/pipes-and-fittings-to-be-used-in-inside-service-or/voluntary-labelling-scheme-on-drinking-water-dispe/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/pipes-and-fittings-to-be-used-in-inside-service-or/voluntary-labelling-scheme-on-drinking-water-dispe/introduction/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/guide-to-application-for-water-supply/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index_id_406.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index_id_493.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/technical-committee/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/voluntary-continuing-professional-development-sche/accreditation/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-flow-controllers/wels-on-flow-controllers-how-to-apply/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-showers-for-bathing/wels-on-showers-for-bathing-how-to-apply/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-urinal-equipment/wels-on-urinal-equipment-how-to-apply/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-washing-machines/wels-on-washing-machine-how-to-apply/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-water-closets/wels-on-water-closet-how-to-apply/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-water-closets/wels-on-water-closet-publications/index.html"
+          - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-water-taps/wels-on-water-taps-how-to-apply/index.html"
+          - "https://www.wsd.gov.hk/en/water-safety/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       mechanical_electrical_ss:
         # WSD Mechanical & Electrical Standard Specification crawler.
         page_url: "https://www.wsd.gov.hk/en/publications-and-statistics/guidelines-reports-drawings-specifications/mechanical-electrical-standard-specification/index.html"
@@ -1005,6 +1399,28 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      epd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives/aqoreview2016.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/noise/help_corner/da.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/noise/guide_ref/noise_guidelines.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives/2030aqosreview.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives/public-consultation.html"
+          - "https://www.epd.gov.hk/epd/english/resources_pub/policy_documents/index_archive.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/studyrpts/ferries_ULSD.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/studyrpts/acid_rain_archives.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/waste/guide_ref/daso_gr.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives/air_quality_objectives.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives/Historical_AQO.html"
+          - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_maincontent.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       air:
         # EPD Air main-content crawler (English + Traditional Chinese) with scoped traversal.
         seed_url: "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_maincontent.html"
@@ -1179,6 +1595,53 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      emsd_document_sweep:
+        # Pages holding documents this department's own crawlers do not
+        # reach. Signed duplicates and zipped superseded editions are
+        # excluded: they carry no text the current version does not.
+        page_urls:
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/archived_circulars/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/publications/general/index.html#eps"
+          - "https://bestpractice.emsd.gov.hk/en/resource"
+          - "https://www.emsd.gov.hk/beeo/en/mibec_beeo_circular.html"
+          - "https://www.emsd.gov.hk/tc/gas_safety/publications/general/index.html"
+          - "https://www.emsd.gov.hk/en/gas_safety/publications/general/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/lift_modernisation_resource_corner/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/qlsrs/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/publications/codes_of_practice/index.html"
+          - "https://www.emsd.gov.hk/en/gas_safety/related_information_for_competent_person/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/publications/guidance_notes_guidelines/notes_for_registered_electrical_workers/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/publications/guidance_notes_guidelines/notes_for_registered_electrical_contractors/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/publications/guidance_notes_guidelines/notes_on_examination_for_registration_as_a_grade_c/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/new_edition_cop/new_edition_cop_electricity_wiring_regulations/index.html"
+          - "https://www.emsd.gov.hk/en/railway_safety/regulating_railway_safety/index.html"
+          - "https://www.emsd.gov.hk/en/railway_safety/publication/index.html"
+          - "https://www.emsd.gov.hk/tc/lifts_and_escalators_safety/information_for_the_registered_workers/cpd_of_registered_lift_and_escalator_workers/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/guidance_notes_guidelines/index.html"
+          - "https://www.emsd.gov.hk/en/gas_safety/statutory_advisory_bodies/gas_safety_advisory_committee_gsac/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/publications/guidance_notes_guidelines/index.html"
+          - "http://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contractors_performance_rating/index.html"
+          - "https://www.emsd.gov.hk/beeo/en/mibec_beeo_WhatsNews.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/how_to_apply/registering_as_an_electrical_worker/index.html"
+          - "https://www.emsd.gov.hk/en/electricity_safety/information_for_the_electrical_trade/electricity_news/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/digital_log_books_system/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/how_to_apply/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contractors_performance_rating/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contractors_performance_rating/past_escalator_contractors_performance_rating/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contractors_performance_rating/past_lift_contractors_performance_rating/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contractors_performance_rating/reported_escalator_incident_records/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contractors_performance_rating/reported_lift_incident_records/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/general_report/lift_and_escalator_newsletter/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/specified_forms/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/lifts_not_equipped_modern_safety_devices/index.html"
+          - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/lift_and_escalator_safety_advisory_committee_lesa/agenda_minutes_of_the_committee_meetings/index.html"
+        exclude_url_patterns:
+          - '(se|ov)\.(pdf|docx?)$'
+          - '\.zip$'
+        doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+
       electric_safety_cop:
         # EMSD Electricity Safety - New Edition of Code of Practice.
         landing_url: "https://www.emsd.gov.hk/en/electricity_safety/new_edition_cop/index.html"
