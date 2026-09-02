@@ -175,12 +175,22 @@ def _load_v2_latest_records(out_root: Path) -> list[dict[str, Any]] | None:
 def _load_previous_records_by_source(
     out_root: Path,
 ) -> dict[str, dict[str, dict[str, Any]]]:
-    records = _load_v2_latest_records(out_root)
-    if records is None:
-        path = _find_previous_urls_jsonl(out_root)
-        if path is None:
-            return {}
+    # latest/urls.jsonl is the canonical snapshot of the previous run, so it is
+    # what a run must start from. The archive_v2 reconstruction (month base +
+    # the day's delta) is only a fallback for a checkout that has no latest.
+    #
+    # It used to be the other way round, and that lost data: archiving is
+    # skipped when the day already has a delta, so the reconstruction reflects
+    # only the first run of a day. A second run the same day then rebuilt
+    # latest from that stale baseline and every record the runs in between had
+    # added was gone — 7,578 rows across 25 sections on 2026-09-02.
+    path = _find_previous_urls_jsonl(out_root)
+    if path is not None:
         records = list(iter_jsonl(path))
+    else:
+        records = _load_v2_latest_records(out_root)
+        if records is None:
+            return {}
 
     out: dict[str, dict[str, dict[str, Any]]] = {}
     for rec in records:
@@ -341,6 +351,23 @@ def _detect_regressions(
         sorted(zeroed, key=lambda r: r["crawler"]),
         sorted(dropped, key=lambda r: r["crawler"]),
     )
+
+
+def _detect_total_row_regression(
+    *, previous_rows: int, current_rows: int, tolerance: float = 0.05
+) -> dict[str, int] | None:
+    """Flag a merged snapshot that is materially smaller than the last one.
+
+    The per-crawler check only sees crawlers that ran. A run that starts from a
+    stale baseline can silently drop the records of crawlers that did not run,
+    and nothing per-crawler will notice. The snapshot as a whole shrinking by
+    more than a few percent in one run is the signal for that.
+    """
+    if previous_rows <= 0:
+        return None
+    if current_rows < previous_rows * (1.0 - tolerance):
+        return {"previous": previous_rows, "current": current_rows}
+    return None
 
 
 def _merge_records_for_latest(
@@ -579,6 +606,16 @@ def main() -> int:
             "last_successful_run_date": run_day,
         }
 
+    previous_total = sum(len(v) for v in previous_records_by_source.values())
+    total_regression = _detect_total_row_regression(
+        previous_rows=previous_total, current_rows=len(all_records)
+    )
+    if total_regression:
+        print(
+            f"  REGRESSION snapshot shrank: {total_regression['current']} rows, "
+            f"down from {total_regression['previous']}"
+        )
+
     latest_dir = out_root / "latest"
     urls_path = latest_dir / "urls.jsonl"
     rows = write_jsonl(urls_path, all_records)
@@ -599,6 +636,7 @@ def main() -> int:
         # and fails the job then.
         "regressions_zeroed": zeroed,
         "regressions_dropped": dropped,
+        "regression_total_rows": total_regression,
         "schedule": schedule_decisions,
     }
     write_json(latest_dir / "summary.json", summary)
