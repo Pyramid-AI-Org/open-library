@@ -14,6 +14,7 @@ from crawlers.base import (
     canonicalize_url,
     clean_text,
     get_with_retries,
+    infer_name_from_link,
     path_ext,
     sleep_seconds,
 )
@@ -27,6 +28,10 @@ class _RowData:
     pn_new: str
     subject: str
     download_href: str | None
+    # A practice note row links more than the note itself: appendices, sample
+    # forms and lease clauses hang off the same row. Taking only the first link
+    # in the download column collected 101 of the 312 documents on the page.
+    extra_hrefs: tuple[str, ...] = ()
 
 
 class _LaoDesktopTableParser(HTMLParser):
@@ -49,6 +54,7 @@ class _LaoDesktopTableParser(HTMLParser):
         self._row_pn_anchor_id: str | None = None
         self._row_subject = ""
         self._row_download_href: str | None = None
+        self._row_extra_hrefs: list[str] = []
 
         self.rows: list[_RowData] = []
 
@@ -82,6 +88,7 @@ class _LaoDesktopTableParser(HTMLParser):
             self._row_pn_anchor_id = None
             self._row_subject = ""
             self._row_download_href = None
+            self._row_extra_hrefs = []
             return
 
         if not self._in_row:
@@ -103,8 +110,16 @@ class _LaoDesktopTableParser(HTMLParser):
                 if pn_id:
                     self._row_pn_anchor_id = pn_id
 
-            if self._td_index == 3 and self._row_download_href is None and href:
-                self._row_download_href = href
+            if self._td_index == 3 and href:
+                if self._row_download_href is None:
+                    self._row_download_href = href
+                elif href not in self._row_extra_hrefs:
+                    self._row_extra_hrefs.append(href)
+            elif href and self._td_index in (4, 5):
+                # Appendices are commonly linked from the subject or remarks
+                # column rather than the download column.
+                if href not in self._row_extra_hrefs:
+                    self._row_extra_hrefs.append(href)
 
             if self._td_index == 4:
                 self._in_subject_anchor = True
@@ -153,6 +168,7 @@ class _LaoDesktopTableParser(HTMLParser):
                         pn_new=pn_new,
                         subject=subject,
                         download_href=self._row_download_href,
+                        extra_hrefs=tuple(self._row_extra_hrefs),
                     )
                 )
 
@@ -241,35 +257,50 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-            raw_href = clean_text(str(row.download_href or ""))
-            if not raw_href:
-                continue
-
-            candidate_url = _canonicalize(urljoin(page_url, raw_href))
-            if not candidate_url:
-                continue
-            if path_ext(candidate_url) not in _ALLOWED_EXTENSIONS:
-                continue
-            if candidate_url in seen_urls:
-                continue
-
             publish_date = _publish_date_from_pn_new(row.pn_new)
-            name = row.subject or f"LAO Practice Note {row.pn_new}"
+            base_name = row.subject or f"LAO Practice Note {row.pn_new}"
 
-            out.append(
-                ctx.make_record(
-                    url=candidate_url,
-                    name=name,
-                    discovered_at_utc=ctx.run_date_utc,
-                    source=self.name,
-                    publish_date=publish_date,
-                    meta={
-                        "discovered_from": page_url,
-                        "ref_no": row.pn_new,
-                    },
+            for position, raw in enumerate(
+                (row.download_href or "",) + row.extra_hrefs
+            ):
+                raw_href = clean_text(str(raw or ""))
+                if not raw_href:
+                    continue
+
+                candidate_url = _canonicalize(urljoin(page_url, raw_href))
+                if not candidate_url:
+                    continue
+                if path_ext(candidate_url) not in _ALLOWED_EXTENSIONS:
+                    continue
+                if candidate_url in seen_urls:
+                    continue
+
+                # The first link is the note; the rest are its attachments, and
+                # sharing the note's title verbatim would make them
+                # indistinguishable in the viewer.
+                name = base_name
+                if position:
+                    attachment = infer_name_from_link(None, candidate_url)
+                    name = f"{base_name} - {attachment}" if attachment else base_name
+
+                out.append(
+                    ctx.make_record(
+                        url=candidate_url,
+                        name=name,
+                        discovered_at_utc=ctx.run_date_utc,
+                        source=self.name,
+                        publish_date=publish_date,
+                        meta={
+                            "discovered_from": page_url,
+                            "ref_no": row.pn_new,
+                            "record_kind": "note" if not position else "attachment",
+                        },
+                    )
                 )
-            )
-            seen_urls.add(candidate_url)
+                seen_urls.add(candidate_url)
+
+                if len(out) >= max_total_records:
+                    break
 
         out.sort(
             key=lambda r: (
