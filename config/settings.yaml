@@ -367,6 +367,42 @@ crawlers:
           - page_url: "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2020/index.html"
             heading: "Continuously Updated Version incorporating Amendments"
 
+      ceo_and_port_works:
+        # /publications/ceo/ is a sibling of the GEO branch; scoping to GEO
+        # alone missed the Port Works Design Manual entirely.
+        page_urls:
+          - "https://www.cedd.gov.hk/eng/publications/ceo/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/chtdatum/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/d-guidelines-frp/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/guidelines-design-im-eco-as/index.html"
+          # The manual's parts each sit on their own page, including the
+          # superseded editions of Part 1.
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm1-2006/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm1-2014/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm1-2018/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm1-2020/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm1-2022/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm2/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm3/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm4/index.html"
+          - "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm5/index.html"
+        doc_extensions: [".pdf"]
+
+      mines_and_blasting:
+        # Blasting and explosives guidance, filed under our-major-services
+        # rather than publications.
+        page_urls:
+          - "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/index.html"
+          - "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+          # Guidance and practice notes are two levels down.
+          - "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information-provided-by-mines-division/index.html"
+          - "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information-provided-by-mines-division/mines-division-guidance-notes/index.html"
+          - "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information-provided-by-mines-division/mines-division-practice-notes/index.html"
+          - "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information-provided-by-mines-division/list-of-approved-explosives-in-hong-kong/index.html"
+        doc_extensions: [".pdf"]
+
       cedd_ceo_publications:
         # CEDD CEO publications crawler.
         page_url: "https://www.cedd.gov.hk/eng/publications/ceo/index.html"
@@ -657,6 +693,14 @@ crawlers:
         # PlanD Joint Practice Notes crawler.
         page_url: "https://www.pland.gov.hk/pland_en/tech_doc/jpn/index.html"
 
+      approved_planning_briefs:
+        # Site-specific development parameters approved by the Town Planning
+        # Board. A branch of /resources/ that was never seeded.
+        page_urls:
+          - "https://www.pland.gov.hk/pland_en/resources/approved_pb/hd_pb/index.html"
+          - "https://www.pland.gov.hk/pland_en/resources/approved_pb/others/index.html"
+        doc_extensions: [".pdf"]
+
   # ============================================================================
   # TD - Transport Department
   # ============================================================================
@@ -696,6 +740,18 @@ crawlers:
         chapter_path_prefix: "/en/publications_and_press_releases/publications/free_publications/the_third_comprehensive_transport_study/"
         publish_date: "1999-01-01"
 
+      free_publications_subsections:
+        # Six of the nine sub-series linked from the free-publications index
+        # were never configured, so their documents were unreachable.
+        page_urls:
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/environmental_report_of_transport_department/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/public_engagement_report_on_erp/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/Traffic_Study_for_Mid_Levels_Area/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/survey_on_goods_vehicles_trip_characteristics_2011/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/tcsfr/index.html"
+          - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/atci1/index.html"
+        doc_extensions: [".pdf"]
+
       free_publications:
         # TD Free Publications index PDF crawler.
         page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/index.html"
@@ -730,6 +786,26 @@ crawlers:
             page_url: "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/tcsfr/index.html"
             selection_mode: "heading_text_match"
             include_text: "Report and Executive Summary"
+
+  # ============================================================================
+  # TPB - Town Planning Board
+  # ============================================================================
+  tpb:
+    label: "Town Planning Board"
+    schedule:
+      enabled: true
+      interval_days: 7
+    base_url: "https://www.tpb.gov.hk"
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    max_total_records: 50000
+    content_element_id: "content"
+    pages:
+      planning_guidelines:
+        # TPB PG-No series: the guidelines the Board applies to planning
+        # applications. A complete series with no crawler at all until now.
+        page_url: "https://www.tpb.gov.hk/en/resources/tpb_guidelines/index.html"
+        doc_extensions: [".pdf"]
 
   # ============================================================================
   # WSD - Water Supplies Department
