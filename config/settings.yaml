@@ -182,6 +182,20 @@ crawlers:
         # Building Department codes, design manuals, and guidelines crawler.
         page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/index.html"
 
+      codes_and_design_manuals_subsections:
+        # Sub-sections linked from the codes index whose documents never appear
+        # on the index itself — 97 documents behind four links.
+        page_urls:
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/MWGG.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/MWTG.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/bmg.html"
+          - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/suos2011.html"
+
+      common_conditions_and_requirements:
+        # Structural submission conditions (SE-SA / SE-SC). 266 documents on one
+        # page, none of which were held: the section was never seeded at all.
+        page_url: "https://www.bd.gov.hk/en/resources/codes-and-references/common-conditions-and-requirements/index.html"
+
       practice_notes_and_circular_letters:
         # BD Practice Notes and Circular Letters.
         url_pnap: "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_pnap.html"
