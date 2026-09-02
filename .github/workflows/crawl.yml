@@ -190,8 +190,7 @@ jobs:
               )
 
           if zeroed or total:
-              print("
-Silent-failure regression detected. Data was still published.")
+              print("Silent-failure regression detected. Data was still published.")
               sys.exit(1)
 
           print("No silent-failure regressions detected.")
