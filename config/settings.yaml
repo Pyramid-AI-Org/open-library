@@ -45,7 +45,12 @@ crawlers:
   legco:
     label: "Legislative Council"
     schedule:
-      enabled: true
+      # [2026-09-01] Suspended. www.legco.gov.hk serves an incomplete certificate
+      # chain (leaf only, no Hongkong Post intermediate), so every fetch fails
+      # verification and all seven pages collect nothing. The fix is on branch
+      # fix/hk-silent-failures; re-enable together with it. Left disabled so the
+      # regression guardrail below is not permanently red on these seven rows.
+      enabled: false
       interval_days: 1
     base_url: "https://www.legco.gov.hk"
     request_delay_seconds: 0.5
