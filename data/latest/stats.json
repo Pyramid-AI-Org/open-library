@@ -1,57 +1,43 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 85154,
-    "records_total": 85154,
+    "lines_total": 78610,
+    "records_total": 78610,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
-      "emsd_document_sweep": 859,
       "epd.publications_other_reports": 3,
-      "codes_and_references_sections": 56,
       "epd.publications_study_report": 41,
-      "epd_document_sweep": 70,
       "epd.publications_guidance_documents": 312,
       "epd.policy_documents": 13,
       "emsd.gas_safety_tips": 71,
       "epd.publications_technical_memorandum": 21,
       "epd.publications_propeccpns": 16,
       "occupational_health_part_d": 18,
-      "bd_document_sweep": 1638,
       "notices_and_reports": 20,
-      "labour_document_sweep": 626,
       "emsd.regulating_railway_safety": 7,
       "enhancing_plumbing_works_control": 3,
-      "wsd_document_sweep": 196,
       "emsd.publications_handbooks": 8,
-      "fsd_document_sweep": 311,
       "archsd_practices_and_guidelines": 53,
       "archsd_technical_documents": 135,
       "scheduled_areas": 346,
       "codes_design_manuals_and_guidelines": 53,
       "basic_pages": 31,
-      "codes_and_design_manuals_subsections": 84,
-      "common_conditions_and_requirements": 265,
       "practice_notes_and_circular_letters": 468,
       "central_data_bank": 18,
-      "mines_and_blasting": 28,
       "cedd_ceo_publications": 8,
       "cedd_geo_publications": 1235,
-      "ceo_and_port_works": 51,
-      "cedd_document_sweep": 492,
       "cedd_standards_spec_handbooks_cost": 200,
       "cedd_eacsb_handbook": 1,
       "cedd_technical_circulars": 21,
       "devb_press_releases": 3644,
       "devb_speeches_and_presentations": 481,
       "devb_publications": 1603,
-      "devb_document_sweep": 308,
       "devb_general_circulars": 3,
       "devb_planning_and_lands_technical_circulars": 4,
-      "devb_works_technical_circulars_um": 71,
+      "devb_works_technical_circulars_um": 346,
       "tel_directory": 16049,
       "guidelines": 5,
       "technical_circulars_and_practice_notes": 56,
-      "dsd_document_sweep": 17,
       "technical_manuals": 17,
       "technical_papers_published_by_dsd": 104,
       "beeo_codes_guidelines": 40,
@@ -76,16 +62,12 @@
       "epd.waste": 597,
       "epd.water": 246,
       "herbarium": 3348,
-      "circular_letters_obsolete": 20,
       "checklist": 8,
       "circular_letters": 143,
       "licensing_food_premises": 67,
-      "circular_letters_old": 25,
       "technical_guidance": 3,
       "notices": 7,
       "code_of_practice": 1,
-      "hyd_document_sweep": 313,
-      "hyd_standard_drawings": 575,
       "hyd_technical_documents": 357,
       "hksar_press_releases": 46119,
       "pressure_equipment": 16,
@@ -99,24 +81,18 @@
       "occupational_health_part_a": 4,
       "occupational_safety_part_b": 18,
       "info_notes": 11,
-      "lands_document_sweep": 441,
       "joint_practice_notes": 18,
       "laco_circular_memorandum": 47,
       "lao_practice_notes": 101,
       "smo_practice_notes": 4,
-      "approved_planning_briefs": 118,
-      "pland_document_sweep": 60,
       "standards_guidelines": 12,
       "practice_notes": 11,
       "third_comprehensive_study": 11,
-      "free_publications_subsections": 45,
-      "td_document_sweep": 38,
       "miscellaneous": 6,
       "second_parking_demand": 11,
       "transport_planning": 11,
       "free_publications": 10,
       "annual_digest": 206,
-      "planning_guidelines": 31,
       "enhancement_of_control_of_inside_services": 11,
       "information_for_licensed_plumbers": 4,
       "licensed_plumbers": 8,
@@ -128,7 +104,6 @@
       "qualified_persons": 4,
       "water_safety_plan_for_buildings": 11,
       "water_safety_plan_subsidy_scheme": 14,
-      "circular_letters_superseded": 152,
       "water_efficiency_labelling_scheme": 31,
       "guidelines_reports_drawings_specifications": 8,
       "plumbing_requirements": 5,
@@ -275,139 +250,6 @@
         "count": 59
       }
     },
-    "emsd_document_sweep": {
-      "records": 859,
-      "unique_urls": 859,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 859,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 859
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 859
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars...",
-            "count": 150
-          },
-          {
-            "value": "https://www.emsd.gov.hk/tc/gas_safety/publications/general/index.html",
-            "count": 69
-          },
-          {
-            "value": "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contracto...",
-            "count": 68
-          },
-          {
-            "value": "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contracto...",
-            "count": 65
-          },
-          {
-            "value": "https://www.emsd.gov.hk/en/electricity_safety/publications/general/index.html...",
-            "count": 63
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          859
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.emsd.gov.hk",
-          814
-        ],
-        [
-          "bestpractice.emsd.gov.hk",
-          32
-        ],
-        [
-          "wcms.emsd.gov.hk",
-          8
-        ],
-        [
-          "www.cic.hk",
-          3
-        ],
-        [
-          "re.emsd.gov.hk",
-          2
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          852
-        ],
-        [
-          ".docx",
-          7
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 859
-      }
-    },
     "epd.publications_other_reports": {
       "records": 3,
       "unique_urls": 3,
@@ -507,127 +349,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 3
-      }
-    },
-    "codes_and_references_sections": {
-      "records": 56,
-      "unique_urls": 56,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 56,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 56
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 56
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/epidemic-prevention-i...",
-            "count": 16
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/precautionary-measure...",
-            "count": 11
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/pre-accepted-computer...",
-            "count": 7
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/index_TeachingKit.html",
-            "count": 5
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/transitional-housing-...",
-            "count": 5
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          56
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.bd.gov.hk",
-          52
-        ],
-        [
-          "www.labour.gov.hk",
-          3
-        ],
-        [
-          "www.eaa.org.hk",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          56
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 56
       }
     },
     "epd.publications_study_report": {
@@ -747,131 +468,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 41
-      }
-    },
-    "epd_document_sweep": {
-      "records": 70,
-      "unique_urls": 70,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 70,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 70
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 70
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.epd.gov.hk/epd/english/environmentinhk/noise/guide_ref/noise_guid...",
-            "count": 19
-          },
-          {
-            "value": "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives...",
-            "count": 15
-          },
-          {
-            "value": "https://www.epd.gov.hk/epd/english/environmentinhk/noise/help_corner/da.html",
-            "count": 9
-          },
-          {
-            "value": "https://www.epd.gov.hk/epd/english/environmentinhk/air/studyrpts/acid_rain_ar...",
-            "count": 8
-          },
-          {
-            "value": "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives...",
-            "count": 5
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          70
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.epd.gov.hk",
-          58
-        ],
-        [
-          "www.legco.gov.hk",
-          5
-        ],
-        [
-          "www.eeb.gov.hk",
-          4
-        ],
-        [
-          "www.gld.gov.hk",
-          3
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          70
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 70
       }
     },
     "epd.publications_guidance_documents": {
@@ -1703,155 +1299,6 @@
         "count": 18
       }
     },
-    "bd_document_sweep": {
-      "records": 1638,
-      "unique_urls": 1638,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 1638,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 1638
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 1638
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/scheduled-areas/index...",
-            "count": 346
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-ci...",
-            "count": 271
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/common-conditions-and...",
-            "count": 265
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-ci...",
-            "count": 223
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-ci...",
-            "count": 63
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          1638
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.bd.gov.hk",
-          1624
-        ],
-        [
-          "www.labour.gov.hk",
-          7
-        ],
-        [
-          "www.gld.gov.hk",
-          2
-        ],
-        [
-          "brplatform.org.hk",
-          2
-        ],
-        [
-          "www.oshc.org.hk",
-          1
-        ],
-        [
-          "bm.icac.hk",
-          1
-        ],
-        [
-          "esh.bd.gov.hk",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          1620
-        ],
-        [
-          ".doc",
-          9
-        ],
-        [
-          ".xlsx",
-          6
-        ],
-        [
-          ".docx",
-          3
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 1638
-      }
-    },
     "notices_and_reports": {
       "records": 20,
       "unique_urls": 20,
@@ -1970,135 +1417,6 @@
         "min": "2026-09-01T07:18:01.066058+00:00",
         "max": "2026-09-01T07:18:01.066058+00:00",
         "count": 20
-      }
-    },
-    "labour_document_sweep": {
-      "records": 626,
-      "unique_urls": 626,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 626,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 626
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 626
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.labour.gov.hk/eng/public/content2_7.htm",
-            "count": 72
-          },
-          {
-            "value": "https://www.labour.gov.hk/eng/public/eo.htm",
-            "count": 62
-          },
-          {
-            "value": "https://www.labour.gov.hk/eng/public/content2_9b.htm",
-            "count": 54
-          },
-          {
-            "value": "https://www.labour.gov.hk/eng/public/content2_5.htm",
-            "count": 46
-          },
-          {
-            "value": "https://www.labour.gov.hk/eng/public/content2_smw.htm",
-            "count": 45
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          626
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.labour.gov.hk",
-          614
-        ],
-        [
-          "www.fdh.labour.gov.hk",
-          10
-        ],
-        [
-          "www.yes.labour.gov.hk",
-          2
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          617
-        ],
-        [
-          ".doc",
-          6
-        ],
-        [
-          ".docx",
-          3
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 626
       }
     },
     "emsd.regulating_railway_safety": {
@@ -2311,135 +1629,6 @@
         "count": 3
       }
     },
-    "wsd_document_sweep": {
-      "records": 196,
-      "unique_urls": 196,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 196,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 196
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 196
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.wsd.gov.hk/en/water-safety/fresh-water-management-system-/index.html",
-            "count": 28
-          },
-          {
-            "value": "https://www.wsd.gov.hk/en/plumbing-engineering/automatic-meter-reading/index....",
-            "count": 18
-          },
-          {
-            "value": "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-inst...",
-            "count": 18
-          },
-          {
-            "value": "https://www.wsd.gov.hk/en/water-safety/wspss/index.html",
-            "count": 13
-          },
-          {
-            "value": "https://www.wsd.gov.hk/en/plumbing-engineering/technical-committee/index.html",
-            "count": 13
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          196
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.wsd.gov.hk",
-          195
-        ],
-        [
-          "www.itc.gov.hk",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          163
-        ],
-        [
-          ".docx",
-          30
-        ],
-        [
-          ".xlsx",
-          2
-        ],
-        [
-          ".doc",
-          1
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 196
-      }
-    },
     "emsd.publications_handbooks": {
       "records": 8,
       "unique_urls": 8,
@@ -2559,131 +1748,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 8
-      }
-    },
-    "fsd_document_sweep": {
-      "records": 311,
-      "unique_urls": 311,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 311,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 311
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 311
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_food.html",
-            "count": 83
-          },
-          {
-            "value": "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/fsd_cwci/index.html",
-            "count": 43
-          },
-          {
-            "value": "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premise_pe.html",
-            "count": 34
-          },
-          {
-            "value": "https://www.hkfsd.gov.hk/eng/aboutus/enquiry/download/index.html",
-            "count": 31
-          },
-          {
-            "value": "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular_old.html",
-            "count": 27
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          311
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.hkfsd.gov.hk",
-          306
-        ],
-        [
-          "eform.hkfsd.gov.hk",
-          4
-        ],
-        [
-          "www.csb.gov.hk",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          307
-        ],
-        [
-          ".doc",
-          4
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 311
       }
     },
     "archsd_practices_and_guidelines": {
@@ -3341,212 +2405,6 @@
         "count": 31
       }
     },
-    "codes_and_design_manuals_subsections": {
-      "records": 84,
-      "unique_urls": 84,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 84,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 84
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 84
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manu...",
-            "count": 28
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manu...",
-            "count": 22
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manu...",
-            "count": 18
-          },
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manu...",
-            "count": 16
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          84
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.bd.gov.hk",
-          84
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          84
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 84
-      }
-    },
-    "common_conditions_and_requirements": {
-      "records": 265,
-      "unique_urls": 265,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 265,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 265
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 265
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.bd.gov.hk/en/resources/codes-and-references/common-conditions-and...",
-            "count": 265
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          265
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.bd.gov.hk",
-          265
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          265
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 265
-      }
-    },
     "practice_notes_and_circular_letters": {
       "records": 468,
       "unique_urls": 468,
@@ -3802,125 +2660,6 @@
         "count": 18
       }
     },
-    "mines_and_blasting": {
-      "records": 28,
-      "unique_urls": 28,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 1,
-        "by_kind": {
-          "meta_value_outlier": 1
-        }
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 28,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 28
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 28
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/m...",
-            "count": 12
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/m...",
-            "count": 7
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/m...",
-            "count": 5
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/m...",
-            "count": 3
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/m...",
-            "count": 1
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          28
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.cedd.gov.hk",
-          27
-        ],
-        [
-          "www.bd.gov.hk",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          28
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 28
-      }
-    },
     "cedd_ceo_publications": {
       "records": 8,
       "unique_urls": 8,
@@ -4149,246 +2888,6 @@
         "min": "2026-09-01T07:18:01.066058+00:00",
         "max": "2026-09-01T07:18:01.066058+00:00",
         "count": 1235
-      }
-    },
-    "ceo_and_port_works": {
-      "records": 51,
-      "unique_urls": 51,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 51,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 51
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 51
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm3/index.html",
-            "count": 10
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm4/index.html",
-            "count": 9
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm5/index.html",
-            "count": 8
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/index.html",
-            "count": 7
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/ceo/pwdm/manu-pwdm2/index.html",
-            "count": 7
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          51
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.cedd.gov.hk",
-          51
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          51
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 51
-      }
-    },
-    "cedd_document_sweep": {
-      "records": 492,
-      "unique_urls": 492,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 48,
-        "by_kind": {
-          "meta_value_outlier": 48
-        }
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 492,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 492
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 492
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/eacsb-handbook/index.html",
-            "count": 170
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/bim-ob...",
-            "count": 41
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-g...",
-            "count": 39
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-p...",
-            "count": 38
-          },
-          {
-            "value": "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-g...",
-            "count": 35
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          492
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.cedd.gov.hk",
-          492
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          478
-        ],
-        [
-          ".xlsx",
-          11
-        ],
-        [
-          ".docx",
-          2
-        ],
-        [
-          ".doc",
-          1
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 492
       }
     },
     "cedd_standards_spec_handbooks_cost": {
@@ -5110,135 +3609,6 @@
         "count": 1603
       }
     },
-    "devb_document_sweep": {
-      "records": 308,
-      "unique_urls": 308,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 308,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 308
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 308
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.devb.gov.hk/en/publications_and_press_releases/publications/const...",
-            "count": 36
-          },
-          {
-            "value": "https://www.devb.gov.hk/en/publications_and_press_releases/publications/devb-...",
-            "count": 19
-          },
-          {
-            "value": "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/annual_concret...",
-            "count": 19
-          },
-          {
-            "value": "https://www.devb.gov.hk/en/issues_in_focus/streamlining_development_control/a...",
-            "count": 18
-          },
-          {
-            "value": "https://www.devb.gov.hk/en/construction_sector_matters/contractors/contractor...",
-            "count": 17
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          308
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.devb.gov.hk",
-          307
-        ],
-        [
-          "www.wsd.gov.hk",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          284
-        ],
-        [
-          ".docx",
-          19
-        ],
-        [
-          ".xlsx",
-          3
-        ],
-        [
-          ".doc",
-          2
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 308
-      }
-    },
     "devb_general_circulars": {
       "records": 3,
       "unique_urls": 3,
@@ -5495,14 +3865,14 @@
       }
     },
     "devb_works_technical_circulars_um": {
-      "records": 71,
-      "unique_urls": 71,
+      "records": 346,
+      "unique_urls": 346,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 0,
-        "warnings": 3,
+        "warnings": 65,
         "by_kind": {
-          "meta_value_outlier": 3
+          "meta_value_outlier": 65
         }
       },
       "required_field_null_missing_invalid": {
@@ -5548,7 +3918,7 @@
             "source_id",
             "url"
           ],
-          "count": 71
+          "count": 346
         }
       ],
       "meta_schema_signatures": [
@@ -5560,18 +3930,18 @@
             "revision_date",
             "revision_year"
           ],
-          "count": 71
+          "count": 346
         }
       ],
       "meta_schema_variants": 1,
       "meta_type_variation": {
         "revision_date": {
-          "str": 36,
-          "null": 35
+          "null": 302,
+          "str": 44
         },
         "revision_year": {
-          "str": 36,
-          "null": 35
+          "null": 302,
+          "str": 44
         }
       },
       "meta_top_scalar_values": {
@@ -5581,32 +3951,32 @@
             "count": 5
           },
           {
-            "value": "10/1997",
+            "value": "32/2004",
+            "count": 5
+          },
+          {
+            "value": "11/2007",
             "count": 3
           },
           {
-            "value": "06/2005",
+            "value": "04/1998",
             "count": 3
           },
           {
-            "value": "50/2002",
-            "count": 1
-          },
-          {
-            "value": "03/2023",
-            "count": 1
+            "value": "19/1997",
+            "count": 3
           }
         ],
         "discovered_from": [
           {
             "value": "https://www.devb.gov.hk/filemanager/technicalcirculars/list_technicalcircular...",
-            "count": 71
+            "count": 346
           }
         ],
         "revision_date": [
           {
             "value": "null",
-            "count": 35
+            "count": 302
           },
           {
             "value": "2021-06-02",
@@ -5628,7 +3998,7 @@
         "revision_year": [
           {
             "value": "null",
-            "count": 35
+            "count": 302
           },
           {
             "value": "2021",
@@ -5643,49 +4013,53 @@
             "count": 4
           },
           {
-            "value": "2018",
-            "count": 2
+            "value": "2014",
+            "count": 3
           }
         ]
       },
       "top_meta_keys": [
         [
           "circular_no",
-          71
+          346
         ],
         [
           "discovered_from",
-          71
+          346
         ],
         [
           "matched_years",
-          71
+          346
         ],
         [
           "revision_date",
-          71
+          346
         ],
         [
           "revision_year",
-          71
+          346
         ]
       ],
       "top_hosts": [
         [
           "www.devb.gov.hk",
-          71
+          346
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          71
+          345
+        ],
+        [
+          ".jpg",
+          1
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-01T07:18:01.066058+00:00",
-        "max": "2026-09-01T07:18:01.066058+00:00",
-        "count": 71
+        "min": "2026-09-02T12:24:05.744622+00:00",
+        "max": "2026-09-02T12:24:05.744622+00:00",
+        "count": 346
       }
     },
     "tel_directory": {
@@ -6244,107 +4618,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 56
-      }
-    },
-    "dsd_document_sweep": {
-      "records": 17,
-      "unique_urls": 17,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 17,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 17
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 17
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.dsd.gov.hk/EN/TechnicalDocuments/DSD_BIM_Reference_Materials/DSD_...",
-            "count": 10
-          },
-          {
-            "value": "https://www.dsd.gov.hk/EN/Technical_Documents/NEC_Corner/index.html",
-            "count": 7
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          17
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.dsd.gov.hk",
-          17
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          17
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 17
       }
     },
     "technical_manuals": {
@@ -9482,103 +7755,6 @@
         "count": 3348
       }
     },
-    "circular_letters_obsolete": {
-      "records": 20,
-      "unique_urls": 20,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 20,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 20
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 20
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular_obs.html",
-            "count": 20
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          20
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.hkfsd.gov.hk",
-          20
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          20
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 20
-      }
-    },
     "checklist": {
       "records": 8,
       "unique_urls": 8,
@@ -9990,103 +8166,6 @@
         "count": 67
       }
     },
-    "circular_letters_old": {
-      "records": 25,
-      "unique_urls": 25,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 25
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 25
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular_old.html",
-            "count": 25
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          25
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.hkfsd.gov.hk",
-          25
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          25
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T00:00:00+00:00",
-        "max": "2026-09-02T00:00:00+00:00",
-        "count": 25
-      }
-    },
     "technical_guidance": {
       "records": 3,
       "unique_urls": 3,
@@ -10395,236 +8474,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 1
-      }
-    },
-    "hyd_document_sweep": {
-      "records": 313,
-      "unique_urls": 313,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 313,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 313
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 313
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/manual...",
-            "count": 66
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/relate...",
-            "count": 47
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/technical_document/guidance_no...",
-            "count": 43
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_repor...",
-            "count": 11
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/others/hyd_environmental_repor...",
-            "count": 11
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          313
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.hyd.gov.hk",
-          312
-        ],
-        [
-          "www.tlb.gov.hk",
-          1
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          313
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 313
-      }
-    },
-    "hyd_standard_drawings": {
-      "records": 575,
-      "unique_urls": 575,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 575,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 575
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 575
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/standard_drawings/hyd_standard...",
-            "count": 171
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/standard_drawings/ltg_standard...",
-            "count": 121
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/standard_drawings/structures_s...",
-            "count": 68
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/standard_drawings/hyd_standard...",
-            "count": 66
-          },
-          {
-            "value": "https://www.hyd.gov.hk/en/technical_references/standard_drawings/hyd_standard...",
-            "count": 56
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          575
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.hyd.gov.hk",
-          575
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          575
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T00:00:00+00:00",
-        "max": "2026-09-02T00:00:00+00:00",
-        "count": 575
       }
     },
     "hyd_technical_documents": {
@@ -12281,123 +10130,6 @@
         "count": 11
       }
     },
-    "lands_document_sweep": {
-      "records": 441,
-      "unique_urls": 441,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 441,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 441
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 441
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/lao.html",
-            "count": 287
-          },
-          {
-            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/laco.html",
-            "count": 125
-          },
-          {
-            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html",
-            "count": 18
-          },
-          {
-            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/smo.html",
-            "count": 11
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          441
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.landsd.gov.hk",
-          441
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          384
-        ],
-        [
-          ".docx",
-          45
-        ],
-        [
-          ".doc",
-          12
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 441
-      }
-    },
     "joint_practice_notes": {
       "records": 18,
       "unique_urls": 18,
@@ -12898,212 +10630,6 @@
         "count": 4
       }
     },
-    "approved_planning_briefs": {
-      "records": 118,
-      "unique_urls": 118,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 118,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 118
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 118
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.pland.gov.hk/pland_en/resources/approved_pb/hd_pb/index.html",
-            "count": 96
-          },
-          {
-            "value": "https://www.pland.gov.hk/pland_en/resources/approved_pb/others/index.html",
-            "count": 22
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          118
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.pland.gov.hk",
-          118
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          118
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 118
-      }
-    },
-    "pland_document_sweep": {
-      "records": 60,
-      "unique_urls": 60,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 60,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 60
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 60
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.pland.gov.hk/pland_en/tech_doc/hkpsg/index.html",
-            "count": 25
-          },
-          {
-            "value": "https://www.pland.gov.hk/pland_en/resources/approved_pb/others/index.html",
-            "count": 22
-          },
-          {
-            "value": "https://www.pland.gov.hk/pland_en/resources/site_wind/index.html",
-            "count": 13
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          60
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.pland.gov.hk",
-          60
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          60
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 60
-      }
-    },
     "standards_guidelines": {
       "records": 12,
       "unique_urls": 12,
@@ -13447,238 +10973,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 11
-      }
-    },
-    "free_publications_subsections": {
-      "records": 45,
-      "unique_urls": 45,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 45,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 45
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 45
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 23
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 16
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 2
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 2
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 2
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          45
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.td.gov.hk",
-          45
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          45
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 45
-      }
-    },
-    "td_document_sweep": {
-      "records": 38,
-      "unique_urls": 38,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 1,
-        "by_kind": {
-          "meta_value_outlier": 1
-        }
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 38,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 38
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 38
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 23
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 10
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 2
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 2
-          },
-          {
-            "value": "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_pu...",
-            "count": 1
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          38
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.td.gov.hk",
-          36
-        ],
-        [
-          "www.tlb.gov.hk",
-          2
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          38
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 38
       }
     },
     "miscellaneous": {
@@ -14242,103 +11536,6 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 206
-      }
-    },
-    "planning_guidelines": {
-      "records": 31,
-      "unique_urls": 31,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 31,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 31
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from"
-          ],
-          "count": 31
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.tpb.gov.hk/en/resources/tpb_guidelines/index.html",
-            "count": 31
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          31
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.tpb.gov.hk",
-          31
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          31
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T11:07:40.253693+00:00",
-        "max": "2026-09-02T11:07:40.253693+00:00",
-        "count": 31
       }
     },
     "enhancement_of_control_of_inside_services": {
@@ -15475,130 +12672,6 @@
         "count": 14
       }
     },
-    "circular_letters_superseded": {
-      "records": 152,
-      "unique_urls": 152,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 142,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 152
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from",
-            "pdf_no"
-          ],
-          "count": 152
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-inst...",
-            "count": 152
-          }
-        ],
-        "pdf_no": [
-          {
-            "value": "NA",
-            "count": 10
-          },
-          {
-            "value": "2/2006",
-            "count": 2
-          },
-          {
-            "value": "9/2017",
-            "count": 2
-          },
-          {
-            "value": "4/2007",
-            "count": 1
-          },
-          {
-            "value": "3/2007",
-            "count": 1
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          152
-        ],
-        [
-          "pdf_no",
-          152
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.wsd.gov.hk",
-          152
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          152
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T00:00:00+00:00",
-        "max": "2026-09-02T00:00:00+00:00",
-        "count": 152
-      }
-    },
     "water_efficiency_labelling_scheme": {
       "records": 31,
       "unique_urls": 31,
@@ -16300,17 +13373,17 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1398,
-      "mean": 517.1841487187918,
-      "p50": 402.0,
-      "p95": 980.0
+      "mean": 526.5573336725607,
+      "p50": 400.0,
+      "p95": 984.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 1755,
+        "warning": 1767,
         "error": 3370
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 1751,
+        "warning:meta_value_outlier": 1763,
         "error:missing_required_field": 3370,
         "warning:meta_type_outlier": 4
       }
@@ -16321,7 +13394,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.programme_area",
-        "line": 18,
+        "line": 11,
         "detail": "rare value in source: 其他"
       },
       {
@@ -16329,7 +13402,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.programme_area",
-        "line": 97,
+        "line": 45,
         "detail": "rare value in source: Carbon Management"
       },
       {
@@ -16337,7 +13410,7 @@
         "kind": "meta_value_outlier",
         "source": "epd.publications_guidance_documents",
         "field": "meta.programme_area",
-        "line": 98,
+        "line": 46,
         "detail": "rare value in source: 碳管理"
       },
       {
@@ -16345,7 +13418,7 @@
         "kind": "meta_value_outlier",
         "source": "archsd_practices_and_guidelines",
         "field": "meta.discovered_from",
-        "line": 156,
+        "line": 89,
         "detail": "rare value in source: https://www.archsd.gov.hk/en/consultants-contractors/product-conformity-certification-schemes.html"
       },
       {
@@ -16353,7 +13426,7 @@
         "kind": "meta_value_outlier",
         "source": "archsd_technical_documents",
         "field": "meta.section",
-        "line": 199,
+        "line": 132,
         "detail": "rare value in source: Standard Method of Measurement for Building Elements"
       },
       {
@@ -16361,7 +13434,7 @@
         "kind": "meta_value_outlier",
         "source": "archsd_technical_documents",
         "field": "meta.section",
-        "line": 200,
+        "line": 133,
         "detail": "rare value in source: Standard Method of Measurement for Building Elements"
       },
       {
@@ -16369,7 +13442,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2246,
+        "line": 822,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16377,7 +13450,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2246,
+        "line": 822,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16385,7 +13458,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2248,
+        "line": 823,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16393,7 +13466,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2248,
+        "line": 823,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16401,7 +13474,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2250,
+        "line": 824,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16409,7 +13482,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2250,
+        "line": 824,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16417,7 +13490,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2252,
+        "line": 825,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16425,7 +13498,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2252,
+        "line": 825,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16433,7 +13506,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2254,
+        "line": 826,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16441,7 +13514,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2254,
+        "line": 826,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16449,7 +13522,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2256,
+        "line": 827,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16457,7 +13530,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2256,
+        "line": 827,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16465,7 +13538,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2258,
+        "line": 828,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16473,7 +13546,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2258,
+        "line": 828,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16481,7 +13554,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2260,
+        "line": 829,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16489,7 +13562,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2260,
+        "line": 829,
         "detail": "rare value in source: JPN"
       },
       {
@@ -16497,7 +13570,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 2262,
+        "line": 830,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -16505,23 +13578,15 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 2262,
+        "line": 830,
         "detail": "rare value in source: JPN"
-      },
-      {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "mines_and_blasting",
-        "field": "meta.discovered_from",
-        "line": 2751,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information..."
       },
       {
         "severity": "error",
         "kind": "missing_required_field",
         "source": "basic_pages",
         "field": "meta.discovered_from",
-        "line": 3262,
+        "line": 1169,
         "detail": "missing required field"
       },
       {
@@ -16529,7 +13594,7 @@
         "kind": "missing_required_field",
         "source": "basic_pages",
         "field": "meta.discovered_from",
-        "line": 3263,
+        "line": 1170,
         "detail": "missing required field"
       },
       {
@@ -16537,7 +13602,7 @@
         "kind": "missing_required_field",
         "source": "basic_pages",
         "field": "meta.discovered_from",
-        "line": 3264,
+        "line": 1171,
         "detail": "missing required field"
       },
       {
@@ -16545,7 +13610,7 @@
         "kind": "missing_required_field",
         "source": "basic_pages",
         "field": "meta.discovered_from",
-        "line": 3265,
+        "line": 1172,
         "detail": "missing required field"
       },
       {
@@ -16553,7 +13618,7 @@
         "kind": "missing_required_field",
         "source": "basic_pages",
         "field": "meta.discovered_from",
-        "line": 3266,
+        "line": 1173,
         "detail": "missing required field"
       },
       {
@@ -16561,160 +13626,168 @@
         "kind": "missing_required_field",
         "source": "basic_pages",
         "field": "meta.discovered_from",
-        "line": 3267,
+        "line": 1174,
         "detail": "missing required field"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3769,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/miscellaneous/index.html"
+        "line": 2398,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3770,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/miscellaneous/index.html"
+        "line": 2399,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3778,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-playbook/index.html"
+        "line": 2400,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3779,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-innovation-series/index.html"
+        "line": 2560,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3780,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-innovation-series/index.html"
+        "line": 2561,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3781,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-innovation-series/index.html"
+        "line": 2562,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1-2010/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3845,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2563,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs1-2010/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3846,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2564,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3847,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2565,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 3848,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2566,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4163,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/geo/index.html"
+        "line": 2567,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4164,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/geo/index.html"
+        "line": 2568,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs2-2012/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4604,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+        "line": 2569,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-cs3-2013/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4720,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+        "line": 2570,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-smm/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4728,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+        "line": 2583,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-svyspec/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4730,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+        "line": 2584,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/construction/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4732,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+        "line": 2585,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/construction/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "source": "cedd_standards_spec_handbooks_cost",
         "field": "meta.discovered_from",
-        "line": 4734,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+        "line": 2598,
+        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/cedd-library/index.html"
       },
       {
         "severity": "warning",
         "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
-        "field": "meta.discovered_from",
-        "line": 4737,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/index.html"
+        "source": "devb_works_technical_circulars_um",
+        "field": "meta.revision_date",
+        "line": 6142,
+        "detail": "rare value in source: 2016-07-14"
+      },
+      {
+        "severity": "warning",
+        "kind": "meta_value_outlier",
+        "source": "devb_works_technical_circulars_um",
+        "field": "meta.revision_year",
+        "line": 6142,
+        "detail": "rare value in source: 2016"
       }
     ]
   }
