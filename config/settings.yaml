@@ -475,6 +475,19 @@ crawlers:
         page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular.html"
         pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
 
+      circular_letters_obsolete:
+        # Obsolete circulars, 1987-2021. A separate page we did not know existed.
+        # Uses the generic content collector: this page's layout is not the
+        # div.col shape the FSD circular parser expects.
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular_obs.html"
+        url_prefix: "https://www.hkfsd.gov.hk/"
+        doc_extensions: [".pdf"]
+
+      circular_letters_old:
+        # Old ventilating-system circulars, 1968-1998. Also its own page.
+        page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular_old.html"
+        pdf_scope_prefix: "https://www.hkfsd.gov.hk/"
+
       technical_guidance:
         # FSD Technical Guidance crawler.
         page_url: "https://www.hkfsd.gov.hk/eng/fire_protection/notices/guidance.html"
@@ -889,6 +902,12 @@ crawlers:
       circular_letters:
         # WSD Circular Letters crawler.
         page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index.html"
+        pdf_scope_prefix: "https://www.wsd.gov.hk/"
+
+      circular_letters_superseded:
+        # Superseded circulars back to 1975, on a page reachable only from inside
+        # the current-circulars page. 152 documents, none previously held.
+        page_url: "https://www.wsd.gov.hk/en/plumbing-engineering/requirements-for-plumbing-installation/wsd-circular-letters/index_superseded.html"
         pdf_scope_prefix: "https://www.wsd.gov.hk/"
 
   # ============================================================================
