@@ -284,6 +284,11 @@ class Crawler:
         base_url = str(cfg.get("base_url", _DEFAULT_BASE_URL)).strip().rstrip("/")
         start_url_raw = str(cfg.get("start_url", _DEFAULT_START_URL)).strip()
         scope_prefix = str(cfg.get("scope_prefix", _DEFAULT_SCOPE_PREFIX)).strip()
+        # The GIS and XPPM helpers fetch fixed URLs inside the technical_document
+        # branch, so they run regardless of scope_prefix. Sections that reuse this
+        # spider for a different branch must be able to turn them off, or they
+        # re-collect ~249 documents that already belong to another crawler.
+        include_helper_sections = bool(cfg.get("include_helper_sections", True))
         if not scope_prefix.startswith("/"):
             scope_prefix = "/" + scope_prefix
 
@@ -451,52 +456,14 @@ class Crawler:
             if len(out) >= max_total_records:
                 break
 
-        try:
-            if request_delay_seconds > 0:
-                _sleep_seconds(
-                    request_delay_seconds + random.uniform(0.0, request_jitter_seconds)
-                )
-
-            gis_hits = fetch_and_parse_gis_specification_hits(
-                session=session,
-                timeout_seconds=timeout_seconds,
-                max_retries=max_retries,
-                backoff_base_seconds=backoff_base_seconds,
-                backoff_jitter_seconds=backoff_jitter_seconds,
-            )
-        except Exception as exc:
-            if ctx.debug:
-                print(f"[{self.name}] Skip page fetch failure: {GIS_PAGE_URL} ({exc})")
-            gis_hits = []
-
-        for hit in gis_hits:
-            if hit.url in seen_docs:
-                continue
-
-            seen_docs.add(hit.url)
-            meta: dict[str, str] = {"discovered_from": GIS_PAGE_URL}
-
-            out.append(
-                ctx.make_record(
-                    url=hit.url,
-                    name=hit.name,
-                    discovered_at_utc=ctx.run_date_utc,
-                    source=self.name,
-                    meta=meta,
-                )
-            )
-            if len(out) >= max_total_records:
-                break
-
-        if len(out) < max_total_records:
+        if include_helper_sections:
             try:
                 if request_delay_seconds > 0:
                     _sleep_seconds(
-                        request_delay_seconds
-                        + random.uniform(0.0, request_jitter_seconds)
+                        request_delay_seconds + random.uniform(0.0, request_jitter_seconds)
                     )
 
-                xppm_hits = fetch_and_parse_xppm_hits(
+                gis_hits = fetch_and_parse_gis_specification_hits(
                     session=session,
                     timeout_seconds=timeout_seconds,
                     max_retries=max_retries,
@@ -505,19 +472,15 @@ class Crawler:
                 )
             except Exception as exc:
                 if ctx.debug:
-                    print(
-                        f"[{self.name}] Skip page fetch failure: {XPPM_MAIN_URL} ({exc})"
-                    )
-                xppm_hits = []
+                    print(f"[{self.name}] Skip page fetch failure: {GIS_PAGE_URL} ({exc})")
+                gis_hits = []
 
-            for hit in xppm_hits:
+            for hit in gis_hits:
                 if hit.url in seen_docs:
                     continue
 
                 seen_docs.add(hit.url)
-                meta: dict[str, str] = {"discovered_from": hit.discovered_from}
-                if hit.meta:
-                    meta.update(hit.meta)
+                meta: dict[str, str] = {"discovered_from": GIS_PAGE_URL}
 
                 out.append(
                     ctx.make_record(
@@ -530,6 +493,49 @@ class Crawler:
                 )
                 if len(out) >= max_total_records:
                     break
+
+            if len(out) < max_total_records:
+                try:
+                    if request_delay_seconds > 0:
+                        _sleep_seconds(
+                            request_delay_seconds
+                            + random.uniform(0.0, request_jitter_seconds)
+                        )
+
+                    xppm_hits = fetch_and_parse_xppm_hits(
+                        session=session,
+                        timeout_seconds=timeout_seconds,
+                        max_retries=max_retries,
+                        backoff_base_seconds=backoff_base_seconds,
+                        backoff_jitter_seconds=backoff_jitter_seconds,
+                    )
+                except Exception as exc:
+                    if ctx.debug:
+                        print(
+                            f"[{self.name}] Skip page fetch failure: {XPPM_MAIN_URL} ({exc})"
+                        )
+                    xppm_hits = []
+
+                for hit in xppm_hits:
+                    if hit.url in seen_docs:
+                        continue
+
+                    seen_docs.add(hit.url)
+                    meta: dict[str, str] = {"discovered_from": hit.discovered_from}
+                    if hit.meta:
+                        meta.update(hit.meta)
+
+                    out.append(
+                        ctx.make_record(
+                            url=hit.url,
+                            name=hit.name,
+                            discovered_at_utc=ctx.run_date_utc,
+                            source=self.name,
+                            meta=meta,
+                        )
+                    )
+                    if len(out) >= max_total_records:
+                        break
 
         out.sort(
             key=lambda r: (
