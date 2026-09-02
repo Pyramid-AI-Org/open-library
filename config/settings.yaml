@@ -416,6 +416,18 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      hyd_standard_drawings:
+        # Highways, lighting and structures standard drawings. A sibling branch
+        # of technical_document/ that was never seeded: 581 drawings, none held.
+        start_url: "https://www.hyd.gov.hk/en/technical_references/standard_drawings/index.html"
+        scope_prefix: "/en/technical_references/standard_drawings/"
+        max_depth: 5
+        max_pages: 400
+        max_out_links_per_page: 1000
+        # The GIS and XPPM helpers sit in the technical_document branch and are
+        # already collected by hyd_technical_documents.
+        include_helper_sections: false
+
       hyd_technical_documents:
         # HYD Technical Documents recursive PDF crawler.
         start_url: "https://www.hyd.gov.hk/en/technical_references/technical_document/index.html"
