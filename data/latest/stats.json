@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 78535,
-    "records_total": 78535,
+    "lines_total": 78335,
+    "records_total": 78335,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
       "epd.publications_other_reports": 3,
@@ -81,9 +81,9 @@
       "occupational_health_part_a": 4,
       "occupational_safety_part_b": 18,
       "info_notes": 11,
-      "lao_practice_notes": 301,
       "joint_practice_notes": 18,
       "laco_circular_memorandum": 47,
+      "lao_practice_notes": 101,
       "smo_practice_notes": 4,
       "standards_guidelines": 12,
       "practice_notes": 11,
@@ -10126,157 +10126,6 @@
         "count": 11
       }
     },
-    "lao_practice_notes": {
-      "records": 301,
-      "unique_urls": 301,
-      "duplicate_url_hits": 0,
-      "issue_counts": {
-        "errors": 0,
-        "warnings": 0,
-        "by_kind": {}
-      },
-      "required_field_null_missing_invalid": {
-        "url": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "name": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "discovered_at_utc": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "publish_date": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "source": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        },
-        "meta.discovered_from": {
-          "missing": 0,
-          "null": 0,
-          "invalid": 0
-        }
-      },
-      "top_level_schema_signatures": [
-        {
-          "keys": [
-            "discovered_at_utc",
-            "meta",
-            "name",
-            "publish_date",
-            "source",
-            "source_id",
-            "url"
-          ],
-          "count": 301
-        }
-      ],
-      "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "discovered_from",
-            "record_kind",
-            "ref_no"
-          ],
-          "count": 301
-        }
-      ],
-      "meta_schema_variants": 1,
-      "meta_type_variation": {},
-      "meta_top_scalar_values": {
-        "discovered_from": [
-          {
-            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/lao.html",
-            "count": 301
-          }
-        ],
-        "record_kind": [
-          {
-            "value": "attachment",
-            "count": 200
-          },
-          {
-            "value": "note",
-            "count": 101
-          }
-        ],
-        "ref_no": [
-          {
-            "value": "6/2023",
-            "count": 14
-          },
-          {
-            "value": "1/2020A",
-            "count": 11
-          },
-          {
-            "value": "1/2026",
-            "count": 8
-          },
-          {
-            "value": "2/2023",
-            "count": 8
-          },
-          {
-            "value": "3/2026",
-            "count": 8
-          }
-        ]
-      },
-      "top_meta_keys": [
-        [
-          "discovered_from",
-          301
-        ],
-        [
-          "record_kind",
-          301
-        ],
-        [
-          "ref_no",
-          301
-        ]
-      ],
-      "top_hosts": [
-        [
-          "www.landsd.gov.hk",
-          301
-        ]
-      ],
-      "top_extensions": [
-        [
-          ".pdf",
-          260
-        ],
-        [
-          ".docx",
-          23
-        ],
-        [
-          ".rtf",
-          13
-        ],
-        [
-          ".doc",
-          5
-        ]
-      ],
-      "discovered_at_range": {
-        "min": "2026-09-02T00:00:00+00:00",
-        "max": "2026-09-02T00:00:00+00:00",
-        "count": 301
-      }
-    },
     "joint_practice_notes": {
       "records": 18,
       "unique_urls": 18,
@@ -10523,6 +10372,138 @@
         "min": "2026-09-01T00:00:00+00:00",
         "max": "2026-09-01T00:00:00+00:00",
         "count": 47
+      }
+    },
+    "lao_practice_notes": {
+      "records": 101,
+      "unique_urls": 101,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 0,
+        "warnings": 0,
+        "by_kind": {}
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 101
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from",
+            "ref_no"
+          ],
+          "count": 101
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.landsd.gov.hk/en/resources/practice-notes/lao.html",
+            "count": 101
+          }
+        ],
+        "ref_no": [
+          {
+            "value": "3/2000A",
+            "count": 1
+          },
+          {
+            "value": "4/2000(B)",
+            "count": 1
+          },
+          {
+            "value": "2/2001",
+            "count": 1
+          },
+          {
+            "value": "3/2001",
+            "count": 1
+          },
+          {
+            "value": "6/2001",
+            "count": 1
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "discovered_from",
+          101
+        ],
+        [
+          "ref_no",
+          101
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.landsd.gov.hk",
+          101
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          86
+        ],
+        [
+          ".rtf",
+          11
+        ],
+        [
+          ".doc",
+          4
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-09-01T00:00:00+00:00",
+        "max": "2026-09-01T00:00:00+00:00",
+        "count": 101
       }
     },
     "smo_practice_notes": {
@@ -13388,7 +13369,7 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1398,
-      "mean": 526.4174062519895,
+      "mean": 526.4728282376971,
       "p50": 400,
       "p95": 984.0
     },
