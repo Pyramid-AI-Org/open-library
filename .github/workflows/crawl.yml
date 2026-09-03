@@ -182,8 +182,15 @@ jobs:
                   f"{entry['previous']} in the previous run"
               )
 
-          if zeroed:
-              print(f"\n{len(zeroed)} crawler(s) silently stopped collecting. Data was still published.")
+          total = summary.get("regression_total_rows")
+          if total:
+              print(
+                  f"::error::snapshot shrank to {total['current']} rows from "
+                  f"{total['previous']} - records from crawlers that did not run were lost"
+              )
+
+          if zeroed or total:
+              print("Silent-failure regression detected. Data was still published.")
               sys.exit(1)
 
           print("No silent-failure regressions detected.")
