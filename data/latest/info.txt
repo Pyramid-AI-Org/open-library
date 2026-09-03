@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 85724 (parse_errors=0)
+Total records: 85755 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.2%)
@@ -110,6 +110,7 @@ Records by source:
 - occupational_safety_part_d: 70 (0.1%)
 - occupational_safety_part_g: 39 (0.0%)
 - pland_document_sweep: 60 (0.1%)
+- planning_guidelines: 31 (0.0%)
 - plumbing_requirements: 5 (0.0%)
 - practice_notes: 11 (0.0%)
 - practice_notes_and_circular_letters: 468 (0.5%)
@@ -124,7 +125,7 @@ Records by source:
 - technical_guidance: 3 (0.0%)
 - technical_manuals: 17 (0.0%)
 - technical_papers_published_by_dsd: 104 (0.1%)
-- tel_directory: 16075 (18.8%)
+- tel_directory: 16075 (18.7%)
 - third_comprehensive_study: 11 (0.0%)
 - transport_planning: 22 (0.0%)
 - water_efficiency_labelling_scheme: 31 (0.0%)
@@ -3308,6 +3309,32 @@ Per-source schema and validation summary:
   - locale: en (103), tc (103)
   - section: Registration and Licensing of Vehicles and Drivers (27), Road Tunnels and Control Areas (27), 車輛和駕駛人士的登記和發牌 (27)
 
+[planning_guidelines]
+- records: 31 | unique_urls: 31 | dup_url_hits: 0
+- issues: errors=0 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=31 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=0 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-09-03T03:02:41.965194+00:00 .. 2026-09-03T03:02:41.965194+00:00
+- top url hosts:
+  - www.tpb.gov.hk: 31
+- top url extensions:
+  - .pdf: 31
+- top-level key signatures (urls.jsonl record format):
+  - count=31 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=31 meta_keys=['discovered_from']
+- meta schema variants: 1
+- most common meta keys:
+  - discovered_from: 31
+- top scalar meta values (sample):
+  - discovered_from: https://www.tpb.gov.hk/en/resources/tpb_guidelines/index.html (31)
+
 [enhancement_of_control_of_inside_services]
 - records: 11 | unique_urls: 11 | dup_url_hits: 0
 - issues: errors=0 warnings=0
@@ -3793,7 +3820,7 @@ Per-source schema and validation summary:
   - discovered_from: https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbin... (1)
 
 General stats:
-- record JSON size (bytes): min=204 p50=403.0 mean=517.3 p95=980.0 max=1398
+- record JSON size (bytes): min=204 p50=403 mean=517.3 p95=980.0 max=1398
 
 Unusual records / issues:
 - error:missing_required_field: 3370

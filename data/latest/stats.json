@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 85724,
-    "records_total": 85724,
+    "lines_total": 85755,
+    "records_total": 85755,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 59,
       "emsd_document_sweep": 859,
@@ -116,6 +116,7 @@
       "transport_planning": 22,
       "free_publications": 10,
       "annual_digest": 206,
+      "planning_guidelines": 31,
       "enhancement_of_control_of_inside_services": 11,
       "information_for_licensed_plumbers": 4,
       "licensed_plumbers": 8,
@@ -14266,6 +14267,103 @@
         "count": 206
       }
     },
+    "planning_guidelines": {
+      "records": 31,
+      "unique_urls": 31,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 0,
+        "warnings": 0,
+        "by_kind": {}
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 31,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 31
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "discovered_from"
+          ],
+          "count": 31
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "discovered_from": [
+          {
+            "value": "https://www.tpb.gov.hk/en/resources/tpb_guidelines/index.html",
+            "count": 31
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "discovered_from",
+          31
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.tpb.gov.hk",
+          31
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          31
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-09-03T03:02:41.965194+00:00",
+        "max": "2026-09-03T03:02:41.965194+00:00",
+        "count": 31
+      }
+    },
     "enhancement_of_control_of_inside_services": {
       "records": 11,
       "unique_urls": 11,
@@ -16225,8 +16323,8 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1398,
-      "mean": 517.285824273249,
-      "p50": 403.0,
+      "mean": 517.2544341437817,
+      "p50": 403,
       "p95": 980.0
     },
     "issue_counts": {
