@@ -2,77 +2,10 @@
   "crawler": "all",
   "crawlers_considered": 73,
   "crawlers_due": [
-    "accessibility_and_universal_design",
-    "active_mobility",
-    "acts_codes_and_regulations",
-    "advisories",
-    "advisories_and_alerts",
-    "airport_and_aerodrome",
     "bills_introduced",
     "building_facilities_codes",
-    "building_professionals",
-    "circulars",
-    "circulars",
-    "circulars",
-    "circulars",
-    "circulars",
-    "circulars",
-    "code_of_practice",
-    "codes_and_guidelines",
-    "codes_of_practice",
-    "conservation",
-    "corporate_publications",
-    "cuge_standards",
-    "development_and_renovation",
-    "development_construction_resources",
-    "development_control",
-    "development_control",
-    "educational_materials",
-    "fire_code",
-    "fire_safety_circulars",
-    "forms",
-    "guidebooks_and_publications",
-    "guides_and_handbooks",
-    "industry_reports",
-    "learn",
-    "legislation",
-    "legislation",
-    "legislation",
-    "licences",
-    "master_plan",
-    "ministries",
-    "nature",
-    "obstacle_height_control",
     "order_paper",
-    "organs_of_state",
-    "petroleum_and_flammable_materials",
-    "pollution_control",
-    "practical_guidance",
-    "practices_and_guidelines",
-    "property_boundaries",
-    "publications",
-    "publications_resources",
-    "railway_protection",
-    "regulations",
-    "regulatory_publications",
-    "requirements",
-    "resources",
-    "safety_and_standards",
-    "services",
-    "statistics",
-    "statutory_boards",
-    "street_works",
-    "submission_process",
-    "sustainability_legislation",
-    "tenancy_requirements",
-    "town_design_guides",
-    "transport_infrastructure_standards",
-    "vehicle_parking",
-    "votes_and_proceedings",
-    "who_we_are",
-    "workplace_safety_and_health",
-    "wsh_circulars",
-    "wsh_legislation"
+    "votes_and_proceedings"
   ],
   "crawlers_failed": [
     "imda.building_facilities_codes",
@@ -81,10 +14,6 @@
     "parliament.votes_and_proceedings"
   ],
   "crawlers_skipped": [
-    "mnd.publications",
-    "sso.construction_legislation"
-  ],
-  "crawlers_succeeded": [
     "bca.accessibility_and_universal_design",
     "bca.circulars",
     "bca.guidebooks_and_publications",
@@ -115,6 +44,7 @@
     "lta.street_works",
     "lta.transport_infrastructure_standards",
     "lta.vehicle_parking",
+    "mnd.publications",
     "mom.workplace_safety_and_health",
     "mom.wsh_circulars",
     "mom.wsh_legislation",
@@ -145,6 +75,7 @@
     "sla.circulars",
     "sla.legislation",
     "sla.property_boundaries",
+    "sso.construction_legislation",
     "ura.circulars",
     "ura.conservation",
     "ura.development_control",
@@ -153,6 +84,7 @@
     "wshc.codes_and_guidelines",
     "wshc.practical_guidance"
   ],
+  "crawlers_succeeded": [],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
@@ -160,178 +92,178 @@
   "run_date_utc": "2026-09-03",
   "schedule": {
     "bca.accessibility_and_universal_design": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "bca.accessibility_and_universal_design",
       "source_id": "bca"
     },
     "bca.circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "bca.circulars",
       "source_id": "bca"
     },
     "bca.guidebooks_and_publications": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "bca.guidebooks_and_publications",
       "source_id": "bca"
     },
     "bca.safety_and_standards": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "bca.safety_and_standards",
       "source_id": "bca"
     },
     "bca.sustainability_legislation": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "bca.sustainability_legislation",
       "source_id": "bca"
     },
     "caas.airport_and_aerodrome": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "caas.airport_and_aerodrome",
       "source_id": "caas"
     },
     "caas.legislation": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "caas.legislation",
       "source_id": "caas"
     },
     "caas.obstacle_height_control": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "caas.obstacle_height_control",
       "source_id": "caas"
     },
     "corenet.code_of_practice": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "corenet.code_of_practice",
       "source_id": "corenet"
     },
     "corenet.resources": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "corenet.resources",
       "source_id": "corenet"
     },
     "corenet.submission_process": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "corenet.submission_process",
       "source_id": "corenet"
     },
     "ema.circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.circulars",
       "source_id": "ema"
     },
     "ema.corporate_publications": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.corporate_publications",
       "source_id": "ema"
     },
     "ema.educational_materials": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.educational_materials",
       "source_id": "ema"
     },
     "ema.forms": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.forms",
       "source_id": "ema"
     },
     "ema.industry_reports": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.industry_reports",
       "source_id": "ema"
     },
     "ema.licences": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.licences",
       "source_id": "ema"
     },
     "ema.regulations": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.regulations",
       "source_id": "ema"
     },
     "ema.regulatory_publications": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.regulatory_publications",
       "source_id": "ema"
     },
     "ema.statistics": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ema.statistics",
       "source_id": "ema"
     },
     "hdb.building_professionals": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "hdb.building_professionals",
       "source_id": "hdb"
     },
     "hdb.town_design_guides": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "hdb.town_design_guides",
       "source_id": "hdb"
     },
@@ -344,66 +276,66 @@
       "source_id": "imda"
     },
     "jtc.development_and_renovation": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "jtc.development_and_renovation",
       "source_id": "jtc"
     },
     "jtc.tenancy_requirements": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "jtc.tenancy_requirements",
       "source_id": "jtc"
     },
     "lta.active_mobility": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "lta.active_mobility",
       "source_id": "lta"
     },
     "lta.development_construction_resources": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "lta.development_construction_resources",
       "source_id": "lta"
     },
     "lta.railway_protection": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "lta.railway_protection",
       "source_id": "lta"
     },
     "lta.street_works": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "lta.street_works",
       "source_id": "lta"
     },
     "lta.transport_infrastructure_standards": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "lta.transport_infrastructure_standards",
       "source_id": "lta"
     },
     "lta.vehicle_parking": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "lta.vehicle_parking",
       "source_id": "lta"
     },
@@ -416,122 +348,122 @@
       "source_id": "mnd"
     },
     "mom.workplace_safety_and_health": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "mom.workplace_safety_and_health",
       "source_id": "mom"
     },
     "mom.wsh_circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "mom.wsh_circulars",
       "source_id": "mom"
     },
     "mom.wsh_legislation": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "mom.wsh_legislation",
       "source_id": "mom"
     },
     "nea.circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nea.circulars",
       "source_id": "nea"
     },
     "nea.development_control": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nea.development_control",
       "source_id": "nea"
     },
     "nea.legislation": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nea.legislation",
       "source_id": "nea"
     },
     "nea.pollution_control": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nea.pollution_control",
       "source_id": "nea"
     },
     "nea.practices_and_guidelines": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nea.practices_and_guidelines",
       "source_id": "nea"
     },
     "nea.publications": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nea.publications",
       "source_id": "nea"
     },
     "nparks.cuge_standards": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nparks.cuge_standards",
       "source_id": "nparks"
     },
     "nparks.learn": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nparks.learn",
       "source_id": "nparks"
     },
     "nparks.nature": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nparks.nature",
       "source_id": "nparks"
     },
     "nparks.publications_resources": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nparks.publications_resources",
       "source_id": "nparks"
     },
     "nparks.services": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nparks.services",
       "source_id": "nparks"
     },
     "nparks.who_we_are": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "nparks.who_we_are",
       "source_id": "nparks"
     },
@@ -560,122 +492,122 @@
       "source_id": "parliament"
     },
     "pub.circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "pub.circulars",
       "source_id": "pub"
     },
     "pub.codes_of_practice": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "pub.codes_of_practice",
       "source_id": "pub"
     },
     "pub.guides_and_handbooks": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "pub.guides_and_handbooks",
       "source_id": "pub"
     },
     "pub.requirements": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "pub.requirements",
       "source_id": "pub"
     },
     "scdf.acts_codes_and_regulations": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "scdf.acts_codes_and_regulations",
       "source_id": "scdf"
     },
     "scdf.advisories": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "scdf.advisories",
       "source_id": "scdf"
     },
     "scdf.fire_code": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "scdf.fire_code",
       "source_id": "scdf"
     },
     "scdf.fire_safety_circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "scdf.fire_safety_circulars",
       "source_id": "scdf"
     },
     "scdf.petroleum_and_flammable_materials": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "scdf.petroleum_and_flammable_materials",
       "source_id": "scdf"
     },
     "sgdi.ministries": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "sgdi.ministries",
       "source_id": "sgdi"
     },
     "sgdi.organs_of_state": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "sgdi.organs_of_state",
       "source_id": "sgdi"
     },
     "sgdi.statutory_boards": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "sgdi.statutory_boards",
       "source_id": "sgdi"
     },
     "sla.circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "sla.circulars",
       "source_id": "sla"
     },
     "sla.legislation": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "sla.legislation",
       "source_id": "sla"
     },
     "sla.property_boundaries": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "sla.property_boundaries",
       "source_id": "sla"
     },
@@ -688,61 +620,61 @@
       "source_id": "sso"
     },
     "ura.circulars": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ura.circulars",
       "source_id": "ura"
     },
     "ura.conservation": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ura.conservation",
       "source_id": "ura"
     },
     "ura.development_control": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ura.development_control",
       "source_id": "ura"
     },
     "ura.master_plan": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "ura.master_plan",
       "source_id": "ura"
     },
     "wshc.advisories_and_alerts": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "wshc.advisories_and_alerts",
       "source_id": "wshc"
     },
     "wshc.codes_and_guidelines": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "wshc.codes_and_guidelines",
       "source_id": "wshc"
     },
     "wshc.practical_guidance": {
-      "due_today": true,
+      "due_today": false,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-08-27",
+      "last_successful_run_date": "2026-09-03",
       "module_path": "wshc.practical_guidance",
       "source_id": "wshc"
     }
   },
-  "started_at_utc": "2026-09-03T04:27:12.431308+00:00"
+  "started_at_utc": "2026-09-03T07:48:42.152236+00:00"
 }
