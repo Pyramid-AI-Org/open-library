@@ -53,6 +53,7 @@ from crawlers.base import (
 )
 from crawlers.common.isomer import (
     assign_titles,
+    extract_og_title,
     extract_page_links,
     extract_page_title,
 )
@@ -221,6 +222,10 @@ class SectionSpiderCrawler:
         emit_pages = bool(cfg.get("emit_page_records", True))
         strip_query = bool(cfg.get("strip_document_query", True))
         content_element_id = str(cfg.get("content_element_id", "") or "").strip() or None
+        # Where a page's own name lives. Default keeps extract_page_title's
+        # h1-first preference; 'og_title' is for sites whose <h1> is the agency
+        # banner rather than the page name (see extract_og_title).
+        title_source = str(cfg.get("page_title_source", "") or "").strip().lower()
         max_depth = int(cfg.get("max_depth", 4))
         max_out_links = int(cfg.get("max_out_links_per_page", 800))
         max_records = int(cfg.get("max_total_records", 50000))
@@ -265,7 +270,11 @@ class SectionSpiderCrawler:
             if html is None:
                 continue
 
-            page_title = extract_page_title(html)
+            page_title = (
+                extract_og_title(html) or extract_page_title(html)
+                if title_source == "og_title"
+                else extract_page_title(html)
+            )
 
             if emit_pages and page_url not in recorded:
                 recorded.add(page_url)

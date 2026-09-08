@@ -34,6 +34,7 @@ repository.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from html import unescape as html_unescape
 from html.parser import HTMLParser
 import json
 import random
@@ -312,6 +313,29 @@ def extract_page_links(
 _TITLE_RE = re.compile(r"<h1[^>]*>(.*?)</h1>", re.IGNORECASE | re.DOTALL)
 _TAG_RE = re.compile(r"<[^>]+>")
 _HEAD_TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.IGNORECASE | re.DOTALL)
+
+
+_OG_TITLE_RE = re.compile(
+    r"""<meta[^>]+(?:property|name)=["']og:title["'][^>]+content=["']([^"']*)["']""",
+    re.IGNORECASE,
+)
+
+
+def extract_og_title(html: str) -> str | None:
+    """The page's og:title, if it declares one.
+
+    Some government sites put the agency name in <h1> as a banner and the real
+    page name only in <title> and og:title — DSD's Sewage Services Charging
+    Scheme is one, where every page's <h1> reads "Drainage Services Department".
+    For those, extract_page_title's h1-first preference is wrong, so a crawler
+    can opt into this instead via `page_title_source: og_title`.
+    """
+    match = _OG_TITLE_RE.search(html or "")
+    if not match:
+        return None
+    # og:title carries entity-encoded text ("Ordinance &amp; Regulations"),
+    # and unlike the <h1> path there is no markup strip to decode it.
+    return clean_text(html_unescape(match.group(1))) or None
 
 
 def extract_page_title(html: str) -> str | None:
