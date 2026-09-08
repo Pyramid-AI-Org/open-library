@@ -24,6 +24,7 @@ from types import SimpleNamespace
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+import pytest
 import yaml
 
 import crawlers.common.spider as spider
@@ -68,26 +69,33 @@ PAGES = {
     ),
 }
 
-FETCHED: list[str] = []
+@pytest.fixture(autouse=True)
+def fetched(monkeypatch):
+    """Stub the HTTP layer for this module only, and record what was fetched.
 
+    Deliberately a fixture rather than a module-level assignment: patching
+    `spider.get_with_retries` at import time leaks into every other test module
+    pytest loads in the same session, which is what makes the LTA and BCA suites
+    fail when the whole directory runs. monkeypatch undoes itself per test.
+    """
+    urls: list[str] = []
 
-def _fake_get(session, url, **kwargs):
-    FETCHED.append(url)
-    if url not in PAGES:
-        raise RuntimeError(f"unexpected fetch: {url}")
-    return SimpleNamespace(
-        text=PAGES[url], status_code=200, headers={"Content-Type": "text/html"}
-    )
+    def fake_get(session, url, **kwargs):
+        urls.append(url)
+        if url not in PAGES:
+            raise RuntimeError(f"unexpected fetch: {url}")
+        return SimpleNamespace(
+            text=PAGES[url], status_code=200, headers={"Content-Type": "text/html"}
+        )
 
-
-spider.get_with_retries = _fake_get
-spider.sleep_seconds = lambda _s: None
+    monkeypatch.setattr(spider, "get_with_retries", fake_get)
+    monkeypatch.setattr(spider, "sleep_seconds", lambda _s: None)
+    return urls
 
 
 def _run():
     import importlib
 
-    FETCHED.clear()
     module = importlib.import_module("crawlers.dsd.sewage_services_charging_scheme")
     ctx = RunContext(
         run_date_utc="2026-09-08",
@@ -151,10 +159,12 @@ def test_the_operating_accounts_reports_are_left_out():
     assert [r.url for r in records if "ssoa_reports" in r.url] == []
 
 
-def test_the_chinese_mirror_is_not_followed():
+def test_the_chinese_mirror_is_not_followed(fetched):
     records = _run()
     assert [r.url for r in records if "/TC/" in r.url] == []
-    assert [u for u in FETCHED if "/TC/" in u] == []
+    # And it was never even requested — the allowlist drops it before the fetch.
+    assert [u for u in fetched if "/TC/" in u] == []
+    assert len(fetched) == len(PAGES)
 
 
 def test_every_record_is_attributed_to_this_section():
