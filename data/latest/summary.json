@@ -100,6 +100,7 @@
     "occupational_safety_part_d",
     "occupational_safety_part_g",
     "pland_document_sweep",
+    "planning_guidelines",
     "plumbing_requirements",
     "policy_documents",
     "practice_notes",
@@ -143,8 +144,7 @@
     "legco.finance_meetings",
     "legco.finance_papers_reports",
     "legco.public_works_papers_reports",
-    "legco.public_works_project_proposal_considered",
-    "tpb.planning_guidelines"
+    "legco.public_works_project_proposal_considered"
   ],
   "crawlers_succeeded": [
     "archsd.archsd_practices_and_guidelines",
@@ -258,6 +258,7 @@
     "td.td_document_sweep",
     "td.third_comprehensive_study",
     "td.transport_planning",
+    "tpb.planning_guidelines",
     "wsd.automatic_meter_reading",
     "wsd.circular_letters",
     "wsd.circular_letters_superseded",
@@ -289,14 +290,14 @@
     }
   ],
   "regressions_zeroed": [],
-  "rows": 85657,
-  "run_date_utc": "2026-09-07",
+  "rows": 85709,
+  "run_date_utc": "2026-09-08",
   "schedule": {
     "archsd.archsd_practices_and_guidelines": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "archsd.archsd_practices_and_guidelines",
       "source_id": "archsd"
     },
@@ -304,7 +305,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "archsd.archsd_technical_documents",
       "source_id": "archsd"
     },
@@ -312,7 +313,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.basic_pages",
       "source_id": "bd"
     },
@@ -320,7 +321,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.bd_document_sweep",
       "source_id": "bd"
     },
@@ -328,7 +329,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.central_data_bank",
       "source_id": "bd"
     },
@@ -336,7 +337,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.codes_and_design_manuals_subsections",
       "source_id": "bd"
     },
@@ -344,7 +345,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.codes_and_references_sections",
       "source_id": "bd"
     },
@@ -352,7 +353,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.codes_design_manuals_and_guidelines",
       "source_id": "bd"
     },
@@ -360,7 +361,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.common_conditions_and_requirements",
       "source_id": "bd"
     },
@@ -368,7 +369,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.notices_and_reports",
       "source_id": "bd"
     },
@@ -376,7 +377,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.practice_notes_and_circular_letters",
       "source_id": "bd"
     },
@@ -384,7 +385,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "bd.scheduled_areas",
       "source_id": "bd"
     },
@@ -392,7 +393,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.cedd_ceo_publications",
       "source_id": "cedd"
     },
@@ -400,7 +401,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.cedd_document_sweep",
       "source_id": "cedd"
     },
@@ -408,7 +409,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.cedd_eacsb_handbook",
       "source_id": "cedd"
     },
@@ -416,7 +417,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.cedd_geo_publications",
       "source_id": "cedd"
     },
@@ -424,7 +425,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.cedd_standards_spec_handbooks_cost",
       "source_id": "cedd"
     },
@@ -432,7 +433,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.cedd_technical_circulars",
       "source_id": "cedd"
     },
@@ -440,7 +441,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.ceo_and_port_works",
       "source_id": "cedd"
     },
@@ -448,7 +449,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "cedd.mines_and_blasting",
       "source_id": "cedd"
     },
@@ -456,7 +457,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "devb.devb_document_sweep",
       "source_id": "devb"
     },
@@ -464,7 +465,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "devb.devb_general_circulars",
       "source_id": "devb"
     },
@@ -472,7 +473,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "devb.devb_planning_and_lands_technical_circulars",
       "source_id": "devb"
     },
@@ -480,7 +481,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "devb.devb_press_releases",
       "source_id": "devb"
     },
@@ -488,7 +489,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "devb.devb_publications",
       "source_id": "devb"
     },
@@ -496,7 +497,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "devb.devb_speeches_and_presentations",
       "source_id": "devb"
     },
@@ -504,7 +505,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "devb.devb_works_technical_circulars_um",
       "source_id": "devb"
     },
@@ -512,7 +513,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "directory.tel_directory",
       "source_id": "directory"
     },
@@ -520,7 +521,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "dsd.dsd_document_sweep",
       "source_id": "dsd"
     },
@@ -528,7 +529,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "dsd.guidelines",
       "source_id": "dsd"
     },
@@ -536,7 +537,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "dsd.technical_circulars_and_practice_notes",
       "source_id": "dsd"
     },
@@ -544,7 +545,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "dsd.technical_manuals",
       "source_id": "dsd"
     },
@@ -552,7 +553,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "dsd.technical_papers_published_by_dsd",
       "source_id": "dsd"
     },
@@ -560,7 +561,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.electric_safety_cop",
       "source_id": "emsd"
     },
@@ -568,7 +569,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.electric_safety_publications_cop",
       "source_id": "emsd"
     },
@@ -576,7 +577,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.electric_safety_publications_general",
       "source_id": "emsd"
     },
@@ -584,7 +585,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.electric_safety_publications_guidelines",
       "source_id": "emsd"
     },
@@ -592,7 +593,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.emsd_document_sweep",
       "source_id": "emsd"
     },
@@ -600,7 +601,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.gas_approval_schemes",
       "source_id": "emsd"
     },
@@ -608,7 +609,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.gas_publications",
       "source_id": "emsd"
     },
@@ -616,7 +617,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.gas_related_information_for_competent_person",
       "source_id": "emsd"
     },
@@ -624,7 +625,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.gas_safety_portal",
       "source_id": "emsd"
     },
@@ -632,7 +633,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.gas_safety_tips",
       "source_id": "emsd"
     },
@@ -640,7 +641,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.gas_statutory_advisory_bodies",
       "source_id": "emsd"
     },
@@ -648,7 +649,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.lifts_and_escalators_circulars",
       "source_id": "emsd"
     },
@@ -656,7 +657,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.lifts_and_escalators_publications",
       "source_id": "emsd"
     },
@@ -664,7 +665,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.lifts_and_escalators_registered_workers",
       "source_id": "emsd"
     },
@@ -672,7 +673,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.lifts_and_escalators_responsible_persons_corner",
       "source_id": "emsd"
     },
@@ -680,7 +681,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.lifts_and_escalators_statutory_advisory_bodies",
       "source_id": "emsd"
     },
@@ -688,7 +689,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.publications_handbooks",
       "source_id": "emsd"
     },
@@ -696,7 +697,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.publications_technical_specifications",
       "source_id": "emsd"
     },
@@ -704,7 +705,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.railway_safety_publication",
       "source_id": "emsd"
     },
@@ -712,7 +713,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd.regulating_railway_safety",
       "source_id": "emsd"
     },
@@ -720,7 +721,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "emsd_beeo.beeo_codes_guidelines",
       "source_id": "emsd_beeo"
     },
@@ -728,7 +729,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.air",
       "source_id": "epd"
     },
@@ -736,7 +737,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.eia_planning",
       "source_id": "epd"
     },
@@ -744,7 +745,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.epd_document_sweep",
       "source_id": "epd"
     },
@@ -752,7 +753,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.noise",
       "source_id": "epd"
     },
@@ -760,7 +761,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.policy_documents",
       "source_id": "epd"
     },
@@ -768,7 +769,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.publications_guidance_documents",
       "source_id": "epd"
     },
@@ -776,7 +777,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.publications_other_reports",
       "source_id": "epd"
     },
@@ -784,7 +785,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.publications_propeccpns",
       "source_id": "epd"
     },
@@ -792,7 +793,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.publications_study_report",
       "source_id": "epd"
     },
@@ -800,7 +801,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.publications_technical_memorandum",
       "source_id": "epd"
     },
@@ -808,7 +809,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.waste",
       "source_id": "epd"
     },
@@ -816,7 +817,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "epd.water",
       "source_id": "epd"
     },
@@ -824,7 +825,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.checklist",
       "source_id": "fsd"
     },
@@ -832,7 +833,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.circular_letters",
       "source_id": "fsd"
     },
@@ -840,7 +841,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.circular_letters_obsolete",
       "source_id": "fsd"
     },
@@ -848,7 +849,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.circular_letters_old",
       "source_id": "fsd"
     },
@@ -856,7 +857,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.code_of_practice",
       "source_id": "fsd"
     },
@@ -864,7 +865,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.fsd_document_sweep",
       "source_id": "fsd"
     },
@@ -872,7 +873,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.licensing_food_premises",
       "source_id": "fsd"
     },
@@ -880,7 +881,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.notices",
       "source_id": "fsd"
     },
@@ -888,7 +889,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "fsd.technical_guidance",
       "source_id": "fsd"
     },
@@ -896,7 +897,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "herbarium.herbarium",
       "source_id": "herbarium"
     },
@@ -904,7 +905,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "hksar.hksar_press_releases",
       "source_id": "hksar"
     },
@@ -912,7 +913,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "hyd.hyd_document_sweep",
       "source_id": "hyd"
     },
@@ -920,7 +921,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "hyd.hyd_standard_drawings",
       "source_id": "hyd"
     },
@@ -928,7 +929,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "hyd.hyd_technical_documents",
       "source_id": "hyd"
     },
@@ -936,7 +937,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.faq",
       "source_id": "labour"
     },
@@ -944,7 +945,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.labour_document_sweep",
       "source_id": "labour"
     },
@@ -952,7 +953,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_health_part_a",
       "source_id": "labour"
     },
@@ -960,7 +961,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_health_part_b",
       "source_id": "labour"
     },
@@ -968,7 +969,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_health_part_c",
       "source_id": "labour"
     },
@@ -976,7 +977,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_health_part_d",
       "source_id": "labour"
     },
@@ -984,7 +985,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_safety_part_a",
       "source_id": "labour"
     },
@@ -992,7 +993,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_safety_part_b",
       "source_id": "labour"
     },
@@ -1000,7 +1001,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_safety_part_c",
       "source_id": "labour"
     },
@@ -1008,7 +1009,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_safety_part_d",
       "source_id": "labour"
     },
@@ -1016,7 +1017,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.occupational_safety_part_g",
       "source_id": "labour"
     },
@@ -1024,7 +1025,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "labour.pressure_equipment",
       "source_id": "labour"
     },
@@ -1032,7 +1033,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "lands.info_notes",
       "source_id": "lands"
     },
@@ -1040,7 +1041,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "lands.joint_practice_notes",
       "source_id": "lands"
     },
@@ -1048,7 +1049,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "lands.laco_circular_memorandum",
       "source_id": "lands"
     },
@@ -1056,7 +1057,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "lands.lands_document_sweep",
       "source_id": "lands"
     },
@@ -1064,7 +1065,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "lands.lao_practice_notes",
       "source_id": "lands"
     },
@@ -1072,7 +1073,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "lands.smo_practice_notes",
       "source_id": "lands"
     },
@@ -1136,7 +1137,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "pland.approved_planning_briefs",
       "source_id": "pland"
     },
@@ -1144,7 +1145,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "pland.joint_practice_notes",
       "source_id": "pland"
     },
@@ -1152,7 +1153,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "pland.pland_document_sweep",
       "source_id": "pland"
     },
@@ -1160,7 +1161,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "pland.practice_notes",
       "source_id": "pland"
     },
@@ -1168,7 +1169,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "pland.standards_guidelines",
       "source_id": "pland"
     },
@@ -1176,7 +1177,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.annual_digest",
       "source_id": "td"
     },
@@ -1184,7 +1185,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.free_publications",
       "source_id": "td"
     },
@@ -1192,7 +1193,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.free_publications_subsections",
       "source_id": "td"
     },
@@ -1200,7 +1201,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.miscellaneous",
       "source_id": "td"
     },
@@ -1208,7 +1209,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.second_parking_demand",
       "source_id": "td"
     },
@@ -1216,7 +1217,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.td_document_sweep",
       "source_id": "td"
     },
@@ -1224,7 +1225,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.third_comprehensive_study",
       "source_id": "td"
     },
@@ -1232,14 +1233,14 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "td.transport_planning",
       "source_id": "td"
     },
     "tpb.planning_guidelines": {
-      "due_today": false,
+      "due_today": true,
       "enabled": true,
-      "interval_days": 7,
+      "interval_days": 1,
       "last_successful_run_date": "2026-09-03",
       "module_path": "tpb.planning_guidelines",
       "source_id": "tpb"
@@ -1248,7 +1249,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.automatic_meter_reading",
       "source_id": "wsd"
     },
@@ -1256,7 +1257,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.circular_letters",
       "source_id": "wsd"
     },
@@ -1264,7 +1265,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.circular_letters_superseded",
       "source_id": "wsd"
     },
@@ -1272,7 +1273,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.cpd_for_licensed_plumbers",
       "source_id": "wsd"
     },
@@ -1280,7 +1281,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.enhancement_of_control_of_inside_services",
       "source_id": "wsd"
     },
@@ -1288,7 +1289,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.enhancing_plumbing_works_control",
       "source_id": "wsd"
     },
@@ -1296,7 +1297,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.flushing_water",
       "source_id": "wsd"
     },
@@ -1304,7 +1305,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.fresh_water_management_system",
       "source_id": "wsd"
     },
@@ -1312,7 +1313,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.good_practice_guide",
       "source_id": "wsd"
     },
@@ -1320,7 +1321,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.guidelines_reports_drawings_specifications",
       "source_id": "wsd"
     },
@@ -1328,7 +1329,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.information_for_licensed_plumbers",
       "source_id": "wsd"
     },
@@ -1336,7 +1337,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.licensed_plumbers",
       "source_id": "wsd"
     },
@@ -1344,7 +1345,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.maintenance_of_internal_plumbing",
       "source_id": "wsd"
     },
@@ -1352,7 +1353,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.mechanical_electrical_ss",
       "source_id": "wsd"
     },
@@ -1360,7 +1361,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.plumbing_requirements",
       "source_id": "wsd"
     },
@@ -1368,7 +1369,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.qualified_persons",
       "source_id": "wsd"
     },
@@ -1376,7 +1377,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.water_efficiency_labelling_scheme",
       "source_id": "wsd"
     },
@@ -1384,7 +1385,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.water_safety_plan_for_buildings",
       "source_id": "wsd"
     },
@@ -1392,7 +1393,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.water_safety_plan_subsidy_scheme",
       "source_id": "wsd"
     },
@@ -1400,7 +1401,7 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.works_of_minor_nature",
       "source_id": "wsd"
     },
@@ -1408,10 +1409,10 @@
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
-      "last_successful_run_date": "2026-09-06",
+      "last_successful_run_date": "2026-09-07",
       "module_path": "wsd.wsd_document_sweep",
       "source_id": "wsd"
     }
   },
-  "started_at_utc": "2026-09-07T07:01:33.253613+00:00"
+  "started_at_utc": "2026-09-08T06:56:18.787460+00:00"
 }
