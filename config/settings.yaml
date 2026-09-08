@@ -599,6 +599,42 @@ crawlers:
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
+      sewage_services_charging_scheme:
+        # [2026-09-08] PAI-1037. The charging regime under the Sewage Services
+        # Ordinance (Cap. 463) — Sewage Charge, Trade Effluent Surcharge,
+        # business classifications, billing, waivers, reassessment. DSD's other
+        # crawlers only reach document tables under /EN/Technical_Documents/,
+        # so a question about the Sewage Charge found nothing.
+        #
+        # Measured 2026-09-08: 10 pages, 28,083 characters of text, and 14
+        # documents (4 rate/classification appendices, the DSD_TES1-9 and
+        # DSD_DF_COD application forms, TM 2007) totalling 14.2 MB.
+        #
+        # The landing page is /EN/SewageServicesChargingScheme/ but every child
+        # sits under /EN/Sewage_Services_Charging_Scheme/, so both prefixes are
+        # allowed. Documents are pinned to the scheme's own uploads tree: the
+        # Sewage Services Operating Accounts page links 46 annual financial
+        # reports from elsewhere on the site, which are company accounts rather
+        # than charging rules.
+        engine: spider
+        # Every page's <h1> is the site banner "Drainage Services Department";
+        # the page's own name is only in <title> and og:title, so six of the
+        # ten pages would otherwise all be titled "Drainage Services
+        # Department" — and title is an indexed retrieval field.
+        page_title_source: og_title
+        start_urls:
+          - "https://www.dsd.gov.hk/EN/SewageServicesChargingScheme/index.html"
+          - "https://www.dsd.gov.hk/EN/Sewage_Services_Charging_Scheme/Sewage_Services_Charges/index.html"
+        allowed_path_prefixes:
+          - "/EN/SewageServicesChargingScheme"
+          - "/EN/Sewage_Services_Charging_Scheme"
+        document_path_prefixes:
+          - "/uploads/page/SewageServicesChargingScheme/"
+        document_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
+        emit_page_records: true
+        max_depth: 3
+        max_pages: 40
+
       technical_manuals:
         # DSD Technical Manuals table crawler.
         locales:
