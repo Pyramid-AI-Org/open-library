@@ -3,7 +3,7 @@ Total records: 11354 (parse_errors=0)
 
 Records by source:
 - bca.accessibility_and_universal_design: 12 (0.1%)
-- bca.circulars: 411 (3.6%)
+- bca.circulars: 413 (3.6%)
 - bca.guidebooks_and_publications: 52 (0.5%)
 - bca.safety_and_standards: 473 (4.2%)
 - bca.sustainability_legislation: 72 (0.6%)
@@ -16,7 +16,7 @@ Records by source:
 - ema.circulars: 29 (0.3%)
 - ema.corporate_publications: 16 (0.1%)
 - ema.educational_materials: 29 (0.3%)
-- ema.forms: 25 (0.2%)
+- ema.forms: 23 (0.2%)
 - ema.industry_reports: 11 (0.1%)
 - ema.licences: 495 (4.4%)
 - ema.regulations: 67 (0.6%)
@@ -31,10 +31,10 @@ Records by source:
 - lta.street_works: 42 (0.4%)
 - lta.transport_infrastructure_standards: 22 (0.2%)
 - lta.vehicle_parking: 3 (0.0%)
-- mom.workplace_safety_and_health: 511 (4.5%)
+- mom.workplace_safety_and_health: 509 (4.5%)
 - mom.wsh_circulars: 153 (1.3%)
 - mom.wsh_legislation: 32 (0.3%)
-- nea.circulars: 124 (1.1%)
+- nea.circulars: 122 (1.1%)
 - nea.development_control: 29 (0.3%)
 - nea.legislation: 90 (0.8%)
 - nea.pollution_control: 140 (1.2%)
@@ -67,7 +67,7 @@ Records by source:
 - ura.circulars: 64 (0.6%)
 - ura.conservation: 150 (1.3%)
 - ura.development_control: 343 (3.0%)
-- ura.master_plan: 175 (1.5%)
+- ura.master_plan: 179 (1.6%)
 - wshc.advisories_and_alerts: 460 (4.1%)
 - wshc.codes_and_guidelines: 284 (2.5%)
 - wshc.practical_guidance: 341 (3.0%)
@@ -85,7 +85,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=10 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.scdf.gov.sg: 288
   - info.corenet.gov.sg: 1
@@ -131,7 +131,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=38 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.scdf.gov.sg: 151
   - info.corenet.gov.sg: 1
@@ -176,7 +176,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.scdf.gov.sg: 101
   - info.corenet.gov.sg: 1
@@ -219,7 +219,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=19 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - sso.agc.gov.sg: 39
   - www.ema.gov.sg: 24
@@ -260,7 +260,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=25 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - cuge.nparks.gov.sg: 25
 - top url extensions:
@@ -290,7 +290,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=150 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=5
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 182
   - www.ura.gov.sg: 150
@@ -323,7 +323,7 @@ Per-source schema and validation summary:
   - sitemap_lastmod: 2026-07-27T08:18:55.222Z (33), 2026-06-06T18:27:20.219Z (32), 2026-06-06T17:31:02.462Z (32)
 
 [bca.circulars]
-- records: 411 | unique_urls: 411 | dup_url_hits: 0
+- records: 413 | unique_urls: 413 | dup_url_hits: 0
 - issues: errors=1 warnings=2
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
@@ -333,81 +333,81 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
-  - isomer-user-content.by.gov.sg: 353
+  - isomer-user-content.by.gov.sg: 355
   - www1.bca.gov.sg: 37
   - go.gov.sg: 14
   - info.corenet.gov.sg: 5
   - www.corenet.gov.sg: 1
   - www.mom.gov.sg: 1
 - top url extensions:
-  - .pdf: 359
+  - .pdf: 361
   - (no_ext): 52
 - top-level key signatures (urls.jsonl record format):
-  - count=411 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=413 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=225 meta_keys=['collection', 'date_raw', 'discovered_from', 'file_ext', 'record_kind']
+  - count=227 meta_keys=['collection', 'date_raw', 'discovered_from', 'file_ext', 'record_kind']
   - count=134 meta_keys=['collection', 'date_raw', 'declared_file_size', 'declared_file_type', 'discovered_from', 'file_ext', 'record_kind']
   - count=51 meta_keys=['collection', 'date_raw', 'discovered_from', 'record_kind']
 - meta schema variants: 4
 - most common meta keys:
-  - record_kind: 411
-  - collection: 410
-  - date_raw: 410
-  - discovered_from: 410
-  - file_ext: 360
+  - record_kind: 413
+  - collection: 412
+  - date_raw: 412
+  - discovered_from: 412
+  - file_ext: 362
   - declared_file_size: 134
   - declared_file_type: 134
 - top scalar meta values (sample):
-  - collection: Circulars (410)
+  - collection: Circulars (412)
   - date_raw: 1 September 2022 (11), 1 June 2021 (8), 1 September 2019 (8)
-  - discovered_from: https://www1.bca.gov.sg/resources/circulars/ (410)
-  - record_kind: document (359), page (51), index_page (1)
-  - file_ext: pdf (359), html (1)
+  - discovered_from: https://www1.bca.gov.sg/resources/circulars/ (412)
+  - record_kind: document (361), page (51), index_page (1)
+  - file_ext: pdf (361), html (1)
   - declared_file_size: 193 KB (3), 299 KB (2), 148 KB (2)
 
 [ura.master_plan]
-- records: 175 | unique_urls: 175 | dup_url_hits: 0
-- issues: errors=84 warnings=20
+- records: 179 | unique_urls: 179 | dup_url_hits: 0
+- issues: errors=85 warnings=20
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=91 invalid=0
+  - publish_date: missing=0 null=94 invalid=0
   - source: missing=0 null=0 invalid=0
-  - meta.discovered_from: missing=84 null=0 invalid=0
+  - meta.discovered_from: missing=85 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
-  - isomer-user-content.by.gov.sg: 89
-  - www.ura.gov.sg: 84
+  - isomer-user-content.by.gov.sg: 92
+  - www.ura.gov.sg: 85
   - go.gov.sg: 2
 - top url extensions:
-  - .pdf: 89
-  - (no_ext): 86
+  - .pdf: 92
+  - (no_ext): 87
 - top-level key signatures (urls.jsonl record format):
-  - count=175 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=179 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=89 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
-  - count=84 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=92 meta_keys=['declared_file_size', 'declared_file_type', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=85 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
   - count=2 meta_keys=['discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
 - meta schema variants: 3
 - most common meta keys:
-  - record_kind: 175
-  - sitemap_lastmod: 175
-  - file_ext: 173
-  - discovered_from: 91
-  - discovered_from_title: 91
-  - declared_file_size: 89
-  - declared_file_type: 89
+  - record_kind: 179
+  - sitemap_lastmod: 179
+  - file_ext: 177
+  - discovered_from: 94
+  - discovered_from_title: 94
+  - declared_file_size: 92
+  - declared_file_type: 92
 - top scalar meta values (sample):
   - discovered_from: https://www.ura.gov.sg/land-planning/master-plan/control-plans/list-of-street... (59), https://www.ura.gov.sg/land-planning/master-plan/amendments-to-master-plan/20... (7), https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/tanjong-pag... (6)
   - discovered_from_title: List of Street Block Plans (59), Amendments to Master Plan 2025 (9), &#x27;From Dreams to Rail-ity&#x27; (6)
-  - record_kind: document (89), page (84), external_reference (2)
+  - record_kind: document (92), page (85), external_reference (2)
   - sitemap_lastmod: 2026-07-20T10:10:14.489Z (60), 2026-07-24T01:32:29.131Z (8), 2026-06-05T09:46:35.961Z (7)
   - declared_file_size: 1.1 MB (9), 1.3 MB (7), 1.2 MB (5)
-  - declared_file_type: pdf (89)
+  - declared_file_type: pdf (92)
 
 [ura.conservation]
 - records: 150 | unique_urls: 150 | dup_url_hits: 0
@@ -420,7 +420,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=17 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 131
   - www.ura.gov.sg: 17
@@ -464,7 +464,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=58 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=6
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 379
   - www1.bca.gov.sg: 58
@@ -512,7 +512,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=7 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=5
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 55
   - sso.agc.gov.sg: 9
@@ -557,7 +557,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - info.corenet.gov.sg: 10
 - top url extensions:
@@ -595,7 +595,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.lta.gov.sg: 4
   - info.corenet.gov.sg: 3
@@ -636,7 +636,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=6 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - info.corenet.gov.sg: 6
 - top url extensions:
@@ -666,7 +666,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=2 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - info.corenet.gov.sg: 2
 - top url extensions:
@@ -696,7 +696,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.lta.gov.sg: 12
   - info.corenet.gov.sg: 1
@@ -735,7 +735,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 31
   - www.caas.gov.sg: 1
@@ -772,7 +772,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=3 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 3
   - www.caas.gov.sg: 3
@@ -811,7 +811,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=8 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 44
   - www1.bca.gov.sg: 8
@@ -852,7 +852,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=5 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 7
   - www1.bca.gov.sg: 5
@@ -893,7 +893,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 332
   - www.sla.gov.sg: 1
@@ -931,7 +931,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=6 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - isomer-user-content.by.gov.sg: 11
   - www.sla.gov.sg: 6
@@ -958,46 +958,46 @@ Per-source schema and validation summary:
   - sitemap_lastmod: 2025-08-01T02:31:26.356Z (7), 2025-10-27T03:48:37.022Z (6), 2025-09-04T08:13:14.930Z (1)
 
 [mom.workplace_safety_and_health]
-- records: 511 | unique_urls: 511 | dup_url_hits: 0
-- issues: errors=229 warnings=14
+- records: 509 | unique_urls: 509 | dup_url_hits: 0
+- issues: errors=229 warnings=184
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=282 invalid=0
+  - publish_date: missing=0 null=280 invalid=0
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=229 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
-  - mom.gov.sg: 492
+  - mom.gov.sg: 490
   - sso.agc.gov.sg: 19
 - top url extensions:
   - (no_ext): 248
-  - .pdf: 239
+  - .pdf: 237
   - .docx: 10
   - .xlsx: 8
   - .doc: 4
   - .xls: 2
 - top-level key signatures (urls.jsonl record format):
-  - count=511 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=509 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=263 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
+  - count=261 meta_keys=['discovered_from', 'discovered_from_title', 'file_ext', 'record_kind', 'sitemap_lastmod']
   - count=229 meta_keys=['file_ext', 'record_kind', 'sitemap_lastmod']
   - count=15 meta_keys=['discovered_from', 'discovered_from_title', 'record_kind', 'sitemap_lastmod']
 - meta schema variants: 4
 - most common meta keys:
-  - record_kind: 511
-  - sitemap_lastmod: 511
-  - file_ext: 492
-  - discovered_from: 282
-  - discovered_from_title: 282
+  - record_kind: 509
+  - sitemap_lastmod: 509
+  - file_ext: 490
+  - discovered_from: 280
+  - discovered_from_title: 280
   - fetch_url: 4
 - top scalar meta values (sample):
   - discovered_from: https://mom.gov.sg/workplace-safety-and-health/work-injury-compensation/resou... (69), https://mom.gov.sg/workplace-safety-and-health/wsh-reports-and-statistics (64), https://mom.gov.sg/workplace-safety-and-health/major-hazard-installations/pre... (10)
   - discovered_from_title: Resources and tools for work injury compensation (69), Workplace safety and health reports and statistics (64), Preparing for safety case (10)
-  - file_ext: pdf (239), html (229), docx (10)
-  - record_kind: document (263), page (229), external_reference (19)
+  - file_ext: pdf (237), html (229), docx (10)
+  - record_kind: document (261), page (229), external_reference (19)
   - sitemap_lastmod: 2024-03-14 (153), 2026-02-04 (70), 2026-09-08 (65)
   - fetch_url: https://sso.agc.gov.sg/Act/ITA1947?ProvIds=pr7-.,pr19A-. (1), https://sso.agc.gov.sg/Act/WICA2019?ProvIds=Sc2-XX-Sc2- (1), https://sso.agc.gov.sg/Act/WSHA2006?ProvIds=Sc3- (1)
 
@@ -1012,7 +1012,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - mom.gov.sg: 153
 - top url extensions:
@@ -1049,7 +1049,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - sso.agc.gov.sg: 31
   - mom.gov.sg: 1
@@ -1085,7 +1085,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=24 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nea.gov.sg: 76
   - sso.agc.gov.sg: 14
@@ -1125,7 +1125,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - sso.agc.gov.sg: 14
   - www.sla.gov.sg: 1
@@ -1161,7 +1161,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=60 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nea.gov.sg: 132
   - sso.agc.gov.sg: 8
@@ -1203,7 +1203,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=9 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - sso.agc.gov.sg: 72
   - www.caas.gov.sg: 9
@@ -1239,7 +1239,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=495 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ema.gov.sg: 495
 - top url extensions:
@@ -1269,7 +1269,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=16 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ema.gov.sg: 16
 - top url extensions:
@@ -1299,7 +1299,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=29 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ema.gov.sg: 29
 - top url extensions:
@@ -1319,36 +1319,36 @@ Per-source schema and validation summary:
   - record_kind: document (29)
 
 [ema.forms]
-- records: 25 | unique_urls: 25 | dup_url_hits: 0
-- issues: errors=25 warnings=0
+- records: 23 | unique_urls: 23 | dup_url_hits: 0
+- issues: errors=23 warnings=0
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=25 invalid=0
+  - publish_date: missing=0 null=23 invalid=0
   - source: missing=0 null=0 invalid=0
-  - meta.discovered_from: missing=25 null=0 invalid=0
+  - meta.discovered_from: missing=23 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
-  - www.ema.gov.sg: 25
+  - www.ema.gov.sg: 23
 - top url extensions:
   - .zip: 13
-  - .pdf: 9
-  - .docx: 3
+  - .pdf: 8
+  - .docx: 2
 - top-level key signatures (urls.jsonl record format):
-  - count=25 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=23 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=25 meta_keys=['file_type', 'found_on', 'record_kind']
+  - count=23 meta_keys=['file_type', 'found_on', 'record_kind']
 - meta schema variants: 1
 - most common meta keys:
-  - file_type: 25
-  - found_on: 25
-  - record_kind: 25
+  - file_type: 23
+  - found_on: 23
+  - record_kind: 23
 - top scalar meta values (sample):
-  - file_type: zip (13), pdf (9), docx (3)
-  - found_on: https://www.ema.gov.sg/resources/forms (25)
-  - record_kind: document (25)
+  - file_type: zip (13), pdf (8), docx (2)
+  - found_on: https://www.ema.gov.sg/resources/forms (23)
+  - record_kind: document (23)
 
 [ema.corporate_publications]
 - records: 16 | unique_urls: 16 | dup_url_hits: 0
@@ -1361,7 +1361,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=16 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ema.gov.sg: 16
 - top url extensions:
@@ -1391,7 +1391,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=29 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ema.gov.sg: 29
 - top url extensions:
@@ -1421,7 +1421,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=5 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ema.gov.sg: 11
 - top url extensions:
@@ -1457,7 +1457,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=13 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ema.gov.sg: 20
 - top url extensions:
@@ -1530,7 +1530,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=7 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.jtc.gov.sg: 23
 - top url extensions:
@@ -1566,7 +1566,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=18 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.jtc.gov.sg: 50
 - top url extensions:
@@ -1603,7 +1603,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.lta.gov.sg: 22
 - top url extensions:
@@ -1640,7 +1640,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=4 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.lta.gov.sg: 42
 - top url extensions:
@@ -1680,7 +1680,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.lta.gov.sg: 22
 - top url extensions:
@@ -1716,7 +1716,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.lta.gov.sg: 3
 - top url extensions:
@@ -1742,38 +1742,38 @@ Per-source schema and validation summary:
   - record_kind: document (2), page (1)
 
 [nea.circulars]
-- records: 124 | unique_urls: 124 | dup_url_hits: 0
-- issues: errors=8 warnings=2
+- records: 122 | unique_urls: 122 | dup_url_hits: 0
+- issues: errors=7 warnings=0
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=124 invalid=0
+  - publish_date: missing=0 null=122 invalid=0
   - source: missing=0 null=0 invalid=0
-  - meta.discovered_from: missing=8 null=0 invalid=0
+  - meta.discovered_from: missing=7 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
-  - www.nea.gov.sg: 124
+  - www.nea.gov.sg: 122
 - top url extensions:
-  - .pdf: 116
-  - (no_ext): 8
+  - .pdf: 115
+  - (no_ext): 7
 - top-level key signatures (urls.jsonl record format):
-  - count=124 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=122 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=116 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
-  - count=8 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
+  - count=115 meta_keys=['crawl_depth', 'discovered_from', 'discovered_from_title', 'file_ext', 'record_kind']
+  - count=7 meta_keys=['crawl_depth', 'file_ext', 'record_kind']
 - meta schema variants: 2
 - most common meta keys:
-  - crawl_depth: 124
-  - file_ext: 124
-  - record_kind: 124
-  - discovered_from: 116
-  - discovered_from_title: 116
+  - crawl_depth: 122
+  - file_ext: 122
+  - record_kind: 122
+  - discovered_from: 115
+  - discovered_from_title: 115
 - top scalar meta values (sample):
-  - crawl_depth: 1 (83), 0 (41)
-  - file_ext: pdf (116), html (8)
-  - record_kind: document (116), page (8)
+  - crawl_depth: 1 (81), 0 (41)
+  - file_ext: pdf (115), html (7)
+  - record_kind: document (115), page (7)
   - discovered_from: https://www.nea.gov.sg/corporate-functions/resources/circulars/climate-change... (41), https://www.nea.gov.sg/corporate-functions/resources/circulars (40), https://www.nea.gov.sg/corporate-functions/resources/circulars/hazardous-subs... (34)
   - discovered_from_title: Climate Change & Energy Efficiency Circulars (41), Development Control Circulars (40), Hazardous Substance Control Circulars (34)
 
@@ -1788,7 +1788,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=3 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nea.gov.sg: 48
 - top url extensions:
@@ -1830,7 +1830,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=13 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nea.gov.sg: 48
 - top url extensions:
@@ -1869,7 +1869,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=11 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nea.gov.sg: 29
 - top url extensions:
@@ -1907,7 +1907,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=30 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nparks.gov.sg: 129
 - top url extensions:
@@ -1947,7 +1947,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=65 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nparks.gov.sg: 120
 - top url extensions:
@@ -1986,7 +1986,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=45 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nparks.gov.sg: 86
 - top url extensions:
@@ -2026,7 +2026,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=111 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nparks.gov.sg: 113
 - top url extensions:
@@ -2064,7 +2064,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=6 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.nparks.gov.sg: 8
 - top url extensions:
@@ -2205,7 +2205,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=33 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.pub.gov.sg: 88
 - top url extensions:
@@ -2243,7 +2243,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.pub.gov.sg: 31
 - top url extensions:
@@ -2282,7 +2282,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.pub.gov.sg: 1
 - top url extensions:
@@ -2312,7 +2312,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.pub.gov.sg: 1
 - top url extensions:
@@ -2342,7 +2342,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=8 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.scdf.gov.sg: 62
 - top url extensions:
@@ -2386,7 +2386,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=3
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.scdf.gov.sg: 36
 - top url extensions:
@@ -2425,7 +2425,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=350 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.sgdi.gov.sg: 350
 - top url extensions:
@@ -2455,7 +2455,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=687 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.sgdi.gov.sg: 687
 - top url extensions:
@@ -2485,7 +2485,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=83 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.sgdi.gov.sg: 83
 - top url extensions:
@@ -2515,7 +2515,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=171 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.tal.sg: 341
 - top url extensions:
@@ -2554,7 +2554,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=230 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.tal.sg: 460
 - top url extensions:
@@ -2590,7 +2590,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=142 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.tal.sg: 284
 - top url extensions:
@@ -2628,7 +2628,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-09-17T12:00:37.002578+00:00 .. 2026-09-17T12:00:37.002578+00:00
+- discovered_at_utc: 2026-09-18T11:45:08.385388+00:00 .. 2026-09-18T11:45:08.385388+00:00
 - top url hosts:
   - www.ura.gov.sg: 64
 - top url extensions:
@@ -2653,12 +2653,12 @@ Per-source schema and validation summary:
   - discovered_from: https://www.ura.gov.sg/guidelines/circulars/ (63)
 
 General stats:
-- record JSON size (bytes): min=254 p50=493.0 mean=513.2 p95=765.0 max=1132
+- record JSON size (bytes): min=254 p50=493.0 mean=513.3 p95=765.0 max=1132
 
 Unusual records / issues:
-- error:missing_required_field: 6997
+- error:missing_required_field: 6995
 - error:null_required_field: 495
-- warning:meta_value_outlier: 228
+- warning:meta_value_outlier: 396
 
 Examples (first 50):
 - line 1 [warning] scdf.acts_codes_and_regulations meta.file_ext meta_value_outlier -> rare value in source:
