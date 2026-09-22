@@ -1,21 +1,21 @@
 {
   "input": "data-worktree/data/sg/latest/urls.jsonl",
   "totals": {
-    "lines_total": 11362,
-    "records_total": 11362,
+    "lines_total": 11364,
+    "records_total": 11364,
     "records_by_source": {
       "scdf.acts_codes_and_regulations": 289,
       "scdf.fire_code": 152,
       "scdf.fire_safety_circulars": 102,
-      "ema.regulations": 67,
+      "ema.regulations": 66,
       "nparks.cuge_standards": 25,
       "ura.development_control": 343,
-      "bca.circulars": 413,
+      "bca.circulars": 414,
       "ura.master_plan": 179,
       "ura.conservation": 150,
       "bca.safety_and_standards": 473,
       "bca.sustainability_legislation": 72,
-      "corenet.code_of_practice": 10,
+      "corenet.code_of_practice": 12,
       "lta.active_mobility": 7,
       "corenet.submission_process": 6,
       "corenet.resources": 2,
@@ -31,16 +31,16 @@
       "mom.wsh_legislation": 32,
       "nea.legislation": 90,
       "sla.legislation": 15,
-      "nea.pollution_control": 139,
+      "nea.pollution_control": 140,
       "caas.legislation": 83,
       "ema.licences": 495,
       "ema.regulatory_publications": 16,
       "ema.circulars": 29,
-      "ema.forms": 23,
+      "ema.forms": 25,
       "ema.corporate_publications": 16,
       "ema.educational_materials": 29,
       "ema.industry_reports": 11,
-      "ema.statistics": 20,
+      "ema.statistics": 17,
       "imda.building_facilities_codes": 24,
       "jtc.development_and_renovation": 23,
       "jtc.tenancy_requirements": 50,
@@ -49,7 +49,7 @@
       "lta.transport_infrastructure_standards": 22,
       "lta.vehicle_parking": 3,
       "nea.circulars": 124,
-      "nea.practices_and_guidelines": 48,
+      "nea.practices_and_guidelines": 49,
       "nea.publications": 48,
       "nea.development_control": 29,
       "nparks.learn": 129,
@@ -64,7 +64,7 @@
       "pub.guides_and_handbooks": 31,
       "pub.circulars": 1,
       "pub.codes_of_practice": 1,
-      "scdf.petroleum_and_flammable_materials": 62,
+      "scdf.petroleum_and_flammable_materials": 61,
       "scdf.advisories": 36,
       "sgdi.ministries": 350,
       "sgdi.statutory_boards": 687,
@@ -394,8 +394,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 289
       }
     },
@@ -704,8 +704,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 152
       }
     },
@@ -937,20 +937,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 102
       }
     },
     "ema.regulations": {
-      "records": 67,
-      "unique_urls": 67,
+      "records": 66,
+      "unique_urls": 66,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 19,
-        "warnings": 2,
+        "warnings": 1,
         "by_kind": {
-          "meta_value_outlier": 2,
+          "meta_value_outlier": 1,
           "missing_required_field": 19
         }
       },
@@ -972,7 +972,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 67,
+          "null": 66,
           "invalid": 0
         },
         "source": {
@@ -997,7 +997,7 @@
             "source_id",
             "url"
           ],
-          "count": 67
+          "count": 66
         }
       ],
       "meta_schema_signatures": [
@@ -1009,7 +1009,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 46
+          "count": 45
         },
         {
           "meta_keys": [
@@ -1041,7 +1041,7 @@
           },
           {
             "value": "2",
-            "count": 18
+            "count": 17
           },
           {
             "value": "1",
@@ -1060,16 +1060,12 @@
           {
             "value": "https://www.ema.gov.sg/regulations-licences/regulations/policies-frameworks/r...",
             "count": 1
-          },
-          {
-            "value": "https://www.ema.gov.sg/regulations-licences/regulations/market-operations/mar...",
-            "count": 1
           }
         ],
         "discovered_from_title": [
           {
             "value": "About EMA",
-            "count": 48
+            "count": 47
           }
         ],
         "file_ext": [
@@ -1083,7 +1079,7 @@
           },
           {
             "value": "pdf",
-            "count": 9
+            "count": 8
           }
         ],
         "record_kind": [
@@ -1097,7 +1093,7 @@
           },
           {
             "value": "document",
-            "count": 5
+            "count": 4
           }
         ],
         "fetch_url": [
@@ -1114,23 +1110,23 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          67
+          66
         ],
         [
           "file_ext",
-          67
+          66
         ],
         [
           "record_kind",
-          67
+          66
         ],
         [
           "discovered_from",
-          48
+          47
         ],
         [
           "discovered_from_title",
-          48
+          47
         ],
         [
           "fetch_url",
@@ -1144,7 +1140,7 @@
         ],
         [
           "www.ema.gov.sg",
-          24
+          23
         ],
         [
           "assets.egazette.gov.sg",
@@ -1158,13 +1154,13 @@
         ],
         [
           ".pdf",
-          9
+          8
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 67
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 66
       }
     },
     "nparks.cuge_standards": {
@@ -1295,8 +1291,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 25
       }
     },
@@ -1603,14 +1599,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 343
       }
     },
     "bca.circulars": {
-      "records": 413,
-      "unique_urls": 413,
+      "records": 414,
+      "unique_urls": 414,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 1,
@@ -1663,7 +1659,7 @@
             "source_id",
             "url"
           ],
-          "count": 413
+          "count": 414
         }
       ],
       "meta_schema_signatures": [
@@ -1675,7 +1671,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 227
+          "count": 228
         },
         {
           "meta_keys": [
@@ -1712,7 +1708,7 @@
         "collection": [
           {
             "value": "Circulars",
-            "count": 412
+            "count": 413
           }
         ],
         "date_raw": [
@@ -1740,13 +1736,13 @@
         "discovered_from": [
           {
             "value": "https://www1.bca.gov.sg/resources/circulars/",
-            "count": 412
+            "count": 413
           }
         ],
         "record_kind": [
           {
             "value": "document",
-            "count": 361
+            "count": 362
           },
           {
             "value": "page",
@@ -1760,7 +1756,7 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 361
+            "count": 362
           },
           {
             "value": "html",
@@ -1799,23 +1795,23 @@
       "top_meta_keys": [
         [
           "record_kind",
-          413
+          414
         ],
         [
           "collection",
-          412
+          413
         ],
         [
           "date_raw",
-          412
+          413
         ],
         [
           "discovered_from",
-          412
+          413
         ],
         [
           "file_ext",
-          362
+          363
         ],
         [
           "declared_file_size",
@@ -1829,7 +1825,7 @@
       "top_hosts": [
         [
           "isomer-user-content.by.gov.sg",
-          355
+          356
         ],
         [
           "www1.bca.gov.sg",
@@ -1855,7 +1851,7 @@
       "top_extensions": [
         [
           ".pdf",
-          361
+          362
         ],
         [
           "(no_ext)",
@@ -1863,9 +1859,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 413
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 414
       }
     },
     "ura.master_plan": {
@@ -2134,8 +2130,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 179
       }
     },
@@ -2439,8 +2435,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 150
       }
     },
@@ -2804,8 +2800,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 473
       }
     },
@@ -3133,14 +3129,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 72
       }
     },
     "corenet.code_of_practice": {
-      "records": 10,
-      "unique_urls": 10,
+      "records": 12,
+      "unique_urls": 12,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 1,
@@ -3167,7 +3163,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 10,
+          "null": 12,
           "invalid": 0
         },
         "source": {
@@ -3192,7 +3188,7 @@
             "source_id",
             "url"
           ],
-          "count": 10
+          "count": 12
         }
       ],
       "meta_schema_signatures": [
@@ -3205,7 +3201,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 9
+          "count": 11
         },
         {
           "meta_keys": [
@@ -3222,19 +3218,19 @@
         "crawl_depth": [
           {
             "value": "0",
-            "count": 10
+            "count": 12
           }
         ],
         "discovered_from": [
           {
             "value": "https://info.corenet.gov.sg/regulatory-process/corenet-x-code-of-practice",
-            "count": 9
+            "count": 11
           }
         ],
         "discovered_from_title": [
           {
             "value": "CORENET X Code of Practice",
-            "count": 9
+            "count": 11
           }
         ],
         "fetch_url": [
@@ -3255,14 +3251,14 @@
             "count": 1
           },
           {
-            "value": "https://info.corenet.gov.sg/docs/default-source/default-document-library/core...",
+            "value": "https://info.corenet.gov.sg/docs/default-source/default-document-library/anne...",
             "count": 1
           }
         ],
         "file_ext": [
           {
             "value": "pdf",
-            "count": 9
+            "count": 11
           },
           {
             "value": "html",
@@ -3272,7 +3268,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 9
+            "count": 11
           },
           {
             "value": "page",
@@ -3283,39 +3279,39 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          10
+          12
         ],
         [
           "file_ext",
-          10
+          12
         ],
         [
           "record_kind",
-          10
+          12
         ],
         [
           "discovered_from",
-          9
+          11
         ],
         [
           "discovered_from_title",
-          9
+          11
         ],
         [
           "fetch_url",
-          9
+          11
         ]
       ],
       "top_hosts": [
         [
           "info.corenet.gov.sg",
-          10
+          12
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          9
+          11
         ],
         [
           "(no_ext)",
@@ -3323,9 +3319,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 10
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 12
       }
     },
     "lta.active_mobility": {
@@ -3531,8 +3527,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 7
       }
     },
@@ -3664,8 +3660,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 6
       }
     },
@@ -3785,8 +3781,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 2
       }
     },
@@ -3972,8 +3968,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 13
       }
     },
@@ -4140,8 +4136,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 32
       }
     },
@@ -4332,8 +4328,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 7
       }
     },
@@ -4584,8 +4580,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 52
       }
     },
@@ -4825,8 +4821,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 12
       }
     },
@@ -5016,8 +5012,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 333
       }
     },
@@ -5207,8 +5203,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 17
       }
     },
@@ -5496,8 +5492,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 509
       }
     },
@@ -5668,8 +5664,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 153
       }
     },
@@ -5827,8 +5823,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 32
       }
     },
@@ -6068,8 +6064,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 90
       }
     },
@@ -6226,20 +6222,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 15
       }
     },
     "nea.pollution_control": {
-      "records": 139,
-      "unique_urls": 139,
+      "records": 140,
+      "unique_urls": 140,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 59,
+        "errors": 60,
         "warnings": 1,
         "by_kind": {
-          "missing_required_field": 59,
+          "missing_required_field": 60,
           "meta_value_outlier": 1
         }
       },
@@ -6261,7 +6257,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 139,
+          "null": 140,
           "invalid": 0
         },
         "source": {
@@ -6270,7 +6266,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 59,
+          "missing": 60,
           "null": 0,
           "invalid": 0
         }
@@ -6286,7 +6282,7 @@
             "source_id",
             "url"
           ],
-          "count": 139
+          "count": 140
         }
       ],
       "meta_schema_signatures": [
@@ -6306,7 +6302,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 59
+          "count": 60
         },
         {
           "meta_keys": [
@@ -6330,7 +6326,7 @@
           },
           {
             "value": "1",
-            "count": 14
+            "count": 15
           },
           {
             "value": "0",
@@ -6410,7 +6406,7 @@
           },
           {
             "value": "html",
-            "count": 59
+            "count": 60
           },
           {
             "value": "",
@@ -6432,7 +6428,7 @@
           },
           {
             "value": "page",
-            "count": 59
+            "count": 60
           },
           {
             "value": "external_reference",
@@ -6443,15 +6439,15 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          139
+          140
         ],
         [
           "file_ext",
-          139
+          140
         ],
         [
           "record_kind",
-          139
+          140
         ],
         [
           "discovered_from",
@@ -6469,7 +6465,7 @@
       "top_hosts": [
         [
           "www.nea.gov.sg",
-          131
+          132
         ],
         [
           "sso.agc.gov.sg",
@@ -6479,7 +6475,7 @@
       "top_extensions": [
         [
           "(no_ext)",
-          67
+          68
         ],
         [
           ".pdf",
@@ -6495,9 +6491,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 139
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 140
       }
     },
     "caas.legislation": {
@@ -6702,8 +6698,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 83
       }
     },
@@ -6824,8 +6820,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 495
       }
     },
@@ -6945,8 +6941,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 16
       }
     },
@@ -7066,20 +7062,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 29
       }
     },
     "ema.forms": {
-      "records": 23,
-      "unique_urls": 23,
+      "records": 25,
+      "unique_urls": 25,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 23,
+        "errors": 25,
         "warnings": 0,
         "by_kind": {
-          "missing_required_field": 23
+          "missing_required_field": 25
         }
       },
       "required_field_null_missing_invalid": {
@@ -7100,7 +7096,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 23,
+          "null": 25,
           "invalid": 0
         },
         "source": {
@@ -7109,7 +7105,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 23,
+          "missing": 25,
           "null": 0,
           "invalid": 0
         }
@@ -7125,7 +7121,7 @@
             "source_id",
             "url"
           ],
-          "count": 23
+          "count": 25
         }
       ],
       "meta_schema_signatures": [
@@ -7135,7 +7131,7 @@
             "found_on",
             "record_kind"
           ],
-          "count": 23
+          "count": 25
         }
       ],
       "meta_schema_variants": 1,
@@ -7148,44 +7144,44 @@
           },
           {
             "value": "pdf",
-            "count": 8
+            "count": 9
           },
           {
             "value": "docx",
-            "count": 2
+            "count": 3
           }
         ],
         "found_on": [
           {
             "value": "https://www.ema.gov.sg/resources/forms",
-            "count": 23
+            "count": 25
           }
         ],
         "record_kind": [
           {
             "value": "document",
-            "count": 23
+            "count": 25
           }
         ]
       },
       "top_meta_keys": [
         [
           "file_type",
-          23
+          25
         ],
         [
           "found_on",
-          23
+          25
         ],
         [
           "record_kind",
-          23
+          25
         ]
       ],
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          23
+          25
         ]
       ],
       "top_extensions": [
@@ -7195,17 +7191,17 @@
         ],
         [
           ".pdf",
-          8
+          9
         ],
         [
           ".docx",
-          2
+          3
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 23
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 25
       }
     },
     "ema.corporate_publications": {
@@ -7324,8 +7320,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 16
       }
     },
@@ -7445,8 +7441,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 29
       }
     },
@@ -7616,14 +7612,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 11
       }
     },
     "ema.statistics": {
-      "records": 20,
-      "unique_urls": 20,
+      "records": 17,
+      "unique_urls": 17,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 13,
@@ -7650,7 +7646,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 20,
+          "null": 17,
           "invalid": 0
         },
         "source": {
@@ -7675,7 +7671,7 @@
             "source_id",
             "url"
           ],
-          "count": 20
+          "count": 17
         }
       ],
       "meta_schema_signatures": [
@@ -7695,7 +7691,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 7
+          "count": 4
         }
       ],
       "meta_schema_variants": 2,
@@ -7708,7 +7704,7 @@
           },
           {
             "value": "2",
-            "count": 8
+            "count": 5
           },
           {
             "value": "0",
@@ -7723,20 +7719,12 @@
           {
             "value": "https://www.ema.gov.sg/resources/statistics/average-monthly-uniform-singapore...",
             "count": 2
-          },
-          {
-            "value": "https://www.ema.gov.sg/resources/statistics/installed-capacity-of-grid-connec...",
-            "count": 2
-          },
-          {
-            "value": "https://www.ema.gov.sg/resources/statistics/number-of-grid-connected-solar-ph...",
-            "count": 1
           }
         ],
         "discovered_from_title": [
           {
             "value": "About EMA",
-            "count": 7
+            "count": 4
           }
         ],
         "file_ext": [
@@ -7746,11 +7734,11 @@
           },
           {
             "value": "xlsx",
-            "count": 5
+            "count": 3
           },
           {
             "value": "pdf",
-            "count": 2
+            "count": 1
           }
         ],
         "record_kind": [
@@ -7760,36 +7748,36 @@
           },
           {
             "value": "document",
-            "count": 7
+            "count": 4
           }
         ]
       },
       "top_meta_keys": [
         [
           "crawl_depth",
-          20
+          17
         ],
         [
           "file_ext",
-          20
+          17
         ],
         [
           "record_kind",
-          20
+          17
         ],
         [
           "discovered_from",
-          7
+          4
         ],
         [
           "discovered_from_title",
-          7
+          4
         ]
       ],
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          20
+          17
         ]
       ],
       "top_extensions": [
@@ -7799,17 +7787,17 @@
         ],
         [
           ".xlsx",
-          5
+          3
         ],
         [
           ".pdf",
-          2
+          1
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 20
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 17
       }
     },
     "imda.building_facilities_codes": {
@@ -8158,8 +8146,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 23
       }
     },
@@ -8370,8 +8358,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 50
       }
     },
@@ -8542,8 +8530,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 22
       }
     },
@@ -8770,8 +8758,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 42
       }
     },
@@ -8934,8 +8922,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 22
       }
     },
@@ -9097,8 +9085,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 3
       }
     },
@@ -9289,14 +9277,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 124
       }
     },
     "nea.practices_and_guidelines": {
-      "records": 48,
-      "unique_urls": 48,
+      "records": 49,
+      "unique_urls": 49,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 3,
@@ -9323,7 +9311,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 48,
+          "null": 49,
           "invalid": 0
         },
         "source": {
@@ -9348,7 +9336,7 @@
             "source_id",
             "url"
           ],
-          "count": 48
+          "count": 49
         }
       ],
       "meta_schema_signatures": [
@@ -9360,7 +9348,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 25
+          "count": 26
         },
         {
           "meta_keys": [
@@ -9400,7 +9388,7 @@
         "crawl_depth": [
           {
             "value": "0",
-            "count": 39
+            "count": 40
           },
           {
             "value": "1",
@@ -9410,7 +9398,7 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 43
+            "count": 44
           },
           {
             "value": "html",
@@ -9424,7 +9412,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 45
+            "count": 46
           },
           {
             "value": "page",
@@ -9434,7 +9422,7 @@
         "discovered_from": [
           {
             "value": "https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines",
-            "count": 38
+            "count": 39
           },
           {
             "value": "https://www.nea.gov.sg/corporate-functions/resources/practices-and-guidelines...",
@@ -9444,7 +9432,7 @@
         "discovered_from_title": [
           {
             "value": "Guidelines",
-            "count": 38
+            "count": 39
           },
           {
             "value": "Practices",
@@ -9489,23 +9477,23 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          48
+          49
         ],
         [
           "file_ext",
-          48
+          49
         ],
         [
           "record_kind",
-          48
+          49
         ],
         [
           "discovered_from",
-          45
+          46
         ],
         [
           "discovered_from_title",
-          45
+          46
         ],
         [
           "fetch_url",
@@ -9523,13 +9511,13 @@
       "top_hosts": [
         [
           "www.nea.gov.sg",
-          48
+          49
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          43
+          44
         ],
         [
           "(no_ext)",
@@ -9541,9 +9529,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 48
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 49
       }
     },
     "nea.publications": {
@@ -9762,8 +9750,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 48
       }
     },
@@ -9962,8 +9950,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 29
       }
     },
@@ -10203,8 +10191,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 129
       }
     },
@@ -10436,8 +10424,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 120
       }
     },
@@ -10676,8 +10664,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 86
       }
     },
@@ -10855,8 +10843,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 113
       }
     },
@@ -11033,8 +11021,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 8
       }
     },
@@ -11769,8 +11757,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 88
       }
     },
@@ -11957,8 +11945,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 31
       }
     },
@@ -12078,8 +12066,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 1
       }
     },
@@ -12199,14 +12187,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 1
       }
     },
     "scdf.petroleum_and_flammable_materials": {
-      "records": 62,
-      "unique_urls": 62,
+      "records": 61,
+      "unique_urls": 61,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 8,
@@ -12234,7 +12222,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 62,
+          "null": 61,
           "invalid": 0
         },
         "source": {
@@ -12259,7 +12247,7 @@
             "source_id",
             "url"
           ],
-          "count": 62
+          "count": 61
         }
       ],
       "meta_schema_signatures": [
@@ -12303,7 +12291,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 3
+          "count": 2
         }
       ],
       "meta_schema_variants": 4,
@@ -12316,7 +12304,7 @@
           },
           {
             "value": "1",
-            "count": 26
+            "count": 25
           }
         ],
         "declared_file_size": [
@@ -12358,7 +12346,7 @@
           },
           {
             "value": "https://www.scdf.gov.sg/fire-safety-services-listing/petroleum-and-flammable-...",
-            "count": 9
+            "count": 8
           },
           {
             "value": "https://www.scdf.gov.sg/fire-safety-services-listing/petroleum-and-flammable-...",
@@ -12380,7 +12368,7 @@
           },
           {
             "value": "Hero banner for Information of P&amp;FM Transport Licence",
-            "count": 9
+            "count": 8
           },
           {
             "value": "Hero banner for Information of P&amp;FM Storage Licence",
@@ -12420,7 +12408,7 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 44
+            "count": 43
           },
           {
             "value": "html",
@@ -12442,7 +12430,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 54
+            "count": 53
           },
           {
             "value": "page",
@@ -12453,23 +12441,23 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          62
+          61
         ],
         [
           "file_ext",
-          62
+          61
         ],
         [
           "record_kind",
-          62
+          61
         ],
         [
           "discovered_from",
-          54
+          53
         ],
         [
           "discovered_from_title",
-          54
+          53
         ],
         [
           "fetch_url",
@@ -12487,13 +12475,13 @@
       "top_hosts": [
         [
           "www.scdf.gov.sg",
-          62
+          61
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          44
+          43
         ],
         [
           "(no_ext)",
@@ -12513,9 +12501,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
-        "count": 62
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
+        "count": 61
       }
     },
     "scdf.advisories": {
@@ -12714,8 +12702,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 36
       }
     },
@@ -12844,8 +12832,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 350
       }
     },
@@ -12974,8 +12962,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 687
       }
     },
@@ -13104,8 +13092,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 83
       }
     },
@@ -13340,8 +13328,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 346
       }
     },
@@ -13551,8 +13539,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 460
       }
     },
@@ -13779,8 +13767,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 284
       }
     },
@@ -13949,8 +13937,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-21T12:25:36.638400+00:00",
-        "max": "2026-09-21T12:25:36.638400+00:00",
+        "min": "2026-09-22T10:23:35.473606+00:00",
+        "max": "2026-09-22T10:23:35.473606+00:00",
         "count": 64
       }
     }
@@ -13959,18 +13947,18 @@
     "record_size_bytes": {
       "min": 254,
       "max": 1132,
-      "mean": 513.3389368069002,
+      "mean": 513.341781063006,
       "p50": 493.0,
       "p95": 765.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 399,
-        "error": 7491
+        "warning": 398,
+        "error": 7494
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 399,
-        "error:missing_required_field": 6996,
+        "warning:meta_value_outlier": 398,
+        "error:missing_required_field": 6999,
         "error:null_required_field": 495
       }
     },
@@ -14316,22 +14304,6 @@
         "kind": "missing_required_field",
         "source": "corenet.submission_process",
         "field": "meta.discovered_from",
-        "line": 81,
-        "detail": "missing required field"
-      },
-      {
-        "severity": "error",
-        "kind": "missing_required_field",
-        "source": "corenet.submission_process",
-        "field": "meta.discovered_from",
-        "line": 82,
-        "detail": "missing required field"
-      },
-      {
-        "severity": "error",
-        "kind": "missing_required_field",
-        "source": "corenet.submission_process",
-        "field": "meta.discovered_from",
         "line": 83,
         "detail": "missing required field"
       },
@@ -14346,7 +14318,7 @@
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "corenet.code_of_practice",
+        "source": "corenet.submission_process",
         "field": "meta.discovered_from",
         "line": 85,
         "detail": "missing required field"
@@ -14362,7 +14334,7 @@
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "corenet.submission_process",
+        "source": "corenet.code_of_practice",
         "field": "meta.discovered_from",
         "line": 87,
         "detail": "missing required field"
@@ -14370,9 +14342,25 @@
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "corenet.resources",
+        "source": "corenet.submission_process",
         "field": "meta.discovered_from",
         "line": 88,
+        "detail": "missing required field"
+      },
+      {
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.submission_process",
+        "field": "meta.discovered_from",
+        "line": 89,
+        "detail": "missing required field"
+      },
+      {
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "corenet.resources",
+        "field": "meta.discovered_from",
+        "line": 90,
         "detail": "missing required field"
       }
     ]
