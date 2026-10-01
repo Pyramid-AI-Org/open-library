@@ -1,19 +1,19 @@
 {
   "input": "data-worktree/data/sg/latest/urls.jsonl",
   "totals": {
-    "lines_total": 11379,
-    "records_total": 11379,
+    "lines_total": 11224,
+    "records_total": 11224,
     "records_by_source": {
       "scdf.acts_codes_and_regulations": 289,
       "scdf.fire_code": 152,
       "scdf.fire_safety_circulars": 102,
-      "ema.regulations": 67,
+      "ema.regulations": 66,
       "nparks.cuge_standards": 25,
       "ura.development_control": 343,
       "bca.circulars": 418,
       "ura.master_plan": 170,
       "ura.conservation": 150,
-      "bca.safety_and_standards": 473,
+      "bca.safety_and_standards": 405,
       "bca.sustainability_legislation": 72,
       "corenet.code_of_practice": 12,
       "lta.active_mobility": 7,
@@ -40,7 +40,7 @@
       "ema.corporate_publications": 16,
       "ema.educational_materials": 29,
       "ema.industry_reports": 11,
-      "ema.statistics": 20,
+      "ema.statistics": 19,
       "imda.building_facilities_codes": 24,
       "jtc.development_and_renovation": 23,
       "jtc.tenancy_requirements": 50,
@@ -66,8 +66,8 @@
       "pub.codes_of_practice": 1,
       "scdf.petroleum_and_flammable_materials": 61,
       "scdf.advisories": 36,
-      "sgdi.ministries": 350,
-      "sgdi.statutory_boards": 687,
+      "sgdi.ministries": 340,
+      "sgdi.statutory_boards": 612,
       "sgdi.organs_of_state": 83,
       "wshc.practical_guidance": 350,
       "wshc.advisories_and_alerts": 460,
@@ -394,8 +394,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 289
       }
     },
@@ -704,8 +704,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 152
       }
     },
@@ -937,20 +937,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 102
       }
     },
     "ema.regulations": {
-      "records": 67,
-      "unique_urls": 67,
+      "records": 66,
+      "unique_urls": 66,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 19,
-        "warnings": 2,
+        "warnings": 1,
         "by_kind": {
-          "meta_value_outlier": 2,
+          "meta_value_outlier": 1,
           "missing_required_field": 19
         }
       },
@@ -972,7 +972,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 67,
+          "null": 66,
           "invalid": 0
         },
         "source": {
@@ -997,7 +997,7 @@
             "source_id",
             "url"
           ],
-          "count": 67
+          "count": 66
         }
       ],
       "meta_schema_signatures": [
@@ -1009,7 +1009,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 46
+          "count": 45
         },
         {
           "meta_keys": [
@@ -1041,7 +1041,7 @@
           },
           {
             "value": "2",
-            "count": 18
+            "count": 17
           },
           {
             "value": "1",
@@ -1060,16 +1060,12 @@
           {
             "value": "https://www.ema.gov.sg/regulations-licences/regulations/policies-frameworks/r...",
             "count": 1
-          },
-          {
-            "value": "https://www.ema.gov.sg/regulations-licences/regulations/market-operations/mar...",
-            "count": 1
           }
         ],
         "discovered_from_title": [
           {
             "value": "About EMA",
-            "count": 48
+            "count": 47
           }
         ],
         "file_ext": [
@@ -1083,7 +1079,7 @@
           },
           {
             "value": "pdf",
-            "count": 9
+            "count": 8
           }
         ],
         "record_kind": [
@@ -1097,7 +1093,7 @@
           },
           {
             "value": "document",
-            "count": 5
+            "count": 4
           }
         ],
         "fetch_url": [
@@ -1114,23 +1110,23 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          67
+          66
         ],
         [
           "file_ext",
-          67
+          66
         ],
         [
           "record_kind",
-          67
+          66
         ],
         [
           "discovered_from",
-          48
+          47
         ],
         [
           "discovered_from_title",
-          48
+          47
         ],
         [
           "fetch_url",
@@ -1144,7 +1140,7 @@
         ],
         [
           "www.ema.gov.sg",
-          24
+          23
         ],
         [
           "assets.egazette.gov.sg",
@@ -1158,13 +1154,13 @@
         ],
         [
           ".pdf",
-          9
+          8
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
-        "count": 67
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
+        "count": 66
       }
     },
     "nparks.cuge_standards": {
@@ -1295,8 +1291,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 25
       }
     },
@@ -1603,8 +1599,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 343
       }
     },
@@ -1863,8 +1859,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 418
       }
     },
@@ -2134,8 +2130,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 170
       }
     },
@@ -2439,21 +2435,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 150
       }
     },
     "bca.safety_and_standards": {
-      "records": 473,
-      "unique_urls": 473,
+      "records": 405,
+      "unique_urls": 405,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 58,
+        "errors": 57,
         "warnings": 10,
         "by_kind": {
           "meta_value_outlier": 10,
-          "missing_required_field": 58
+          "missing_required_field": 57
         }
       },
       "required_field_null_missing_invalid": {
@@ -2474,7 +2470,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 415,
+          "null": 348,
           "invalid": 0
         },
         "source": {
@@ -2483,7 +2479,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 58,
+          "missing": 57,
           "null": 0,
           "invalid": 0
         }
@@ -2499,7 +2495,7 @@
             "source_id",
             "url"
           ],
-          "count": 473
+          "count": 405
         }
       ],
       "meta_schema_signatures": [
@@ -2513,7 +2509,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 335
+          "count": 268
         },
         {
           "meta_keys": [
@@ -2521,7 +2517,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 58
+          "count": 57
         },
         {
           "meta_keys": [
@@ -2558,30 +2554,30 @@
       "meta_top_scalar_values": {
         "declared_file_size": [
           {
-            "value": "70 KB",
-            "count": 8
-          },
-          {
-            "value": "451 KB",
-            "count": 8
-          },
-          {
-            "value": "75 KB",
-            "count": 7
-          },
-          {
-            "value": "76 KB",
-            "count": 7
-          },
-          {
-            "value": "456 KB",
+            "value": "5.1 MB",
             "count": 5
+          },
+          {
+            "value": "1.6 MB",
+            "count": 3
+          },
+          {
+            "value": "37 KB",
+            "count": 3
+          },
+          {
+            "value": "1.0MB",
+            "count": 3
+          },
+          {
+            "value": "400 KB",
+            "count": 2
           }
         ],
         "declared_file_type": [
           {
             "value": "pdf",
-            "count": 331
+            "count": 264
           },
           {
             "value": "docx",
@@ -2602,10 +2598,6 @@
         ],
         "discovered_from": [
           {
-            "value": "https://www1.bca.gov.sg/safety-and-standards/construction-quality/conquas-for...",
-            "count": 67
-          },
-          {
             "value": "https://www1.bca.gov.sg/safety-and-standards/applications-and-licenses/struct...",
             "count": 65
           },
@@ -2620,16 +2612,16 @@
           {
             "value": "https://www1.bca.gov.sg/safety-and-standards/lifts-escalators-and-mechanised-...",
             "count": 24
+          },
+          {
+            "value": "https://www1.bca.gov.sg/safety-and-standards/amusement-rides/forms-for-permit...",
+            "count": 16
           }
         ],
         "discovered_from_title": [
           {
             "value": "Resources from Past Events",
             "count": 71
-          },
-          {
-            "value": "CONQUAS for Public Projects",
-            "count": 67
           },
           {
             "value": "Guidelines for ST Plan Applications",
@@ -2642,6 +2634,10 @@
           {
             "value": "Forms and Certificates",
             "count": 24
+          },
+          {
+            "value": "Forms for Permits and Notifications",
+            "count": 16
           }
         ],
         "fetch_url": [
@@ -2669,11 +2665,11 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 375
+            "count": 308
           },
           {
             "value": "html",
-            "count": 58
+            "count": 57
           },
           {
             "value": "xlsx",
@@ -2691,11 +2687,11 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 380
+            "count": 313
           },
           {
             "value": "page",
-            "count": 58
+            "count": 57
           },
           {
             "value": "external_reference",
@@ -2703,10 +2699,6 @@
           }
         ],
         "sitemap_lastmod": [
-          {
-            "value": "2026-03-14T14:59:32.279Z",
-            "count": 68
-          },
           {
             "value": "2026-09-28T07:41:28.072Z",
             "count": 66
@@ -2722,37 +2714,41 @@
           {
             "value": "2026-07-15T08:45:53.054Z",
             "count": 25
+          },
+          {
+            "value": "2026-03-18T12:03:36.233Z",
+            "count": 17
           }
         ]
       },
       "top_meta_keys": [
         [
           "record_kind",
-          473
+          405
         ],
         [
           "sitemap_lastmod",
-          473
+          405
         ],
         [
           "file_ext",
-          438
+          370
         ],
         [
           "discovered_from",
-          415
+          348
         ],
         [
           "discovered_from_title",
-          415
+          348
         ],
         [
           "declared_file_size",
-          336
+          269
         ],
         [
           "declared_file_type",
-          336
+          269
         ],
         [
           "fetch_url",
@@ -2762,11 +2758,11 @@
       "top_hosts": [
         [
           "isomer-user-content.by.gov.sg",
-          379
+          312
         ],
         [
           "www1.bca.gov.sg",
-          58
+          57
         ],
         [
           "sso.agc.gov.sg",
@@ -2780,11 +2776,11 @@
       "top_extensions": [
         [
           ".pdf",
-          375
+          308
         ],
         [
           "(no_ext)",
-          93
+          92
         ],
         [
           ".xlsx",
@@ -2804,9 +2800,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
-        "count": 473
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
+        "count": 405
       }
     },
     "bca.sustainability_legislation": {
@@ -3133,8 +3129,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 72
       }
     },
@@ -3323,8 +3319,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 12
       }
     },
@@ -3531,8 +3527,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 7
       }
     },
@@ -3664,8 +3660,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 6
       }
     },
@@ -3785,8 +3781,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 2
       }
     },
@@ -3972,8 +3968,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 13
       }
     },
@@ -4140,8 +4136,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 32
       }
     },
@@ -4332,8 +4328,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 7
       }
     },
@@ -4584,8 +4580,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 53
       }
     },
@@ -4825,8 +4821,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 12
       }
     },
@@ -5016,8 +5012,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 333
       }
     },
@@ -5207,8 +5203,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 17
       }
     },
@@ -5496,8 +5492,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 509
       }
     },
@@ -5668,8 +5664,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 155
       }
     },
@@ -5827,8 +5823,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 32
       }
     },
@@ -6068,8 +6064,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 90
       }
     },
@@ -6226,8 +6222,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 15
       }
     },
@@ -6495,8 +6491,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 140
       }
     },
@@ -6702,8 +6698,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 83
       }
     },
@@ -6824,8 +6820,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 504
       }
     },
@@ -6945,8 +6941,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 16
       }
     },
@@ -7066,8 +7062,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 29
       }
     },
@@ -7203,8 +7199,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 23
       }
     },
@@ -7324,8 +7320,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 16
       }
     },
@@ -7445,8 +7441,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 29
       }
     },
@@ -7616,14 +7612,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 11
       }
     },
     "ema.statistics": {
-      "records": 20,
-      "unique_urls": 20,
+      "records": 19,
+      "unique_urls": 19,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 13,
@@ -7650,7 +7646,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 20,
+          "null": 19,
           "invalid": 0
         },
         "source": {
@@ -7675,7 +7671,7 @@
             "source_id",
             "url"
           ],
-          "count": 20
+          "count": 19
         }
       ],
       "meta_schema_signatures": [
@@ -7695,7 +7691,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 7
+          "count": 6
         }
       ],
       "meta_schema_variants": 2,
@@ -7708,7 +7704,7 @@
           },
           {
             "value": "2",
-            "count": 8
+            "count": 7
           },
           {
             "value": "0",
@@ -7727,16 +7723,12 @@
           {
             "value": "https://www.ema.gov.sg/resources/statistics/installed-capacity-of-grid-connec...",
             "count": 2
-          },
-          {
-            "value": "https://www.ema.gov.sg/resources/statistics/number-of-grid-connected-solar-ph...",
-            "count": 1
           }
         ],
         "discovered_from_title": [
           {
             "value": "About EMA",
-            "count": 7
+            "count": 6
           }
         ],
         "file_ext": [
@@ -7746,7 +7738,7 @@
           },
           {
             "value": "xlsx",
-            "count": 5
+            "count": 4
           },
           {
             "value": "pdf",
@@ -7760,36 +7752,36 @@
           },
           {
             "value": "document",
-            "count": 7
+            "count": 6
           }
         ]
       },
       "top_meta_keys": [
         [
           "crawl_depth",
-          20
+          19
         ],
         [
           "file_ext",
-          20
+          19
         ],
         [
           "record_kind",
-          20
+          19
         ],
         [
           "discovered_from",
-          7
+          6
         ],
         [
           "discovered_from_title",
-          7
+          6
         ]
       ],
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          20
+          19
         ]
       ],
       "top_extensions": [
@@ -7799,7 +7791,7 @@
         ],
         [
           ".xlsx",
-          5
+          4
         ],
         [
           ".pdf",
@@ -7807,9 +7799,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
-        "count": 20
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
+        "count": 19
       }
     },
     "imda.building_facilities_codes": {
@@ -8158,8 +8150,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 23
       }
     },
@@ -8370,8 +8362,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 50
       }
     },
@@ -8542,8 +8534,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 22
       }
     },
@@ -8770,8 +8762,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 42
       }
     },
@@ -8934,8 +8926,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 22
       }
     },
@@ -9097,8 +9089,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 3
       }
     },
@@ -9289,8 +9281,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 124
       }
     },
@@ -9541,8 +9533,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 49
       }
     },
@@ -9762,8 +9754,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 48
       }
     },
@@ -9962,8 +9954,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 29
       }
     },
@@ -10203,8 +10195,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 131
       }
     },
@@ -10436,8 +10428,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 120
       }
     },
@@ -10676,8 +10668,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 86
       }
     },
@@ -10855,8 +10847,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 113
       }
     },
@@ -11033,8 +11025,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 8
       }
     },
@@ -11769,8 +11761,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 88
       }
     },
@@ -11957,8 +11949,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 31
       }
     },
@@ -12078,8 +12070,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 1
       }
     },
@@ -12199,8 +12191,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 1
       }
     },
@@ -12513,8 +12505,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 61
       }
     },
@@ -12714,20 +12706,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 36
       }
     },
     "sgdi.ministries": {
-      "records": 350,
-      "unique_urls": 350,
+      "records": 340,
+      "unique_urls": 340,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 350,
+        "errors": 340,
         "warnings": 1,
         "by_kind": {
-          "missing_required_field": 350,
+          "missing_required_field": 340,
           "meta_value_outlier": 1
         }
       },
@@ -12749,7 +12741,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 350,
+          "null": 340,
           "invalid": 0
         },
         "source": {
@@ -12758,7 +12750,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 350,
+          "missing": 340,
           "null": 0,
           "invalid": 0
         }
@@ -12774,7 +12766,7 @@
             "source_id",
             "url"
           ],
-          "count": 350
+          "count": 340
         }
       ],
       "meta_schema_signatures": [
@@ -12784,7 +12776,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 350
+          "count": 340
         }
       ],
       "meta_schema_variants": 1,
@@ -12793,7 +12785,7 @@
         "crawl_depth": [
           {
             "value": "2",
-            "count": 333
+            "count": 323
           },
           {
             "value": "1",
@@ -12807,57 +12799,57 @@
         "file_ext": [
           {
             "value": "html",
-            "count": 350
+            "count": 340
           }
         ],
         "record_kind": [
           {
             "value": "page",
-            "count": 350
+            "count": 340
           }
         ]
       },
       "top_meta_keys": [
         [
           "crawl_depth",
-          350
+          340
         ],
         [
           "file_ext",
-          350
+          340
         ],
         [
           "record_kind",
-          350
+          340
         ]
       ],
       "top_hosts": [
         [
           "www.sgdi.gov.sg",
-          350
+          340
         ]
       ],
       "top_extensions": [
         [
           "(no_ext)",
-          350
+          340
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
-        "count": 350
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
+        "count": 340
       }
     },
     "sgdi.statutory_boards": {
-      "records": 687,
-      "unique_urls": 687,
+      "records": 612,
+      "unique_urls": 612,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 687,
+        "errors": 612,
         "warnings": 1,
         "by_kind": {
-          "missing_required_field": 687,
+          "missing_required_field": 612,
           "meta_value_outlier": 1
         }
       },
@@ -12879,7 +12871,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 687,
+          "null": 612,
           "invalid": 0
         },
         "source": {
@@ -12888,7 +12880,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 687,
+          "missing": 612,
           "null": 0,
           "invalid": 0
         }
@@ -12904,7 +12896,7 @@
             "source_id",
             "url"
           ],
-          "count": 687
+          "count": 612
         }
       ],
       "meta_schema_signatures": [
@@ -12914,7 +12906,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 687
+          "count": 612
         }
       ],
       "meta_schema_variants": 1,
@@ -12923,11 +12915,11 @@
         "crawl_depth": [
           {
             "value": "2",
-            "count": 621
+            "count": 555
           },
           {
             "value": "1",
-            "count": 65
+            "count": 56
           },
           {
             "value": "0",
@@ -12937,46 +12929,46 @@
         "file_ext": [
           {
             "value": "html",
-            "count": 687
+            "count": 612
           }
         ],
         "record_kind": [
           {
             "value": "page",
-            "count": 687
+            "count": 612
           }
         ]
       },
       "top_meta_keys": [
         [
           "crawl_depth",
-          687
+          612
         ],
         [
           "file_ext",
-          687
+          612
         ],
         [
           "record_kind",
-          687
+          612
         ]
       ],
       "top_hosts": [
         [
           "www.sgdi.gov.sg",
-          687
+          612
         ]
       ],
       "top_extensions": [
         [
           "(no_ext)",
-          687
+          612
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
-        "count": 687
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
+        "count": 612
       }
     },
     "sgdi.organs_of_state": {
@@ -13104,8 +13096,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 83
       }
     },
@@ -13340,8 +13332,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 350
       }
     },
@@ -13551,8 +13543,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 460
       }
     },
@@ -13779,8 +13771,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 284
       }
     },
@@ -13949,8 +13941,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-09-30T06:48:59.974442+00:00",
-        "max": "2026-09-30T06:48:59.974442+00:00",
+        "min": "2026-10-01T06:56:29.812423+00:00",
+        "max": "2026-10-01T06:56:29.812423+00:00",
         "count": 64
       }
     }
@@ -13959,18 +13951,18 @@
     "record_size_bytes": {
       "min": 254,
       "max": 1132,
-      "mean": 513.3372001054574,
-      "p50": 493,
-      "p95": 765.0
+      "mean": 513.9972380612973,
+      "p50": 494.0,
+      "p95": 767.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 229,
-        "error": 7510
+        "warning": 228,
+        "error": 7424
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 229,
-        "error:missing_required_field": 7006,
+        "warning:meta_value_outlier": 228,
+        "error:missing_required_field": 6920,
         "error:null_required_field": 504
       }
     },
