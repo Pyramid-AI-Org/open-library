@@ -140,15 +140,22 @@ def _write_day_delta(
     base_version: int,
     added: list[dict[str, Any]],
     removed: list[dict[str, Any]],
+    crawl_date: str | None = None,
 ) -> Path:
     added_path, removed_path, meta_path = _day_files(data_root, yyyy, mm, dd)
     _write_jsonl(added_path, added)
     _write_jsonl(removed_path, removed)
 
+    # `date` is the day the snapshot was archived, which is the run *after* the
+    # crawl that produced it. `crawl_date` is the crawl's own run date, the one
+    # the viewer should show.
+    meta: dict[str, Any] = {"date": f"{yyyy}-{mm}-{dd}"}
+    if crawl_date:
+        meta["crawl_date"] = crawl_date
     _write_json(
         meta_path,
         {
-            "date": f"{yyyy}-{mm}-{dd}",
+            **meta,
             "format": "v2-delta",
             "base_version": base_version,
             "base_path": _base_file(data_root, yyyy, mm)
@@ -256,6 +263,7 @@ def _rebase_month_if_needed(
         day_dd = day_dir.name
         full_map = daily_full_maps[idx]
         added, removed = _calc_added_removed(refreshed_base, full_map)
+        previous_meta = _read_json(_day_files(data_root, yyyy, mm, day_dd)[2])
         _write_day_delta(
             data_root=data_root,
             yyyy=yyyy,
@@ -264,6 +272,7 @@ def _rebase_month_if_needed(
             base_version=base_version,
             added=added,
             removed=removed,
+            crawl_date=str(previous_meta.get("crawl_date") or "") or None,
         )
 
     _write_json(
@@ -341,6 +350,7 @@ def archive_previous_latest(
             base_version=1,
             added=[],
             removed=[],
+            crawl_date=latest_run_date or None,
         )
         _rebase_month_if_needed(data_root, run_date, mid_month_refresh_day)
         return RotationResult(archived=True, archived_path=meta_path)
@@ -357,6 +367,7 @@ def archive_previous_latest(
         base_version=base_version,
         added=added,
         removed=removed,
+        crawl_date=latest_run_date or None,
     )
 
     latest_path.unlink(missing_ok=True)

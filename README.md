@@ -22,6 +22,8 @@ Archive v2 policy summary:
 - Each month has a base snapshot and per-day deltas (`added`/`removed`) keyed by `(source, url)`.
 - On `archive_policy.mid_month_refresh_day` (default `15`), the active month's base is refreshed and that same month's day deltas are rewritten against the refreshed base.
 - Previous months are immutable; only the active month is rewritten during mid-month refresh.
+- A snapshot is archived by the run after the one that crawled it, so a day folder's date is its archive date. Day `meta.json` records the crawl's own run date as `crawl_date`, and `archive/index.json` labels each entry by that crawl date (keeping the folder date as `archived_on`). Archives written before `crawl_date` existed are labelled by their records' most common `discovered_at_utc` day.
+- The first archive of a month moves the whole snapshot into the month base and writes an empty delta for that day. The index reports that day's size as the base size, not 0 B.
 
 ## Scheduling
 

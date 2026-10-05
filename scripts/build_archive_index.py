@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import re
+from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -10,7 +12,7 @@ from utils.time import utc_now
 
 @dataclass(frozen=True)
 class ArchiveEntry:
-    date: str  # YYYY-MM-DD
+    date: str  # YYYY-MM-DD the snapshot was crawled; the viewer's label
     path: str  # path used by the viewer for selection/fetch
     bytes: int
     format: str  # legacy-full | v2-delta
@@ -18,6 +20,38 @@ class ArchiveEntry:
     added_path: str | None = None
     removed_path: str | None = None
     base_version: int | None = None
+    archived_on: str | None = None  # YYYY-MM-DD of the run that archived it
+
+
+_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+# Enough rows to outvote records carried forward from older crawls.
+_CRAWL_DATE_SAMPLE_ROWS = 2000
+
+
+def _infer_crawl_date(path: Path) -> str | None:
+    """The most common `discovered_at_utc` day among a snapshot's first rows.
+
+    A snapshot is archived by the run after the one that crawled it, so its
+    archive date is not its crawl date. Archives written before `crawl_date`
+    was recorded in day meta only carry the crawl date in their records.
+    """
+    counts: Counter[str] = Counter()
+    try:
+        with path.open("r", encoding="utf-8") as fh:
+            for i, line in enumerate(fh):
+                if i >= _CRAWL_DATE_SAMPLE_ROWS:
+                    break
+                try:
+                    rec = json.loads(line)
+                except Exception:
+                    continue
+                day = str(rec.get("discovered_at_utc") or "")[:10]
+                if _DATE_RE.match(day):
+                    counts[day] += 1
+    except OSError:
+        return None
+    return counts.most_common(1)[0][0] if counts else None
 
 
 def _iter_legacy_archives(data_root: Path) -> list[ArchiveEntry]:
@@ -42,14 +76,15 @@ def _iter_legacy_archives(data_root: Path) -> list[ArchiveEntry]:
         except Exception:
             continue
 
-        date = f"{yyyy}-{mm}-{dd}"
+        archived_on = f"{yyyy}-{mm}-{dd}"
         size = urls_path.stat().st_size
         out.append(
             ArchiveEntry(
-                date=date,
+                date=_infer_crawl_date(urls_path) or archived_on,
                 path=rel,
                 bytes=size,
                 format="legacy-full",
+                archived_on=archived_on,
             )
         )
 
@@ -112,6 +147,21 @@ def _iter_v2_archives(data_root: Path) -> list[ArchiveEntry]:
                 if p.exists():
                     bytes_total += p.stat().st_size
 
+        # The first day of a month moves the whole snapshot into the month base
+        # and leaves an empty delta, until the mid-month refresh rewrites it.
+        # That day's snapshot is the base, so report the base's size.
+        base_file = data_root / base_path if base_path else None
+        delta_is_empty = bytes_total == 0
+        if delta_is_empty and base_file is not None and base_file.exists():
+            bytes_total = base_file.stat().st_size
+
+        crawl_date = str(meta.get("crawl_date") or "").strip()
+        if not _DATE_RE.match(crawl_date):
+            sample = base_file if delta_is_empty else (
+                data_root / added_path if added_path else None
+            )
+            crawl_date = (_infer_crawl_date(sample) if sample else None) or date
+
         base_version_raw = meta.get("base_version")
         base_version = (
             int(base_version_raw) if isinstance(base_version_raw, int) else None
@@ -119,7 +169,8 @@ def _iter_v2_archives(data_root: Path) -> list[ArchiveEntry]:
 
         out.append(
             ArchiveEntry(
-                date=date,
+                date=crawl_date,
+                archived_on=date,
                 path=rel_meta,
                 bytes=bytes_total,
                 format="v2-delta",
@@ -136,7 +187,7 @@ def _iter_v2_archives(data_root: Path) -> list[ArchiveEntry]:
 def _iter_archives(data_root: Path) -> list[ArchiveEntry]:
     out = _iter_legacy_archives(data_root)
     out.extend(_iter_v2_archives(data_root))
-    out.sort(key=lambda e: e.date, reverse=True)
+    out.sort(key=lambda e: (e.date, e.archived_on or ""), reverse=True)
     return out
 
 
@@ -154,6 +205,7 @@ def build_index(data_root: Path) -> dict:
                 "added_path": e.added_path,
                 "removed_path": e.removed_path,
                 "base_version": e.base_version,
+                "archived_on": e.archived_on,
             }
             for e in archives
         ],
