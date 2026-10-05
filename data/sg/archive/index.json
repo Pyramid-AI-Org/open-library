@@ -1,345 +1,390 @@
 {
-  "generated_at_utc": "2026-10-04T13:33:17.703791+00:00",
+  "generated_at_utc": "2026-10-05T14:07:18.133867+00:00",
   "archives": [
     {
       "date": "2026-10-04",
+      "path": "archive_v2/2026/10/days/05/meta.json",
+      "bytes": 4131045,
+      "format": "v2-delta",
+      "base_path": "archive_v2/2026/10/base.jsonl",
+      "added_path": "archive_v2/2026/10/days/05/added.jsonl",
+      "removed_path": "archive_v2/2026/10/days/05/removed.jsonl",
+      "base_version": 1,
+      "archived_on": "2026-10-05"
+    },
+    {
+      "date": "2026-10-03",
       "path": "archive_v2/2026/10/days/04/meta.json",
       "bytes": 4130943,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/10/base.jsonl",
       "added_path": "archive_v2/2026/10/days/04/added.jsonl",
       "removed_path": "archive_v2/2026/10/days/04/removed.jsonl",
-      "base_version": 1
+      "base_version": 1,
+      "archived_on": "2026-10-04"
     },
     {
-      "date": "2026-10-03",
+      "date": "2026-10-02",
       "path": "archive_v2/2026/10/days/03/meta.json",
       "bytes": 4130943,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/10/base.jsonl",
       "added_path": "archive_v2/2026/10/days/03/added.jsonl",
       "removed_path": "archive_v2/2026/10/days/03/removed.jsonl",
-      "base_version": 1
+      "base_version": 1,
+      "archived_on": "2026-10-03"
     },
     {
-      "date": "2026-10-02",
+      "date": "2026-10-01",
       "path": "archive_v2/2026/10/days/02/meta.json",
       "bytes": 4098611,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/10/base.jsonl",
       "added_path": "archive_v2/2026/10/days/02/added.jsonl",
       "removed_path": "archive_v2/2026/10/days/02/removed.jsonl",
-      "base_version": 1
+      "base_version": 1,
+      "archived_on": "2026-10-02"
     },
     {
-      "date": "2026-10-01",
+      "date": "2026-09-30",
       "path": "archive_v2/2026/10/days/01/meta.json",
-      "bytes": 0,
+      "bytes": 5853971,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/10/base.jsonl",
       "added_path": "archive_v2/2026/10/days/01/added.jsonl",
       "removed_path": "archive_v2/2026/10/days/01/removed.jsonl",
-      "base_version": 1
+      "base_version": 1,
+      "archived_on": "2026-10-01"
     },
     {
-      "date": "2026-09-30",
+      "date": "2026-09-29",
       "path": "archive_v2/2026/09/days/30/meta.json",
       "bytes": 4088519,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/30/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/30/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-30"
     },
     {
-      "date": "2026-09-29",
+      "date": "2026-09-28",
       "path": "archive_v2/2026/09/days/29/meta.json",
       "bytes": 4088141,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/29/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/29/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-29"
     },
     {
-      "date": "2026-09-28",
+      "date": "2026-09-27",
       "path": "archive_v2/2026/09/days/28/meta.json",
       "bytes": 4098047,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/28/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/28/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-28"
     },
     {
-      "date": "2026-09-27",
+      "date": "2026-09-26",
       "path": "archive_v2/2026/09/days/27/meta.json",
       "bytes": 4098926,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/27/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/27/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-27"
     },
     {
-      "date": "2026-09-26",
+      "date": "2026-09-25",
       "path": "archive_v2/2026/09/days/26/meta.json",
       "bytes": 4097435,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/26/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/26/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-26"
     },
     {
-      "date": "2026-09-25",
+      "date": "2026-09-24",
       "path": "archive_v2/2026/09/days/25/meta.json",
       "bytes": 4092176,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/25/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/25/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-25"
     },
     {
-      "date": "2026-09-24",
+      "date": "2026-09-23",
       "path": "archive_v2/2026/09/days/24/meta.json",
       "bytes": 4092004,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/24/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/24/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-24"
     },
     {
-      "date": "2026-09-23",
+      "date": "2026-09-22",
       "path": "archive_v2/2026/09/days/23/meta.json",
       "bytes": 4087516,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/23/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/23/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-23"
     },
     {
-      "date": "2026-09-22",
+      "date": "2026-09-21",
       "path": "archive_v2/2026/09/days/22/meta.json",
       "bytes": 4086455,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/22/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/22/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-22"
     },
     {
-      "date": "2026-09-21",
+      "date": "2026-09-20",
       "path": "archive_v2/2026/09/days/21/meta.json",
       "bytes": 4082553,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/21/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/21/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-21"
     },
     {
-      "date": "2026-09-20",
+      "date": "2026-09-19",
       "path": "archive_v2/2026/09/days/20/meta.json",
       "bytes": 4083432,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/20/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/20/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-20"
     },
     {
-      "date": "2026-09-19",
+      "date": "2026-09-18",
       "path": "archive_v2/2026/09/days/19/meta.json",
       "bytes": 4082121,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/19/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/19/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-19"
     },
     {
-      "date": "2026-09-18",
+      "date": "2026-09-17",
       "path": "archive_v2/2026/09/days/18/meta.json",
       "bytes": 4081203,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/18/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/18/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-18"
     },
     {
-      "date": "2026-09-17",
+      "date": "2026-09-16",
       "path": "archive_v2/2026/09/days/17/meta.json",
       "bytes": 4079188,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/17/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/17/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-17"
     },
     {
-      "date": "2026-09-16",
+      "date": "2026-09-15",
       "path": "archive_v2/2026/09/days/16/meta.json",
       "bytes": 4076444,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/16/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/16/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-16"
     },
     {
-      "date": "2026-09-15",
+      "date": "2026-09-14",
       "path": "archive_v2/2026/09/days/15/meta.json",
       "bytes": 4078845,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/15/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/15/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-15"
     },
     {
-      "date": "2026-09-14",
+      "date": "2026-09-13",
       "path": "archive_v2/2026/09/days/14/meta.json",
       "bytes": 4084014,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/14/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/14/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-14"
     },
     {
-      "date": "2026-09-13",
+      "date": "2026-09-12",
       "path": "archive_v2/2026/09/days/13/meta.json",
       "bytes": 4082802,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/13/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/13/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-13"
     },
     {
-      "date": "2026-09-12",
+      "date": "2026-09-11",
       "path": "archive_v2/2026/09/days/12/meta.json",
       "bytes": 4084893,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/12/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/12/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-12"
     },
     {
-      "date": "2026-09-11",
+      "date": "2026-09-10",
       "path": "archive_v2/2026/09/days/11/meta.json",
       "bytes": 4083105,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/11/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/11/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-11"
     },
     {
-      "date": "2026-09-10",
+      "date": "2026-09-09",
       "path": "archive_v2/2026/09/days/10/meta.json",
       "bytes": 4082530,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/10/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/10/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-10"
     },
     {
-      "date": "2026-09-09",
+      "date": "2026-09-08",
       "path": "archive_v2/2026/09/days/09/meta.json",
       "bytes": 4082291,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/09/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/09/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-09"
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-07",
       "path": "archive_v2/2026/09/days/08/meta.json",
       "bytes": 4074938,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/08/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/08/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-08"
     },
     {
-      "date": "2026-09-07",
+      "date": "2026-09-06",
       "path": "archive_v2/2026/09/days/07/meta.json",
       "bytes": 4074517,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/07/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/07/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-07"
     },
     {
-      "date": "2026-09-06",
+      "date": "2026-09-05",
       "path": "archive_v2/2026/09/days/06/meta.json",
       "bytes": 4073638,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/06/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/06/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-06"
     },
     {
-      "date": "2026-09-05",
+      "date": "2026-09-04",
       "path": "archive_v2/2026/09/days/05/meta.json",
       "bytes": 4073638,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/05/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/05/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-05"
     },
     {
-      "date": "2026-09-04",
+      "date": "2026-09-03",
       "path": "archive_v2/2026/09/days/04/meta.json",
       "bytes": 4069305,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/04/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/04/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-04"
     },
     {
-      "date": "2026-09-03",
+      "date": "2026-08-27",
       "path": "archive_v2/2026/09/days/03/meta.json",
       "bytes": 4059312,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/09/base.jsonl",
       "added_path": "archive_v2/2026/09/days/03/added.jsonl",
       "removed_path": "archive_v2/2026/09/days/03/removed.jsonl",
-      "base_version": 2
+      "base_version": 2,
+      "archived_on": "2026-09-03"
     },
     {
-      "date": "2026-08-27",
+      "date": "2026-08-25",
       "path": "archive_v2/2026/08/days/27/meta.json",
       "bytes": 4140539,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/08/base.jsonl",
       "added_path": "archive_v2/2026/08/days/27/added.jsonl",
       "removed_path": "archive_v2/2026/08/days/27/removed.jsonl",
-      "base_version": 1
+      "base_version": 1,
+      "archived_on": "2026-08-27"
     },
     {
-      "date": "2026-08-25",
+      "date": "2026-08-24",
       "path": "archive_v2/2026/08/days/25/meta.json",
-      "bytes": 0,
+      "bytes": 4847335,
       "format": "v2-delta",
       "base_path": "archive_v2/2026/08/base.jsonl",
       "added_path": "archive_v2/2026/08/days/25/added.jsonl",
       "removed_path": "archive_v2/2026/08/days/25/removed.jsonl",
-      "base_version": 1
+      "base_version": 1,
+      "archived_on": "2026-08-25"
     }
   ]
 }
