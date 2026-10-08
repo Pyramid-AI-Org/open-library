@@ -86,10 +86,10 @@ def test_each_archive_is_labelled_by_the_crawl_it_holds(tmp_path: Path):
     assert entry["path"] == "archive_v2/2026/10/days/02/meta.json"
 
 
-def test_mid_month_refresh_keeps_crawl_dates_and_fills_day_one(tmp_path: Path):
+def test_mid_month_refresh_keeps_crawl_dates(tmp_path: Path):
     _publish_latest(tmp_path, "2026-09-30", rows=5)
     archive_previous_latest(tmp_path, run_date="2026-10-01", mid_month_refresh_day=2)
-    _publish_latest(tmp_path, "2026-10-01", rows=5)
+    _publish_latest(tmp_path, "2026-10-01", rows=6)
     archive_previous_latest(tmp_path, run_date="2026-10-02", mid_month_refresh_day=2)
 
     days = tmp_path / "archive_v2" / "2026" / "10" / "days"
@@ -99,8 +99,33 @@ def test_mid_month_refresh_keeps_crawl_dates_and_fills_day_one(tmp_path: Path):
     assert day1["base_version"] == 2
     assert day1["crawl_date"] == "2026-09-30"
     assert day2["crawl_date"] == "2026-10-01"
-    # After the refresh day one is a real delta, so its own size is reported.
-    assert _entry(tmp_path, "2026-10-01")["bytes"] == day1["bytes"] > 0
+    # The five records both crawls share form the refreshed base, so day one's
+    # delta is empty and the index reports the base's size; day two adds one.
+    assert day1["rows_added"] == 0
+    assert day2["rows_added"] == 1
+    base = tmp_path / "archive_v2" / "2026" / "10" / "base.jsonl"
+    assert _entry(tmp_path, "2026-10-01")["bytes"] == base.stat().st_size > 0
+
+
+def test_a_recrawl_that_changes_nothing_adds_nothing(tmp_path: Path):
+    """PAI-1384: deltas were near-full copies because every record carries the
+    run's discovered_at_utc. A re-crawl of the same records is an empty delta,
+    and a real change (here a renamed document) is still recorded."""
+    _publish_latest(tmp_path, "2026-09-30", rows=5)
+    archive_previous_latest(tmp_path, run_date="2026-10-01")
+    _publish_latest(tmp_path, "2026-10-01", rows=5)
+    renamed = [_rec(n, "2026-10-01") for n in range(5)]
+    renamed[2]["name"] = "Renamed by the department"
+    _write_jsonl(tmp_path / "latest" / "urls.jsonl", renamed)
+    archive_previous_latest(tmp_path, run_date="2026-10-02")
+
+    day2 = tmp_path / "archive_v2" / "2026" / "10" / "days" / "02"
+    meta = json.loads((day2 / "meta.json").read_text(encoding="utf-8"))
+    added = [json.loads(line) for line in (day2 / "added.jsonl").read_text().splitlines()]
+
+    assert meta["rows_added"] == 1
+    assert meta["rows_removed"] == 0
+    assert added[0]["name"] == "Renamed by the department"
 
 
 def _write_meta_without_crawl_date(day: Path, archived_on: str) -> None:

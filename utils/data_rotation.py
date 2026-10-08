@@ -113,6 +113,22 @@ def _base_meta_file(data_root: Path, yyyy: str, mm: str) -> Path:
     return _month_dir(data_root, yyyy, mm) / "base.meta.json"
 
 
+# Fields that change on every crawl without the record changing. Every record
+# is re-stamped with the run's `discovered_at_utc`, so comparing whole records
+# made each day's delta a near-full copy (~45 MB/day; 84,776 of 84,969 "changed"
+# records differed only here) and left September's refreshed base empty
+# (PAI-1384). Deltas and the mid-month base now compare records without them.
+# A record kept from the base therefore shows the base's discovered_at_utc —
+# when it was first seen that month — while every other field is current.
+_VOLATILE_FIELDS = frozenset({"discovered_at_utc"})
+
+
+def _stable(rec: dict[str, Any] | None) -> dict[str, Any] | None:
+    if rec is None:
+        return None
+    return {k: v for k, v in rec.items() if k not in _VOLATILE_FIELDS}
+
+
 def _calc_added_removed(
     base_map: dict[tuple[str, str], dict[str, Any]],
     full_map: dict[tuple[str, str], dict[str, Any]],
@@ -122,7 +138,7 @@ def _calc_added_removed(
 
     for key, rec in full_map.items():
         base_rec = base_map.get(key)
-        if base_rec != rec:
+        if _stable(base_rec) != _stable(rec):
             added.append(rec)
 
     for key, rec in base_map.items():
@@ -217,7 +233,7 @@ def _intersection_common(
         next_common: dict[tuple[str, str], dict[str, Any]] = {}
         for key, rec in common.items():
             other = day_map.get(key)
-            if other == rec:
+            if other is not None and _stable(other) == _stable(rec):
                 next_common[key] = rec
         common = next_common
     return common

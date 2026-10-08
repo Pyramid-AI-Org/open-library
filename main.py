@@ -394,6 +394,29 @@ def _merge_records_for_latest(
     return merged
 
 
+def _drop_sweep_duplicates(
+    records: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], int]:
+    """Drop a `*_document_sweep` record whose URL another crawler already lists.
+
+    The sweeps re-read each department's index pages to catch documents its own
+    crawlers miss, so 2,492 of their URLs were also listed by the dedicated
+    crawler (PAI-1384: DMUA 2026 under both `codes_design_manuals_and_guidelines`
+    and `bd_document_sweep`). Ingestion stored such files twice. The dedicated
+    record is kept: it is the source the search taxonomy is written against.
+
+    Runs on the merged snapshot, so carried-forward records count too. The
+    per-crawler regression check reads raw crawler output and is unaffected.
+    """
+
+    def is_sweep(rec: dict[str, Any]) -> bool:
+        return str(rec.get("source") or "").endswith("_document_sweep")
+
+    owned = {rec.get("url") for rec in records if not is_sweep(rec)}
+    kept = [rec for rec in records if not (is_sweep(rec) and rec.get("url") in owned)]
+    return kept, len(records) - len(kept)
+
+
 def _run_one(
     source_id: str,
     crawler_name: str,
@@ -595,10 +618,14 @@ def main() -> int:
             f"down from {entry['previous']} in the previous run"
         )
 
-    all_records = _merge_records_for_latest(
-        previous_records_by_source,
-        successful_records_by_source,
+    all_records, sweep_duplicates_dropped = _drop_sweep_duplicates(
+        _merge_records_for_latest(
+            previous_records_by_source,
+            successful_records_by_source,
+        )
     )
+    if sweep_duplicates_dropped:
+        print(f"  Dropped {sweep_duplicates_dropped} sweep records another crawler already lists")
 
     updated_crawler_state = dict(crawler_state)
     for crawler_name in succeeded_crawlers:
@@ -637,6 +664,7 @@ def main() -> int:
         "regressions_zeroed": zeroed,
         "regressions_dropped": dropped,
         "regression_total_rows": total_regression,
+        "sweep_duplicates_dropped": sweep_duplicates_dropped,
         "schedule": schedule_decisions,
     }
     write_json(latest_dir / "summary.json", summary)

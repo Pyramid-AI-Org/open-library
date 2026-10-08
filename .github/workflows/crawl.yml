@@ -129,6 +129,7 @@ jobs:
           python -m scripts.build_archive_index --data-root data-worktree/data
 
       - name: Commit and push data branch
+        id: publish
         run: |
           pushd data-worktree
 
@@ -147,8 +148,31 @@ jobs:
           stamp=$(date -u +"%Y-%m-%d")
           git commit -m "Daily crawl data: $stamp" || true
           git push origin data
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
 
           popd
+
+      # PAI-1384: start ingestion as soon as the snapshot is published. The
+      # pyramid-chat ingest cron runs at 04:00 UTC, but this crawl now commits
+      # between 07:00 and 12:30 UTC, so every new document waited about a day
+      # (DMUA 2026: crawled 10-01, searchable 10-02 12:14 HKT). The cron stays as
+      # the safety net. The 10-minute delay lets raw.githubusercontent.com stop
+      # serving the previous latest/urls.jsonl. Skipped until the secret is set.
+      - name: Start Open Library ingestion
+        if: steps.publish.outputs.pushed == 'true'
+        continue-on-error: true
+        env:
+          TRIGGER_SECRET_KEY: ${{ secrets.OPEN_LIBRARY_TRIGGER_SECRET_KEY }}
+        run: |
+          if [ -z "$TRIGGER_SECRET_KEY" ]; then
+            echo "::notice::OPEN_LIBRARY_TRIGGER_SECRET_KEY not set; ingestion waits for the 04:00 UTC cron."
+            exit 0
+          fi
+          curl -fsS -X POST "https://api.trigger.dev/api/v1/tasks/open-library-daily/trigger" \
+            -H "Authorization: Bearer $TRIGGER_SECRET_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{"payload":{},"options":{"delay":"10m"}}' \
+            || { echo "::error::Could not start Open Library ingestion; the 04:00 UTC cron will pick this snapshot up."; exit 1; }
 
       # Runs after the commit on purpose: a regressed run must still publish its
       # data, but it must not look green. A crawler that reports success while
