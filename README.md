@@ -163,6 +163,9 @@ python main.py --crawler sla.circulars --settings config/settings.sg.yaml --out 
 
 ## Adding a new crawler
 
+The bounded Hysan licensing PDF inventory (PAI-1457) and its cross-repository
+publication order are documented in [sources/hk-licensing/README.md](sources/hk-licensing/README.md).
+
 1. Create `crawlers/<name>.py` exporting a `Crawler` class with a `.crawl(ctx)` method.
 2. Add config under `crawlers.<source>.pages.<crawler_name>` in [config/settings.yaml](config/settings.yaml).
 3. Optionally configure source-wide cadence under `crawlers.<source>.schedule`.

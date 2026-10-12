@@ -1809,3 +1809,112 @@ crawlers:
         # (TG-BEC/TG-EAC) PDF crawler.
         page_url: "https://www.emsd.gov.hk/beeo/en/mibec_beeo_codtechguidelines.html"
         scope_prefix: "https://www.emsd.gov.hk/beeo/"
+
+  # PAI-1457: reviewed licensing PDF inventory. Dates remain null unless verified.
+  fehd:
+    label: Food and Environmental Hygiene Department / Liquor Licensing Board
+    schedule:
+      enabled: true
+      interval_days: 1
+    pages:
+      licensing_guides:
+        document_hosts:
+        - www.fehd.gov.hk
+        documents:
+        - url: https://www.fehd.gov.hk/english/howtoseries/forms/new/A_Guide_to_Restaurant.PDF
+          title: A Guide to Application for Restaurant Licences
+          publish_date: null
+        - url: https://www.fehd.gov.hk/english/forms/pdf/guide_fehd104.pdf
+          title: Guide to Application for Places of Public Entertainment Licences (Cinemas/Theatres)
+          publish_date: null
+        - url: https://www.fehd.gov.hk/english/forms/pdf/ppe_non_cinema_guide.pdf
+          title: Guide to Application for Places of Public Entertainment Licences for Places Other Than Cinemas and Theatres
+          publish_date: null
+        - url: https://www.fehd.gov.hk/english/forms/karaoke.pdf
+          title: Guide to Application for Karaoke Establishment Permits in Restaurants
+          publish_date: null
+        - url: https://www.fehd.gov.hk/english/licensing/ll-cll-appguide.pdf
+          title: Guide to Application for Liquor Licences and Club Liquor Licences — Liquor Licensing Board
+          publish_date: null
+
+  # PAI-1457: reviewed licensing PDF inventory. Dates remain null unless verified.
+  swd:
+    label: Social Welfare Department
+    schedule:
+      enabled: true
+      interval_days: 1
+    pages:
+      licensing_guides:
+        document_hosts:
+        - www.swd.gov.hk
+        documents:
+        - url: https://www.swd.gov.hk/storage/asset/section/417/Code_of_Practice_for_Residential_Care_Homes_for_the_Elderly_June_2024_Revised_Edition(2).pdf
+          title: Code of Practice for Residential Care Homes for the Elderly — June 2024 Revised Edition
+          publish_date: null
+        - url: https://www.swd.gov.hk/storage/asset/section/435/en/Code_of_Practice_on_MHCCC_eng_(Revised_September_2021).pdf
+          title: Code of Practice on Mutual Help Child Care Centres — Revised September 2021
+          publish_date: null
+        - url: https://www.swd.gov.hk/storage/asset/section/429/en/LODTC_CoP_20221101(Eng).pdf.pdf
+          title: Code of Practice for Drug Dependent Persons Treatment and Rehabilitation Centres
+          publish_date: null
+        - url: https://www.swd.gov.hk/storage/asset/section/423/Code_of_Practice_for_RCHDs_June_2024_Revised_Edition_Eng_(Updated%20in%20Oct%202024).pdf
+          title: Code of Practice for Residential Care Homes for Persons with Disabilities — June 2024 Revised Edition (Updated October 2024)
+          publish_date: null
+
+  # PAI-1457: reviewed licensing PDF inventory. Dates remain null unless verified.
+  had:
+    label: Home Affairs Department / Office of the Licensing Authority
+    schedule:
+      enabled: true
+      interval_days: 1
+    pages:
+      licensing_guides:
+        document_hosts:
+        - www.had.gov.hk
+        - www.hadla.gov.hk
+        documents:
+        - url: https://www.hadla.gov.hk/filemanager/en/docs/layman.pdf
+          title: A Layman's Guide to Licence Applications under the Hotel and Guesthouse Accommodation Ordinance
+          publish_date: null
+        - url: https://www.had.gov.hk/file_manager/en/documents/public_services/licensing/Laymans-Guide.pdf
+          title: A Layman's Guide to Certificate of Compliance Applications under the Clubs (Safety of Premises) Ordinance
+          publish_date: null
+        - url: https://www.hadla.gov.hk/el/filemanager/common/docs/forms/Guidance_Notes_on_Application_for_the_Grant_of_Amusement_Game_Centre_Licence_eng.pdf
+          title: Guidance Notes on Application for the Grant of Amusement Game Centre Licence — Revised December 2025
+          publish_date: null
+        - url: https://www.hadla.gov.hk/el/filemanager/common/docs/forms/MJ-TK_Application_Forms_Guide_eng.pdf
+          title: Mahjong/Tin Kau Licence Application Forms and Guide — December 2025
+          publish_date: null
+        - url: https://www.hadla.gov.hk/el/filemanager/common/docs/forms/PDH_DS_Application_Forms_Guide_eng.pdf
+          title: Public Dance Hall/Dancing School Licence Application Forms and Guide — Revised December 2025
+          publish_date: null
+
+  # PAI-1457: reviewed licensing PDF inventory. Dates remain null unless verified.
+  edb:
+    label: Education Bureau
+    schedule:
+      enabled: true
+      interval_days: 1
+    pages:
+      licensing_guides:
+        document_hosts:
+        - www.edb.gov.hk
+        documents:
+        - url: https://www.edb.gov.hk/attachment/en/sch-admin/sch-registration/about-sch-registration/Guidelines%20Extension%202026/3b_eguide-ext%20of%20sch%20premises_purpose-built.pdf
+          title: Guidelines for Extension of School Premises (For Premises Not Designed and Constructed as a School) — June 2026
+          publish_date: null
+
+  # PAI-1457: reviewed licensing PDF inventory. Dates remain null unless verified.
+  police:
+    label: Hong Kong Police Force
+    schedule:
+      enabled: true
+      interval_days: 1
+    pages:
+      licensing_guides:
+        document_hosts:
+        - www.police.gov.hk
+        documents:
+        - url: https://www.police.gov.hk/info/doc/licensing/general/en/gls_mel_Guideline(e).pdf
+          title: A Guide to the Application for a Massage Establishments Licence
+          publish_date: null
