@@ -1,17 +1,17 @@
 {
   "input": "data-worktree/data/sg/latest/urls.jsonl",
   "totals": {
-    "lines_total": 11319,
-    "records_total": 11319,
+    "lines_total": 11305,
+    "records_total": 11305,
     "records_by_source": {
       "scdf.acts_codes_and_regulations": 290,
-      "scdf.fire_code": 152,
+      "scdf.fire_code": 142,
       "scdf.fire_safety_circulars": 102,
       "ema.regulations": 67,
       "nparks.cuge_standards": 25,
       "ura.development_control": 343,
       "bca.circulars": 419,
-      "ura.master_plan": 173,
+      "ura.master_plan": 175,
       "ura.conservation": 151,
       "bca.safety_and_standards": 405,
       "bca.sustainability_legislation": 72,
@@ -53,8 +53,8 @@
       "nea.publications": 48,
       "nea.development_control": 29,
       "nparks.learn": 131,
-      "nparks.nature": 120,
-      "nparks.services": 86,
+      "nparks.nature": 113,
+      "nparks.services": 87,
       "nparks.publications_resources": 113,
       "nparks.who_we_are": 8,
       "parliament.bills_introduced": 773,
@@ -145,7 +145,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 264
+          "count": 262
         },
         {
           "meta_keys": [
@@ -155,7 +155,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 13
+          "count": 15
         },
         {
           "meta_keys": [
@@ -198,11 +198,11 @@
             "count": 101
           },
           {
-            "value": "https://www.scdf.gov.sg/fire-safety-services-listing/downloads/acts-codes-and...",
+            "value": "https://www.scdf.gov.sg/fire-safety-services-listing/downloads/forms-and-guides",
             "count": 48
           },
           {
-            "value": "https://www.scdf.gov.sg/fire-safety-services-listing/downloads/forms-and-guides",
+            "value": "https://www.scdf.gov.sg/fire-safety-services-listing/downloads/acts-codes-and...",
             "count": 48
           },
           {
@@ -220,11 +220,11 @@
             "count": 101
           },
           {
-            "value": "Hero banner for Fire Code 2013",
+            "value": "Hero banner for Forms and Guides",
             "count": 48
           },
           {
-            "value": "Hero banner for Forms and Guides",
+            "value": "Hero banner for Fire Code 2013",
             "count": 48
           },
           {
@@ -342,7 +342,7 @@
         ],
         [
           "fetch_url",
-          267
+          265
         ],
         [
           "declared_file_size",
@@ -394,20 +394,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 290
       }
     },
     "scdf.fire_code": {
-      "records": 152,
-      "unique_urls": 152,
+      "records": 142,
+      "unique_urls": 142,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 38,
-        "warnings": 18,
+        "warnings": 10,
         "by_kind": {
-          "meta_value_outlier": 18,
+          "meta_value_outlier": 10,
           "missing_required_field": 38
         }
       },
@@ -429,7 +429,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 152,
+          "null": 142,
           "invalid": 0
         },
         "source": {
@@ -454,7 +454,7 @@
             "source_id",
             "url"
           ],
-          "count": 152
+          "count": 142
         }
       ],
       "meta_schema_signatures": [
@@ -467,7 +467,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 106
+          "count": 95
         },
         {
           "meta_keys": [
@@ -485,7 +485,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 6
+          "count": 7
         },
         {
           "meta_keys": [
@@ -507,11 +507,11 @@
         "crawl_depth": [
           {
             "value": "1",
-            "count": 117
+            "count": 111
           },
           {
             "value": "2",
-            "count": 31
+            "count": 27
           },
           {
             "value": "0",
@@ -524,19 +524,15 @@
             "count": 101
           },
           {
-            "value": "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/codes-and...",
-            "count": 6
-          },
-          {
-            "value": "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/table-of-...",
-            "count": 2
-          },
-          {
             "value": "https://www.scdf.gov.sg/fire-safety-services-listing/cpfprts-2022",
             "count": 1
           },
           {
             "value": "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023",
+            "count": 1
+          },
+          {
+            "value": "https://www.scdf.gov.sg/fire-safety-services-listing/fire-code-2023/table-of-...",
             "count": 1
           }
         ],
@@ -546,26 +542,22 @@
             "count": 101
           },
           {
-            "value": "Hero banner for Related Tables and Diagrams of Chapter 1",
-            "count": 6
-          },
-          {
-            "value": "Hero banner for 1.1 Scope",
-            "count": 2
-          },
-          {
             "value": "Hero banner for Code of Practice for Fire Precautions in Rapid Transit System...",
             "count": 1
           },
           {
             "value": "Hero banner for Fire Code 2023",
             "count": 1
+          },
+          {
+            "value": "Hero banner for Appendix 01 - Fire Safety Report",
+            "count": 1
           }
         ],
         "file_ext": [
           {
             "value": "pdf",
-            "count": 107
+            "count": 97
           },
           {
             "value": "html",
@@ -587,7 +579,7 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 113
+            "count": 103
           },
           {
             "value": "page",
@@ -640,27 +632,27 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          152
+          142
         ],
         [
           "file_ext",
-          152
+          142
         ],
         [
           "record_kind",
-          152
+          142
         ],
         [
           "discovered_from",
-          114
+          104
         ],
         [
           "discovered_from_title",
-          114
+          104
         ],
         [
           "fetch_url",
-          108
+          97
         ],
         [
           "declared_file_size",
@@ -674,7 +666,7 @@
       "top_hosts": [
         [
           "www.scdf.gov.sg",
-          151
+          141
         ],
         [
           "info.corenet.gov.sg",
@@ -684,7 +676,7 @@
       "top_extensions": [
         [
           ".pdf",
-          107
+          97
         ],
         [
           "(no_ext)",
@@ -704,9 +696,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
-        "count": 152
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
+        "count": 142
       }
     },
     "scdf.fire_safety_circulars": {
@@ -777,7 +769,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 95
+          "count": 94
         },
         {
           "meta_keys": [
@@ -787,7 +779,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 6
+          "count": 7
         },
         {
           "meta_keys": [
@@ -901,7 +893,7 @@
         ],
         [
           "fetch_url",
-          95
+          94
         ]
       ],
       "top_hosts": [
@@ -937,8 +929,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 102
       }
     },
@@ -1162,8 +1154,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 67
       }
     },
@@ -1295,8 +1287,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 25
       }
     },
@@ -1603,8 +1595,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 343
       }
     },
@@ -1863,21 +1855,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 419
       }
     },
     "ura.master_plan": {
-      "records": 173,
-      "unique_urls": 173,
+      "records": 175,
+      "unique_urls": 175,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 84,
+        "errors": 85,
         "warnings": 20,
         "by_kind": {
           "meta_value_outlier": 20,
-          "missing_required_field": 84
+          "missing_required_field": 85
         }
       },
       "required_field_null_missing_invalid": {
@@ -1898,7 +1890,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 89,
+          "null": 90,
           "invalid": 0
         },
         "source": {
@@ -1907,7 +1899,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 84,
+          "missing": 85,
           "null": 0,
           "invalid": 0
         }
@@ -1923,7 +1915,7 @@
             "source_id",
             "url"
           ],
-          "count": 173
+          "count": 175
         }
       ],
       "meta_schema_signatures": [
@@ -1937,7 +1929,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 87
+          "count": 88
         },
         {
           "meta_keys": [
@@ -1945,7 +1937,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 84
+          "count": 85
         },
         {
           "meta_keys": [
@@ -1975,7 +1967,7 @@
           },
           {
             "value": "https://www.ura.gov.sg/land-planning/master-plan/amendments-to-master-plan/20...",
-            "count": 4
+            "count": 5
           },
           {
             "value": "https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/themes/stre...",
@@ -1997,7 +1989,7 @@
           },
           {
             "value": "List of Gazetted Approved Amendments to Master Plan 2025",
-            "count": 4
+            "count": 5
           },
           {
             "value": "A Cool City in a Warming World",
@@ -2007,11 +1999,11 @@
         "record_kind": [
           {
             "value": "document",
-            "count": 87
+            "count": 88
           },
           {
             "value": "page",
-            "count": 84
+            "count": 85
           },
           {
             "value": "external_reference",
@@ -2032,8 +2024,8 @@
             "count": 7
           },
           {
-            "value": "2026-10-13T01:19:36.835Z",
-            "count": 5
+            "value": "2026-10-16T01:41:52.132Z",
+            "count": 6
           },
           {
             "value": "2026-06-04T03:23:35.903Z",
@@ -2065,58 +2057,58 @@
         "declared_file_type": [
           {
             "value": "pdf",
-            "count": 87
+            "count": 88
           }
         ],
         "file_ext": [
           {
             "value": "pdf",
-            "count": 87
+            "count": 88
           },
           {
             "value": "html",
-            "count": 84
+            "count": 85
           }
         ]
       },
       "top_meta_keys": [
         [
           "record_kind",
-          173
+          175
         ],
         [
           "sitemap_lastmod",
-          173
+          175
         ],
         [
           "file_ext",
-          171
+          173
         ],
         [
           "discovered_from",
-          89
+          90
         ],
         [
           "discovered_from_title",
-          89
+          90
         ],
         [
           "declared_file_size",
-          87
+          88
         ],
         [
           "declared_file_type",
-          87
+          88
         ]
       ],
       "top_hosts": [
         [
           "isomer-user-content.by.gov.sg",
-          87
+          88
         ],
         [
           "www.ura.gov.sg",
-          84
+          85
         ],
         [
           "go.gov.sg",
@@ -2126,17 +2118,17 @@
       "top_extensions": [
         [
           ".pdf",
-          87
+          88
         ],
         [
           "(no_ext)",
-          86
+          87
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
-        "count": 173
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
+        "count": 175
       }
     },
     "ura.conservation": {
@@ -2439,8 +2431,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 151
       }
     },
@@ -2804,8 +2796,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 405
       }
     },
@@ -3133,8 +3125,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 72
       }
     },
@@ -3323,8 +3315,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 12
       }
     },
@@ -3531,8 +3523,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 7
       }
     },
@@ -3664,8 +3656,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 6
       }
     },
@@ -3785,8 +3777,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 2
       }
     },
@@ -3972,8 +3964,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 13
       }
     },
@@ -4140,8 +4132,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 32
       }
     },
@@ -4332,8 +4324,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 7
       }
     },
@@ -4584,8 +4576,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 53
       }
     },
@@ -4825,8 +4817,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 12
       }
     },
@@ -5016,8 +5008,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 334
       }
     },
@@ -5207,8 +5199,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 17
       }
     },
@@ -5496,8 +5488,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 509
       }
     },
@@ -5668,8 +5660,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 155
       }
     },
@@ -5827,8 +5819,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 32
       }
     },
@@ -6068,8 +6060,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 90
       }
     },
@@ -6226,8 +6218,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 15
       }
     },
@@ -6495,8 +6487,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 140
       }
     },
@@ -6702,8 +6694,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 84
       }
     },
@@ -6824,8 +6816,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 504
       }
     },
@@ -6945,8 +6937,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 16
       }
     },
@@ -7066,8 +7058,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 29
       }
     },
@@ -7203,8 +7195,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 23
       }
     },
@@ -7324,8 +7316,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 17
       }
     },
@@ -7445,8 +7437,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 29
       }
     },
@@ -7616,8 +7608,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 11
       }
     },
@@ -7807,8 +7799,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 20
       }
     },
@@ -8158,8 +8150,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 23
       }
     },
@@ -8370,8 +8362,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 50
       }
     },
@@ -8542,8 +8534,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 22
       }
     },
@@ -8770,8 +8762,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 42
       }
     },
@@ -8934,8 +8926,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 22
       }
     },
@@ -9097,8 +9089,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 3
       }
     },
@@ -9289,8 +9281,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 124
       }
     },
@@ -9541,8 +9533,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 49
       }
     },
@@ -9762,8 +9754,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 48
       }
     },
@@ -9962,8 +9954,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 29
       }
     },
@@ -10203,21 +10195,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 131
       }
     },
     "nparks.nature": {
-      "records": 120,
-      "unique_urls": 120,
+      "records": 113,
+      "unique_urls": 113,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 65,
-        "warnings": 16,
+        "errors": 59,
+        "warnings": 14,
         "by_kind": {
-          "meta_value_outlier": 16,
-          "missing_required_field": 65
+          "meta_value_outlier": 14,
+          "missing_required_field": 59
         }
       },
       "required_field_null_missing_invalid": {
@@ -10238,7 +10230,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 120,
+          "null": 113,
           "invalid": 0
         },
         "source": {
@@ -10247,7 +10239,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 65,
+          "missing": 59,
           "null": 0,
           "invalid": 0
         }
@@ -10263,7 +10255,7 @@
             "source_id",
             "url"
           ],
-          "count": 120
+          "count": 113
         }
       ],
       "meta_schema_signatures": [
@@ -10273,7 +10265,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 65
+          "count": 59
         },
         {
           "meta_keys": [
@@ -10283,7 +10275,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 45
+          "count": 44
         },
         {
           "meta_keys": [
@@ -10314,11 +10306,11 @@
             "count": 10
           },
           {
-            "value": "https://www.nparks.gov.sg/nature/community-in-nature/seagrass-monitoring",
+            "value": "https://www.nparks.gov.sg/nature/community-in-nature/singapore-freshwater-cra...",
             "count": 1
           },
           {
-            "value": "https://www.nparks.gov.sg/nature/community-in-nature/singapore-freshwater-cra...",
+            "value": "https://www.nparks.gov.sg/nature/integrated-urban-coastal-management",
             "count": 1
           }
         ],
@@ -10336,11 +10328,11 @@
             "count": 10
           },
           {
-            "value": "Seagrass monitoring by TeamSeaGrass",
+            "value": "Freshwater Crab Conservation Working Group",
             "count": 1
           },
           {
-            "value": "Freshwater Crab Conservation Working Group",
+            "value": "Singapore&#39;s integrated urban coastal management",
             "count": 1
           }
         ],
@@ -10369,50 +10361,50 @@
         "file_ext": [
           {
             "value": "html",
-            "count": 65
+            "count": 59
           },
           {
             "value": "pdf",
-            "count": 55
+            "count": 54
           }
         ],
         "record_kind": [
           {
             "value": "page",
-            "count": 65
+            "count": 59
           },
           {
             "value": "document",
-            "count": 55
+            "count": 54
           }
         ],
         "sitemap_lastmod": [
           {
             "value": "null",
-            "count": 120
+            "count": 113
           }
         ]
       },
       "top_meta_keys": [
         [
           "file_ext",
-          120
+          113
         ],
         [
           "record_kind",
-          120
+          113
         ],
         [
           "sitemap_lastmod",
-          120
+          113
         ],
         [
           "discovered_from",
-          55
+          54
         ],
         [
           "discovered_from_title",
-          55
+          54
         ],
         [
           "fetch_url",
@@ -10422,28 +10414,28 @@
       "top_hosts": [
         [
           "www.nparks.gov.sg",
-          120
+          113
         ]
       ],
       "top_extensions": [
         [
           "(no_ext)",
-          65
+          59
         ],
         [
           ".pdf",
-          55
+          54
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
-        "count": 120
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
+        "count": 113
       }
     },
     "nparks.services": {
-      "records": 86,
-      "unique_urls": 86,
+      "records": 87,
+      "unique_urls": 87,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 45,
@@ -10470,7 +10462,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 86,
+          "null": 87,
           "invalid": 0
         },
         "source": {
@@ -10495,7 +10487,7 @@
             "source_id",
             "url"
           ],
-          "count": 86
+          "count": 87
         }
       ],
       "meta_schema_signatures": [
@@ -10526,7 +10518,7 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 19
+          "count": 20
         }
       ],
       "meta_schema_variants": 3,
@@ -10583,7 +10575,7 @@
           },
           {
             "value": "pdf",
-            "count": 38
+            "count": 39
           },
           {
             "value": "docx",
@@ -10597,13 +10589,13 @@
           },
           {
             "value": "document",
-            "count": 41
+            "count": 42
           }
         ],
         "sitemap_lastmod": [
           {
             "value": "null",
-            "count": 86
+            "count": 87
           }
         ],
         "fetch_url": [
@@ -10632,23 +10624,23 @@
       "top_meta_keys": [
         [
           "file_ext",
-          86
+          87
         ],
         [
           "record_kind",
-          86
+          87
         ],
         [
           "sitemap_lastmod",
-          86
+          87
         ],
         [
           "discovered_from",
-          41
+          42
         ],
         [
           "discovered_from_title",
-          41
+          42
         ],
         [
           "fetch_url",
@@ -10658,7 +10650,7 @@
       "top_hosts": [
         [
           "www.nparks.gov.sg",
-          86
+          87
         ]
       ],
       "top_extensions": [
@@ -10668,7 +10660,7 @@
         ],
         [
           ".pdf",
-          38
+          39
         ],
         [
           ".docx",
@@ -10676,9 +10668,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
-        "count": 86
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
+        "count": 87
       }
     },
     "nparks.publications_resources": {
@@ -10855,8 +10847,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 113
       }
     },
@@ -11033,8 +11025,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 8
       }
     },
@@ -11769,8 +11761,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 88
       }
     },
@@ -11957,8 +11949,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 31
       }
     },
@@ -12078,8 +12070,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 1
       }
     },
@@ -12199,8 +12191,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 1
       }
     },
@@ -12513,8 +12505,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 61
       }
     },
@@ -12714,8 +12706,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 36
       }
     },
@@ -12844,8 +12836,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 350
       }
     },
@@ -12974,8 +12966,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 684
       }
     },
@@ -13104,8 +13096,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 83
       }
     },
@@ -13340,8 +13332,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 350
       }
     },
@@ -13551,8 +13543,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 460
       }
     },
@@ -13779,8 +13771,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 286
       }
     },
@@ -13949,8 +13941,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-15T11:13:42.965945+00:00",
-        "max": "2026-10-15T11:13:42.965945+00:00",
+        "min": "2026-10-16T06:51:12.567407+00:00",
+        "max": "2026-10-16T06:51:12.567407+00:00",
         "count": 64
       }
     }
@@ -13959,18 +13951,18 @@
     "record_size_bytes": {
       "min": 254,
       "max": 1132,
-      "mean": 512.8361162646877,
+      "mean": 512.6161875276426,
       "p50": 492,
-      "p95": 766.0
+      "p95": 764.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 229,
-        "error": 7510
+        "warning": 219,
+        "error": 7505
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 229,
-        "error:missing_required_field": 7006,
+        "warning:meta_value_outlier": 219,
+        "error:missing_required_field": 7001,
         "error:null_required_field": 504
       }
     },
