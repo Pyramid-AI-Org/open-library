@@ -1,0 +1,108 @@
+spec_version: 1
+status: approved
+approved_on: '2026-10-23'
+approval: User approved the reviewed plan and Option B in the Codex chat; proceed
+  through merge-ready PRs, without merge or paid activation.
+jurisdiction: HK
+source_id: ha
+label: Housing Authority
+parent_url: https://www.housingauthority.gov.hk/en/business-partnerships/resources/index.html
+intent: section_documents
+scope: Bounded English Resources pages; PDF/DOC/DOCX on approved HA asset paths. Dynamic
+  future links and sections, within configured depth and budgets.
+expected:
+  section_pages: 23
+  hub_pages: 1
+  documents: 27
+  already_ingested: 4
+  new_candidates: 23
+excluded_documents:
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_042023_19062023_Batch01_OGCIO_V1.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_042024_Batch02_OGCIO%20(rev%201).pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_052022_31052023_Orginal_OGCIO_V3.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_052025_Batch03_OGCIO_final.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_052026_Batch04_OGCIO_final.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/Annexes.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HA%20BIM%20Standards%20and%20Guidelines%20Version%202.0.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v4-Annexes.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v4-Vol.1-Quick%20Guide.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v4-Vol.2-Detail%20Guide.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/Volume%201%20of%202%20-%20Introduction%20and%20Quick%20Guide.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/Volume%202%20of%202%20-%20Detail%20Guide.docx
+acceptance_urls:
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-specification-for-building-works/General%20Specification%20for%20Building%20Works%202024%20Edition.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Annexes.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Vol.1-Quick%20Guide.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Vol.2-Detail%20Guide.docx
+initial_documents:
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-conditions-of-contract-for-capital-works/Building-GCC.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-conditions-of-contract-for-capital-works/Civil-GCC.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-conditions-of-contract-for-capital-works/Foundation-GCC.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-conditions-of-contract-for-capital-works/Miscellaneous-GCC.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-conditions-of-contract-for-capital-works/NSC-GCC.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-conditions-of-contract-for-maintenance-and-improvement-works/Term_BS_GCC.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-conditions-of-contract-for-maintenance-and-improvement-works/Term_Misc_GCC.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-specification-for-building-works/General%20Specification%20for%20Building%20Works%202024%20Edition.pdf
+- https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2026_072026_Original_OGCIO_final.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/about-us/publications-and-statistics/asbestos-containing-materials-in-public-housing-estates/acm.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/PSP-Handbook-(Version-for-External-Reference).pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/TPI.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Annexes.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Vol.1-Quick%20Guide.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Vol.2-Detail%20Guide.docx
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-pass/BPASS.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/BldgProductRequiringProdCert(20260930)_EngW3C.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/DrLOSpeech.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/FugroSpeech.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/GEOSpeech.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/HKASSpeech.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/HKHASpeech.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/ManufacturersOrSuppliers-ProductCertStatus(20260930)_EngW3C.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/OpeningSpeech.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/PhotoGallery.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/construction-product-certification/Using%20Production%20Certification%20in%20Construction%20Works_v1.pdf
+- https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/performance-assessment/building-services-pass/BSPASS_Chart1_Eng-C.pdf
+out_of_scope:
+- Chinese mirrors, external publishers, HTML ingestion, media/CAD/model/ZIP assets
+- Previous BIM versions 2-4; Specification Library 2022 by initial-scope policy (not
+  a universal retirement claim)
+- Automatic retirement of removed/superseded indexed editions; department/category
+  filter mapping
+crawlers:
+  building_information_modelling:
+    start_urls:
+    - https://www.housingauthority.gov.hk/en/business-partnerships/resources/building-information-modelling/index.html
+    allowed_path_prefixes:
+    - /en/business-partnerships/resources/building-information-modelling/
+    document_path_prefixes:
+    - /en/common/pdf/business-partnerships/resources/building-information-modelling/
+    - /common/pdf/business-partnerships/resources/building-information-modelling/
+    max_depth: 1
+    min_records: 3
+  general_specification_for_building_works:
+    start_urls:
+    - https://www.housingauthority.gov.hk/en/business-partnerships/resources/general-specification-for-building-works/index.html
+    allowed_path_prefixes:
+    - /en/business-partnerships/resources/general-specification-for-building-works/
+    document_path_prefixes:
+    - /en/common/pdf/business-partnerships/resources/general-specification-for-building-works/
+    - /common/pdf/business-partnerships/resources/general-specification-for-building-works/
+    max_depth: 1
+    min_records: 1
+  resources:
+    start_urls:
+    - https://www.housingauthority.gov.hk/en/business-partnerships/resources/index.html
+    allowed_path_prefixes:
+    - /en/business-partnerships/resources/
+    exclude_path_patterns:
+    - ^/en/business-partnerships/resources/building-information-modelling/
+    - ^/en/business-partnerships/resources/general-specification-for-building-works/
+    document_path_prefixes:
+    - /en/common/pdf/business-partnerships/resources/
+    - /common/pdf/business-partnerships/resources/
+    - /en/common/pdf/about-us/publications-and-statistics/asbestos-containing-materials-in-public-housing-estates/
+    max_depth: 3
+    min_records: 17
+inventory_note: Executable hub walk additionally found PSP Handbook and TPI, two direct
+  hub links missed by the earlier section-only inventory; both satisfy approved Option
+  B.

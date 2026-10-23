@@ -1918,3 +1918,89 @@ crawlers:
         - url: https://www.police.gov.hk/info/doc/licensing/general/en/gls_mel_Guideline(e).pdf
           title: A Guide to the Application for a Massage Establishments Licence
           publish_date: null
+
+  # PAI-1453: approved Resources scope B, 2026-10-23.
+  ha:
+    allowed_schemes: [https]
+    label: Housing Authority
+    base_url: https://www.housingauthority.gov.hk
+    schedule:
+      enabled: true
+      interval_days: 1
+    request_delay_seconds: 0.5
+    request_jitter_seconds: 0.25
+    allowed_hosts:
+    - www.housingauthority.gov.hk
+    document_hosts:
+    - www.housingauthority.gov.hk
+    document_extensions:
+    - pdf
+    - doc
+    - docx
+    emit_page_records: false
+    fail_on_page_error: true
+    fail_on_truncation: true
+    popup_wrapper: popup800600Scroll
+    max_pages: 80
+    max_out_links_per_page: 800
+    max_total_records: 500
+    document_name_template: Housing Authority — {page_title} — {title}
+    document_names:
+      ? https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Vol.2-Detail%20Guide.docx
+      : Housing Authority BIM Standards and Guidelines Version 5.0 — Volume 2 Detail
+        Guide
+      ? https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/general-specification-for-building-works/General%20Specification%20for%20Building%20Works%202024%20Edition.pdf
+      : General Specification for Building Works 2024 Edition
+      ? https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Annexes.docx
+      : Housing Authority BIM Standards and Guidelines Version 5.0 — Annexes
+      ? https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v5.0-Vol.1-Quick%20Guide.docx
+      : Housing Authority BIM Standards and Guidelines Version 5.0 — Volume 1 Introduction
+        and Quick Guide
+    exclude_document_urls:
+    - https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_042023_19062023_Batch01_OGCIO_V1.pdf
+    - https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_042024_Batch02_OGCIO%20(rev%201).pdf
+    - https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_052022_31052023_Orginal_OGCIO_V3.pdf
+    - https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_052025_Batch03_OGCIO_final.pdf
+    - https://www.housingauthority.gov.hk/common/pdf/business-partnerships/resources/specification-library/SL2022_052026_Batch04_OGCIO_final.pdf
+    - https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/Annexes.docx
+    - https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HA%20BIM%20Standards%20and%20Guidelines%20Version%202.0.docx
+    - https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v4-Annexes.docx
+    - https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v4-Vol.1-Quick%20Guide.docx
+    - https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/HABIMSG%20v4-Vol.2-Detail%20Guide.docx
+    - https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/Volume%201%20of%202%20-%20Introduction%20and%20Quick%20Guide.docx
+    - https://www.housingauthority.gov.hk/en/common/pdf/business-partnerships/resources/building-information-modelling/Volume%202%20of%202%20-%20Detail%20Guide.docx
+    pages:
+      building_information_modelling:
+        start_urls:
+        - https://www.housingauthority.gov.hk/en/business-partnerships/resources/building-information-modelling/index.html
+        allowed_path_prefixes:
+        - /en/business-partnerships/resources/building-information-modelling/
+        document_path_prefixes:
+        - /en/common/pdf/business-partnerships/resources/building-information-modelling/
+        - /common/pdf/business-partnerships/resources/building-information-modelling/
+        max_depth: 1
+        min_records: 3
+      general_specification_for_building_works:
+        start_urls:
+        - https://www.housingauthority.gov.hk/en/business-partnerships/resources/general-specification-for-building-works/index.html
+        allowed_path_prefixes:
+        - /en/business-partnerships/resources/general-specification-for-building-works/
+        document_path_prefixes:
+        - /en/common/pdf/business-partnerships/resources/general-specification-for-building-works/
+        - /common/pdf/business-partnerships/resources/general-specification-for-building-works/
+        max_depth: 1
+        min_records: 1
+      resources:
+        start_urls:
+        - https://www.housingauthority.gov.hk/en/business-partnerships/resources/index.html
+        allowed_path_prefixes:
+        - /en/business-partnerships/resources/
+        exclude_path_patterns:
+        - ^/en/business-partnerships/resources/building-information-modelling/
+        - ^/en/business-partnerships/resources/general-specification-for-building-works/
+        document_path_prefixes:
+        - /en/common/pdf/business-partnerships/resources/
+        - /common/pdf/business-partnerships/resources/
+        - /en/common/pdf/about-us/publications-and-statistics/asbestos-containing-materials-in-public-housing-estates/
+        max_depth: 3
+        min_records: 17
