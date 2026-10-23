@@ -32,12 +32,12 @@ Only ``requests`` and the standard library are used.
 
 from __future__ import annotations
 
-from collections import deque
+from collections import Counter, deque
 from dataclasses import dataclass
 import random
 import re
 from typing import Any
-from urllib.parse import urlparse, urlunparse
+from urllib.parse import unquote, urljoin, urlparse, urlunparse
 
 import requests
 
@@ -51,13 +51,13 @@ from crawlers.base import (
     path_ext,
     sleep_seconds,
 )
+from crawlers.common.popup_links import unwrap_popup_link
 from crawlers.common.isomer import (
     assign_titles,
     extract_og_title,
     extract_page_links,
     extract_page_title,
 )
-
 
 DEFAULT_DOCUMENT_EXTENSIONS: tuple[str, ...] = (
     ".pdf",
@@ -129,6 +129,7 @@ class SectionSpiderCrawler:
                               approved scope spec.
     exclude_path_patterns     Regexes applied to the path; matches are neither
                               followed nor recorded.
+    allowed_schemes           Optional scheme allowlist; HA uses https only.
     allowed_hosts             Hosts whose pages may be followed. Defaults to
                               the hosts of the start URLs.
     document_hosts            Hosts whose files count as this agency's output.
@@ -150,6 +151,13 @@ class SectionSpiderCrawler:
     max_pages                 Hard cap on pages fetched. Default 400.
     max_out_links_per_page    Guard against a single page with thousands of
                               links. Default 800.
+    fail_on_page_error        Raise on failed/non-HTML pages instead of skipping.
+    fail_on_truncation        Raise on page, link or record budget exhaustion.
+    min_records               Minimum complete output count (default zero).
+    exclude_document_urls     Exact canonical document identities to exclude.
+    document_names            Canonical URL -> reviewed title overrides.
+    document_name_template    Optional {page_title}/{title}/{filename} format.
+    popup_wrapper             Opt-in literal popup800600Scroll URL extraction.
     content_element_id        Optional element id to scope extraction to. Leave
                               unset where the path allowlist already does the
                               work.
@@ -205,23 +213,30 @@ class SectionSpiderCrawler:
         if not start_urls:
             return []
 
+        schemes = set(_as_list(cfg.get("allowed_schemes")))
         prefixes = _as_list(cfg.get("allowed_path_prefixes"))
         excludes = [re.compile(p) for p in _as_list(cfg.get("exclude_path_patterns"))]
         allowed_hosts = {h.lower() for h in _as_list(cfg.get("allowed_hosts"))}
         if not allowed_hosts:
             allowed_hosts = {urlparse(u).netloc.lower() for u in start_urls}
 
-        doc_hosts = {h.lower() for h in _as_list(cfg.get("document_hosts"))} or set(allowed_hosts)
+        doc_hosts = {h.lower() for h in _as_list(cfg.get("document_hosts"))} or set(
+            allowed_hosts
+        )
         doc_prefixes = _as_list(cfg.get("document_path_prefixes"))
         ext_hosts = {h.lower() for h in _as_list(cfg.get("external_document_hosts"))}
         doc_exts = {
             e.lower() if e.startswith(".") else f".{e.lower()}"
-            for e in (_as_list(cfg.get("document_extensions")) or DEFAULT_DOCUMENT_EXTENSIONS)
+            for e in (
+                _as_list(cfg.get("document_extensions")) or DEFAULT_DOCUMENT_EXTENSIONS
+            )
         }
 
         emit_pages = bool(cfg.get("emit_page_records", True))
         strip_query = bool(cfg.get("strip_document_query", True))
-        content_element_id = str(cfg.get("content_element_id", "") or "").strip() or None
+        content_element_id = (
+            str(cfg.get("content_element_id", "") or "").strip() or None
+        )
         # Where a page's own name lives. Default keeps extract_page_title's
         # h1-first preference; 'og_title' is for sites whose <h1> is the agency
         # banner rather than the page name (see extract_og_title).
@@ -230,9 +245,26 @@ class SectionSpiderCrawler:
         max_out_links = int(cfg.get("max_out_links_per_page", 800))
         max_records = int(cfg.get("max_total_records", 50000))
         budget = _Budget(max_pages=int(cfg.get("max_pages", 400)))
+        strict = bool(cfg.get("fail_on_truncation", False))
+        popup_wrapper = str(cfg.get("popup_wrapper") or "")
+        name_template = str(cfg.get("document_name_template") or "")
+
+        def identity_of(url: str) -> str | None:
+            canon = _canon(url)
+            return _strip_query(canon) if canon and strip_query else canon
+
+        excluded_docs = {
+            identity_of(u) for u in _as_list(cfg.get("exclude_document_urls"))
+        }
+        document_names = {
+            identity_of(u): str(name)
+            for u, name in (cfg.get("document_names") or {}).items()
+        }
 
         def in_section(url: str) -> bool:
             parsed = urlparse(url)
+            if schemes and parsed.scheme.lower() not in schemes:
+                return False
             if parsed.netloc.lower() not in allowed_hosts:
                 return False
             path = parsed.path or "/"
@@ -243,9 +275,13 @@ class SectionSpiderCrawler:
         def is_document(url: str) -> bool:
             parsed = urlparse(url)
             host, path = parsed.netloc.lower(), (parsed.path or "").lower()
+            if schemes and parsed.scheme.lower() not in schemes:
+                return False
             if host not in doc_hosts:
                 return False
-            if doc_prefixes and not any(path.startswith(p.lower()) for p in doc_prefixes):
+            if doc_prefixes and not any(
+                path.startswith(p.lower()) for p in doc_prefixes
+            ):
                 return False
             return path_ext(url) in doc_exts
 
@@ -257,6 +293,8 @@ class SectionSpiderCrawler:
         queue: deque[tuple[str, int]] = deque()
         for url in start_urls:
             canon = _canon(url)
+            if canon and schemes and urlparse(canon).scheme.lower() not in schemes:
+                raise ValueError(f"[{self.name}] start URL has disallowed scheme")
             if canon and canon not in visited:
                 visited.add(canon)
                 queue.append((canon, 0))
@@ -268,6 +306,10 @@ class SectionSpiderCrawler:
 
             html = self._fetch(session, page_url, ctx=ctx, cfg=cfg)
             if html is None:
+                if cfg.get("fail_on_page_error", False):
+                    raise RuntimeError(
+                        f"[{self.name}] failed to fetch HTML page: {page_url}"
+                    )
                 continue
 
             page_title = (
@@ -295,13 +337,24 @@ class SectionSpiderCrawler:
 
             links = extract_page_links(
                 html, base_url=page_url, element_id=content_element_id
-            )[:max_out_links]
+            )
+            if strict and len(links) > max_out_links:
+                raise RuntimeError(f"[{self.name}] link budget exceeded: {page_url}")
+            resolved = assign_titles(links[:max_out_links])
+            title_counts = Counter(title for _, title, _ in resolved)
 
-            for link, title, hints in assign_titles(links):
+            for link, title, hints in resolved:
                 if len(out) >= max_records:
+                    if strict:
+                        raise RuntimeError(f"[{self.name}] record budget exceeded")
                     break
 
-                canon = _canon(link.href)
+                target = (
+                    unwrap_popup_link(link.href, popup_wrapper)
+                    if popup_wrapper
+                    else link.href
+                )
+                canon = _canon(urljoin(page_url, target)) if target else None
                 if not canon:
                     continue
 
@@ -314,9 +367,23 @@ class SectionSpiderCrawler:
 
                 if doc or external:
                     identity = _strip_query(canon) if strip_query else canon
-                    if identity in recorded:
+                    if identity in recorded or identity in excluded_docs:
                         continue
                     recorded.add(identity)
+
+                    if identity in document_names:
+                        title = document_names[identity]
+                    elif name_template:
+                        filename = unquote(urlparse(identity).path.rsplit("/", 1)[-1])
+                        filename = filename.rsplit(".", 1)[0]
+                        label = title
+                        if title_counts[title] > 1:
+                            label = f"{title} ({filename})"
+                        title = name_template.format(
+                            page_title=page_title or page_url,
+                            title=label,
+                            filename=filename,
+                        )
 
                     meta: dict[str, Any] = {
                         "record_kind": "document" if doc else "external_reference",
@@ -349,6 +416,14 @@ class SectionSpiderCrawler:
                 visited.add(canon)
                 queue.append((canon, depth + 1))
 
+        if strict and (budget.truncated or len(out) >= max_records):
+            raise RuntimeError(
+                f"[{self.name}] crawl budget exhausted; output is incomplete"
+            )
+        if len(out) < int(cfg.get("min_records", 0)):
+            raise RuntimeError(
+                f"[{self.name}] record count {len(out)} below approved floor"
+            )
         if budget.truncated:
             # Saying this out loud matters: a crawl that stopped at its cap and
             # said nothing is indistinguishable from one that covered the

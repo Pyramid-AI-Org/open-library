@@ -213,7 +213,11 @@ jobs:
                   f"{total['previous']} - records from crawlers that did not run were lost"
               )
 
-          if zeroed or total:
+          ha_failed = [name for name in summary.get("crawlers_failed", []) if name.startswith("ha.")]
+          for name in ha_failed:
+              print(f"::error::{name} failed; previous HA snapshot retained")
+
+          if zeroed or total or ha_failed:
               print("Silent-failure regression detected. Data was still published.")
               sys.exit(1)
 
