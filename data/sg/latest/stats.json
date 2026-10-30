@@ -1,17 +1,17 @@
 {
   "input": "data-worktree/data/sg/latest/urls.jsonl",
   "totals": {
-    "lines_total": 11310,
-    "records_total": 11310,
+    "lines_total": 11328,
+    "records_total": 11328,
     "records_by_source": {
       "scdf.acts_codes_and_regulations": 291,
       "scdf.fire_code": 152,
       "scdf.fire_safety_circulars": 102,
-      "ema.regulations": 67,
+      "ema.regulations": 66,
       "nparks.cuge_standards": 25,
       "ura.development_control": 343,
-      "bca.circulars": 420,
-      "ura.master_plan": 169,
+      "bca.circulars": 421,
+      "ura.master_plan": 185,
       "ura.conservation": 151,
       "bca.safety_and_standards": 407,
       "bca.sustainability_legislation": 72,
@@ -37,10 +37,10 @@
       "ema.regulatory_publications": 16,
       "ema.circulars": 29,
       "ema.forms": 23,
-      "ema.corporate_publications": 16,
+      "ema.corporate_publications": 17,
       "ema.educational_materials": 29,
       "ema.industry_reports": 11,
-      "ema.statistics": 15,
+      "ema.statistics": 16,
       "imda.building_facilities_codes": 24,
       "jtc.development_and_renovation": 23,
       "jtc.tenancy_requirements": 52,
@@ -394,8 +394,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 291
       }
     },
@@ -704,8 +704,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 152
       }
     },
@@ -937,20 +937,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 102
       }
     },
     "ema.regulations": {
-      "records": 67,
-      "unique_urls": 67,
+      "records": 66,
+      "unique_urls": 66,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 19,
-        "warnings": 2,
+        "warnings": 1,
         "by_kind": {
-          "meta_value_outlier": 2,
+          "meta_value_outlier": 1,
           "missing_required_field": 19
         }
       },
@@ -972,7 +972,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 67,
+          "null": 66,
           "invalid": 0
         },
         "source": {
@@ -997,7 +997,7 @@
             "source_id",
             "url"
           ],
-          "count": 67
+          "count": 66
         }
       ],
       "meta_schema_signatures": [
@@ -1009,7 +1009,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 46
+          "count": 45
         },
         {
           "meta_keys": [
@@ -1041,7 +1041,7 @@
           },
           {
             "value": "2",
-            "count": 18
+            "count": 17
           },
           {
             "value": "1",
@@ -1060,16 +1060,12 @@
           {
             "value": "https://www.ema.gov.sg/regulations-licences/regulations/policies-frameworks/r...",
             "count": 1
-          },
-          {
-            "value": "https://www.ema.gov.sg/regulations-licences/regulations/market-operations/mar...",
-            "count": 1
           }
         ],
         "discovered_from_title": [
           {
             "value": "About EMA",
-            "count": 48
+            "count": 47
           }
         ],
         "file_ext": [
@@ -1083,7 +1079,7 @@
           },
           {
             "value": "pdf",
-            "count": 9
+            "count": 8
           }
         ],
         "record_kind": [
@@ -1097,7 +1093,7 @@
           },
           {
             "value": "document",
-            "count": 5
+            "count": 4
           }
         ],
         "fetch_url": [
@@ -1114,23 +1110,23 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          67
+          66
         ],
         [
           "file_ext",
-          67
+          66
         ],
         [
           "record_kind",
-          67
+          66
         ],
         [
           "discovered_from",
-          48
+          47
         ],
         [
           "discovered_from_title",
-          48
+          47
         ],
         [
           "fetch_url",
@@ -1144,7 +1140,7 @@
         ],
         [
           "www.ema.gov.sg",
-          24
+          23
         ],
         [
           "assets.egazette.gov.sg",
@@ -1158,13 +1154,13 @@
         ],
         [
           ".pdf",
-          9
+          8
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
-        "count": 67
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
+        "count": 66
       }
     },
     "nparks.cuge_standards": {
@@ -1295,8 +1291,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 25
       }
     },
@@ -1603,14 +1599,14 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 343
       }
     },
     "bca.circulars": {
-      "records": 420,
-      "unique_urls": 420,
+      "records": 421,
+      "unique_urls": 421,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 1,
@@ -1663,7 +1659,7 @@
             "source_id",
             "url"
           ],
-          "count": 420
+          "count": 421
         }
       ],
       "meta_schema_signatures": [
@@ -1675,7 +1671,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 234
+          "count": 235
         },
         {
           "meta_keys": [
@@ -1712,7 +1708,7 @@
         "collection": [
           {
             "value": "Circulars",
-            "count": 419
+            "count": 420
           }
         ],
         "date_raw": [
@@ -1740,13 +1736,13 @@
         "discovered_from": [
           {
             "value": "https://www1.bca.gov.sg/resources/circulars/",
-            "count": 419
+            "count": 420
           }
         ],
         "record_kind": [
           {
             "value": "document",
-            "count": 368
+            "count": 369
           },
           {
             "value": "page",
@@ -1760,7 +1756,7 @@
         "file_ext": [
           {
             "value": "pdf",
-            "count": 368
+            "count": 369
           },
           {
             "value": "html",
@@ -1799,23 +1795,23 @@
       "top_meta_keys": [
         [
           "record_kind",
-          420
+          421
         ],
         [
           "collection",
-          419
+          420
         ],
         [
           "date_raw",
-          419
+          420
         ],
         [
           "discovered_from",
-          419
+          420
         ],
         [
           "file_ext",
-          369
+          370
         ],
         [
           "declared_file_size",
@@ -1829,7 +1825,7 @@
       "top_hosts": [
         [
           "isomer-user-content.by.gov.sg",
-          362
+          363
         ],
         [
           "www1.bca.gov.sg",
@@ -1855,7 +1851,7 @@
       "top_extensions": [
         [
           ".pdf",
-          368
+          369
         ],
         [
           "(no_ext)",
@@ -1863,21 +1859,21 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
-        "count": 420
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
+        "count": 421
       }
     },
     "ura.master_plan": {
-      "records": 169,
-      "unique_urls": 169,
+      "records": 185,
+      "unique_urls": 185,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 84,
-        "warnings": 22,
+        "errors": 86,
+        "warnings": 20,
         "by_kind": {
-          "meta_value_outlier": 22,
-          "missing_required_field": 84
+          "meta_value_outlier": 20,
+          "missing_required_field": 86
         }
       },
       "required_field_null_missing_invalid": {
@@ -1898,7 +1894,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 85,
+          "null": 99,
           "invalid": 0
         },
         "source": {
@@ -1907,7 +1903,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 84,
+          "missing": 86,
           "null": 0,
           "invalid": 0
         }
@@ -1923,18 +1919,10 @@
             "source_id",
             "url"
           ],
-          "count": 169
+          "count": 185
         }
       ],
       "meta_schema_signatures": [
-        {
-          "meta_keys": [
-            "file_ext",
-            "record_kind",
-            "sitemap_lastmod"
-          ],
-          "count": 84
-        },
         {
           "meta_keys": [
             "declared_file_size",
@@ -1945,7 +1933,15 @@
             "record_kind",
             "sitemap_lastmod"
           ],
-          "count": 83
+          "count": 97
+        },
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "sitemap_lastmod"
+          ],
+          "count": 86
         },
         {
           "meta_keys": [
@@ -1967,7 +1963,11 @@
           },
           {
             "value": "https://www.ura.gov.sg/land-planning/master-plan/amendments-to-master-plan/20...",
-            "count": 6
+            "count": 12
+          },
+          {
+            "value": "https://www.ura.gov.sg/land-planning/master-plan/amendments-to-master-plan/20...",
+            "count": 9
           },
           {
             "value": "https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/tanjong-pag...",
@@ -1975,10 +1975,6 @@
           },
           {
             "value": "https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/themes/stre...",
-            "count": 2
-          },
-          {
-            "value": "https://www.ura.gov.sg/land-planning/master-plan/master-plan-2025/queensway-n...",
             "count": 2
           }
         ],
@@ -1989,7 +1985,11 @@
           },
           {
             "value": "List of Gazetted Proposed Amendments to Master Plan 2025",
-            "count": 6
+            "count": 12
+          },
+          {
+            "value": "List of Gazetted Approved Amendments to Master Plan 2025",
+            "count": 9
           },
           {
             "value": "&#x27;From Dreams to Rail-ity&#x27;",
@@ -1998,20 +1998,16 @@
           {
             "value": "A Cool City in a Warming World",
             "count": 2
-          },
-          {
-            "value": "Queensway Node",
-            "count": 2
           }
         ],
         "record_kind": [
           {
-            "value": "page",
-            "count": 84
+            "value": "document",
+            "count": 97
           },
           {
-            "value": "document",
-            "count": 83
+            "value": "page",
+            "count": 86
           },
           {
             "value": "external_reference",
@@ -2024,8 +2020,12 @@
             "count": 60
           },
           {
-            "value": "2026-10-26T07:08:23.939Z",
-            "count": 7
+            "value": "2026-10-30T02:30:20.885Z",
+            "count": 13
+          },
+          {
+            "value": "2026-10-30T02:30:53.679Z",
+            "count": 10
           },
           {
             "value": "2026-06-05T09:46:35.961Z",
@@ -2033,10 +2033,6 @@
           },
           {
             "value": "2026-06-04T03:23:35.903Z",
-            "count": 3
-          },
-          {
-            "value": "2026-06-22T13:33:38.285Z",
             "count": 3
           }
         ],
@@ -2065,58 +2061,58 @@
         "declared_file_type": [
           {
             "value": "pdf",
-            "count": 83
+            "count": 97
           }
         ],
         "file_ext": [
           {
-            "value": "html",
-            "count": 84
+            "value": "pdf",
+            "count": 97
           },
           {
-            "value": "pdf",
-            "count": 83
+            "value": "html",
+            "count": 86
           }
         ]
       },
       "top_meta_keys": [
         [
           "record_kind",
-          169
+          185
         ],
         [
           "sitemap_lastmod",
-          169
+          185
         ],
         [
           "file_ext",
-          167
+          183
         ],
         [
           "discovered_from",
-          85
+          99
         ],
         [
           "discovered_from_title",
-          85
+          99
         ],
         [
           "declared_file_size",
-          83
+          97
         ],
         [
           "declared_file_type",
-          83
+          97
         ]
       ],
       "top_hosts": [
         [
-          "www.ura.gov.sg",
-          84
+          "isomer-user-content.by.gov.sg",
+          97
         ],
         [
-          "isomer-user-content.by.gov.sg",
-          83
+          "www.ura.gov.sg",
+          86
         ],
         [
           "go.gov.sg",
@@ -2125,18 +2121,18 @@
       ],
       "top_extensions": [
         [
-          "(no_ext)",
-          86
+          ".pdf",
+          97
         ],
         [
-          ".pdf",
-          83
+          "(no_ext)",
+          88
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
-        "count": 169
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
+        "count": 185
       }
     },
     "ura.conservation": {
@@ -2439,8 +2435,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 151
       }
     },
@@ -2804,8 +2800,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 407
       }
     },
@@ -3123,8 +3119,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 72
       }
     },
@@ -3313,8 +3309,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 12
       }
     },
@@ -3521,8 +3517,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 7
       }
     },
@@ -3654,8 +3650,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 6
       }
     },
@@ -3775,8 +3771,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 2
       }
     },
@@ -3962,8 +3958,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 13
       }
     },
@@ -4130,8 +4126,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 32
       }
     },
@@ -4322,8 +4318,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 7
       }
     },
@@ -4574,8 +4570,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 53
       }
     },
@@ -4815,8 +4811,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 13
       }
     },
@@ -5006,8 +5002,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 334
       }
     },
@@ -5197,8 +5193,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 17
       }
     },
@@ -5486,8 +5482,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 510
       }
     },
@@ -5658,8 +5654,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 155
       }
     },
@@ -5817,8 +5813,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 32
       }
     },
@@ -6058,8 +6054,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 90
       }
     },
@@ -6216,8 +6212,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 15
       }
     },
@@ -6485,8 +6481,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 136
       }
     },
@@ -6692,8 +6688,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 84
       }
     },
@@ -6814,8 +6810,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 504
       }
     },
@@ -6935,8 +6931,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 16
       }
     },
@@ -7056,8 +7052,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 29
       }
     },
@@ -7193,20 +7189,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 23
       }
     },
     "ema.corporate_publications": {
-      "records": 16,
-      "unique_urls": 16,
+      "records": 17,
+      "unique_urls": 17,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 16,
+        "errors": 17,
         "warnings": 0,
         "by_kind": {
-          "missing_required_field": 16
+          "missing_required_field": 17
         }
       },
       "required_field_null_missing_invalid": {
@@ -7236,7 +7232,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 16,
+          "missing": 17,
           "null": 0,
           "invalid": 0
         }
@@ -7252,7 +7248,7 @@
             "source_id",
             "url"
           ],
-          "count": 16
+          "count": 17
         }
       ],
       "meta_schema_signatures": [
@@ -7262,7 +7258,7 @@
             "found_on",
             "record_kind"
           ],
-          "count": 16
+          "count": 17
         }
       ],
       "meta_schema_variants": 1,
@@ -7271,52 +7267,52 @@
         "file_type": [
           {
             "value": "pdf",
-            "count": 16
+            "count": 17
           }
         ],
         "found_on": [
           {
             "value": "https://www.ema.gov.sg/resources/corporate-publications",
-            "count": 16
+            "count": 17
           }
         ],
         "record_kind": [
           {
             "value": "document",
-            "count": 16
+            "count": 17
           }
         ]
       },
       "top_meta_keys": [
         [
           "file_type",
-          16
+          17
         ],
         [
           "found_on",
-          16
+          17
         ],
         [
           "record_kind",
-          16
+          17
         ]
       ],
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          16
+          17
         ]
       ],
       "top_extensions": [
         [
           ".pdf",
-          16
+          17
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
-        "count": 16
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
+        "count": 17
       }
     },
     "ema.educational_materials": {
@@ -7435,8 +7431,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 29
       }
     },
@@ -7606,20 +7602,20 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 11
       }
     },
     "ema.statistics": {
-      "records": 15,
-      "unique_urls": 15,
+      "records": 16,
+      "unique_urls": 16,
       "duplicate_url_hits": 0,
       "issue_counts": {
-        "errors": 10,
+        "errors": 11,
         "warnings": 0,
         "by_kind": {
-          "missing_required_field": 10
+          "missing_required_field": 11
         }
       },
       "required_field_null_missing_invalid": {
@@ -7640,7 +7636,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 15,
+          "null": 16,
           "invalid": 0
         },
         "source": {
@@ -7649,7 +7645,7 @@
           "invalid": 0
         },
         "meta.discovered_from": {
-          "missing": 10,
+          "missing": 11,
           "null": 0,
           "invalid": 0
         }
@@ -7665,7 +7661,7 @@
             "source_id",
             "url"
           ],
-          "count": 15
+          "count": 16
         }
       ],
       "meta_schema_signatures": [
@@ -7675,7 +7671,7 @@
             "file_ext",
             "record_kind"
           ],
-          "count": 10
+          "count": 11
         },
         {
           "meta_keys": [
@@ -7703,6 +7699,10 @@
           {
             "value": "0",
             "count": 2
+          },
+          {
+            "value": "3",
+            "count": 1
           }
         ],
         "discovered_from": [
@@ -7728,7 +7728,7 @@
         "file_ext": [
           {
             "value": "html",
-            "count": 10
+            "count": 11
           },
           {
             "value": "xlsx",
@@ -7742,7 +7742,7 @@
         "record_kind": [
           {
             "value": "page",
-            "count": 10
+            "count": 11
           },
           {
             "value": "document",
@@ -7753,15 +7753,15 @@
       "top_meta_keys": [
         [
           "crawl_depth",
-          15
+          16
         ],
         [
           "file_ext",
-          15
+          16
         ],
         [
           "record_kind",
-          15
+          16
         ],
         [
           "discovered_from",
@@ -7775,13 +7775,13 @@
       "top_hosts": [
         [
           "www.ema.gov.sg",
-          15
+          16
         ]
       ],
       "top_extensions": [
         [
           "(no_ext)",
-          10
+          11
         ],
         [
           ".xlsx",
@@ -7793,9 +7793,9 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
-        "count": 15
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
+        "count": 16
       }
     },
     "imda.building_facilities_codes": {
@@ -8144,8 +8144,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 23
       }
     },
@@ -8356,8 +8356,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 52
       }
     },
@@ -8528,8 +8528,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 22
       }
     },
@@ -8756,8 +8756,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 42
       }
     },
@@ -8920,8 +8920,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 22
       }
     },
@@ -9083,8 +9083,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 3
       }
     },
@@ -9275,8 +9275,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 125
       }
     },
@@ -9527,8 +9527,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 49
       }
     },
@@ -9748,8 +9748,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 48
       }
     },
@@ -9948,8 +9948,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 29
       }
     },
@@ -10189,8 +10189,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 131
       }
     },
@@ -10422,8 +10422,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 114
       }
     },
@@ -10662,8 +10662,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 87
       }
     },
@@ -10841,8 +10841,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 113
       }
     },
@@ -11019,8 +11019,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 8
       }
     },
@@ -11755,8 +11755,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 88
       }
     },
@@ -11943,8 +11943,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 31
       }
     },
@@ -12064,8 +12064,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 1
       }
     },
@@ -12185,8 +12185,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 1
       }
     },
@@ -12499,8 +12499,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 61
       }
     },
@@ -12700,8 +12700,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 36
       }
     },
@@ -12830,8 +12830,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 351
       }
     },
@@ -12960,8 +12960,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 684
       }
     },
@@ -13090,8 +13090,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 83
       }
     },
@@ -13326,8 +13326,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 350
       }
     },
@@ -13537,8 +13537,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 460
       }
     },
@@ -13765,8 +13765,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 286
       }
     },
@@ -13935,8 +13935,8 @@
         ]
       ],
       "discovered_at_range": {
-        "min": "2026-10-29T06:27:58.863110+00:00",
-        "max": "2026-10-29T06:27:58.863110+00:00",
+        "min": "2026-10-30T06:23:40.360474+00:00",
+        "max": "2026-10-30T06:23:40.360474+00:00",
         "count": 64
       }
     }
@@ -13945,18 +13945,18 @@
     "record_size_bytes": {
       "min": 254,
       "max": 1132,
-      "mean": 512.8753315649867,
+      "mean": 513.0556144067797,
       "p50": 492.0,
-      "p95": 766.45
+      "p95": 766.0
     },
     "issue_counts": {
       "by_severity": {
-        "warning": 228,
-        "error": 7502
+        "warning": 225,
+        "error": 7506
       },
       "by_severity_and_kind": {
-        "warning:meta_value_outlier": 228,
-        "error:missing_required_field": 6998,
+        "warning:meta_value_outlier": 225,
+        "error:missing_required_field": 7002,
         "error:null_required_field": 504
       }
     },
