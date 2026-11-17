@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 83570,
-    "records_total": 83570,
+    "lines_total": 83958,
+    "records_total": 83958,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 63,
       "epd.publications_other_reports": 3,
@@ -19,12 +19,13 @@
       "notices_and_reports": 20,
       "labour_document_sweep": 519,
       "emsd.regulating_railway_safety": 7,
-      "bd_document_sweep": 376,
+      "bd_document_sweep": 375,
       "enhancing_plumbing_works_control": 4,
       "wsd_document_sweep": 120,
       "emsd.publications_handbooks": 8,
       "archsd_practices_and_guidelines": 53,
       "archsd_technical_documents": 137,
+      "bd.minor_works": 389,
       "scheduled_areas": 346,
       "codes_design_manuals_and_guidelines": 54,
       "basic_pages": 31,
@@ -2072,8 +2073,8 @@
       }
     },
     "bd_document_sweep": {
-      "records": 376,
-      "unique_urls": 376,
+      "records": 375,
+      "unique_urls": 375,
       "duplicate_url_hits": 0,
       "issue_counts": {
         "errors": 0,
@@ -2098,7 +2099,7 @@
         },
         "publish_date": {
           "missing": 0,
-          "null": 376,
+          "null": 375,
           "invalid": 0
         },
         "source": {
@@ -2123,7 +2124,7 @@
             "source_id",
             "url"
           ],
-          "count": 376
+          "count": 375
         }
       ],
       "meta_schema_signatures": [
@@ -2131,7 +2132,7 @@
           "meta_keys": [
             "discovered_from"
           ],
-          "count": 376
+          "count": 375
         }
       ],
       "meta_schema_variants": 1,
@@ -2163,13 +2164,13 @@
       "top_meta_keys": [
         [
           "discovered_from",
-          376
+          375
         ]
       ],
       "top_hosts": [
         [
           "www.bd.gov.hk",
-          370
+          369
         ],
         [
           "brplatform.org.hk",
@@ -2195,7 +2196,7 @@
       "top_extensions": [
         [
           ".pdf",
-          358
+          357
         ],
         [
           ".doc",
@@ -2213,7 +2214,7 @@
       "discovered_at_range": {
         "min": "2026-11-17T02:14:07.876358+00:00",
         "max": "2026-11-17T02:14:07.876358+00:00",
-        "count": 376
+        "count": 375
       }
     },
     "enhancing_plumbing_works_control": {
@@ -2818,6 +2819,213 @@
         "min": "2026-11-17T02:14:07.876358+00:00",
         "max": "2026-11-17T02:14:07.876358+00:00",
         "count": 137
+      }
+    },
+    "bd.minor_works": {
+      "records": 389,
+      "unique_urls": 389,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 364,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 364
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 389,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 364,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 389
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 364
+        },
+        {
+          "meta_keys": [
+            "crawl_depth",
+            "discovered_from",
+            "discovered_from_title",
+            "file_ext",
+            "record_kind"
+          ],
+          "count": 25
+        }
+      ],
+      "meta_schema_variants": 2,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "crawl_depth": [
+          {
+            "value": "1",
+            "count": 279
+          },
+          {
+            "value": "2",
+            "count": 53
+          },
+          {
+            "value": "3",
+            "count": 37
+          },
+          {
+            "value": "0",
+            "count": 20
+          }
+        ],
+        "discovered_from": [
+          {
+            "value": "https://www.bd.gov.hk/en/building-works/minor-works/guidelines-pamphlets/inde...",
+            "count": 11
+          },
+          {
+            "value": "https://www.bd.gov.hk/en/building-works/minor-works/minor-works-items/index_m...",
+            "count": 3
+          },
+          {
+            "value": "https://www.bd.gov.hk/en/building-works/minor-works/prescribed-professionals-...",
+            "count": 2
+          },
+          {
+            "value": "https://www.bd.gov.hk/en/building-works/minor-works/prescribed-professionals-...",
+            "count": 2
+          },
+          {
+            "value": "https://www.bd.gov.hk/en/building-works/minor-works/minor-works-items/index_m...",
+            "count": 2
+          }
+        ],
+        "discovered_from_title": [
+          {
+            "value": "Guidelines &amp; Pamphlets",
+            "count": 11
+          },
+          {
+            "value": "Minor Works Item - 1.1",
+            "count": 3
+          },
+          {
+            "value": "FAQ on minor works submissions",
+            "count": 2
+          },
+          {
+            "value": "FAQ of Registered Minor Works Contractors on filling the standard forms of Su...",
+            "count": 2
+          },
+          {
+            "value": "Minor Works Item - 2.1",
+            "count": 2
+          }
+        ],
+        "file_ext": [
+          {
+            "value": "html",
+            "count": 364
+          },
+          {
+            "value": "pdf",
+            "count": 25
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "page",
+            "count": 364
+          },
+          {
+            "value": "document",
+            "count": 25
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "crawl_depth",
+          389
+        ],
+        [
+          "file_ext",
+          389
+        ],
+        [
+          "record_kind",
+          389
+        ],
+        [
+          "discovered_from",
+          25
+        ],
+        [
+          "discovered_from_title",
+          25
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.bd.gov.hk",
+          389
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".html",
+          364
+        ],
+        [
+          ".pdf",
+          25
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-11-17T09:28:54.154170+00:00",
+        "max": "2026-11-17T09:28:54.154170+00:00",
+        "count": 389
       }
     },
     "scheduled_areas": {
@@ -17653,18 +17861,18 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1390,
-      "mean": 525.076726097882,
+      "mean": 524.3066533266633,
       "p50": 405.0,
       "p95": 981.0
     },
     "issue_counts": {
       "by_severity": {
         "warning": 1815,
-        "error": 3414
+        "error": 3778
       },
       "by_severity_and_kind": {
         "warning:meta_value_outlier": 1811,
-        "error:missing_required_field": 3414,
+        "error:missing_required_field": 3778,
         "warning:meta_type_outlier": 4
       }
     },
@@ -17722,7 +17930,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1342,
+        "line": 1355,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17730,7 +17938,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1342,
+        "line": 1355,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17738,7 +17946,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1343,
+        "line": 1356,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17746,7 +17954,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1343,
+        "line": 1356,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17754,7 +17962,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1344,
+        "line": 1357,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17762,7 +17970,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1344,
+        "line": 1357,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17770,7 +17978,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1345,
+        "line": 1358,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17778,7 +17986,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1345,
+        "line": 1358,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17786,7 +17994,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1346,
+        "line": 1359,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17794,7 +18002,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1346,
+        "line": 1359,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17802,7 +18010,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1347,
+        "line": 1360,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17810,7 +18018,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1347,
+        "line": 1360,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17818,7 +18026,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1348,
+        "line": 1361,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17826,7 +18034,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1348,
+        "line": 1361,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17834,7 +18042,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1349,
+        "line": 1362,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17842,7 +18050,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1349,
+        "line": 1362,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17850,7 +18058,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.discovered_from",
-        "line": 1350,
+        "line": 1363,
         "detail": "rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html"
       },
       {
@@ -17858,7 +18066,7 @@
         "kind": "meta_value_outlier",
         "source": "practice_notes_and_circular_letters",
         "field": "meta.source_page",
-        "line": 1350,
+        "line": 1363,
         "detail": "rare value in source: JPN"
       },
       {
@@ -17866,208 +18074,208 @@
         "kind": "meta_value_outlier",
         "source": "mines_and_blasting",
         "field": "meta.discovered_from",
-        "line": 1617,
+        "line": 1630,
         "detail": "rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information..."
       },
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "basic_pages",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2001,
+        "line": 2025,
         "detail": "missing required field"
       },
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "basic_pages",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2002,
+        "line": 2026,
         "detail": "missing required field"
       },
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "basic_pages",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2003,
+        "line": 2027,
         "detail": "missing required field"
       },
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "basic_pages",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2004,
+        "line": 2028,
         "detail": "missing required field"
       },
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "basic_pages",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2005,
+        "line": 2029,
         "detail": "missing required field"
       },
       {
         "severity": "error",
         "kind": "missing_required_field",
-        "source": "basic_pages",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2006,
+        "line": 2030,
         "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2508,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/miscellaneous/index.html"
+        "line": 2031,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2509,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/miscellaneous/index.html"
+        "line": 2032,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2510,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/miscellaneous/index.html"
+        "line": 2033,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2511,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/miscellaneous/index.html"
+        "line": 2034,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2519,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-playbook/index.html"
+        "line": 2035,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2520,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-playbook/index.html"
+        "line": 2036,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2521,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-playbook/index.html"
+        "line": 2037,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2522,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-playbook/index.html"
+        "line": 2038,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2523,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-playbook/index.html"
+        "line": 2039,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2601,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2040,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2602,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2041,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2603,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2042,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2604,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/cedd-departmental-report/index.html"
+        "line": 2043,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_document_sweep",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 2919,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/geo/index.html"
+        "line": 2044,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_standards_spec_handbooks_cost",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 3551,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
+        "line": 2045,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_standards_spec_handbooks_cost",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 3552,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
+        "line": 2046,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_standards_spec_handbooks_cost",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 3553,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs/index.html"
+        "line": 2047,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_standards_spec_handbooks_cost",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 3554,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2006/index.html"
+        "line": 2048,
+        "detail": "missing required field"
       },
       {
-        "severity": "warning",
-        "kind": "meta_value_outlier",
-        "source": "cedd_standards_spec_handbooks_cost",
+        "severity": "error",
+        "kind": "missing_required_field",
+        "source": "bd.minor_works",
         "field": "meta.discovered_from",
-        "line": 3579,
-        "detail": "rare value in source: https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-gs-2006/index.html"
+        "line": 2049,
+        "detail": "missing required field"
       }
     ]
   }

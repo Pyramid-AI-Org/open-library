@@ -1,8 +1,8 @@
 {
-  "crawler": "bd.buildings_ordinance",
+  "crawler": "bd.minor_works",
   "crawlers_considered": 151,
   "crawlers_due": [
-    "buildings_ordinance"
+    "minor_works"
   ],
   "crawlers_failed": [],
   "crawlers_skipped": [
@@ -12,6 +12,7 @@
     "archsd_technical_documents",
     "automatic_meter_reading",
     "basic_pages",
+    "bd.buildings_ordinance",
     "bd_document_sweep",
     "beeo_codes_guidelines",
     "cedd_ceo_publications",
@@ -148,24 +149,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "bd.buildings_ordinance"
+    "bd.minor_works"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83570,
+  "rows": 83958,
   "run_date_utc": "2026-11-17",
   "schedule": {
-    "bd.buildings_ordinance": {
+    "bd.minor_works": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "bd.buildings_ordinance",
+      "module_path": "bd.minor_works",
       "source_id": "bd"
     }
   },
-  "started_at_utc": "2026-11-17T09:27:08.831612+00:00",
-  "sweep_duplicates_dropped": 0
+  "started_at_utc": "2026-11-17T09:28:54.154170+00:00",
+  "sweep_duplicates_dropped": 1
 }
