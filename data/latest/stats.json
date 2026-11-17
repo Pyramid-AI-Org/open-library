@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 83552,
-    "records_total": 83552,
+    "lines_total": 83570,
+    "records_total": 83570,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 63,
       "epd.publications_other_reports": 3,
@@ -56,6 +56,7 @@
       "technical_papers_published_by_dsd": 104,
       "dsd.sewage_services_charging_scheme": 30,
       "edb.licensing_guides": 1,
+      "bd.buildings_ordinance": 18,
       "beeo_codes_guidelines": 40,
       "electric_safety_publications_guidelines": 40,
       "emsd.gas_statutory_advisory_bodies": 2,
@@ -6877,6 +6878,127 @@
         "min": "2026-11-17T02:14:07.876358+00:00",
         "max": "2026-11-17T02:14:07.876358+00:00",
         "count": 1
+      }
+    },
+    "bd.buildings_ordinance": {
+      "records": 18,
+      "unique_urls": 18,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 18,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 18
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 18,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 18,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 18
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "ticket"
+          ],
+          "count": 18
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_ext": [
+          {
+            "value": "pdf",
+            "count": 18
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 18
+          }
+        ],
+        "ticket": [
+          {
+            "value": "PAI-1696",
+            "count": 18
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_ext",
+          18
+        ],
+        [
+          "record_kind",
+          18
+        ],
+        [
+          "ticket",
+          18
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.elegislation.gov.hk",
+          18
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          18
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-11-17T09:27:08.831612+00:00",
+        "max": "2026-11-17T09:27:08.831612+00:00",
+        "count": 18
       }
     },
     "beeo_codes_guidelines": {
@@ -17531,18 +17653,18 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1390,
-      "mean": 525.1149583492914,
+      "mean": 525.076726097882,
       "p50": 405.0,
       "p95": 981.0
     },
     "issue_counts": {
       "by_severity": {
         "warning": 1815,
-        "error": 3396
+        "error": 3414
       },
       "by_severity_and_kind": {
         "warning:meta_value_outlier": 1811,
-        "error:missing_required_field": 3396,
+        "error:missing_required_field": 3414,
         "warning:meta_type_outlier": 4
       }
     },

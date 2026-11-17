@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 83552 (parse_errors=0)
+Total records: 83570 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.2%)
@@ -8,7 +8,8 @@ Records by source:
 - archsd_technical_documents: 137 (0.2%)
 - automatic_meter_reading: 10 (0.0%)
 - basic_pages: 31 (0.0%)
-- bd_document_sweep: 376 (0.5%)
+- bd.buildings_ordinance: 18 (0.0%)
+- bd_document_sweep: 376 (0.4%)
 - beeo_codes_guidelines: 40 (0.0%)
 - cedd_ceo_publications: 10 (0.0%)
 - cedd_document_sweep: 459 (0.5%)
@@ -1653,6 +1654,36 @@ Per-source schema and validation summary:
   - file_ext: pdf (1)
   - record_kind: document (1)
   - ticket: PAI-1457 (1)
+
+[bd.buildings_ordinance]
+- records: 18 | unique_urls: 18 | dup_url_hits: 0
+- issues: errors=18 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=18 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=18 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-11-17T09:27:08.831612+00:00 .. 2026-11-17T09:27:08.831612+00:00
+- top url hosts:
+  - www.elegislation.gov.hk: 18
+- top url extensions:
+  - .pdf: 18
+- top-level key signatures (urls.jsonl record format):
+  - count=18 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=18 meta_keys=['file_ext', 'record_kind', 'ticket']
+- meta schema variants: 1
+- most common meta keys:
+  - file_ext: 18
+  - record_kind: 18
+  - ticket: 18
+- top scalar meta values (sample):
+  - file_ext: pdf (18)
+  - record_kind: document (18)
+  - ticket: PAI-1696 (18)
 
 [beeo_codes_guidelines]
 - records: 40 | unique_urls: 40 | dup_url_hits: 0
@@ -4117,7 +4148,7 @@ General stats:
 - record JSON size (bytes): min=204 p50=405.0 mean=525.1 p95=981.0 max=1390
 
 Unusual records / issues:
-- error:missing_required_field: 3396
+- error:missing_required_field: 3414
 - warning:meta_value_outlier: 1811
 - warning:meta_type_outlier: 4
 
