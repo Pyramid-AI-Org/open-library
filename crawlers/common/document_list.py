@@ -27,12 +27,13 @@ class DocumentListCrawler:
                 raise ValueError(f"{ctx.source_id}.{self.name}: invalid PDF entry")
             if urlparse(url).scheme != "https" or urlparse(url).hostname not in hosts:
                 raise ValueError(f"{ctx.source_id}.{self.name}: unexpected document host")
+            ticket = str(cfg.get("ticket") or "PAI-1457").strip() or "PAI-1457"
             records[url] = ctx.make_record(
                 url=url,
                 name=title,
                 source=f"{ctx.source_id}.{self.name}",
                 discovered_at_utc=ctx.started_at_utc,
                 publish_date=document.get("publish_date"),
-                meta={"file_ext": "pdf", "record_kind": "document", "ticket": "PAI-1457"},
+                meta={"file_ext": "pdf", "record_kind": "document", "ticket": ticket},
             )
         return [records[url] for url in sorted(records)]

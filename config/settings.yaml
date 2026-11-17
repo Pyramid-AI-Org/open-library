@@ -377,6 +377,112 @@ crawlers:
           - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_reports.html"
           - "https://www.bd.gov.hk/en/resources/codes-and-references/notices-and-reports/index_CEPAS.html"
 
+      # PAI-1696: Cap 123 Buildings Ordinance family PDFs (principal + Cap 123A–Q).
+      # Hosted on elegislation.gov.hk. The HTML index tabs (?tab=s / ?tab=m) are
+      # JS shells with no statute text after the client-check gate, so they are
+      # not crawled; the verified PDFs are the corpus. Cap 123D/E remain on the
+      # site (historical lift/escalator regs). Client-check is completed at
+      # pyramid-os ingest, not in this crawler.
+      buildings_ordinance:
+        ticket: PAI-1696
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap123!en.pdf
+            title: Buildings Ordinance (Cap 123)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123A!en-zh-Hant-HK.pdf
+            title: Building (Administration) Regulations (Cap 123A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123B!en-zh-Hant-HK.pdf
+            title: Building (Construction) Regulations (Cap 123B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123C!en-zh-Hant-HK.pdf
+            title: Building (Demolition Works) Regulations (Cap 123C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123D!en-zh-Hant-HK.pdf
+            title: Building (Lifts) Regulations (Cap 123D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123E!en-zh-Hant-HK.pdf
+            title: Building (Escalators) Regulations (Cap 123E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123F!en-zh-Hant-HK.pdf
+            title: Building (Planning) Regulations (Cap 123F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123G!en-zh-Hant-HK.pdf
+            title: Building (Private Streets and Access Roads) Regulations (Cap 123G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123H!en-zh-Hant-HK.pdf
+            title: Building (Refuse Storage and Material Recovery Chambers and Refuse Chutes) Regulations (Cap 123H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123I!en-zh-Hant-HK.pdf
+            title: Building (Standards of Sanitary Fitments, Plumbing, Drainage Works and Latrines) Regulations (Cap 123I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123J!en-zh-Hant-HK.pdf
+            title: Building (Ventilating Systems) Regulations (Cap 123J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123K!en-zh-Hant-HK.pdf
+            title: Building (Oil Storage Installations) Regulations (Cap 123K)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123L!en-zh-Hant-HK.pdf
+            title: Building (Appeal) Regulation (Cap 123L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123M!en-zh-Hant-HK.pdf
+            title: Building (Energy Efficiency) Regulation (Cap 123M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123N!en-zh-Hant-HK.pdf
+            title: Building (Minor Works) Regulation (Cap 123N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123O!en-zh-Hant-HK.pdf
+            title: Building (Minor Works) (Fees) Regulation (Cap 123O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123P!en-zh-Hant-HK.pdf
+            title: Building (Inspection and Repair) Regulation (Cap 123P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123Q!en-zh-Hant-HK.pdf
+            title: Building (Construction) Regulation (Cap 123Q)
+            publish_date: null
+
+      # PAI-1696: Minor Works Control System family pages (item 1.17 and siblings
+      # live under minor-works-items/). CoP MBIS/MWIS + MWGG/MWTG PDFs are already
+      # covered by codes_design_manuals_* crawlers; this spider fills the HTML gap
+      # and keeps pamphlet / types-table PDFs in the daily delta. BD schedule is
+      # interval_days: 1, so after the first snapshot only added/changed URLs
+      # re-ingest.
+      minor_works:
+        start_urls:
+          - https://www.bd.gov.hk/en/building-works/minor-works/index.html
+          - https://www.bd.gov.hk/en/building-works/minor-works/introduction-to-minor-works-control-system/index.html
+          - https://www.bd.gov.hk/en/building-works/minor-works/minor-works-items/index.html
+          - https://www.bd.gov.hk/en/building-works/minor-works/minor-works-items/types-of-minor-works/index.html
+          - https://www.bd.gov.hk/en/building-works/minor-works/designated-exempted-works/index.html
+          - https://www.bd.gov.hk/en/building-works/minor-works/procedures/index.html
+          - https://www.bd.gov.hk/en/building-works/minor-works/guidelines-pamphlets/index.html
+          - https://www.bd.gov.hk/en/resources/legal-matters/index.html
+        allowed_schemes: [https]
+        allowed_hosts:
+          - www.bd.gov.hk
+        allowed_path_prefixes:
+          - /en/building-works/minor-works/
+          - /en/resources/legal-matters/
+        document_hosts:
+          - www.bd.gov.hk
+        document_path_prefixes:
+          - /doc/en/building-works/minor-works/
+          - /doc/en/resources/pamphlets-and-videos/
+        document_extensions: [pdf]
+        emit_page_records: true
+        content_element_id: content
+        max_depth: 3
+        max_pages: 500
+        max_out_links_per_page: 800
+        max_total_records: 600
+        min_records: 50
+        exclude_path_patterns:
+          - index_mwcs_news
+        fail_on_page_error: false
+        fail_on_truncation: true
+
   # ============================================================================
   # ARCHSD - Architectural Services Department
   # ============================================================================
