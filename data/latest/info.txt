@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 83958 (parse_errors=0)
+Total records: 84016 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.2%)
@@ -60,7 +60,7 @@ Records by source:
 - emsd.publications_technical_specifications: 9 (0.0%)
 - emsd.railway_safety_publication: 4 (0.0%)
 - emsd.regulating_railway_safety: 7 (0.0%)
-- emsd_document_sweep: 508 (0.6%)
+- emsd_document_sweep: 509 (0.6%)
 - enhancement_of_control_of_inside_services: 11 (0.0%)
 - enhancing_plumbing_works_control: 4 (0.0%)
 - epd.air: 275 (0.3%)
@@ -90,7 +90,7 @@ Records by source:
 - ha.resources: 23 (0.0%)
 - had.licensing_guides: 5 (0.0%)
 - herbarium: 3348 (4.0%)
-- hksar_press_releases: 45344 (54.0%)
+- hksar_press_releases: 45399 (54.0%)
 - hyd_document_sweep: 266 (0.3%)
 - hyd_standard_drawings: 575 (0.7%)
 - hyd_technical_documents: 363 (0.4%)
@@ -136,7 +136,7 @@ Records by source:
 - technical_guidance: 3 (0.0%)
 - technical_manuals: 17 (0.0%)
 - technical_papers_published_by_dsd: 104 (0.1%)
-- tel_directory: 16777 (20.0%)
+- tel_directory: 16779 (20.0%)
 - third_comprehensive_study: 11 (0.0%)
 - transport_planning: 22 (0.0%)
 - water_efficiency_labelling_scheme: 31 (0.0%)
@@ -158,7 +158,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 59
   - www.cic.hk: 3
@@ -188,7 +188,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 2
   - www.cmab.gov.hk: 1
@@ -215,7 +215,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 52
   - www.labour.gov.hk: 3
@@ -243,7 +243,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 40
   - www.eeb.gov.hk: 1
@@ -270,7 +270,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.epd.gov.hk: 41
   - www.legco.gov.hk: 5
@@ -299,7 +299,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 270
   - www.wastereduction.gov.hk: 13
@@ -341,7 +341,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.eeb.gov.hk: 12
   - www.epd.gov.hk: 1
@@ -358,32 +358,32 @@ Per-source schema and validation summary:
   - discovered_from: https://www.epd.gov.hk/epd/english/resources_pub/policy_documents/index.html (13)
 
 [emsd_document_sweep]
-- records: 508 | unique_urls: 508 | dup_url_hits: 0
+- records: 509 | unique_urls: 509 | dup_url_hits: 0
 - issues: errors=0 warnings=0
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=508 invalid=0
+  - publish_date: missing=0 null=509 invalid=0
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 471
-  - bestpractice.emsd.gov.hk: 28
+  - bestpractice.emsd.gov.hk: 29
   - wcms.emsd.gov.hk: 8
   - re.emsd.gov.hk: 1
 - top url extensions:
-  - .pdf: 501
+  - .pdf: 502
   - .docx: 7
 - top-level key signatures (urls.jsonl record format):
-  - count=508 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=509 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=508 meta_keys=['discovered_from']
+  - count=509 meta_keys=['discovered_from']
 - meta schema variants: 1
 - most common meta keys:
-  - discovered_from: 508
+  - discovered_from: 509
 - top scalar meta values (sample):
   - discovered_from: https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contracto... (69), https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/contracto... (66), https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bod... (54)
 
@@ -398,7 +398,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 70
   - www.buildingmgt.gov.hk: 1
@@ -426,7 +426,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 14
   - egazette.gld.gov.hk: 5
@@ -457,7 +457,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 16
 - top url extensions:
@@ -485,7 +485,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 16
   - www.fehd.gov.hk: 2
@@ -514,7 +514,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 19
   - www.gld.gov.hk: 1
@@ -543,7 +543,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.labour.gov.hk: 507
   - www.fdh.labour.gov.hk: 10
@@ -573,7 +573,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 5
   - www.legco.gov.hk: 2
@@ -600,7 +600,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 369
   - brplatform.org.hk: 2
@@ -634,7 +634,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 4
 - top url extensions:
@@ -660,7 +660,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.wsd.gov.hk: 119
   - www.itc.gov.hk: 1
@@ -690,7 +690,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - bestpractice.emsd.gov.hk: 4
   - re.emsd.gov.hk: 2
@@ -718,7 +718,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.archsd.gov.hk: 53
 - top url extensions:
@@ -744,7 +744,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.archsd.gov.hk: 137
 - top url extensions:
@@ -772,7 +772,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=364 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-11-17T09:28:54.154170+00:00 .. 2026-11-17T09:28:54.154170+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 389
 - top url extensions:
@@ -808,7 +808,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 346
 - top url extensions:
@@ -834,7 +834,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 54
 - top url extensions:
@@ -866,7 +866,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=6 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 28
   - www.labour.gov.hk: 3
@@ -899,7 +899,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 84
 - top url extensions:
@@ -925,7 +925,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 265
 - top url extensions:
@@ -951,7 +951,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 471
 - top url extensions:
@@ -979,7 +979,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.bd.gov.hk: 18
 - top url extensions:
@@ -1005,7 +1005,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 27
   - www.bd.gov.hk: 1
@@ -1032,7 +1032,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 10
 - top url extensions:
@@ -1059,7 +1059,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 1254
 - top url extensions:
@@ -1086,7 +1086,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 51
 - top url extensions:
@@ -1112,7 +1112,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 459
 - top url extensions:
@@ -1141,7 +1141,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 284
 - top url extensions:
@@ -1170,7 +1170,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 1
 - top url extensions:
@@ -1196,7 +1196,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.cedd.gov.hk: 21
 - top url extensions:
@@ -1222,7 +1222,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 203
   - www.csb.gov.hk: 1
@@ -1250,7 +1250,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.devb.gov.hk: 3713
 - top url extensions:
@@ -1278,7 +1278,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.devb.gov.hk: 501
 - top url extensions:
@@ -1306,7 +1306,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.devb.gov.hk: 1650
 - top url extensions:
@@ -1334,7 +1334,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.devb.gov.hk: 260
   - www.wsd.gov.hk: 1
@@ -1364,7 +1364,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.devb.gov.hk: 3
 - top url extensions:
@@ -1392,7 +1392,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.devb.gov.hk: 4
 - top url extensions:
@@ -1422,7 +1422,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.devb.gov.hk: 346
 - top url extensions:
@@ -1449,47 +1449,47 @@ Per-source schema and validation summary:
   - revision_year: null (302), 2021 (16), 2023 (7)
 
 [tel_directory]
-- records: 16777 | unique_urls: 16777 | dup_url_hits: 0
+- records: 16779 | unique_urls: 16779 | dup_url_hits: 0
 - issues: errors=0 warnings=0
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
   - name: missing=0 null=0 invalid=0
   - discovered_at_utc: missing=0 null=0 invalid=0
-  - publish_date: missing=0 null=16777 invalid=0
+  - publish_date: missing=0 null=16779 invalid=0
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-03-17T14:00:00.884908+00:00 .. 2026-11-17T04:40:09.707927+00:00
+- discovered_at_utc: 2026-03-17T14:00:00.884908+00:00 .. 2026-11-18T04:53:38.449876+00:00
 - top url hosts:
-  - www.directory.gov.hk: 16777
+  - www.directory.gov.hk: 16779
 - top url extensions:
-  - .jsp: 16777
+  - .jsp: 16779
 - top-level key signatures (urls.jsonl record format):
-  - count=16777 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=16779 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=16777 meta_keys=['dedup_key', 'department', 'discovered_from', 'email', 'fax', 'office_address', 'office_tel', 'post_title', 'post_title_long']
+  - count=16779 meta_keys=['dedup_key', 'department', 'discovered_from', 'email', 'fax', 'office_address', 'office_tel', 'post_title', 'post_title_long']
 - meta schema variants: 1
 - meta keys with type variation:
-  - email: {'str': 16125, 'null': 652}
-  - fax: {'str': 14396, 'null': 2381}
-  - office_address: {'str': 16580, 'null': 197}
-  - post_title: {'str': 16684, 'null': 93}
-  - post_title_long: {'str': 16684, 'null': 93}
+  - email: {'str': 16127, 'null': 652}
+  - fax: {'str': 14398, 'null': 2381}
+  - office_address: {'str': 16582, 'null': 197}
+  - post_title: {'str': 16686, 'null': 93}
+  - post_title_long: {'str': 16686, 'null': 93}
 - most common meta keys:
-  - dedup_key: 16777
-  - department: 16777
-  - discovered_from: 16777
-  - email: 16777
-  - fax: 16777
-  - office_address: 16777
-  - office_tel: 16777
-  - post_title: 16777
+  - dedup_key: 16779
+  - department: 16779
+  - discovered_from: 16779
+  - email: 16779
+  - fax: 16779
+  - office_address: 16779
+  - office_tel: 16779
+  - post_title: 16779
 - top scalar meta values (sample):
   - dedup_key: https://www.directory.gov.hk/details.jsp?dn=cn%3D1101000002%2Cou%3DCMAB%2Cou%... (1), https://www.directory.gov.hk/details.jsp?dn=cn%3D1101000002%2Cou%3DCMAB%2Cou%... (1), https://www.directory.gov.hk/details.jsp?dn=cn%3D1101000004%2Cou%3DCMAB%2Cou%... (1)
   - department: Health Bureau -> Primary Healthcare Commission (150), Innovation, Technology and Industry Bureau -> Digital Policy Office -> Data G... (111), Health Bureau -> Chinese Medicine Hospital Project Office (104)
   - discovered_from: https://tel.directory.gov.hk/0603007231_ENG.html (161), https://tel.directory.gov.hk/0606008855_ENG.html (150), https://tel.directory.gov.hk/0147008608_ENG.html (128)
   - email: email@csd.gov.hk (742), null (652), sbenq@sb.gov.hk (194)
-  - fax: null (2381), 2802 4549 (140), 2573 5299 (106)
+  - fax: null (2381), 2802 4549 (140), 2573 5299 (107)
   - office_address: Buildings Department Headquarters, North Tower, West Kowloon Government Offic... (864), 9/F - 16/F, South Tower, Tseung Kwan O Government Offices, 30 Tong Yin Street... (256), 24/F, Central Government Offices, 2 Tim Mei Avenue, Tamar, Hong Kong (228)
 
 [guidelines]
@@ -1503,7 +1503,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.dsd.gov.hk: 5
 - top url extensions:
@@ -1529,7 +1529,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.dsd.gov.hk: 59
 - top url extensions:
@@ -1555,7 +1555,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.dsd.gov.hk: 17
 - top url extensions:
@@ -1581,7 +1581,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.dsd.gov.hk: 17
 - top url extensions:
@@ -1609,7 +1609,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.dsd.gov.hk: 104
 - top url extensions:
@@ -1637,7 +1637,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=10 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.dsd.gov.hk: 30
 - top url extensions:
@@ -1673,7 +1673,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.edb.gov.hk: 1
 - top url extensions:
@@ -1703,7 +1703,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=18 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T09:27:08.831612+00:00 .. 2026-11-17T09:27:08.831612+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.elegislation.gov.hk: 18
 - top url extensions:
@@ -1733,7 +1733,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 40
 - top url extensions:
@@ -1759,7 +1759,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 40
 - top url extensions:
@@ -1786,7 +1786,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 2
 - top url extensions:
@@ -1812,7 +1812,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 3
 - top url extensions:
@@ -1838,7 +1838,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 4
 - top url extensions:
@@ -1866,7 +1866,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 95
 - top url extensions:
@@ -1892,7 +1892,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 22
 - top url extensions:
@@ -1918,7 +1918,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 9
 - top url extensions:
@@ -1946,7 +1946,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 20
 - top url extensions:
@@ -1972,7 +1972,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 14
 - top url extensions:
@@ -1998,7 +1998,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 47
 - top url extensions:
@@ -2024,7 +2024,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.emsd.gov.hk: 4
 - top url extensions:
@@ -2050,7 +2050,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 30
 - top url extensions:
@@ -2076,7 +2076,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 150
 - top url extensions:
@@ -2108,7 +2108,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 9
 - top url extensions:
@@ -2134,7 +2134,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=16 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.emsd.gov.hk: 16
 - top url extensions:
@@ -2162,7 +2162,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 275
 - top url extensions:
@@ -2190,7 +2190,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 293
 - top url extensions:
@@ -2218,7 +2218,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 110
 - top url extensions:
@@ -2247,7 +2247,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 599
 - top url extensions:
@@ -2275,7 +2275,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.epd.gov.hk: 246
 - top url extensions:
@@ -2303,7 +2303,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=5 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.fehd.gov.hk: 5
 - top url extensions:
@@ -2333,7 +2333,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=5 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.hadla.gov.hk: 4
   - www.had.gov.hk: 1
@@ -2364,7 +2364,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=3348 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.herbarium.gov.hk: 3348
 - top url extensions:
@@ -2404,7 +2404,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 20
 - top url extensions:
@@ -2430,7 +2430,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 8
 - top url extensions:
@@ -2456,7 +2456,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 111
   - www.wsd.gov.hk: 33
@@ -2490,7 +2490,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 67
 - top url extensions:
@@ -2518,7 +2518,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 25
 - top url extensions:
@@ -2544,7 +2544,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 3
 - top url extensions:
@@ -2570,7 +2570,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 8
 - top url extensions:
@@ -2598,7 +2598,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hkfsd.gov.hk: 1
 - top url extensions:
@@ -2624,7 +2624,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.housingauthority.gov.hk: 23
 - top url extensions:
@@ -2658,7 +2658,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.housingauthority.gov.hk: 1
 - top url extensions:
@@ -2692,7 +2692,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.housingauthority.gov.hk: 3
 - top url extensions:
@@ -2726,7 +2726,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.hyd.gov.hk: 266
 - top url extensions:
@@ -2752,7 +2752,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hyd.gov.hk: 575
 - top url extensions:
@@ -2778,7 +2778,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=4
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.hyd.gov.hk: 363
 - top url extensions:
@@ -2804,7 +2804,7 @@ Per-source schema and validation summary:
   - remark: Effective from 13.1.2010 to 18.3.2010 (12), Effective from 21.2.2011 to 17.4.2011 (12), Effective from 18.4.2011 to 31.8.2011 (12)
 
 [hksar_press_releases]
-- records: 45344 | unique_urls: 45344 | dup_url_hits: 0
+- records: 45399 | unique_urls: 45399 | dup_url_hits: 0
 - issues: errors=0 warnings=0
 - required field quality (missing/null/invalid):
   - url: missing=0 null=0 invalid=0
@@ -2814,22 +2814,22 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.884973+00:00 .. 2026-11-17T02:14:07.884973+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.339815+00:00 .. 2026-11-18T02:14:21.339815+00:00
 - top url hosts:
-  - www.info.gov.hk: 45344
+  - www.info.gov.hk: 45399
 - top url extensions:
-  - .htm: 45344
+  - .htm: 45399
 - top-level key signatures (urls.jsonl record format):
-  - count=45344 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+  - count=45399 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
 - meta key signatures:
-  - count=45344 meta_keys=['discovered_from', 'locale']
+  - count=45399 meta_keys=['discovered_from', 'locale']
 - meta schema variants: 1
 - most common meta keys:
-  - discovered_from: 45344
-  - locale: 45344
+  - discovered_from: 45399
+  - locale: 45399
 - top scalar meta values (sample):
   - discovered_from: https://www.info.gov.hk/gia/general/202509/26c.htm (88), https://www.info.gov.hk/gia/general/202606/18c.htm (82), https://www.info.gov.hk/gia/general/202606/26c.htm (82)
-  - locale: tc (23624), en (21720)
+  - locale: tc (23651), en (21748)
 
 [pressure_equipment]
 - records: 17 | unique_urls: 17 | dup_url_hits: 0
@@ -2842,7 +2842,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 17
 - top url extensions:
@@ -2870,7 +2870,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 89
 - top url extensions:
@@ -2899,7 +2899,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 24
 - top url extensions:
@@ -2927,7 +2927,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 40
 - top url extensions:
@@ -2955,7 +2955,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 34
 - top url extensions:
@@ -2983,7 +2983,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 31
 - top url extensions:
@@ -3011,7 +3011,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 70
 - top url extensions:
@@ -3039,7 +3039,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 44
 - top url extensions:
@@ -3070,7 +3070,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 4
 - top url extensions:
@@ -3098,7 +3098,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.labour.gov.hk: 18
 - top url extensions:
@@ -3126,7 +3126,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.landsd.gov.hk: 11
 - top url extensions:
@@ -3154,7 +3154,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=2
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.landsd.gov.hk: 312
 - top url extensions:
@@ -3188,7 +3188,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.landsd.gov.hk: 95
 - top url extensions:
@@ -3216,7 +3216,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.landsd.gov.hk: 9
   - www.pland.gov.hk: 9
@@ -3243,7 +3243,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.landsd.gov.hk: 47
 - top url extensions:
@@ -3273,7 +3273,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.landsd.gov.hk: 5
 - top url extensions:
@@ -3301,7 +3301,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.pland.gov.hk: 117
 - top url extensions:
@@ -3327,7 +3327,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.pland.gov.hk: 26
 - top url extensions:
@@ -3353,7 +3353,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.pland.gov.hk: 12
 - top url extensions:
@@ -3381,7 +3381,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.pland.gov.hk: 11
 - top url extensions:
@@ -3409,7 +3409,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=1 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.police.gov.hk: 1
 - top url extensions:
@@ -3439,7 +3439,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=4 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.swd.gov.hk: 4
 - top url extensions:
@@ -3469,7 +3469,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.td.gov.hk: 11
 - top url extensions:
@@ -3495,7 +3495,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.td.gov.hk: 45
 - top url extensions:
@@ -3521,7 +3521,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.td.gov.hk: 7
 - top url extensions:
@@ -3547,7 +3547,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.td.gov.hk: 12
 - top url extensions:
@@ -3573,7 +3573,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.td.gov.hk: 22
 - top url extensions:
@@ -3599,7 +3599,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.td.gov.hk: 4
 - top url extensions:
@@ -3625,7 +3625,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.td.gov.hk: 10
   - www.tlb.gov.hk: 2
@@ -3652,7 +3652,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.td.gov.hk: 206
 - top url extensions:
@@ -3682,7 +3682,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T02:14:07.876358+00:00 .. 2026-11-17T02:14:07.876358+00:00
+- discovered_at_utc: 2026-11-18T02:14:21.329787+00:00 .. 2026-11-18T02:14:21.329787+00:00
 - top url hosts:
   - www.tpb.gov.hk: 31
 - top url extensions:
@@ -3708,7 +3708,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 11
 - top url extensions:
@@ -3735,7 +3735,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 4
 - top url extensions:
@@ -3762,7 +3762,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 8
 - top url extensions:
@@ -3788,7 +3788,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 15
 - top url extensions:
@@ -3815,7 +3815,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 1
 - top url extensions:
@@ -3841,7 +3841,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 10
 - top url extensions:
@@ -3870,7 +3870,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 1
 - top url extensions:
@@ -3896,7 +3896,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 17
 - top url extensions:
@@ -3923,7 +3923,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 4
 - top url extensions:
@@ -3950,7 +3950,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 11
 - top url extensions:
@@ -3977,7 +3977,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 16
 - top url extensions:
@@ -4004,7 +4004,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 156
 - top url extensions:
@@ -4032,7 +4032,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 31
 - top url extensions:
@@ -4058,7 +4058,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 8
 - top url extensions:
@@ -4084,7 +4084,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 7
 - top url extensions:
@@ -4110,7 +4110,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 17
 - top url extensions:
@@ -4136,7 +4136,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-04-06T14:11:14.828328+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 129
 - top url extensions:
@@ -4166,7 +4166,7 @@ Per-source schema and validation summary:
   - source: missing=0 null=0 invalid=0
   - meta.discovered_from: missing=0 null=0 invalid=0
 - schema variation: top-level variants=1 meta variants=1
-- discovered_at_utc: 2026-11-17T00:00:00+00:00 .. 2026-11-17T00:00:00+00:00
+- discovered_at_utc: 2026-11-18T00:00:00+00:00 .. 2026-11-18T00:00:00+00:00
 - top url hosts:
   - www.wsd.gov.hk: 1
 - top url extensions:
@@ -4182,7 +4182,7 @@ Per-source schema and validation summary:
   - discovered_from: https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbin... (1)
 
 General stats:
-- record JSON size (bytes): min=204 p50=405.0 mean=524.3 p95=981.0 max=1390
+- record JSON size (bytes): min=204 p50=405.0 mean=524.2 p95=981.0 max=1390
 
 Unusual records / issues:
 - error:missing_required_field: 3778
@@ -4191,13 +4191,11 @@ Unusual records / issues:
 
 Examples (first 50):
 - line 15 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 其他
-- line 89 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: Carbon Management
-- line 90 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 碳管理
-- line 143 [warning] archsd_practices_and_guidelines meta.discovered_from meta_value_outlier -> rare value in source: https://www.archsd.gov.hk/en/consultants-contractors/product-conformity-certification-schemes.html
-- line 188 [warning] archsd_technical_documents meta.section meta_value_outlier -> rare value in source: Standard Method of Measurement for Building Elements
+- line 90 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: Carbon Management
+- line 91 [warning] epd.publications_guidance_documents meta.programme_area meta_value_outlier -> rare value in source: 碳管理
+- line 144 [warning] archsd_practices_and_guidelines meta.discovered_from meta_value_outlier -> rare value in source: https://www.archsd.gov.hk/en/consultants-contractors/product-conformity-certification-schemes.html
 - line 189 [warning] archsd_technical_documents meta.section meta_value_outlier -> rare value in source: Standard Method of Measurement for Building Elements
-- line 1355 [warning] practice_notes_and_circular_letters meta.discovered_from meta_value_outlier -> rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html
-- line 1355 [warning] practice_notes_and_circular_letters meta.source_page meta_value_outlier -> rare value in source: JPN
+- line 190 [warning] archsd_technical_documents meta.section meta_value_outlier -> rare value in source: Standard Method of Measurement for Building Elements
 - line 1356 [warning] practice_notes_and_circular_letters meta.discovered_from meta_value_outlier -> rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html
 - line 1356 [warning] practice_notes_and_circular_letters meta.source_page meta_value_outlier -> rare value in source: JPN
 - line 1357 [warning] practice_notes_and_circular_letters meta.discovered_from meta_value_outlier -> rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html
@@ -4214,8 +4212,9 @@ Examples (first 50):
 - line 1362 [warning] practice_notes_and_circular_letters meta.source_page meta_value_outlier -> rare value in source: JPN
 - line 1363 [warning] practice_notes_and_circular_letters meta.discovered_from meta_value_outlier -> rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html
 - line 1363 [warning] practice_notes_and_circular_letters meta.source_page meta_value_outlier -> rare value in source: JPN
-- line 1630 [warning] mines_and_blasting meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information...
-- line 2025 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
+- line 1364 [warning] practice_notes_and_circular_letters meta.discovered_from meta_value_outlier -> rare value in source: https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_joint.html
+- line 1364 [warning] practice_notes_and_circular_letters meta.source_page meta_value_outlier -> rare value in source: JPN
+- line 1631 [warning] mines_and_blasting meta.discovered_from meta_value_outlier -> rare value in source: https://www.cedd.gov.hk/eng/our-major-services/explosives-blasting-quarries/mines-explosives-and-blasting/information...
 - line 2026 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
 - line 2027 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
 - line 2028 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
@@ -4240,5 +4239,6 @@ Examples (first 50):
 - line 2047 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
 - line 2048 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
 - line 2049 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
+- line 2050 [error] bd.minor_works meta.discovered_from missing_required_field -> missing required field
 
 Wrote JSON report to: data-worktree/data/latest/stats.json
