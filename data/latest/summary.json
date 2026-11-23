@@ -1,8 +1,8 @@
 {
-  "crawler": "emsd.legislation",
+  "crawler": "emsd.ordinance_guidance",
   "crawlers_considered": 164,
   "crawlers_due": [
-    "legislation"
+    "ordinance_guidance"
   ],
   "crawlers_failed": [],
   "crawlers_skipped": [
@@ -56,6 +56,7 @@
     "emsd.gas_safety_portal",
     "emsd.gas_safety_tips",
     "emsd.gas_statutory_advisory_bodies",
+    "emsd.legislation",
     "emsd.lifts_and_escalators_circulars",
     "emsd.lifts_and_escalators_publications",
     "emsd.lifts_and_escalators_registered_workers",
@@ -152,24 +153,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "emsd.legislation"
+    "emsd.ordinance_guidance"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83355,
+  "rows": 83377,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "emsd.legislation": {
+    "emsd.ordinance_guidance": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "emsd.legislation",
+      "module_path": "emsd.ordinance_guidance",
       "source_id": "emsd"
     }
   },
-  "started_at_utc": "2026-11-23T20:46:40.107746+00:00",
+  "started_at_utc": "2026-11-23T20:48:26.139225+00:00",
   "sweep_duplicates_dropped": 0
 }
