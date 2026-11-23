@@ -84,9 +84,12 @@ duplicates.
 
 ## Refresh
 
-Ingest change checks cannot HEAD elegislation, so they report "changed". The
-rotation reaches each URL about every 160 days at 500 checks per run; the PDF is
-then re-downloaded and skipped when its hash is unchanged.
+After the first parse and embed, daily change checks treat these PDFs like
+every other file. A HEAD, after the client-check handshake, returns the PDF's
+ETag and no body. A matching stored ETag skips the download. A different ETag
+re-downloads the PDF, and parsing and embedding run only when its SHA-256
+changes. The site ignores `If-None-Match`, so the check compares the ETag
+itself. URLs with no stored ETag are downloaded once to record one.
 
 ## Publication order
 
