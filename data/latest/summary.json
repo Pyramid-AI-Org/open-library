@@ -1,5 +1,5 @@
 {
-  "crawler": "devb.legislation",
+  "crawler": "lands.legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
     "legislation"
@@ -36,6 +36,7 @@
     "codes_design_manuals_and_guidelines",
     "common_conditions_and_requirements",
     "cpd_for_licensed_plumbers",
+    "devb.legislation",
     "devb_document_sweep",
     "devb_general_circulars",
     "devb_planning_and_lands_technical_circulars",
@@ -161,24 +162,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "devb.legislation"
+    "lands.legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83943,
+  "rows": 83947,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "devb.legislation": {
+    "lands.legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "devb.legislation",
-      "source_id": "devb"
+      "module_path": "lands.legislation",
+      "source_id": "lands"
     }
   },
-  "started_at_utc": "2026-11-23T21:02:25.793485+00:00",
+  "started_at_utc": "2026-11-23T21:04:07.978496+00:00",
   "sweep_duplicates_dropped": 0
 }
