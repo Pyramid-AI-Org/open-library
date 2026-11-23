@@ -1,8 +1,8 @@
 {
   "input": "data-worktree/data/latest/urls.jsonl",
   "totals": {
-    "lines_total": 83383,
-    "records_total": 83383,
+    "lines_total": 83411,
+    "records_total": 83411,
     "records_by_source": {
       "emsd.lifts_and_escalators_publications": 63,
       "epd.publications_other_reports": 3,
@@ -60,6 +60,7 @@
       "bd.legislation": 3,
       "bd.buildings_ordinance": 18,
       "pland.legislation": 8,
+      "fsd.legislation": 28,
       "emsd.legislation": 64,
       "fsd.fire_safety_legislation": 6,
       "beeo_codes_guidelines": 40,
@@ -7454,6 +7455,127 @@
         "min": "2026-11-23T17:13:31.196651+00:00",
         "max": "2026-11-23T17:13:31.196651+00:00",
         "count": 8
+      }
+    },
+    "fsd.legislation": {
+      "records": 28,
+      "unique_urls": 28,
+      "duplicate_url_hits": 0,
+      "issue_counts": {
+        "errors": 28,
+        "warnings": 0,
+        "by_kind": {
+          "missing_required_field": 28
+        }
+      },
+      "required_field_null_missing_invalid": {
+        "url": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "name": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "discovered_at_utc": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "publish_date": {
+          "missing": 0,
+          "null": 28,
+          "invalid": 0
+        },
+        "source": {
+          "missing": 0,
+          "null": 0,
+          "invalid": 0
+        },
+        "meta.discovered_from": {
+          "missing": 28,
+          "null": 0,
+          "invalid": 0
+        }
+      },
+      "top_level_schema_signatures": [
+        {
+          "keys": [
+            "discovered_at_utc",
+            "meta",
+            "name",
+            "publish_date",
+            "source",
+            "source_id",
+            "url"
+          ],
+          "count": 28
+        }
+      ],
+      "meta_schema_signatures": [
+        {
+          "meta_keys": [
+            "file_ext",
+            "record_kind",
+            "ticket"
+          ],
+          "count": 28
+        }
+      ],
+      "meta_schema_variants": 1,
+      "meta_type_variation": {},
+      "meta_top_scalar_values": {
+        "file_ext": [
+          {
+            "value": "pdf",
+            "count": 28
+          }
+        ],
+        "record_kind": [
+          {
+            "value": "document",
+            "count": 28
+          }
+        ],
+        "ticket": [
+          {
+            "value": "PAI-1741",
+            "count": 28
+          }
+        ]
+      },
+      "top_meta_keys": [
+        [
+          "file_ext",
+          28
+        ],
+        [
+          "record_kind",
+          28
+        ],
+        [
+          "ticket",
+          28
+        ]
+      ],
+      "top_hosts": [
+        [
+          "www.elegislation.gov.hk",
+          28
+        ]
+      ],
+      "top_extensions": [
+        [
+          ".pdf",
+          28
+        ]
+      ],
+      "discovered_at_range": {
+        "min": "2026-11-23T20:51:36.476622+00:00",
+        "max": "2026-11-23T20:51:36.476622+00:00",
+        "count": 28
       }
     },
     "emsd.legislation": {
@@ -18471,18 +18593,18 @@
     "record_size_bytes": {
       "min": 204,
       "max": 1390,
-      "mean": 520.245937421297,
+      "mean": 520.179029144837,
       "p50": 403,
       "p95": 979.0
     },
     "issue_counts": {
       "by_severity": {
         "warning": 1815,
-        "error": 3881
+        "error": 3909
       },
       "by_severity_and_kind": {
         "warning:meta_value_outlier": 1811,
-        "error:missing_required_field": 3881,
+        "error:missing_required_field": 3909,
         "warning:meta_type_outlier": 4
       }
     },

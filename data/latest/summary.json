@@ -1,8 +1,8 @@
 {
-  "crawler": "fsd.fire_safety_legislation",
+  "crawler": "fsd.legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
-    "fire_safety_legislation"
+    "legislation"
   ],
   "crawlers_failed": [],
   "crawlers_skipped": [
@@ -88,6 +88,7 @@
     "free_publications",
     "free_publications_subsections",
     "fresh_water_management_system",
+    "fsd.fire_safety_legislation",
     "fsd_document_sweep",
     "good_practice_guide",
     "guidelines",
@@ -154,24 +155,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "fsd.fire_safety_legislation"
+    "fsd.legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83383,
+  "rows": 83411,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "fsd.fire_safety_legislation": {
+    "fsd.legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "fsd.fire_safety_legislation",
+      "module_path": "fsd.legislation",
       "source_id": "fsd"
     }
   },
-  "started_at_utc": "2026-11-23T20:50:08.310598+00:00",
+  "started_at_utc": "2026-11-23T20:51:36.476622+00:00",
   "sweep_duplicates_dropped": 0
 }

@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 83383 (parse_errors=0)
+Total records: 83411 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.2%)
@@ -85,6 +85,7 @@ Records by source:
 - free_publications_subsections: 45 (0.1%)
 - fresh_water_management_system: 17 (0.0%)
 - fsd.fire_safety_legislation: 6 (0.0%)
+- fsd.legislation: 28 (0.0%)
 - fsd_document_sweep: 204 (0.2%)
 - good_practice_guide: 1 (0.0%)
 - guidelines: 5 (0.0%)
@@ -94,7 +95,7 @@ Records by source:
 - ha.resources: 23 (0.0%)
 - had.licensing_guides: 5 (0.0%)
 - herbarium: 3348 (4.0%)
-- hksar_press_releases: 45406 (54.5%)
+- hksar_press_releases: 45406 (54.4%)
 - hyd_document_sweep: 266 (0.3%)
 - hyd_standard_drawings: 575 (0.7%)
 - hyd_technical_documents: 363 (0.4%)
@@ -1786,6 +1787,36 @@ Per-source schema and validation summary:
   - file_ext: pdf (8)
   - record_kind: document (8)
   - ticket: PAI-1741 (8)
+
+[fsd.legislation]
+- records: 28 | unique_urls: 28 | dup_url_hits: 0
+- issues: errors=28 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=28 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=28 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-11-23T20:51:36.476622+00:00 .. 2026-11-23T20:51:36.476622+00:00
+- top url hosts:
+  - www.elegislation.gov.hk: 28
+- top url extensions:
+  - .pdf: 28
+- top-level key signatures (urls.jsonl record format):
+  - count=28 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=28 meta_keys=['file_ext', 'record_kind', 'ticket']
+- meta schema variants: 1
+- most common meta keys:
+  - file_ext: 28
+  - record_kind: 28
+  - ticket: 28
+- top scalar meta values (sample):
+  - file_ext: pdf (28)
+  - record_kind: document (28)
+  - ticket: PAI-1741 (28)
 
 [emsd.legislation]
 - records: 64 | unique_urls: 64 | dup_url_hits: 0
@@ -4340,7 +4371,7 @@ General stats:
 - record JSON size (bytes): min=204 p50=403 mean=520.2 p95=979.0 max=1390
 
 Unusual records / issues:
-- error:missing_required_field: 3881
+- error:missing_required_field: 3909
 - warning:meta_value_outlier: 1811
 - warning:meta_type_outlier: 4
 
