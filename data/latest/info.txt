@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 83291 (parse_errors=0)
+Total records: 83355 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.2%)
@@ -11,7 +11,7 @@ Records by source:
 - bd.buildings_ordinance: 18 (0.0%)
 - bd.legislation: 3 (0.0%)
 - bd.minor_works: 389 (0.5%)
-- bd_document_sweep: 375 (0.5%)
+- bd_document_sweep: 375 (0.4%)
 - beeo_codes_guidelines: 40 (0.0%)
 - cedd_ceo_publications: 10 (0.0%)
 - cedd_document_sweep: 459 (0.6%)
@@ -52,6 +52,7 @@ Records by source:
 - emsd.gas_safety_portal: 16 (0.0%)
 - emsd.gas_safety_tips: 71 (0.1%)
 - emsd.gas_statutory_advisory_bodies: 2 (0.0%)
+- emsd.legislation: 64 (0.1%)
 - emsd.lifts_and_escalators_circulars: 150 (0.2%)
 - emsd.lifts_and_escalators_publications: 63 (0.1%)
 - emsd.lifts_and_escalators_registered_workers: 9 (0.0%)
@@ -1783,6 +1784,36 @@ Per-source schema and validation summary:
   - file_ext: pdf (8)
   - record_kind: document (8)
   - ticket: PAI-1741 (8)
+
+[emsd.legislation]
+- records: 64 | unique_urls: 64 | dup_url_hits: 0
+- issues: errors=64 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=64 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=64 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-11-23T20:46:40.107746+00:00 .. 2026-11-23T20:46:40.107746+00:00
+- top url hosts:
+  - www.elegislation.gov.hk: 64
+- top url extensions:
+  - .pdf: 64
+- top-level key signatures (urls.jsonl record format):
+  - count=64 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=64 meta_keys=['file_ext', 'record_kind', 'ticket']
+- meta schema variants: 1
+- most common meta keys:
+  - file_ext: 64
+  - record_kind: 64
+  - ticket: 64
+- top scalar meta values (sample):
+  - file_ext: pdf (64)
+  - record_kind: document (64)
+  - ticket: PAI-1741 (64)
 
 [beeo_codes_guidelines]
 - records: 40 | unique_urls: 40 | dup_url_hits: 0
@@ -4244,10 +4275,10 @@ Per-source schema and validation summary:
   - discovered_from: https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbin... (1)
 
 General stats:
-- record JSON size (bytes): min=204 p50=404 mean=520.4 p95=979.0 max=1390
+- record JSON size (bytes): min=204 p50=403 mean=520.3 p95=979.0 max=1390
 
 Unusual records / issues:
-- error:missing_required_field: 3789
+- error:missing_required_field: 3853
 - warning:meta_value_outlier: 1811
 - warning:meta_type_outlier: 4
 

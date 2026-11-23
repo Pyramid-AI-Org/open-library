@@ -1,5 +1,5 @@
 {
-  "crawler": "pland.legislation",
+  "crawler": "emsd.legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
     "legislation"
@@ -123,6 +123,7 @@
     "occupational_safety_part_c",
     "occupational_safety_part_d",
     "occupational_safety_part_g",
+    "pland.legislation",
     "pland_document_sweep",
     "planning_guidelines",
     "plumbing_requirements",
@@ -151,24 +152,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "pland.legislation"
+    "emsd.legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83291,
+  "rows": 83355,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "pland.legislation": {
+    "emsd.legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "pland.legislation",
-      "source_id": "pland"
+      "module_path": "emsd.legislation",
+      "source_id": "emsd"
     }
   },
-  "started_at_utc": "2026-11-23T17:13:31.196651+00:00",
+  "started_at_utc": "2026-11-23T20:46:40.107746+00:00",
   "sweep_duplicates_dropped": 0
 }
