@@ -1,5 +1,5 @@
 {
-  "crawler": "wsd.legislation",
+  "crawler": "devb.legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
     "legislation"
@@ -157,27 +157,28 @@
     "water_safety_plan_for_buildings",
     "water_safety_plan_subsidy_scheme",
     "works_of_minor_nature",
+    "wsd.legislation",
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "wsd.legislation"
+    "devb.legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83929,
+  "rows": 83943,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "wsd.legislation": {
+    "devb.legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "wsd.legislation",
-      "source_id": "wsd"
+      "module_path": "devb.legislation",
+      "source_id": "devb"
     }
   },
-  "started_at_utc": "2026-11-23T21:00:46.385038+00:00",
+  "started_at_utc": "2026-11-23T21:02:25.793485+00:00",
   "sweep_duplicates_dropped": 0
 }
