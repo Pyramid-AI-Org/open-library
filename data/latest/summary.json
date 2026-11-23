@@ -1,5 +1,5 @@
 {
-  "crawler": "labour.legislation",
+  "crawler": "had.legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
     "legislation"
@@ -106,6 +106,7 @@
     "info_notes",
     "information_for_licensed_plumbers",
     "joint_practice_notes",
+    "labour.legislation",
     "labour_document_sweep",
     "laco_circular_memorandum",
     "lands_document_sweep",
@@ -156,24 +157,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "labour.legislation"
+    "had.legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83517,
+  "rows": 83541,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "labour.legislation": {
+    "had.legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "labour.legislation",
-      "source_id": "labour"
+      "module_path": "had.legislation",
+      "source_id": "had"
     }
   },
-  "started_at_utc": "2026-11-23T20:53:21.530901+00:00",
+  "started_at_utc": "2026-11-23T20:55:14.465496+00:00",
   "sweep_duplicates_dropped": 0
 }
