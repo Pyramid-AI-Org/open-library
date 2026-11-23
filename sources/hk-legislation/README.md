@@ -58,12 +58,14 @@ FSD pages need the trailing slash: their links are relative to it.
 | `emsd.legislation` | 211 Aerial Ropeways | 3 |
 | `epd.legislation` | 312 Aircraft Noise | 2 |
 
-No Open Library department administers Cap 7 (Rating and Valuation), so it
-sits with HAD's property-management ordinances. Cap 132 subsidiaries were
+Cap 7 is administered by the Rating and Valuation Department, which has no
+Open Library entry, so it sits with HAD's property-management ordinances. Cap 132 subsidiaries were
 probed to suffix DZ.
 
-All 322 chapters also have their Chinese edition in the same list (plus the
-Chinese Cap 123): 645 e-Legislation PDFs in total.
+All 322 chapters also have their Chinese edition in the same list: 645
+e-Legislation PDFs in total. The Chinese Cap 123 principal is in
+`bd.legislation`, because `bd.buildings_ordinance` is pinned to the PAI-1696
+list; both labels belong to BD.
 
 `emsd.ordinance_guidance` lists 22 EMSD documents its sweep cannot reach: the
 14 regulatory regime leaflets (links written by JavaScript) and the earlier

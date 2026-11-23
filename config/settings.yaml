@@ -3997,8 +3997,9 @@ crawlers:
       interval_days: 1
     pages:
       legislation:
-        # [2026-11-23] PAI-1741: Caps 344, 626, 349 and 7. No Open Library department administers Cap 7
-        # (Rating and Valuation); it sits with HAD's property-management ordinances.
+        # [2026-11-23] PAI-1741: Caps 344, 626, 349 and 7. Cap 7 is administered by the Rating and Valuation
+        # Department, which has no Open Library entry; it sits with HAD's
+        # property-management ordinances.
         ticket: PAI-1741
         document_hosts:
           - www.elegislation.gov.hk
