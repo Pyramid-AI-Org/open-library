@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 83283 (parse_errors=0)
+Total records: 83291 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.2%)
@@ -119,6 +119,7 @@ Records by source:
 - occupational_safety_part_c: 31 (0.0%)
 - occupational_safety_part_d: 70 (0.1%)
 - occupational_safety_part_g: 89 (0.1%)
+- pland.legislation: 8 (0.0%)
 - pland_document_sweep: 26 (0.0%)
 - planning_guidelines: 31 (0.0%)
 - plumbing_requirements: 7 (0.0%)
@@ -1752,6 +1753,36 @@ Per-source schema and validation summary:
   - file_ext: pdf (18)
   - record_kind: document (18)
   - ticket: PAI-1696 (18)
+
+[pland.legislation]
+- records: 8 | unique_urls: 8 | dup_url_hits: 0
+- issues: errors=8 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=8 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=8 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-11-23T17:13:31.196651+00:00 .. 2026-11-23T17:13:31.196651+00:00
+- top url hosts:
+  - www.elegislation.gov.hk: 8
+- top url extensions:
+  - .pdf: 8
+- top-level key signatures (urls.jsonl record format):
+  - count=8 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=8 meta_keys=['file_ext', 'record_kind', 'ticket']
+- meta schema variants: 1
+- most common meta keys:
+  - file_ext: 8
+  - record_kind: 8
+  - ticket: 8
+- top scalar meta values (sample):
+  - file_ext: pdf (8)
+  - record_kind: document (8)
+  - ticket: PAI-1741 (8)
 
 [beeo_codes_guidelines]
 - records: 40 | unique_urls: 40 | dup_url_hits: 0
@@ -4213,10 +4244,10 @@ Per-source schema and validation summary:
   - discovered_from: https://www.wsd.gov.hk/en/plumbing-engineering/good-practice-guide-on-plumbin... (1)
 
 General stats:
-- record JSON size (bytes): min=204 p50=404 mean=520.5 p95=979.0 max=1390
+- record JSON size (bytes): min=204 p50=404 mean=520.4 p95=979.0 max=1390
 
 Unusual records / issues:
-- error:missing_required_field: 3781
+- error:missing_required_field: 3789
 - warning:meta_value_outlier: 1811
 - warning:meta_type_outlier: 4
 

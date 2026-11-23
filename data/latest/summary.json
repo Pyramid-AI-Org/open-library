@@ -1,5 +1,5 @@
 {
-  "crawler": "bd.legislation",
+  "crawler": "pland.legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
     "legislation"
@@ -13,6 +13,7 @@
     "automatic_meter_reading",
     "basic_pages",
     "bd.buildings_ordinance",
+    "bd.legislation",
     "bd.minor_works",
     "bd_document_sweep",
     "beeo_codes_guidelines",
@@ -150,24 +151,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "bd.legislation"
+    "pland.legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83283,
+  "rows": 83291,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "bd.legislation": {
+    "pland.legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "bd.legislation",
-      "source_id": "bd"
+      "module_path": "pland.legislation",
+      "source_id": "pland"
     }
   },
-  "started_at_utc": "2026-11-23T17:12:02.160879+00:00",
+  "started_at_utc": "2026-11-23T17:13:31.196651+00:00",
   "sweep_duplicates_dropped": 0
 }
