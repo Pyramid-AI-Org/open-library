@@ -1,8 +1,8 @@
 {
-  "crawler": "emsd.ordinance_guidance",
+  "crawler": "fsd.fire_safety_legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
-    "ordinance_guidance"
+    "fire_safety_legislation"
   ],
   "crawlers_failed": [],
   "crawlers_skipped": [
@@ -62,6 +62,7 @@
     "emsd.lifts_and_escalators_registered_workers",
     "emsd.lifts_and_escalators_responsible_persons_corner",
     "emsd.lifts_and_escalators_statutory_advisory_bodies",
+    "emsd.ordinance_guidance",
     "emsd.publications_handbooks",
     "emsd.publications_technical_specifications",
     "emsd.railway_safety_publication",
@@ -153,24 +154,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "emsd.ordinance_guidance"
+    "fsd.fire_safety_legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83377,
+  "rows": 83383,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "emsd.ordinance_guidance": {
+    "fsd.fire_safety_legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "emsd.ordinance_guidance",
-      "source_id": "emsd"
+      "module_path": "fsd.fire_safety_legislation",
+      "source_id": "fsd"
     }
   },
-  "started_at_utc": "2026-11-23T20:48:26.139225+00:00",
+  "started_at_utc": "2026-11-23T20:50:08.310598+00:00",
   "sweep_duplicates_dropped": 0
 }
