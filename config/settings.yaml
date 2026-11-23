@@ -109,6 +109,54 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap583!en.pdf
+            title: Construction Workers Registration Ordinance (Cap 583)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap583!zh-Hant-HK.pdf
+            title: 建造業工人註冊條例 (Cap 583)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap583A!en.pdf
+            title: Construction Workers Registration (Levy) Notice (Cap 583A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap583A!zh-Hant-HK.pdf
+            title: 建造業工人註冊(徵款)公告 (Cap 583A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap583B!en.pdf
+            title: Construction Workers Registration (Fees) Regulation (Cap 583B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap583B!zh-Hant-HK.pdf
+            title: 建造業工人註冊(費用)規例 (Cap 583B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap583C!en.pdf
+            title: Construction Workers Registration (Exemption) Regulation (Cap 583C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap583C!zh-Hant-HK.pdf
+            title: 建造業工人註冊(豁免)規例 (Cap 583C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap587!en.pdf
+            title: Construction Industry Council Ordinance (Cap 587)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap587!zh-Hant-HK.pdf
+            title: 建造業議會條例 (Cap 587)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap652!en.pdf
+            title: Construction Industry Security of Payment Ordinance (Cap 652)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap652!zh-Hant-HK.pdf
+            title: 建造業付款保障條例 (Cap 652)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap652A!en.pdf
+            title: Construction Industry Security of Payment Rules (Cap 652A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap652A!zh-Hant-HK.pdf
+            title: 建造業付款保障規則 (Cap 652A)
+            publish_date: null
       devb_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -145,7 +193,7 @@ crawlers:
           - "https://www.devb.gov.hk/en/issues_in_focus/concrete_technology/past_research_projects/index.html"
           - "https://www.devb.gov.hk/en/issues_in_focus/streamlining_development_control/administrative_measures/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -231,11 +279,19 @@ crawlers:
           - url: https://www.elegislation.gov.hk/hk/cap121!en.pdf
             title: Buildings Ordinance (Application to the New Territories) Ordinance (Cap 121)
             publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap121!zh-Hant-HK.pdf
+            title: 建築物條例(新界適用)條例 (Cap 121)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap123!zh-Hant-HK.pdf
+            title: 建築物條例 (Cap 123)
+            publish_date: null
       bd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
         # excluded: they carry no text the current version does not.
         page_urls:
+          # [2026-11-23] PAI-1741: ordinance guidance pages not crawled before.
+          - "https://www.bd.gov.hk/en/resources/legal-matters/index.html"
           - "https://www.bd.gov.hk/en/resources/codes-and-references/practice-notes-and-circular-letters/index_circulars.html"
           - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/bmg.html"
           - "https://www.bd.gov.hk/en/resources/codes-and-references/codes-and-design-manuals/index.html"
@@ -294,7 +350,7 @@ crawlers:
           - "https://www.bd.gov.hk/en/safety-inspection/mwis/useful-information/index_complying_mbis_mwis.html"
           - "https://www.bd.gov.hk/en/safety-inspection/slope-safety/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -588,7 +644,7 @@ crawlers:
           - "https://www.cedd.gov.hk/eng/publications/standards-spec-handbooks-cost/stan-smm/index.html"
           - "https://www.cedd.gov.hk/eng/publications/stem/ten-treasures/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -710,7 +766,7 @@ crawlers:
           - "https://www.dsd.gov.hk/EN/TechnicalDocuments/DSD_BIM_Reference_Materials/DSD_BIM_Objects/index.html"
           - "https://www.dsd.gov.hk/EN/Technical_Documents/NEC_Corner/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -823,7 +879,7 @@ crawlers:
           - "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/related_documents/index.html"
           - "https://www.hyd.gov.hk/en/technical_references/technical_document/xppm/related_documents/simplified_guidelines/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -882,6 +938,15 @@ crawlers:
           - url: https://www.elegislation.gov.hk/hk/cap636!en.pdf
             title: Fire Safety (Industrial Buildings) Ordinance (Cap 636)
             publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap502!zh-Hant-HK.pdf
+            title: 消防安全(商業處所)條例 (Cap 502)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap572!zh-Hant-HK.pdf
+            title: 消防安全(建築物)條例 (Cap 572)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap636!zh-Hant-HK.pdf
+            title: 消防安全(工業建築物)條例 (Cap 636)
+            publish_date: null
       legislation:
         # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
         ticket: PAI-1741
@@ -930,6 +995,48 @@ crawlers:
           - url: https://www.elegislation.gov.hk/hk/cap295G!en.pdf
             title: Dangerous Goods (Control) Regulation (Cap 295G)
             publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95!zh-Hant-HK.pdf
+            title: 消防條例 (Cap 95)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95A!zh-Hant-HK.pdf
+            title: 消防(裝置承辦商)規例 (Cap 95A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95B!zh-Hant-HK.pdf
+            title: 消防(裝置及設備)規例 (Cap 95B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95C!zh-Hant-HK.pdf
+            title: 消防處(報告及證明書)規例 (Cap 95C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95E!zh-Hant-HK.pdf
+            title: 消防處(福利基金)規例 (Cap 95E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95F!zh-Hant-HK.pdf
+            title: 消防(消除火警危險)規例 (Cap 95F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95G!zh-Hant-HK.pdf
+            title: 消防(註冊消防工程師)(費用)規例 (Cap 95G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95H!zh-Hant-HK.pdf
+            title: 消防(註冊消防工程師)規例 (Cap 95H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132!zh-Hant-HK.pdf
+            title: 公眾衞生及市政條例 (Cap 132)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295!zh-Hant-HK.pdf
+            title: 危險品條例 (Cap 295)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295D!zh-Hant-HK.pdf
+            title: 危險品(政府爆炸品倉庫)規例 (Cap 295D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295E!zh-Hant-HK.pdf
+            title: 2012年危險品(適用及豁免)規例 (Cap 295E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295F!zh-Hant-HK.pdf
+            title: 2012年危險品(船運)規例 (Cap 295F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295G!zh-Hant-HK.pdf
+            title: 危險品(管制)規例 (Cap 295G)
+            publish_date: null
       fsd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -958,8 +1065,10 @@ crawlers:
           - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_columbaria.html"
           - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_ewaste.html"
           - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_school.html"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/mini_storages/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/scaffolded_buildings.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
           # [2026-11-23] PAI-1741: accep_eq links two lists under a doubled
           # path that 404s on FSD's own site.
@@ -1192,6 +1301,165 @@ crawlers:
           - url: https://www.elegislation.gov.hk/hk/cap608B!en.pdf
             title: Minimum Wage (Assessment Methods) Notice (Cap 608B)
             publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap56!zh-Hant-HK.pdf
+            title: 鍋爐及壓力容器條例 (Cap 56)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap56A!zh-Hant-HK.pdf
+            title: 鍋爐及壓力容器規例 (Cap 56A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap56B!zh-Hant-HK.pdf
+            title: 鍋爐及壓力容器(表格)令 (Cap 56B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap56C!zh-Hant-HK.pdf
+            title: 鍋爐及壓力容器(豁免)(綜合)令 (Cap 56C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57!zh-Hant-HK.pdf
+            title: 僱傭條例 (Cap 57)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57A!zh-Hant-HK.pdf
+            title: 職業介紹所規例 (Cap 57A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57B!zh-Hant-HK.pdf
+            title: 僱用兒童規例 (Cap 57B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57C!zh-Hant-HK.pdf
+            title: 僱用青年(工業)規例 (Cap 57C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59!zh-Hant-HK.pdf
+            title: 工廠及工業經營條例 (Cap 59)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59A!zh-Hant-HK.pdf
+            title: 工廠及工業經營規例 (Cap 59A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59C!zh-Hant-HK.pdf
+            title: 工廠及工業經營(噴砂打磨)特別規例 (Cap 59C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59D!zh-Hant-HK.pdf
+            title: 工廠及工業經營(應呈報工場的急救設備)規例 (Cap 59D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59E!zh-Hant-HK.pdf
+            title: 工廠及工業經營(職業病呈報)規例 (Cap 59E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59F!zh-Hant-HK.pdf
+            title: 石礦場(安全)規例 (Cap 59F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59G!zh-Hant-HK.pdf
+            title: 工廠及工業經營(木工機械)規例 (Cap 59G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59H!zh-Hant-HK.pdf
+            title: 工廠及工業經營(電解鉻工序)規例 (Cap 59H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59I!zh-Hant-HK.pdf
+            title: 建築地盤(安全)規例 (Cap 59I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59J!zh-Hant-HK.pdf
+            title: 工廠及工業經營(起重機械及起重裝置)規例 (Cap 59J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59K!zh-Hant-HK.pdf
+            title: 工廠及工業經營(貨物搬運及貨櫃處理作業)規例 (Cap 59K)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59L!zh-Hant-HK.pdf
+            title: 工廠及工業經營(砂輪)規例 (Cap 59L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59M!zh-Hant-HK.pdf
+            title: 工廠及工業經營(在壓縮空氣中工作)規例 (Cap 59M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59N!zh-Hant-HK.pdf
+            title: 工廠及工業經營(易燃液體的噴塗)規例 (Cap 59N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59O!zh-Hant-HK.pdf
+            title: 工廠及工業經營(載貨升降機)規例 (Cap 59O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59P!zh-Hant-HK.pdf
+            title: 工廠及工業經營(乾電池)規例 (Cap 59P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59Q!zh-Hant-HK.pdf
+            title: 工廠及工業經營(機械的防護及操作)規例 (Cap 59Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59R!zh-Hant-HK.pdf
+            title: 工廠及工業經營(槍彈推動打釘工具)規例 (Cap 59R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59S!zh-Hant-HK.pdf
+            title: 工廠及工業經營(保護眼睛)規例 (Cap 59S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59T!zh-Hant-HK.pdf
+            title: 工廠及工業經營(工作噪音)規例 (Cap 59T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59V!zh-Hant-HK.pdf
+            title: 工廠及工業經營(應呈報工場的防火設備)規例 (Cap 59V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59W!zh-Hant-HK.pdf
+            title: 工廠及工業經營(電力)規例 (Cap 59W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59Z!zh-Hant-HK.pdf
+            title: 工廠及工業經營(安全主任及安全督導員)規例 (Cap 59Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AA!zh-Hant-HK.pdf
+            title: 工廠及工業經營(可致癌物質)規例 (Cap 59AA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AB!zh-Hant-HK.pdf
+            title: 工廠及工業經營(危險物質)規例 (Cap 59AB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AC!zh-Hant-HK.pdf
+            title: 工廠及工業經營(吊船)規例 (Cap 59AC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AD!zh-Hant-HK.pdf
+            title: 工廠及工業經營(石棉)規例 (Cap 59AD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AE!zh-Hant-HK.pdf
+            title: 工廠及工業經營(密閉空間)規例 (Cap 59AE)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AF!zh-Hant-HK.pdf
+            title: 工廠及工業經營(安全管理)規例 (Cap 59AF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AG!zh-Hant-HK.pdf
+            title: 工廠及工業經營(負荷物移動機械)規例 (Cap 59AG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AH!zh-Hant-HK.pdf
+            title: 〈工廠及工業經營條例〉(第59章)(第6BA(17)條所指的指定日期)公告 (Cap 59AH)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AI!zh-Hant-HK.pdf
+            title: 工廠及工業經營(氣體焊接及火焰切割)規例 (Cap 59AI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap282!zh-Hant-HK.pdf
+            title: 僱員補償條例 (Cap 282)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap282A!zh-Hant-HK.pdf
+            title: 僱員補償規例 (Cap 282A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap282B!zh-Hant-HK.pdf
+            title: 僱員補償(法院規則)規則 (Cap 282B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap360!zh-Hant-HK.pdf
+            title: 肺塵埃沉着病及間皮瘤(補償)條例 (Cap 360)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap360A!zh-Hant-HK.pdf
+            title: 肺塵埃沉着病及間皮瘤(補償)(評估徵款)規例 (Cap 360A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap360C!zh-Hant-HK.pdf
+            title: 肺塵埃沉着病及間皮瘤(補償)上訴規則 (Cap 360C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap469!zh-Hant-HK.pdf
+            title: 職業性失聰(補償)條例 (Cap 469)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap509!zh-Hant-HK.pdf
+            title: 職業安全及健康條例 (Cap 509)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap509A!zh-Hant-HK.pdf
+            title: 職業安全及健康規例 (Cap 509A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap509B!zh-Hant-HK.pdf
+            title: 職業安全及健康(顯示屏幕設備)規例 (Cap 509B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap608!zh-Hant-HK.pdf
+            title: 最低工資條例 (Cap 608)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap608A!zh-Hant-HK.pdf
+            title: 最低工資(擔任認可評估員的準則)公告 (Cap 608A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap608B!zh-Hant-HK.pdf
+            title: 最低工資(評估方法)公告 (Cap 608B)
+            publish_date: null
       labour_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -1267,7 +1535,7 @@ crawlers:
           - "https://www.labour.gov.hk/eng/public/proper_keeping_WER.htm"
           - "https://www.labour.gov.hk/eng/public/typhoon.htm"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -1346,6 +1614,24 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap28!en.pdf
+            title: Land (Miscellaneous Provisions) Ordinance (Cap 28)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap28!zh-Hant-HK.pdf
+            title: 土地(雜項條文)條例 (Cap 28)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap28A!en.pdf
+            title: Land (Miscellaneous Provisions) Regulations (Cap 28A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap28A!zh-Hant-HK.pdf
+            title: 土地(雜項條文)規例 (Cap 28A)
+            publish_date: null
       lands_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -1356,7 +1642,7 @@ crawlers:
           - "https://www.landsd.gov.hk/en/resources/practice-notes/jpn.html"
           - "https://www.landsd.gov.hk/en/resources/practice-notes/smo.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -1395,6 +1681,36 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap131!en.pdf
+            title: Town Planning Ordinance (Cap 131)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap131!zh-Hant-HK.pdf
+            title: 城市規劃條例 (Cap 131)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap131A!en.pdf
+            title: Town Planning Regulations (Cap 131A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap131A!zh-Hant-HK.pdf
+            title: 城市規劃規例 (Cap 131A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap131B!en.pdf
+            title: Town Planning (Appeals) Regulations (Cap 131B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap131B!zh-Hant-HK.pdf
+            title: 城市規劃(上訴)規例 (Cap 131B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap131C!en.pdf
+            title: Town Planning (Taking Possession and Disposal of Property) Regulation (Cap 131C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap131C!zh-Hant-HK.pdf
+            title: 城市規劃(財產的接管及處置)規例 (Cap 131C)
+            publish_date: null
       pland_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -1404,7 +1720,7 @@ crawlers:
           - "https://www.pland.gov.hk/pland_en/resources/approved_pb/others/index.html"
           - "https://www.pland.gov.hk/pland_en/resources/site_wind/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -1454,7 +1770,7 @@ crawlers:
           - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/annual_transport_digest/index.html"
           - "https://www.td.gov.hk/en/publications_and_press_releases/publications/free_publications/Traffic_Study_for_Mid_Levels_Area/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -1580,6 +1896,12 @@ crawlers:
           - url: https://www.elegislation.gov.hk/hk/cap102A!en.pdf
             title: Waterworks Regulations (Cap 102A)
             publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap102!zh-Hant-HK.pdf
+            title: 水務設施條例 (Cap 102)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap102A!zh-Hant-HK.pdf
+            title: 水務設施規例 (Cap 102A)
+            publish_date: null
       wsd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -1618,7 +1940,7 @@ crawlers:
           - "https://www.wsd.gov.hk/en/plumbing-engineering/water-efficiency-labelling-scheme/wels-on-water-taps/wels-on-water-taps-how-to-apply/index.html"
           - "https://www.wsd.gov.hk/en/water-safety/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -2197,6 +2519,405 @@ crawlers:
           - url: https://www.elegislation.gov.hk/hk/cap640!en.pdf
             title: Mercury Control Ordinance (Cap 640)
             publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap312!en.pdf
+            title: Civil Aviation (Aircraft Noise) Ordinance (Cap 312)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap312!zh-Hant-HK.pdf
+            title: 民航(飛機噪音)條例 (Cap 312)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap312A!en.pdf
+            title: Civil Aviation (Aircraft Noise) (Certification) Regulations (Cap 312A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap312A!zh-Hant-HK.pdf
+            title: 民航(飛機噪音)(證明)規例 (Cap 312A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311!zh-Hant-HK.pdf
+            title: 空氣污染管制條例 (Cap 311)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311A!zh-Hant-HK.pdf
+            title: 空氣污染管制(火爐、烘爐及煙囱)(安裝及更改)規例 (Cap 311A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311B!zh-Hant-HK.pdf
+            title: 空氣污染管制(塵埃及砂礫排放)規例 (Cap 311B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311C!zh-Hant-HK.pdf
+            title: 空氣污染管制(煙霧)規例 (Cap 311C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311D!zh-Hant-HK.pdf
+            title: 空氣污染管制(上訴委員會)規例 (Cap 311D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311E!zh-Hant-HK.pdf
+            title: 空氣污染管制(空氣質素管制區)(宣布)(綜合)令 (Cap 311E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311F!zh-Hant-HK.pdf
+            title: 空氣污染管制(指明工序)規例 (Cap 311F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311G!zh-Hant-HK.pdf
+            title: 1993年空氣污染管制(指明工序)(所需詳情及資料的指明)令 (Cap 311G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311I!zh-Hant-HK.pdf
+            title: 空氣污染管制(燃料限制)規例 (Cap 311I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311J!zh-Hant-HK.pdf
+            title: 空氣污染管制(車輛設計標準)(排放)規例 (Cap 311J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311K!zh-Hant-HK.pdf
+            title: 1993年空氣污染管制(指明工序)(撤除豁免)令 (Cap 311K)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311L!zh-Hant-HK.pdf
+            title: 空氣污染管制(汽車燃料)規例 (Cap 311L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311M!zh-Hant-HK.pdf
+            title: 1994年空氣污染管制(指明工序)(撤除豁免)令 (Cap 311M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311N!zh-Hant-HK.pdf
+            title: 1994年空氣污染管制(指明工序)(所需詳情及資料的指明)令 (Cap 311N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311O!zh-Hant-HK.pdf
+            title: 空氣污染管制(露天焚燒)規例 (Cap 311O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311P!zh-Hant-HK.pdf
+            title: 空氣污染管制(石棉)(行政管理)規例 (Cap 311P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311Q!zh-Hant-HK.pdf
+            title: 1996年空氣污染管制(指明工序)(撤除豁免)令 (Cap 311Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311R!zh-Hant-HK.pdf
+            title: 空氣污染管制(建造工程塵埃)規例 (Cap 311R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311S!zh-Hant-HK.pdf
+            title: 空氣污染管制(油站)(汽體回收)規例 (Cap 311S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311T!zh-Hant-HK.pdf
+            title: 空氣污染管制(乾洗機)(汽體回收)規例 (Cap 311T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311U!zh-Hant-HK.pdf
+            title: 空氣污染管制(車輛減少排放物器件)規例 (Cap 311U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311W!zh-Hant-HK.pdf
+            title: 空氣污染管制(揮發性有機化合物)規例 (Cap 311W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311X!zh-Hant-HK.pdf
+            title: 空氣污染管制(空氣污染物排放)(受管制車輛)規例 (Cap 311X)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311Y!zh-Hant-HK.pdf
+            title: 空氣污染管制(船用輕質柴油)規例 (Cap 311Y)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311Z!zh-Hant-HK.pdf
+            title: 空氣污染管制(非道路移動機械)(排放)規例 (Cap 311Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311AB!zh-Hant-HK.pdf
+            title: 空氣污染管制 (船用燃料) 規例 (Cap 311AB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354!zh-Hant-HK.pdf
+            title: 廢物處置條例 (Cap 354)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354A!zh-Hant-HK.pdf
+            title: 廢物處置(禽畜廢物)規例 (Cap 354A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354B!zh-Hant-HK.pdf
+            title: 廢物處置(上訴委員會)規例 (Cap 354B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354C!zh-Hant-HK.pdf
+            title: 廢物處置(化學廢物)(一般)規例 (Cap 354C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354D!zh-Hant-HK.pdf
+            title: 廢物處置(許可證、授權及牌照)(費用)規例 (Cap 354D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354E!zh-Hant-HK.pdf
+            title: 1992年廢物處置條例(適用範圍)公告 (Cap 354E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354F!zh-Hant-HK.pdf
+            title: 1993年廢物處置條例(適用範圍)公告 (Cap 354F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354G!zh-Hant-HK.pdf
+            title: 1992 年廢物處置(化學廢物)(一般) 規例 (第II、VII及VIII部適用範圍)公告 (Cap 354G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354H!zh-Hant-HK.pdf
+            title: 1992年廢物處置(化學廢物)(一般) 規例(第4條及第III、IV、V及VI部適用範圍)公告 (Cap 354H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354I!zh-Hant-HK.pdf
+            title: 1993年廢物處置(化學廢物)(一般) 規例(第4條及第III、IV、V及VI部適用範圍)公告 (Cap 354I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354J!zh-Hant-HK.pdf
+            title: 廢物處置(化學廢物處置的收費)規例 (Cap 354J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354L!zh-Hant-HK.pdf
+            title: 廢物處置(指定廢物處置設施)規例 (Cap 354L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354M!zh-Hant-HK.pdf
+            title: 廢物處置(廢物轉運站)規例 (Cap 354M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354N!zh-Hant-HK.pdf
+            title: 廢物處置(建築廢物處置收費)規例 (Cap 354N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354O!zh-Hant-HK.pdf
+            title: 廢物處置(醫療廢物)(一般)規例 (Cap 354O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354P!zh-Hant-HK.pdf
+            title: 廢物處置(醫療廢物處置的收費)規例 (Cap 354P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354Q!zh-Hant-HK.pdf
+            title: 2011年〈廢物處置條例〉(第16條的適用範圍)公告 (Cap 354Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354R!zh-Hant-HK.pdf
+            title: 2018年〈廢物處置條例〉(第16條的適用範圍)公告 (Cap 354R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354S!zh-Hant-HK.pdf
+            title: 廢物處置(垃圾收集站及指明桶箱的訂明標誌)公告 (Cap 354S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354T!zh-Hant-HK.pdf
+            title: 廢物處置(政府用廢物車輛的訂明標誌)公告 (Cap 354T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354U!zh-Hant-HK.pdf
+            title: 廢物處置(設有壓縮裝置非政府用廢物車輛的訂明標誌)公告 (Cap 354U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354V!zh-Hant-HK.pdf
+            title: 廢物處置(指定袋及指定標籤的指明規定)公告 (Cap 354V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354W!zh-Hant-HK.pdf
+            title: 2022年〈廢物處置條例〉(第16條的適用範圍)公告 (Cap 354W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358!zh-Hant-HK.pdf
+            title: 水污染管制條例 (Cap 358)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358A!zh-Hant-HK.pdf
+            title: 水污染管制(吐露港及赤門水質管制區)令 (Cap 358A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358B!zh-Hant-HK.pdf
+            title: 吐露港及赤門水質管制區水質指標聲明 (Cap 358B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358C!zh-Hant-HK.pdf
+            title: 水污染管制(上訴委員會)規例 (Cap 358C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358D!zh-Hant-HK.pdf
+            title: 水污染管制(一般)規例 (Cap 358D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358E!zh-Hant-HK.pdf
+            title: 水污染管制(吐露港及赤門水質管制區)(指定日期)令 (Cap 358E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358F!zh-Hant-HK.pdf
+            title: 吐露港及赤門水質管制區水道水質指標聲明 (Cap 358F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358G!zh-Hant-HK.pdf
+            title: 水污染管制(南區水質管制區)令 (Cap 358G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358H!zh-Hant-HK.pdf
+            title: 水污染管制(南區水質管制區)(指定日期)(綜合)令 (Cap 358H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358I!zh-Hant-HK.pdf
+            title: 南區水質管制區水質指標聲明 (Cap 358I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358J!zh-Hant-HK.pdf
+            title: 水污染管制(將軍澳水質管制區)令 (Cap 358J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358K!zh-Hant-HK.pdf
+            title: 水污染管制(將軍澳水質管制區)(指定日期)令 (Cap 358K)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358L!zh-Hant-HK.pdf
+            title: 將軍澳水質管制區水質指標聲明 (Cap 358L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358M!zh-Hant-HK.pdf
+            title: 水污染管制(牛尾海水質管制區)令 (Cap 358M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358N!zh-Hant-HK.pdf
+            title: 水污染管制(牛尾海水質管制區)(指定日期)令 (Cap 358N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358O!zh-Hant-HK.pdf
+            title: 牛尾海水質管制區水質指標 (Cap 358O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358P!zh-Hant-HK.pdf
+            title: 水污染管制(后海灣水質管制區)令 (Cap 358P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358Q!zh-Hant-HK.pdf
+            title: 水污染管制(后海灣水質管制區)(指定日期)令 (Cap 358Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358R!zh-Hant-HK.pdf
+            title: 水質指標聲明(后海灣水質管制區) (Cap 358R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358S!zh-Hant-HK.pdf
+            title: 水污染管制(大鵬灣水質管制區)令 (Cap 358S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358T!zh-Hant-HK.pdf
+            title: 水污染管制(大鵬灣水質管制區)(指定日期)令 (Cap 358T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358U!zh-Hant-HK.pdf
+            title: 水質指標聲明(大鵬灣水質管制區) (Cap 358U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358V!zh-Hant-HK.pdf
+            title: 水污染管制(西北部水質管制區)令 (Cap 358V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358W!zh-Hant-HK.pdf
+            title: 水污染管制(西北部水質管制區)(指定日期)令 (Cap 358W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358X!zh-Hant-HK.pdf
+            title: 水質指標聲明(西北部水質管制區) (Cap 358X)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358Y!zh-Hant-HK.pdf
+            title: 水污染管制(東部緩衝區水質管制區)令 (Cap 358Y)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358Z!zh-Hant-HK.pdf
+            title: 水污染管制(東部緩衝區水質管制區)(指定日期)令 (Cap 358Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AA!zh-Hant-HK.pdf
+            title: 水質指標聲明(東部緩衝區水質管制區) (Cap 358AA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AB!zh-Hant-HK.pdf
+            title: 水污染管制(西部緩衝區水質管制區)令 (Cap 358AB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AC!zh-Hant-HK.pdf
+            title: 水污染管制(西部緩衝區水質管制區)(指定日期)令 (Cap 358AC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AD!zh-Hant-HK.pdf
+            title: 水質指標聲明(西部緩衝區水質管制區) (Cap 358AD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AE!zh-Hant-HK.pdf
+            title: 水污染管制(南區附水質管制區)令 (Cap 358AE)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AF!zh-Hant-HK.pdf
+            title: 水污染管制(南區附水質管制區)(指定日期)令 (Cap 358AF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AG!zh-Hant-HK.pdf
+            title: 水質指標聲明(南區附水質管制區) (Cap 358AG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AH!zh-Hant-HK.pdf
+            title: 水污染管制(吐露港附水質管制區)令 (Cap 358AH)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AI!zh-Hant-HK.pdf
+            title: 水污染管制(吐露港附水質管制區)(指定日期)令 (Cap 358AI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AJ!zh-Hant-HK.pdf
+            title: 水質指標聲明(吐露港附水質管制區) (Cap 358AJ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AL!zh-Hant-HK.pdf
+            title: 水污染管制(排污設備)規例 (Cap 358AL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AM!zh-Hant-HK.pdf
+            title: 水污染管制(維多利亞港(第一期)水質管制區)令 (Cap 358AM)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AN!zh-Hant-HK.pdf
+            title: 水污染管制(維多利亞港(第一期)水質管制區)(指定日期)令 (Cap 358AN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AO!zh-Hant-HK.pdf
+            title: 水質指標聲明(維多利亞港(第一期)水質管制區) (Cap 358AO)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AP!zh-Hant-HK.pdf
+            title: 水污染管制(維多利亞港(第二期)水質管制區)令 (Cap 358AP)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AQ!zh-Hant-HK.pdf
+            title: 水污染管制(維多利亞港(第二期)水質管制區)(指定日期)令 (Cap 358AQ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AR!zh-Hant-HK.pdf
+            title: 水質指標聲明(維多利亞港(第二期)水質管制區) (Cap 358AR)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AS!zh-Hant-HK.pdf
+            title: 水污染管制(維多利亞港(第三期)水質管制區)令 (Cap 358AS)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AT!zh-Hant-HK.pdf
+            title: 水污染管制(維多利亞港(第三期)水質管制區)(指定日期)令 (Cap 358AT)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AU!zh-Hant-HK.pdf
+            title: 水質指標聲明(維多利亞港(第三期)水質管制區) (Cap 358AU)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AV!zh-Hant-HK.pdf
+            title: 水污染管制(西北部附水質管制區)令 (Cap 358AV)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AW!zh-Hant-HK.pdf
+            title: 水污染管制(南區第二附水質管制區)令 (Cap 358AW)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AX!zh-Hant-HK.pdf
+            title: 水污染管制(西北部附水質管制區)(指定日期)令 (Cap 358AX)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AY!zh-Hant-HK.pdf
+            title: 水污染管制(南區第二附水質管制區)(指定日期)令 (Cap 358AY)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AZ!zh-Hant-HK.pdf
+            title: 水質指標聲明(西北部附水質管制區) (Cap 358AZ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358BA!zh-Hant-HK.pdf
+            title: 水質指標聲明(南區第二附水質管制區) (Cap 358BA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400!zh-Hant-HK.pdf
+            title: 噪音管制條例 (Cap 400)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400A!zh-Hant-HK.pdf
+            title: 噪音管制(一般)規例 (Cap 400A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400B!zh-Hant-HK.pdf
+            title: 噪音管制(上訴委員會)規例 (Cap 400B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400C!zh-Hant-HK.pdf
+            title: 噪音管制(空氣壓縮機)規例 (Cap 400C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400D!zh-Hant-HK.pdf
+            title: 噪音管制(手提撞擊式破碎機)規例 (Cap 400D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400G!zh-Hant-HK.pdf
+            title: 噪音管制(建築工程)規例 (Cap 400G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400I!zh-Hant-HK.pdf
+            title: 噪音管制(汽車)規例 (Cap 400I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400L!zh-Hant-HK.pdf
+            title: 噪音管制(建築工程指定範圍)公告 (Cap 400L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403!zh-Hant-HK.pdf
+            title: 保護臭氧層條例 (Cap 403)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403A!zh-Hant-HK.pdf
+            title: 保護臭氧層(費用)規例 (Cap 403A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403B!zh-Hant-HK.pdf
+            title: 保護臭氧層(受管制製冷劑)規例 (Cap 403B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403C!zh-Hant-HK.pdf
+            title: 保護臭氧層(含受管制物質產品)(禁止進口)規例 (Cap 403C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap466!zh-Hant-HK.pdf
+            title: 海上傾倒物料條例 (Cap 466)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap466A!zh-Hant-HK.pdf
+            title: 海上傾倒物料(費用)規例 (Cap 466A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap466B!zh-Hant-HK.pdf
+            title: 海上傾倒物料(豁免)令 (Cap 466B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap499!zh-Hant-HK.pdf
+            title: 環境影響評估條例 (Cap 499)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap499A!zh-Hant-HK.pdf
+            title: 環境影響評估(上訴委員會)規例 (Cap 499A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap499B!zh-Hant-HK.pdf
+            title: 環境影響評估(費用)規例 (Cap 499B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap595!zh-Hant-HK.pdf
+            title: 有毒化學品管制條例 (Cap 595)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap595A!zh-Hant-HK.pdf
+            title: 有毒化學品管制(一般)規例 (Cap 595A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap595B!zh-Hant-HK.pdf
+            title: 有毒化學品管制(費用)規例 (Cap 595B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap603!zh-Hant-HK.pdf
+            title: 產品環保責任條例 (Cap 603)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap603B!zh-Hant-HK.pdf
+            title: 產品環保責任(受管制電器)規例 (Cap 603B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap603C!zh-Hant-HK.pdf
+            title: 產品環保責任(受規管物品)規例 (Cap 603C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap611!zh-Hant-HK.pdf
+            title: 汽車引擎空轉(定額罰款)條例 (Cap 611)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap611A!zh-Hant-HK.pdf
+            title: 汽車引擎空轉(定額罰款)規例 (Cap 611A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap640!zh-Hant-HK.pdf
+            title: 汞管制條例 (Cap 640)
+            publish_date: null
       epd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -2215,7 +2936,7 @@ crawlers:
           - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_quality_objectives/Historical_AQO.html"
           - "https://www.epd.gov.hk/epd/english/environmentinhk/air/air_maincontent.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -2393,6 +3114,80 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      ordinance_guidance:
+        # [2026-11-23] PAI-1741: the leaflet page writes its links with
+        # JavaScript and the earlier wiring code editions sit outside the
+        # content element, so the document sweep reaches neither.
+        ticket: PAI-1741
+        document_hosts:
+          - www.emsd.gov.hk
+        documents:
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_Electricity_Safety.pdf
+            title: Regulatory Regime for Electricity Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_Gas%20Safety.pdf
+            title: Regulatory Regime for Gas Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_Lift_Escalator_Safety.pdf
+            title: Regulatory Regime for Lift and Escalator Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_BLTWP_Safety.pdf
+            title: "Regulatory Regime for Builder's Lift and Tower Working Platform Safety"
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_BEEO.pdf
+            title: Regulatory Regime for Buildings Energy Efficiency
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_MEELS.pdf
+            title: Regulatory Regime for Mandatory Energy Efficiency Labelling Scheme (MEELS)
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_FWCT.pdf
+            title: Regulatory Regime for Fresh Water Cooling Towers
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_DCS.pdf
+            title: Regulatory Regime for District Cooling System
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_Aerial_Ropeway_Safety.pdf
+            title: Regulatory Regime for Aerial Ropeway Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_Amusement_Ride_Safety.pdf
+            title: Regulatory Regime for Amusement Ride Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_MTR_Safety.pdf
+            title: Regulatory Regime for Mass Transit Railway Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_Tramway_Safety.pdf
+            title: Regulatory Regime for Tramway Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_Peak_Tramway_Safety.pdf
+            title: Regulatory Regime for Peak Tramway Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_1490/Rgltry_Regime_Leaflet_APM_Safety.pdf
+            title: Regulatory Regime for Automated People Mover (APM) Safety
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_443/COP_E_2003.pdf
+            title: Code of Practice for the Electricity (Wiring) Regulations (2003 Edition, superseded)
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_443/amendment_no_1_e.pdf
+            title: "Amendment No. 1: 2007 to the Code of Practice for the Electricity (Wiring) Regulations (2003 Edition, superseded)"
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_443/COP_E_2009.pdf
+            title: Code of Practice for the Electricity (Wiring) Regulations (2009 Edition, superseded)
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_443/COP_E_2015.pdf
+            title: Code of Practice for the Electricity (Wiring) Regulations (2015 Edition, superseded)
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_443/COP_E_2015_Pages_Update_for_Hard_Copy.pdf
+            title: "Code of Practice for the Electricity (Wiring) Regulations (2015 Edition, superseded): Pages of Update for Hard Copy"
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_443/Summary_of_Updates.pdf
+            title: "Code of Practice for the Electricity (Wiring) Regulations: Summary of Updates"
+            publish_date: null
+          - url: https://www.emsd.gov.hk/filemanager/en/content_443/Notice_to_Public_and_Trade_Consultation.pdf
+            title: "Code of Practice for the Electricity (Wiring) Regulations: Notice to Public and Trade Consultation"
+            publish_date: null
+          - url: https://www.emsd.gov.hk/minisites/electricity_pub_cop/en/ESLPR_COP_Full_Version_English.pdf
+            title: Code of Practice on Working near Electricity Supply Lines (Full Version)
+            publish_date: null
       legislation:
         # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
         ticket: PAI-1741
@@ -2486,6 +3281,111 @@ crawlers:
           - url: https://www.elegislation.gov.hk/hk/cap624!en.pdf
             title: District Cooling Services Ordinance (Cap 624)
             publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap211!en.pdf
+            title: Aerial Ropeways (Safety) Ordinance (Cap 211)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap211!zh-Hant-HK.pdf
+            title: 架空纜車(安全)條例 (Cap 211)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap211A!en.pdf
+            title: Aerial Ropeways (Operation and Maintenance) Regulations (Cap 211A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap211A!zh-Hant-HK.pdf
+            title: 架空纜車(操作及保養)規例 (Cap 211A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap211B!en.pdf
+            title: Aerial Ropeways (Fees) Regulation (Cap 211B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap211B!zh-Hant-HK.pdf
+            title: 架空纜車(費用)規例 (Cap 211B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51!zh-Hant-HK.pdf
+            title: 氣體安全條例 (Cap 51)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51A!zh-Hant-HK.pdf
+            title: 氣體安全(氣體品質)規例 (Cap 51A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51B!zh-Hant-HK.pdf
+            title: 氣體安全(氣體供應)規例 (Cap 51B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51C!zh-Hant-HK.pdf
+            title: 氣體安全(裝置及使用)規例 (Cap 51C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51D!zh-Hant-HK.pdf
+            title: 氣體安全(氣體裝置技工及氣體工程承辦商註冊)規例 (Cap 51D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51E!zh-Hant-HK.pdf
+            title: 氣體安全(氣體供應公司註冊)規例 (Cap 51E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51F!zh-Hant-HK.pdf
+            title: 氣體安全(雜項)規例 (Cap 51F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51G!zh-Hant-HK.pdf
+            title: 氣體安全(儲氣鼓檢驗)規例 (Cap 51G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406!zh-Hant-HK.pdf
+            title: 電力條例 (Cap 406)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406A!zh-Hant-HK.pdf
+            title: 電力供應規例 (Cap 406A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406B!zh-Hant-HK.pdf
+            title: 電力供應(特別地區)規例 (Cap 406B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406C!zh-Hant-HK.pdf
+            title: 電力(豁免)規例 (Cap 406C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406D!zh-Hant-HK.pdf
+            title: 電力(註冊)規例 (Cap 406D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406E!zh-Hant-HK.pdf
+            title: 電力(線路)規例 (Cap 406E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406G!zh-Hant-HK.pdf
+            title: 電氣產品(安全)規例 (Cap 406G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406H!zh-Hant-HK.pdf
+            title: 供電電纜(保護)規例 (Cap 406H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap449!zh-Hant-HK.pdf
+            title: 機動遊戲機(安全)條例 (Cap 449)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap449A!zh-Hant-HK.pdf
+            title: 機動遊戲機(安全)(收費)規例 (Cap 449A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap449B!zh-Hant-HK.pdf
+            title: 機動遊戲機(安全)(操作及保養)規例 (Cap 449B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap470!zh-Hant-HK.pdf
+            title: 建築工地升降機及塔式工作平台(安全)條例 (Cap 470)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap470A!zh-Hant-HK.pdf
+            title: 建築工地升降機及塔式工作平台(安全)(費用)規例 (Cap 470A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap598!zh-Hant-HK.pdf
+            title: 能源效益(產品標籤)條例 (Cap 598)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap610!zh-Hant-HK.pdf
+            title: 建築物能源效益條例 (Cap 610)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap610A!zh-Hant-HK.pdf
+            title: 建築物能源效益(費用)規例 (Cap 610A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap610B!zh-Hant-HK.pdf
+            title: 建築物能源效益(註冊能源效益評核人)規例 (Cap 610B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap618!zh-Hant-HK.pdf
+            title: 升降機及自動梯條例 (Cap 618)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap618A!zh-Hant-HK.pdf
+            title: 升降機及自動梯(一般)規例 (Cap 618A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap618B!zh-Hant-HK.pdf
+            title: 升降機及自動梯(費用)規例 (Cap 618B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap624!zh-Hant-HK.pdf
+            title: 區域供冷服務條例 (Cap 624)
+            publish_date: null
       emsd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -2530,8 +3430,9 @@ crawlers:
           - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/specified_forms/index.html"
           - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/responsible_persons_corner/lifts_not_equipped_modern_safety_devices/index.html"
           - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/statutory_advisory_bodies/lift_and_escalator_safety_advisory_committee_lesa/agenda_minutes_of_the_committee_meetings/index.html"
+          - "https://www.emsd.gov.hk/en/energy_efficiency/DCS_in_HK/guidelines_forms/index.html"
         exclude_url_patterns:
-          - '(se|ov)\.(pdf|docx?)$'
+          - '\d(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
@@ -2671,6 +3572,379 @@ crawlers:
       enabled: true
       interval_days: 1
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Cap 172 and the Cap 132 subsidiary legislation. The Cap 132 principal
+        # ordinance is in fsd.legislation, as the register lists it.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap132A!en.pdf
+            title: Abattoirs Regulation (Cap 132A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132A!zh-Hant-HK.pdf
+            title: 屠場規例 (Cap 132A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132B!en.pdf
+            title: Advertisements Regulation (Cap 132B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132B!zh-Hant-HK.pdf
+            title: 宣傳品規例 (Cap 132B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132E!en.pdf
+            title: Bathing Beaches Regulation (Cap 132E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132E!zh-Hant-HK.pdf
+            title: 泳灘規例 (Cap 132E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132F!en.pdf
+            title: Civic Centres Regulation (Cap 132F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132F!zh-Hant-HK.pdf
+            title: 文娛中心規例 (Cap 132F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132H!en.pdf
+            title: Colouring Matter in Food Regulations (Cap 132H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132H!zh-Hant-HK.pdf
+            title: 食物內染色料規例 (Cap 132H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132I!en.pdf
+            title: Commercial Bathhouses Regulation (Cap 132I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132I!zh-Hant-HK.pdf
+            title: 商營浴室規例 (Cap 132I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132J!en.pdf
+            title: Commonwealth War Graves Commission Cemeteries Rules (Cap 132J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132J!zh-Hant-HK.pdf
+            title: 英聯邦國殤紀念墳場管理委員會墳場規則 (Cap 132J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132M!en.pdf
+            title: Cremation and Gardens of Remembrance Regulation (Cap 132M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132M!zh-Hant-HK.pdf
+            title: 火葬及紀念花園規例 (Cap 132M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132O!en.pdf
+            title: Designation of Libraries Order (Cap 132O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132O!zh-Hant-HK.pdf
+            title: 圖書館指定令 (Cap 132O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132P!en.pdf
+            title: Designation of Museums Order (Cap 132P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132P!zh-Hant-HK.pdf
+            title: 博物館指定令 (Cap 132P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132R!en.pdf
+            title: Dried Milk Regulations (Cap 132R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132R!zh-Hant-HK.pdf
+            title: 奶粉規例 (Cap 132R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132U!en.pdf
+            title: Sweeteners in Food Regulations (Cap 132U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132U!zh-Hant-HK.pdf
+            title: 食物內甜味劑規例 (Cap 132U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132V!en.pdf
+            title: Food Adulteration (Metallic Contamination) Regulations (Cap 132V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132V!zh-Hant-HK.pdf
+            title: 食物攙雜(金屬雜質含量)規例 (Cap 132V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132W!en.pdf
+            title: Food and Drugs (Composition and Labelling) Regulations (Cap 132W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132W!zh-Hant-HK.pdf
+            title: 食物及藥物(成分組合及標籤)規例 (Cap 132W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132X!en.pdf
+            title: Food Business Regulation (Cap 132X)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132X!zh-Hant-HK.pdf
+            title: 食物業規例 (Cap 132X)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132Z!en.pdf
+            title: Food Business Regulation (Exemption from Section 31(1)) Notice (Cap 132Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132Z!zh-Hant-HK.pdf
+            title: 食物業規例(豁免第31(1)條規定)公告 (Cap 132Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AC!en.pdf
+            title: Frozen Confections Regulation (Cap 132AC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AC!zh-Hant-HK.pdf
+            title: 冰凍甜點規例 (Cap 132AC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AD!en.pdf
+            title: Funeral Parlours Regulation (Cap 132AD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AD!zh-Hant-HK.pdf
+            title: 殯儀館規例 (Cap 132AD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AF!en.pdf
+            title: Harmful Substances in Food Regulations (Cap 132AF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AF!zh-Hant-HK.pdf
+            title: 食物內有害物質規例 (Cap 132AF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AG!en.pdf
+            title: Hawker (Permitted Places) Declaration (Cap 132AG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AG!zh-Hant-HK.pdf
+            title: 小販(認可區)宣布 (Cap 132AG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AI!en.pdf
+            title: Hawker Regulation (Cap 132AI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AI!zh-Hant-HK.pdf
+            title: 小販規例 (Cap 132AI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AJ!en.pdf
+            title: Hong Kong Cemetery, Happy Valley, Rules (Cap 132AJ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AJ!zh-Hant-HK.pdf
+            title: 跑馬地香港墳場規則 (Cap 132AJ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AK!en.pdf
+            title: Imported Game, Meat, Poultry and Eggs Regulations (Cap 132AK)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AK!zh-Hant-HK.pdf
+            title: 進口野味、肉類、家禽及蛋類規例 (Cap 132AK)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AL!en.pdf
+            title: Libraries Regulation (Cap 132AL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AL!zh-Hant-HK.pdf
+            title: 圖書館規例 (Cap 132AL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AN!en.pdf
+            title: Declaration of Markets Notice (Cap 132AN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AN!zh-Hant-HK.pdf
+            title: 街市宣布公告 (Cap 132AN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AQ!en.pdf
+            title: Milk Regulation (Cap 132AQ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AQ!zh-Hant-HK.pdf
+            title: 奶業規例 (Cap 132AQ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AR!en.pdf
+            title: Mineral Oil in Food Regulations (Cap 132AR)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AR!zh-Hant-HK.pdf
+            title: 食物內礦物油規例 (Cap 132AR)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AT!en.pdf
+            title: Museums Regulation (Cap 132AT)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AT!zh-Hant-HK.pdf
+            title: 博物館規例 (Cap 132AT)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AV!en.pdf
+            title: Declaration of Offensive Trades Notice (Cap 132AV)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AV!zh-Hant-HK.pdf
+            title: 厭惡性行業宣布公告 (Cap 132AV)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AX!en.pdf
+            title: Offensive Trades Regulation (Cap 132AX)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132AX!zh-Hant-HK.pdf
+            title: 厭惡性行業規例 (Cap 132AX)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BA!en.pdf
+            title: Places of Amusement Regulation (Cap 132BA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BA!zh-Hant-HK.pdf
+            title: 遊樂場所規例 (Cap 132BA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BC!en.pdf
+            title: Pleasure Grounds Regulation (Cap 132BC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BC!zh-Hant-HK.pdf
+            title: 遊樂場地規例 (Cap 132BC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BD!en.pdf
+            title: Preservatives in Food Regulation (Cap 132BD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BD!zh-Hant-HK.pdf
+            title: 食物內防腐劑規例 (Cap 132BD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BF!en.pdf
+            title: Private Cemeteries Regulation (Cap 132BF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BF!zh-Hant-HK.pdf
+            title: 私營墳場規例 (Cap 132BF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BG!en.pdf
+            title: Private Markets Regulation (Cap 132BG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BG!zh-Hant-HK.pdf
+            title: 私營街市規例 (Cap 132BG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BI!en.pdf
+            title: Public Cemeteries Regulation (Cap 132BI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BI!zh-Hant-HK.pdf
+            title: 公眾墳場規例 (Cap 132BI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BK!en.pdf
+            title: Public Cleansing and Prevention of Nuisances Regulation (Cap 132BK)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BK!zh-Hant-HK.pdf
+            title: 公眾潔淨及防止妨擾規例 (Cap 132BK)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BL!en.pdf
+            title: Public Conveniences (Conduct and Behaviour) Regulation (Cap 132BL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BL!zh-Hant-HK.pdf
+            title: 公廁(行為及舉止)規例 (Cap 132BL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BN!en.pdf
+            title: Public Funeral Halls Regulation (Cap 132BN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BN!zh-Hant-HK.pdf
+            title: 公眾殯儀廳規例 (Cap 132BN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BO!en.pdf
+            title: Public Markets Regulation (Cap 132BO)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BO!zh-Hant-HK.pdf
+            title: 公眾街市規例 (Cap 132BO)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BR!en.pdf
+            title: Public Swimming Pools Regulation (Cap 132BR)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BR!zh-Hant-HK.pdf
+            title: 公眾泳池規例 (Cap 132BR)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BS!en.pdf
+            title: Restriction of Hawking in Special Areas Notification (Cap 132BS)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BS!zh-Hant-HK.pdf
+            title: 限制在特別範圍販賣公告 (Cap 132BS)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BT!en.pdf
+            title: Sanitation and Conservancy Regulation (Cap 132BT)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BT!zh-Hant-HK.pdf
+            title: 衞生及清糞規例 (Cap 132BT)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BU!en.pdf
+            title: Slaughterhouses Regulation (Cap 132BU)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BU!zh-Hant-HK.pdf
+            title: 屠房規例 (Cap 132BU)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BW!en.pdf
+            title: Smokeless Tobacco Products (Prohibition) Regulations (Cap 132BW)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BW!zh-Hant-HK.pdf
+            title: 無煙煙草產品(禁止)規例 (Cap 132BW)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BY!en.pdf
+            title: Stadia Regulation (Cap 132BY)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132BY!zh-Hant-HK.pdf
+            title: 體育場規例 (Cap 132BY)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CA!en.pdf
+            title: Swimming Pools Regulation (Cap 132CA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CA!zh-Hant-HK.pdf
+            title: 泳池規例 (Cap 132CA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CB!en.pdf
+            title: Undertakers of Burials Regulation (Cap 132CB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CB!zh-Hant-HK.pdf
+            title: 殮葬商規例 (Cap 132CB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CE!en.pdf
+            title: Ventilation of Scheduled Premises Regulation (Cap 132CE)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CE!zh-Hant-HK.pdf
+            title: 附表所列處所通風設施規例 (Cap 132CE)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CH!en.pdf
+            title: Wo Hop Shek, Sandy Ridge and Sandy Ridge (Urn) Cemeteries, Private Lots, Rules (Cap 132CH)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CH!zh-Hant-HK.pdf
+            title: 和合石、沙嶺及沙嶺(金塔)墳場內私人地段規則 (Cap 132CH)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CI!en.pdf
+            title: Licensing Appeals Board Rules (Cap 132CI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CI!zh-Hant-HK.pdf
+            title: 牌照上訴委員會規則 (Cap 132CI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CJ!en.pdf
+            title: Public Health and Municipal Services (Fees) Regulation (Cap 132CJ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CJ!zh-Hant-HK.pdf
+            title: 公眾衞生及市政(費用)規例 (Cap 132CJ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CK!en.pdf
+            title: Public Health and Municipal Services (Fees and Charges) (Museums) Regulation (Cap 132CK)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CK!zh-Hant-HK.pdf
+            title: 公眾衞生及市政(費用)(博物館)規例 (Cap 132CK)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CL!en.pdf
+            title: Appeal Board on Closure Orders (Immediate Health Hazard) Rules (Cap 132CL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CL!zh-Hant-HK.pdf
+            title: 封閉令(對健康的即時危害)上訴委員會規則 (Cap 132CL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CM!en.pdf
+            title: Pesticide Residues in Food Regulation (Cap 132CM)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CM!zh-Hant-HK.pdf
+            title: 食物內除害劑殘餘規例 (Cap 132CM)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CN!en.pdf
+            title: Public Health and Municipal Services (Fees and Charges) (Leisure Facilities) Regulation (Cap 132CN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CN!zh-Hant-HK.pdf
+            title: 公眾衞生及市政(費用)(康樂設施)規例 (Cap 132CN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CO!en.pdf
+            title: Public Health and Municipal Services (Fees and Charges) (Places of Amusement Licences) Regulation (Cap 132CO)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132CO!zh-Hant-HK.pdf
+            title: 公眾衞生及市政(費用)(遊樂場所牌照)規例 (Cap 132CO)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172!en.pdf
+            title: Places of Public Entertainment Ordinance (Cap 172)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172!zh-Hant-HK.pdf
+            title: 公眾娛樂場所條例 (Cap 172)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172A!en.pdf
+            title: Places of Public Entertainment Regulations (Cap 172A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172A!zh-Hant-HK.pdf
+            title: 公眾娛樂場所規例 (Cap 172A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172D!en.pdf
+            title: Places of Public Entertainment (Exemption) Order (Cap 172D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172D!zh-Hant-HK.pdf
+            title: 公眾娛樂場所(豁免)令 (Cap 172D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172E!en.pdf
+            title: Places of Public Entertainment (Licences) (Fees) Regulation (Cap 172E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap172E!zh-Hant-HK.pdf
+            title: 公眾娛樂場所(牌照)(費用)規例 (Cap 172E)
+            publish_date: null
       licensing_guides:
         document_hosts:
         - www.fehd.gov.hk
@@ -2722,6 +3996,85 @@ crawlers:
       enabled: true
       interval_days: 1
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Caps 344, 626, 349 and 7. No Open Library department administers Cap 7
+        # (Rating and Valuation); it sits with HAD's property-management ordinances.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap7!en.pdf
+            title: Landlord and Tenant (Consolidation) Ordinance (Cap 7)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap7!zh-Hant-HK.pdf
+            title: 業主與租客(綜合)條例 (Cap 7)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap7A!en.pdf
+            title: Tenancy (Notice of Termination) (Exclusion) (Consolidation) Order (Cap 7A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap7A!zh-Hant-HK.pdf
+            title: 租賃(終止租賃通知書)(豁除)(綜合)令 (Cap 7A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap344!en.pdf
+            title: Building Management Ordinance (Cap 344)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap344!zh-Hant-HK.pdf
+            title: 建築物管理條例 (Cap 344)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap344A!en.pdf
+            title: Building Management (Fees) Regulations (Cap 344A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap344A!zh-Hant-HK.pdf
+            title: 建築物管理(費用)規例 (Cap 344A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap344B!en.pdf
+            title: Building Management (Third Party Risks Insurance) Regulation (Cap 344B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap344B!zh-Hant-HK.pdf
+            title: 建築物管理(第三者風險保險)規例 (Cap 344B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349!en.pdf
+            title: Hotel and Guesthouse Accommodation Ordinance (Cap 349)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349!zh-Hant-HK.pdf
+            title: 旅館業條例 (Cap 349)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349A!en.pdf
+            title: Hotel and Guesthouse Accommodation (Appeal Board) Regulations (Cap 349A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349A!zh-Hant-HK.pdf
+            title: 旅館業(上訴委員會)規例 (Cap 349A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349B!en.pdf
+            title: Hotel and Guesthouse Accommodation (Fees) Regulations (Cap 349B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349B!zh-Hant-HK.pdf
+            title: 旅館業(費用)規例 (Cap 349B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349C!en.pdf
+            title: Hotel and Guesthouse Accommodation (Exclusion) Order (Cap 349C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap349C!zh-Hant-HK.pdf
+            title: 旅館業(豁免)令 (Cap 349C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap626!en.pdf
+            title: Property Management Services Ordinance (Cap 626)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap626!zh-Hant-HK.pdf
+            title: 物業管理服務條例 (Cap 626)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap626A!en.pdf
+            title: Property Management Services (Levy) Regulation (Cap 626A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap626A!zh-Hant-HK.pdf
+            title: 物業管理服務(徵款)規例 (Cap 626A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap626B!en.pdf
+            title: Property Management Services (Licensing and Related Matters) Regulation (Cap 626B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap626B!zh-Hant-HK.pdf
+            title: 物業管理服務(發牌及相關事宜)規例 (Cap 626B)
+            publish_date: null
       licensing_guides:
         document_hosts:
         - www.had.gov.hk

@@ -1,86 +1,101 @@
-<!-- focus: PAI-1741 HKSAR department ordinances and subsidiary legislation crawl inventory -->
+<!-- focus: PAI-1741 HKSAR ordinances, subsidiary legislation and ordinance guidance crawl inventory -->
 <!-- use-when: operating or extending the department legislation Open Library addition -->
 
 # HKSAR department legislation (PAI-1741)
 
-Adds the ordinances and subsidiary legislation that BD, EMSD, FSD, Labour, EPD
-and WSD administer, from the register "HKSAR Departments Ordinances and
-Subsidiary Legislation.docx" on PAI-1741. Before this, the only legislation in
+Adds the ordinances and subsidiary legislation that Open Library's Hong Kong
+departments administer, starting from the register "HKSAR Departments
+Ordinances and Subsidiary Legislation.docx" on PAI-1741, plus the department
+guidance documents for those ordinances. Before this, the only legislation in
 Open Library was Cap 123 (`bd.buildings_ordinance`, PAI-1696).
 
-Every chapter is the English PDF `https://www.elegislation.gov.hk/hk/cap<N>!en.pdf`.
-The register lists 239 rows: 237 distinct chapters, with Caps 502 and 572 under
-both BD and FSD. Every register URL and every related chapter below returned a
-PDF through the client-check handshake on 2026-11-23. The crawler only registers URLs; pyramid-os
-ingest completes the handshake (`elegislation-fetch.ts`, PAI-1696).
+Each chapter is crawled in English (`cap<N>!en.pdf`) and Traditional Chinese
+(`cap<N>!zh-Hant-HK.pdf`) from `www.elegislation.gov.hk`. Every URL returned a
+PDF through the client-check handshake on 2026-11-23. The crawler only
+registers URLs; pyramid-os ingest completes the handshake
+(`elegislation-fetch.ts`, PAI-1696).
 
 ## Crawl inventory
 
-### Tier 1: the register (222 PDFs)
+### Tier 1: the register (222 chapters)
 
-| Source label | Chapters | PDFs |
+The register lists 239 rows: 237 distinct chapters, with Caps 502 and 572 under
+both BD and FSD. Its 15 Cap 123 rows are already in `bd.buildings_ordinance`.
+Probing suffixes A–BZ for each principal found no in-force subsidiary chapter
+missing from the register, except Cap 132 (Tier 3).
+
+| Source label | Chapters | Chapters crawled |
 | --- | --- | --- |
-| `bd.legislation` | 121 | 1 |
+| `bd.legislation` | 121 (and the Chinese Cap 123) | 1 |
 | `fsd.fire_safety_legislation` | 502, 572, 636 (enforced jointly by BD and FSD) | 3 |
-| `fsd.legislation` | 95 family, 132, 295 family | 14 |
+| `fsd.legislation` | 95 family, 132 principal, 295 family | 14 |
 | `emsd.legislation` | 51, 406, 449, 598, 610, 618 families | 26 |
 | `labour.legislation` | 56, 57, 59, 282, 360, 469, 509, 608 families | 53 |
 | `epd.legislation` | 311, 354, 358, 400, 403, 466, 499, 603 families | 123 |
 | `wsd.legislation` | 102, 102A | 2 |
 
-The register's 15 Cap 123 rows are already in `bd.buildings_ordinance` and are
-not repeated. The register puts the Cap 132 principal ordinance under FSD, so
-`fsd.legislation` carries it. Probing suffixes A–BZ for each principal found no in-force subsidiary
-chapter missing from the register, except Cap 132 (Tier 3).
-
-### Tier 2: enhancements (9 PDFs and 8 guidance pages)
-
-Related chapters administered by the same departments, added to their lists:
+### Tier 2: related chapters and guidance pages
 
 | Source label | Chapters |
 | --- | --- |
-| `emsd.legislation` | 470, 470A Builders' Lifts and Tower Working Platforms (Safety); 624 District Cooling Services |
-| `epd.legislation` | 595, 595A, 595B Hazardous Chemicals Control; 640 Mercury Control; 611, 611A Motor Vehicle Idling |
+| `emsd.legislation` | 470, 470A, 624 |
+| `epd.legislation` | 595, 595A, 595B, 640, 611, 611A |
 
-Ordinance guidance pages whose documents were not in the feed, added to the
-department document sweeps:
+Guidance pages added to the document sweeps: FSD `fs_buildings_commercial_premises_ordinance`,
+`fs_industrial_building`, `cert`, `accep_eq`, `timber_store`, `open_kitchen` and
+`es.hkfsd.gov.hk/dg/en/`; EMSD `other_regulatory_services/cooling_towers`.
+FSD pages need the trailing slash: their links are relative to it.
 
-| Sweep | Page | Documents |
+### Tier 3: other departments, Chinese editions, remaining guidance
+
+| Source label | Chapters | Chapters crawled |
 | --- | --- | --- |
-| `fsd_document_sweep` | `fire_protection/fs_buildings_commercial_premises_ordinance` | Cap 502 guide |
-| `fsd_document_sweep` | `fire_protection/fs_industrial_building` | Cap 636 pamphlets, checklists |
-| `fsd_document_sweep` | `fire_protection/cert` | Cap 95B FSIC letters, checklists |
-| `fsd_document_sweep` | `fire_protection/accep_eq` | approved and accepted equipment lists |
-| `fsd_document_sweep` | `fire_protection/timber_store` | Cap 95 timber store guides |
-| `fsd_document_sweep` | `fire_protection/open_kitchen` | open kitchen design guide |
-| `fsd_document_sweep` | `es.hkfsd.gov.hk/dg/en/` | Cap 295 dangerous goods advice |
-| `emsd_document_sweep` | `other_regulatory_services/cooling_towers` | cooling tower O&M practice |
+| `had.legislation` | 344 Building Management, 626 Property Management Services, 349 Hotel and Guesthouse, 7 Landlord and Tenant | 12 |
+| `fehd.legislation` | 172 Places of Public Entertainment, Cap 132 subsidiary legislation | 61 |
+| `devb.legislation` | 583, 587, 652 construction industry ordinances | 7 |
+| `pland.legislation` | 131 Town Planning | 4 |
+| `lands.legislation` | 28 Land (Miscellaneous Provisions) | 2 |
+| `emsd.legislation` | 211 Aerial Ropeways | 3 |
+| `epd.legislation` | 312 Aircraft Noise | 2 |
 
-### Tier 3: not crawled
+No Open Library department administers Cap 7 (Rating and Valuation), so it
+sits with HAD's property-management ordinances. Cap 132 subsidiaries were
+probed to suffix DZ.
 
-| Item | Why not |
-| --- | --- |
-| Cap 132 subsidiaries (46) | FEHD's ordinance; FSD administers only parts |
-| Caps 344, 626, 7, 131, 28, 583, 587, 652, 172, 349 | other bureaux and departments; needs a scope decision |
-| Caps 211, 312 | EMSD / EPD, but outside building and property work |
-| EMSD regulatory regime leaflets (14) | links are written by JavaScript; needs a document list |
-| Chinese and bilingual chapter PDFs | register asks for English |
-| Superseded Cap 406 CoP editions, DCS forms, mini-storage records, scaffold forms, Labour translations | superseded, forms or translations |
+All 322 chapters also have their Chinese edition in the same list (plus the
+Chinese Cap 123): 645 e-Legislation PDFs in total.
+
+`emsd.ordinance_guidance` lists 22 EMSD documents its sweep cannot reach: the
+14 regulatory regime leaflets (links written by JavaScript) and the earlier
+wiring code editions (outside the content element). Earlier editions are titled
+"superseded"; run the Open Library maintenance review (`ol-maint`) after ingest
+so they are marked superseded rather than current.
+
+Further pages added to the sweeps: BD `resources/legal-matters`, FSD
+`mini_storages` and `scaffolded_buildings`, EMSD `DCS_in_HK/guidelines_forms`.
+
+The sweeps' signed-duplicate rule now requires a digit before `se`/`ov`
+(`APP070se.pdf`). The earlier rule also dropped any file ending in "se" or "ov",
+such as Labour's `FCO_Leaflet_Japanese.pdf` and `noise.pdf`. Across all 13
+sweeps the change recovers 21 documents and still excludes BD's 243 signed
+duplicates.
 
 ## Refresh
 
 Ingest change checks cannot HEAD elegislation, so they report "changed". The
-rotation covers each URL about every 160 days at 500 checks per run; the PDF is
+rotation reaches each URL about every 160 days at 500 checks per run; the PDF is
 then re-downloaded and skipped when its hash is unchanged.
 
 ## Publication order
 
 1. Deploy the paired pyramid-os PR (department claims for the new labels).
 2. Merge this PR.
-3. Dispatch `crawl.yml` for `bd`, `emsd`, `fsd`, `labour`, `epd` and `wsd`.
+3. Dispatch `crawl.yml` for `bd`, `emsd`, `fsd`, `labour`, `epd`, `wsd`, `devb`,
+   `fehd`, `had`, `lands`, `pland` and `cedd`.
 4. Confirm the new URLs appear in `data/latest/urls.jsonl`.
-5. Run production `open-library-daily` with
-   `{ "dryRun": true, "onlySourceIds": ["bd", "emsd", "fsd", "labour", "epd", "wsd"] }`,
-   then with `dryRun: false`.
-6. Verify search: Cap 406E wiring, Cap 59 factories, Cap 95B FSIC, Cap 311 air
-   pollution, and a BD list that returns Cap 121 and Cap 572 but not Cap 406.
+5. Run production `open-library-daily` with `dryRun: true` and those
+   `onlySourceIds`, then with `dryRun: false`.
+6. Run the maintenance review for the earlier wiring code editions.
+7. Verify search: Cap 406E wiring, Cap 59 factories, Cap 344 building
+   management, a Chinese query on 建築物條例, and a BD list that returns Cap 121
+   and Cap 572 but not Cap 406.
