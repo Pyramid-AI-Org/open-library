@@ -27,4 +27,4 @@ jobs:
       - name: Verify HA discovery and snapshot regression guards
         run: |
           python -m pip install -r crawlers/requirements.txt pytest
-          python -m pytest tests/test_ha_resources_offline.py tests/test_licensing_inventory.py tests/test_cap123_inventory.py tests/test_previous_snapshot.py tests/test_regression_guardrail.py -q
+          python -m pytest tests/test_ha_resources_offline.py tests/test_licensing_inventory.py tests/test_cap123_inventory.py tests/test_legislation_inventory.py tests/test_previous_snapshot.py tests/test_regression_guardrail.py -q

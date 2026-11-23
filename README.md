@@ -165,6 +165,8 @@ python main.py --crawler sla.circulars --settings config/settings.sg.yaml --out 
 
 The bounded Hysan licensing PDF inventory (PAI-1457) and its cross-repository
 publication order are documented in [sources/hk-licensing/README.md](sources/hk-licensing/README.md).
+The department ordinances and subsidiary legislation (PAI-1741) are in
+[sources/hk-legislation/README.md](sources/hk-legislation/README.md).
 
 1. Create `crawlers/<name>.py` exporting a `Crawler` class with a `.crawl(ctx)` method.
 2. Add config under `crawlers.<source>.pages.<crawler_name>` in [config/settings.yaml](config/settings.yaml).
