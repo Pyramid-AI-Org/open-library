@@ -222,6 +222,15 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Cap 121. Cap 123 is bd.buildings_ordinance; Caps 502/572/636 are fsd.fire_safety_legislation.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap121!en.pdf
+            title: Buildings Ordinance (Application to the New Territories) Ordinance (Cap 121)
+            publish_date: null
       bd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -858,11 +867,82 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      fire_safety_legislation:
+        # [2026-11-23] PAI-1741: Caps 502, 572, 636, enforced jointly by BD and FSD.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap502!en.pdf
+            title: Fire Safety (Commercial Premises) Ordinance (Cap 502)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap572!en.pdf
+            title: Fire Safety (Buildings) Ordinance (Cap 572)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap636!en.pdf
+            title: Fire Safety (Industrial Buildings) Ordinance (Cap 636)
+            publish_date: null
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap95!en.pdf
+            title: Fire Services Ordinance (Cap 95)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95A!en.pdf
+            title: Fire Service (Installation Contractors) Regulations (Cap 95A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95B!en.pdf
+            title: Fire Service (Installations and Equipment) Regulations (Cap 95B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95C!en.pdf
+            title: Fire Services Department (Reports and Certificates) Regulations (Cap 95C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95E!en.pdf
+            title: Fire Services Department (Welfare Fund) Regulation (Cap 95E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95F!en.pdf
+            title: Fire Services (Fire Hazard Abatement) Regulation (Cap 95F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95G!en.pdf
+            title: Fire Services (Registered Fire Engineers) (Fees) Regulation (Cap 95G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap95H!en.pdf
+            title: Fire Services (Registered Fire Engineers) Regulation (Cap 95H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap132!en.pdf
+            title: Public Health and Municipal Services Ordinance (Cap 132)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295!en.pdf
+            title: Dangerous Goods Ordinance (Cap 295)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295D!en.pdf
+            title: Dangerous Goods (Government Explosives Depots) Regulations (Cap 295D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295E!en.pdf
+            title: Dangerous Goods (Application and Exemption) Regulation 2012 (Cap 295E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295F!en.pdf
+            title: Dangerous Goods (Shipping) Regulation 2012 (Cap 295F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap295G!en.pdf
+            title: Dangerous Goods (Control) Regulation (Cap 295G)
+            publish_date: null
       fsd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
         # excluded: they carry no text the current version does not.
         page_urls:
+          # [2026-11-23] PAI-1741: ordinance guidance pages not crawled before.
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/fs_buildings_commercial_premises_ordinance/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/fs_industrial_building/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/cert/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/accep_eq/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/timber_store/"
+          - "https://www.hkfsd.gov.hk/eng/fire_protection/open_kitchen/"
+          - "https://es.hkfsd.gov.hk/dg/en/"
           - "https://www.hkfsd.gov.hk/eng/fire_protection/licensing/premises_food.html"
           - "https://www.hkfsd.gov.hk/eng/aboutus/enquiry/download/index.html"
           - "https://www.hkfsd.gov.hk/eng/fire_protection/notices/circular_old.html"
@@ -881,6 +961,9 @@ crawlers:
         exclude_url_patterns:
           - '(se|ov)\.(pdf|docx?)$'
           - '\.zip$'
+          # [2026-11-23] PAI-1741: accep_eq links two lists under a doubled
+          # path that 404s on FSD's own site.
+          - '/source/licensing/source/licensing/'
         doc_extensions: [".pdf", ".doc", ".docx", ".xls", ".xlsx"]
 
       circular_letters:
@@ -944,6 +1027,171 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap56!en.pdf
+            title: Boilers and Pressure Vessels Ordinance (Cap 56)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap56A!en.pdf
+            title: Boilers and Pressure Vessels Regulations (Cap 56A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap56B!en.pdf
+            title: Boilers and Pressure Vessels (Forms) Order (Cap 56B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap56C!en.pdf
+            title: Boilers and Pressure Vessels (Exemption) (Consolidation) Order (Cap 56C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57!en.pdf
+            title: Employment Ordinance (Cap 57)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57A!en.pdf
+            title: Employment Agency Regulations (Cap 57A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57B!en.pdf
+            title: Employment of Children Regulations (Cap 57B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap57C!en.pdf
+            title: Employment of Young Persons (Industry) Regulations (Cap 57C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59!en.pdf
+            title: Factories and Industrial Undertakings Ordinance (Cap 59)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59A!en.pdf
+            title: Factories and Industrial Undertakings Regulations (Cap 59A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59C!en.pdf
+            title: Factories and Industrial Undertakings (Blasting by Abrasives) Special Regulations (Cap 59C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59D!en.pdf
+            title: Factories and Industrial Undertakings (First Aid in Notifiable Workplaces) Regulations (Cap 59D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59E!en.pdf
+            title: Factories and Industrial Undertakings (Notification of Occupational Diseases) Regulations (Cap 59E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59F!en.pdf
+            title: Quarries (Safety) Regulations (Cap 59F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59G!en.pdf
+            title: Factories and Industrial Undertakings (Woodworking Machinery) Regulations (Cap 59G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59H!en.pdf
+            title: Factories and Industrial Undertakings (Electrolytic Chromium Process) Regulations (Cap 59H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59I!en.pdf
+            title: Construction Sites (Safety) Regulations (Cap 59I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59J!en.pdf
+            title: Factories and Industrial Undertakings (Lifting Appliances and Lifting Gear) Regulations (Cap 59J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59K!en.pdf
+            title: Factories and Industrial Undertakings (Cargo and Container Handling) Regulations (Cap 59K)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59L!en.pdf
+            title: Factories and Industrial Undertakings (Abrasive Wheels) Regulations (Cap 59L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59M!en.pdf
+            title: Factories and Industrial Undertakings (Work in Compressed Air) Regulations (Cap 59M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59N!en.pdf
+            title: Factories and Industrial Undertakings (Spraying of Flammable Liquids) Regulations (Cap 59N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59O!en.pdf
+            title: Factories and Industrial Undertakings (Goods Lifts) Regulations (Cap 59O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59P!en.pdf
+            title: Factories and Industrial Undertakings (Dry Batteries) Regulations (Cap 59P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59Q!en.pdf
+            title: Factories and Industrial Undertakings (Guarding and Operation of Machinery) Regulations (Cap 59Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59R!en.pdf
+            title: Factories and Industrial Undertakings (Cartridge-Operated Fixing Tools) Regulations (Cap 59R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59S!en.pdf
+            title: Factories and Industrial Undertakings (Protection of Eyes) Regulations (Cap 59S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59T!en.pdf
+            title: Factories and Industrial Undertakings (Noise at Work) Regulation (Cap 59T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59V!en.pdf
+            title: Factories and Industrial Undertakings (Fire Precautions in Notifiable Workplaces) Regulations (Cap 59V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59W!en.pdf
+            title: Factories and Industrial Undertakings (Electricity) Regulations (Cap 59W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59Z!en.pdf
+            title: Factories and Industrial Undertakings (Safety Officers and Safety Supervisors) Regulations (Cap 59Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AA!en.pdf
+            title: Factories and Industrial Undertakings (Carcinogenic Substances) Regulations (Cap 59AA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AB!en.pdf
+            title: Factories and Industrial Undertakings (Dangerous Substances) Regulations (Cap 59AB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AC!en.pdf
+            title: Factories and Industrial Undertakings (Suspended Working Platforms) Regulation (Cap 59AC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AD!en.pdf
+            title: Factories and Industrial Undertakings (Asbestos) Regulation (Cap 59AD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AE!en.pdf
+            title: Factories and Industrial Undertakings (Confined Spaces) Regulation (Cap 59AE)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AF!en.pdf
+            title: Factories and Industrial Undertakings (Safety Management) Regulation (Cap 59AF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AG!en.pdf
+            title: Factories and Industrial Undertakings (Loadshifting Machinery) Regulation (Cap 59AG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AH!en.pdf
+            title: Factories and Industrial Undertakings Ordinance (Cap. 59) (Appointed Day under Section 6BA(17)) Notice (Cap 59AH)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap59AI!en.pdf
+            title: Factories and Industrial Undertakings (Gas Welding and Flame Cutting) Regulation (Cap 59AI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap282!en.pdf
+            title: "Employees' Compensation Ordinance (Cap 282)"
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap282A!en.pdf
+            title: "Employees' Compensation Regulations (Cap 282A)"
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap282B!en.pdf
+            title: "Employees' Compensation (Rules of Court) Rules (Cap 282B)"
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap360!en.pdf
+            title: Pneumoconiosis and Mesothelioma (Compensation) Ordinance (Cap 360)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap360A!en.pdf
+            title: Pneumoconiosis and Mesothelioma (Compensation) (Assessment of Levy) Regulations (Cap 360A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap360C!en.pdf
+            title: Pneumoconiosis and Mesothelioma (Compensation) Appeal Rules (Cap 360C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap469!en.pdf
+            title: Occupational Deafness (Compensation) Ordinance (Cap 469)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap509!en.pdf
+            title: Occupational Safety and Health Ordinance (Cap 509)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap509A!en.pdf
+            title: Occupational Safety and Health Regulation (Cap 509A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap509B!en.pdf
+            title: Occupational Safety and Health (Display Screen Equipment) Regulation (Cap 509B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap608!en.pdf
+            title: Minimum Wage Ordinance (Cap 608)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap608A!en.pdf
+            title: Minimum Wage (Criteria for Approved Assessors) Notice (Cap 608A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap608B!en.pdf
+            title: Minimum Wage (Assessment Methods) Notice (Cap 608B)
+            publish_date: null
       labour_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -1320,6 +1568,18 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap102!en.pdf
+            title: Waterworks Ordinance (Cap 102)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap102A!en.pdf
+            title: Waterworks Regulations (Cap 102A)
+            publish_date: null
       wsd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -1544,6 +1804,399 @@ crawlers:
     backoff_jitter_seconds: 0.25
     max_total_records: 50000
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap311!en.pdf
+            title: Air Pollution Control Ordinance (Cap 311)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311A!en.pdf
+            title: Air Pollution Control (Furnaces, Ovens and Chimneys) (Installation and Alteration) Regulations (Cap 311A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311B!en.pdf
+            title: Air Pollution Control (Dust and Grit Emission) Regulations (Cap 311B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311C!en.pdf
+            title: Air Pollution Control (Smoke) Regulations (Cap 311C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311D!en.pdf
+            title: Air Pollution Control (Appeal Board) Regulations (Cap 311D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311E!en.pdf
+            title: Air Pollution Control (Air Control Zones) (Declaration) (Consolidation) Order (Cap 311E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311F!en.pdf
+            title: Air Pollution Control (Specified Processes) Regulations (Cap 311F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311G!en.pdf
+            title: Air Pollution Control (Specified Processes) (Specification of Required Particulars and Information) Order 1993 (Cap 311G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311I!en.pdf
+            title: Air Pollution Control (Fuel Restriction) Regulations (Cap 311I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311J!en.pdf
+            title: Air Pollution Control (Vehicle Design Standards) (Emission) Regulations (Cap 311J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311K!en.pdf
+            title: Air Pollution Control (Specified Processes) (Removal of Exemption) Order 1993 (Cap 311K)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311L!en.pdf
+            title: Air Pollution Control (Motor Vehicle Fuel) Regulation (Cap 311L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311M!en.pdf
+            title: Air Pollution Control (Specified Processes) (Removal of Exemption) Order 1994 (Cap 311M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311N!en.pdf
+            title: Air Pollution Control (Specified Processes) (Specification of Required Particulars and Information) Order 1994 (Cap 311N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311O!en.pdf
+            title: Air Pollution Control (Open Burning) Regulation (Cap 311O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311P!en.pdf
+            title: Air Pollution Control (Asbestos) (Administration) Regulation (Cap 311P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311Q!en.pdf
+            title: Air Pollution Control (Specified Processes) (Removal of Exemption) Order 1996 (Cap 311Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311R!en.pdf
+            title: Air Pollution Control (Construction Dust) Regulation (Cap 311R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311S!en.pdf
+            title: Air Pollution Control (Petrol Filling Stations) (Vapour Recovery) Regulation (Cap 311S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311T!en.pdf
+            title: Air Pollution Control (Dry-cleaning Machines) (Vapour Recovery) Regulation (Cap 311T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311U!en.pdf
+            title: Air Pollution Control (Emission Reduction Devices for Vehicles) Regulation (Cap 311U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311W!en.pdf
+            title: Air Pollution Control (Volatile Organic Compounds) Regulation (Cap 311W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311X!en.pdf
+            title: Air Pollution Control (Air Pollutant Emission) (Controlled Vehicles) Regulation (Cap 311X)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311Y!en.pdf
+            title: Air Pollution Control (Marine Light Diesel) Regulation (Cap 311Y)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311Z!en.pdf
+            title: Air Pollution Control (Non-road Mobile Machinery) (Emission) Regulation (Cap 311Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap311AB!en.pdf
+            title: Air Pollution Control (Fuel for Vessels) Regulation (Cap 311AB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354!en.pdf
+            title: Waste Disposal Ordinance (Cap 354)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354A!en.pdf
+            title: Waste Disposal (Livestock Waste) Regulations (Cap 354A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354B!en.pdf
+            title: Waste Disposal (Appeal Board) Regulation (Cap 354B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354C!en.pdf
+            title: Waste Disposal (Chemical Waste) (General) Regulation (Cap 354C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354D!en.pdf
+            title: Waste Disposal (Permits, Authorizations and Licences) (Fees) Regulation (Cap 354D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354E!en.pdf
+            title: Waste Disposal Ordinance (Application) Notice 1992 (Cap 354E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354F!en.pdf
+            title: Waste Disposal Ordinance (Application) Notice 1993 (Cap 354F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354G!en.pdf
+            title: Waste Disposal (Chemical Waste) (General) Regulation (Application of Parts II, VII and VIII) Notice 1992 (Cap 354G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354H!en.pdf
+            title: Waste Disposal (Chemical Waste) (General) Regulation (Application of Regulation 4 and Parts III, IV, V and VI) Notice 1992 (Cap 354H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354I!en.pdf
+            title: Waste Disposal (Chemical Waste) (General) Regulation (Application of Section 4 and Parts III, IV, V and VI) Notice 1993 (Cap 354I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354J!en.pdf
+            title: Waste Disposal (Charges for Disposal of Chemical Waste) Regulation (Cap 354J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354L!en.pdf
+            title: Waste Disposal (Designated Waste Disposal Facility) Regulation (Cap 354L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354M!en.pdf
+            title: Waste Disposal (Refuse Transfer Station) Regulation (Cap 354M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354N!en.pdf
+            title: Waste Disposal (Charges for Disposal of Construction Waste) Regulation (Cap 354N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354O!en.pdf
+            title: Waste Disposal (Clinical Waste) (General) Regulation (Cap 354O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354P!en.pdf
+            title: Waste Disposal (Charge for Disposal of Clinical Waste) Regulation (Cap 354P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354Q!en.pdf
+            title: Waste Disposal Ordinance (Application of Section 16) Notice 2011 (Cap 354Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354R!en.pdf
+            title: Waste Disposal Ordinance (Application of Section 16) Notice 2018 (Cap 354R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354S!en.pdf
+            title: Waste Disposal (Prescribed Signs for Refuse Collection Points and Specified Bins) Notice (Cap 354S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354T!en.pdf
+            title: Waste Disposal (Prescribed Sign for Waste Vehicles in Government Service) Notice (Cap 354T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354U!en.pdf
+            title: Waste Disposal (Prescribed Sign for Waste Vehicles in Private Use (with Compactor)) Notice (Cap 354U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354V!en.pdf
+            title: Waste Disposal (Specified Requirements for Designated Bag and Designated Label) Notice (Cap 354V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap354W!en.pdf
+            title: Waste Disposal Ordinance (Application of Section 16) Notice 2022 (Cap 354W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358!en.pdf
+            title: Water Pollution Control Ordinance (Cap 358)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358A!en.pdf
+            title: Water Pollution Control (Tolo Harbour and Channel Water Control Zone) Order (Cap 358A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358B!en.pdf
+            title: Tolo Harbour and Channel Water Control Zone Statement of Water Quality Objectives (Cap 358B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358C!en.pdf
+            title: Water Pollution Control (Appeal Board) Regulations (Cap 358C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358D!en.pdf
+            title: Water Pollution Control (General) Regulations (Cap 358D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358E!en.pdf
+            title: Water Pollution Control (Tolo Harbour and Channel Water Control Zone) (Appointed Days) Order (Cap 358E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358F!en.pdf
+            title: Tolo Harbour and Channel Water Control Zone Statement of Water Quality Objectives for Watercourses (Cap 358F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358G!en.pdf
+            title: Water Pollution Control (Southern Water Control Zone) Order (Cap 358G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358H!en.pdf
+            title: Water Pollution Control (Southern Water Control Zone) (Appointed Days) (Consolidation) Order (Cap 358H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358I!en.pdf
+            title: Southern Water Control Zone Statement of Water Quality Objectives (Cap 358I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358J!en.pdf
+            title: Water Pollution Control (Junk Bay Water Control Zone) Order (Cap 358J)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358K!en.pdf
+            title: Water Pollution Control (Junk Bay Water Control Zone) (Appointed Days) Order (Cap 358K)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358L!en.pdf
+            title: Junk Bay Water Control Zone Statement of Water Quality Objectives (Cap 358L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358M!en.pdf
+            title: Water Pollution Control (Port Shelter Water Control Zone) Order (Cap 358M)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358N!en.pdf
+            title: Water Pollution Control (Port Shelter Water Control Zone) (Appointed Days) Order (Cap 358N)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358O!en.pdf
+            title: Port Shelter Water Control Zone Statement of Water Quality Objectives (Cap 358O)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358P!en.pdf
+            title: Water Pollution Control (Deep Bay Water Control Zone) Order (Cap 358P)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358Q!en.pdf
+            title: Water Pollution Control (Deep Bay Water Control Zone) (Appointed Days) Order (Cap 358Q)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358R!en.pdf
+            title: Statement of Water Quality Objectives (Deep Bay Water Control Zone) (Cap 358R)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358S!en.pdf
+            title: Water Pollution Control (Mirs Bay Water Control Zone) Order (Cap 358S)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358T!en.pdf
+            title: Water Pollution Control (Mirs Bay Water Control Zone) (Appointed Days) Order (Cap 358T)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358U!en.pdf
+            title: Statement of Water Quality Objectives (Mirs Bay Water Control Zone) (Cap 358U)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358V!en.pdf
+            title: Water Pollution Control (North Western Water Control Zone) Order (Cap 358V)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358W!en.pdf
+            title: Water Pollution Control (North Western Water Control Zone) (Appointed Days) Order (Cap 358W)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358X!en.pdf
+            title: Statement of Water Quality Objectives (North Western Water Control Zone) (Cap 358X)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358Y!en.pdf
+            title: Water Pollution Control (Eastern Buffer Water Control Zone) Order (Cap 358Y)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358Z!en.pdf
+            title: Water Pollution Control (Eastern Buffer Water Control Zone) (Appointed Days) Order (Cap 358Z)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AA!en.pdf
+            title: Statement of Water Quality Objectives (Eastern Buffer Water Control Zone) (Cap 358AA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AB!en.pdf
+            title: Water Pollution Control (Western Buffer Water Control Zone) Order (Cap 358AB)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AC!en.pdf
+            title: Water Pollution Control (Western Buffer Water Control Zone) (Appointed Days) Order (Cap 358AC)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AD!en.pdf
+            title: Statement of Water Quality Objectives (Western Buffer Water Control Zone) (Cap 358AD)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AE!en.pdf
+            title: Water Pollution Control (Southern Supplementary Water Control Zone) Order (Cap 358AE)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AF!en.pdf
+            title: Water Pollution Control (Southern Supplementary Water Control Zone) (Appointed Days) Order (Cap 358AF)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AG!en.pdf
+            title: Statement of Water Quality Objectives (Southern Supplementary Water Control Zone) (Cap 358AG)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AH!en.pdf
+            title: Water Pollution Control (Tolo Harbour Supplementary Water Control Zone) Order (Cap 358AH)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AI!en.pdf
+            title: Water Pollution Control (Tolo Harbour Supplementary Water Control Zone) (Appointed Days) Order (Cap 358AI)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AJ!en.pdf
+            title: Statement of Water Quality Objectives (Tolo Harbour Supplementary Water Control Zone) (Cap 358AJ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AL!en.pdf
+            title: Water Pollution Control (Sewerage) Regulation (Cap 358AL)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AM!en.pdf
+            title: Water Pollution Control (Victoria Harbour (Phase One) Water Control Zone) Order (Cap 358AM)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AN!en.pdf
+            title: Water Pollution Control (Victoria Harbour (Phase One) Water Control Zone) (Appointed Days) Order (Cap 358AN)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AO!en.pdf
+            title: Statement of Water Quality Objectives (Victoria Harbour (Phase One) Water Control Zone) (Cap 358AO)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AP!en.pdf
+            title: Water Pollution Control (Victoria Harbour (Phase Two) Water Control Zone) Order (Cap 358AP)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AQ!en.pdf
+            title: Water Pollution Control (Victoria Harbour (Phase Two) Water Control Zone) (Appointed Days) Order (Cap 358AQ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AR!en.pdf
+            title: Statement of Water Quality Objectives (Victoria Harbour (Phase Two) Water Control Zone) (Cap 358AR)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AS!en.pdf
+            title: Water Pollution Control (Victoria Harbour (Phase Three) Water Control Zone) Order (Cap 358AS)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AT!en.pdf
+            title: Water Pollution Control (Victoria Harbour (Phase Three) Water Control Zone) (Appointed Days) Order (Cap 358AT)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AU!en.pdf
+            title: Statement of Water Quality Objectives (Victoria Harbour (Phase Three) Water Control Zone) (Cap 358AU)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AV!en.pdf
+            title: Water Pollution Control (North Western Supplementary Water Control Zone) Order (Cap 358AV)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AW!en.pdf
+            title: Water Pollution Control (Second Southern Supplementary Water Control Zone) Order (Cap 358AW)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AX!en.pdf
+            title: Water Pollution Control (North Western Supplementary Water Control Zone) (Appointed Days) Order (Cap 358AX)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AY!en.pdf
+            title: Water Pollution Control (Second Southern Supplementary Water Control Zone) (Appointed Days) Order (Cap 358AY)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358AZ!en.pdf
+            title: Statement of Water Quality Objectives (North Western Supplementary Water Control Zone) (Cap 358AZ)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap358BA!en.pdf
+            title: Statement of Water Quality Objectives (Second Southern Supplementary Water Control Zone) (Cap 358BA)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400!en.pdf
+            title: Noise Control Ordinance (Cap 400)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400A!en.pdf
+            title: Noise Control (General) Regulations (Cap 400A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400B!en.pdf
+            title: Noise Control (Appeal Board) Regulations (Cap 400B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400C!en.pdf
+            title: Noise Control (Air Compressors) Regulations (Cap 400C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400D!en.pdf
+            title: Noise Control (Hand Held Percussive Breakers) Regulations (Cap 400D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400G!en.pdf
+            title: Noise Control (Construction Work) Regulation (Cap 400G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400I!en.pdf
+            title: Noise Control (Motor Vehicles) Regulation (Cap 400I)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap400L!en.pdf
+            title: Noise Control (Construction Work Designated Areas) Notice (Cap 400L)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403!en.pdf
+            title: Ozone Layer Protection Ordinance (Cap 403)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403A!en.pdf
+            title: Ozone Layer Protection (Fees) Regulations (Cap 403A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403B!en.pdf
+            title: Ozone Layer Protection (Controlled Refrigerants) Regulation (Cap 403B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap403C!en.pdf
+            title: Ozone Layer Protection (Products Containing Scheduled Substances) (Import Banning) Regulation (Cap 403C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap466!en.pdf
+            title: Dumping at Sea Ordinance (Cap 466)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap466A!en.pdf
+            title: Dumping at Sea (Fees) Regulation (Cap 466A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap466B!en.pdf
+            title: Dumping at Sea (Exemption) Order (Cap 466B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap499!en.pdf
+            title: Environmental Impact Assessment Ordinance (Cap 499)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap499A!en.pdf
+            title: Environmental Impact Assessment (Appeal Board) Regulation (Cap 499A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap499B!en.pdf
+            title: Environmental Impact Assessment (Fees) Regulation (Cap 499B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap595!en.pdf
+            title: Hazardous Chemicals Control Ordinance (Cap 595)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap595A!en.pdf
+            title: Hazardous Chemicals Control (General) Regulation (Cap 595A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap595B!en.pdf
+            title: Hazardous Chemicals Control (Fees) Regulation (Cap 595B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap603!en.pdf
+            title: Product Eco-responsibility Ordinance (Cap 603)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap603B!en.pdf
+            title: Product Eco-responsibility (Regulated Electrical Equipment) Regulation (Cap 603B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap603C!en.pdf
+            title: Product Eco-responsibility (Regulated Articles) Regulation (Cap 603C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap611!en.pdf
+            title: Motor Vehicle Idling (Fixed Penalty) Ordinance (Cap 611)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap611A!en.pdf
+            title: Motor Vehicle Idling (Fixed Penalty) Regulation (Cap 611A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap640!en.pdf
+            title: Mercury Control Ordinance (Cap 640)
+            publish_date: null
       epd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
@@ -1740,11 +2393,106 @@ crawlers:
     max_total_records: 50000
     content_element_id: "content"
     pages:
+      legislation:
+        # [2026-11-23] PAI-1741: Ordinances and subsidiary legislation this department administers.
+        ticket: PAI-1741
+        document_hosts:
+          - www.elegislation.gov.hk
+        documents:
+          - url: https://www.elegislation.gov.hk/hk/cap51!en.pdf
+            title: Gas Safety Ordinance (Cap 51)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51A!en.pdf
+            title: Gas Safety (Gas Quality) Regulations (Cap 51A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51B!en.pdf
+            title: Gas Safety (Gas Supply) Regulations (Cap 51B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51C!en.pdf
+            title: Gas Safety (Installation and Use) Regulations (Cap 51C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51D!en.pdf
+            title: Gas Safety (Registration of Gas Installers and Gas Contractors) Regulations (Cap 51D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51E!en.pdf
+            title: Gas Safety (Registration of Gas Supply Companies) Regulations (Cap 51E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51F!en.pdf
+            title: Gas Safety (Miscellaneous) Regulations (Cap 51F)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap51G!en.pdf
+            title: Gas Safety (Gasholders Examination) Regulation (Cap 51G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406!en.pdf
+            title: Electricity Ordinance (Cap 406)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406A!en.pdf
+            title: Electricity Supply Regulations (Cap 406A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406B!en.pdf
+            title: Electricity Supply (Special Areas) Regulations (Cap 406B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406C!en.pdf
+            title: Electricity (Exemption) Regulations (Cap 406C)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406D!en.pdf
+            title: Electricity (Registration) Regulations (Cap 406D)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406E!en.pdf
+            title: Electricity (Wiring) Regulations (Cap 406E)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406G!en.pdf
+            title: Electrical Products (Safety) Regulation (Cap 406G)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap406H!en.pdf
+            title: Electricity Supply Lines (Protection) Regulation (Cap 406H)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap449!en.pdf
+            title: Amusement Rides (Safety) Ordinance (Cap 449)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap449A!en.pdf
+            title: Amusement Rides (Safety) (Fees) Regulation (Cap 449A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap449B!en.pdf
+            title: Amusement Rides (Safety) (Operation and Maintenance) Regulation (Cap 449B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap470!en.pdf
+            title: "Builders' Lifts and Tower Working Platforms (Safety) Ordinance (Cap 470)"
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap470A!en.pdf
+            title: "Builders' Lifts and Tower Working Platforms (Safety) (Fees) Regulation (Cap 470A)"
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap598!en.pdf
+            title: Energy Efficiency (Labelling of Products) Ordinance (Cap 598)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap610!en.pdf
+            title: Buildings Energy Efficiency Ordinance (Cap 610)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap610A!en.pdf
+            title: Buildings Energy Efficiency (Fees) Regulation (Cap 610A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap610B!en.pdf
+            title: Buildings Energy Efficiency (Registered Energy Assessors) Regulation (Cap 610B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap618!en.pdf
+            title: Lifts and Escalators Ordinance (Cap 618)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap618A!en.pdf
+            title: Lifts and Escalators (General) Regulation (Cap 618A)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap618B!en.pdf
+            title: Lifts and Escalators (Fees) Regulation (Cap 618B)
+            publish_date: null
+          - url: https://www.elegislation.gov.hk/hk/cap624!en.pdf
+            title: District Cooling Services Ordinance (Cap 624)
+            publish_date: null
       emsd_document_sweep:
         # Pages holding documents this department's own crawlers do not
         # reach. Signed duplicates and zipped superseded editions are
         # excluded: they carry no text the current version does not.
         page_urls:
+          # [2026-11-23] PAI-1741: ordinance guidance pages not crawled before.
+          - "https://www.emsd.gov.hk/en/other_regulatory_services/cooling_towers/index.html"
           - "https://www.emsd.gov.hk/en/lifts_and_escalators_safety/publications/circulars/archived_circulars/index.html"
           - "https://www.emsd.gov.hk/en/electricity_safety/publications/general/index.html#eps"
           - "https://bestpractice.emsd.gov.hk/en/resource"
