@@ -1,5 +1,5 @@
 {
-  "crawler": "had.legislation",
+  "crawler": "epd.legislation",
   "crawlers_considered": 164,
   "crawlers_due": [
     "legislation"
@@ -97,6 +97,7 @@
     "ha.building_information_modelling",
     "ha.general_specification_for_building_works",
     "ha.resources",
+    "had.legislation",
     "had.licensing_guides",
     "herbarium",
     "hksar_press_releases",
@@ -157,24 +158,24 @@
     "wsd_document_sweep"
   ],
   "crawlers_succeeded": [
-    "had.legislation"
+    "epd.legislation"
   ],
   "regression_total_rows": null,
   "regressions_dropped": [],
   "regressions_zeroed": [],
-  "rows": 83541,
+  "rows": 83803,
   "run_date_utc": "2026-11-23",
   "schedule": {
-    "had.legislation": {
+    "epd.legislation": {
       "due_today": true,
       "enabled": true,
       "interval_days": 1,
       "last_successful_run_date": null,
       "manual_override": true,
-      "module_path": "had.legislation",
-      "source_id": "had"
+      "module_path": "epd.legislation",
+      "source_id": "epd"
     }
   },
-  "started_at_utc": "2026-11-23T20:55:14.465496+00:00",
+  "started_at_utc": "2026-11-23T20:57:07.137663+00:00",
   "sweep_duplicates_dropped": 0
 }
