@@ -1,5 +1,5 @@
 Input: data-worktree/data/latest/urls.jsonl
-Total records: 83925 (parse_errors=0)
+Total records: 83929 (parse_errors=0)
 
 Records by source:
 - annual_digest: 206 (0.2%)
@@ -153,6 +153,7 @@ Records by source:
 - water_safety_plan_for_buildings: 11 (0.0%)
 - water_safety_plan_subsidy_scheme: 16 (0.0%)
 - works_of_minor_nature: 1 (0.0%)
+- wsd.legislation: 4 (0.0%)
 - wsd_document_sweep: 120 (0.1%)
 
 Per-source schema and validation summary:
@@ -1701,6 +1702,36 @@ Per-source schema and validation summary:
   - file_ext: pdf (1)
   - record_kind: document (1)
   - ticket: PAI-1457 (1)
+
+[wsd.legislation]
+- records: 4 | unique_urls: 4 | dup_url_hits: 0
+- issues: errors=4 warnings=0
+- required field quality (missing/null/invalid):
+  - url: missing=0 null=0 invalid=0
+  - name: missing=0 null=0 invalid=0
+  - discovered_at_utc: missing=0 null=0 invalid=0
+  - publish_date: missing=0 null=4 invalid=0
+  - source: missing=0 null=0 invalid=0
+  - meta.discovered_from: missing=4 null=0 invalid=0
+- schema variation: top-level variants=1 meta variants=1
+- discovered_at_utc: 2026-11-23T21:00:46.385038+00:00 .. 2026-11-23T21:00:46.385038+00:00
+- top url hosts:
+  - www.elegislation.gov.hk: 4
+- top url extensions:
+  - .pdf: 4
+- top-level key signatures (urls.jsonl record format):
+  - count=4 keys=['discovered_at_utc', 'meta', 'name', 'publish_date', 'source', 'source_id', 'url']
+- meta key signatures:
+  - count=4 meta_keys=['file_ext', 'record_kind', 'ticket']
+- meta schema variants: 1
+- most common meta keys:
+  - file_ext: 4
+  - record_kind: 4
+  - ticket: 4
+- top scalar meta values (sample):
+  - file_ext: pdf (4)
+  - record_kind: document (4)
+  - ticket: PAI-1741 (4)
 
 [bd.legislation]
 - records: 3 | unique_urls: 3 | dup_url_hits: 0
@@ -4495,7 +4526,7 @@ General stats:
 - record JSON size (bytes): min=204 p50=402 mean=519.0 p95=979.0 max=1390
 
 Unusual records / issues:
-- error:missing_required_field: 4423
+- error:missing_required_field: 4427
 - warning:meta_value_outlier: 1811
 - warning:meta_type_outlier: 4
 
